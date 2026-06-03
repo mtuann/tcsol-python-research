@@ -60,7 +60,7 @@ By the end of the course, the learner should be able to:
 |---|---|---|
 | Data tables | `pandas`, `numpy`, `openpyxl` | CSV/Excel, cleaning, grouping, summary tables |
 | Visualization | `matplotlib`, `seaborn` | bar charts, line charts, boxplots, heatmaps |
-| Statistics | `scipy`, `pingouin`, `statsmodels` | t-test, correlation, regression, ANOVA, effect size |
+| Statistics | `scipy`, `statsmodels` | t-test, correlation, regression, ANOVA, effect size |
 | Text patterns | `re`, `regex` | search linguistic patterns, annotate examples |
 | Similarity/editing | `rapidfuzz` | fuzzy matching, edit distance, MTPE effort proxies |
 | MT metrics | `sacreBLEU` | BLEU, chrF, TER for MT evaluation |
@@ -443,7 +443,6 @@ These topics are useful later, but they are not the shortest path to a good Appl
 - [seaborn documentation](https://seaborn.pydata.org/)
 - [SciPy documentation](https://docs.scipy.org/doc/scipy/)
 - [statsmodels User Guide](https://www.statsmodels.org/stable/user-guide.html)
-- [Pingouin documentation](https://pingouin-stats.org/)
 
 ### Translation, MT, and MTPE
 
@@ -472,6 +471,9 @@ These topics are useful later, but they are not the shortest path to a good Appl
 
 ### TCSOL and Chinese Education Policy
 
+- [ACTFL Proficiency Guidelines 2024 release](https://www.actfl.org/news/revised-actfl-proficiency-guidelines-released)
+- [NCSSFL-ACTFL Can-Do Statements](https://www.actfl.org/educator-resources/ncssfl-actfl-can-do-statements)
+- [CEFR Companion Volume and language versions](https://www.coe.int/en/web/common-european-framework-reference-languages/cefr-companion-volume-and-its-language-versions)
 - [MOE: Chinese Proficiency Grading Standards launch](https://en.moe.gov.cn/news/press_releases/202104/t20210428_528917.html)
 - [Chinese Proficiency Grading Standards overview](https://www.chinese.cn/zhuanti/202207/en/)
 - [2024 National Education Development Statistical Bulletin, PRC MOE](https://www.moe.gov.cn/jyb_sjzl/sjzl_fztjgb/202506/t20250611_1193760.html)
@@ -482,8 +484,8 @@ These topics are useful later, but they are not the shortest path to a good Appl
 
 ## Next Content Tasks
 
-- Review and refine `weeks/week-01-python-research-workflow/`.
-- Review and refine `weeks/week-02-research-data-tables/`.
+- Review and refine `weeks/week-07-tcsol-short-course-research/` after learner testing.
+- Start detailed content for Week 08 learner error analysis.
 - Create blank CSV templates in `resources/templates/`.
 - Add a one-page learner setup guide in Vietnamese.
 - Add a Zotero + Word workflow guide.

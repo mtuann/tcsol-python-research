@@ -2,7 +2,19 @@
 
 ## A. Copy And Modify
 
-Change one activity label in the notebook, rerun the table, and confirm the numeric results did not change.
+In the notebook label mapping, change only the right-hand display text, for example:
+
+```python
+"measure_words": "Measure words"
+```
+
+to:
+
+```python
+"measure_words": "Lượng từ"
+```
+
+Rerun the table and confirm the numeric results did not change. Do not change the raw `activity_focus` keys on the left.
 
 ## B. Read The Table
 
@@ -15,7 +27,7 @@ Answer in short phrases:
 
 ## C. Results Paragraph
 
-Write 120-160 words using the sentence frame in `assignment.md`. Underline or mark:
+Write 120-160 words using the Vietnamese thinking frame or English paper frame in `assignment.md`. Underline or mark:
 
 - estimate;
 - uncertainty;
@@ -33,4 +45,3 @@ Choose one track and rewrite the Results sentence:
 ## E. Stretch
 
 Run the paired t-test cell. Explain why the p-value does not replace the CI.
-

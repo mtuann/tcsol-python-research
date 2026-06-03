@@ -54,8 +54,8 @@
         <h2 data-i18n="frame.title">Khung nghiên cứu</h2>
         <div class="doc-grid">
           <article class="mini-card"><span class="swatch blue"></span><h3 data-i18n="frame.question.title">Câu hỏi nhỏ</h3><p data-i18n="frame.question.body">Average gain sau hoạt động Hán ngữ ngắn hạn là bao nhiêu, và estimate này chắc đến mức nào?</p></article>
-          <article class="mini-card"><span class="swatch green"></span><h3 data-i18n="frame.data.title">Dữ liệu</h3><p data-i18n="frame.data.body">36 synthetic records; 25 usable records có pre/post score numeric và completed status.</p></article>
-          <article class="mini-card"><span class="swatch amber"></span><h3 data-i18n="frame.output.title">Output</h3><p data-i18n="frame.output.body">Một bảng statistics, một CI figure có caption, một Results paragraph 120-160 từ.</p></article>
+          <article class="mini-card"><span class="swatch green"></span><h3 data-i18n="frame.data.title">Dữ liệu</h3><p data-i18n="frame.data.body">36 bản ghi synthetic; 25 bản ghi dùng được có pre/post score numeric và completed status.</p></article>
+          <article class="mini-card"><span class="swatch amber"></span><h3 data-i18n="frame.output.title">Output</h3><p data-i18n="frame.output.body">Một bảng overall, một bảng activity, một CI figure có caption, một Results paragraph 120-160 từ.</p></article>
         </div>
       </section>
 
@@ -89,26 +89,26 @@
           <article class="mini-card"><span class="swatch green"></span><h3 data-i18n="result.overall.title">Overall gain</h3><p data-i18n="result.overall.body">Usable N = 25; mean gain = 10.88; SD = 1.90; 95% CI [10.10, 11.66].</p></article>
           <article class="mini-card"><span class="swatch purple"></span><h3 data-i18n="result.group.title">Group pattern</h3><p data-i18n="result.group.body">Result complements có descriptive mean gain cao nhất; word order thấp nhất. Đây không phải causal evidence.</p></article>
         </div>
-        <blockquote data-i18n="result.frame">In the usable Week 06 records (N = 25), learners gained an average of 10.88 points from pre-test to post-test (SD = 1.90, 95% CI [10.10, 11.66]).</blockquote>
+        <blockquote data-i18n="result.frame">Trong 25 bản ghi dùng được, chênh lệch post-test minus pre-test trung bình là 10.88 điểm (SD = 1.90, 95% CI [10.10, 11.66]).</blockquote>
       </section>
 
       <section class="doc-card" id="practice">
         <h2 data-i18n="practice.title">Thực hành</h2>
         <div class="doc-grid">
-          <article class="mini-card"><span class="swatch blue"></span><h3 data-i18n="practice.a.title">A. Copy and Modify</h3><p data-i18n="practice.a.body">Đổi một activity label, chạy lại notebook và kiểm tra số liệu không đổi.</p></article>
-          <article class="mini-card"><span class="swatch green"></span><h3 data-i18n="practice.b.title">B. Guided Problem</h3><p data-i18n="practice.b.body">Xuất bảng CI và figure CI từ notebook.</p></article>
-          <article class="mini-card"><span class="swatch amber"></span><h3 data-i18n="practice.c.title">C. Research Task</h3><p data-i18n="practice.c.body">Viết Results paragraph 120-160 từ, có estimate, interval và limitation.</p></article>
+          <article class="mini-card"><span class="swatch blue"></span><h3 data-i18n="practice.a.title">A. Core Minimum</h3><p data-i18n="practice.a.body">Đọc bảng overall, xác định N/mean/SD/CI và viết một đoạn Results thận trọng.</p></article>
+          <article class="mini-card"><span class="swatch green"></span><h3 data-i18n="practice.b.title">B. Guided Core</h3><p data-i18n="practice.b.body">Chạy notebook để xuất bảng overall, bảng activity và CI figure.</p></article>
+          <article class="mini-card"><span class="swatch amber"></span><h3 data-i18n="practice.c.title">C. Stretch</h3><p data-i18n="practice.c.body">Chạy paired t-test và giải thích vì sao p-value không thay thế estimate, CI và limitation.</p></article>
         </div>
       </section>
 
       <section class="doc-card" id="assignment">
         <h2 data-i18n="assignment.title">Bài nộp</h2>
-        <p data-i18n="assignment.body">Nộp notebook, statistics CSV, CI figure PNG, figure caption, Results paragraph và source note. Paired t-test là stretch.</p>
+        <p data-i18n="assignment.body">Nộp notebook, overall CSV, activity CSV, CI figure PNG, figure caption, Results paragraph và source note. Paired t-test là stretch.</p>
         <ol>
           <li data-i18n-html="assignment.t1">Filter <code>usable_pre_post == True</code>.</li>
-          <li data-i18n-html="assignment.t2">Tính <code>n</code>, <code>mean</code>, <code>SD</code>, <code>SE</code>, <code>95% CI</code>.</li>
-          <li data-i18n="assignment.t3">Tạo figure confidence interval.</li>
-          <li data-i18n="assignment.t4">Viết Results paragraph không overclaim.</li>
+          <li data-i18n-html="assignment.t2">Đọc overall <code>n</code>, <code>mean</code>, <code>SD</code>, <code>95% CI</code>.</li>
+          <li data-i18n="assignment.t3">Tạo bảng theo activity và figure confidence interval.</li>
+          <li data-i18n="assignment.t4">Viết Results paragraph không overclaim và có source note.</li>
         </ol>
       </section>
 
@@ -141,12 +141,12 @@
         <h2 data-i18n="source.title">Nguồn biên soạn cho giảng viên</h2>
         <p data-i18n="source.body">Markdown là source để sửa bài. Người học nên dùng trang HTML, slides, demo và notebook HTML.</p>
         <div class="doc-links">
-          <a class="doc-chip" href="README.md">README.md</a>
-          <a class="doc-chip" href="lecture_notes.md">lecture_notes.md</a>
-          <a class="doc-chip" href="exercises.md">exercises.md</a>
-          <a class="doc-chip" href="assignment.md">assignment.md</a>
-          <a class="doc-chip" href="readings.md">readings.md</a>
-          <a class="doc-chip" href="rubric.md">rubric.md</a>
+          <a class="doc-chip" href="README.md" download>README.md</a>
+          <a class="doc-chip" href="lecture_notes.md" download>lecture_notes.md</a>
+          <a class="doc-chip" href="exercises.md" download>exercises.md</a>
+          <a class="doc-chip" href="assignment.md" download>assignment.md</a>
+          <a class="doc-chip" href="readings.md" download>readings.md</a>
+          <a class="doc-chip" href="rubric.md" download>rubric.md</a>
         </div>
       </section>
     </div>
@@ -186,9 +186,9 @@
         "frame.question.title": "Câu hỏi nhỏ",
         "frame.question.body": "Average gain sau hoạt động Hán ngữ ngắn hạn là bao nhiêu, và estimate này chắc đến mức nào?",
         "frame.data.title": "Dữ liệu",
-        "frame.data.body": "36 synthetic records; 25 usable records có pre/post score numeric và completed status.",
+        "frame.data.body": "36 bản ghi synthetic; 25 bản ghi dùng được có pre/post score numeric và completed status.",
         "frame.output.title": "Output",
-        "frame.output.body": "Một bảng statistics, một CI figure có caption, một Results paragraph 120-160 từ.",
+        "frame.output.body": "Một bảng overall, một bảng activity, một CI figure có caption, một Results paragraph 120-160 từ.",
         "notes.title": "Ghi chú bài học",
         "notes.intro": "Tuần 06 học cách đọc con số để viết paper, không học thống kê như một danh sách công thức.",
         "notes.concept": "Khái niệm",
@@ -216,20 +216,20 @@
         "result.overall.body": "Usable N = 25; mean gain = 10.88; SD = 1.90; 95% CI [10.10, 11.66].",
         "result.group.title": "Group pattern",
         "result.group.body": "Result complements có descriptive mean gain cao nhất; word order thấp nhất. Đây không phải causal evidence.",
-        "result.frame": "In the usable Week 06 records (N = 25), learners gained an average of 10.88 points from pre-test to post-test (SD = 1.90, 95% CI [10.10, 11.66]).",
+        "result.frame": "Trong 25 bản ghi dùng được, chênh lệch post-test minus pre-test trung bình là 10.88 điểm (SD = 1.90, 95% CI [10.10, 11.66]).",
         "practice.title": "Thực hành",
-        "practice.a.title": "A. Copy and Modify",
-        "practice.a.body": "Đổi một activity label, chạy lại notebook và kiểm tra số liệu không đổi.",
-        "practice.b.title": "B. Guided Problem",
-        "practice.b.body": "Xuất bảng CI và figure CI từ notebook.",
-        "practice.c.title": "C. Research Task",
-        "practice.c.body": "Viết Results paragraph 120-160 từ, có estimate, interval và limitation.",
+        "practice.a.title": "A. Core Minimum",
+        "practice.a.body": "Đọc bảng overall, xác định N/mean/SD/CI và viết một đoạn Results thận trọng.",
+        "practice.b.title": "B. Guided Core",
+        "practice.b.body": "Chạy notebook để xuất bảng overall, bảng activity và CI figure.",
+        "practice.c.title": "C. Stretch",
+        "practice.c.body": "Chạy paired t-test và giải thích vì sao p-value không thay thế estimate, CI và limitation.",
         "assignment.title": "Bài nộp",
-        "assignment.body": "Nộp notebook, statistics CSV, CI figure PNG, figure caption, Results paragraph và source note. Paired t-test là stretch.",
+        "assignment.body": "Nộp notebook, overall CSV, activity CSV, CI figure PNG, figure caption, Results paragraph và source note. Paired t-test là stretch.",
         "assignment.t1": "Filter <code>usable_pre_post == True</code>.",
-        "assignment.t2": "Tính <code>n</code>, <code>mean</code>, <code>SD</code>, <code>SE</code>, <code>95% CI</code>.",
-        "assignment.t3": "Tạo figure confidence interval.",
-        "assignment.t4": "Viết Results paragraph không overclaim.",
+        "assignment.t2": "Đọc overall <code>n</code>, <code>mean</code>, <code>SD</code>, <code>95% CI</code>.",
+        "assignment.t3": "Tạo bảng theo activity và figure confidence interval.",
+        "assignment.t4": "Viết Results paragraph không overclaim và có source note.",
         "readings.title": "Bài đọc",
         "readings.groupby.body": "Nguồn chính cho split-apply-combine và aggregation.",
         "readings.sem.body": "Nguồn chính cho standard error of the mean.",
@@ -291,7 +291,7 @@
         "frame.data.title": "Data",
         "frame.data.body": "36 synthetic records; 25 usable records have numeric pre/post scores and completed status.",
         "frame.output.title": "Output",
-        "frame.output.body": "One statistics table, one CI figure with caption, and one 120-160 word Results paragraph.",
+        "frame.output.body": "One overall table, one activity table, one CI figure with caption, and one 120-160 word Results paragraph.",
         "notes.title": "Lesson notes",
         "notes.intro": "Week 06 teaches how to read numbers for paper writing, not statistics as a formula list.",
         "notes.concept": "Concept",
@@ -319,20 +319,20 @@
         "result.overall.body": "Usable N = 25; mean gain = 10.88; SD = 1.90; 95% CI [10.10, 11.66].",
         "result.group.title": "Group pattern",
         "result.group.body": "Result complements has the highest descriptive mean gain; word order has the lowest. This is not causal evidence.",
-        "result.frame": "In the usable Week 06 records (N = 25), learners gained an average of 10.88 points from pre-test to post-test (SD = 1.90, 95% CI [10.10, 11.66]).",
+        "result.frame": "In the usable Week 06 records (N = 25), learners showed a mean post-test minus pre-test difference of 10.88 points (SD = 1.90, 95% CI [10.10, 11.66]).",
         "practice.title": "Practice",
-        "practice.a.title": "A. Copy and Modify",
-        "practice.a.body": "Change one activity label, rerun the notebook, and confirm the numbers do not change.",
-        "practice.b.title": "B. Guided Problem",
-        "practice.b.body": "Export the CI table and CI figure from the notebook.",
-        "practice.c.title": "C. Research Task",
-        "practice.c.body": "Write a 120-160 word Results paragraph with estimate, interval, and limitation.",
+        "practice.a.title": "A. Core Minimum",
+        "practice.a.body": "Read the overall table, identify N/mean/SD/CI, and write a cautious Results paragraph.",
+        "practice.b.title": "B. Guided Core",
+        "practice.b.body": "Run the notebook to export the overall table, activity table, and CI figure.",
+        "practice.c.title": "C. Stretch",
+        "practice.c.body": "Run the paired t-test and explain why the p-value does not replace estimate, CI, and limitation.",
         "assignment.title": "Assignment",
-        "assignment.body": "Submit notebook, statistics CSV, CI figure PNG, figure caption, Results paragraph, and source note. Paired t-test is stretch.",
+        "assignment.body": "Submit notebook, overall CSV, activity CSV, CI figure PNG, figure caption, Results paragraph, and source note. Paired t-test is stretch.",
         "assignment.t1": "Filter <code>usable_pre_post == True</code>.",
-        "assignment.t2": "Compute <code>n</code>, <code>mean</code>, <code>SD</code>, <code>SE</code>, and <code>95% CI</code>.",
-        "assignment.t3": "Create a confidence interval figure.",
-        "assignment.t4": "Write a Results paragraph without overclaiming.",
+        "assignment.t2": "Read overall <code>n</code>, <code>mean</code>, <code>SD</code>, and <code>95% CI</code>.",
+        "assignment.t3": "Create the activity table and confidence interval figure.",
+        "assignment.t4": "Write a Results paragraph without overclaiming and include a source note.",
         "readings.title": "Readings",
         "readings.groupby.body": "Main source for split-apply-combine and aggregation.",
         "readings.sem.body": "Main source for standard error of the mean.",

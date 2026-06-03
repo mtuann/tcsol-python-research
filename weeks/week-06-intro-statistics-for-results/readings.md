@@ -1,12 +1,16 @@
 # Week 06 Readings
 
-## Required Technical Sources
+## Required Course Note
+
+Before opening external documentation, read `lecture_notes.md` sections "Concept Ladder", "What The CI Assumes", and "Results Writing Frame". That is the required learner reading for this week.
+
+## Source References For Code
 
 1. pandas GroupBy user guide, especially the split-apply-combine overview and aggregation examples: <https://pandas.pydata.org/pandas-docs/stable/user_guide/groupby.html>
 2. pandas `DataFrame.sem`, for standard error of the mean: <https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.sem.html>
 3. SciPy `stats.t`, for the t distribution and `ppf`: <https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.t.html>
 
-## Required Method Reading
+## Source Reference For Reporting
 
 1. Gardner, M. J., & Altman, D. G. (1986). Confidence intervals rather than P values: estimation rather than hypothesis testing. *BMJ*, 292, 746-750. <https://www.bmj.com/content/292/6522/746>
 

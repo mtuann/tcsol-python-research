@@ -48,6 +48,16 @@ def source_text(cell: dict[str, Any]) -> str:
 
 def inline_markdown(text: str) -> str:
     escaped = html.escape(text)
+    escaped = re.sub(
+        r"!\[([^\]]*)\]\(([^)]+)\)",
+        r'<img src="\2" alt="\1" class="nb-image">',
+        escaped,
+    )
+    escaped = re.sub(
+        r"\[([^\]]+)\]\(([^)]+)\)",
+        r'<a href="\2">\1</a>',
+        escaped,
+    )
     escaped = re.sub(r"`([^`]+)`", r"<code>\1</code>", escaped)
     escaped = re.sub(r"\*\*([^*]+)\*\*", r"<strong>\1</strong>", escaped)
     return escaped

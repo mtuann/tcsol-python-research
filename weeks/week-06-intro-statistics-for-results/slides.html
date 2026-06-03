@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title data-i18n="meta.title">Tuần 06: Thống kê nhập môn cho Results</title>
   <link rel="stylesheet" href="../../assets/css/bilingual.css">
-  <link rel="stylesheet" href="../../assets/css/lecture-slides.css">
+  <link rel="stylesheet" href="../../assets/css/lecture-slides.css?v=20260603b">
   <noscript>
     <style>
       body.lecture-slide-page { overflow: auto; }
@@ -40,9 +40,9 @@
           </div>
           <div class="stage">
             <div class="concept-grid three">
-              <div class="concept-card row"><strong>25</strong><span data-i18n="hero.usable">usable records</span></div>
-              <div class="concept-card value"><strong>10.88</strong><span data-i18n="hero.mean">mean gain</span></div>
-              <div class="concept-card schema"><strong>[10.10, 11.66]</strong><span data-i18n="hero.ci">95% CI</span></div>
+            <div class="concept-card row"><strong>25</strong><span data-i18n="hero.usable">bản ghi dùng được</span></div>
+            <div class="concept-card value"><strong>10.88</strong><span data-i18n="hero.mean">mean gain</span></div>
+            <div class="concept-card schema"><strong>[10.10, 11.66]</strong><span data-i18n="hero.ci">95% CI</span></div>
             </div>
           </div>
         </div>
@@ -56,10 +56,10 @@
         </div>
         <div class="stage">
           <div class="flow four">
-            <div class="flow-step"><strong>Clean data</strong><span data-i18n="flow.data">25 usable rows</span></div>
-            <div class="flow-step"><strong>Estimate</strong><span data-i18n="flow.mean">mean gain</span></div>
-            <div class="flow-step"><strong>Uncertainty</strong><span data-i18n="flow.ci">95% CI</span></div>
-            <div class="flow-step"><strong>Writing</strong><span data-i18n="flow.results">Results paragraph</span></div>
+            <div class="flow-step"><strong data-i18n="flow.data.title">Dữ liệu sạch</strong><span data-i18n="flow.data">25 dòng dùng được</span></div>
+            <div class="flow-step"><strong data-i18n="flow.mean.title">Ước lượng</strong><span data-i18n="flow.mean">mức chênh trung bình</span></div>
+            <div class="flow-step"><strong data-i18n="flow.ci.title">Độ bất định</strong><span data-i18n="flow.ci">95% CI</span></div>
+            <div class="flow-step"><strong data-i18n="flow.results.title">Viết</strong><span data-i18n="flow.results">đoạn Results</span></div>
           </div>
         </div>
       </section>
@@ -71,7 +71,7 @@
           <p class="lead" data-i18n="s3.body">Câu hỏi tốt hơn: estimate này chắc đến mức nào, và ta được phép claim gì?</p>
         </div>
         <div class="stage">
-          <div class="paper-card"><blockquote data-i18n="rq.text">After a short-term Chinese activity, how large is the average gain and how uncertain is the estimate?</blockquote></div>
+          <div class="paper-card"><blockquote data-i18n="rq.text">Sau một hoạt động Hán ngữ ngắn hạn, chênh lệch trung bình là bao nhiêu và estimate này chắc đến mức nào?</blockquote></div>
         </div>
       </section>
 
@@ -82,9 +82,9 @@
         </div>
         <div class="stage">
           <div class="concept-grid three">
-            <div class="concept-card row"><strong>36</strong><span data-i18n="n.raw">raw records</span></div>
-            <div class="concept-card value"><strong>25</strong><span data-i18n="n.usable">usable records</span></div>
-            <div class="concept-card schema"><strong>11</strong><span data-i18n="n.excluded">excluded or incomplete</span></div>
+            <div class="concept-card row"><strong>36</strong><span data-i18n="n.raw">bản ghi ban đầu</span></div>
+            <div class="concept-card value"><strong>25</strong><span data-i18n="n.usable">bản ghi dùng được</span></div>
+            <div class="concept-card schema"><strong>11</strong><span data-i18n="n.excluded">bị loại hoặc thiếu</span></div>
           </div>
           <div class="code-card"><pre><code>usable = df[df["usable_pre_post"] == True].copy()</code></pre></div>
         </div>
@@ -97,10 +97,10 @@
         </div>
         <div class="stage">
           <div class="concept-grid">
-            <div class="concept-card value"><strong>mean</strong><span data-i18n="concept.mean">average gain</span></div>
-            <div class="concept-card row"><strong>SD</strong><span data-i18n="concept.sd">learner spread</span></div>
-            <div class="concept-card column"><strong>SE</strong><span data-i18n="concept.se">estimate uncertainty</span></div>
-            <div class="concept-card schema"><strong>CI</strong><span data-i18n="concept.ci">interval around mean</span></div>
+            <div class="concept-card value"><strong>mean</strong><span data-i18n="concept.mean">trung bình gain</span></div>
+            <div class="concept-card row"><strong>SD</strong><span data-i18n="concept.sd">độ khác nhau giữa learner</span></div>
+            <div class="concept-card column"><strong>SE</strong><span data-i18n="concept.se">độ bất định của estimate</span></div>
+            <div class="concept-card schema"><strong>CI</strong><span data-i18n="concept.ci">khoảng quanh mean</span></div>
           </div>
         </div>
       </section>
@@ -131,7 +131,6 @@
         n=("gain_score", "count"),
         mean_gain=("gain_score", "mean"),
         sd_gain=("gain_score", "std"),
-        se_gain=("gain_score", "sem"),
     )
 )</code></pre></div>
         </div>
@@ -159,10 +158,10 @@ ci95_high = mean_gain + margin</code></pre></div>
         <div class="stage">
           <div class="research-table compact">
             <div class="row four header"><span>activity</span><span>n</span><span>mean</span><span>95% CI</span></div>
-            <div class="row four focus-row"><span>result_complements</span><span>6</span><span>13.00</span><span>12.06-13.94</span></div>
-            <div class="row four"><span>measure_words</span><span>5</span><span>12.60</span><span>11.92-13.28</span></div>
-            <div class="row four"><span>vocabulary_review</span><span>8</span><span>9.75</span><span>9.16-10.34</span></div>
-            <div class="row four"><span>word_order</span><span>6</span><span>8.83</span><span>8.40-9.26</span></div>
+            <div class="row four focus-row"><span data-i18n="table.result">Result complements</span><span>6</span><span>13.00</span><span>12.06-13.94</span></div>
+            <div class="row four"><span data-i18n="table.measure">Measure words</span><span>5</span><span>12.60</span><span>11.92-13.28</span></div>
+            <div class="row four"><span data-i18n="table.vocab">Vocabulary review</span><span>8</span><span>9.75</span><span>9.16-10.34</span></div>
+            <div class="row four"><span data-i18n="table.word">Word order</span><span>6</span><span>8.83</span><span>8.40-9.26</span></div>
           </div>
         </div>
       </section>
@@ -174,7 +173,7 @@ ci95_high = mean_gain + margin</code></pre></div>
         </div>
         <div class="stage">
           <div class="paper-card">
-            <img src="outputs/figures/week06_mean_gain_ci_by_activity.png" alt="Mean gain with confidence interval by activity focus" style="display:block;max-width:100%;border-radius:8px">
+            <img class="slide-figure" src="outputs/figures/week06_mean_gain_ci_by_activity.png" alt="Mean gain with confidence interval by activity focus" data-i18n-alt="figure.alt">
           </div>
         </div>
       </section>
@@ -185,7 +184,7 @@ ci95_high = mean_gain + margin</code></pre></div>
           <h2 class="wide-title" data-i18n="s11.title">Results paragraph = estimate + uncertainty + limitation</h2>
         </div>
         <div class="stage">
-          <div class="paper-card sentence-frame-card"><blockquote class="sentence-frame" data-i18n-html="results.frame">In the usable Week 06 records (<span class="frame-slot">N = 25</span>), learners gained an average of <span class="frame-slot">10.88</span> points (<span class="frame-slot">SD = 1.90</span>, <span class="frame-slot">95% CI [10.10, 11.66]</span>).</blockquote></div>
+          <div class="paper-card sentence-frame-card"><blockquote class="sentence-frame" data-i18n-html="results.frame">Trong 25 bản ghi dùng được, chênh lệch post-test minus pre-test trung bình là <span class="frame-slot">10.88</span> điểm (<span class="frame-slot">SD = 1.90</span>, <span class="frame-slot">95% CI [10.10, 11.66]</span>).</blockquote></div>
         </div>
       </section>
 
@@ -236,7 +235,7 @@ ci95_high = mean_gain + margin</code></pre></div>
         <div class="stage">
           <div class="checklist-card">
             <ul>
-              <li data-i18n="submit.1">statistics CSV</li>
+              <li data-i18n="submit.1">overall + activity CSV</li>
               <li data-i18n="submit.2">CI figure PNG</li>
               <li data-i18n="submit.3">figure caption</li>
               <li data-i18n="submit.4">Results paragraph 120-160 từ</li>
@@ -266,38 +265,42 @@ ci95_high = mean_gain + margin</code></pre></div>
         "nav.jump.aria": "Đi tới slide",
         "nav.jump.label": "Slide",
         "nav.jump.input": "Số slide",
-        "nav.jump.go": "Go",
+        "nav.jump.go": "Đi",
         "nav.toc.title": "Mục lục slide",
         "nav.toc.hint": "Chọn phần muốn xem nhanh.",
         "nav.toc.close": "Đóng",
         "s1.tag": "Tuần 06",
         "s1.title": "Thống kê cho Results",
         "s1.body": "Mean, SD, SE và 95% CI để viết kết quả thận trọng.",
-        "hero.usable": "usable records",
+        "hero.usable": "bản ghi dùng được",
         "hero.mean": "mean gain",
         "hero.ci": "95% CI",
         "s2.tag": "Từ Week 05",
         "s2.title": "Figure cần một câu Results biết giới hạn",
         "s2.body": "Week 05 cho ta pattern. Week 06 thêm uncertainty để không viết quá tay.",
-        "flow.data": "25 usable rows",
-        "flow.mean": "mean gain",
+        "flow.data.title": "Dữ liệu sạch",
+        "flow.mean.title": "Ước lượng",
+        "flow.ci.title": "Độ bất định",
+        "flow.results.title": "Viết",
+        "flow.data": "25 dòng dùng được",
+        "flow.mean": "mức chênh trung bình",
         "flow.ci": "95% CI",
-        "flow.results": "Results paragraph",
+        "flow.results": "đoạn Results",
         "s3.tag": "Câu hỏi",
         "s3.title": "Average gain là bao nhiêu?",
         "s3.body": "Câu hỏi tốt hơn: estimate này chắc đến mức nào, và ta được phép claim gì?",
-        "rq.text": "After a short-term Chinese activity, how large is the average gain and how uncertain is the estimate?",
+        "rq.text": "Sau một hoạt động Hán ngữ ngắn hạn, chênh lệch trung bình là bao nhiêu và estimate này chắc đến mức nào?",
         "s4.tag": "Data",
         "s4.title": "Raw N không phải usable N",
-        "n.raw": "raw records",
-        "n.usable": "usable records",
-        "n.excluded": "excluded or incomplete",
+        "n.raw": "bản ghi ban đầu",
+        "n.usable": "bản ghi dùng được",
+        "n.excluded": "bị loại hoặc thiếu",
         "s5.tag": "Concepts",
         "s5.title": "Bốn con số trước khi viết",
-        "concept.mean": "average gain",
-        "concept.sd": "learner spread",
-        "concept.se": "estimate uncertainty",
-        "concept.ci": "interval around mean",
+        "concept.mean": "trung bình gain",
+        "concept.sd": "độ khác nhau giữa learner",
+        "concept.se": "độ bất định của estimate",
+        "concept.ci": "khoảng quanh mean",
         "s6.tag": "Mental model",
         "s6.title": "SD mô tả learner; SE/CI mô tả estimate",
         "sd.card": "Nếu learner rất khác nhau, SD lớn.",
@@ -309,29 +312,34 @@ ci95_high = mean_gain + margin</code></pre></div>
         "ci.note": "Không cần học thuộc bảng t. Python giúp tính; ta cần hiểu CI giúp viết thận trọng.",
         "s9.tag": "Table",
         "s9.title": "Đọc bảng theo estimate trước",
+        "table.result": "Result complements",
+        "table.measure": "Measure words",
+        "table.vocab": "Vocabulary review",
+        "table.word": "Word order",
         "s10.tag": "Figure",
         "s10.title": "CI figure làm uncertainty visible",
+        "figure.alt": "Figure mean gain và khoảng tin cậy theo activity focus",
         "s11.tag": "Writing",
         "s11.title": "Results paragraph = estimate + uncertainty + limitation",
-        "results.frame": "In the usable Week 06 records (<span class=\"frame-slot\">N = 25</span>), learners gained an average of <span class=\"frame-slot\">10.88</span> points (<span class=\"frame-slot\">SD = 1.90</span>, <span class=\"frame-slot\">95% CI [10.10, 11.66]</span>).",
+        "results.frame": "Trong 25 bản ghi dùng được, chênh lệch post-test minus pre-test trung bình là <span class=\"frame-slot\">10.88</span> điểm (<span class=\"frame-slot\">SD = 1.90</span>, <span class=\"frame-slot\">95% CI [10.10, 11.66]</span>).",
         "s12.tag": "Caution",
         "s12.title": "Không biến descriptive pattern thành causal claim",
-        "weak.title": "Weak",
-        "weak.body": "Result complements worked best.",
-        "better.title": "Better",
-        "better.body": "Result complements had the highest descriptive mean gain, but groups were small and not randomly assigned.",
+        "weak.title": "Yếu",
+        "weak.body": "Result complements hiệu quả nhất.",
+        "better.title": "Tốt hơn",
+        "better.body": "Result complements có mean gain mô tả cao nhất, nhưng nhóm nhỏ và không được phân nhóm ngẫu nhiên.",
         "s13.tag": "Stretch",
         "s13.title": "T-test là optional, không phải kết luận",
         "s13.body": "Paired t-test hỏi mean difference có xa 0 không. Results vẫn cần mean, CI và limitation.",
         "s14.tag": "Transfer",
         "s14.title": "Cùng logic dùng được cho bốn hướng nghiên cứu",
         "track.tcsol": "mean gain + CI",
-        "track.contrast": "difficulty rating + CI",
-        "track.mtpe": "edit time + CI",
-        "track.policy": "coding score + CI",
+        "track.contrast": "điểm khó + CI",
+        "track.mtpe": "thời gian sửa + CI",
+        "track.policy": "điểm mã hóa + CI",
         "s15.tag": "Bài nộp",
         "s15.title": "Submit một Results package nhỏ",
-        "submit.1": "statistics CSV",
+        "submit.1": "overall + activity CSV",
         "submit.2": "CI figure PNG",
         "submit.3": "figure caption",
         "submit.4": "Results paragraph 120-160 từ",
@@ -364,6 +372,10 @@ ci95_high = mean_gain + margin</code></pre></div>
         "s2.tag": "From Week 05",
         "s2.title": "A figure needs a bounded Results sentence",
         "s2.body": "Week 05 gave us the pattern. Week 06 adds uncertainty so we do not overwrite the evidence.",
+        "flow.data.title": "Clean data",
+        "flow.mean.title": "Estimate",
+        "flow.ci.title": "Uncertainty",
+        "flow.results.title": "Writing",
         "flow.data": "25 usable rows",
         "flow.mean": "mean gain",
         "flow.ci": "95% CI",
@@ -394,11 +406,16 @@ ci95_high = mean_gain + margin</code></pre></div>
         "ci.note": "You do not need to memorize a t table. Python calculates it; we need to understand CI for cautious writing.",
         "s9.tag": "Table",
         "s9.title": "Read the table from estimate first",
+        "table.result": "Result complements",
+        "table.measure": "Measure words",
+        "table.vocab": "Vocabulary review",
+        "table.word": "Word order",
         "s10.tag": "Figure",
         "s10.title": "A CI figure makes uncertainty visible",
+        "figure.alt": "Figure showing mean gain and confidence interval by activity focus",
         "s11.tag": "Writing",
         "s11.title": "Results paragraph = estimate + uncertainty + limitation",
-        "results.frame": "In the usable Week 06 records (<span class=\"frame-slot\">N = 25</span>), learners gained an average of <span class=\"frame-slot\">10.88</span> points (<span class=\"frame-slot\">SD = 1.90</span>, <span class=\"frame-slot\">95% CI [10.10, 11.66]</span>).",
+        "results.frame": "In the usable Week 06 records (<span class=\"frame-slot\">N = 25</span>), learners showed a mean post-test minus pre-test difference of <span class=\"frame-slot\">10.88</span> points (<span class=\"frame-slot\">SD = 1.90</span>, <span class=\"frame-slot\">95% CI [10.10, 11.66]</span>).",
         "s12.tag": "Caution",
         "s12.title": "Do not turn a descriptive pattern into a causal claim",
         "weak.title": "Weak",
@@ -416,7 +433,7 @@ ci95_high = mean_gain + margin</code></pre></div>
         "track.policy": "coding score + CI",
         "s15.tag": "Assignment",
         "s15.title": "Submit a small Results package",
-        "submit.1": "statistics CSV",
+        "submit.1": "overall + activity CSV",
         "submit.2": "CI figure PNG",
         "submit.3": "figure caption",
         "submit.4": "120-160 word Results paragraph",

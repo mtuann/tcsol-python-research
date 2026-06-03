@@ -53,18 +53,24 @@
       </section>
 
       <section class="notebook-document" aria-label="Các cell notebook đã render" data-i18n-aria-label="notebook.cells.aria">
-        <article class="nb-cell nb-markdown" data-cell-type="markdown" data-i18n-html="notebook.cell_title"><h2>Tuần 06: Thống kê nhập môn cho Results</h2>
+        <article class="nb-cell nb-markdown" data-cell-type="markdown"><h2>Tuần 06: Thống kê nhập môn cho Results</h2>
 <p>Mục tiêu: dùng cleaned pre/post data để tính <code>n</code>, <code>mean</code>, <code>SD</code>, <code>SE</code>, <code>95% CI</code>, rồi viết một Results paragraph thận trọng. Tuần này ưu tiên diễn giải kết quả, không biến p-value thành mục tiêu chính.</p></article>
 <article class="nb-cell nb-code" data-cell-type="code"><div class="nb-input-label">In [1]</div><pre><code>from pathlib import Path
 from urllib.request import urlretrieve
 import hashlib
 
-import pandas as pd
-import matplotlib
-matplotlib.use(&quot;Agg&quot;)
-matplotlib.rcParams[&quot;svg.hashsalt&quot;] = &quot;week06-intro-statistics&quot;
-import matplotlib.pyplot as plt
-from scipy import stats
+try:
+    import pandas as pd
+    import matplotlib
+    matplotlib.use(&quot;Agg&quot;)
+    matplotlib.rcParams[&quot;svg.hashsalt&quot;] = &quot;week06-intro-statistics&quot;
+    import matplotlib.pyplot as plt
+    from scipy import stats
+except ImportError as exc:
+    raise SystemExit(
+        &quot;Missing package. From the project root, run: &quot;
+        &quot;python -m pip install -r requirements.txt&quot;
+    ) from exc
 
 THIS_WEEK = &quot;week-06-intro-statistics-for-results&quot;
 EXPECTED_SHA256 = &quot;175469cd9120b36a467d0e0b439f78859525841555c6a30bc5de0777edb9137a&quot;
@@ -82,18 +88,56 @@ def find_week_dir():
             return candidate
         if (candidate / &quot;data/raw/week06_tcsol_prepost_scores.csv&quot;).exists():
             return candidate
-    week_dir = Path.cwd() / &quot;weeks&quot; / THIS_WEEK
-    week_dir.mkdir(parents=True, exist_ok=True)
-    return week_dir
+    raise FileNotFoundError(&quot;Cannot find the Week 06 folder. Run this notebook from the project root or the Week 06 folder.&quot;)
 
 
-def course_path(path):
-    path = Path(path)
-    if THIS_WEEK in path.parts:
-        start = path.parts.index(THIS_WEEK)
-        return Path(&quot;weeks&quot;) / Path(*path.parts[start:])
-    return path.name
+def sha256_file(path):
+    return hashlib.sha256(path.read_bytes()).hexdigest()
 
+
+def strip_svg_whitespace(path):
+    text = path.read_text(encoding=&quot;utf-8&quot;)
+    clean_text = &quot;\n&quot;.join(line.rstrip() for line in text.splitlines()) + &quot;\n&quot;
+    path.write_text(clean_text, encoding=&quot;utf-8&quot;)
+
+def make_ci_table(data, group_column, value_column, label_column=None, order=None, pre_column=None, post_column=None):
+    rows = []
+    groups = order if order is not None else sorted(data[group_column].dropna().unique())
+    for group_name in groups:
+        group = data[data[group_column] == group_name]
+        n = len(group)
+        mean_value = group[value_column].mean()
+        sd_value = group[value_column].std(ddof=1)
+        se_value = group[value_column].sem()
+        t_critical = stats.t.ppf(0.975, n - 1) if n &gt; 1 else float(&quot;nan&quot;)
+        margin = t_critical * se_value if n &gt; 1 else float(&quot;nan&quot;)
+        row = {
+            group_column: group_name,
+            &quot;n&quot;: n,
+            &quot;mean_gain&quot;: mean_value,
+            &quot;sd_gain&quot;: sd_value,
+            &quot;se_gain&quot;: se_value,
+            &quot;t_critical_95&quot;: t_critical,
+            &quot;ci95_low&quot;: mean_value - margin,
+            &quot;ci95_high&quot;: mean_value + margin,
+        }
+        if label_column:
+            row[label_column] = group[label_column].iloc[0]
+        if pre_column:
+            row[&quot;pre_mean&quot;] = group[pre_column].mean()
+        if post_column:
+            row[&quot;post_mean&quot;] = group[post_column].mean()
+        rows.append(row)
+    columns = [group_column]
+    if label_column:
+        columns.append(label_column)
+    columns.extend([&quot;n&quot;])
+    if pre_column:
+        columns.append(&quot;pre_mean&quot;)
+    if post_column:
+        columns.append(&quot;post_mean&quot;)
+    columns.extend([&quot;mean_gain&quot;, &quot;sd_gain&quot;, &quot;se_gain&quot;, &quot;t_critical_95&quot;, &quot;ci95_low&quot;, &quot;ci95_high&quot;])
+    return pd.DataFrame(rows)[columns]
 
 WEEK_DIR = find_week_dir()
 DATA_PATH = WEEK_DIR / &quot;data/raw/week06_tcsol_prepost_scores.csv&quot;
@@ -103,21 +147,21 @@ TABLE_DIR.mkdir(parents=True, exist_ok=True)
 FIGURE_DIR.mkdir(parents=True, exist_ok=True)
 
 if not DATA_PATH.exists():
-    DATA_PATH.parent.mkdir(parents=True, exist_ok=True)
-    source_url = &quot;https://raw.githubusercontent.com/mtuann/tcsol-python-research/main/weeks/week-06-intro-statistics-for-results/data/raw/week06_tcsol_prepost_scores.csv&quot;
-    urlretrieve(source_url, DATA_PATH)
+    source = &quot;https://raw.githubusercontent.com/mtuann/tcsol-python-research/main/weeks/week-06-intro-statistics-for-results/data/raw/week06_tcsol_prepost_scores.csv&quot;
+    print(&quot;Local data not found. Downloading synthetic course dataset...&quot;)
+    urlretrieve(source, DATA_PATH)
 
-actual_hash = hashlib.sha256(DATA_PATH.read_bytes()).hexdigest()
-if actual_hash != EXPECTED_SHA256:
-    raise ValueError(&quot;Downloaded CSV does not match the expected Week 06 teaching dataset.&quot;)
+actual_sha = sha256_file(DATA_PATH)
+if actual_sha != EXPECTED_SHA256:
+    raise ValueError(f&quot;Data hash mismatch. Expected {EXPECTED_SHA256}, got {actual_sha}&quot;)
 
-print(&quot;pandas version:&quot;, pd.__version__)
-print(&quot;matplotlib version:&quot;, matplotlib.__version__)
-print(&quot;Data file:&quot;, course_path(DATA_PATH))</code></pre><div class="nb-output"><div class="nb-output-label">Output</div><pre><code>pandas version: 2.3.3
-matplotlib version: 3.9.4
-Data file: weeks/week-06-intro-statistics-for-results/data/raw/week06_tcsol_prepost_scores.csv</code></pre></div></article>
-<article class="nb-cell nb-markdown" data-cell-type="markdown" data-i18n-html="notebook.cell_research_frame"><h3>1. Khung nghiên cứu</h3>
-<p>Research question nhỏ: <strong>Sau một hoạt động Hán ngữ ngắn hạn, average gain là bao nhiêu và estimate này chắc đến mức nào?</strong></p>
+print(&quot;Week folder:&quot;, WEEK_DIR)
+print(&quot;Data file:&quot;, DATA_PATH)
+print(&quot;SHA-256:&quot;, actual_sha)</code></pre><div class="nb-output"><div class="nb-output-label">Output</div><pre><code>Week folder: /Users/mitu/Desktop/work/projects/tcsol-python-research-syllabus/weeks/week-06-intro-statistics-for-results
+Data file: /Users/mitu/Desktop/work/projects/tcsol-python-research-syllabus/weeks/week-06-intro-statistics-for-results/data/raw/week06_tcsol_prepost_scores.csv
+SHA-256: 175469cd9120b36a467d0e0b439f78859525841555c6a30bc5de0777edb9137a</code></pre></div></article>
+<article class="nb-cell nb-markdown" data-cell-type="markdown"><h3>1. Khung nghiên cứu</h3>
+<p>Research question nhỏ: <strong>Sau một hoạt động Hán ngữ ngắn hạn, chênh lệch trung bình là bao nhiêu và estimate này chắc đến mức nào?</strong></p>
 <p>Paper connection: Week 05 tạo figure. Week 06 thêm uncertainty để câu Results không chỉ nói “cao hơn/thấp hơn”, mà nói rõ <code>N</code>, khoảng ước lượng và limitation.</p></article>
 <article class="nb-cell nb-code" data-cell-type="code"><div class="nb-input-label">In [2]</div><pre><code>df = pd.read_csv(DATA_PATH)
 usable = df[df[&quot;usable_pre_post&quot;] == True].copy()
@@ -141,51 +185,35 @@ learner_id     activity_focus  pre_score  post_score  gain_score
       S009         word_order       64.0        73.0         9.0
       S010         word_order       63.0        72.0         9.0
       S011         word_order       65.0        74.0         9.0</code></pre></div></article>
-<article class="nb-cell nb-markdown" data-cell-type="markdown" data-i18n-html="notebook.cell_concepts"><h3>2. Bốn con số cần đọc</h3>
+<article class="nb-cell nb-markdown" data-cell-type="markdown"><h3>2. Bốn con số cần đọc</h3>
 <ul><li><code>mean</code>: mức gain trung bình trong sample.</li><li><code>SD</code>: learner trong nhóm khác nhau nhiều hay ít.</li><li><code>SE</code>: estimate mean ổn định đến đâu.</li><li><code>95% CI</code>: một khoảng ước lượng hợp lý cho mean, nếu giả định thống kê phù hợp.</li></ul>
-<p>Mental model: <strong>SD nói về người học; SE/CI nói về estimate mean.</strong></p></article>
+<p>Mental model: <strong>SD nói về người học; SE/CI nói về estimate mean.</strong></p>
+<p>Cảnh báo quan trọng: CI không có nghĩa là “95% learner nằm trong khoảng này”. CI nói về độ bất định quanh mean estimate.</p></article>
 <article class="nb-cell nb-code" data-cell-type="code"><div class="nb-input-label">In [3]</div><pre><code>order = [&quot;result_complements&quot;, &quot;measure_words&quot;, &quot;vocabulary_review&quot;, &quot;word_order&quot;]
-rows = []
+activity_stats = make_ci_table(
+    usable,
+    group_column=&quot;activity_focus&quot;,
+    value_column=&quot;gain_score&quot;,
+    label_column=&quot;activity_label&quot;,
+    order=order,
+    pre_column=&quot;pre_score&quot;,
+    post_column=&quot;post_score&quot;,
+).round(2)
 
-for activity in order:
-    group = usable[usable[&quot;activity_focus&quot;] == activity]
-    n = len(group)
-    mean_gain = group[&quot;gain_score&quot;].mean()
-    sd_gain = group[&quot;gain_score&quot;].std(ddof=1)
-    se_gain = group[&quot;gain_score&quot;].sem()
-    t_critical = stats.t.ppf(0.975, n - 1)
-    margin = t_critical * se_gain
-    rows.append({
-        &quot;activity_focus&quot;: activity,
-        &quot;activity_label&quot;: group[&quot;activity_label&quot;].iloc[0],
-        &quot;n&quot;: n,
-        &quot;pre_mean&quot;: group[&quot;pre_score&quot;].mean(),
-        &quot;post_mean&quot;: group[&quot;post_score&quot;].mean(),
-        &quot;mean_gain&quot;: mean_gain,
-        &quot;sd_gain&quot;: sd_gain,
-        &quot;se_gain&quot;: se_gain,
-        &quot;t_critical_95&quot;: t_critical,
-        &quot;ci95_low&quot;: mean_gain - margin,
-        &quot;ci95_high&quot;: mean_gain + margin,
-    })
+activity_path = TABLE_DIR / &quot;week06_activity_statistics.csv&quot;
+activity_stats.to_csv(activity_path, index=False)
 
-activity_stats = pd.DataFrame(rows)
-rounded = activity_stats.copy()
-number_cols = [&quot;pre_mean&quot;, &quot;post_mean&quot;, &quot;mean_gain&quot;, &quot;sd_gain&quot;, &quot;se_gain&quot;, &quot;t_critical_95&quot;, &quot;ci95_low&quot;, &quot;ci95_high&quot;]
-rounded[number_cols] = rounded[number_cols].round(2)
-output_path = TABLE_DIR / &quot;week06_activity_statistics.csv&quot;
-rounded.to_csv(output_path, index=False)
-
-print(rounded[[&quot;activity_label&quot;, &quot;n&quot;, &quot;mean_gain&quot;, &quot;sd_gain&quot;, &quot;se_gain&quot;, &quot;ci95_low&quot;, &quot;ci95_high&quot;]].to_string(index=False))
-print(&quot;Saved:&quot;, course_path(output_path))</code></pre><div class="nb-output"><div class="nb-output-label">Output</div><pre><code>    activity_label  n  mean_gain  sd_gain  se_gain  ci95_low  ci95_high
-Result complements  6      13.00     0.89     0.37     12.06      13.94
-     Measure words  5      12.60     0.55     0.24     11.92      13.28
- Vocabulary review  8       9.75     0.71     0.25      9.16      10.34
-        Word order  6       8.83     0.41     0.17      8.40       9.26
-Saved: weeks/week-06-intro-statistics-for-results/outputs/tables/week06_activity_statistics.csv</code></pre></div></article>
-<article class="nb-cell nb-markdown" data-cell-type="markdown" data-i18n-html="notebook.cell_table_reading"><h3>3. Đọc bảng như người viết Results</h3>
+print(&quot;Saved:&quot;, activity_path)
+print(activity_stats.to_string(index=False))</code></pre><div class="nb-output"><div class="nb-output-label">Output</div><pre><code>Saved: /Users/mitu/Desktop/work/projects/tcsol-python-research-syllabus/weeks/week-06-intro-statistics-for-results/outputs/tables/week06_activity_statistics.csv
+    activity_focus     activity_label  n  pre_mean  post_mean  mean_gain  sd_gain  se_gain  t_critical_95  ci95_low  ci95_high
+result_complements Result complements  6     58.67      71.67      13.00     0.89     0.37           2.57     12.06      13.94
+     measure_words      Measure words  5     59.60      72.20      12.60     0.55     0.24           2.78     11.92      13.28
+ vocabulary_review  Vocabulary review  8     72.62      82.38       9.75     0.71     0.25           2.36      9.16      10.34
+        word_order         Word order  6     64.33      73.17       8.83     0.41     0.17           2.57      8.40       9.26</code></pre></div></article>
+<article class="nb-cell nb-markdown" data-cell-type="markdown"><h3>3. Đọc bảng như người viết Results</h3>
 <p>Đừng bắt đầu bằng “significant hay không?”. Hãy đọc theo thứ tự:</p>
-<ol><li><code>n</code>: có bao nhiêu record usable?</li><li><code>mean_gain</code>: estimate chính là gì?</li><li><code>ci95_low</code> đến <code>ci95_high</code>: khoảng ước lượng rộng hay hẹp?</li><li>limitation: sample nhỏ, synthetic data, không random assignment.</li></ol></article>
+<ol><li><code>n</code>: có bao nhiêu record usable?</li><li><code>mean_gain</code>: estimate chính là gì?</li><li><code>ci95_low</code> đến <code>ci95_high</code>: khoảng ước lượng rộng hay hẹp?</li><li>limitation: sample nhỏ, synthetic data, không random assignment.</li></ol>
+<p>Khi so sánh activity, luôn đọc kèm group <code>n</code> và CI; bảng này chưa làm kiểm định giữa các nhóm.</p></article>
 <article class="nb-cell nb-code" data-cell-type="code"><div class="nb-input-label">In [4]</div><pre><code>n = len(usable)
 mean_gain = usable[&quot;gain_score&quot;].mean()
 sd_gain = usable[&quot;gain_score&quot;].std(ddof=1)
@@ -212,11 +240,11 @@ overall_rounded = overall_summary.round(2)
 overall_path = TABLE_DIR / &quot;week06_overall_gain_summary.csv&quot;
 overall_rounded.to_csv(overall_path, index=False)
 
-print(overall_rounded.to_string(index=False))
-print(&quot;Saved:&quot;, course_path(overall_path))</code></pre><div class="nb-output"><div class="nb-output-label">Output</div><pre><code> raw_n  usable_n  pre_mean  post_mean  mean_gain  sd_gain  se_gain  t_critical_95  ci95_low  ci95_high  min_gain  max_gain
-    36        25     64.68      75.56      10.88      1.9     0.38           2.06      10.1      11.66       8.0      14.0
-Saved: weeks/week-06-intro-statistics-for-results/outputs/tables/week06_overall_gain_summary.csv</code></pre></div></article>
-<article class="nb-cell nb-markdown" data-cell-type="markdown" data-i18n-html="notebook.cell_figure_intro"><h3>4. Figure có confidence interval</h3>
+print(&quot;Saved:&quot;, overall_path)
+print(overall_rounded.to_string(index=False))</code></pre><div class="nb-output"><div class="nb-output-label">Output</div><pre><code>Saved: /Users/mitu/Desktop/work/projects/tcsol-python-research-syllabus/weeks/week-06-intro-statistics-for-results/outputs/tables/week06_overall_gain_summary.csv
+ raw_n  usable_n  pre_mean  post_mean  mean_gain  sd_gain  se_gain  t_critical_95  ci95_low  ci95_high  min_gain  max_gain
+    36        25     64.68      75.56      10.88      1.9     0.38           2.06      10.1      11.66       8.0      14.0</code></pre></div></article>
+<article class="nb-cell nb-markdown" data-cell-type="markdown"><h3>4. Figure có confidence interval</h3>
 <p>Figure Week 06 không cần màu mè hơn Week 05. Nó chỉ thêm một thứ: thanh interval để người đọc thấy estimate mean có độ bất định.</p></article>
 <article class="nb-cell nb-code" data-cell-type="code"><div class="nb-input-label">In [5]</div><pre><code>png_path = FIGURE_DIR / &quot;week06_mean_gain_ci_by_activity.png&quot;
 svg_path = FIGURE_DIR / &quot;week06_mean_gain_ci_by_activity.svg&quot;
@@ -232,54 +260,48 @@ error_right = activity_stats[&quot;ci95_high&quot;] - means
 ax.barh(y_positions, means, color=palette, alpha=0.88, height=0.55)
 ax.errorbar(means, y_positions, xerr=[error_left, error_right], fmt=&quot;none&quot;, ecolor=&quot;#172033&quot;, elinewidth=1.8, capsize=5)
 ax.set_yticks(list(y_positions))
-ax.set_yticklabels([f&quot;{label}\n(n={n})&quot; for label, n in zip(activity_stats[&quot;activity_label&quot;], activity_stats[&quot;n&quot;])])
-ax.invert_yaxis()
-ax.set_xlabel(&quot;Mean gain score with 95% CI&quot;)
-ax.set_title(&quot;Estimated mean gain by activity focus&quot;, weight=&quot;bold&quot;, pad=14)
-ax.set_xlim(0, 15)
-ax.grid(axis=&quot;x&quot;, color=&quot;#dbe4f0&quot;, linewidth=0.8)
-ax.grid(axis=&quot;y&quot;, visible=False)
-for idx, row in activity_stats.iterrows():
-    ax.text(row[&quot;ci95_high&quot;] + 0.2, idx, f&quot;{row[&#x27;mean_gain&#x27;]:.2f}&quot;, va=&quot;center&quot;, ha=&quot;left&quot;, fontsize=10, weight=&quot;bold&quot;)
-fig.text(0.12, 0.035, &quot;Synthetic teaching dataset; intervals describe uncertainty around group mean gains, not causal effects.&quot;, color=&quot;#5b6578&quot;, fontsize=9.5)
-fig.tight_layout(rect=(0, 0.08, 1, 1))
-fig.savefig(png_path, dpi=300, bbox_inches=&quot;tight&quot;, metadata=figure_metadata)
-fig.savefig(svg_path, bbox_inches=&quot;tight&quot;, metadata=figure_metadata)
-plt.close(fig)
-
-print(&quot;Saved PNG:&quot;, course_path(png_path))
-print(&quot;Saved SVG:&quot;, course_path(svg_path))</code></pre><div class="nb-output"><div class="nb-output-label">Output</div><pre><code>Saved PNG: weeks/week-06-intro-statistics-for-results/outputs/figures/week06_mean_gain_ci_by_activity.png
-Saved SVG: weeks/week-06-intro-statistics-for-results/outputs/figures/week06_mean_gain_ci_by_activity.svg</code></pre></div></article>
-<article class="nb-cell nb-markdown" data-cell-type="markdown" data-i18n-html="notebook.cell_results_frame"><h3>5. Caption và Results paragraph frame</h3>
+ax.set_yticklabels([f&quot;{label}\n(n={n})&quot; for label, n in zip(activity_stats[&quot;activity_label&quot;], activity_stats[&quot;n&quot;])])</code></pre></article>
+<article class="nb-cell nb-markdown" data-cell-type="markdown"><h3>5. Output kiểm tra nhanh</h3>
+<p><img src="outputs/figures/week06_mean_gain_ci_by_activity.png" alt="Figure 1: Mean gain score with 95% CI by activity focus" class="nb-image"></p>
+<ul><li><a href="outputs/tables/week06_overall_gain_summary.csv">Overall gain summary CSV</a></li><li><a href="outputs/tables/week06_activity_statistics.csv">Activity statistics CSV</a></li><li><a href="outputs/figures/week06_mean_gain_ci_by_activity.svg">Editable SVG figure</a></li></ul></article>
+<article class="nb-cell nb-markdown" data-cell-type="markdown"><h3>6. Caption và Results paragraph frame</h3>
 <p>Figure caption frame:</p>
 <blockquote>Figure 1. Mean gain score by activity focus in the synthetic Week 06 TCSOL dataset (<code>N = 25</code> usable learner records). Error bars show 95% confidence intervals around group mean gains; the figure is descriptive and does not establish causal effects.</blockquote>
-<p>Mẫu Results 120-160 từ:</p>
-<blockquote>In the usable Week 06 records (<code>N = 25</code>), learners gained an average of <code>[mean]</code> points from pre-test to post-test (<code>SD = [SD]</code>, <code>95% CI [low, high]</code>). By activity focus, <code>[highest group]</code> had the highest descriptive mean gain, while <code>[lowest group]</code> had the lowest. These estimates should be read cautiously because the dataset is synthetic, group sizes are small, and activity focus was not randomly assigned.</blockquote></article>
+<p>Vietnamese thinking frame:</p>
+<blockquote>Trong 25 bản ghi dùng được, chênh lệch post-test minus pre-test trung bình là <code>[mean]</code> điểm (<code>SD = [SD]</code>, <code>95% CI [low, high]</code>). Nhóm <code>[highest group]</code> có mean gain mô tả cao hơn nhóm <code>[lowest group]</code>, nhưng kết quả cần đọc thận trọng vì <code>[limitation]</code>.</blockquote>
+<p>English paper frame:</p>
+<blockquote>In the usable Week 06 records (<code>N = 25</code>), learners showed a mean post-test minus pre-test difference of <code>[mean]</code> points (<code>SD = [SD]</code>, <code>95% CI [low, high]</code>). By activity focus, <code>[highest group]</code> had the highest descriptive mean gain, while <code>[lowest group]</code> had the lowest. These estimates should be read cautiously because <code>[limitation]</code>.</blockquote></article>
 <article class="nb-cell nb-code" data-cell-type="code"><div class="nb-input-label">In [6]</div><pre><code>high = activity_stats.sort_values(&quot;mean_gain&quot;, ascending=False).iloc[0]
 low = activity_stats.sort_values(&quot;mean_gain&quot;, ascending=True).iloc[0]
 result_paragraph = (
-    f&quot;In the usable Week 06 records (N = {n}), learners gained an average of &quot;
-    f&quot;{mean_gain:.2f} points from pre-test to post-test (SD = {sd_gain:.2f}, &quot;
-    f&quot;95% CI [{ci_low:.2f}, {ci_high:.2f}]). By activity focus, &quot;
-    f&quot;{high[&#x27;activity_label&#x27;]} had the highest descriptive mean gain &quot;
-    f&quot;(M = {high[&#x27;mean_gain&#x27;]:.2f}), while {low[&#x27;activity_label&#x27;]} had the lowest &quot;
-    f&quot;(M = {low[&#x27;mean_gain&#x27;]:.2f}). These estimates should be read cautiously because &quot;
-    &quot;the dataset is synthetic, group sizes are small, and activity focus was not randomly assigned. &quot;
-    &quot;The result therefore supports a descriptive claim about observed learner records, not a causal claim.&quot;
+    f&quot;In the usable Week 06 records (N = {n}), learners showed a mean post-test minus pre-test &quot;
+    f&quot;difference of {mean_gain:.2f} points (SD = {sd_gain:.2f}, 95% CI [{ci_low:.2f}, {ci_high:.2f}]). &quot;
+    f&quot;By activity focus, {high[&#x27;activity_label&#x27;]} had the highest descriptive mean gain &quot;
+    f&quot;(n = {int(high[&#x27;n&#x27;])}, M = {high[&#x27;mean_gain&#x27;]:.2f}, 95% CI [{high[&#x27;ci95_low&#x27;]:.2f}, {high[&#x27;ci95_high&#x27;]:.2f}]), &quot;
+    f&quot;while {low[&#x27;activity_label&#x27;]} had the lowest &quot;
+    f&quot;(n = {int(low[&#x27;n&#x27;])}, M = {low[&#x27;mean_gain&#x27;]:.2f}, 95% CI [{low[&#x27;ci95_low&#x27;]:.2f}, {low[&#x27;ci95_high&#x27;]:.2f}]). &quot;
+    &quot;These estimates should be read cautiously because the dataset is synthetic, group sizes are small, &quot;
+    &quot;and activity focus was not randomly assigned. The result therefore supports a descriptive claim &quot;
+    &quot;about observed score differences, not a causal claim about teaching effectiveness.&quot;
 )
-print(result_paragraph)</code></pre><div class="nb-output"><div class="nb-output-label">Output</div><pre><code>In the usable Week 06 records (N = 25), learners gained an average of 10.88 points from pre-test to post-test (SD = 1.90, 95% CI [10.10, 11.66]). By activity focus, Result complements had the highest descriptive mean gain (M = 13.00), while Word order had the lowest (M = 8.83). These estimates should be read cautiously because the dataset is synthetic, group sizes are small, and activity focus was not randomly assigned. The result therefore supports a descriptive claim about observed learner records, not a causal claim.</code></pre></div></article>
-<article class="nb-cell nb-markdown" data-cell-type="markdown" data-i18n-html="notebook.cell_optional_test"><h3>6. Optional: paired t-test</h3>
+print(result_paragraph)
+print(&quot;\nWord count:&quot;, len(result_paragraph.split()))</code></pre><div class="nb-output"><div class="nb-output-label">Output</div><pre><code>In the usable Week 06 records (N = 25), learners showed a mean post-test minus pre-test difference of 10.88 points (SD = 1.90, 95% CI [10.10, 11.66]). By activity focus, Result complements had the highest descriptive mean gain (n = 6, M = 13.00, 95% CI [12.06, 13.94]), while Word order had the lowest (n = 6, M = 8.83, 95% CI [8.40, 9.26]). These estimates should be read cautiously because the dataset is synthetic, group sizes are small, and activity focus was not randomly assigned. The result therefore supports a descriptive claim about observed score differences, not a causal claim about teaching effectiveness.
+
+Word count: 104</code></pre></div></article>
+<article class="nb-cell nb-markdown" data-cell-type="markdown"><h3>7. Optional: paired t-test</h3>
 <p>T-test trả lời câu hỏi khác với CI. CI giúp viết <strong>estimate + uncertainty</strong>. T-test hỏi liệu mean difference có xa 0 không dưới giả định thống kê. Với người mới, chỉ đọc output này như stretch, không dùng p-value một mình để kết luận.</p></article>
 <article class="nb-cell nb-code" data-cell-type="code"><div class="nb-input-label">In [7]</div><pre><code>paired_test = stats.ttest_rel(usable[&quot;post_score&quot;], usable[&quot;pre_score&quot;])
 print(&quot;paired t statistic:&quot;, round(float(paired_test.statistic), 2))
 print(&quot;p-value:&quot;, f&quot;{float(paired_test.pvalue):.3g}&quot;)
-print(&quot;df:&quot;, int(paired_test.df))</code></pre><div class="nb-output"><div class="nb-output-label">Output</div><pre><code>paired t statistic: 28.63
+print(&quot;df:&quot;, int(paired_test.df))
+print(&quot;Stretch only: this p-value asks whether the mean paired difference is far from 0; the Results paragraph still needs mean, CI, and limitation.&quot;)</code></pre><div class="nb-output"><div class="nb-output-label">Output</div><pre><code>paired t statistic: 28.63
 p-value: 4.58e-20
-df: 24</code></pre></div></article>
-<article class="nb-cell nb-markdown" data-cell-type="markdown" data-i18n-html="notebook.cell_transfer"><h3>7. Transfer sang các hướng nghiên cứu</h3>
+df: 24
+Stretch only: this p-value asks whether the mean paired difference is far from 0; the Results paragraph still needs mean, CI, and limitation.</code></pre></div></article>
+<article class="nb-cell nb-markdown" data-cell-type="markdown"><h3>8. Transfer sang các hướng nghiên cứu</h3>
 <ul><li>TCSOL: report mean gain + CI cho pre/post score.</li><li>Đối chiếu Hán-Việt: report mean difficulty rating + CI theo hiện tượng ngữ pháp.</li><li>MT/MTPE: report mean edit time hoặc error count + CI theo system.</li><li>Chính sách giáo dục: report mean/median coding score theo giai đoạn, nhớ nói rõ đơn vị phân tích là văn bản hay chính sách.</li></ul></article>
-<article class="nb-cell nb-markdown" data-cell-type="markdown" data-i18n-html="notebook.cell_exercise"><h3>8. Exercise</h3>
-<ol><li>Change one activity label to Vietnamese.</li><li>Rerun the activity statistics table.</li><li>Save the CI figure.</li><li>Write a 120-160 word Results paragraph.</li><li>Add one limitation sentence that does <strong>not</strong> sound like an apology.</li></ol></article>
+<article class="nb-cell nb-markdown" data-cell-type="markdown"><h3>9. Exercise</h3>
+<ol><li>Đọc <code>week06_overall_gain_summary.csv</code>: ghi lại usable <code>N</code>, <code>mean_gain</code>, <code>SD</code>, và <code>95% CI</code>.</li><li>Rerun notebook để xuất <code>week06_activity_statistics.csv</code> và CI figure.</li><li>Nếu muốn đổi label activity sang tiếng Việt, chỉ đổi display text bên phải trong mapping, không đổi raw key bên trái.</li><li>Viết một Results paragraph 120-160 từ.</li><li>Thêm source note và một câu limitation không nghe như lời xin lỗi.</li><li>Stretch: chạy paired t-test và giải thích vì sao p-value không thay thế CI.</li></ol></article>
       </section>
     </div>
   </main>
@@ -290,15 +312,6 @@ df: 24</code></pre></div></article>
       defaultLang: "vi",
       translations: {
         "vi": {
-                "notebook.cell_title": "<h2>Tuần 06: Thống kê nhập môn cho Results</h2>\n<p>Mục tiêu: dùng cleaned pre/post data để tính <code>n</code>, <code>mean</code>, <code>SD</code>, <code>SE</code>, <code>95% CI</code>, rồi viết một Results paragraph thận trọng. Tuần này ưu tiên diễn giải kết quả, không biến p-value thành mục tiêu chính.</p>",
-                "notebook.cell_research_frame": "<h3>1. Khung nghiên cứu</h3>\n<p>Research question nhỏ: <strong>Sau một hoạt động Hán ngữ ngắn hạn, average gain là bao nhiêu và estimate này chắc đến mức nào?</strong></p>\n<p>Paper connection: Week 05 tạo figure. Week 06 thêm uncertainty để câu Results không chỉ nói “cao hơn/thấp hơn”, mà nói rõ <code>N</code>, khoảng ước lượng và limitation.</p>",
-                "notebook.cell_concepts": "<h3>2. Bốn con số cần đọc</h3>\n<ul><li><code>mean</code>: mức gain trung bình trong sample.</li><li><code>SD</code>: learner trong nhóm khác nhau nhiều hay ít.</li><li><code>SE</code>: estimate mean ổn định đến đâu.</li><li><code>95% CI</code>: một khoảng ước lượng hợp lý cho mean, nếu giả định thống kê phù hợp.</li></ul>\n<p>Mental model: <strong>SD nói về người học; SE/CI nói về estimate mean.</strong></p>",
-                "notebook.cell_table_reading": "<h3>3. Đọc bảng như người viết Results</h3>\n<p>Đừng bắt đầu bằng “significant hay không?”. Hãy đọc theo thứ tự:</p>\n<ol><li><code>n</code>: có bao nhiêu record usable?</li><li><code>mean_gain</code>: estimate chính là gì?</li><li><code>ci95_low</code> đến <code>ci95_high</code>: khoảng ước lượng rộng hay hẹp?</li><li>limitation: sample nhỏ, synthetic data, không random assignment.</li></ol>",
-                "notebook.cell_figure_intro": "<h3>4. Figure có confidence interval</h3>\n<p>Figure Week 06 không cần màu mè hơn Week 05. Nó chỉ thêm một thứ: thanh interval để người đọc thấy estimate mean có độ bất định.</p>",
-                "notebook.cell_results_frame": "<h3>5. Caption và Results paragraph frame</h3>\n<p>Figure caption frame:</p>\n<blockquote>Figure 1. Mean gain score by activity focus in the synthetic Week 06 TCSOL dataset (<code>N = 25</code> usable learner records). Error bars show 95% confidence intervals around group mean gains; the figure is descriptive and does not establish causal effects.</blockquote>\n<p>Mẫu Results 120-160 từ:</p>\n<blockquote>In the usable Week 06 records (<code>N = 25</code>), learners gained an average of <code>[mean]</code> points from pre-test to post-test (<code>SD = [SD]</code>, <code>95% CI [low, high]</code>). By activity focus, <code>[highest group]</code> had the highest descriptive mean gain, while <code>[lowest group]</code> had the lowest. These estimates should be read cautiously because the dataset is synthetic, group sizes are small, and activity focus was not randomly assigned.</blockquote>",
-                "notebook.cell_optional_test": "<h3>6. Optional: paired t-test</h3>\n<p>T-test trả lời câu hỏi khác với CI. CI giúp viết <strong>estimate + uncertainty</strong>. T-test hỏi liệu mean difference có xa 0 không dưới giả định thống kê. Với người mới, chỉ đọc output này như stretch, không dùng p-value một mình để kết luận.</p>",
-                "notebook.cell_transfer": "<h3>7. Transfer sang các hướng nghiên cứu</h3>\n<ul><li>TCSOL: report mean gain + CI cho pre/post score.</li><li>Đối chiếu Hán-Việt: report mean difficulty rating + CI theo hiện tượng ngữ pháp.</li><li>MT/MTPE: report mean edit time hoặc error count + CI theo system.</li><li>Chính sách giáo dục: report mean/median coding score theo giai đoạn, nhớ nói rõ đơn vị phân tích là văn bản hay chính sách.</li></ul>",
-                "notebook.cell_exercise": "<h3>8. Exercise</h3>\n<ol><li>Change one activity label to Vietnamese.</li><li>Rerun the activity statistics table.</li><li>Save the CI figure.</li><li>Write a 120-160 word Results paragraph.</li><li>Add one limitation sentence that does <strong>not</strong> sound like an apology.</li></ol>",
                 "brand": "Python Research Hub",
                 "meta.title": "Tuần 06: Thống kê nhập môn cho Results | Notebook đã render",
                 "nav.aria": "Điều hướng notebook",
@@ -328,15 +341,6 @@ df: 24</code></pre></div></article>
                 "notebook.cells.aria": "Các cell notebook đã render"
         },
         "en": {
-                "notebook.cell_title": "<h2>Week 06: Intro Statistics for Results</h2>\n<p>Goal: use cleaned pre/post data to compute <code>n</code>, <code>mean</code>, <code>SD</code>, <code>SE</code>, <code>95% CI</code>, then write a cautious Results paragraph. This week prioritizes interpretation, not chasing p-values.</p>",
-                "notebook.cell_research_frame": "<h3>1. Research frame</h3>\n<p>Small research question: <strong>After a short-term Chinese activity, how large is the average gain and how uncertain is the estimate?</strong></p>\n<p>Paper connection: Week 05 created the figure. Week 06 adds uncertainty so the Results paragraph reports <code>N</code>, an interval estimate, and a limitation.</p>",
-                "notebook.cell_concepts": "<h3>2. Four numbers to read</h3>\n<ul><li><code>mean</code>: average gain in the sample.</li><li><code>SD</code>: how different learners are within the group.</li><li><code>SE</code>: how stable the mean estimate is.</li><li><code>95% CI</code>: a plausible interval for the mean, under the statistical assumptions.</li></ul>\n<p>Mental model: <strong>SD describes learners; SE/CI describe the mean estimate.</strong></p>",
-                "notebook.cell_table_reading": "<h3>3. Read the table like a Results writer</h3>\n<p>Do not start with “significant or not?”. Read in this order:</p>\n<ol><li><code>n</code>: how many usable records?</li><li><code>mean_gain</code>: what is the main estimate?</li><li><code>ci95_low</code> to <code>ci95_high</code>: is the interval narrow or wide?</li><li>limitation: small sample, synthetic data, no random assignment.</li></ol>",
-                "notebook.cell_figure_intro": "<h3>4. Figure with confidence intervals</h3>\n<p>The Week 06 figure does not need more decoration than Week 05. It adds one thing: interval bars so the reader can see uncertainty around the mean estimate.</p>",
-                "notebook.cell_results_frame": "<h3>5. Caption and Results paragraph frame</h3>\n<p>Figure caption frame:</p>\n<blockquote>Figure 1. Mean gain score by activity focus in the synthetic Week 06 TCSOL dataset (<code>N = 25</code> usable learner records). Error bars show 95% confidence intervals around group mean gains; the figure is descriptive and does not establish causal effects.</blockquote>\n<p>120-160 word Results model:</p>\n<blockquote>In the usable Week 06 records (<code>N = 25</code>), learners gained an average of <code>[mean]</code> points from pre-test to post-test (<code>SD = [SD]</code>, <code>95% CI [low, high]</code>). By activity focus, <code>[highest group]</code> had the highest descriptive mean gain, while <code>[lowest group]</code> had the lowest. These estimates should be read cautiously because the dataset is synthetic, group sizes are small, and activity focus was not randomly assigned.</blockquote>",
-                "notebook.cell_optional_test": "<h3>6. Optional: paired t-test</h3>\n<p>A t-test answers a different question from a CI. CI supports <strong>estimate + uncertainty</strong> writing. A t-test asks whether the mean difference is far from 0 under statistical assumptions. For beginners, read this output as stretch and never use the p-value alone as the conclusion.</p>",
-                "notebook.cell_transfer": "<h3>7. Transfer to research tracks</h3>\n<ul><li>TCSOL: report mean gain + CI for pre/post scores.</li><li>Chinese-Vietnamese contrast: report mean difficulty rating + CI by grammatical phenomenon.</li><li>MT/MTPE: report mean editing time or error count + CI by system.</li><li>Education policy: report mean/median coding score by period, with a clear unit of analysis.</li></ul>",
-                "notebook.cell_exercise": "<h3>8. Exercise</h3>\n<ol><li>Change one activity label to Vietnamese.</li><li>Rerun the activity statistics table.</li><li>Save the CI figure.</li><li>Write a 120-160 word Results paragraph.</li><li>Add one limitation sentence that does <strong>not</strong> sound like an apology.</li></ol>",
                 "brand": "Python Research Hub",
                 "meta.title": "Week 06: Intro Statistics for Results | Rendered Notebook",
                 "nav.aria": "Notebook navigation",

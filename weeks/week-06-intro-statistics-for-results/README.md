@@ -7,7 +7,7 @@ This week turns the Week 05 cleaned pre/post dataset into cautious statistical w
 - Question: After a short-term Chinese learning activity, how large is the average gain, and how uncertain is the estimate?
 - Unit of analysis: one usable learner record with numeric pre-test and post-test scores.
 - Dataset: synthetic TCSOL pre/post data, reused from the cleaned Week 05 dataset.
-- Core output: one activity-level statistics table, one CI figure with caption, one 120-160 word Results paragraph.
+- Core output: one overall summary table, one activity-level statistics table, one CI figure with caption, one 120-160 word Results paragraph.
 - Stretch output: paired t-test output and a short note explaining why p-values should not be the only evidence.
 
 ## Beginner Scope
@@ -38,19 +38,37 @@ The learner should be able to explain:
 - `rubric.md`: assessment criteria.
 - `readings.md`: required and optional readings.
 
-## Core Checklist
+## Core Minimum
 
 - [ ] Load `week06_tcsol_prepost_scores.csv`.
 - [ ] Filter rows where `usable_pre_post == True`.
+- [ ] Read `raw_n`, `usable_n`, overall `mean_gain`, `SD`, and `95% CI`.
+- [ ] Write one cautious Results paragraph from the overall summary.
+
+## Guided Core
+
 - [ ] Compute `n`, `mean_gain`, `sd_gain`, `se_gain`, `ci95_low`, `ci95_high`.
+- [ ] Export `outputs/tables/week06_overall_gain_summary.csv`.
 - [ ] Export `outputs/tables/week06_activity_statistics.csv`.
 - [ ] Export `outputs/figures/week06_mean_gain_ci_by_activity.png`.
 - [ ] Write a CI figure caption that reports variable, groups, usable N, and limitation.
 - [ ] Write a Results paragraph with estimate, interval, and limitation.
 
+## Stretch
+
+- [ ] Run the optional paired t-test cell.
+- [ ] Explain why the p-value does not replace mean, CI, and limitation.
+- [ ] If changing activity labels, edit only the right-hand display text in the label mapping; do not change the raw `activity_focus` keys.
+
 ## Main Sentence Frame
 
-> In the usable Week 06 records (`N = 25`), learners gained an average of `10.88` points from pre-test to post-test (`SD = 1.90`, `95% CI [10.10, 11.66]`). This descriptive result should be interpreted cautiously because the dataset is synthetic, activity groups were small, and activity focus was not randomly assigned.
+Vietnamese thinking frame:
+
+> Trong 25 bản ghi dùng được, chênh lệch post-test minus pre-test trung bình là `10.88` điểm (`SD = 1.90`, `95% CI [10.10, 11.66]`). Đây là mô tả từ dữ liệu mẫu, chưa phải bằng chứng nhân quả, vì dữ liệu là synthetic, mỗi nhóm activity nhỏ và activity focus không được phân nhóm ngẫu nhiên.
+
+English paper frame:
+
+> In the usable Week 06 records (`N = 25`), learners showed a mean post-test minus pre-test difference of `10.88` points (`SD = 1.90`, `95% CI [10.10, 11.66]`). This descriptive result should be interpreted cautiously because the dataset is synthetic, activity groups were small, and activity focus was not randomly assigned.
 
 Figure caption frame:
 
@@ -59,3 +77,10 @@ Figure caption frame:
 ## Teaching Note
 
 Keep the first pass descriptive. Do not ask the learner to decide whether the intervention "worked" from one p-value. The main research habit is to report the estimate and show uncertainty before making claims.
+
+## Data Provenance
+
+- File: `data/raw/week06_tcsol_prepost_scores.csv`
+- Type: synthetic teaching dataset for workflow practice, not real student data.
+- SHA-256: `175469cd9120b36a467d0e0b439f78859525841555c6a30bc5de0777edb9137a`
+- Reused from the cleaned Week 05 TCSOL pre/post example so Week 06 can focus on statistics and writing rather than new data cleaning.

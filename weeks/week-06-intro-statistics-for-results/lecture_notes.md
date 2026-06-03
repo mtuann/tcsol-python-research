@@ -27,6 +27,14 @@ Mental model: **SD describes learners; SE/CI describe the estimate.**
 
 ## Main Workflow
 
+For teaching, first use a helper idea:
+
+```text
+make_ci_table(data, group_column, value_column)
+```
+
+The learner reads the output before they study every line of the function. This keeps the first pass focused on interpretation.
+
 ```python
 usable = df[df["usable_pre_post"] == True].copy()
 
@@ -62,9 +70,26 @@ Start with:
 
 Do not start with "Is it significant?" The learner should first learn to describe the evidence.
 
+## What The CI Assumes
+
+For Week 06, a 95% CI is a teaching estimate. It is most reasonable when:
+
+- records are independent enough for classroom analysis;
+- the outcome is numeric and measured in the same way for all usable records;
+- there are no severe outliers or extreme skew in the small group;
+- missing or excluded records are documented.
+
+Do not write "95% of learners are inside the CI." The CI is about uncertainty around the mean estimate, not the spread of individual learners.
+
 ## Results Writing Frame
 
-> In the usable Week 06 records (`N = 25`), learners gained an average of `[mean]` points from pre-test to post-test (`SD = [SD]`, `95% CI [low, high]`). By activity focus, `[highest group]` had the highest descriptive mean gain, while `[lowest group]` had the lowest. These estimates should be read cautiously because `[limitation]`.
+Vietnamese thinking frame:
+
+> Trong 25 bản ghi dùng được, chênh lệch post-test minus pre-test trung bình là `[mean]` điểm (`SD = [SD]`, `95% CI [low, high]`). Nhóm `[highest group]` có mean gain mô tả cao hơn nhóm `[lowest group]`, nhưng kết quả cần đọc thận trọng vì `[limitation]`.
+
+English paper frame:
+
+> In the usable Week 06 records (`N = 25`), learners showed a mean post-test minus pre-test difference of `[mean]` points (`SD = [SD]`, `95% CI [low, high]`). By activity focus, `[highest group]` had the highest descriptive mean gain, while `[lowest group]` had the lowest. These estimates should be read cautiously because `[limitation]`.
 
 ## Weak vs Better Results
 
@@ -91,4 +116,4 @@ Better:
 - Saying "proved" or "caused" when the design is descriptive.
 - Reporting p-values without mean, interval, and limitation.
 - Forgetting that missing data changed `raw_n` into `usable_n`.
-
+- Ranking groups without reporting group `n` and CI.

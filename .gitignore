@@ -23,6 +23,7 @@ weeks/**/data/processed/*
 !weeks/week-01-python-research-workflow/data/raw/week01_mini_examples.csv
 !weeks/week-05-visualization-for-paper/data/raw/week05_cleaned_tcsol_scores.csv
 !weeks/week-06-intro-statistics-for-results/data/raw/week06_tcsol_prepost_scores.csv
+!weeks/week-07-tcsol-short-course-research/data/raw/week07_short_course_learner_tasks.csv
 submissions/
 weeks/**/submissions/
 
@@ -40,12 +41,19 @@ weeks/**/outputs/interactive/*
 !weeks/week-05-visualization-for-paper/outputs/tables/week05_figure_summary.csv
 !weeks/week-06-intro-statistics-for-results/outputs/tables/week06_activity_statistics.csv
 !weeks/week-06-intro-statistics-for-results/outputs/tables/week06_overall_gain_summary.csv
+!weeks/week-07-tcsol-short-course-research/outputs/tables/week07_activity_summary.csv
+!weeks/week-07-tcsol-short-course-research/outputs/tables/week07_rubric_gain_summary.csv
+!weeks/week-07-tcsol-short-course-research/outputs/tables/week07_variable_map.csv
 !weeks/week-05-visualization-for-paper/outputs/figures/week05_mean_gain_by_activity.png
 !weeks/week-05-visualization-for-paper/outputs/figures/week05_mean_gain_by_activity.svg
 !weeks/week-05-visualization-for-paper/outputs/figures/week05_gain_distribution_by_activity.png
 !weeks/week-05-visualization-for-paper/outputs/figures/week05_gain_distribution_by_activity.svg
 !weeks/week-06-intro-statistics-for-results/outputs/figures/week06_mean_gain_ci_by_activity.png
 !weeks/week-06-intro-statistics-for-results/outputs/figures/week06_mean_gain_ci_by_activity.svg
+!weeks/week-07-tcsol-short-course-research/outputs/figures/week07_total_gain_by_activity.png
+!weeks/week-07-tcsol-short-course-research/outputs/figures/week07_total_gain_by_activity.svg
+!weeks/week-07-tcsol-short-course-research/outputs/figures/week07_rubric_gain_by_criterion.png
+!weeks/week-07-tcsol-short-course-research/outputs/figures/week07_rubric_gain_by_criterion.svg
 
 # Office temporary files
 ~$*

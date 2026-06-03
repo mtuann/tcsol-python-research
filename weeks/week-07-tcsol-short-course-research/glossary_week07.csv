@@ -1,0 +1,8 @@
+term_vi,term_en,plain_meaning,use
+đơn vị phân tích,unit of analysis,one row or observation,defines what the dataset describes
+cấu trúc đích,target structure,language feature being taught,connects teaching to evidence
+nhiệm vụ người học,learner task,what the learner does,creates observable evidence
+rubric,rubric,consistent scoring guide,turns task performance into data
+biến nhóm,grouping variable,column used to compare groups,organizes descriptive summaries
+mã khó khăn,difficulty code,short label for learner problem,adds qualitative insight
+Methods draft,Methods draft,short paper section explaining design,prepares paper writing

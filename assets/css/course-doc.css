@@ -333,6 +333,17 @@ pre code {
   border-left: 5px solid var(--doc-green);
 }
 
+.nb-image {
+  border: 1px solid var(--doc-line);
+  border-radius: 8px;
+  display: block;
+  height: auto;
+  margin: 0.75rem 0;
+  max-height: 460px;
+  max-width: 100%;
+  object-fit: contain;
+}
+
 .nb-code {
   border-left: 5px solid var(--doc-blue);
 }

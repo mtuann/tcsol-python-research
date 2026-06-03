@@ -480,6 +480,15 @@ h2 {
   max-width: 980px;
 }
 
+.slide-figure {
+  display: block;
+  margin: 0 auto;
+  max-height: min(36vh, 280px);
+  max-width: 100%;
+  object-fit: contain;
+  width: 100%;
+}
+
 .sentence-frame-card {
   max-width: 1080px;
 }

@@ -1,0 +1,10 @@
+variable,role,measurement
+learner_id,unit id,one synthetic learner task record
+activity_focus,grouping variable,"input practice, role play, or feedback cycle"
+target_structure,teaching focus,short-course Chinese target structure
+task_completion_*,rubric criterion,1-5 score before/after activity
+accuracy_*,rubric criterion,1-5 score before/after activity
+fluency_*,rubric criterion,1-5 score before/after activity
+interaction_strategy_*,rubric criterion,1-5 score before/after activity
+main_difficulty,qualitative code,teacher-coded learning difficulty
+teacher_feedback,qualitative note,short teacher observation

@@ -15,3 +15,9 @@
 
 Important: this is a synthetic teaching dataset for learning workflow, not real student data.
 
+## Provenance
+
+- Source role: synthetic classroom-style dataset for Week 05 cleaning and Week 06 statistics practice.
+- Privacy: contains no real learner records.
+- SHA-256: `175469cd9120b36a467d0e0b439f78859525841555c6a30bc5de0777edb9137a`
+- Required filter: use rows where `usable_pre_post == True` before computing Week 06 statistics.

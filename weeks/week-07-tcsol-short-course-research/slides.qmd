@@ -1,0 +1,22 @@
+---
+title: "Week 07: TCSOL Short-Course Research"
+format: html
+---
+
+Source note: learner-facing slides are authored directly in `slides.html` so the deck can use the shared interactive slide controller, bilingual toggle, quick overview, and GitHub Pages-safe navigation. This `.qmd` records the canonical slide plan.
+
+1. TCSOL short-course research.
+2. Research loop.
+3. Small research question.
+4. Specific target structure.
+5. Rubric as task observation.
+6. Variable map.
+7. Gain computation.
+8. Activity summary without causal ranking.
+9. Activity evidence figure.
+10. Rubric criterion figure.
+11. Methods draft frame.
+12. Source note frameworks.
+13. Causal-claim caution.
+14. Transfer to other tracks.
+15. Assignment package.

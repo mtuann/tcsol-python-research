@@ -52,7 +52,9 @@ Cuối tuần này, bạn có thể:
 - Interactive demo source: `interactive_demo.qmd`
 - Interactive demo HTML song ngữ: `interactive_demo.html`
 - Lecture notes: `lecture_notes.md`
-- Notebook: `live_coding.ipynb`
+- Rendered notebook HTML: `live_coding.html`
+- Notebook source/download: `live_coding.ipynb`
+- Browser run option: Colab link from `index.html` or `live_coding.html`
 - Exercises: `exercises.md`
 - Assignment: `assignment.md`
 - Content blocks: `content_blocks.md`

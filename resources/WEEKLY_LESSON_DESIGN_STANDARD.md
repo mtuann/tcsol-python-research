@@ -35,6 +35,36 @@ Every week must include:
 
 Do not add a hard dataset and a hard Python concept in the same week. If the Python skill is new, the dataset must be simple. If the dataset is messy or realistic, the Python skill must already be familiar.
 
+## Canonical Week Pattern
+
+Week 01 is the current canonical implementation pattern. Future weeks should reuse its structure unless the week's `README.md` records a clear reason to differ.
+
+The canonical public path pattern is:
+
+```text
+course homepage
+  -> weeks/week-XX-topic-slug/
+    -> slides.html
+    -> interactive_demo.html
+    -> live_coding.html
+    -> Colab link
+    -> clearly labeled source .ipynb / Markdown links
+```
+
+Required learner-facing week surfaces:
+
+- folder `index.html`: overview, research frame, writing support, notes, exercises, assignment, readings, rubric, and source links;
+- `slides.html`: bilingual deck with language switcher, page-number jump, keyboard navigation, visible course exit links, and final-slide next-step CTAs;
+- `live_coding.html`: rendered notebook with code/output, Colab action, source notebook download, and link back to the week overview;
+- `interactive_demo.html`: included when interaction improves learning; if not included, record the reason in the week's `README.md`;
+- homepage cards/links: point to public HTML pages first, not raw source files.
+
+Required source surfaces:
+
+- Markdown files remain editable source and may be exposed only in a clearly labeled "Source Markdown" area;
+- `.ipynb` remains the runnable source and may be exposed only as source/download or through Colab;
+- generated/rendered HTML is the main learner reading experience.
+
 ## Beginner-First Layering
 
 The standard is comprehensive for the instructor, but the learner is a complete programming beginner. Each weekly file must separate content into three levels:
@@ -304,7 +334,9 @@ The rendered `slides.html` should:
 - use Reveal.js through Quarto when available, or a documented standalone static HTML fallback;
 - include the shared bilingual language switcher when published on the website;
 - default to Vietnamese and allow English without duplicating the whole file in beginner weeks;
-- include keyboard navigation;
+- include keyboard navigation, previous/next controls, page-number jump, and a visible slide counter;
+- include persistent exit links to the course homepage and week overview;
+- include final-slide next-step CTAs to the rendered notebook, interactive demo when available, week overview, and homepage;
 - include speaker notes when useful;
 - avoid heavy animation in beginner weeks;
 - link to `interactive_demo.html` when interaction would distract from the main slide flow.
@@ -324,6 +356,7 @@ Public HTML pages must:
 
 - use the shared bilingual language switcher;
 - preserve headings, tables, lists, code blocks, and links in rendered HTML;
+- include clear actions to slides, rendered notebook, Colab, demo, and writing roadmap where relevant;
 - include a small "Source Markdown" section only when source access is useful;
 - avoid sending learners directly to raw Markdown from homepage/course navigation.
 
@@ -344,6 +377,14 @@ Public links should use this order:
 3. raw `.ipynb` only as clearly labeled source/download.
 
 For beginner weeks, make Colab notebooks self-contained: either commit the small CSV data needed for the lesson or add a fallback download from the public repository. For later weeks with rich plots or heavier dependencies, use `nbconvert` or Quarto to render notebooks, but keep the same public-link policy.
+
+For simple beginner notebooks, the course renderer may be used:
+
+```bash
+./scripts/render_notebook.py weeks/week-XX-topic-slug/live_coding.ipynb weeks/week-XX-topic-slug/live_coding.html --execute --write-executed
+```
+
+Only use the lightweight renderer for notebooks with Markdown, code, stdout, and simple file outputs. Use `nbconvert` or Quarto for rich plots, images, math, widgets, or complex outputs.
 
 ## Interactive Demo Standard
 

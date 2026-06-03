@@ -93,6 +93,8 @@ Public learner-facing navigation should target HTML pages or folder `index.html`
 
 Notebook files follow the same rule. Direct `.ipynb` links on GitHub Pages may render as raw notebook JSON, so public navigation should point to a rendered notebook HTML page such as `live_coding.html`. Keep the `.ipynb` as downloadable/runnable source, and add a Colab link when the notebook should be executed without local setup.
 
+Week 01 is the canonical implementation pattern for future weeks. New weeks should copy its learner-facing structure: folder `index.html`, `slides.html` with exit navigation, `interactive_demo.html` when useful, rendered `live_coding.html`, Colab/source notebook links, bilingual labels, and clearly separated source Markdown/notebook files.
+
 ## Bilingual Website Policy
 
 Public learner-facing HTML defaults to Vietnamese and provides an English option through a language switcher. The course uses Vietnamese-first explanations with English anchor terms, rather than long side-by-side duplicate paragraphs, so a beginner can focus on the concept without extra reading load.

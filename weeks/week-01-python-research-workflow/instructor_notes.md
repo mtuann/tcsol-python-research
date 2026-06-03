@@ -36,7 +36,7 @@ Tránh:
 2. Cho thấy Methods cần nguồn dữ liệu, dòng, cột, và quy trình.
 3. Mở `slides.html`.
 4. Mở `interactive_demo.html` và cho thấy dataset nhỏ có thể thành bảng/hình.
-5. Mở `live_coding.ipynb`.
+5. Mở `live_coding.html` để xem bản đã render, rồi mở Colab hoặc `live_coding.ipynb` nếu cần chạy/chỉnh notebook.
 6. Để người học chỉ sửa variables.
 7. Cùng chạy các CSV cells.
 8. Hỏi người học muốn chọn hướng nào cho tương lai.

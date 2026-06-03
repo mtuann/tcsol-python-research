@@ -86,6 +86,20 @@ Every visual artifact must be traceable:
 
 Use `resources/templates/slide_prompt_sources_template.md` for each week and save the filled file as `slide_prompt_sources.md`.
 
+### 7. Never Leave A Dead-End Deck
+
+Each slide deck must give the learner a way out of the deck without using the browser back button.
+
+Required navigation pattern, modeled on Week 01:
+
+- persistent top links to the course homepage and the current week overview;
+- previous/next controls with a visible slide counter;
+- page-number jump input;
+- final-slide CTAs to the rendered notebook, interactive demo when available, week overview, and homepage;
+- bilingual labels for all navigation and CTA text.
+
+The final slide should answer "what do I do next?" with links, not only a closing message.
+
 ## Beginner-Safe Rule
 
 In Weeks 1-4, the learner should only read and interpret rich slides. They should not be asked to author HTML, CSS, JavaScript, SVG, Reveal.js, or Quarto internals.

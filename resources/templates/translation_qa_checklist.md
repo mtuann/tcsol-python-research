@@ -16,6 +16,14 @@ Copy this file into a week folder as `translation_qa.md`.
 - [ ] Notebook Markdown instructions are Vietnamese-first.
 - [ ] Assignment, exercises, rubric, readings, and data dictionary are Vietnamese-first.
 
+## Public Navigation
+
+- [ ] Homepage links point to the week overview, slides, rendered notebook HTML, demo, assignment/rubric anchors, or Colab, not raw source files.
+- [ ] Week overview links point to `slides.html`, `interactive_demo.html` when available, `live_coding.html`, Colab, and clearly labeled source/download files.
+- [ ] Slides include persistent homepage/week links, previous/next controls, slide counter, page-number jump, and final-slide next-step CTAs.
+- [ ] Rendered notebook HTML includes Colab, source `.ipynb` download, and a link back to the week overview.
+- [ ] Raw `.md` and `.ipynb` links are clearly labeled as source or download.
+
 ## Terminology
 
 - [ ] Week glossary is updated.
@@ -36,3 +44,5 @@ Copy this file into a week folder as `translation_qa.md`.
 - [ ] Interactive controls have accessible names.
 - [ ] Keyboard navigation still works after adding the language switcher.
 - [ ] No-JavaScript fallback remains understandable in Vietnamese.
+- [ ] Slide exit links and final CTAs are keyboard reachable.
+- [ ] Public pages have no horizontal overflow on desktop and mobile.

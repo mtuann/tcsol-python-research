@@ -24,6 +24,8 @@ Default learner-facing language is Vietnamese. English is available as an option
 - Avoid full paragraph-by-paragraph duplication on beginner pages.
 - Slides should be concise: one main idea per slide, one small code block at most.
 - Interactive demos should translate controls, labels, chart titles, fallback text, and screen-reader summaries.
+- Course navigation labels must be bilingual everywhere: homepage links, week overview sidebars, slide exit links, slide counters/jump controls, notebook action buttons, Colab links, and source/download labels.
+- Public learner-facing links should lead to rendered HTML first. Raw Markdown and `.ipynb` links should be labeled as source or download.
 
 ## Translation QA
 
@@ -31,3 +33,4 @@ Default learner-facing language is Vietnamese. English is available as an option
 - Then switch to English and check that no Vietnamese learner-facing labels remain.
 - Verify that `<html lang>` changes with the selected language.
 - Keep weekly glossary entries synchronized with the content.
+- Check the Week 01 canonical path: homepage -> week overview -> slides/demo/rendered notebook -> back to week overview/home.

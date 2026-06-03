@@ -17,6 +17,14 @@ Copy this file into a week folder as `content_blocks.md`.
 | page.title |  |  | Browser title / H1 |
 | page.subtitle |  |  | Short learner-facing subtitle |
 | nav.language | Ngôn ngữ / Language | Language | Accessibility label |
+| nav.home | Trang chủ | Home | Course exit link |
+| nav.week | Tuần XX | Week XX | Week overview link |
+| nav.slides | Slides | Slides | Link to `slides.html` |
+| nav.demo | Demo tương tác | Interactive demo | Link to `interactive_demo.html` when available |
+| nav.notebook_html | Notebook HTML | Notebook HTML | Link to rendered notebook |
+| nav.colab | Chạy trong Colab | Run in Colab | Browser-based execution link |
+| nav.source_md | Source Markdown | Source Markdown | Clearly labeled source link |
+| nav.source_ipynb | Source .ipynb | Source .ipynb | Clearly labeled notebook source/download |
 
 ## Slide Blocks
 
@@ -25,6 +33,10 @@ Copy this file into a week folder as `content_blocks.md`.
 | slide01.title |  |  | Keep concise |
 | slide01.body |  |  | Use 1-3 short sentences |
 | slide01.note |  |  | Optional instructor cue |
+| slide.final.cta.notebook | Xem notebook | View notebook | Final-slide next step |
+| slide.final.cta.demo | Mở demo | Open demo | Final-slide next step |
+| slide.final.cta.week | Về Tuần XX | Back to Week XX | Final-slide exit |
+| slide.final.cta.home | Về trang chủ | Back to Home | Final-slide exit |
 
 ## Interactive Demo Blocks
 

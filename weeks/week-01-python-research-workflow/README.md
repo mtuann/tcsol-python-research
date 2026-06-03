@@ -14,6 +14,14 @@ English option: public HTML pages include a Tiếng Việt / English language sw
 - Kỹ năng hỗ trợ: phân biệt ô Markdown và ô code, sửa text an toàn, đọc output, viết diễn giải ngắn.
 - Hàm/thư viện: người học chỉ cần sửa biến text và chạy cell. Code đọc CSV/path/export là mẫu giảng viên cung cấp để chạy và quan sát.
 
+## Writing Support
+
+- Paper section supported: research question, early Introduction note, and source note.
+- Writing output: one research question and one 100-150 word memo explaining why a small dataset could answer it.
+- Tool support: write inside notebook Markdown first; Word/Zotero can wait until Week 3; Overleaf is not needed in Week 01.
+- Sentence frame: "This project asks [small question] because [research reason]. The first dataset would contain [unit of observation], so Python can help by [table/figure/output]."
+- Common writing risk: choosing a topic that is interesting but too broad to connect to rows, columns, and evidence.
+
 ## Cam kết cho người mới
 
 Tuần này cố ý nhẹ. Bạn **không** cần hiểu lý thuyết lập trình, thống kê, pandas, thiết kế web, hay machine learning. Mục tiêu là chạy notebook, sửa vài giá trị an toàn, và thấy một câu hỏi nghiên cứu kết nối với dữ liệu như thế nào.
@@ -34,6 +42,7 @@ Cuối tuần này, bạn có thể:
 - [ ] Trong notebook, bạn giữ hoặc tạo một bảng tóm tắt nhỏ.
 - [ ] Trong notebook, bạn viết chú thích bảng/hình 1-2 câu.
 - [ ] Trong notebook, bạn viết một diễn giải 100-150 từ.
+- [ ] Bạn dùng sentence frame để viết một đoạn có thể phát triển thành phần Introduction/Methods sau này.
 - [ ] Notebook ghi nguồn/ngày truy cập được cung cấp và không chứa dữ liệu riêng tư.
 
 ## Files
@@ -62,6 +71,7 @@ Cuối tuần này, bạn có thể:
 | Instructor demo | 10 phút | Giảng viên mở `interactive_demo.html` để cho thấy dataset nhỏ có thể dẫn tới bảng/hình. |
 | Live coding | 35 phút | Chạy notebook, sửa biến, đọc tệp CSV. |
 | Guided practice | 25 phút | Làm Exercise A và B. |
+| Writing bridge | 10 phút | Dùng sentence frame để nối câu hỏi, dữ liệu và output paper. |
 | Wrap-up | 10 phút | Chọn một hướng dự án có thể phát triển sau này. |
 
 ## Core vs Stretch
@@ -71,7 +81,8 @@ Core:
 - chạy notebook;
 - sửa biến topic/question;
 - chọn một hướng nghiên cứu;
-- viết caption và memo ngắn trong notebook.
+- viết caption và memo ngắn trong notebook;
+- dùng sentence frame để tạo một đoạn paper-facing đầu tiên.
 
 Stretch:
 
@@ -82,4 +93,5 @@ Stretch:
 Instructor-only:
 
 - giải thích vì sao Tuần 01 tránh pandas và thống kê;
+- giải thích vì sao Word/Zotero và Overleaf chưa cần xuất hiện trong tuần đầu;
 - preview cách cùng quy trình này phát triển thành phân tích pre/post-test, MTPE evaluation, hoặc policy coding.

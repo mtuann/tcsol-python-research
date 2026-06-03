@@ -9,7 +9,7 @@ Tổng: 100 điểm.
 | Kiểm tra dữ liệu | 15 | Bạn chạy code mẫu đọc CSV, đếm dòng, và giải thích một dòng đại diện cho điều gì. |
 | Câu hỏi nghiên cứu | 15 | Câu hỏi đã chọn đủ nhỏ và gắn với dữ liệu quan sát được. |
 | Bảng/caption | 15 | Bạn tạo hoặc giữ một bảng tóm tắt nhỏ và viết caption rõ. |
-| Diễn giải | 15 | Memo có quan sát, cách dùng cho nghiên cứu, và hạn chế trong 100-150 từ. |
+| Writing và diễn giải | 15 | Memo có quan sát, cách dùng cho nghiên cứu, hạn chế trong 100-150 từ, và một câu paper-facing dùng được. |
 | Thói quen tái lập | 10 | Bạn giữ output do code tạo, ghi nguồn/ngày truy cập, tránh thông tin riêng tư, và không sửa output file thủ công. |
 
 ## Ghi chú chấm điểm cho người mới
@@ -19,6 +19,8 @@ Không trừ điểm vì bạn chưa hiểu mọi dòng code đọc CSV. Ở Tu�
 - bạn chạy được code;
 - bạn sửa được phần an toàn;
 - bạn kết nối output với một ý tưởng nghiên cứu.
+
+Tuần này chưa chấm Word/Zotero hoặc Overleaf. Những công cụ đó xuất hiện muộn hơn khi bạn đã có bảng, hình, caption và đoạn viết để đóng gói.
 
 ## Tuần 01 Reproducibility Checklist
 

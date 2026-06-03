@@ -27,7 +27,8 @@ This syllabus assumes the learner:
 - can read academic Chinese and Vietnamese;
 - needs Python mainly for paper writing and research evidence;
 - may work in China, so local/offline tools should be preferred over tools that rely heavily on blocked or unstable cloud access;
-- is more likely to use Word/Zotero at first than a full LaTeX workflow.
+- is more likely to use Word/Zotero at first than a full LaTeX workflow;
+- should meet Overleaf only after she has real tables, figures, captions, and draft sections to package.
 
 ## Learning Outcomes
 
@@ -39,6 +40,8 @@ By the end of the course, the learner should be able to:
 - evaluate MT/MTPE outputs with both human annotation and light automatic metrics;
 - produce publication-ready tables and figures;
 - write clear Methods and Results sections;
+- build a paper-facing writing habit through weekly captions, paragraphs, limitations, and source notes;
+- choose an appropriate writing workflow: Word + Zotero by default, Quarto or Overleaf when the project needs reproducible publishing or LaTeX formatting;
 - keep a reproducible research folder with data, notebooks, outputs, and references.
 
 ## Recommended Tool Stack
@@ -66,12 +69,19 @@ By the end of the course, the learner should be able to:
 ### Writing and Citation
 
 - **Zotero + Word** for the first writing workflow.
-- **Quarto** for a later reproducible report workflow.
+- **Quarto** for a later reproducible report workflow that combines text, code, figures, and citations.
+- **Overleaf** as a Week 14 optional paper-packaging workflow when the learner needs LaTeX, a journal/university template, or collaborative LaTeX editing.
 - **Markdown** for README, notes, and simple GitHub Pages content.
+
+Writing is not saved for the end of the course. Every week must include a small paper-facing writing task. Overleaf should not be introduced as a separate early burden; it is a final packaging option after the learner has enough paper material.
+
+Detailed policy: [`resources/WRITING_AND_PAPER_TOOLING_ROADMAP.md`](resources/WRITING_AND_PAPER_TOOLING_ROADMAP.md).
 
 ## Course Design Standard
 
 All weekly lessons must follow the contract in [`resources/WEEKLY_LESSON_DESIGN_STANDARD.md`](resources/WEEKLY_LESSON_DESIGN_STANDARD.md). That file defines the required weekly artifacts: slides, lecture notes, live-coding notebook, dataset/data dictionary, exercises, assignment, readings, figure/table output, caption, interpretation paragraph, rubric, and reproducibility checklist.
+
+Each week must also follow the writing-support policy in [`resources/WRITING_AND_PAPER_TOOLING_ROADMAP.md`](resources/WRITING_AND_PAPER_TOOLING_ROADMAP.md): paper connection, writing output, tool support, sentence frame, and common writing risk.
 
 The current design supports both Markdown/Quarto sources and deployable HTML:
 
@@ -131,18 +141,20 @@ Important: do not publish identifiable student data. If this repository becomes 
 - Use Excel/CSV as the bridge from familiar research habits to Python.
 - Treat visualization as argument-building, not decoration.
 - Treat automatic MT metrics as supporting evidence, not final judgment.
+- Treat writing as a weekly output, not a final-week clean-up task.
+- Keep Overleaf optional and late: Week 14 paper packaging, not Week 1-6 concept load.
 - Make the final notebook runnable from top to bottom.
 
 ## 14-Week Syllabus
 
 | Week | Theme | Python Skills | Research Practice | Deliverable |
 |---|---|---|---|---|
-| 1 | Python as a research tool | Jupyter, cells, variables, strings, Markdown | Turn a broad interest into a researchable question | 1-page research idea |
-| 2 | Research data as tables | lists, dictionaries, CSV/Excel structure | Design columns for learners, tests, errors, translations, or policies | first dataset template |
-| 3 | pandas basics | `DataFrame`, select columns, filter rows, `groupby` | Summarize class or survey data | descriptive table |
-| 4 | Cleaning data | missing values, type conversion, label normalization | Clean survey/pre-test/post-test data | cleaned dataset |
-| 5 | Visualization for papers | `matplotlib`, `seaborn` | Choose chart types that match research claims | 2 draft figures |
-| 6 | Intro statistics | mean, SD, confidence interval, t-test, correlation | Compare pre-test vs post-test or two teaching groups | short Results paragraph |
+| 1 | Python as a research tool | Jupyter, cells, variables, strings, Markdown | Turn a broad interest into a researchable question | research question + 100-150 word memo |
+| 2 | Research data as tables | lists, dictionaries, CSV/Excel structure | Design columns for learners, tests, errors, translations, or policies | dataset template + data description |
+| 3 | pandas basics | `DataFrame`, select columns, filter rows, `groupby` | Summarize class or survey data | descriptive table + caption |
+| 4 | Cleaning data | missing values, type conversion, label normalization | Clean survey/pre-test/post-test data | cleaned dataset + cleaning note |
+| 5 | Visualization for papers | `matplotlib`, `seaborn` | Choose chart types that match research claims | 2 draft figures + captions |
+| 6 | Intro statistics | mean, SD, confidence interval, t-test, correlation | Compare pre-test vs post-test or two teaching groups | Results paragraph with limitation |
 | 7 | TCSOL short-course research | rubric design, classroom variables | Analyze learner gains and learning difficulties | mini teaching-study design |
 | 8 | Learner error analysis | frequency tables, cross-tabulation | Code errors: tones, measure words, aspect, word order, complements | learner error report |
 | 9 | Chinese-Vietnamese contrastive data | string matching, regex, coding categories | Build bilingual examples and classify phenomena | contrastive analysis table |
@@ -150,7 +162,17 @@ Important: do not publish identifiable student data. If this repository becomes 
 | 11 | MT evaluation | source/MT/reference tables, BLEU/chrF/TER | Compare MT systems on Chinese-Vietnamese examples | MT evaluation table |
 | 12 | MTPE workflow | edit distance, time logs, error annotation | Measure post-editing effort and classify errors | MTPE analysis memo |
 | 13 | Education policy data | policy metadata, timeline, coding scheme | Analyze policy documents and education statistics | policy coding table |
-| 14 | Reproducible paper package | clean notebook, README, Zotero/Quarto, appendix | Combine question, data, method, results, limitations | mini paper + notebook |
+| 14 | Paper package and Overleaf option | clean notebook, README, Zotero, Word, optional Quarto/Overleaf | Combine question, data, method, results, limitations | mini paper + notebook + optional Overleaf project |
+
+## Writing and Paper Tooling Progression
+
+| Stage | Weeks | Writing focus | Tool support |
+|---|---:|---|---|
+| Foundation | 1-2 | research question, data unit, source note | notebook Markdown; Word optional |
+| Evidence | 3-5 | descriptive table, figure caption, figure note | Word + Zotero setup begins |
+| Results | 6-8 | Results paragraph, limitation, teaching implication | Word + Zotero |
+| Track writing | 9-13 | track-specific analysis paragraph | Word + Zotero; Quarto optional |
+| Paper package | 14 | mini paper, appendix, references, reproducibility note | Word + Zotero by default; Overleaf/Quarto optional |
 
 ## Project Tracks
 
@@ -432,6 +454,10 @@ These topics are useful later, but they are not the shortest path to a good Appl
 - [Zotero word processor integration](https://www.zotero.org/support/word_processor_integration)
 - [Quarto authoring in VS Code](https://quarto.org/docs/get-started/authoring/vscode.html)
 - [Quarto citations](https://quarto.org/docs/authoring/citations.html)
+- [Overleaf Learn LaTeX in 30 minutes](https://www.overleaf.com/learn/latex/Learn_LaTeX_in_30_minutes)
+- [Overleaf bibliography management in LaTeX](https://www.overleaf.com/learn/latex/Bibliography_management_in_LaTeX)
+- [Overleaf: working with `.bib` files](https://docs.overleaf.com/citing-and-references/working-with-.bib-files)
+- [Overleaf and Zotero](https://www.overleaf.com/learn/how-to/How_to_link_your_Overleaf_account_to_Mendeley_and_Zotero)
 - [GitHub Pages quickstart](https://docs.github.com/pages/quickstart)
 - [GitHub Pages publishing source](https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site)
 - [Git documentation](https://git.github.io/htmldocs/git.html)
@@ -455,5 +481,6 @@ These topics are useful later, but they are not the shortest path to a good Appl
 - Create blank CSV templates in `resources/templates/`.
 - Add a one-page learner setup guide in Vietnamese.
 - Add a Zotero + Word workflow guide.
+- Add a Week 14 Word/Zotero/Overleaf paper package template.
 - Add a simple MTPE annotation rubric.
 - Add a short policy document coding rubric.

@@ -14,6 +14,9 @@ Default learner-facing language is Vietnamese. English is available as an option
 - First mention: Vietnamese term + English anchor, for example `biến (variable)`.
 - Later mentions: Vietnamese term only, unless the English term is needed for software UI.
 - Keep these in English: Python code, package names, function names, file names, column names, URLs, citation titles.
+- Keep tool names in English: Word, Zotero, Quarto, Overleaf, LaTeX.
+- Use `hỗ trợ viết paper (writing support)` when introducing the weekly writing layer.
+- Use `mẫu câu viết học thuật (sentence frame)` for beginner writing scaffolds.
 
 ## Layout
 

@@ -4,6 +4,8 @@
 
 - Kỹ năng Python: chạy notebook, sửa biến, đọc một tệp CSV nhỏ.
 - Kỹ năng nghiên cứu: chuyển chủ đề rộng thành câu hỏi nhỏ sẵn sàng cho dữ liệu.
+- Kỹ năng writing: viết một research-question memo có thể phát triển thành đoạn mở đầu paper.
+- Tool support: viết trong Markdown cell của notebook; chưa cần Word/Zotero hoặc Overleaf ở Tuần 01.
 
 ## Dữ liệu
 
@@ -23,7 +25,8 @@ Trong notebook:
 4. Giữ hoặc tạo một bảng tóm tắt nhỏ.
 5. Viết caption 1-2 câu.
 6. Viết một diễn giải 100-150 từ.
-7. Ghi một hạn chế hoặc câu hỏi bạn còn băn khoăn.
+7. Dùng sentence frame để viết một đoạn paper-facing đầu tiên.
+8. Ghi một hạn chế hoặc câu hỏi bạn còn băn khoăn.
 
 Các cell đọc CSV và xuất bảng là code mẫu. Ở Tuần 01, bạn chỉ cần chạy và quan sát kết quả.
 
@@ -34,16 +37,23 @@ Chosen track:
 Small research question:
 Data I would need:
 Possible table or figure:
+Paper-facing sentence:
 Limitation:
 ```
 
 Bạn có thể điền bằng tiếng Việt hoặc English.
 
+Sentence frame gợi ý:
+
+```text
+This project asks [small question] because [research reason]. The first dataset would contain [unit of observation], so Python can help by [table/figure/output].
+```
+
 ## Submission
 
 - Chỉ cần nộp `live_coding.ipynb` đã hoàn thành.
 
-Notebook nên có hướng đã chọn, bảng/summary đã in ra, caption, memo, và ghi chú nguồn/ngày truy cập.
+Notebook nên có hướng đã chọn, bảng/summary đã in ra, caption, memo, một câu paper-facing, và ghi chú nguồn/ngày truy cập.
 
 Nhắc lại về caption:
 

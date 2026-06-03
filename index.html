@@ -510,6 +510,7 @@
     <div class="nav-cluster">
       <nav class="quick-nav" aria-label="Điều hướng nhanh" data-i18n-aria-label="nav.quick">
         <a href="#overview" data-i18n="nav.overview">Overview</a>
+        <a href="#writing" data-i18n="nav.writing">Writing</a>
         <a href="#week-01" data-i18n="nav.week1">Tuần 01</a>
         <a href="#syllabus" data-i18n="nav.syllabus">Syllabus</a>
         <a href="#resources" data-i18n="nav.resources">Tài nguyên</a>
@@ -595,9 +596,42 @@
         <article class="info-card">
           <span class="swatch amber"></span>
           <h3 data-i18n="info.tools.title">Công cụ chính</h3>
-          <p data-i18n="info.tools.body">JupyterLab, pandas, matplotlib/seaborn, Excel/CSV, Zotero, Markdown, GitHub Pages và Quarto khi cần báo cáo tái lập.</p>
+          <p data-i18n="info.tools.body">JupyterLab, pandas, matplotlib/seaborn, Excel/CSV, Word/Zotero, Markdown, GitHub Pages, Quarto và Overleaf tùy đúng thời điểm.</p>
         </article>
       </div>
+    </section>
+
+    <section class="section" id="writing">
+      <div class="section-head">
+        <div>
+          <span class="eyebrow" data-i18n="writing.tag">Writing support</span>
+          <h2 data-i18n="writing.title">Viết paper được rải đều từng tuần, Overleaf để cuối khóa</h2>
+        </div>
+        <p data-i18n="writing.body">Khóa học không đợi đến tuần cuối mới viết. Mỗi tuần đều có một caption, memo, Methods note, Results paragraph hoặc limitation để dần tạo thành paper package.</p>
+      </div>
+      <div class="info-grid">
+        <article class="info-card">
+          <span class="swatch blue"></span>
+          <h3 data-i18n="writing.weekly.title">Mỗi tuần có writing output</h3>
+          <p data-i18n="writing.weekly.body">Paper connection, sentence frame và common writing risk đi kèm với từng kỹ năng Python.</p>
+        </article>
+        <article class="info-card">
+          <span class="swatch green"></span>
+          <h3 data-i18n="writing.word.title">Word + Zotero trước</h3>
+          <p data-i18n="writing.word.body">Workflow quen thuộc cho ngành ngôn ngữ học, dịch thuật và chính sách giáo dục; bắt đầu khi có caption và nguồn trích dẫn.</p>
+        </article>
+        <article class="info-card">
+          <span class="swatch purple"></span>
+          <h3 data-i18n="writing.quarto.title">Quarto khi cần tái lập</h3>
+          <p data-i18n="writing.quarto.body">Dùng sau khi notebook, figure và citation đã ổn, nhất là khi muốn report kết hợp code, bảng, hình và prose.</p>
+        </article>
+        <article class="info-card">
+          <span class="swatch rose"></span>
+          <h3 data-i18n="writing.overleaf.title">Overleaf ở Week 14</h3>
+          <p data-i18n="writing.overleaf.body">Overleaf là lựa chọn đóng gói LaTeX khi đã có draft, bảng/hình và references; không bắt buộc trong các tuần đầu.</p>
+        </article>
+      </div>
+      <p class="footnote"><a href="resources/WRITING_AND_PAPER_TOOLING_ROADMAP.md" data-i18n="writing.roadmap">Mở writing and paper tooling roadmap</a></p>
     </section>
 
     <section class="section" id="week-01">
@@ -696,7 +730,7 @@
           <span class="eyebrow" data-i18n="syllabus.tag">Syllabus</span>
           <h2 data-i18n="syllabus.title">Lộ trình 14 tuần từ beginner đến mini paper package</h2>
         </div>
-        <p data-i18n="syllabus.body">Tuần 1-4 xây nền dữ liệu và notebook; tuần 5-8 học phân tích, hình, thống kê nhẹ; tuần 9-14 đi vào track nghiên cứu và đóng gói paper.</p>
+        <p data-i18n="syllabus.body">Tuần 1-4 xây nền dữ liệu và notebook; tuần 5-8 học phân tích, hình, thống kê nhẹ; tuần 9-13 đi vào track nghiên cứu; tuần 14 đóng gói paper bằng Word/Zotero, Quarto hoặc Overleaf nếu cần.</p>
       </div>
       <div class="syllabus-list" aria-label="Syllabus 14 tuần" data-i18n-aria-label="syllabus.aria">
         <div class="week-row current"><span class="week-code">Week 01</span><a class="week-title" href="weeks/week-01-python-research-workflow/slides.html" data-i18n="w01.title">Python như một quy trình nghiên cứu</a><span class="week-skill" data-i18n="w01.skill">Jupyter, cells, variables, Markdown</span><span class="week-output" data-i18n="w01.output">1-page research idea</span></div>
@@ -712,7 +746,7 @@
         <div class="week-row"><span class="week-code">Week 11</span><span class="week-title" data-i18n="w11.title">Đánh giá dịch máy</span><span class="week-skill" data-i18n="w11.skill">source/MT/reference tables, BLEU, chrF, TER</span><span class="week-output" data-i18n="w11.output">MT evaluation table</span></div>
         <div class="week-row"><span class="week-code">Week 12</span><span class="week-title" data-i18n="w12.title">Quy trình MTPE</span><span class="week-skill" data-i18n="w12.skill">edit distance, time logs, error annotation</span><span class="week-output" data-i18n="w12.output">MTPE analysis memo</span></div>
         <div class="week-row"><span class="week-code">Week 13</span><span class="week-title" data-i18n="w13.title">Dữ liệu chính sách giáo dục</span><span class="week-skill" data-i18n="w13.skill">metadata, timeline, coding scheme</span><span class="week-output" data-i18n="w13.output">policy coding table</span></div>
-        <div class="week-row"><span class="week-code">Week 14</span><span class="week-title" data-i18n="w14.title">Reproducible paper package</span><span class="week-skill" data-i18n="w14.skill">clean notebook, README, Zotero/Quarto</span><span class="week-output" data-i18n="w14.output">mini paper + notebook</span></div>
+        <div class="week-row"><span class="week-code">Week 14</span><span class="week-title" data-i18n="w14.title">Paper package và Overleaf option</span><span class="week-skill" data-i18n="w14.skill">clean notebook, Word/Zotero, optional Quarto/Overleaf</span><span class="week-output" data-i18n="w14.output">mini paper + notebook + optional Overleaf project</span></div>
       </div>
     </section>
 
@@ -722,13 +756,14 @@
           <span class="eyebrow" data-i18n="resources.tag">Weekly design</span>
           <h2 data-i18n="resources.title">Mỗi tuần đều có cùng một cấu trúc để người học không bị lạc</h2>
         </div>
-        <p data-i18n="resources.body">Thiết kế lặp lại giúp người mới tập trung vào khái niệm mới, không phải đoán tuần này cần mở file nào hay nộp gì.</p>
+        <p data-i18n="resources.body">Thiết kế lặp lại giúp người mới tập trung vào khái niệm mới, không phải đoán tuần này cần mở file nào, viết đoạn gì, hay nộp gì.</p>
       </div>
       <div class="rhythm-grid">
         <article class="rhythm-item"><strong data-i18n="rhythm.pre.title">Pre-class</strong><p data-i18n="rhythm.pre.body">Đọc note ngắn, xem dataset, trả lời warm-up.</p></article>
         <article class="rhythm-item"><strong data-i18n="rhythm.lecture.title">Lecture</strong><p data-i18n="rhythm.lecture.body">Khái niệm, use case nghiên cứu, lỗi thường gặp.</p></article>
         <article class="rhythm-item"><strong data-i18n="rhythm.coding.title">Live coding</strong><p data-i18n="rhythm.coding.body">Giảng viên chạy notebook và giải thích output.</p></article>
         <article class="rhythm-item"><strong data-i18n="rhythm.practice.title">Guided practice</strong><p data-i18n="rhythm.practice.body">Người học sửa code mẫu và đọc kết quả.</p></article>
+        <article class="rhythm-item"><strong data-i18n="rhythm.writing.title">Writing bridge</strong><p data-i18n="rhythm.writing.body">Chuyển output thành caption, Methods note, Results sentence hoặc limitation.</p></article>
         <article class="rhythm-item"><strong data-i18n="rhythm.debrief.title">Debrief</strong><p data-i18n="rhythm.debrief.body">Nói về bug, figure choice và diễn giải nghiên cứu.</p></article>
         <article class="rhythm-item"><strong data-i18n="rhythm.homework.title">Homework</strong><p data-i18n="rhythm.homework.body">Notebook, bảng/hình, caption, memo và nguồn.</p></article>
       </div>
@@ -746,6 +781,7 @@
         "brand.name": "Python Research Hub",
         "nav.quick": "Điều hướng nhanh",
         "nav.overview": "Overview",
+        "nav.writing": "Writing",
         "nav.week1": "Tuần 01",
         "nav.syllabus": "Syllabus",
         "nav.resources": "Tài nguyên",
@@ -788,7 +824,19 @@
         "info.outcome.title": "Sau khóa học",
         "info.outcome.body": "Người học có thể tạo dataset sạch, chạy notebook, xuất bảng/hình, viết caption và đoạn Results có giới hạn rõ ràng.",
         "info.tools.title": "Công cụ chính",
-        "info.tools.body": "JupyterLab, pandas, matplotlib/seaborn, Excel/CSV, Zotero, Markdown, GitHub Pages và Quarto khi cần báo cáo tái lập.",
+        "info.tools.body": "JupyterLab, pandas, matplotlib/seaborn, Excel/CSV, Word/Zotero, Markdown, GitHub Pages, Quarto và Overleaf tùy đúng thời điểm.",
+        "writing.tag": "Writing support",
+        "writing.title": "Viết paper được rải đều từng tuần, Overleaf để cuối khóa",
+        "writing.body": "Khóa học không đợi đến tuần cuối mới viết. Mỗi tuần đều có một caption, memo, Methods note, Results paragraph hoặc limitation để dần tạo thành paper package.",
+        "writing.weekly.title": "Mỗi tuần có writing output",
+        "writing.weekly.body": "Paper connection, sentence frame và common writing risk đi kèm với từng kỹ năng Python.",
+        "writing.word.title": "Word + Zotero trước",
+        "writing.word.body": "Workflow quen thuộc cho ngành ngôn ngữ học, dịch thuật và chính sách giáo dục; bắt đầu khi có caption và nguồn trích dẫn.",
+        "writing.quarto.title": "Quarto khi cần tái lập",
+        "writing.quarto.body": "Dùng sau khi notebook, figure và citation đã ổn, nhất là khi muốn report kết hợp code, bảng, hình và prose.",
+        "writing.overleaf.title": "Overleaf ở Week 14",
+        "writing.overleaf.body": "Overleaf là lựa chọn đóng gói LaTeX khi đã có draft, bảng/hình và references; không bắt buộc trong các tuần đầu.",
+        "writing.roadmap": "Mở writing and paper tooling roadmap",
         "week1.tag": "Tuần đang có",
         "week1.title": "Tuần 01: Python như một quy trình nghiên cứu",
         "week1.body": "Mục tiêu tuần đầu là nhẹ nhưng rõ: chạy notebook, xem CSV nhỏ, chọn một hướng nghiên cứu, rồi viết caption và memo ngắn.",
@@ -828,7 +876,7 @@
         "track.policy.item2": "timeline or theme figure",
         "syllabus.tag": "Syllabus",
         "syllabus.title": "Lộ trình 14 tuần từ beginner đến mini paper package",
-        "syllabus.body": "Tuần 1-4 xây nền dữ liệu và notebook; tuần 5-8 học phân tích, hình, thống kê nhẹ; tuần 9-14 đi vào track nghiên cứu và đóng gói paper.",
+        "syllabus.body": "Tuần 1-4 xây nền dữ liệu và notebook; tuần 5-8 học phân tích, hình, thống kê nhẹ; tuần 9-13 đi vào track nghiên cứu; tuần 14 đóng gói paper bằng Word/Zotero, Quarto hoặc Overleaf nếu cần.",
         "syllabus.aria": "Syllabus 14 tuần",
         "w01.title": "Python như một quy trình nghiên cứu",
         "w01.skill": "Jupyter, cells, variables, Markdown",
@@ -869,12 +917,12 @@
         "w13.title": "Dữ liệu chính sách giáo dục",
         "w13.skill": "metadata, timeline, coding scheme",
         "w13.output": "policy coding table",
-        "w14.title": "Reproducible paper package",
-        "w14.skill": "clean notebook, README, Zotero/Quarto",
-        "w14.output": "mini paper + notebook",
+        "w14.title": "Paper package và Overleaf option",
+        "w14.skill": "clean notebook, Word/Zotero, optional Quarto/Overleaf",
+        "w14.output": "mini paper + notebook + optional Overleaf project",
         "resources.tag": "Weekly design",
         "resources.title": "Mỗi tuần đều có cùng một cấu trúc để người học không bị lạc",
-        "resources.body": "Thiết kế lặp lại giúp người mới tập trung vào khái niệm mới, không phải đoán tuần này cần mở file nào hay nộp gì.",
+        "resources.body": "Thiết kế lặp lại giúp người mới tập trung vào khái niệm mới, không phải đoán tuần này cần mở file nào, viết đoạn gì, hay nộp gì.",
         "rhythm.pre.title": "Pre-class",
         "rhythm.pre.body": "Đọc note ngắn, xem dataset, trả lời warm-up.",
         "rhythm.lecture.title": "Lecture",
@@ -883,6 +931,8 @@
         "rhythm.coding.body": "Giảng viên chạy notebook và giải thích output.",
         "rhythm.practice.title": "Guided practice",
         "rhythm.practice.body": "Người học sửa code mẫu và đọc kết quả.",
+        "rhythm.writing.title": "Writing bridge",
+        "rhythm.writing.body": "Chuyển output thành caption, Methods note, Results sentence hoặc limitation.",
         "rhythm.debrief.title": "Debrief",
         "rhythm.debrief.body": "Nói về bug, figure choice và diễn giải nghiên cứu.",
         "rhythm.homework.title": "Homework",
@@ -895,6 +945,7 @@
         "brand.name": "Python Research Hub",
         "nav.quick": "Quick navigation",
         "nav.overview": "Overview",
+        "nav.writing": "Writing",
         "nav.week1": "Week 01",
         "nav.syllabus": "Syllabus",
         "nav.resources": "Resources",
@@ -937,7 +988,19 @@
         "info.outcome.title": "After the course",
         "info.outcome.body": "The learner can build clean datasets, run notebooks, export tables/figures, write captions, and draft bounded Results paragraphs.",
         "info.tools.title": "Core tools",
-        "info.tools.body": "JupyterLab, pandas, matplotlib/seaborn, Excel/CSV, Zotero, Markdown, GitHub Pages, and Quarto for reproducible reports when needed.",
+        "info.tools.body": "JupyterLab, pandas, matplotlib/seaborn, Excel/CSV, Word/Zotero, Markdown, GitHub Pages, Quarto, and Overleaf at the right time.",
+        "writing.tag": "Writing support",
+        "writing.title": "Paper writing is spread across the course; Overleaf comes at the end",
+        "writing.body": "The course does not wait until the final week to write. Every week includes a caption, memo, Methods note, Results paragraph, or limitation that gradually becomes the paper package.",
+        "writing.weekly.title": "Weekly writing output",
+        "writing.weekly.body": "Paper connection, sentence frame, and common writing risk accompany each Python skill.",
+        "writing.word.title": "Word + Zotero first",
+        "writing.word.body": "A familiar workflow for linguistics, translation studies, and education policy; it starts once captions and sources appear.",
+        "writing.quarto.title": "Quarto for reproducibility",
+        "writing.quarto.body": "Use it after notebooks, figures, and citations are comfortable, especially for reports combining code, tables, figures, and prose.",
+        "writing.overleaf.title": "Overleaf in Week 14",
+        "writing.overleaf.body": "Overleaf is a LaTeX packaging option once a draft, tables/figures, and references exist; it is not required in the early weeks.",
+        "writing.roadmap": "Open the writing and paper tooling roadmap",
         "week1.tag": "Available now",
         "week1.title": "Week 01: Python as a research workflow",
         "week1.body": "The first week is light but concrete: run a notebook, inspect a small CSV, choose a research direction, then write a caption and short memo.",
@@ -977,7 +1040,7 @@
         "track.policy.item2": "timeline or theme figure",
         "syllabus.tag": "Syllabus",
         "syllabus.title": "A 14-week path from beginner to mini paper package",
-        "syllabus.body": "Weeks 1-4 build data and notebook foundations; Weeks 5-8 introduce analysis, figures, and light statistics; Weeks 9-14 focus on research tracks and paper packaging.",
+        "syllabus.body": "Weeks 1-4 build data and notebook foundations; Weeks 5-8 introduce analysis, figures, and light statistics; Weeks 9-13 focus on research tracks; Week 14 packages the paper with Word/Zotero, Quarto, or Overleaf when needed.",
         "syllabus.aria": "14-week syllabus",
         "w01.title": "Python as a research workflow",
         "w01.skill": "Jupyter, cells, variables, Markdown",
@@ -1018,12 +1081,12 @@
         "w13.title": "Education policy data",
         "w13.skill": "metadata, timeline, coding scheme",
         "w13.output": "policy coding table",
-        "w14.title": "Reproducible paper package",
-        "w14.skill": "clean notebook, README, Zotero/Quarto",
-        "w14.output": "mini paper + notebook",
+        "w14.title": "Paper package and Overleaf option",
+        "w14.skill": "clean notebook, Word/Zotero, optional Quarto/Overleaf",
+        "w14.output": "mini paper + notebook + optional Overleaf project",
         "resources.tag": "Weekly design",
         "resources.title": "Every week uses the same structure so the learner does not get lost",
-        "resources.body": "The repeated design lets a beginner focus on the new concept instead of guessing which file to open or what to submit.",
+        "resources.body": "The repeated design lets a beginner focus on the new concept instead of guessing which file to open, what to write, or what to submit.",
         "rhythm.pre.title": "Pre-class",
         "rhythm.pre.body": "Read short notes, inspect the dataset, answer warm-up questions.",
         "rhythm.lecture.title": "Lecture",
@@ -1032,6 +1095,8 @@
         "rhythm.coding.body": "The instructor runs the notebook and explains output.",
         "rhythm.practice.title": "Guided practice",
         "rhythm.practice.body": "The learner edits starter code and reads results.",
+        "rhythm.writing.title": "Writing bridge",
+        "rhythm.writing.body": "Turn output into a caption, Methods note, Results sentence, or limitation.",
         "rhythm.debrief.title": "Debrief",
         "rhythm.debrief.body": "Discuss bugs, figure choice, and research interpretation.",
         "rhythm.homework.title": "Homework",

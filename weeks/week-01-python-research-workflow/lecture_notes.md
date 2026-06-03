@@ -27,9 +27,12 @@ câu hỏi nghiên cứu
 nguồn dữ liệu
 code
 bảng hoặc hình
+caption
 diễn giải
 hạn chế
 ```
+
+Tuần 01 chưa cần Word/Zotero hoặc Overleaf. Bạn viết ngay trong Markdown cell để tập thói quen: mỗi output nhỏ đều phải có câu giải thích. Các công cụ viết paper sẽ được thêm dần sau khi bạn đã có dữ liệu, bảng, hình và nguồn trích dẫn.
 
 ## Ý tưởng Python đầu tiên
 
@@ -94,6 +97,12 @@ Một câu hỏi nghiên cứu tốt cho người mới nên:
 - gắn với dữ liệu quan sát được;
 - nói rõ đơn vị quan sát (unit of observation);
 - có thể tạo ít nhất một bảng hoặc hình.
+
+Sentence frame cho Tuần 01:
+
+```text
+This project asks [small question] because [research reason]. The first dataset would contain [unit of observation], so Python can help by [table/figure/output].
+```
 
 ## Ví dụ đã làm mẫu
 

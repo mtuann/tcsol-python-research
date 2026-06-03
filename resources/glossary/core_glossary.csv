@@ -11,5 +11,14 @@ research_question,câu hỏi nghiên cứu,research question,Prefer "câu hỏi 
 data_ready_question,câu hỏi sẵn sàng cho dữ liệu,data-ready question,Small question linked to observable data.
 caption,chú thích bảng/hình,caption,Must state data N variables and main reading.
 interpretation,diễn giải kết quả,interpretation,Separate observation from inference and limitation.
+writing_support,hỗ trợ viết paper,writing support,Weekly paper-facing writing layer.
+paper_facing_output,output phục vụ paper,paper-facing output,Table figure caption paragraph or source note usable in a paper draft.
+sentence_frame,mẫu câu viết học thuật,sentence frame,Reusable writing scaffold for beginner academic writing.
+methods_note,ghi chú Methods,Methods note,Short statement explaining data source coding method or tool.
+results_paragraph,đoạn Results,Results paragraph,Short paragraph linking output to research question and limitation.
+zotero_word,Word + Zotero,Word + Zotero,Default early writing and citation workflow.
+quarto_report,báo cáo Quarto,Quarto report,Optional reproducible report workflow after notebooks are familiar.
+overleaf,Overleaf,Overleaf,Optional Week 14 LaTeX paper packaging tool.
+latex,LaTeX,LaTeX,Introduce only as optional formatting language when needed.
 reproducibility,tính tái lập,reproducibility,Workflow can be rerun and checked.
 fallback,phương án dự phòng,fallback,Static table/summary when JS does not load.

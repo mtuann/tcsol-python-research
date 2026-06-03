@@ -11,4 +11,8 @@ unit_observation,đơn vị quan sát,unit of observation,What one row represent
 research_track,hướng nghiên cứu,research track,One possible future project direction.
 caption,chú thích bảng/hình,caption,Paper-facing explanation of output.
 memo,memo nghiên cứu ngắn,short research memo,100-150 word interpretation.
+writing_support,hỗ trợ viết paper,writing support,Week 01 uses notebook Markdown not Overleaf.
+sentence_frame,mẫu câu viết học thuật,sentence frame,Use to connect question data and possible output.
+paper_facing_sentence,câu phục vụ paper,paper-facing sentence,One sentence that can later grow into Introduction or Methods.
+overleaf,Overleaf,Overleaf,Not required in Week 01; optional final-week packaging tool.
 fallback_table,bảng dự phòng,fallback table,Static table if interaction does not load.

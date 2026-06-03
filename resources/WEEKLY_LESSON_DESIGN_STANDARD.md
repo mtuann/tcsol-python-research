@@ -14,7 +14,7 @@ The course is not a generic Python course. Every week must connect Python to one
 The weekly loop is:
 
 ```text
-research question -> small dataset -> Python skill -> table/figure -> interpretation -> paper-ready output
+research question -> small dataset -> Python skill -> table/figure -> interpretation -> paper-ready writing -> paper-ready output
 ```
 
 ## Non-Negotiable Rules
@@ -29,8 +29,9 @@ Every week must include:
 6. One independent applied task.
 7. One figure or table suitable for a paper draft.
 8. One caption and interpretation paragraph.
-9. One technical reading and one research/method reading.
-10. One reproducibility checklist.
+9. One explicit writing-support block: paper section, writing output, tool support, sentence frame, and common writing risk.
+10. One technical reading and one research/method reading.
+11. One reproducibility checklist.
 
 Do not add a hard dataset and a hard Python concept in the same week. If the Python skill is new, the dataset must be simple. If the dataset is messy or realistic, the Python skill must already be familiar.
 
@@ -50,7 +51,7 @@ For Weeks 1-4, the learner-facing Core must stay light:
 - one dataset with 10-100 rows;
 - one short table or figure;
 - one 100-150 word interpretation;
-- no regression, COMET, advanced Git, APIs, scraping, or JavaScript authoring.
+- no regression, COMET, advanced Git, APIs, scraping, JavaScript authoring, or Overleaf/LaTeX authoring.
 
 The instructor may prepare HTML slides, interactive visualizations, and source audits, but the learner only needs to use them, not build them, until later weeks.
 
@@ -137,7 +138,7 @@ weeks/week-XX-topic-slug/
 Minimum submission from the learner:
 
 ```text
-notebook + cleaned data or derived table + figure/table + caption + interpretation paragraph + source list
+notebook + cleaned data or derived table + figure/table + caption + interpretation paragraph + paper-facing writing + source list
 ```
 
 ## Weekly README Template
@@ -159,6 +160,14 @@ Each week's `README.md` must contain:
 - Supporting skills:
 - Functions/libraries:
 
+## Writing Support
+
+- Paper section supported:
+- Writing output:
+- Tool support:
+- Sentence frame:
+- Common writing risk:
+
 ## Learning Objectives
 
 By the end of this week, the learner can:
@@ -174,6 +183,7 @@ By the end of this week, the learner can:
 - [ ] One table or figure is exported.
 - [ ] Caption explains N, variables, units, method, and main finding.
 - [ ] Interpretation paragraph separates description, inference, and limitation.
+- [ ] Writing output is ready to paste into Word, Quarto, or the final paper draft.
 - [ ] Sources are cited with links and access date.
 
 ## Files
@@ -196,8 +206,45 @@ By the end of this week, the learner can:
 | Lecture | 45-60 min | concept, research use case, common mistakes, mini demo |
 | Live coding | 30-45 min | instructor codes from blank/skeleton notebook |
 | Guided practice | 30-45 min | learner modifies and completes partially written code |
-| Debrief | 10-15 min | discuss bugs, research interpretation, figure/table choices |
-| Homework | 60-120 min | notebook + memo + figure/table/caption |
+| Writing bridge | 10-15 min | turn the output into a caption, Results sentence, Methods note, or limitation |
+| Debrief | 10-15 min | discuss bugs, research interpretation, figure/table choices, writing risk |
+| Homework | 60-120 min | notebook + memo + figure/table/caption + paper-facing paragraph |
+
+## Writing Support and Paper Tooling Standard
+
+Every week must support paper writing, but tools must be layered gently.
+
+Default progression:
+
+| Stage | Weeks | Writing focus | Tool support |
+|---|---:|---|---|
+| Foundation | 1-2 | research question, data unit, source note | notebook Markdown; Word optional |
+| Evidence | 3-5 | descriptive table, figure caption, figure note | Word + Zotero setup begins |
+| Results | 6-8 | Results paragraph, limitation, teaching implication | Word + Zotero |
+| Track writing | 9-13 | track-specific analysis paragraph | Word + Zotero; Quarto optional |
+| Paper package | 14 | mini paper, appendix, references, reproducibility note | Word + Zotero by default; Overleaf/Quarto optional |
+
+Required weekly writing block:
+
+```markdown
+## Writing Support
+
+- Paper section supported:
+- Writing output:
+- Tool support:
+- Sentence frame:
+- Common writing risk:
+```
+
+Overleaf/LaTeX policy:
+
+- Do not introduce Overleaf in Weeks 1-6.
+- Do not require Overleaf unless the target journal, university, or template needs LaTeX.
+- Introduce Overleaf in Week 14 as a packaging option after the learner already has draft sections, references, tables, and figures.
+- Word + Zotero remains the default first writing workflow.
+- Quarto is optional for reproducible reports after notebooks and figures are comfortable.
+
+Course-wide roadmap: `resources/WRITING_AND_PAPER_TOOLING_ROADMAP.md`.
 
 ## Slide Deck Standard
 
@@ -321,31 +368,37 @@ The notebook must run from top to bottom with "Restart Kernel and Run All".
 Required notebook sections:
 
 1. **Title and research question**
-2. **Setup**
+2. **Paper connection**
+   - target paper section;
+   - writing output for this week;
+   - sentence frame.
+3. **Setup**
    - imports;
    - optional seed;
    - package versions if relevant.
-3. **Load data**
+4. **Load data**
    - file path;
    - source note;
    - first 5 rows.
-4. **Inspect data**
+5. **Inspect data**
    - dimensions;
    - column names;
    - missing values;
    - data types.
-5. **Core Python skill**
+6. **Core Python skill**
    - one worked example;
    - one learner-editable example.
-6. **Analysis**
+7. **Analysis**
    - summary table, metric, or transformation.
-7. **Visualization or table**
+8. **Visualization or table**
    - export to `outputs/figures/` or `outputs/tables/`.
-8. **Interpretation**
+9. **Interpretation**
    - 100-200 words in Markdown.
-9. **Limitations**
+10. **Paper-facing writing**
+    - a caption, Methods note, Results paragraph, or Discussion/limitation paragraph ready to move into Word, Quarto, or the final paper draft.
+11. **Limitations**
    - at least two limitations.
-10. **Next step**
+12. **Next step**
     - one possible improvement.
 
 Do not leave hidden state. All variables needed by later cells must be created in earlier cells.
@@ -409,6 +462,8 @@ Each `assignment.md` must use this template:
 
 - Python skill:
 - Research skill:
+- Paper section supported:
+- Writing output:
 
 ## Data
 
@@ -423,13 +478,14 @@ Each `assignment.md` must use this template:
 3. Produce one table or figure.
 4. Write a caption.
 5. Write a 150-300 word interpretation.
-6. Record one debugging note or limitation.
+6. Write one paper-facing paragraph or sentence frame.
+7. Record one debugging note or limitation.
 
 ## Submission
 
 - `.ipynb` notebook;
 - exported table or figure;
-- short memo in Markdown;
+- short memo or paper-facing paragraph in Markdown/Word;
 - source list.
 ```
 
@@ -443,7 +499,7 @@ Use a 100-point rubric every week.
 | Code clarity | 15 | readable names, organized sections, minimal clutter |
 | Data handling | 15 | schema followed, missing values handled, source recorded |
 | Figure/table quality | 15 | labels, units, N, scale, export quality |
-| Research interpretation | 20 | meaningful claim, limitation, link to research question |
+| Research writing and interpretation | 20 | meaningful claim, limitation, link to research question, usable paper-facing sentence/paragraph |
 | Reproducibility | 10 | paths, package notes, source links, no manual output edits |
 
 Track-specific rubric points may replace up to 20 points:
@@ -734,6 +790,16 @@ Use these as starting points, then update readings when building each week.
 - [Plotly `write_html`](https://plotly.com/python-api-reference/generated/plotly.io.write_html.html)
 - [JupyterLite documentation](https://jupyterlite.readthedocs.io/)
 
+### Writing, Citation, and Paper Packaging
+
+- [Zotero Word processor plugin](https://www.zotero.org/support/word_processor_plugin_usage)
+- [Zotero word processor integration](https://www.zotero.org/support/word_processor_integration)
+- [Quarto citations](https://quarto.org/docs/authoring/citations.html)
+- [Overleaf Learn LaTeX in 30 minutes](https://www.overleaf.com/learn/latex/Learn_LaTeX_in_30_minutes)
+- [Overleaf bibliography management in LaTeX](https://www.overleaf.com/learn/latex/Bibliography_management_in_LaTeX)
+- [Overleaf `.bib` file documentation](https://docs.overleaf.com/citing-and-references/working-with-.bib-files)
+- [Overleaf and Zotero](https://www.overleaf.com/learn/how-to/How_to_link_your_Overleaf_account_to_Mendeley_and_Zotero)
+
 ### Research Design, Tables, Figures, Reproducibility
 
 - [Tidy Data](https://vita.had.co.nz/papers/tidy-data.html)
@@ -770,32 +836,33 @@ Use these as starting points, then update readings when building each week.
 - [UNESCO education policies and strategies](https://www.unesco.org/en/education-policies)
 - [OECD Education Policy Outlook 2025](https://www.oecd.org/en/publications/education-policy-outlook-2025_c3f402ba-en.html)
 
-## 14-Week Artifact Progression
+## 14-Week Artifact and Writing Progression
 
 This table does not replace the syllabus. It defines the artifact emphasis for each week.
 
-| Week | Main build | Required paper-facing output |
-|---|---|---|
-| 1 | research notebook basics + HTML slide demo | reproducible notebook with source note |
-| 2 | data table and data dictionary | clean CSV template + codebook |
-| 3 | pandas summaries | descriptive table |
-| 4 | data cleaning log | before/after cleaning table |
-| 5 | visualization basics | bar/line/boxplot with caption |
-| 6 | basic statistics | test result table + interpretation |
-| 7 | TCSOL design | pre/post-test or rubric artifact |
-| 8 | learner error analysis | error frequency chart + examples |
-| 9 | Chinese-Vietnamese contrastive analysis | contrastive examples table |
-| 10 | teaching adaptation | data-driven teaching recommendation |
-| 11 | MT evaluation | metric table + human score comparison |
-| 12 | MTPE analysis | post-editing effort chart + error table |
-| 13 | education policy coding | policy timeline or theme table |
-| 14 | final project | mini paper package + reproducibility checklist |
+| Week | Main build | Required paper-facing output | Writing/tool output |
+|---|---|---|---|
+| 1 | research notebook basics + HTML slide demo | reproducible notebook with source note | research question + 100-150 word memo |
+| 2 | data table and data dictionary | clean CSV template + codebook | data description paragraph |
+| 3 | pandas summaries | descriptive table | table caption; Word + Zotero setup begins |
+| 4 | data cleaning log | before/after cleaning table | cleaning decision note |
+| 5 | visualization basics | bar/line/boxplot with caption | figure caption + figure note |
+| 6 | basic statistics | test result table + interpretation | Results paragraph with limitation |
+| 7 | TCSOL design | pre/post-test or rubric artifact | short teaching-study Methods draft |
+| 8 | learner error analysis | error frequency chart + examples | learner-error Results paragraph |
+| 9 | Chinese-Vietnamese contrastive analysis | contrastive examples table | contrastive example interpretation |
+| 10 | teaching adaptation | data-driven teaching recommendation | pedagogical adaptation paragraph |
+| 11 | MT evaluation | metric table + human score comparison | MT evaluation Results paragraph |
+| 12 | MTPE analysis | post-editing effort chart + error table | MTPE workflow discussion paragraph |
+| 13 | education policy coding | policy timeline or theme table | policy coding Methods paragraph; Quarto optional |
+| 14 | final project | mini paper package + reproducibility checklist | Word + Zotero by default; optional Overleaf/Quarto package |
 
 ## Definition of Done
 
 A week is complete only when all are true:
 
 - `README.md` states the research question and Python skill.
+- `README.md` states the weekly writing support block and tool support.
 - Learner-facing website content opens in Vietnamese by default and can switch to English.
 - `content_blocks.md`, `glossary_weekXX.csv`, `translation_qa.md`, and `slide_prompt_sources.md` are updated.
 - `slides.qmd` and `slides.html` exist and follow the slide deck standard.
@@ -806,13 +873,14 @@ A week is complete only when all are true:
 - Exercises include copy-modify, guided, and research-style levels.
 - Assignment has clear deliverables.
 - At least one figure or table is exported.
-- Caption and interpretation are included.
+- Caption, interpretation, and paper-facing writing output are included.
 - Readings include links and source audit notes.
 - Rubric is present.
 - Learner-facing Core is clearly separated from Stretch and Instructor-only content.
 - Language switch, keyboard navigation, and no-JavaScript fallback are tested for public HTML.
 - Slide visuals are original or properly sourced, and all prompts/sources are logged.
 - No private learner data is exposed.
+- Overleaf is not required before Week 14.
 
 ## Design Smell Checklist
 
@@ -821,7 +889,9 @@ Revise the week if any of these are true:
 - The week teaches more than two new Python concepts.
 - The dataset has no research context.
 - The assignment only asks for code and no interpretation.
+- The assignment only asks for interpretation and no paper-facing writing output.
 - The HTML slide/demo requires the learner to understand JavaScript in beginner weeks.
+- Overleaf or LaTeX is introduced before the learner has paper materials to format.
 - The interactive demo has no plain-language fallback summary.
 - The figure has no caption or N.
 - The reading list has no current source or official documentation.

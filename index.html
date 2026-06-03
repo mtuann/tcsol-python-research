@@ -7,18 +7,28 @@
   <link rel="stylesheet" href="assets/css/bilingual.css">
   <style>
     :root {
-      --bg: #f7f9fc;
+      --bg: #f6f8fb;
+      --paper: #ffffff;
       --ink: #172033;
       --muted: #5b6578;
       --line: #dbe4f0;
       --blue: #2563eb;
-      --green: #2e7d32;
-      --amber: #c2610f;
+      --blue-soft: #edf4ff;
+      --green: #1f7a4d;
+      --green-soft: #eaf7ef;
+      --amber: #b45309;
+      --amber-soft: #fff3df;
       --purple: #6d5bd0;
-      --paper: #ffffff;
+      --purple-soft: #f1efff;
+      --rose: #b8325f;
+      --rose-soft: #fff0f5;
+      --shadow: 0 18px 44px rgba(23, 32, 51, 0.08);
     }
     * {
       box-sizing: border-box;
+    }
+    html {
+      scroll-behavior: smooth;
     }
     body {
       background: var(--bg);
@@ -27,31 +37,6 @@
       line-height: 1.55;
       margin: 0;
     }
-    main {
-      margin: 0 auto;
-      max-width: 1120px;
-      padding: 24px 20px 52px;
-    }
-    header {
-      display: grid;
-      gap: 1.2rem;
-      grid-template-columns: minmax(0, 1.15fr) minmax(280px, 0.85fr);
-      padding: 32px 0 28px;
-    }
-    h1 {
-      font-size: clamp(2rem, 5vw, 4.2rem);
-      letter-spacing: 0;
-      line-height: 1.03;
-      margin: 0 0 14px;
-    }
-    h2 {
-      font-size: 1.3rem;
-      margin: 0 0 12px;
-    }
-    p {
-      color: var(--muted);
-      margin: 0 0 12px;
-    }
     a {
       color: var(--blue);
       text-decoration: none;
@@ -59,17 +44,120 @@
     a:hover {
       text-decoration: underline;
     }
-    .site-tools {
-      justify-content: flex-end;
+    .topbar {
+      align-items: center;
+      background: rgba(255, 255, 255, 0.94);
+      border-bottom: 1px solid var(--line);
+      display: flex;
+      gap: 1rem;
+      justify-content: space-between;
+      padding: 0.8rem max(1rem, calc((100vw - 1180px) / 2));
+      position: sticky;
+      top: 0;
+      z-index: 30;
     }
-    .hero-text {
-      align-self: center;
+    .brand {
+      align-items: center;
+      color: var(--ink);
+      display: inline-flex;
+      font-weight: 800;
+      gap: 0.55rem;
+      min-width: max-content;
     }
-    .hero-actions {
+    .brand-mark {
+      background: var(--blue);
+      border-radius: 6px;
+      box-shadow: inset 0 -10px 0 rgba(0, 0, 0, 0.08);
+      display: inline-block;
+      height: 1.2rem;
+      width: 1.2rem;
+    }
+    .nav-cluster {
+      align-items: center;
       display: flex;
       flex-wrap: wrap;
-      gap: 0.7rem;
-      margin-top: 18px;
+      gap: 0.75rem;
+      justify-content: flex-end;
+    }
+    .quick-nav {
+      align-items: center;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem;
+    }
+    .quick-nav a {
+      border: 1px solid transparent;
+      border-radius: 999px;
+      color: var(--muted);
+      font-size: 0.92rem;
+      padding: 0.35rem 0.6rem;
+    }
+    .quick-nav a:hover {
+      background: var(--blue-soft);
+      border-color: var(--line);
+      color: var(--blue);
+      text-decoration: none;
+    }
+    main {
+      margin: 0 auto;
+      max-width: 1180px;
+      padding: 28px 20px 60px;
+    }
+    .intro-panel {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+    .intro-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(360px, 0.95fr);
+      min-height: 500px;
+    }
+    .intro-copy {
+      align-content: center;
+      display: grid;
+      padding: clamp(1.5rem, 4vw, 3.2rem);
+    }
+    .eyebrow {
+      color: var(--blue);
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+    h1 {
+      font-size: clamp(2.2rem, 5vw, 4.8rem);
+      letter-spacing: 0;
+      line-height: 1.02;
+      margin: 0.5rem 0 1rem;
+      max-width: 12ch;
+    }
+    h2 {
+      font-size: clamp(1.5rem, 2.4vw, 2.3rem);
+      letter-spacing: 0;
+      line-height: 1.15;
+      margin: 0;
+    }
+    h3 {
+      font-size: 1.05rem;
+      letter-spacing: 0;
+      margin: 0 0 0.35rem;
+    }
+    p {
+      color: var(--muted);
+      margin: 0;
+    }
+    .lead {
+      font-size: 1.08rem;
+      max-width: 58ch;
+    }
+    .action-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.65rem;
+      margin-top: 1.4rem;
     }
     .button {
       align-items: center;
@@ -78,179 +166,877 @@
       border-radius: 8px;
       color: #ffffff;
       display: inline-flex;
-      font-weight: 700;
+      font-weight: 750;
+      justify-content: center;
       min-height: 44px;
       padding: 0.65rem 0.9rem;
-    }
-    .button.secondary {
-      background: #ffffff;
-      color: var(--blue);
     }
     .button:hover {
       text-decoration: none;
     }
-    .workflow-panel {
-      background: #ffffff;
+    .button.secondary {
+      background: var(--paper);
+      color: var(--blue);
+    }
+    .button.dark {
+      background: var(--ink);
+      border-color: var(--ink);
+    }
+    .metric-row {
+      display: grid;
+      gap: 0.7rem;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      margin-top: 1.7rem;
+    }
+    .metric {
       border: 1px solid var(--line);
       border-radius: 8px;
-      box-shadow: 0 18px 40px rgba(23, 32, 51, 0.08);
-      display: grid;
-      gap: 0.55rem;
-      padding: 18px;
+      padding: 0.75rem;
     }
-    .step {
-      border-left: 5px solid var(--blue);
-      border-radius: 8px;
-      background: #f8fbff;
-      padding: 0.72rem 0.85rem;
-    }
-    .step:nth-child(2) {
-      border-left-color: var(--purple);
-    }
-    .step:nth-child(3) {
-      border-left-color: var(--green);
-    }
-    .step:nth-child(4) {
-      border-left-color: var(--amber);
-    }
-    .step strong {
+    .metric strong {
+      color: var(--ink);
       display: block;
-      margin-bottom: 0.18rem;
+      font-size: 1.35rem;
+      line-height: 1;
+      margin-bottom: 0.25rem;
     }
-    .grid {
+    .metric span {
+      color: var(--muted);
+      font-size: 0.86rem;
+    }
+    .evidence-board {
+      background: #f9fbff;
+      border-left: 1px solid var(--line);
       display: grid;
-      gap: 16px;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      margin-top: 18px;
+      gap: 1rem;
+      grid-template-rows: auto 1fr auto;
+      padding: clamp(1.3rem, 3vw, 2.3rem);
     }
-    .card {
+    .board-title {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.55rem;
+    }
+    .board-chip {
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: var(--muted);
+      font-size: 0.78rem;
+      font-weight: 750;
+      padding: 0.25rem 0.55rem;
+    }
+    .research-loop {
+      align-content: center;
+      display: grid;
+      gap: 0.65rem;
+    }
+    .loop-step {
+      align-items: center;
       background: var(--paper);
       border: 1px solid var(--line);
       border-radius: 8px;
-      box-shadow: 0 12px 30px rgba(23, 32, 51, 0.06);
-      padding: 18px;
+      display: grid;
+      gap: 0.65rem;
+      grid-template-columns: 2.1rem 1fr;
+      padding: 0.75rem;
     }
-    .card strong {
+    .loop-step b {
+      align-items: center;
+      border-radius: 6px;
+      color: #ffffff;
+      display: inline-flex;
+      height: 2.1rem;
+      justify-content: center;
+      width: 2.1rem;
+    }
+    .loop-step span {
+      color: var(--ink);
+      font-weight: 750;
+    }
+    .loop-step small {
+      color: var(--muted);
+      display: block;
+      font-size: 0.82rem;
+      margin-top: 0.1rem;
+    }
+    .loop-step:nth-child(1) b { background: var(--blue); }
+    .loop-step:nth-child(2) b { background: var(--purple); }
+    .loop-step:nth-child(3) b { background: var(--green); }
+    .loop-step:nth-child(4) b { background: var(--amber); }
+    .loop-step:nth-child(5) b { background: var(--rose); }
+    .mini-output {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 0.8rem;
+    }
+    .bars {
+      display: grid;
+      gap: 0.45rem;
+    }
+    .bar-line {
+      align-items: center;
+      display: grid;
+      gap: 0.45rem;
+      grid-template-columns: 5.8rem 1fr 2.5rem;
+    }
+    .bar-line span {
+      color: var(--muted);
+      font-size: 0.82rem;
+    }
+    .bar {
+      background: var(--blue-soft);
+      border-radius: 999px;
+      height: 0.65rem;
+      overflow: hidden;
+    }
+    .bar i {
+      background: var(--blue);
+      display: block;
+      height: 100%;
+    }
+    .section {
+      margin-top: 28px;
+    }
+    .section-head {
+      align-items: end;
+      display: flex;
+      gap: 1rem;
+      justify-content: space-between;
+      margin-bottom: 1rem;
+    }
+    .section-head p {
+      max-width: 58ch;
+    }
+    .info-grid {
+      display: grid;
+      gap: 1rem;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+    .info-card,
+    .track-card,
+    .resource-card,
+    .week-row,
+    .rhythm-item {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 1rem;
+    }
+    .info-card {
+      min-height: 190px;
+    }
+    .info-card .swatch,
+    .track-card .swatch,
+    .resource-card .swatch {
+      border-radius: 999px;
+      display: block;
+      height: 0.4rem;
+      margin-bottom: 0.8rem;
+      width: 3rem;
+    }
+    .blue { background: var(--blue); }
+    .green { background: var(--green); }
+    .amber { background: var(--amber); }
+    .purple { background: var(--purple); }
+    .rose { background: var(--rose); }
+    .track-grid {
+      display: grid;
+      gap: 1rem;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+    .track-card {
+      display: grid;
+      gap: 0.7rem;
+    }
+    .track-card ul,
+    .resource-card ul {
+      color: var(--muted);
+      margin: 0;
+      padding-left: 1.1rem;
+    }
+    .track-card li,
+    .resource-card li {
+      margin: 0.2rem 0;
+    }
+    .resource-grid {
+      display: grid;
+      gap: 1rem;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+    .resource-card {
+      display: grid;
+      gap: 0.75rem;
+      min-height: 210px;
+    }
+    .resource-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.45rem;
+      margin-top: auto;
+    }
+    .pill-link {
+      background: var(--blue-soft);
+      border: 1px solid #cfe1ff;
+      border-radius: 999px;
+      color: var(--blue);
+      font-size: 0.86rem;
+      font-weight: 750;
+      padding: 0.35rem 0.55rem;
+    }
+    .pill-link:hover {
+      text-decoration: none;
+    }
+    .syllabus-list {
+      display: grid;
+      gap: 0.65rem;
+    }
+    .week-row {
+      align-items: center;
+      display: grid;
+      gap: 0.85rem;
+      grid-template-columns: 5.2rem 1.2fr 1.25fr 1fr;
+    }
+    .week-row.current {
+      border-color: #b8cdfd;
+      box-shadow: 0 10px 28px rgba(37, 99, 235, 0.08);
+    }
+    .week-code {
+      color: var(--blue);
+      font-size: 0.82rem;
+      font-weight: 850;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+    .week-title {
+      color: var(--ink);
+      font-weight: 800;
+    }
+    .week-skill,
+    .week-output {
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+    .rhythm-grid {
+      display: grid;
+      gap: 0.85rem;
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+    }
+    .rhythm-item {
+      min-height: 130px;
+    }
+    .rhythm-item strong {
       display: block;
       margin-bottom: 0.35rem;
     }
-    .tag {
-      color: var(--blue);
-      font-size: 0.78rem;
-      font-weight: 800;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
+    .footnote {
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      margin-top: 32px;
+      padding-top: 18px;
     }
-    @media (max-width: 840px) {
-      header,
-      .grid {
+    @media (max-width: 1040px) {
+      .intro-grid,
+      .info-grid,
+      .track-grid,
+      .resource-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+      .intro-copy {
+        grid-column: 1 / -1;
+      }
+      .evidence-board {
+        border-left: 0;
+        border-top: 1px solid var(--line);
+        grid-column: 1 / -1;
+      }
+      .rhythm-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+      .week-row {
+        grid-template-columns: 4.7rem 1fr;
+      }
+      .week-skill,
+      .week-output {
+        grid-column: 2;
+      }
+    }
+    @media (max-width: 720px) {
+      .topbar {
+        align-items: flex-start;
+        position: static;
+      }
+      .nav-cluster {
+        justify-content: flex-start;
+      }
+      .quick-nav {
+        display: none;
+      }
+      main {
+        padding-left: 14px;
+        padding-right: 14px;
+      }
+      .intro-grid,
+      .info-grid,
+      .track-grid,
+      .resource-grid,
+      .rhythm-grid,
+      .metric-row {
         grid-template-columns: 1fr;
       }
-      .site-tools {
-        justify-content: flex-start;
+      .section-head {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+      .week-row {
+        grid-template-columns: 1fr;
+      }
+      .week-skill,
+      .week-output {
+        grid-column: auto;
+      }
+      .bar-line {
+        grid-template-columns: 4.8rem 1fr 2rem;
       }
     }
   </style>
 </head>
 <body>
-  <div class="site-tools">
-    <nav class="language-switcher" aria-label="Ngôn ngữ / Language" data-i18n-aria-label="nav.language">
-      <button type="button" data-lang-option="vi" aria-pressed="true">Tiếng Việt</button>
-      <button type="button" data-lang-option="en" aria-pressed="false">English</button>
-    </nav>
-  </div>
-  <main>
-    <header>
-      <section class="hero-text">
-        <span class="tag" data-i18n="hero.tag">Khóa học nghiên cứu</span>
-        <h1 data-i18n="hero.title">Python cho TCSOL, đối chiếu Hán-Việt, MTPE và chính sách giáo dục</h1>
-        <p data-i18n="hero.body">Một lộ trình beginner-first giúp người học dùng Python để thiết kế dữ liệu, phân tích, trực quan hóa, và viết paper.</p>
-        <div class="hero-actions">
-          <a class="button" href="weeks/week-01-python-research-workflow/slides.html" data-i18n="action.slides">Mở slide Tuần 01</a>
-          <a class="button secondary" href="weeks/week-01-python-research-workflow/interactive_demo.html" data-i18n="action.demo">Mở demo tương tác</a>
-        </div>
-      </section>
-      <aside class="workflow-panel" aria-label="Quy trình nghiên cứu" data-i18n-aria-label="workflow.aria">
-        <div class="step"><strong data-i18n="step.question">Câu hỏi</strong><p data-i18n="step.question.body">Chuyển chủ đề rộng thành câu hỏi nhỏ.</p></div>
-        <div class="step"><strong data-i18n="step.data">Dữ liệu</strong><p data-i18n="step.data.body">Nói rõ dòng, cột, nguồn, và đơn vị quan sát.</p></div>
-        <div class="step"><strong data-i18n="step.output">Output</strong><p data-i18n="step.output.body">Tạo bảng/hình có thể dùng trong paper.</p></div>
-        <div class="step"><strong data-i18n="step.paper">Paper</strong><p data-i18n="step.paper.body">Viết caption, diễn giải, và giới hạn.</p></div>
-      </aside>
-    </header>
+  <header class="topbar">
+    <a class="brand" href="#top" data-i18n-aria-label="brand.aria" aria-label="Về đầu trang">
+      <span class="brand-mark" aria-hidden="true"></span>
+      <span data-i18n="brand.name">Python Research Hub</span>
+    </a>
+    <div class="nav-cluster">
+      <nav class="quick-nav" aria-label="Điều hướng nhanh" data-i18n-aria-label="nav.quick">
+        <a href="#overview" data-i18n="nav.overview">Overview</a>
+        <a href="#week-01" data-i18n="nav.week1">Tuần 01</a>
+        <a href="#syllabus" data-i18n="nav.syllabus">Syllabus</a>
+        <a href="#resources" data-i18n="nav.resources">Tài nguyên</a>
+      </nav>
+      <nav class="language-switcher" aria-label="Ngôn ngữ / Language" data-i18n-aria-label="nav.language">
+        <button type="button" data-lang-option="vi" aria-pressed="true">Tiếng Việt</button>
+        <button type="button" data-lang-option="en" aria-pressed="false">English</button>
+      </nav>
+    </div>
+  </header>
 
-    <section>
-      <h2 data-i18n="section.week1">Tuần đang có</h2>
-      <div class="grid">
-        <article class="card">
-          <span class="tag">Week 01</span>
-          <strong data-i18n="week1.title">Python như một quy trình nghiên cứu</strong>
-          <p data-i18n="week1.body">Chạy notebook, xem CSV nhỏ, chọn một hướng nghiên cứu, và viết memo ngắn.</p>
+  <noscript>
+    <p class="noscript-note">Trang này đang hiển thị tiếng Việt. Bật JavaScript để dùng nút chuyển sang English.</p>
+  </noscript>
+
+  <main id="top">
+    <section class="intro-panel" aria-labelledby="course-title">
+      <div class="intro-grid">
+        <div class="intro-copy">
+          <span class="eyebrow" data-i18n="hero.tag">Khóa học Python cho nghiên cứu</span>
+          <h1 id="course-title" data-i18n="hero.title">Từ câu hỏi nghiên cứu đến bảng, hình và paper</h1>
+          <p class="lead" data-i18n="hero.body">Lộ trình 14 tuần cho người mới bắt đầu lập trình, tập trung vào TCSOL, đối chiếu Hán-Việt, MT/MTPE và chính sách giáo dục.</p>
+          <div class="action-row">
+            <a class="button" href="weeks/week-01-python-research-workflow/slides.html" data-i18n="action.start">Bắt đầu với slide Tuần 01</a>
+            <a class="button secondary" href="#syllabus" data-i18n="action.syllabus">Xem syllabus 14 tuần</a>
+            <a class="button dark" href="weeks/week-01-python-research-workflow/README.md" data-i18n="action.week1">Mở gói Tuần 01</a>
+          </div>
+          <div class="metric-row" aria-label="Tóm tắt khóa học" data-i18n-aria-label="metrics.aria">
+            <div class="metric"><strong>14</strong><span data-i18n="metric.weeks">tuần từ cơ bản đến paper package</span></div>
+            <div class="metric"><strong>4</strong><span data-i18n="metric.tracks">hướng nghiên cứu ứng dụng</span></div>
+            <div class="metric"><strong>1</strong><span data-i18n="metric.loop">vòng lặp nghiên cứu lặp lại mỗi tuần</span></div>
+          </div>
+        </div>
+
+        <figure class="evidence-board" aria-label="Minh họa quy trình nghiên cứu" data-i18n-aria-label="board.aria">
+          <div class="board-title">
+            <span class="board-chip" data-i18n="board.chip1">Research question</span>
+            <span class="board-chip" data-i18n="board.chip2">Small data</span>
+            <span class="board-chip" data-i18n="board.chip3">Paper evidence</span>
+          </div>
+          <div class="research-loop">
+            <div class="loop-step"><b>1</b><div><span data-i18n="loop.question">Câu hỏi nhỏ</span><small data-i18n="loop.question.body">Từ chủ đề rộng đến câu hỏi có thể đo.</small></div></div>
+            <div class="loop-step"><b>2</b><div><span data-i18n="loop.data">Dữ liệu có cấu trúc</span><small data-i18n="loop.data.body">CSV/Excel với dòng, cột, nguồn rõ ràng.</small></div></div>
+            <div class="loop-step"><b>3</b><div><span data-i18n="loop.python">Python vừa đủ</span><small data-i18n="loop.python.body">Một kỹ năng mới phục vụ một nhiệm vụ nghiên cứu.</small></div></div>
+            <div class="loop-step"><b>4</b><div><span data-i18n="loop.output">Bảng hoặc hình</span><small data-i18n="loop.output.body">Output có caption và diễn giải.</small></div></div>
+            <div class="loop-step"><b>5</b><div><span data-i18n="loop.paper">Đưa vào paper</span><small data-i18n="loop.paper.body">Methods, Results, limitation, nguồn trích dẫn.</small></div></div>
+          </div>
+          <div class="mini-output" aria-label="Ví dụ output" data-i18n-aria-label="mini.aria">
+            <div class="bars">
+              <div class="bar-line"><span data-i18n="mini.tcsol">TCSOL</span><div class="bar"><i style="width: 72%"></i></div><span>72</span></div>
+              <div class="bar-line"><span data-i18n="mini.mtpe">MTPE</span><div class="bar"><i style="width: 58%"></i></div><span>58</span></div>
+              <div class="bar-line"><span data-i18n="mini.policy">Policy</span><div class="bar"><i style="width: 44%"></i></div><span>44</span></div>
+            </div>
+          </div>
+        </figure>
+      </div>
+    </section>
+
+    <section class="section" id="overview">
+      <div class="section-head">
+        <div>
+          <span class="eyebrow" data-i18n="overview.tag">Overview</span>
+          <h2 data-i18n="overview.title">Khóa học này dạy Python như một công cụ viết nghiên cứu</h2>
+        </div>
+        <p data-i18n="overview.body">Người học không cần nền tảng lập trình. Mỗi tuần học một kỹ năng Python nhỏ, gắn trực tiếp với một sản phẩm nghiên cứu có thể dùng trong bài viết.</p>
+      </div>
+      <div class="info-grid">
+        <article class="info-card">
+          <span class="swatch blue"></span>
+          <h3 data-i18n="info.for.title">Dành cho ai?</h3>
+          <p data-i18n="info.for.body">Học viên cao học/chuẩn bị cao học ngành Applied Linguistics, TCSOL, dịch thuật hoặc chính sách giáo dục.</p>
         </article>
-        <article class="card">
-          <span class="tag">Slides</span>
-          <strong data-i18n="slides.title">Song ngữ và trực quan</strong>
-          <p data-i18n="slides.body">Slide mặc định tiếng Việt, có English toggle, visual cards, workflow map và caption mockup.</p>
+        <article class="info-card">
+          <span class="swatch purple"></span>
+          <h3 data-i18n="info.not.title">Không phải khóa NLP</h3>
+          <p data-i18n="info.not.body">Không đi theo hướng kỹ sư NLP. Python được dùng để tổ chức dữ liệu, phân tích bằng chứng, trực quan hóa và viết kết quả.</p>
         </article>
-        <article class="card">
-          <span class="tag">Demo</span>
-          <strong data-i18n="demo.title">Research Track Explorer</strong>
-          <p data-i18n="demo.body">Chọn TCSOL, đối chiếu Hán-Việt, MTPE hoặc chính sách giáo dục để xem câu hỏi và dữ liệu gợi ý.</p>
+        <article class="info-card">
+          <span class="swatch green"></span>
+          <h3 data-i18n="info.outcome.title">Sau khóa học</h3>
+          <p data-i18n="info.outcome.body">Người học có thể tạo dataset sạch, chạy notebook, xuất bảng/hình, viết caption và đoạn Results có giới hạn rõ ràng.</p>
+        </article>
+        <article class="info-card">
+          <span class="swatch amber"></span>
+          <h3 data-i18n="info.tools.title">Công cụ chính</h3>
+          <p data-i18n="info.tools.body">JupyterLab, pandas, matplotlib/seaborn, Excel/CSV, Zotero, Markdown, GitHub Pages và Quarto khi cần báo cáo tái lập.</p>
         </article>
       </div>
     </section>
+
+    <section class="section" id="week-01">
+      <div class="section-head">
+        <div>
+          <span class="eyebrow" data-i18n="week1.tag">Tuần đang có</span>
+          <h2 data-i18n="week1.title">Tuần 01: Python như một quy trình nghiên cứu</h2>
+        </div>
+        <p data-i18n="week1.body">Mục tiêu tuần đầu là nhẹ nhưng rõ: chạy notebook, xem CSV nhỏ, chọn một hướng nghiên cứu, rồi viết caption và memo ngắn.</p>
+      </div>
+      <div class="resource-grid">
+        <article class="resource-card">
+          <span class="swatch blue"></span>
+          <h3 data-i18n="week1.learn.title">Học trên lớp</h3>
+          <p data-i18n="week1.learn.body">Slide song ngữ, demo tương tác và lecture notes giúp người học hiểu workflow trước khi đụng vào nhiều code.</p>
+          <div class="resource-links">
+            <a class="pill-link" href="weeks/week-01-python-research-workflow/slides.html" data-i18n="link.slides">Slides</a>
+            <a class="pill-link" href="weeks/week-01-python-research-workflow/interactive_demo.html" data-i18n="link.demo">Demo</a>
+            <a class="pill-link" href="weeks/week-01-python-research-workflow/lecture_notes.md" data-i18n="link.notes">Notes</a>
+          </div>
+        </article>
+        <article class="resource-card">
+          <span class="swatch green"></span>
+          <h3 data-i18n="week1.practice.title">Thực hành</h3>
+          <p data-i18n="week1.practice.body">Notebook và bài tập tập trung vào sửa biến text an toàn, đọc output và nối câu hỏi nghiên cứu với dữ liệu.</p>
+          <div class="resource-links">
+            <a class="pill-link" href="weeks/week-01-python-research-workflow/live_coding.ipynb" data-i18n="link.notebook">Notebook</a>
+            <a class="pill-link" href="weeks/week-01-python-research-workflow/exercises.md" data-i18n="link.exercises">Exercises</a>
+            <a class="pill-link" href="weeks/week-01-python-research-workflow/data/raw/week01_research_tracks.csv" data-i18n="link.data">CSV</a>
+          </div>
+        </article>
+        <article class="resource-card">
+          <span class="swatch rose"></span>
+          <h3 data-i18n="week1.submit.title">Sản phẩm nộp</h3>
+          <p data-i18n="week1.submit.body">Một notebook chạy được, một bảng nhỏ, một caption và một memo 100-150 từ giải thích ý nghĩa nghiên cứu.</p>
+          <div class="resource-links">
+            <a class="pill-link" href="weeks/week-01-python-research-workflow/assignment.md" data-i18n="link.assignment">Assignment</a>
+            <a class="pill-link" href="weeks/week-01-python-research-workflow/rubric.md" data-i18n="link.rubric">Rubric</a>
+            <a class="pill-link" href="weeks/week-01-python-research-workflow/readings.md" data-i18n="link.readings">Readings</a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="tracks">
+      <div class="section-head">
+        <div>
+          <span class="eyebrow" data-i18n="tracks.tag">Research tracks</span>
+          <h2 data-i18n="tracks.title">Bốn hướng nghiên cứu luôn được nối với ví dụ thực hành</h2>
+        </div>
+        <p data-i18n="tracks.body">Các bài tập không chung chung: cùng một kỹ năng Python sẽ được đặt vào bối cảnh giảng dạy Hán ngữ, đối chiếu Hán-Việt, MTPE hoặc chính sách giáo dục.</p>
+      </div>
+      <div class="track-grid">
+        <article class="track-card">
+          <span class="swatch blue"></span>
+          <h3 data-i18n="track.tcsol.title">TCSOL ngắn hạn</h3>
+          <p data-i18n="track.tcsol.body">Theo dõi tiến bộ người học, bài kiểm tra trước/sau, lỗi thường gặp và tác động của hoạt động lớp học.</p>
+          <ul>
+            <li data-i18n="track.tcsol.item1">pre/post table</li>
+            <li data-i18n="track.tcsol.item2">learner progress figure</li>
+          </ul>
+        </article>
+        <article class="track-card">
+          <span class="swatch purple"></span>
+          <h3 data-i18n="track.contrast.title">Đối chiếu Hán-Việt</h3>
+          <p data-i18n="track.contrast.body">Xây dataset ví dụ song ngữ, phân loại hiện tượng, lỗi chuyển di và ghi chú ứng dụng sư phạm.</p>
+          <ul>
+            <li data-i18n="track.contrast.item1">contrastive example table</li>
+            <li data-i18n="track.contrast.item2">teaching priority chart</li>
+          </ul>
+        </article>
+        <article class="track-card">
+          <span class="swatch green"></span>
+          <h3 data-i18n="track.mtpe.title">MT và MTPE</h3>
+          <p data-i18n="track.mtpe.body">Đánh giá bản dịch máy, nhãn lỗi, hậu hiệu đính, thời gian chỉnh sửa và metric hỗ trợ.</p>
+          <ul>
+            <li data-i18n="track.mtpe.item1">error frequency table</li>
+            <li data-i18n="track.mtpe.item2">MTPE effort summary</li>
+          </ul>
+        </article>
+        <article class="track-card">
+          <span class="swatch amber"></span>
+          <h3 data-i18n="track.policy.title">Chính sách giáo dục</h3>
+          <p data-i18n="track.policy.body">Tổ chức văn bản chính sách, metadata, coding scheme, timeline và chủ đề nổi bật.</p>
+          <ul>
+            <li data-i18n="track.policy.item1">policy coding table</li>
+            <li data-i18n="track.policy.item2">timeline or theme figure</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="syllabus">
+      <div class="section-head">
+        <div>
+          <span class="eyebrow" data-i18n="syllabus.tag">Syllabus</span>
+          <h2 data-i18n="syllabus.title">Lộ trình 14 tuần từ beginner đến mini paper package</h2>
+        </div>
+        <p data-i18n="syllabus.body">Tuần 1-4 xây nền dữ liệu và notebook; tuần 5-8 học phân tích, hình, thống kê nhẹ; tuần 9-14 đi vào track nghiên cứu và đóng gói paper.</p>
+      </div>
+      <div class="syllabus-list" aria-label="Syllabus 14 tuần" data-i18n-aria-label="syllabus.aria">
+        <div class="week-row current"><span class="week-code">Week 01</span><a class="week-title" href="weeks/week-01-python-research-workflow/slides.html" data-i18n="w01.title">Python như một quy trình nghiên cứu</a><span class="week-skill" data-i18n="w01.skill">Jupyter, cells, variables, Markdown</span><span class="week-output" data-i18n="w01.output">1-page research idea</span></div>
+        <div class="week-row"><span class="week-code">Week 02</span><span class="week-title" data-i18n="w02.title">Dữ liệu nghiên cứu dưới dạng bảng</span><span class="week-skill" data-i18n="w02.skill">lists, dictionaries, CSV/Excel</span><span class="week-output" data-i18n="w02.output">dataset template</span></div>
+        <div class="week-row"><span class="week-code">Week 03</span><span class="week-title" data-i18n="w03.title">pandas cơ bản</span><span class="week-skill" data-i18n="w03.skill">DataFrame, select, filter, groupby</span><span class="week-output" data-i18n="w03.output">descriptive table</span></div>
+        <div class="week-row"><span class="week-code">Week 04</span><span class="week-title" data-i18n="w04.title">Làm sạch dữ liệu</span><span class="week-skill" data-i18n="w04.skill">missing values, type conversion, labels</span><span class="week-output" data-i18n="w04.output">cleaned dataset</span></div>
+        <div class="week-row"><span class="week-code">Week 05</span><span class="week-title" data-i18n="w05.title">Visualization cho paper</span><span class="week-skill" data-i18n="w05.skill">matplotlib, seaborn</span><span class="week-output" data-i18n="w05.output">2 draft figures</span></div>
+        <div class="week-row"><span class="week-code">Week 06</span><span class="week-title" data-i18n="w06.title">Thống kê nhập môn</span><span class="week-skill" data-i18n="w06.skill">mean, SD, CI, t-test, correlation</span><span class="week-output" data-i18n="w06.output">short Results paragraph</span></div>
+        <div class="week-row"><span class="week-code">Week 07</span><span class="week-title" data-i18n="w07.title">Nghiên cứu TCSOL ngắn hạn</span><span class="week-skill" data-i18n="w07.skill">rubric, classroom variables</span><span class="week-output" data-i18n="w07.output">mini teaching-study design</span></div>
+        <div class="week-row"><span class="week-code">Week 08</span><span class="week-title" data-i18n="w08.title">Phân tích lỗi người học</span><span class="week-skill" data-i18n="w08.skill">frequency tables, cross-tabulation</span><span class="week-output" data-i18n="w08.output">learner error report</span></div>
+        <div class="week-row"><span class="week-code">Week 09</span><span class="week-title" data-i18n="w09.title">Dữ liệu đối chiếu Hán-Việt</span><span class="week-skill" data-i18n="w09.skill">string matching, regex, coding categories</span><span class="week-output" data-i18n="w09.output">contrastive analysis table</span></div>
+        <div class="week-row"><span class="week-code">Week 10</span><span class="week-title" data-i18n="w10.title">Chuyển kết quả đối chiếu thành sư phạm</span><span class="week-skill" data-i18n="w10.skill">grouping, ranking, visualization</span><span class="week-output" data-i18n="w10.output">lesson adaptation memo</span></div>
+        <div class="week-row"><span class="week-code">Week 11</span><span class="week-title" data-i18n="w11.title">Đánh giá dịch máy</span><span class="week-skill" data-i18n="w11.skill">source/MT/reference tables, BLEU, chrF, TER</span><span class="week-output" data-i18n="w11.output">MT evaluation table</span></div>
+        <div class="week-row"><span class="week-code">Week 12</span><span class="week-title" data-i18n="w12.title">Quy trình MTPE</span><span class="week-skill" data-i18n="w12.skill">edit distance, time logs, error annotation</span><span class="week-output" data-i18n="w12.output">MTPE analysis memo</span></div>
+        <div class="week-row"><span class="week-code">Week 13</span><span class="week-title" data-i18n="w13.title">Dữ liệu chính sách giáo dục</span><span class="week-skill" data-i18n="w13.skill">metadata, timeline, coding scheme</span><span class="week-output" data-i18n="w13.output">policy coding table</span></div>
+        <div class="week-row"><span class="week-code">Week 14</span><span class="week-title" data-i18n="w14.title">Reproducible paper package</span><span class="week-skill" data-i18n="w14.skill">clean notebook, README, Zotero/Quarto</span><span class="week-output" data-i18n="w14.output">mini paper + notebook</span></div>
+      </div>
+    </section>
+
+    <section class="section" id="resources">
+      <div class="section-head">
+        <div>
+          <span class="eyebrow" data-i18n="resources.tag">Weekly design</span>
+          <h2 data-i18n="resources.title">Mỗi tuần đều có cùng một cấu trúc để người học không bị lạc</h2>
+        </div>
+        <p data-i18n="resources.body">Thiết kế lặp lại giúp người mới tập trung vào khái niệm mới, không phải đoán tuần này cần mở file nào hay nộp gì.</p>
+      </div>
+      <div class="rhythm-grid">
+        <article class="rhythm-item"><strong data-i18n="rhythm.pre.title">Pre-class</strong><p data-i18n="rhythm.pre.body">Đọc note ngắn, xem dataset, trả lời warm-up.</p></article>
+        <article class="rhythm-item"><strong data-i18n="rhythm.lecture.title">Lecture</strong><p data-i18n="rhythm.lecture.body">Khái niệm, use case nghiên cứu, lỗi thường gặp.</p></article>
+        <article class="rhythm-item"><strong data-i18n="rhythm.coding.title">Live coding</strong><p data-i18n="rhythm.coding.body">Giảng viên chạy notebook và giải thích output.</p></article>
+        <article class="rhythm-item"><strong data-i18n="rhythm.practice.title">Guided practice</strong><p data-i18n="rhythm.practice.body">Người học sửa code mẫu và đọc kết quả.</p></article>
+        <article class="rhythm-item"><strong data-i18n="rhythm.debrief.title">Debrief</strong><p data-i18n="rhythm.debrief.body">Nói về bug, figure choice và diễn giải nghiên cứu.</p></article>
+        <article class="rhythm-item"><strong data-i18n="rhythm.homework.title">Homework</strong><p data-i18n="rhythm.homework.body">Notebook, bảng/hình, caption, memo và nguồn.</p></article>
+      </div>
+    </section>
+
+    <p class="footnote" data-i18n="footer.note">Lưu ý: không đưa dữ liệu định danh người học lên repository công khai. Website mặc định tiếng Việt và có lựa chọn English cho nội dung learner-facing.</p>
   </main>
+
   <script src="assets/js/bilingual.js"></script>
   <script>
     const HOME_I18N = {
       vi: {
         "meta.title": "Python cho nghiên cứu TCSOL",
+        "brand.aria": "Về đầu trang",
+        "brand.name": "Python Research Hub",
+        "nav.quick": "Điều hướng nhanh",
+        "nav.overview": "Overview",
+        "nav.week1": "Tuần 01",
+        "nav.syllabus": "Syllabus",
+        "nav.resources": "Tài nguyên",
         "nav.language": "Ngôn ngữ / Language",
-        "hero.tag": "Khóa học nghiên cứu",
-        "hero.title": "Python cho TCSOL, đối chiếu Hán-Việt, MTPE và chính sách giáo dục",
-        "hero.body": "Một lộ trình beginner-first giúp người học dùng Python để thiết kế dữ liệu, phân tích, trực quan hóa, và viết paper.",
-        "action.slides": "Mở slide Tuần 01",
-        "action.demo": "Mở demo tương tác",
-        "workflow.aria": "Quy trình nghiên cứu",
-        "step.question": "Câu hỏi",
-        "step.question.body": "Chuyển chủ đề rộng thành câu hỏi nhỏ.",
-        "step.data": "Dữ liệu",
-        "step.data.body": "Nói rõ dòng, cột, nguồn, và đơn vị quan sát.",
-        "step.output": "Output",
-        "step.output.body": "Tạo bảng/hình có thể dùng trong paper.",
-        "step.paper": "Paper",
-        "step.paper.body": "Viết caption, diễn giải, và giới hạn.",
-        "section.week1": "Tuần đang có",
-        "week1.title": "Python như một quy trình nghiên cứu",
-        "week1.body": "Chạy notebook, xem CSV nhỏ, chọn một hướng nghiên cứu, và viết memo ngắn.",
-        "slides.title": "Song ngữ và trực quan",
-        "slides.body": "Slide mặc định tiếng Việt, có English toggle, visual cards, workflow map và caption mockup.",
-        "demo.title": "Research Track Explorer",
-        "demo.body": "Chọn TCSOL, đối chiếu Hán-Việt, MTPE hoặc chính sách giáo dục để xem câu hỏi và dữ liệu gợi ý."
+        "hero.tag": "Khóa học Python cho nghiên cứu",
+        "hero.title": "Từ câu hỏi nghiên cứu đến bảng, hình và paper",
+        "hero.body": "Lộ trình 14 tuần cho người mới bắt đầu lập trình, tập trung vào TCSOL, đối chiếu Hán-Việt, MT/MTPE và chính sách giáo dục.",
+        "action.start": "Bắt đầu với slide Tuần 01",
+        "action.syllabus": "Xem syllabus 14 tuần",
+        "action.week1": "Mở gói Tuần 01",
+        "metrics.aria": "Tóm tắt khóa học",
+        "metric.weeks": "tuần từ cơ bản đến paper package",
+        "metric.tracks": "hướng nghiên cứu ứng dụng",
+        "metric.loop": "vòng lặp nghiên cứu lặp lại mỗi tuần",
+        "board.aria": "Minh họa quy trình nghiên cứu",
+        "board.chip1": "Research question",
+        "board.chip2": "Small data",
+        "board.chip3": "Paper evidence",
+        "loop.question": "Câu hỏi nhỏ",
+        "loop.question.body": "Từ chủ đề rộng đến câu hỏi có thể đo.",
+        "loop.data": "Dữ liệu có cấu trúc",
+        "loop.data.body": "CSV/Excel với dòng, cột, nguồn rõ ràng.",
+        "loop.python": "Python vừa đủ",
+        "loop.python.body": "Một kỹ năng mới phục vụ một nhiệm vụ nghiên cứu.",
+        "loop.output": "Bảng hoặc hình",
+        "loop.output.body": "Output có caption và diễn giải.",
+        "loop.paper": "Đưa vào paper",
+        "loop.paper.body": "Methods, Results, limitation, nguồn trích dẫn.",
+        "mini.aria": "Ví dụ output",
+        "mini.tcsol": "TCSOL",
+        "mini.mtpe": "MTPE",
+        "mini.policy": "Policy",
+        "overview.tag": "Overview",
+        "overview.title": "Khóa học này dạy Python như một công cụ viết nghiên cứu",
+        "overview.body": "Người học không cần nền tảng lập trình. Mỗi tuần học một kỹ năng Python nhỏ, gắn trực tiếp với một sản phẩm nghiên cứu có thể dùng trong bài viết.",
+        "info.for.title": "Dành cho ai?",
+        "info.for.body": "Học viên cao học/chuẩn bị cao học ngành Applied Linguistics, TCSOL, dịch thuật hoặc chính sách giáo dục.",
+        "info.not.title": "Không phải khóa NLP",
+        "info.not.body": "Không đi theo hướng kỹ sư NLP. Python được dùng để tổ chức dữ liệu, phân tích bằng chứng, trực quan hóa và viết kết quả.",
+        "info.outcome.title": "Sau khóa học",
+        "info.outcome.body": "Người học có thể tạo dataset sạch, chạy notebook, xuất bảng/hình, viết caption và đoạn Results có giới hạn rõ ràng.",
+        "info.tools.title": "Công cụ chính",
+        "info.tools.body": "JupyterLab, pandas, matplotlib/seaborn, Excel/CSV, Zotero, Markdown, GitHub Pages và Quarto khi cần báo cáo tái lập.",
+        "week1.tag": "Tuần đang có",
+        "week1.title": "Tuần 01: Python như một quy trình nghiên cứu",
+        "week1.body": "Mục tiêu tuần đầu là nhẹ nhưng rõ: chạy notebook, xem CSV nhỏ, chọn một hướng nghiên cứu, rồi viết caption và memo ngắn.",
+        "week1.learn.title": "Học trên lớp",
+        "week1.learn.body": "Slide song ngữ, demo tương tác và lecture notes giúp người học hiểu workflow trước khi đụng vào nhiều code.",
+        "week1.practice.title": "Thực hành",
+        "week1.practice.body": "Notebook và bài tập tập trung vào sửa biến text an toàn, đọc output và nối câu hỏi nghiên cứu với dữ liệu.",
+        "week1.submit.title": "Sản phẩm nộp",
+        "week1.submit.body": "Một notebook chạy được, một bảng nhỏ, một caption và một memo 100-150 từ giải thích ý nghĩa nghiên cứu.",
+        "link.slides": "Slides",
+        "link.demo": "Demo",
+        "link.notes": "Notes",
+        "link.notebook": "Notebook",
+        "link.exercises": "Exercises",
+        "link.data": "CSV",
+        "link.assignment": "Assignment",
+        "link.rubric": "Rubric",
+        "link.readings": "Readings",
+        "tracks.tag": "Research tracks",
+        "tracks.title": "Bốn hướng nghiên cứu luôn được nối với ví dụ thực hành",
+        "tracks.body": "Các bài tập không chung chung: cùng một kỹ năng Python sẽ được đặt vào bối cảnh giảng dạy Hán ngữ, đối chiếu Hán-Việt, MTPE hoặc chính sách giáo dục.",
+        "track.tcsol.title": "TCSOL ngắn hạn",
+        "track.tcsol.body": "Theo dõi tiến bộ người học, bài kiểm tra trước/sau, lỗi thường gặp và tác động của hoạt động lớp học.",
+        "track.tcsol.item1": "pre/post table",
+        "track.tcsol.item2": "learner progress figure",
+        "track.contrast.title": "Đối chiếu Hán-Việt",
+        "track.contrast.body": "Xây dataset ví dụ song ngữ, phân loại hiện tượng, lỗi chuyển di và ghi chú ứng dụng sư phạm.",
+        "track.contrast.item1": "contrastive example table",
+        "track.contrast.item2": "teaching priority chart",
+        "track.mtpe.title": "MT và MTPE",
+        "track.mtpe.body": "Đánh giá bản dịch máy, nhãn lỗi, hậu hiệu đính, thời gian chỉnh sửa và metric hỗ trợ.",
+        "track.mtpe.item1": "error frequency table",
+        "track.mtpe.item2": "MTPE effort summary",
+        "track.policy.title": "Chính sách giáo dục",
+        "track.policy.body": "Tổ chức văn bản chính sách, metadata, coding scheme, timeline và chủ đề nổi bật.",
+        "track.policy.item1": "policy coding table",
+        "track.policy.item2": "timeline or theme figure",
+        "syllabus.tag": "Syllabus",
+        "syllabus.title": "Lộ trình 14 tuần từ beginner đến mini paper package",
+        "syllabus.body": "Tuần 1-4 xây nền dữ liệu và notebook; tuần 5-8 học phân tích, hình, thống kê nhẹ; tuần 9-14 đi vào track nghiên cứu và đóng gói paper.",
+        "syllabus.aria": "Syllabus 14 tuần",
+        "w01.title": "Python như một quy trình nghiên cứu",
+        "w01.skill": "Jupyter, cells, variables, Markdown",
+        "w01.output": "1-page research idea",
+        "w02.title": "Dữ liệu nghiên cứu dưới dạng bảng",
+        "w02.skill": "lists, dictionaries, CSV/Excel",
+        "w02.output": "dataset template",
+        "w03.title": "pandas cơ bản",
+        "w03.skill": "DataFrame, select, filter, groupby",
+        "w03.output": "descriptive table",
+        "w04.title": "Làm sạch dữ liệu",
+        "w04.skill": "missing values, type conversion, labels",
+        "w04.output": "cleaned dataset",
+        "w05.title": "Visualization cho paper",
+        "w05.skill": "matplotlib, seaborn",
+        "w05.output": "2 draft figures",
+        "w06.title": "Thống kê nhập môn",
+        "w06.skill": "mean, SD, CI, t-test, correlation",
+        "w06.output": "short Results paragraph",
+        "w07.title": "Nghiên cứu TCSOL ngắn hạn",
+        "w07.skill": "rubric, classroom variables",
+        "w07.output": "mini teaching-study design",
+        "w08.title": "Phân tích lỗi người học",
+        "w08.skill": "frequency tables, cross-tabulation",
+        "w08.output": "learner error report",
+        "w09.title": "Dữ liệu đối chiếu Hán-Việt",
+        "w09.skill": "string matching, regex, coding categories",
+        "w09.output": "contrastive analysis table",
+        "w10.title": "Chuyển kết quả đối chiếu thành sư phạm",
+        "w10.skill": "grouping, ranking, visualization",
+        "w10.output": "lesson adaptation memo",
+        "w11.title": "Đánh giá dịch máy",
+        "w11.skill": "source/MT/reference tables, BLEU, chrF, TER",
+        "w11.output": "MT evaluation table",
+        "w12.title": "Quy trình MTPE",
+        "w12.skill": "edit distance, time logs, error annotation",
+        "w12.output": "MTPE analysis memo",
+        "w13.title": "Dữ liệu chính sách giáo dục",
+        "w13.skill": "metadata, timeline, coding scheme",
+        "w13.output": "policy coding table",
+        "w14.title": "Reproducible paper package",
+        "w14.skill": "clean notebook, README, Zotero/Quarto",
+        "w14.output": "mini paper + notebook",
+        "resources.tag": "Weekly design",
+        "resources.title": "Mỗi tuần đều có cùng một cấu trúc để người học không bị lạc",
+        "resources.body": "Thiết kế lặp lại giúp người mới tập trung vào khái niệm mới, không phải đoán tuần này cần mở file nào hay nộp gì.",
+        "rhythm.pre.title": "Pre-class",
+        "rhythm.pre.body": "Đọc note ngắn, xem dataset, trả lời warm-up.",
+        "rhythm.lecture.title": "Lecture",
+        "rhythm.lecture.body": "Khái niệm, use case nghiên cứu, lỗi thường gặp.",
+        "rhythm.coding.title": "Live coding",
+        "rhythm.coding.body": "Giảng viên chạy notebook và giải thích output.",
+        "rhythm.practice.title": "Guided practice",
+        "rhythm.practice.body": "Người học sửa code mẫu và đọc kết quả.",
+        "rhythm.debrief.title": "Debrief",
+        "rhythm.debrief.body": "Nói về bug, figure choice và diễn giải nghiên cứu.",
+        "rhythm.homework.title": "Homework",
+        "rhythm.homework.body": "Notebook, bảng/hình, caption, memo và nguồn.",
+        "footer.note": "Lưu ý: không đưa dữ liệu định danh người học lên repository công khai. Website mặc định tiếng Việt và có lựa chọn English cho nội dung learner-facing."
       },
       en: {
         "meta.title": "Python for TCSOL Research",
+        "brand.aria": "Back to top",
+        "brand.name": "Python Research Hub",
+        "nav.quick": "Quick navigation",
+        "nav.overview": "Overview",
+        "nav.week1": "Week 01",
+        "nav.syllabus": "Syllabus",
+        "nav.resources": "Resources",
         "nav.language": "Language",
-        "hero.tag": "Research Course",
-        "hero.title": "Python for TCSOL, Chinese-Vietnamese contrastive research, MTPE, and education policy",
-        "hero.body": "A beginner-first path for using Python to design data, analyze, visualize, and write research papers.",
-        "action.slides": "Open Week 01 slides",
-        "action.demo": "Open interactive demo",
-        "workflow.aria": "Research workflow",
-        "step.question": "Question",
-        "step.question.body": "Turn a broad topic into a small question.",
-        "step.data": "Data",
-        "step.data.body": "Define rows, columns, source, and unit of observation.",
-        "step.output": "Output",
-        "step.output.body": "Create a table or figure for a paper.",
-        "step.paper": "Paper",
-        "step.paper.body": "Write a caption, interpretation, and limitation.",
-        "section.week1": "Available Week",
-        "week1.title": "Python as a Research Workflow",
-        "week1.body": "Run a notebook, inspect a small CSV, choose a research track, and write a short memo.",
-        "slides.title": "Bilingual and visual",
-        "slides.body": "Slides default to Vietnamese, include an English toggle, visual cards, a workflow map, and a caption mockup.",
-        "demo.title": "Research Track Explorer",
-        "demo.body": "Choose TCSOL, Chinese-Vietnamese contrastive analysis, MTPE, or education policy to inspect suggested questions and data."
+        "hero.tag": "Python course for research",
+        "hero.title": "From research question to tables, figures, and paper",
+        "hero.body": "A 14-week path for a programming beginner, focused on TCSOL, Chinese-Vietnamese contrastive research, MT/MTPE, and education policy.",
+        "action.start": "Start with Week 01 slides",
+        "action.syllabus": "View the 14-week syllabus",
+        "action.week1": "Open Week 01 package",
+        "metrics.aria": "Course summary",
+        "metric.weeks": "weeks from basics to a paper package",
+        "metric.tracks": "applied research tracks",
+        "metric.loop": "research loop repeated every week",
+        "board.aria": "Research workflow illustration",
+        "board.chip1": "Research question",
+        "board.chip2": "Small data",
+        "board.chip3": "Paper evidence",
+        "loop.question": "Small question",
+        "loop.question.body": "From a broad topic to something measurable.",
+        "loop.data": "Structured data",
+        "loop.data.body": "CSV/Excel with clear rows, columns, and source.",
+        "loop.python": "Enough Python",
+        "loop.python.body": "One new skill for one research task.",
+        "loop.output": "Table or figure",
+        "loop.output.body": "Output with caption and interpretation.",
+        "loop.paper": "Move into the paper",
+        "loop.paper.body": "Methods, Results, limitation, and cited sources.",
+        "mini.aria": "Example output",
+        "mini.tcsol": "TCSOL",
+        "mini.mtpe": "MTPE",
+        "mini.policy": "Policy",
+        "overview.tag": "Overview",
+        "overview.title": "This course teaches Python as a research-writing instrument",
+        "overview.body": "The learner does not need a programming background. Each week introduces one small Python skill tied directly to a research product that can be used in writing.",
+        "info.for.title": "Who is it for?",
+        "info.for.body": "Graduate or pre-graduate learners in Applied Linguistics, TCSOL, translation studies, or education policy.",
+        "info.not.title": "Not an NLP course",
+        "info.not.body": "This is not an NLP engineering track. Python is used to organize data, analyze evidence, visualize results, and write findings.",
+        "info.outcome.title": "After the course",
+        "info.outcome.body": "The learner can build clean datasets, run notebooks, export tables/figures, write captions, and draft bounded Results paragraphs.",
+        "info.tools.title": "Core tools",
+        "info.tools.body": "JupyterLab, pandas, matplotlib/seaborn, Excel/CSV, Zotero, Markdown, GitHub Pages, and Quarto for reproducible reports when needed.",
+        "week1.tag": "Available now",
+        "week1.title": "Week 01: Python as a research workflow",
+        "week1.body": "The first week is light but concrete: run a notebook, inspect a small CSV, choose a research direction, then write a caption and short memo.",
+        "week1.learn.title": "In class",
+        "week1.learn.body": "Bilingual slides, an interactive demo, and lecture notes help the learner understand the workflow before handling much code.",
+        "week1.practice.title": "Practice",
+        "week1.practice.body": "The notebook and exercises focus on safely editing text variables, reading output, and connecting a research question to data.",
+        "week1.submit.title": "Submission",
+        "week1.submit.body": "A runnable notebook, one small table, one caption, and one 100-150 word memo explaining the research meaning.",
+        "link.slides": "Slides",
+        "link.demo": "Demo",
+        "link.notes": "Notes",
+        "link.notebook": "Notebook",
+        "link.exercises": "Exercises",
+        "link.data": "CSV",
+        "link.assignment": "Assignment",
+        "link.rubric": "Rubric",
+        "link.readings": "Readings",
+        "tracks.tag": "Research tracks",
+        "tracks.title": "Four research directions are always tied to practice examples",
+        "tracks.body": "The tasks are not generic. The same Python skill is placed in the context of Chinese teaching, Chinese-Vietnamese contrastive work, MTPE, or education policy.",
+        "track.tcsol.title": "Short-term TCSOL",
+        "track.tcsol.body": "Track learner progress, pre/post tests, common errors, and the effect of classroom activities.",
+        "track.tcsol.item1": "pre/post table",
+        "track.tcsol.item2": "learner progress figure",
+        "track.contrast.title": "Chinese-Vietnamese contrast",
+        "track.contrast.body": "Build bilingual example datasets, classify phenomena, transfer errors, and pedagogical notes.",
+        "track.contrast.item1": "contrastive example table",
+        "track.contrast.item2": "teaching priority chart",
+        "track.mtpe.title": "MT and MTPE",
+        "track.mtpe.body": "Evaluate machine translation, error labels, post-editing, editing time, and supporting metrics.",
+        "track.mtpe.item1": "error frequency table",
+        "track.mtpe.item2": "MTPE effort summary",
+        "track.policy.title": "Education policy",
+        "track.policy.body": "Organize policy texts, metadata, coding schemes, timelines, and key themes.",
+        "track.policy.item1": "policy coding table",
+        "track.policy.item2": "timeline or theme figure",
+        "syllabus.tag": "Syllabus",
+        "syllabus.title": "A 14-week path from beginner to mini paper package",
+        "syllabus.body": "Weeks 1-4 build data and notebook foundations; Weeks 5-8 introduce analysis, figures, and light statistics; Weeks 9-14 focus on research tracks and paper packaging.",
+        "syllabus.aria": "14-week syllabus",
+        "w01.title": "Python as a research workflow",
+        "w01.skill": "Jupyter, cells, variables, Markdown",
+        "w01.output": "1-page research idea",
+        "w02.title": "Research data as tables",
+        "w02.skill": "lists, dictionaries, CSV/Excel",
+        "w02.output": "dataset template",
+        "w03.title": "pandas basics",
+        "w03.skill": "DataFrame, select, filter, groupby",
+        "w03.output": "descriptive table",
+        "w04.title": "Cleaning data",
+        "w04.skill": "missing values, type conversion, labels",
+        "w04.output": "cleaned dataset",
+        "w05.title": "Visualization for papers",
+        "w05.skill": "matplotlib, seaborn",
+        "w05.output": "2 draft figures",
+        "w06.title": "Intro statistics",
+        "w06.skill": "mean, SD, CI, t-test, correlation",
+        "w06.output": "short Results paragraph",
+        "w07.title": "Short-term TCSOL research",
+        "w07.skill": "rubric, classroom variables",
+        "w07.output": "mini teaching-study design",
+        "w08.title": "Learner error analysis",
+        "w08.skill": "frequency tables, cross-tabulation",
+        "w08.output": "learner error report",
+        "w09.title": "Chinese-Vietnamese contrastive data",
+        "w09.skill": "string matching, regex, coding categories",
+        "w09.output": "contrastive analysis table",
+        "w10.title": "Pedagogical adaptation",
+        "w10.skill": "grouping, ranking, visualization",
+        "w10.output": "lesson adaptation memo",
+        "w11.title": "Machine translation evaluation",
+        "w11.skill": "source/MT/reference tables, BLEU, chrF, TER",
+        "w11.output": "MT evaluation table",
+        "w12.title": "MTPE workflow",
+        "w12.skill": "edit distance, time logs, error annotation",
+        "w12.output": "MTPE analysis memo",
+        "w13.title": "Education policy data",
+        "w13.skill": "metadata, timeline, coding scheme",
+        "w13.output": "policy coding table",
+        "w14.title": "Reproducible paper package",
+        "w14.skill": "clean notebook, README, Zotero/Quarto",
+        "w14.output": "mini paper + notebook",
+        "resources.tag": "Weekly design",
+        "resources.title": "Every week uses the same structure so the learner does not get lost",
+        "resources.body": "The repeated design lets a beginner focus on the new concept instead of guessing which file to open or what to submit.",
+        "rhythm.pre.title": "Pre-class",
+        "rhythm.pre.body": "Read short notes, inspect the dataset, answer warm-up questions.",
+        "rhythm.lecture.title": "Lecture",
+        "rhythm.lecture.body": "Concept, research use case, and common mistakes.",
+        "rhythm.coding.title": "Live coding",
+        "rhythm.coding.body": "The instructor runs the notebook and explains output.",
+        "rhythm.practice.title": "Guided practice",
+        "rhythm.practice.body": "The learner edits starter code and reads results.",
+        "rhythm.debrief.title": "Debrief",
+        "rhythm.debrief.body": "Discuss bugs, figure choice, and research interpretation.",
+        "rhythm.homework.title": "Homework",
+        "rhythm.homework.body": "Notebook, table/figure, caption, memo, and sources.",
+        "footer.note": "Note: do not publish identifiable learner data in a public repository. The website defaults to Vietnamese and provides English for learner-facing content."
       }
     };
     window.Bilingual.init({ translations: HOME_I18N, defaultLang: "vi" });

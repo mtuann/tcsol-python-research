@@ -15,7 +15,7 @@
 ## Writing Support
 
 - Paper section supported: Methods / Data preparation.
-- Writing output: one cleaning decision note plus one before/after cleaning table.
+- Writing output: one cleaning decision note, one before/after cleaning table, one table caption, and one interpretation paragraph.
 - Tool support: write the cleaning note in the notebook, then paste it into Word. Zotero source notes continue; Overleaf is not needed.
 - Sentence frame: "Before analysis, we standardized [labels], converted [columns] to numeric values, and treated [missing value rule] as missing. These decisions changed [before/after pattern] and were recorded in a cleaning log."
 - Common writing risk: hiding cleaning decisions or presenting a cleaned dataset as if it were the original raw data.
@@ -38,7 +38,9 @@ By the end of this week, the learner can:
 - [ ] Cleaned dataset is exported to `data/processed/week04_cleaned_tcsol_scores.csv`.
 - [ ] Cleaning log is exported to `outputs/tables/week04_cleaning_log.csv`.
 - [ ] Before/after issue table is exported to `outputs/tables/week04_cleaning_summary.csv`.
-- [ ] Cleaning note explains label normalization, numeric conversion, missing values, and limitations.
+- [ ] Usable rows by activity are exported to `outputs/tables/week04_usable_by_activity.csv`.
+- [ ] Table caption and interpretation explain the before/after table without overclaiming.
+- [ ] Cleaning note explains label normalization, numeric conversion, missing values, exported artifacts, and limitations.
 - [ ] Sources are cited with links and access date.
 
 ## Files
@@ -61,7 +63,7 @@ By the end of this week, the learner can:
 | Lecture | 45 min | Explain raw vs cleaned data, missing values, label normalization, and cleaning logs. |
 | Live coding | 45 min | Clean the TCSOL dataset and export cleaned files. |
 | Guided practice | 35 min | Learner changes one mapping rule and checks the before/after table. |
-| Writing bridge | 20 min | Draft a Methods-style cleaning decision note. |
+| Writing bridge | 20 min | Draft a Methods-style cleaning decision note plus a table caption. |
 | Homework | 90 min | Submit notebook, cleaned CSV, cleaning log, before/after table, and note. |
 
 ## Core vs Stretch
@@ -73,7 +75,7 @@ Core:
 - convert `pre_score`, `post_score`, `attendance_hours`, and `self_confidence`;
 - create `gain_score`;
 - export cleaned data and cleaning log;
-- write one cleaning decision note.
+- write one cleaning decision note and one caption/interpretation.
 
 Stretch:
 

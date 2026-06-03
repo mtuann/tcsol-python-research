@@ -14,10 +14,10 @@ activity_map = {
 }
 ```
 
-Add one new variant:
+Temporarily remove this existing rule:
 
 ```python
-"measure word": "measure_words"
+"vocab review": "vocabulary_review"
 ```
 
 Run the notebook again.
@@ -25,6 +25,12 @@ Run the notebook again.
 Answer:
 
 - Did the number of unmapped activity labels change?
+- Which raw labels became unmapped?
+
+Then add the rule back and rerun. Expected result: unmapped labels return to `[]`.
+
+Finally answer:
+
 - Why is it safer to change the mapping rule than to edit the CSV by hand?
 
 ## Core Exercise B: Guided Problem
@@ -42,6 +48,7 @@ Checklist:
 7. Create `gain_score`.
 8. Export cleaned data.
 9. Export a cleaning log.
+10. Export a usable-rows-by-activity table.
 
 Write one sentence:
 
@@ -58,6 +65,7 @@ Your note must include:
 - which numeric columns were converted;
 - what happened to invalid or missing values;
 - how many rows are usable for a pre/post summary;
+- which exported table supports that number;
 - one limitation.
 
 Do not say the data became perfect.
@@ -71,6 +79,14 @@ Answer:
 - How many raw label variants appeared before cleaning?
 - How many standard labels remain after cleaning?
 - What would happen to a Week 03 `groupby` table if these labels were not cleaned?
+
+## Paper Table Caption
+
+Write a caption for the before/after table.
+
+Frame:
+
+> Table 1. Before/after cleaning checks for the synthetic Week 04 TCSOL dataset (N = 36 raw records). The table reports label variants and usable pre/post rows after applying the notebook cleaning rules.
 
 ## Reflection
 

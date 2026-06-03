@@ -3,4 +3,34 @@ title: "Week 04: Data cleaning log"
 format: html
 ---
 
-Source placeholder. The public learner deck is maintained in `slides.html` so it can use the shared interactive slide runtime and bilingual controls.
+This source file records the slide design contract for the public deck in
+`slides.html`. The HTML file is maintained directly because it uses the shared
+bilingual slide runtime, slide overview modal, page-number jump control, and
+final CTA links for GitHub Pages.
+
+## Slide Sequence
+
+1. Hero: messy CSV to cleaned dataset, N/source metadata.
+2. Week 03 bridge: descriptive tables depend on clean input.
+3. Research question: after cleaning, which records are usable?
+4. Raw vs cleaned data: never hand-edit raw CSV.
+5. Diagnose before cleaning: missing count, data types, labels.
+6. Missing is not zero.
+7. Normalize labels with mapping.
+8. Convert numeric columns safely.
+9. Standardize completed/inclusion rule.
+10. Create `gain_score` and `usable_pre_post`.
+11. Cleaning log as Methods table.
+12. Before/after summary with caption and interpretation frame.
+13. Methods note: artifact, reported N, limitation.
+14. Assignment checklist: raw unchanged, generated outputs, source note.
+15. Final CTA: demo, notebook, Week 04 overview, home.
+
+## Required Learner Artifacts Shown in Deck
+
+- `data/processed/week04_cleaned_tcsol_scores.csv`
+- `outputs/tables/week04_cleaning_log.csv`
+- `outputs/tables/week04_cleaning_summary.csv`
+- `outputs/tables/week04_usable_by_activity.csv`
+- caption + interpretation paragraph
+- source/access note

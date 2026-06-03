@@ -6,8 +6,8 @@ Total: 100 points
 |---|---:|---|
 | Code correctness | 25 | Notebook runs top to bottom; raw CSV loads; label normalization, numeric conversion, gain score, and exports all work. |
 | Data cleaning decisions | 20 | Cleaning rules are explicit; raw data is preserved; missing values are treated cautiously. |
-| Cleaning log quality | 15 | Log includes step, column, problem, decision, and reason. |
-| Before/after table | 15 | Table clearly shows issue counts or label counts before and after cleaning. |
+| Cleaning log quality | 15 | Log includes step, column, problem, decision, reason, and evidence. |
+| Before/after table | 15 | Table clearly shows issue counts before and after cleaning, includes caption/interpretation, and matches expected checks. |
 | Research writing | 15 | Cleaning note explains method, N, and limitation without claiming the data are perfect. |
 | Reproducibility | 10 | Paths are stable; outputs are produced by code; source/access date are recorded. |
 
@@ -18,6 +18,7 @@ Total: 100 points
 - -10 if label mappings are hidden or undocumented.
 - -10 if cleaned CSV or cleaning log is not exported.
 - -5 if the cleaning note omits a limitation.
+- -5 if the source note or access date is missing.
 
 ## Track-Specific Bonus Awareness
 

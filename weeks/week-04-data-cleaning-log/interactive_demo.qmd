@@ -3,4 +3,29 @@ title: "Week 04 Interactive Demo"
 format: html
 ---
 
-Source placeholder. The public learner demo is maintained in `interactive_demo.html` for GitHub Pages.
+This source file records the interaction design for `interactive_demo.html`.
+The public demo is maintained directly in HTML/CSS/JS so it can run as a static
+GitHub Pages page with bilingual controls and no build step.
+
+## Interaction Model
+
+Controls:
+
+- normalize labels;
+- normalize completed status;
+- convert numeric columns.
+
+Outputs:
+
+- activity labels: `18 -> 4` when label normalization is on;
+- class labels: `12 -> 4` when label normalization is on;
+- completed labels: `4 -> 2` when completed normalization is on;
+- usable rows: `19 -> 25` only when numeric conversion and completed normalization are on;
+- paper-facing Methods note and state-specific feedback.
+
+## Accessibility/Fallback
+
+- Default language is Vietnamese.
+- A `<noscript>` summary gives the complete before/after result.
+- Only the changed feedback/note region uses `aria-live`, not the whole output panel.
+- The workflow note is explicitly labeled as a learning note, not full copy/paste code.

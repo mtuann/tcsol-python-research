@@ -206,8 +206,11 @@
   <main>
     <header>
       <span class="tag" data-i18n="page.tag">Demo tương tác</span>
-      <h1 data-i18n="page.title">Cleaning Workflow Simulator</h1>
+      <h1 data-i18n="page.title">Mô phỏng workflow làm sạch dữ liệu</h1>
       <p class="lead" data-i18n="page.intro">Bật từng bước cleaning để thấy issue count giảm, usable rows tăng và Methods note thay đổi.</p>
+      <noscript>
+        <p class="lead">Không có JavaScript: workflow đầy đủ giảm nhãn hoạt động từ 18 xuống 4, nhãn lớp từ 12 xuống 4, nhãn completed từ 4 xuống 2, và tăng số dòng pre/post dùng được từ 19 lên 25.</p>
+      </noscript>
     </header>
 
     <section class="demo-layout" aria-label="Cleaning workflow simulator" data-i18n-aria-label="demo.aria">
@@ -228,12 +231,14 @@
             <span><strong data-i18n="step.numeric.title">Chuyển cột số</strong><span data-i18n="step.numeric.body">Invalid score thành missing, không thành 0.</span></span>
           </label>
         </div>
+        <h3 style="margin-top:1rem" data-i18n="workflow.title">Ghi chú workflow, không phải code copy/paste đầy đủ</h3>
         <pre class="code-card" id="code-pattern"></pre>
       </aside>
 
-      <section class="panel" aria-live="polite">
+      <section class="panel">
         <span class="tag" data-i18n="summary.tag">Trước/sau</span>
         <h2 data-i18n="summary.title">Chất lượng dữ liệu</h2>
+        <p id="feedback-note" aria-live="polite"></p>
         <div class="metric-grid">
           <div class="metric"><span data-i18n="metric.activity">Nhãn hoạt động</span><strong id="activity-count">4</strong></div>
           <div class="metric"><span data-i18n="metric.class">Nhãn lớp</span><strong id="class-count">4</strong></div>
@@ -247,7 +252,7 @@
           </table>
         </div>
         <h2 style="margin-top:1rem" data-i18n="note.title">Methods note draft</h2>
-        <div class="note-card" id="method-note"></div>
+        <div class="note-card" id="method-note" aria-live="polite"></div>
         <div class="copy-row">
           <button class="copy-button primary" type="button" id="copy-note" data-i18n="copy.note">Sao chép note</button>
           <span class="copy-status" id="copy-status" aria-live="polite"></span>
@@ -293,8 +298,13 @@
         "copy.note": "Sao chép note",
         "copy.ok": "Đã copy note.",
         "copy.fail": "Không copy được tự động; hãy chọn và copy note.",
-        "note.full": "Before analysis, the raw CSV was preserved and a cleaned copy was created in pandas. Labels were standardized, completed-status variants were mapped, and numeric columns were converted with invalid values treated as missing. After cleaning, 25 records had completed status and numeric pre/post scores. The main limitation is that cleaning improves consistency but does not recover unknown scores or create causal evidence.",
-        "note.partial": "This dataset still needs cleaning decisions before analysis. Some labels or numeric fields remain inconsistent, so the current table should be treated as diagnostic rather than paper-ready.",
+        "workflow.title": "Ghi chú workflow, không phải code copy/paste đầy đủ",
+        "note.full": "Nháp tiếng Anh cho paper: Before analysis, the raw CSV was preserved and a cleaned copy was created in pandas. Labels were standardized, completed-status variants were mapped, and numeric columns were converted with invalid values treated as missing. After cleaning, 25 records had completed status and numeric pre/post scores. The main limitation is that cleaning improves consistency but does not recover unknown scores or create causal evidence.",
+        "note.partial": "Bảng hiện tại vẫn là diagnostic, chưa paper-ready: còn ít nhất một quyết định cleaning chưa được áp dụng nên Methods note chưa đủ minh bạch.",
+        "feedback.ready": "Đủ ba bước: bảng có thể dùng để viết caption và Methods note.",
+        "feedback.labels": "Cần bật chuẩn hóa nhãn: nếu không, groupby sẽ đếm nhiều nhóm giả.",
+        "feedback.completed": "Cần bật chuẩn hóa completed: nếu không, usable rows vẫn bị đếm thiếu.",
+        "feedback.numeric": "Cần bật chuyển cột số: nếu không, không nên tính gain_score.",
         "notes.labels": "chuẩn hóa nhãn",
         "notes.class": "chuẩn hóa section lớp",
         "notes.completed": "map biến thể yes/no",
@@ -338,8 +348,13 @@
         "copy.note": "Copy note",
         "copy.ok": "Note copied.",
         "copy.fail": "Automatic copy failed; select and copy the note.",
+        "workflow.title": "Workflow note, not full copy/paste code",
         "note.full": "Before analysis, the raw CSV was preserved and a cleaned copy was created in pandas. Labels were standardized, completed-status variants were mapped, and numeric columns were converted with invalid values treated as missing. After cleaning, 25 records had completed status and numeric pre/post scores. The main limitation is that cleaning improves consistency but does not recover unknown scores or create causal evidence.",
         "note.partial": "This dataset still needs cleaning decisions before analysis. Some labels or numeric fields remain inconsistent, so the current table should be treated as diagnostic rather than paper-ready.",
+        "feedback.ready": "All three steps are on: the table can support a caption and Methods note.",
+        "feedback.labels": "Turn on label normalization: otherwise groupby will count fake groups.",
+        "feedback.completed": "Turn on completed-status normalization: otherwise usable rows remain undercounted.",
+        "feedback.numeric": "Turn on numeric conversion: otherwise gain_score should not be calculated.",
         "notes.labels": "standardized labels",
         "notes.class": "standardized class sections",
         "notes.completed": "mapped yes/no variants",
@@ -382,6 +397,14 @@
       document.getElementById("class-count").textContent = metrics.classGroups;
       document.getElementById("completed-count").textContent = metrics.completedLabels;
       document.getElementById("usable-count").textContent = metrics.usable;
+      const feedbackKey = !state.labels.checked
+        ? "feedback.labels"
+        : !state.completed.checked
+          ? "feedback.completed"
+          : !state.numeric.checked
+            ? "feedback.numeric"
+            : "feedback.ready";
+      document.getElementById("feedback-note").textContent = t(feedbackKey);
 
       const rows = [
         [t("row.activity"), 18, metrics.activity, t("notes.labels")],
@@ -395,9 +418,9 @@
 
       const code = [
         "clean = raw.copy()",
-        state.labels.checked ? "clean labels with .str.strip().str.lower().map(...)" : "# labels are still raw variants",
-        state.completed.checked ? "map completed variants: Y/YES/y -> yes, n -> no" : "# completed variants are not mapped yet",
-        state.numeric.checked ? "pd.to_numeric(..., errors='coerce')" : "# numeric columns are not converted yet",
+        state.labels.checked ? "activity_focus = normalize_text(activity_focus).map(activity_map)" : "# labels are still raw variants",
+        state.completed.checked ? "completed = normalize_text(completed).map(completed_map)" : "# completed variants are not mapped yet",
+        state.numeric.checked ? "scores = pd.to_numeric(scores, errors='coerce')" : "# numeric columns are not converted yet",
         "export cleaned data + cleaning_log"
       ].join("\\n");
       document.getElementById("code-pattern").textContent = code;

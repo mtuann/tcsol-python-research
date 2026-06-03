@@ -161,7 +161,7 @@ Important: do not publish identifiable student data. If this repository becomes 
 | 2 | Research data as tables | lists, dictionaries, CSV/Excel structure | Design columns for learners, tests, errors, translations, or policies | dataset template + data description |
 | 3 | pandas basics | `DataFrame`, select columns, filter rows, `groupby` | Summarize class or survey data | descriptive table + caption |
 | 4 | Cleaning data | missing values, type conversion, label normalization | Clean survey/pre-test/post-test data | cleaned dataset + cleaning note |
-| 5 | Visualization for papers | `matplotlib`, `seaborn` | Choose chart types that match research claims | 2 draft figures + captions |
+| 5 | Visualization for papers | `matplotlib`, `seaborn` | Choose chart types that match research claims | 2 paper-ready figures + captions |
 | 6 | Intro statistics | mean, SD, confidence interval, t-test, correlation | Compare pre-test vs post-test or two teaching groups | Results paragraph with limitation |
 | 7 | TCSOL short-course research | rubric design, classroom variables | Analyze learner gains and learning difficulties | mini teaching-study design |
 | 8 | Learner error analysis | frequency tables, cross-tabulation | Code errors: tones, measure words, aspect, word order, complements | learner error report |

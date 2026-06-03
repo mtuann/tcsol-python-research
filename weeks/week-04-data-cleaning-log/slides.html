@@ -36,6 +36,10 @@
               <div class="row five focus-row"><span>S12</span><span>Class-B</span><span>result_comp</span><span><strong class="value-spotlight">eighty</strong></span><span>Y</span></div>
               <div class="row five"><span>S27</span><span>C</span><span>word_order</span><span>missing</span><span>n</span></div>
             </div>
+            <div class="chip-row">
+              <span class="chip" data-i18n="s1.meta.rows">N = 36 bản ghi synthetic</span>
+              <span class="chip optional" data-i18n="s1.meta.source">Nguồn: dataset dạy học Week 04</span>
+            </div>
           </div>
         </div>
       </section>
@@ -209,6 +213,7 @@ clean["usable_pre_post"] = (
             <div class="row four"><span data-i18n="summary.row.class">nhãn lớp</span><span>12</span><span>4</span><span data-i18n="summary.class">chuẩn hóa section lớp</span></div>
             <div class="row four"><span data-i18n="summary.row.usable">dòng dùng được</span><span>19</span><span>25</span><span data-i18n="summary.usable">map biến thể completed</span></div>
           </div>
+          <div class="paper-card"><blockquote data-i18n-html="summary.caption">Caption: Bảng kiểm tra trước/sau cleaning cho dataset TCSOL synthetic Week 04 (N = 36 bản ghi raw). Cleaning giảm số biến thể nhãn và tăng số dòng completed pre/post dùng được từ 19 lên 25.</blockquote></div>
         </div>
       </section>
 
@@ -220,6 +225,11 @@ clean["usable_pre_post"] = (
         <div class="stage">
           <div class="paper-card sentence-frame-card">
             <blockquote class="sentence-frame" data-i18n-html="methods.frame">Before analysis, the raw CSV was preserved and a cleaned copy was created in pandas. Labels were <span class="frame-slot">standardized</span>, invalid numeric entries were treated as <span class="frame-slot purpose">missing</span>, and <span class="frame-slot columns">25 records</span> had usable completed pre/post scores.</blockquote>
+          </div>
+          <div class="concept-grid three">
+            <div class="concept-card row"><strong data-i18n="methods.artifact.title">Artifact</strong><span>week04_cleaning_log.csv</span></div>
+            <div class="concept-card value"><strong data-i18n="methods.n.title">N báo cáo</strong><span>25 usable rows</span></div>
+            <div class="concept-card schema"><strong data-i18n="methods.limit.title">Limitation</strong><span data-i18n="methods.limit.body">cleaning không phục hồi điểm bị thiếu</span></div>
           </div>
         </div>
       </section>
@@ -233,9 +243,9 @@ clean["usable_pre_post"] = (
         <div class="stage">
           <div class="checklist">
             <div class="check-item"><b>1</b><span data-i18n="check.1">notebook chạy từ đầu đến cuối</span></div>
-            <div class="check-item"><b>2</b><span data-i18n="check.2">cleaned CSV nằm trong data/processed</span></div>
-            <div class="check-item"><b>3</b><span data-i18n="check.3">cleaning log có problem, decision, reason</span></div>
-            <div class="check-item"><b>4</b><span data-i18n="check.4">Methods note 100-150 từ có limitation</span></div>
+            <div class="check-item"><b>2</b><span data-i18n="check.2">raw CSV không sửa tay; cleaned CSV sinh bằng code</span></div>
+            <div class="check-item"><b>3</b><span data-i18n="check.3">cleaning log có problem, decision, reason, evidence</span></div>
+            <div class="check-item"><b>4</b><span data-i18n="check.4">caption, interpretation, Methods note có limitation và source note</span></div>
           </div>
         </div>
       </section>
@@ -284,6 +294,8 @@ clean["usable_pre_post"] = (
         "s1.title": "Làm sạch dữ liệu và cleaning log",
         "s1.body": "Từ CSV messy đến cleaned dataset, trước khi viết Methods note cho paper.",
         "hero.table.aria": "Bảng raw messy minh họa",
+        "s1.meta.rows": "N = 36 bản ghi synthetic",
+        "s1.meta.source": "Nguồn: dataset dạy học Week 04",
         "s2.tag": "Từ Week 03",
         "s2.title": "Bảng mô tả chỉ tốt khi dữ liệu đầu vào đáng tin",
         "s2.body": "Tuần trước ta groupby và viết caption. Tuần này ta hỏi: bảng đó có được tạo từ dữ liệu sạch và có thể tái lập không?",
@@ -332,8 +344,8 @@ clean["usable_pre_post"] = (
         "s9.tag": "Completed",
         "s9.title": "Chuẩn hóa inclusion rule",
         "s9.body": "Y, YES, y có thể cùng nghĩa với yes. Nhưng blank vẫn là missing, không tự biến thành no.",
-        "inc.raw": "Raw label",
-        "inc.cleaned": "Cleaned label",
+        "inc.raw": "Nhãn raw",
+        "inc.cleaned": "Nhãn cleaned",
         "inc.reason": "Lý do",
         "inc.yes": "cùng trạng thái hoàn thành",
         "inc.no": "không đưa vào pre/post completed summary",
@@ -362,16 +374,21 @@ clean["usable_pre_post"] = (
         "summary.activity": "chuẩn hóa nhãn hoạt động",
         "summary.class": "chuẩn hóa section lớp",
         "summary.usable": "map biến thể completed",
+        "summary.caption": "Caption: Bảng kiểm tra trước/sau cleaning cho dataset TCSOL synthetic Week 04 (N = 36 bản ghi raw). Cleaning giảm số biến thể nhãn và tăng số dòng completed pre/post dùng được từ 19 lên 25.",
         "s13.tag": "Writing",
         "s13.title": "Methods note: nói quyết định, N và limitation",
-        "methods.frame": "Before analysis, the raw CSV was preserved and a cleaned copy was created in pandas. Labels were <span class=\"frame-slot\">standardized</span>, invalid numeric entries were treated as <span class=\"frame-slot purpose\">missing</span>, and <span class=\"frame-slot columns\">25 records</span> had usable completed pre/post scores.",
+        "methods.frame": "Nháp tiếng Anh cho paper: Before analysis, the raw CSV was preserved and a cleaned copy was created in pandas. Labels were <span class=\"frame-slot\">standardized</span>, invalid numeric entries were treated as <span class=\"frame-slot purpose\">missing</span>, and <span class=\"frame-slot columns\">25 records</span> had usable completed pre/post scores.",
+        "methods.artifact.title": "Artifact",
+        "methods.n.title": "N báo cáo",
+        "methods.limit.title": "Limitation",
+        "methods.limit.body": "cleaning không phục hồi điểm bị thiếu",
         "s14.tag": "Thực hành",
         "s14.title": "Checklist bài nộp",
         "s14.body": "Mục tiêu không phải nhiều code. Mục tiêu là một workflow chạy lại được và giải thích được.",
         "check.1": "notebook chạy từ đầu đến cuối",
-        "check.2": "cleaned CSV nằm trong data/processed",
-        "check.3": "cleaning log có problem, decision, reason",
-        "check.4": "Methods note 100-150 từ có limitation",
+        "check.2": "raw CSV không sửa tay; cleaned CSV sinh bằng code",
+        "check.3": "cleaning log có problem, decision, reason, evidence",
+        "check.4": "caption, interpretation, Methods note có limitation và source note",
         "s15.tag": "Đi tiếp",
         "s15.title": "Mở demo, chạy notebook, rồi export output",
         "s15.body": "Week 05 sẽ dùng cleaned data để tạo figure cho paper. Hôm nay ta đảm bảo figure đó không dựa trên nhãn bẩn.",
@@ -403,6 +420,8 @@ clean["usable_pre_post"] = (
         "s1.title": "Data cleaning and cleaning logs",
         "s1.body": "From messy CSV to cleaned dataset, before writing a Methods note.",
         "hero.table.aria": "Illustrative messy raw table",
+        "s1.meta.rows": "N = 36 synthetic records",
+        "s1.meta.source": "Source: Week 04 teaching dataset",
         "s2.tag": "From Week 03",
         "s2.title": "A descriptive table is only as good as its input data",
         "s2.body": "Last week we used groupby and wrote captions. This week we ask whether that table came from clean, reproducible data.",
@@ -481,16 +500,21 @@ clean["usable_pre_post"] = (
         "summary.activity": "standardized activity labels",
         "summary.class": "standardized class sections",
         "summary.usable": "mapped completed variants",
+        "summary.caption": "Caption: Before/after cleaning checks for the synthetic Week 04 TCSOL dataset (N = 36 raw records). Cleaning reduces label variants and increases usable completed pre/post rows from 19 to 25.",
         "s13.tag": "Writing",
         "s13.title": "Methods note: state decisions, N, and limitation",
         "methods.frame": "Before analysis, the raw CSV was preserved and a cleaned copy was created in pandas. Labels were <span class=\"frame-slot\">standardized</span>, invalid numeric entries were treated as <span class=\"frame-slot purpose\">missing</span>, and <span class=\"frame-slot columns\">25 records</span> had usable completed pre/post scores.",
+        "methods.artifact.title": "Artifact",
+        "methods.n.title": "Reported N",
+        "methods.limit.title": "Limitation",
+        "methods.limit.body": "cleaning does not recover missing scores",
         "s14.tag": "Practice",
         "s14.title": "Assignment checklist",
         "s14.body": "The goal is not lots of code. The goal is a workflow that can be rerun and explained.",
         "check.1": "notebook runs from top to bottom",
-        "check.2": "cleaned CSV is in data/processed",
-        "check.3": "cleaning log has problem, decision, reason",
-        "check.4": "100-150 word Methods note with a limitation",
+        "check.2": "raw CSV unchanged; cleaned CSV generated by code",
+        "check.3": "cleaning log has problem, decision, reason, evidence",
+        "check.4": "caption, interpretation, Methods note has limitation and source note",
         "s15.tag": "Next",
         "s15.title": "Open the demo, run the notebook, then export outputs",
         "s15.body": "Week 05 will use cleaned data to create a paper figure. Today we make sure the figure is not built on messy labels.",

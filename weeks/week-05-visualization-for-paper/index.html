@@ -1,0 +1,372 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title data-i18n="meta.title">Tuần 05: Visualization cho paper</title>
+  <link rel="stylesheet" href="../../assets/css/bilingual.css">
+  <link rel="stylesheet" href="../../assets/css/course-doc.css">
+</head>
+<body>
+  <header class="doc-topbar">
+    <a class="doc-brand" href="../../" data-i18n="brand">Python Research Hub</a>
+    <nav class="doc-nav" aria-label="Điều hướng tài liệu" data-i18n-aria-label="nav.aria">
+      <a href="#overview" data-i18n="nav.overview">Tổng quan</a>
+      <a href="#notes" data-i18n="nav.notes">Ghi chú</a>
+      <a href="#practice" data-i18n="nav.practice">Thực hành</a>
+      <a href="#assignment" data-i18n="nav.assignment">Bài nộp</a>
+      <a href="#readings" data-i18n="nav.readings">Bài đọc</a>
+      <a href="#rubric" data-i18n="nav.rubric">Tiêu chí</a>
+      <div class="language-switcher" role="group" aria-label="Ngôn ngữ / Language" data-i18n-aria-label="nav.language">
+        <button type="button" data-lang-option="vi" aria-pressed="true">Tiếng Việt</button>
+        <button type="button" data-lang-option="en" aria-pressed="false">English</button>
+      </div>
+    </nav>
+  </header>
+
+  <main class="doc-shell">
+    <aside class="doc-sidebar">
+      <strong data-i18n="side.title">Tuần 05</strong>
+      <a href="slides.html" data-i18n="side.slides">Slides</a>
+      <a href="interactive_demo.html" data-i18n="side.demo">Demo tương tác</a>
+      <a href="live_coding.html" data-i18n="side.notebook">Notebook HTML</a>
+      <a href="https://colab.research.google.com/github/mtuann/tcsol-python-research/blob/main/weeks/week-05-visualization-for-paper/live_coding.ipynb" data-i18n="side.colab">Chạy trong Colab</a>
+      <a href="live_coding.ipynb" download data-i18n="side.notebookSource">Tải source .ipynb</a>
+      <a href="data/raw/week05_cleaned_tcsol_scores.csv" download data-i18n="side.data">Tải data CSV</a>
+      <a href="outputs/figures/week05_mean_gain_by_activity.png" data-i18n="side.fig1">Xem figure bar</a>
+      <a href="outputs/figures/week05_gain_distribution_by_activity.png" data-i18n="side.fig2">Xem figure dot</a>
+    </aside>
+
+    <div class="doc-main">
+      <section class="doc-hero" id="overview">
+        <span class="doc-eyebrow" data-i18n="hero.tag">Tuần 05</span>
+        <h1 data-i18n="hero.title">Visualization cho paper</h1>
+        <p class="doc-lead" data-i18n="hero.body">Tuần này dùng cleaned data từ Week 04 để tạo figure paper-ready: chọn bar hay dot plot, label trục, export PNG/SVG, rồi viết caption và interpretation không overclaim.</p>
+        <div class="doc-actions">
+          <a class="doc-button" href="slides.html" data-i18n="action.slides">Mở slides</a>
+          <a class="doc-button secondary" href="interactive_demo.html" data-i18n="action.demo">Mở demo</a>
+          <a class="doc-button secondary" href="live_coding.html" data-i18n="action.notebook">Xem notebook HTML</a>
+          <a class="doc-button secondary" href="outputs/figures/week05_mean_gain_by_activity.png" data-i18n="action.figure">Xem figure</a>
+        </div>
+      </section>
+
+      <section class="doc-card">
+        <h2 data-i18n="frame.title">Khung nghiên cứu</h2>
+        <div class="doc-grid">
+          <article class="mini-card"><span class="swatch blue"></span><h3 data-i18n="frame.question.title">Câu hỏi nhỏ</h3><p data-i18n="frame.question.body">Nhóm hoạt động nào có descriptive gain pattern rõ nhất sau short-term Chinese activity?</p></article>
+          <article class="mini-card"><span class="swatch green"></span><h3 data-i18n="frame.data.title">Dữ liệu</h3><p data-i18n="frame.data.body">36 bản ghi synthetic từ cleaned Week 04; 25 dòng usable có completed status và pre/post numeric.</p></article>
+          <article class="mini-card"><span class="swatch amber"></span><h3 data-i18n="frame.output.title">Output</h3><p data-i18n="frame.output.body">Hai figure PNG/SVG, một summary table, một caption và một interpretation paragraph.</p></article>
+        </div>
+      </section>
+
+      <section class="doc-card">
+        <h2 data-i18n="writing.title">Hỗ trợ viết Results</h2>
+        <div class="doc-grid two">
+          <article class="mini-card"><span class="swatch purple"></span><h3 data-i18n="writing.output.title">Output viết tuần này</h3><p data-i18n="writing.output.body">Caption figure và đoạn interpretation 120-160 từ, có N, pattern, và limitation.</p></article>
+          <article class="mini-card"><span class="swatch rose"></span><h3 data-i18n="writing.tools.title">Công cụ hỗ trợ</h3><p data-i18n="writing.tools.body">Export figure từ notebook, paste vào Word. Overleaf vẫn optional; chưa cần đưa vào core workflow.</p></article>
+        </div>
+        <h3 data-i18n="writing.frame.title">Mẫu câu caption</h3>
+        <blockquote data-i18n="writing.frame.body">Figure 1 shows mean gain score by activity focus for N usable learner records. The figure is descriptive and does not establish causal effects.</blockquote>
+      </section>
+
+      <section class="doc-card" id="notes">
+        <h2 data-i18n="notes.title">Ghi chú bài học</h2>
+        <p data-i18n="notes.intro">Một figure paper-ready cần giúp reader so sánh đúng pattern, không chỉ trông đẹp.</p>
+        <table>
+          <thead><tr><th data-i18n="notes.choice">Lựa chọn</th><th data-i18n="notes.use">Khi dùng</th><th data-i18n="notes.risk">Rủi ro</th></tr></thead>
+          <tbody>
+            <tr><td><code>barplot</code></td><td data-i18n="bar.use">so sánh group mean</td><td data-i18n="bar.risk">ẩn individual variation</td></tr>
+            <tr><td><code>stripplot</code></td><td data-i18n="dot.use">show từng learner</td><td data-i18n="dot.risk">cần jitter/label để dễ đọc</td></tr>
+            <tr><td><code>savefig</code></td><td data-i18n="save.use">export PNG/SVG</td><td data-i18n="save.risk">screenshot không tái lập tốt</td></tr>
+            <tr><td><code>caption</code></td><td data-i18n="cap.use">giải thích N, variable, limitation</td><td data-i18n="cap.risk">overclaim nếu dùng causal language</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section class="doc-card">
+        <h2 data-i18n="workflow.title">Workflow tuần này</h2>
+        <div class="doc-grid">
+          <article class="mini-card"><span class="swatch blue"></span><h3 data-i18n="workflow.prepare.title">1. Prepare</h3><p data-i18n-html="workflow.prepare.body">Filter <code>usable_pre_post</code> và tạo summary table.</p></article>
+          <article class="mini-card"><span class="swatch green"></span><h3 data-i18n="workflow.plot.title">2. Plot</h3><p data-i18n-html="workflow.plot.body">Tạo <code>barplot</code> cho mean và <code>stripplot</code> cho individual points.</p></article>
+          <article class="mini-card"><span class="swatch amber"></span><h3 data-i18n="workflow.write.title">3. Export + Write</h3><p data-i18n-html="workflow.write.body">Dùng <code>savefig</code>, rồi viết caption có N và limitation.</p></article>
+        </div>
+      </section>
+
+      <section class="doc-card" id="practice">
+        <h2 data-i18n="practice.title">Thực hành</h2>
+        <div class="doc-grid">
+          <article class="mini-card"><span class="swatch blue"></span><h3 data-i18n="practice.a.title">A. Copy and Modify</h3><p data-i18n-html="practice.a.body">Đổi display label trong <code>activity_labels</code>, rồi chạy lại figure.</p></article>
+          <article class="mini-card"><span class="swatch green"></span><h3 data-i18n="practice.b.title">B. Guided Problem</h3><p data-i18n="practice.b.body">Tạo bar chart, dot plot, summary table và export đủ PNG/SVG.</p></article>
+          <article class="mini-card"><span class="swatch amber"></span><h3 data-i18n="practice.c.title">C. Research Task</h3><p data-i18n="practice.c.body">Viết interpretation 120-160 từ, có descriptive pattern và limitation.</p></article>
+        </div>
+      </section>
+
+      <section class="doc-card" id="assignment">
+        <h2 data-i18n="assignment.title">Bài nộp</h2>
+        <p data-i18n="assignment.body">Nộp notebook, summary CSV, hai figure PNG/SVG, caption, interpretation và source note.</p>
+        <ol>
+          <li data-i18n="assignment.t1">Load visualization dataset.</li>
+          <li data-i18n-html="assignment.t2">Filter <code>usable_pre_post == True</code>.</li>
+          <li data-i18n-html="assignment.t3">Group by <code>activity_focus</code> để tính N và mean gain.</li>
+          <li data-i18n="assignment.t4">Tạo bar figure và dot figure.</li>
+          <li data-i18n="assignment.t5">Export PNG/SVG bằng code.</li>
+          <li data-i18n="assignment.t6">Viết caption và interpretation không dùng causal language.</li>
+        </ol>
+      </section>
+
+      <section class="doc-card" id="readings">
+        <h2 data-i18n="readings.title">Bài đọc</h2>
+        <div class="doc-grid two">
+          <article class="mini-card"><span class="swatch blue"></span><h3>Matplotlib Plot Types</h3><p data-i18n="readings.plot.body">Xem nhanh các loại chart và chọn chart theo dữ liệu.</p><a class="doc-chip" href="https://matplotlib.org/stable/plot_types/index.html" data-i18n="readings.open">Mở nguồn</a></article>
+          <article class="mini-card"><span class="swatch green"></span><h3>seaborn Categorical</h3><p data-i18n="readings.cat.body">Nguồn chính cho barplot/stripplot theo categorical variable.</p><a class="doc-chip" href="https://seaborn.pydata.org/tutorial/categorical.html" data-i18n="readings.open2">Mở nguồn</a></article>
+          <article class="mini-card"><span class="swatch amber"></span><h3>Matplotlib savefig</h3><p data-i18n="readings.savefig.body">Nguồn chính cho export PNG/SVG bằng code.</p><a class="doc-chip" href="https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.savefig.html" data-i18n="readings.open3">Mở nguồn</a></article>
+          <article class="mini-card"><span class="swatch rose"></span><h3>Ten Simple Rules</h3><p data-i18n="readings.rules.body">Học cách làm figure rõ, không gây hiểu nhầm.</p><a class="doc-chip" href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1003833" data-i18n="readings.open4">Mở nguồn</a></article>
+        </div>
+      </section>
+
+      <section class="doc-card" id="rubric">
+        <h2 data-i18n="rubric.title">Tiêu chí</h2>
+        <table>
+          <thead><tr><th data-i18n="rubric.criteria">Tiêu chí</th><th data-i18n="rubric.points">Điểm</th><th data-i18n="rubric.good">Bài làm tốt</th></tr></thead>
+          <tbody>
+            <tr><td data-i18n="rubric.code">Code đúng</td><td>25</td><td data-i18n="rubric.code.body">Notebook chạy, filter/summary/plot/export đúng.</td></tr>
+            <tr><td data-i18n="rubric.choice">Figure choice</td><td>20</td><td data-i18n="rubric.choice.body">Bar và dot plot đều phục vụ câu hỏi nghiên cứu.</td></tr>
+            <tr><td data-i18n="rubric.design">Figure design</td><td>20</td><td data-i18n="rubric.design.body">Trục, labels, N, màu và scale rõ ràng.</td></tr>
+            <tr><td data-i18n="rubric.export">Export</td><td>10</td><td data-i18n="rubric.export.body">Có PNG và SVG sinh bằng code.</td></tr>
+            <tr><td data-i18n="rubric.writing">Writing</td><td>15</td><td data-i18n="rubric.writing.body">Caption và interpretation có N, pattern, limitation.</td></tr>
+            <tr><td data-i18n="rubric.repro">Tái lập</td><td>10</td><td data-i18n="rubric.repro.body">Source note, paths, outputs rõ ràng.</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section class="doc-card">
+        <h2 data-i18n="source.title">Nguồn biên soạn cho giảng viên</h2>
+        <p data-i18n="source.body">Markdown là source để sửa bài. Người học nên dùng trang HTML, slides, demo và notebook HTML.</p>
+        <div class="doc-links">
+          <a class="doc-chip" href="README.md">README.md</a>
+          <a class="doc-chip" href="lecture_notes.md">lecture_notes.md</a>
+          <a class="doc-chip" href="exercises.md">exercises.md</a>
+          <a class="doc-chip" href="assignment.md">assignment.md</a>
+          <a class="doc-chip" href="readings.md">readings.md</a>
+          <a class="doc-chip" href="rubric.md">rubric.md</a>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <script src="../../assets/js/bilingual.js"></script>
+  <script>
+    const WEEK05_I18N = {
+      vi: {
+        "meta.title": "Tuần 05: Visualization cho paper",
+        "brand": "Python Research Hub",
+        "nav.aria": "Điều hướng tài liệu",
+        "nav.language": "Ngôn ngữ / Language",
+        "nav.overview": "Tổng quan",
+        "nav.notes": "Ghi chú",
+        "nav.practice": "Thực hành",
+        "nav.assignment": "Bài nộp",
+        "nav.readings": "Bài đọc",
+        "nav.rubric": "Tiêu chí",
+        "side.title": "Tuần 05",
+        "side.slides": "Slides",
+        "side.demo": "Demo tương tác",
+        "side.notebook": "Notebook HTML",
+        "side.colab": "Chạy trong Colab",
+        "side.notebookSource": "Tải source .ipynb",
+        "side.data": "Tải data CSV",
+        "side.fig1": "Xem figure bar",
+        "side.fig2": "Xem figure dot",
+        "hero.tag": "Tuần 05",
+        "hero.title": "Visualization cho paper",
+        "hero.body": "Tuần này dùng cleaned data từ Week 04 để tạo figure paper-ready: chọn bar hay dot plot, label trục, export PNG/SVG, rồi viết caption và interpretation không overclaim.",
+        "action.slides": "Mở slides",
+        "action.demo": "Mở demo",
+        "action.notebook": "Xem notebook HTML",
+        "action.figure": "Xem figure",
+        "frame.title": "Khung nghiên cứu",
+        "frame.question.title": "Câu hỏi nhỏ",
+        "frame.question.body": "Nhóm hoạt động nào có descriptive gain pattern rõ nhất sau short-term Chinese activity?",
+        "frame.data.title": "Dữ liệu",
+        "frame.data.body": "36 bản ghi synthetic từ cleaned Week 04; 25 dòng usable có completed status và pre/post numeric.",
+        "frame.output.title": "Output",
+        "frame.output.body": "Hai figure PNG/SVG, một summary table, một caption và một interpretation paragraph.",
+        "writing.title": "Hỗ trợ viết Results",
+        "writing.output.title": "Output viết tuần này",
+        "writing.output.body": "Caption figure và đoạn interpretation 120-160 từ, có N, pattern, và limitation.",
+        "writing.tools.title": "Công cụ hỗ trợ",
+        "writing.tools.body": "Export figure từ notebook, paste vào Word. Overleaf vẫn optional; chưa cần đưa vào core workflow.",
+        "writing.frame.title": "Mẫu câu caption",
+        "writing.frame.body": "Figure 1 shows mean gain score by activity focus for N usable learner records. The figure is descriptive and does not establish causal effects.",
+        "notes.title": "Ghi chú bài học",
+        "notes.intro": "Một figure paper-ready cần giúp reader so sánh đúng pattern, không chỉ trông đẹp.",
+        "notes.choice": "Lựa chọn",
+        "notes.use": "Khi dùng",
+        "notes.risk": "Rủi ro",
+        "bar.use": "so sánh group mean",
+        "bar.risk": "ẩn individual variation",
+        "dot.use": "show từng learner",
+        "dot.risk": "cần jitter/label để dễ đọc",
+        "save.use": "export PNG/SVG",
+        "save.risk": "screenshot không tái lập tốt",
+        "cap.use": "giải thích N, variable, limitation",
+        "cap.risk": "overclaim nếu dùng causal language",
+        "workflow.title": "Workflow tuần này",
+        "workflow.prepare.title": "1. Prepare",
+        "workflow.prepare.body": "Filter <code>usable_pre_post</code> và tạo summary table.",
+        "workflow.plot.title": "2. Plot",
+        "workflow.plot.body": "Tạo <code>barplot</code> cho mean và <code>stripplot</code> cho individual points.",
+        "workflow.write.title": "3. Export + Write",
+        "workflow.write.body": "Dùng <code>savefig</code>, rồi viết caption có N và limitation.",
+        "practice.title": "Thực hành",
+        "practice.a.title": "A. Copy and Modify",
+        "practice.a.body": "Đổi display label trong <code>activity_labels</code>, rồi chạy lại figure.",
+        "practice.b.title": "B. Guided Problem",
+        "practice.b.body": "Tạo bar chart, dot plot, summary table và export đủ PNG/SVG.",
+        "practice.c.title": "C. Research Task",
+        "practice.c.body": "Viết interpretation 120-160 từ, có descriptive pattern và limitation.",
+        "assignment.title": "Bài nộp",
+        "assignment.body": "Nộp notebook, summary CSV, hai figure PNG/SVG, caption, interpretation và source note.",
+        "assignment.t1": "Load visualization dataset.",
+        "assignment.t2": "Filter <code>usable_pre_post == True</code>.",
+        "assignment.t3": "Group by <code>activity_focus</code> để tính N và mean gain.",
+        "assignment.t4": "Tạo bar figure và dot figure.",
+        "assignment.t5": "Export PNG/SVG bằng code.",
+        "assignment.t6": "Viết caption và interpretation không dùng causal language.",
+        "readings.title": "Bài đọc",
+        "readings.plot.body": "Xem nhanh các loại chart và chọn chart theo dữ liệu.",
+        "readings.cat.body": "Nguồn chính cho barplot/stripplot theo categorical variable.",
+        "readings.savefig.body": "Nguồn chính cho export PNG/SVG bằng code.",
+        "readings.rules.body": "Học cách làm figure rõ, không gây hiểu nhầm.",
+        "readings.open": "Mở nguồn",
+        "readings.open2": "Mở nguồn",
+        "readings.open3": "Mở nguồn",
+        "readings.open4": "Mở nguồn",
+        "rubric.title": "Tiêu chí",
+        "rubric.criteria": "Tiêu chí",
+        "rubric.points": "Điểm",
+        "rubric.good": "Bài làm tốt",
+        "rubric.code": "Code đúng",
+        "rubric.code.body": "Notebook chạy, filter/summary/plot/export đúng.",
+        "rubric.choice": "Figure choice",
+        "rubric.choice.body": "Bar và dot plot đều phục vụ câu hỏi nghiên cứu.",
+        "rubric.design": "Figure design",
+        "rubric.design.body": "Trục, labels, N, màu và scale rõ ràng.",
+        "rubric.export": "Export",
+        "rubric.export.body": "Có PNG và SVG sinh bằng code.",
+        "rubric.writing": "Writing",
+        "rubric.writing.body": "Caption và interpretation có N, pattern, limitation.",
+        "rubric.repro": "Tái lập",
+        "rubric.repro.body": "Source note, paths, outputs rõ ràng.",
+        "source.title": "Nguồn biên soạn cho giảng viên",
+        "source.body": "Markdown là source để sửa bài. Người học nên dùng trang HTML, slides, demo và notebook HTML."
+      },
+      en: {
+        "meta.title": "Week 05: Visualization for papers",
+        "brand": "Python Research Hub",
+        "nav.aria": "Document navigation",
+        "nav.language": "Language",
+        "nav.overview": "Overview",
+        "nav.notes": "Notes",
+        "nav.practice": "Practice",
+        "nav.assignment": "Assignment",
+        "nav.readings": "Readings",
+        "nav.rubric": "Rubric",
+        "side.title": "Week 05",
+        "side.slides": "Slides",
+        "side.demo": "Interactive demo",
+        "side.notebook": "Notebook HTML",
+        "side.colab": "Run in Colab",
+        "side.notebookSource": "Download source .ipynb",
+        "side.data": "Download data CSV",
+        "side.fig1": "View bar figure",
+        "side.fig2": "View dot figure",
+        "hero.tag": "Week 05",
+        "hero.title": "Visualization for papers",
+        "hero.body": "This week uses cleaned Week 04 data to create paper-ready figures: choose bar or dot plots, label axes, export PNG/SVG, then write caption and interpretation without overclaiming.",
+        "action.slides": "Open slides",
+        "action.demo": "Open demo",
+        "action.notebook": "View notebook HTML",
+        "action.figure": "View figure",
+        "frame.title": "Research frame",
+        "frame.question.title": "Small question",
+        "frame.question.body": "Which activity focus has the clearest descriptive gain pattern after a short-term Chinese activity?",
+        "frame.data.title": "Data",
+        "frame.data.body": "36 synthetic records from cleaned Week 04; 25 usable rows have completed status and numeric pre/post scores.",
+        "frame.output.title": "Output",
+        "frame.output.body": "Two PNG/SVG figures, one summary table, one caption, and one interpretation paragraph.",
+        "writing.title": "Results writing support",
+        "writing.output.title": "This week's writing output",
+        "writing.output.body": "A figure caption and a 120-160 word interpretation with N, pattern, and limitation.",
+        "writing.tools.title": "Tool support",
+        "writing.tools.body": "Export figures from the notebook and paste into Word. Overleaf remains optional and is not needed in the core workflow yet.",
+        "writing.frame.title": "Caption frame",
+        "writing.frame.body": "Figure 1 shows mean gain score by activity focus for N usable learner records. The figure is descriptive and does not establish causal effects.",
+        "notes.title": "Lesson notes",
+        "notes.intro": "A paper-ready figure should help the reader compare the right pattern, not only look nice.",
+        "notes.choice": "Choice",
+        "notes.use": "Use when",
+        "notes.risk": "Risk",
+        "bar.use": "comparing group means",
+        "bar.risk": "hides individual variation",
+        "dot.use": "showing each learner",
+        "dot.risk": "needs jitter/labels for readability",
+        "save.use": "exporting PNG/SVG",
+        "save.risk": "screenshots are less reproducible",
+        "cap.use": "explaining N, variable, limitation",
+        "cap.risk": "overclaims if it uses causal language",
+        "workflow.title": "This week's workflow",
+        "workflow.prepare.title": "1. Prepare",
+        "workflow.prepare.body": "Filter <code>usable_pre_post</code> and create a summary table.",
+        "workflow.plot.title": "2. Plot",
+        "workflow.plot.body": "Make a <code>barplot</code> for means and a <code>stripplot</code> for individual points.",
+        "workflow.write.title": "3. Export + Write",
+        "workflow.write.body": "Use <code>savefig</code>, then write a caption with N and limitation.",
+        "practice.title": "Practice",
+        "practice.a.title": "A. Copy and Modify",
+        "practice.a.body": "Change a display label in <code>activity_labels</code>, then rerun the figure.",
+        "practice.b.title": "B. Guided Problem",
+        "practice.b.body": "Create a bar chart, dot plot, summary table, and all PNG/SVG exports.",
+        "practice.c.title": "C. Research Task",
+        "practice.c.body": "Write a 120-160 word interpretation with descriptive pattern and limitation.",
+        "assignment.title": "Assignment",
+        "assignment.body": "Submit notebook, summary CSV, two PNG/SVG figures, caption, interpretation, and source note.",
+        "assignment.t1": "Load the visualization dataset.",
+        "assignment.t2": "Filter <code>usable_pre_post == True</code>.",
+        "assignment.t3": "Group by <code>activity_focus</code> to compute N and mean gain.",
+        "assignment.t4": "Create the bar figure and dot figure.",
+        "assignment.t5": "Export PNG/SVG with code.",
+        "assignment.t6": "Write caption and interpretation without causal language.",
+        "readings.title": "Readings",
+        "readings.plot.body": "Skim common chart types and choose charts from the data.",
+        "readings.cat.body": "Main source for barplot/stripplot with categorical variables.",
+        "readings.savefig.body": "Main source for exporting PNG/SVG with code.",
+        "readings.rules.body": "Learn how to make figures clear and less misleading.",
+        "readings.open": "Open source",
+        "readings.open2": "Open source",
+        "readings.open3": "Open source",
+        "readings.open4": "Open source",
+        "rubric.title": "Rubric",
+        "rubric.criteria": "Criterion",
+        "rubric.points": "Points",
+        "rubric.good": "Strong work",
+        "rubric.code": "Code correctness",
+        "rubric.code.body": "Notebook runs; filter/summary/plot/export work.",
+        "rubric.choice": "Figure choice",
+        "rubric.choice.body": "Bar and dot plots both serve the research question.",
+        "rubric.design": "Figure design",
+        "rubric.design.body": "Axes, labels, N, color, and scale are clear.",
+        "rubric.export": "Export",
+        "rubric.export.body": "PNG and SVG are generated by code.",
+        "rubric.writing": "Writing",
+        "rubric.writing.body": "Caption and interpretation include N, pattern, limitation.",
+        "rubric.repro": "Reproducibility",
+        "rubric.repro.body": "Source note, paths, and outputs are clear.",
+        "source.title": "Instructor source files",
+        "source.body": "Markdown files are the editing source. Learners should use the HTML page, slides, demo, and notebook HTML."
+      }
+    };
+    window.Bilingual.init({ translations: WEEK05_I18N, defaultLang: "vi" });
+  </script>
+</body>
+</html>

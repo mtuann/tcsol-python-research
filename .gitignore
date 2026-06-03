@@ -21,6 +21,7 @@ weeks/**/data/processed/*
 !weeks/**/data/processed/.gitkeep
 !weeks/week-01-python-research-workflow/data/raw/week01_research_tracks.csv
 !weeks/week-01-python-research-workflow/data/raw/week01_mini_examples.csv
+!weeks/week-05-visualization-for-paper/data/raw/week05_cleaned_tcsol_scores.csv
 submissions/
 weeks/**/submissions/
 
@@ -34,6 +35,12 @@ weeks/**/outputs/interactive/*
 !weeks/**/outputs/tables/.gitkeep
 !weeks/**/outputs/interactive/.gitkeep
 !weeks/week-01-python-research-workflow/outputs/tables/week01_selected_track_summary.csv
+!weeks/week-04-data-cleaning-log/outputs/tables/week04_usable_by_activity.csv
+!weeks/week-05-visualization-for-paper/outputs/tables/week05_figure_summary.csv
+!weeks/week-05-visualization-for-paper/outputs/figures/week05_mean_gain_by_activity.png
+!weeks/week-05-visualization-for-paper/outputs/figures/week05_mean_gain_by_activity.svg
+!weeks/week-05-visualization-for-paper/outputs/figures/week05_gain_distribution_by_activity.png
+!weeks/week-05-visualization-for-paper/outputs/figures/week05_gain_distribution_by_activity.svg
 
 # Office temporary files
 ~$*

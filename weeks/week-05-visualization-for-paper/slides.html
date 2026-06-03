@@ -1,0 +1,421 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title data-i18n="meta.title">Tuần 05: Visualization cho paper</title>
+  <link rel="stylesheet" href="../../assets/css/bilingual.css">
+  <link rel="stylesheet" href="../../assets/css/lecture-slides.css">
+</head>
+<body class="lecture-slide-page">
+  <div class="site-tools slide-tools">
+    <nav class="slide-exit-links" aria-label="Điều hướng khóa học" data-i18n-aria-label="nav.course.aria">
+      <a class="slide-link primary" href="../../" data-i18n="nav.home">Trang chủ</a>
+      <a class="slide-link" href="./" data-i18n="nav.week">Tuần 05</a>
+      <button class="slide-link" type="button" data-toc-open data-i18n="nav.toc" data-i18n-aria-label="nav.toc.aria" aria-label="Mục lục slide">Mục lục</button>
+    </nav>
+    <div class="language-switcher" role="group" aria-label="Ngôn ngữ / Language" data-i18n-aria-label="nav.language">
+      <button type="button" data-lang-option="vi" aria-pressed="true">Tiếng Việt</button>
+      <button type="button" data-lang-option="en" aria-pressed="false">English</button>
+    </div>
+  </div>
+
+  <main class="deck">
+    <div class="slides">
+      <section class="active">
+        <div class="hero-layout">
+          <div class="slide-head">
+            <span class="tag" data-i18n="s1.tag">Tuần 05</span>
+            <h1 data-i18n="s1.title">Visualization cho paper</h1>
+            <p class="lead" data-i18n="s1.body">Từ cleaned data đến figure có thể đưa vào Results section.</p>
+          </div>
+          <div class="stage">
+            <div class="concept-grid three">
+              <div class="concept-card row"><strong>25</strong><span data-i18n="hero.usable">usable records</span></div>
+              <div class="concept-card value"><strong>4</strong><span data-i18n="hero.groups">activity groups</span></div>
+              <div class="concept-card schema"><strong>2</strong><span data-i18n="hero.figures">paper figures</span></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="slide-head">
+          <span class="tag" data-i18n="s2.tag">Từ Week 04</span>
+          <h2 class="wide-title" data-i18n="s2.title">Figure chỉ đáng tin khi data đã sạch</h2>
+          <p class="lead" data-i18n="s2.body">Tuần này không clean lại. Ta dùng cleaned dataset để tập trung vào figure choice, export và caption.</p>
+        </div>
+        <div class="stage">
+          <div class="flow four">
+            <div class="flow-step"><strong>Cleaned CSV</strong><span data-i18n="flow.data">Week 04 output</span></div>
+            <div class="flow-step"><strong>Summary</strong><span data-i18n="flow.summary">N + mean gain</span></div>
+            <div class="flow-step"><strong>Figure</strong><span data-i18n="flow.figure">bar + dots</span></div>
+            <div class="flow-step"><strong>Caption</strong><span data-i18n="flow.caption">Results writing</span></div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="slide-head">
+          <span class="tag" data-i18n="s3.tag">Câu hỏi</span>
+          <h2 class="wide-title" data-i18n="s3.title">Nhóm hoạt động nào có gain pattern rõ nhất?</h2>
+          <p class="lead" data-i18n="s3.body">Đây là câu hỏi descriptive. Figure được phép giúp nhìn pattern, nhưng không được biến pattern thành causal claim.</p>
+        </div>
+        <div class="stage">
+          <div class="paper-card"><blockquote data-i18n="rq.text">Which activity focus shows the clearest descriptive gain pattern after a short-term Chinese activity?</blockquote></div>
+        </div>
+      </section>
+
+      <section>
+        <div class="slide-head">
+          <span class="tag" data-i18n="s4.tag">Data preview</span>
+          <h2 class="wide-title" data-i18n="s4.title">Một row vẫn là một learner record</h2>
+        </div>
+        <div class="stage">
+          <div class="research-table compact">
+            <div class="row five header"><span>learner</span><span>activity</span><span>pre</span><span>post</span><span>gain</span></div>
+            <div class="row five"><span>S001</span><span>measure_words</span><span>62</span><span>75</span><span>13</span></div>
+            <div class="row five focus-row"><span>S006</span><span>result_complements</span><span>59</span><span>73</span><span><strong class="value-spotlight">14</strong></span></div>
+            <div class="row five"><span>S025</span><span>word_order</span><span>66</span><span>75</span><span>9</span></div>
+          </div>
+          <div class="chip-row"><span class="chip">N = 36 raw rows</span><span class="chip optional">N = 25 usable rows</span></div>
+        </div>
+      </section>
+
+      <section>
+        <div class="slide-head">
+          <span class="tag" data-i18n="s5.tag">Chart choice</span>
+          <h2 class="wide-title" data-i18n="s5.title">Bar chart trả lời mean; dot plot trả lời variation</h2>
+        </div>
+        <div class="stage">
+          <div class="concept-grid">
+            <div class="concept-card value"><strong data-i18n="bar.title">Bar</strong><span data-i18n="bar.body">so sánh group means</span></div>
+            <div class="concept-card row"><strong data-i18n="dot.title">Dots</strong><span data-i18n="dot.body">show từng learner</span></div>
+            <div class="concept-card schema"><strong data-i18n="caption.title">Caption</strong><span data-i18n="caption.body">nói N, source, limitation</span></div>
+            <div class="concept-card column"><strong data-i18n="claim.title">Claim</strong><span data-i18n="claim.body">descriptive, không causal</span></div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="slide-head">
+          <span class="tag" data-i18n="s6.tag">Prepare</span>
+          <h2 class="wide-title" data-i18n="s6.title">Filter trước khi plot</h2>
+          <p class="lead" data-i18n-html="s6.body">Figure core chỉ dùng dòng <span class="inline-token">usable_pre_post == True</span>.</p>
+        </div>
+        <div class="stage">
+          <div class="code-card"><pre><code>df = pd.read_csv(csv_path)
+usable = df[df["usable_pre_post"] == True].copy()
+usable.shape</code></pre></div>
+        </div>
+      </section>
+
+      <section>
+        <div class="slide-head">
+          <span class="tag" data-i18n="s7.tag">Summary</span>
+          <h2 class="wide-title" data-i18n="s7.title">Tạo summary table để kiểm figure</h2>
+        </div>
+        <div class="stage">
+          <div class="research-table compact">
+            <div class="row four header"><span>activity</span><span>n</span><span>mean</span><span>range</span></div>
+            <div class="row four focus-row"><span>result_complements</span><span>6</span><span><strong class="value-spotlight">13.00</strong></span><span>12-14</span></div>
+            <div class="row four"><span>measure_words</span><span>5</span><span>12.60</span><span>12-13</span></div>
+            <div class="row four"><span>vocabulary_review</span><span>8</span><span>9.75</span><span>9-11</span></div>
+            <div class="row four"><span>word_order</span><span>6</span><span>8.83</span><span>8-9</span></div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="slide-head">
+          <span class="tag" data-i18n="s8.tag">Barplot</span>
+          <h2 class="wide-title" data-i18n="s8.title">Bar chart nên có N và axis labels</h2>
+        </div>
+        <div class="stage">
+          <div class="code-card"><pre><code>sns.barplot(
+    data=usable,
+    x="activity_label",
+    y="gain_score",
+    errorbar=None
+)
+ax.set_xlabel("Activity focus")
+ax.set_ylabel("Gain score")</code></pre></div>
+        </div>
+      </section>
+
+      <section>
+        <div class="slide-head">
+          <span class="tag" data-i18n="s9.tag">Dotplot</span>
+          <h2 class="wide-title" data-i18n="s9.title">Individual points làm small-N visible</h2>
+        </div>
+        <div class="stage">
+          <div class="paper-card"><blockquote data-i18n="dot.note">Nếu mỗi group chỉ có 5-8 learner records, dot plot giúp reader thấy mean không phải là toàn bộ câu chuyện.</blockquote></div>
+          <div class="code-card"><pre><code>sns.stripplot(
+    data=usable,
+    x="activity_label",
+    y="gain_score",
+    jitter=0.12,
+    alpha=0.85
+)</code></pre></div>
+        </div>
+      </section>
+
+      <section>
+        <div class="slide-head">
+          <span class="tag" data-i18n="s10.tag">Color</span>
+          <h2 class="wide-title" data-i18n="s10.title">Color phải có lý do</h2>
+          <p class="lead" data-i18n="s10.body">Dùng palette để phân biệt group, không dùng màu chỉ vì đẹp. Khi không cần highlight, giữ màu giản dị.</p>
+        </div>
+        <div class="stage">
+          <div class="chip-row">
+            <span class="chip" style="border-color:#2563eb;color:#2563eb">#2563eb</span>
+            <span class="chip" style="border-color:#1f7a4d;color:#1f7a4d">#1f7a4d</span>
+            <span class="chip" style="border-color:#b45309;color:#b45309">#b45309</span>
+            <span class="chip" style="border-color:#b8325f;color:#b8325f">#b8325f</span>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="slide-head">
+          <span class="tag" data-i18n="s11.tag">Export</span>
+          <h2 class="wide-title" data-i18n="s11.title">Export bằng code, không screenshot</h2>
+        </div>
+        <div class="stage">
+          <div class="code-card"><pre><code>fig.savefig("outputs/figures/week05_mean_gain_by_activity.png",
+            dpi=300, bbox_inches="tight")
+fig.savefig("outputs/figures/week05_mean_gain_by_activity.svg",
+            bbox_inches="tight")</code></pre></div>
+          <div class="chip-row"><span class="chip">PNG for Word/web</span><span class="chip optional">SVG for vector layout</span></div>
+        </div>
+      </section>
+
+      <section>
+        <div class="slide-head">
+          <span class="tag" data-i18n="s12.tag">Caption</span>
+          <h2 class="wide-title" data-i18n="s12.title">Caption nói figure đang show gì</h2>
+        </div>
+        <div class="stage">
+          <div class="paper-card sentence-frame-card"><blockquote class="sentence-frame" data-i18n-html="caption.frame">Figure 1. Mean gain score by activity focus in the synthetic Week 05 TCSOL dataset (<span class="frame-slot">N = 25 usable records</span>). Bars show group means; the figure is <span class="frame-slot purpose">descriptive</span>, not causal.</blockquote></div>
+        </div>
+      </section>
+
+      <section>
+        <div class="slide-head">
+          <span class="tag" data-i18n="s13.tag">Interpretation</span>
+          <h2 class="wide-title" data-i18n="s13.title">Viết pattern + limitation trong cùng đoạn</h2>
+        </div>
+        <div class="stage">
+          <div class="paper-card"><blockquote data-i18n="interpret.frame">Result complements has the highest descriptive mean gain, but each activity group has only 5-8 usable records. The dot plot is needed because mean bars alone hide individual variation.</blockquote></div>
+        </div>
+      </section>
+
+      <section>
+        <div class="slide-head">
+          <span class="tag" data-i18n="s14.tag">Thực hành</span>
+          <h2 class="wide-title" data-i18n="s14.title">Checklist bài nộp</h2>
+        </div>
+        <div class="stage">
+          <div class="checklist">
+            <div class="check-item"><b>1</b><span data-i18n="check.1">notebook chạy từ đầu đến cuối</span></div>
+            <div class="check-item"><b>2</b><span data-i18n="check.2">summary table có N và mean gain</span></div>
+            <div class="check-item"><b>3</b><span data-i18n="check.3">bar + dot figures export PNG/SVG</span></div>
+            <div class="check-item"><b>4</b><span data-i18n="check.4">caption và interpretation không causal overclaim</span></div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="slide-head">
+          <span class="tag" data-i18n="s15.tag">Đi tiếp</span>
+          <h2 class="wide-title" data-i18n="s15.title">Mở demo, chạy notebook, rồi export figures</h2>
+          <p class="lead" data-i18n="s15.body">Khi đã có figure tốt, Week 06 sẽ tiếp tục với dữ liệu phức tạp hơn và workflow so sánh/join.</p>
+        </div>
+        <div class="stage">
+          <div class="slide-cta-row" aria-label="Đi tiếp sau slides" data-i18n-aria-label="cta.aria">
+            <a class="slide-cta primary" href="interactive_demo.html" data-i18n="cta.demo">Mở demo</a>
+            <a class="slide-cta" href="live_coding.html" data-i18n="cta.notebook">Xem notebook</a>
+            <a class="slide-cta" href="./" data-i18n="cta.week">Về Tuần 05</a>
+            <a class="slide-cta" href="../../" data-i18n="cta.home">Về trang chủ</a>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <script src="../../assets/js/bilingual.js"></script>
+  <script src="../../assets/js/lecture-slides.js"></script>
+  <script>
+    const SLIDE_I18N = {
+      vi: {
+        "meta.title": "Tuần 05: Visualization cho paper",
+        "nav.course.aria": "Điều hướng khóa học",
+        "nav.home": "Trang chủ",
+        "nav.week": "Tuần 05",
+        "nav.toc": "Mục lục",
+        "nav.toc.aria": "Mục lục slide",
+        "nav.language": "Ngôn ngữ / Language",
+        "nav.slides.aria": "Điều hướng slide",
+        "nav.previous": "Trước",
+        "nav.next": "Tiếp",
+        "nav.jump.aria": "Đi đến slide",
+        "nav.jump.label": "Slide",
+        "nav.jump.input": "Số slide",
+        "nav.jump.go": "Đi",
+        "nav.toc.title": "Mục lục slide",
+        "nav.toc.hint": "Chọn phần muốn xem nhanh.",
+        "nav.toc.close": "Đóng",
+        "s1.tag": "Tuần 05",
+        "s1.title": "Visualization cho paper",
+        "s1.body": "Từ cleaned data đến figure có thể đưa vào Results section.",
+        "hero.usable": "usable records",
+        "hero.groups": "activity groups",
+        "hero.figures": "paper figures",
+        "s2.tag": "Từ Week 04",
+        "s2.title": "Figure chỉ đáng tin khi data đã sạch",
+        "s2.body": "Tuần này không clean lại. Ta dùng cleaned dataset để tập trung vào figure choice, export và caption.",
+        "flow.data": "output Week 04",
+        "flow.summary": "N + mean gain",
+        "flow.figure": "bar + dots",
+        "flow.caption": "viết Results",
+        "s3.tag": "Câu hỏi",
+        "s3.title": "Nhóm hoạt động nào có gain pattern rõ nhất?",
+        "s3.body": "Đây là câu hỏi descriptive. Figure được phép giúp nhìn pattern, nhưng không được biến pattern thành causal claim.",
+        "rq.text": "Which activity focus shows the clearest descriptive gain pattern after a short-term Chinese activity?",
+        "s4.tag": "Data preview",
+        "s4.title": "Một row vẫn là một learner record",
+        "s5.tag": "Chart choice",
+        "s5.title": "Bar chart trả lời mean; dot plot trả lời variation",
+        "bar.title": "Bar",
+        "bar.body": "so sánh group means",
+        "dot.title": "Dots",
+        "dot.body": "show từng learner",
+        "caption.title": "Caption",
+        "caption.body": "nói N, source, limitation",
+        "claim.title": "Claim",
+        "claim.body": "descriptive, không causal",
+        "s6.tag": "Prepare",
+        "s6.title": "Filter trước khi plot",
+        "s6.body": "Figure core chỉ dùng dòng <span class=\"inline-token\">usable_pre_post == True</span>.",
+        "s7.tag": "Summary",
+        "s7.title": "Tạo summary table để kiểm figure",
+        "s8.tag": "Barplot",
+        "s8.title": "Bar chart nên có N và axis labels",
+        "s9.tag": "Dotplot",
+        "s9.title": "Individual points làm small-N visible",
+        "dot.note": "Nếu mỗi group chỉ có 5-8 learner records, dot plot giúp reader thấy mean không phải là toàn bộ câu chuyện.",
+        "s10.tag": "Color",
+        "s10.title": "Color phải có lý do",
+        "s10.body": "Dùng palette để phân biệt group, không dùng màu chỉ vì đẹp. Khi không cần highlight, giữ màu giản dị.",
+        "s11.tag": "Export",
+        "s11.title": "Export bằng code, không screenshot",
+        "s12.tag": "Caption",
+        "s12.title": "Caption nói figure đang show gì",
+        "caption.frame": "Figure 1. Mean gain score by activity focus in the synthetic Week 05 TCSOL dataset (<span class=\"frame-slot\">N = 25 usable records</span>). Bars show group means; the figure is <span class=\"frame-slot purpose\">descriptive</span>, not causal.",
+        "s13.tag": "Interpretation",
+        "s13.title": "Viết pattern + limitation trong cùng đoạn",
+        "interpret.frame": "Result complements has the highest descriptive mean gain, but each activity group has only 5-8 usable records. The dot plot is needed because mean bars alone hide individual variation.",
+        "s14.tag": "Thực hành",
+        "s14.title": "Checklist bài nộp",
+        "check.1": "notebook chạy từ đầu đến cuối",
+        "check.2": "summary table có N và mean gain",
+        "check.3": "bar + dot figures export PNG/SVG",
+        "check.4": "caption và interpretation không causal overclaim",
+        "s15.tag": "Đi tiếp",
+        "s15.title": "Mở demo, chạy notebook, rồi export figures",
+        "s15.body": "Khi đã có figure tốt, Week 06 sẽ tiếp tục với dữ liệu phức tạp hơn và workflow so sánh/join.",
+        "cta.aria": "Đi tiếp sau slides",
+        "cta.demo": "Mở demo",
+        "cta.notebook": "Xem notebook",
+        "cta.week": "Về Tuần 05",
+        "cta.home": "Về trang chủ"
+      },
+      en: {
+        "meta.title": "Week 05: Visualization for papers",
+        "nav.course.aria": "Course navigation",
+        "nav.home": "Home",
+        "nav.week": "Week 05",
+        "nav.toc": "Overview",
+        "nav.toc.aria": "Slide overview",
+        "nav.language": "Language",
+        "nav.slides.aria": "Slide navigation",
+        "nav.previous": "Previous",
+        "nav.next": "Next",
+        "nav.jump.aria": "Go to slide",
+        "nav.jump.label": "Slide",
+        "nav.jump.input": "Slide number",
+        "nav.jump.go": "Go",
+        "nav.toc.title": "Slide overview",
+        "nav.toc.hint": "Choose a section to jump directly to the slide you need.",
+        "nav.toc.close": "Close",
+        "s1.tag": "Week 05",
+        "s1.title": "Visualization for papers",
+        "s1.body": "From cleaned data to a figure that can enter a Results section.",
+        "hero.usable": "usable records",
+        "hero.groups": "activity groups",
+        "hero.figures": "paper figures",
+        "s2.tag": "From Week 04",
+        "s2.title": "A figure is only trustworthy when the data are clean",
+        "s2.body": "This week does not clean again. We use the cleaned dataset to focus on figure choice, export, and caption.",
+        "flow.data": "Week 04 output",
+        "flow.summary": "N + mean gain",
+        "flow.figure": "bar + dots",
+        "flow.caption": "Results writing",
+        "s3.tag": "Question",
+        "s3.title": "Which activity group has the clearest gain pattern?",
+        "s3.body": "This is a descriptive question. A figure can help us see a pattern, but it must not turn the pattern into a causal claim.",
+        "rq.text": "Which activity focus shows the clearest descriptive gain pattern after a short-term Chinese activity?",
+        "s4.tag": "Data preview",
+        "s4.title": "One row is still one learner record",
+        "s5.tag": "Chart choice",
+        "s5.title": "Bar charts answer mean; dot plots answer variation",
+        "bar.title": "Bar",
+        "bar.body": "compare group means",
+        "dot.title": "Dots",
+        "dot.body": "show each learner",
+        "caption.title": "Caption",
+        "caption.body": "state N, source, limitation",
+        "claim.title": "Claim",
+        "claim.body": "descriptive, not causal",
+        "s6.tag": "Prepare",
+        "s6.title": "Filter before plotting",
+        "s6.body": "The core figure uses only rows where <span class=\"inline-token\">usable_pre_post == True</span>.",
+        "s7.tag": "Summary",
+        "s7.title": "Create a summary table to check the figure",
+        "s8.tag": "Barplot",
+        "s8.title": "A bar chart needs N and axis labels",
+        "s9.tag": "Dotplot",
+        "s9.title": "Individual points make small N visible",
+        "dot.note": "When each group has only 5-8 learner records, a dot plot helps readers see that the mean is not the whole story.",
+        "s10.tag": "Color",
+        "s10.title": "Color needs a reason",
+        "s10.body": "Use a palette to separate groups, not just to decorate. When no highlight is needed, keep color simple.",
+        "s11.tag": "Export",
+        "s11.title": "Export with code, not screenshots",
+        "s12.tag": "Caption",
+        "s12.title": "A caption says what the figure shows",
+        "caption.frame": "Figure 1. Mean gain score by activity focus in the synthetic Week 05 TCSOL dataset (<span class=\"frame-slot\">N = 25 usable records</span>). Bars show group means; the figure is <span class=\"frame-slot purpose\">descriptive</span>, not causal.",
+        "s13.tag": "Interpretation",
+        "s13.title": "Write the pattern and limitation in one paragraph",
+        "interpret.frame": "Result complements has the highest descriptive mean gain, but each activity group has only 5-8 usable records. The dot plot is needed because mean bars alone hide individual variation.",
+        "s14.tag": "Practice",
+        "s14.title": "Assignment checklist",
+        "check.1": "notebook runs from top to bottom",
+        "check.2": "summary table has N and mean gain",
+        "check.3": "bar + dot figures export PNG/SVG",
+        "check.4": "caption and interpretation avoid causal overclaiming",
+        "s15.tag": "Next",
+        "s15.title": "Open the demo, run the notebook, then export figures",
+        "s15.body": "Once we have a good figure, Week 06 continues with more complex data and comparison/join workflows.",
+        "cta.aria": "Next steps after slides",
+        "cta.demo": "Open demo",
+        "cta.notebook": "View notebook",
+        "cta.week": "Back to Week 05",
+        "cta.home": "Home"
+      }
+    };
+    window.Bilingual.init({ translations: SLIDE_I18N, defaultLang: "vi" });
+    window.LectureSlides.init();
+  </script>
+</body>
+</html>

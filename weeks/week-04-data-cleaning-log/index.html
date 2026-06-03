@@ -1,0 +1,376 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title data-i18n="meta.title">Tuần 04: Làm sạch dữ liệu và cleaning log</title>
+  <link rel="stylesheet" href="../../assets/css/bilingual.css">
+  <link rel="stylesheet" href="../../assets/css/course-doc.css">
+</head>
+<body>
+  <header class="doc-topbar">
+    <a class="doc-brand" href="../../" data-i18n="brand">Python Research Hub</a>
+    <nav class="doc-nav" aria-label="Điều hướng tài liệu" data-i18n-aria-label="nav.aria">
+      <a href="#overview" data-i18n="nav.overview">Tổng quan</a>
+      <a href="#notes" data-i18n="nav.notes">Ghi chú</a>
+      <a href="#practice" data-i18n="nav.practice">Thực hành</a>
+      <a href="#assignment" data-i18n="nav.assignment">Bài nộp</a>
+      <a href="#readings" data-i18n="nav.readings">Bài đọc</a>
+      <a href="#rubric" data-i18n="nav.rubric">Tiêu chí</a>
+      <div class="language-switcher" role="group" aria-label="Ngôn ngữ / Language" data-i18n-aria-label="nav.language">
+        <button type="button" data-lang-option="vi" aria-pressed="true">Tiếng Việt</button>
+        <button type="button" data-lang-option="en" aria-pressed="false">English</button>
+      </div>
+    </nav>
+  </header>
+
+  <main class="doc-shell">
+    <aside class="doc-sidebar">
+      <strong data-i18n="side.title">Tuần 04</strong>
+      <a href="slides.html" data-i18n="side.slides">Slides</a>
+      <a href="interactive_demo.html" data-i18n="side.demo">Demo tương tác</a>
+      <a href="live_coding.html" data-i18n="side.notebook">Notebook HTML</a>
+      <a href="https://colab.research.google.com/github/mtuann/tcsol-python-research/blob/main/weeks/week-04-data-cleaning-log/live_coding.ipynb" data-i18n="side.colab">Chạy trong Colab</a>
+      <a href="live_coding.ipynb" download data-i18n="side.notebookSource">Tải source .ipynb</a>
+      <a href="data/raw/week04_messy_tcsol_scores.csv" download data-i18n="side.raw">Tải raw CSV</a>
+      <a href="data/processed/week04_cleaned_tcsol_scores.csv" download data-i18n="side.cleaned">Tải cleaned CSV</a>
+      <a href="outputs/tables/week04_cleaning_log.csv" download data-i18n="side.log">Tải cleaning log</a>
+    </aside>
+
+    <div class="doc-main">
+      <section class="doc-hero" id="overview">
+        <span class="doc-eyebrow" data-i18n="hero.tag">Tuần 04</span>
+        <h1 data-i18n="hero.title">Làm sạch dữ liệu và cleaning log</h1>
+        <p class="doc-lead" data-i18n="hero.body">Tuần này biến một CSV messy thành cleaned dataset có thể tái lập: diagnose lỗi, chuẩn hóa nhãn, chuyển cột số, ghi cleaning log, export và viết note cho Methods.</p>
+        <div class="doc-actions">
+          <a class="doc-button" href="slides.html" data-i18n="action.slides">Mở slides</a>
+          <a class="doc-button secondary" href="interactive_demo.html" data-i18n="action.demo">Mở demo</a>
+          <a class="doc-button secondary" href="live_coding.html" data-i18n="action.notebook">Xem notebook HTML</a>
+          <a class="doc-button secondary" href="https://colab.research.google.com/github/mtuann/tcsol-python-research/blob/main/weeks/week-04-data-cleaning-log/live_coding.ipynb" data-i18n="action.colab">Chạy trong Colab</a>
+        </div>
+      </section>
+
+      <section class="doc-card">
+        <h2 data-i18n="frame.title">Khung nghiên cứu</h2>
+        <div class="doc-grid">
+          <article class="mini-card"><span class="swatch blue"></span><h3 data-i18n="frame.question.title">Câu hỏi nhỏ</h3><p data-i18n="frame.question.body">Sau khi clean dữ liệu lớp học, nhóm hoạt động nào còn đủ bằng chứng pre/post để mô tả?</p></article>
+          <article class="mini-card"><span class="swatch green"></span><h3 data-i18n="frame.data.title">Dữ liệu</h3><p data-i18n="frame.data.body">36 bản ghi synthetic có nhãn lộn xộn, missing values, score dạng text và completed viết nhiều kiểu.</p></article>
+          <article class="mini-card"><span class="swatch amber"></span><h3 data-i18n="frame.output.title">Output</h3><p data-i18n="frame.output.body">Cleaned CSV, cleaning log, before/after table và cleaning decision note.</p></article>
+        </div>
+      </section>
+
+      <section class="doc-card">
+        <h2 data-i18n="writing.title">Hỗ trợ viết paper</h2>
+        <div class="doc-grid two">
+          <article class="mini-card"><span class="swatch purple"></span><h3 data-i18n="writing.output.title">Output viết tuần này</h3><p data-i18n="writing.output.body">Một đoạn Methods/Data preparation 100-150 từ giải thích raw data, cleaning rules, usable N và limitation.</p></article>
+          <article class="mini-card"><span class="swatch rose"></span><h3 data-i18n="writing.tools.title">Công cụ hỗ trợ</h3><p data-i18n="writing.tools.body">Viết note trong notebook trước, rồi paste sang Word. Zotero chỉ cần source note; Overleaf chưa cần.</p></article>
+        </div>
+        <h3 data-i18n="writing.frame.title">Mẫu câu Methods</h3>
+        <blockquote data-i18n="writing.frame.body">Before analysis, the raw CSV was preserved and a cleaned copy was created in pandas. Labels were standardized, numeric columns were converted, and invalid entries were treated as missing.</blockquote>
+      </section>
+
+      <section class="doc-card" id="notes">
+        <h2 data-i18n="notes.title">Ghi chú bài học</h2>
+        <p data-i18n="notes.intro">Cleaning không phải làm dữ liệu đẹp. Cleaning là biến dữ liệu thành dạng có thể phân tích và ghi lại quyết định.</p>
+        <table>
+          <thead><tr><th data-i18n="notes.term">Khái niệm</th><th data-i18n="notes.meaning">Nghĩa thực hành</th><th data-i18n="notes.paper">Liên hệ paper</th></tr></thead>
+          <tbody>
+            <tr><td><code>raw data</code></td><td data-i18n="raw.meaning">dữ liệu gốc như thu thập</td><td data-i18n="raw.paper">không sửa tay, giữ provenance</td></tr>
+            <tr><td><code>cleaned data</code></td><td data-i18n="clean.meaning">bảng dẫn xuất bằng code</td><td data-i18n="clean.paper">dữ liệu dùng cho analysis</td></tr>
+            <tr><td><code>missing value</code></td><td data-i18n="missing.meaning">giá trị chưa biết, không phải số 0</td><td data-i18n="missing.paper">cần báo usable N</td></tr>
+            <tr><td><code>cleaning log</code></td><td data-i18n="log.meaning">bảng ghi quyết định clean</td><td data-i18n="log.paper">cơ sở cho Methods note</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section class="doc-card">
+        <h2 data-i18n="workflow.title">Workflow tuần này</h2>
+        <div class="doc-grid">
+          <article class="mini-card"><span class="swatch blue"></span><h3 data-i18n="workflow.diagnose.title">1. Diagnose</h3><p data-i18n-html="workflow.diagnose.body">Dùng <code>isna()</code>, <code>dtypes</code>, <code>value_counts()</code> để thấy vấn đề.</p></article>
+          <article class="mini-card"><span class="swatch green"></span><h3 data-i18n="workflow.clean.title">2. Clean</h3><p data-i18n-html="workflow.clean.body">Dùng <code>str.strip</code>, <code>map</code>, <code>to_numeric</code> để chuẩn hóa.</p></article>
+          <article class="mini-card"><span class="swatch amber"></span><h3 data-i18n="workflow.log.title">3. Log + Export</h3><p data-i18n-html="workflow.log.body">Ghi <code>cleaning_log</code>, export cleaned CSV và before/after table.</p></article>
+        </div>
+      </section>
+
+      <section class="doc-card" id="practice">
+        <h2 data-i18n="practice.title">Thực hành</h2>
+        <div class="doc-grid">
+          <article class="mini-card"><span class="swatch blue"></span><h3 data-i18n="practice.a.title">A. Sao chép rồi sửa</h3><p data-i18n-html="practice.a.body">Thêm một variant mới vào <code>activity_map</code>, rồi chạy lại notebook.</p></article>
+          <article class="mini-card"><span class="swatch green"></span><h3 data-i18n="practice.b.title">B. Bài tập có hướng dẫn</h3><p data-i18n="practice.b.body">Tạo cleaned CSV, cleaning log và before/after table theo checklist.</p></article>
+          <article class="mini-card"><span class="swatch amber"></span><h3 data-i18n="practice.c.title">C. Bài tập kiểu nghiên cứu</h3><p data-i18n="practice.c.body">Viết 100-150 từ giải thích cleaning decisions và một limitation.</p></article>
+        </div>
+      </section>
+
+      <section class="doc-card" id="assignment">
+        <h2 data-i18n="assignment.title">Bài nộp</h2>
+        <p data-i18n="assignment.body">Nộp notebook chạy được, cleaned CSV, cleaning log, before/after table, cleaning note và source note.</p>
+        <ol>
+          <li data-i18n="assignment.t1">Load raw CSV và inspect missing values.</li>
+          <li data-i18n-html="assignment.t2">Normalize <code>class_group</code>, <code>activity_focus</code>, <code>completed</code>.</li>
+          <li data-i18n-html="assignment.t3">Convert numeric columns bằng <code>pd.to_numeric</code>.</li>
+          <li data-i18n-html="assignment.t4">Tạo <code>gain_score</code> và <code>usable_pre_post</code>.</li>
+          <li data-i18n="assignment.t5">Export cleaned CSV, cleaning log, before/after summary.</li>
+          <li data-i18n="assignment.t6">Viết cleaning decision note 100-150 từ.</li>
+        </ol>
+      </section>
+
+      <section class="doc-card" id="readings">
+        <h2 data-i18n="readings.title">Bài đọc</h2>
+        <div class="doc-grid two">
+          <article class="mini-card"><span class="swatch blue"></span><h3>pandas Missing Data</h3><p data-i18n="readings.missing.body">Đọc để hiểu missing values và vì sao missing không phải số 0.</p><a class="doc-chip" href="https://pandas.pydata.org/docs/user_guide/missing_data.html" data-i18n="readings.open">Mở nguồn</a></article>
+          <article class="mini-card"><span class="swatch green"></span><h3>pandas Text Data</h3><p data-i18n-html="readings.text.body">Dùng như lookup cho <code>str.strip</code>, <code>str.lower</code> và label normalization.</p><a class="doc-chip" href="https://pandas.pydata.org/pandas-docs/stable/user_guide/text.html" data-i18n="readings.open2">Mở nguồn</a></article>
+          <article class="mini-card"><span class="swatch amber"></span><h3>Initial Data Analysis</h3><p data-i18n="readings.ida.body">Đọc lướt để thấy cleaning và screening là phần của reproducible analysis.</p><a class="doc-chip" href="https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0295726" data-i18n="readings.open3">Mở nguồn</a></article>
+          <article class="mini-card"><span class="swatch rose"></span><h3>Tidy Data</h3><p data-i18n="readings.tidy.body">Nhắc lại row, column, value phải nhất quán trước khi analysis.</p><a class="doc-chip" href="https://vita.had.co.nz/papers/tidy-data.html" data-i18n="readings.open4">Mở nguồn</a></article>
+        </div>
+      </section>
+
+      <section class="doc-card" id="rubric">
+        <h2 data-i18n="rubric.title">Tiêu chí</h2>
+        <table>
+          <thead><tr><th data-i18n="rubric.criteria">Tiêu chí</th><th data-i18n="rubric.points">Điểm</th><th data-i18n="rubric.good">Bài làm tốt</th></tr></thead>
+          <tbody>
+            <tr><td data-i18n="rubric.code">Code đúng</td><td>25</td><td data-i18n="rubric.code.body">Notebook chạy, normalize/convert/export đúng.</td></tr>
+            <tr><td data-i18n="rubric.decisions">Quyết định cleaning</td><td>20</td><td data-i18n="rubric.decisions.body">Rules rõ, raw data giữ nguyên, missing values xử lý cẩn trọng.</td></tr>
+            <tr><td data-i18n="rubric.log">Cleaning log</td><td>15</td><td data-i18n="rubric.log.body">Có step, column, problem, decision, reason.</td></tr>
+            <tr><td data-i18n="rubric.table">Bảng trước/sau</td><td>15</td><td data-i18n="rubric.table.body">Cho thấy label variants và usable rows thay đổi ra sao.</td></tr>
+            <tr><td data-i18n="rubric.writing">Viết Methods note</td><td>15</td><td data-i18n="rubric.writing.body">Note nêu method, N, limitation, không nói data hoàn hảo.</td></tr>
+            <tr><td data-i18n="rubric.repro">Tái lập</td><td>10</td><td data-i18n="rubric.repro.body">Output sinh bằng code, paths ổn định, source note có ngày.</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section class="doc-card">
+        <h2 data-i18n="source.title">Nguồn biên soạn cho giảng viên</h2>
+        <p data-i18n="source.body">Markdown là source để sửa bài. Người học nên dùng trang HTML, slides, demo và notebook HTML.</p>
+        <div class="doc-links">
+          <a class="doc-chip" href="README.md">README.md</a>
+          <a class="doc-chip" href="lecture_notes.md">lecture_notes.md</a>
+          <a class="doc-chip" href="exercises.md">exercises.md</a>
+          <a class="doc-chip" href="assignment.md">assignment.md</a>
+          <a class="doc-chip" href="readings.md">readings.md</a>
+          <a class="doc-chip" href="rubric.md">rubric.md</a>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <script src="../../assets/js/bilingual.js"></script>
+  <script>
+    const WEEK04_I18N = {
+      vi: {
+        "meta.title": "Tuần 04: Làm sạch dữ liệu và cleaning log",
+        "brand": "Python Research Hub",
+        "nav.aria": "Điều hướng tài liệu",
+        "nav.language": "Ngôn ngữ / Language",
+        "nav.overview": "Tổng quan",
+        "nav.notes": "Ghi chú",
+        "nav.practice": "Thực hành",
+        "nav.assignment": "Bài nộp",
+        "nav.readings": "Bài đọc",
+        "nav.rubric": "Tiêu chí",
+        "side.title": "Tuần 04",
+        "side.slides": "Slides",
+        "side.demo": "Demo tương tác",
+        "side.notebook": "Notebook HTML",
+        "side.colab": "Chạy trong Colab",
+        "side.notebookSource": "Tải source .ipynb",
+        "side.raw": "Tải raw CSV",
+        "side.cleaned": "Tải cleaned CSV",
+        "side.log": "Tải cleaning log",
+        "hero.tag": "Tuần 04",
+        "hero.title": "Làm sạch dữ liệu và cleaning log",
+        "hero.body": "Tuần này biến một CSV messy thành cleaned dataset có thể tái lập: diagnose lỗi, chuẩn hóa nhãn, chuyển cột số, ghi cleaning log, export và viết note cho Methods.",
+        "action.slides": "Mở slides",
+        "action.demo": "Mở demo",
+        "action.notebook": "Xem notebook HTML",
+        "action.colab": "Chạy trong Colab",
+        "frame.title": "Khung nghiên cứu",
+        "frame.question.title": "Câu hỏi nhỏ",
+        "frame.question.body": "Sau khi clean dữ liệu lớp học, nhóm hoạt động nào còn đủ bằng chứng pre/post để mô tả?",
+        "frame.data.title": "Dữ liệu",
+        "frame.data.body": "36 bản ghi synthetic có nhãn lộn xộn, missing values, score dạng text và completed viết nhiều kiểu.",
+        "frame.output.title": "Output",
+        "frame.output.body": "Cleaned CSV, cleaning log, before/after table và cleaning decision note.",
+        "writing.title": "Hỗ trợ viết paper",
+        "writing.output.title": "Output viết tuần này",
+        "writing.output.body": "Một đoạn Methods/Data preparation 100-150 từ giải thích raw data, cleaning rules, usable N và limitation.",
+        "writing.tools.title": "Công cụ hỗ trợ",
+        "writing.tools.body": "Viết note trong notebook trước, rồi paste sang Word. Zotero chỉ cần source note; Overleaf chưa cần.",
+        "writing.frame.title": "Mẫu câu Methods",
+        "writing.frame.body": "Before analysis, the raw CSV was preserved and a cleaned copy was created in pandas. Labels were standardized, numeric columns were converted, and invalid entries were treated as missing.",
+        "notes.title": "Ghi chú bài học",
+        "notes.intro": "Cleaning không phải làm dữ liệu đẹp. Cleaning là biến dữ liệu thành dạng có thể phân tích và ghi lại quyết định.",
+        "notes.term": "Khái niệm",
+        "notes.meaning": "Nghĩa thực hành",
+        "notes.paper": "Liên hệ paper",
+        "raw.meaning": "dữ liệu gốc như thu thập",
+        "raw.paper": "không sửa tay, giữ provenance",
+        "clean.meaning": "bảng dẫn xuất bằng code",
+        "clean.paper": "dữ liệu dùng cho analysis",
+        "missing.meaning": "giá trị chưa biết, không phải số 0",
+        "missing.paper": "cần báo usable N",
+        "log.meaning": "bảng ghi quyết định clean",
+        "log.paper": "cơ sở cho Methods note",
+        "workflow.title": "Workflow tuần này",
+        "workflow.diagnose.title": "1. Diagnose",
+        "workflow.diagnose.body": "Dùng <code>isna()</code>, <code>dtypes</code>, <code>value_counts()</code> để thấy vấn đề.",
+        "workflow.clean.title": "2. Clean",
+        "workflow.clean.body": "Dùng <code>str.strip</code>, <code>map</code>, <code>to_numeric</code> để chuẩn hóa.",
+        "workflow.log.title": "3. Log + Export",
+        "workflow.log.body": "Ghi <code>cleaning_log</code>, export cleaned CSV và before/after table.",
+        "practice.title": "Thực hành",
+        "practice.a.title": "A. Sao chép rồi sửa",
+        "practice.a.body": "Thêm một variant mới vào <code>activity_map</code>, rồi chạy lại notebook.",
+        "practice.b.title": "B. Bài tập có hướng dẫn",
+        "practice.b.body": "Tạo cleaned CSV, cleaning log và before/after table theo checklist.",
+        "practice.c.title": "C. Bài tập kiểu nghiên cứu",
+        "practice.c.body": "Viết 100-150 từ giải thích cleaning decisions và một limitation.",
+        "assignment.title": "Bài nộp",
+        "assignment.body": "Nộp notebook chạy được, cleaned CSV, cleaning log, before/after table, cleaning note và source note.",
+        "assignment.t1": "Load raw CSV và inspect missing values.",
+        "assignment.t2": "Normalize <code>class_group</code>, <code>activity_focus</code>, <code>completed</code>.",
+        "assignment.t3": "Convert numeric columns bằng <code>pd.to_numeric</code>.",
+        "assignment.t4": "Tạo <code>gain_score</code> và <code>usable_pre_post</code>.",
+        "assignment.t5": "Export cleaned CSV, cleaning log, before/after summary.",
+        "assignment.t6": "Viết cleaning decision note 100-150 từ.",
+        "readings.title": "Bài đọc",
+        "readings.missing.body": "Đọc để hiểu missing values và vì sao missing không phải số 0.",
+        "readings.text.body": "Dùng như lookup cho <code>str.strip</code>, <code>str.lower</code> và label normalization.",
+        "readings.ida.body": "Đọc lướt để thấy cleaning và screening là phần của reproducible analysis.",
+        "readings.tidy.body": "Nhắc lại row, column, value phải nhất quán trước khi analysis.",
+        "readings.open": "Mở nguồn",
+        "readings.open2": "Mở nguồn",
+        "readings.open3": "Mở nguồn",
+        "readings.open4": "Mở nguồn",
+        "rubric.title": "Tiêu chí",
+        "rubric.criteria": "Tiêu chí",
+        "rubric.points": "Điểm",
+        "rubric.good": "Bài làm tốt",
+        "rubric.code": "Code đúng",
+        "rubric.code.body": "Notebook chạy, normalize/convert/export đúng.",
+        "rubric.decisions": "Quyết định cleaning",
+        "rubric.decisions.body": "Rules rõ, raw data giữ nguyên, missing values xử lý cẩn trọng.",
+        "rubric.log": "Cleaning log",
+        "rubric.log.body": "Có step, column, problem, decision, reason.",
+        "rubric.table": "Bảng trước/sau",
+        "rubric.table.body": "Cho thấy label variants và usable rows thay đổi ra sao.",
+        "rubric.writing": "Viết Methods note",
+        "rubric.writing.body": "Note nêu method, N, limitation, không nói data hoàn hảo.",
+        "rubric.repro": "Tái lập",
+        "rubric.repro.body": "Output sinh bằng code, paths ổn định, source note có ngày.",
+        "source.title": "Nguồn biên soạn cho giảng viên",
+        "source.body": "Markdown là source để sửa bài. Người học nên dùng trang HTML, slides, demo và notebook HTML."
+      },
+      en: {
+        "meta.title": "Week 04: Data cleaning and cleaning logs",
+        "brand": "Python Research Hub",
+        "nav.aria": "Document navigation",
+        "nav.language": "Language",
+        "nav.overview": "Overview",
+        "nav.notes": "Notes",
+        "nav.practice": "Practice",
+        "nav.assignment": "Assignment",
+        "nav.readings": "Readings",
+        "nav.rubric": "Rubric",
+        "side.title": "Week 04",
+        "side.slides": "Slides",
+        "side.demo": "Interactive demo",
+        "side.notebook": "Notebook HTML",
+        "side.colab": "Run in Colab",
+        "side.notebookSource": "Source .ipynb",
+        "side.raw": "Download raw CSV",
+        "side.cleaned": "Download cleaned CSV",
+        "side.log": "Download cleaning log",
+        "hero.tag": "Week 04",
+        "hero.title": "Data cleaning and cleaning logs",
+        "hero.body": "This week turns a messy CSV into a reproducible cleaned dataset: diagnose issues, standardize labels, convert numeric columns, record a cleaning log, export, and write a Methods note.",
+        "action.slides": "Open slides",
+        "action.demo": "Open demo",
+        "action.notebook": "View notebook HTML",
+        "action.colab": "Run in Colab",
+        "frame.title": "Research frame",
+        "frame.question.title": "Small question",
+        "frame.question.body": "After cleaning classroom data, which activity focus still has usable pre/post evidence?",
+        "frame.data.title": "Data",
+        "frame.data.body": "36 synthetic records with messy labels, missing values, text-like scores, and varied completed labels.",
+        "frame.output.title": "Output",
+        "frame.output.body": "Cleaned CSV, cleaning log, before/after table, and cleaning decision note.",
+        "writing.title": "Writing support",
+        "writing.output.title": "This week's writing output",
+        "writing.output.body": "A 100-150 word Methods/Data preparation paragraph explaining raw data, cleaning rules, usable N, and limitation.",
+        "writing.tools.title": "Tool support",
+        "writing.tools.body": "Draft the note in the notebook first, then paste it into Word. Zotero only needs a source note; Overleaf is not needed.",
+        "writing.frame.title": "Methods frame",
+        "writing.frame.body": "Before analysis, the raw CSV was preserved and a cleaned copy was created in pandas. Labels were standardized, numeric columns were converted, and invalid entries were treated as missing.",
+        "notes.title": "Lecture notes",
+        "notes.intro": "Cleaning is not making data pretty. Cleaning makes data analyzable and documents the decisions.",
+        "notes.term": "Concept",
+        "notes.meaning": "Practical meaning",
+        "notes.paper": "Paper connection",
+        "raw.meaning": "data as collected",
+        "raw.paper": "do not manually edit; preserve provenance",
+        "clean.meaning": "a code-derived table",
+        "clean.paper": "data used for analysis",
+        "missing.meaning": "unknown value, not zero",
+        "missing.paper": "report usable N",
+        "log.meaning": "table of cleaning decisions",
+        "log.paper": "basis for Methods note",
+        "workflow.title": "This week's workflow",
+        "workflow.diagnose.title": "1. Diagnose",
+        "workflow.diagnose.body": "Use <code>isna()</code>, <code>dtypes</code>, and <code>value_counts()</code> to see the issues.",
+        "workflow.clean.title": "2. Clean",
+        "workflow.clean.body": "Use <code>str.strip</code>, <code>map</code>, and <code>to_numeric</code> to standardize.",
+        "workflow.log.title": "3. Log + Export",
+        "workflow.log.body": "Write <code>cleaning_log</code>, export cleaned CSV, and create the before/after table.",
+        "practice.title": "Practice",
+        "practice.a.title": "A. Copy and Modify",
+        "practice.a.body": "Add one new variant to <code>activity_map</code>, then rerun the notebook.",
+        "practice.b.title": "B. Guided Problem",
+        "practice.b.body": "Create the cleaned CSV, cleaning log, and before/after table from the checklist.",
+        "practice.c.title": "C. Research-Style Task",
+        "practice.c.body": "Write 100-150 words explaining cleaning decisions and one limitation.",
+        "assignment.title": "Assignment",
+        "assignment.body": "Submit a runnable notebook, cleaned CSV, cleaning log, before/after table, cleaning note, and source note.",
+        "assignment.t1": "Load the raw CSV and inspect missing values.",
+        "assignment.t2": "Normalize <code>class_group</code>, <code>activity_focus</code>, and <code>completed</code>.",
+        "assignment.t3": "Convert numeric columns with <code>pd.to_numeric</code>.",
+        "assignment.t4": "Create <code>gain_score</code> and <code>usable_pre_post</code>.",
+        "assignment.t5": "Export cleaned CSV, cleaning log, and before/after summary.",
+        "assignment.t6": "Write a 100-150 word cleaning decision note.",
+        "readings.title": "Readings",
+        "readings.missing.body": "Read this to understand missing values and why missing is not zero.",
+        "readings.text.body": "Use this as a lookup for <code>str.strip</code>, <code>str.lower</code>, and label normalization.",
+        "readings.ida.body": "Skim this to see cleaning and screening as part of reproducible analysis.",
+        "readings.tidy.body": "Review why row, column, and value consistency matters before analysis.",
+        "readings.open": "Open source",
+        "readings.open2": "Open source",
+        "readings.open3": "Open source",
+        "readings.open4": "Open source",
+        "rubric.title": "Rubric",
+        "rubric.criteria": "Criterion",
+        "rubric.points": "Points",
+        "rubric.good": "Strong work",
+        "rubric.code": "Code correctness",
+        "rubric.code.body": "Notebook runs; normalize/convert/export are correct.",
+        "rubric.decisions": "Cleaning decisions",
+        "rubric.decisions.body": "Rules are clear; raw data is preserved; missing values are handled cautiously.",
+        "rubric.log": "Cleaning log",
+        "rubric.log.body": "Includes step, column, problem, decision, and reason.",
+        "rubric.table": "Before/after table",
+        "rubric.table.body": "Shows how label variants and usable rows changed.",
+        "rubric.writing": "Writing",
+        "rubric.writing.body": "Note states method, N, limitation, and does not claim perfect data.",
+        "rubric.repro": "Reproducibility",
+        "rubric.repro.body": "Outputs are code-generated, paths are stable, source note has date.",
+        "source.title": "Instructor/source files",
+        "source.body": "Markdown files are editable source. Learners should use the HTML page, slides, demo, and notebook HTML."
+      }
+    };
+
+    window.Bilingual.init({
+      defaultLang: "vi",
+      translations: WEEK04_I18N
+    });
+  </script>
+</body>
+</html>

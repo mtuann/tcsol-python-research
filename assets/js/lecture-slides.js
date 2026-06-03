@@ -13,6 +13,8 @@
   function init() {
     const sections = Array.from(document.querySelectorAll(".slides > section"));
     let current = 0;
+    let lastFocusBeforeOverview = null;
+    let isUpdatingHash = false;
 
     const nav = document.createElement("nav");
     nav.className = "fallback-nav";
@@ -73,15 +75,18 @@
     const tocButtons = Array.from(overviewGrid.querySelectorAll(".toc-item"));
 
     function setOverview(open) {
+      if (open) lastFocusBeforeOverview = document.activeElement;
       overview.classList.toggle("is-open", open);
       overview.setAttribute("aria-hidden", String(!open));
       if (open) {
         const activeButton = overviewGrid.querySelector(".toc-item.active");
         if (activeButton) activeButton.focus();
+      } else if (lastFocusBeforeOverview && typeof lastFocusBeforeOverview.focus === "function") {
+        lastFocusBeforeOverview.focus();
       }
     }
 
-    function show(index) {
+    function show(index, options) {
       current = Math.max(0, Math.min(sections.length - 1, index));
       sections.forEach((section, idx) => section.classList.toggle("active", idx === current));
       tocButtons.forEach((button, idx) => {
@@ -95,7 +100,13 @@
       input.value = String(current + 1);
       prev.disabled = current === 0;
       next.disabled = current === sections.length - 1;
-      location.hash = "slide-" + (current + 1);
+      if (!options || options.updateHash !== false) {
+        isUpdatingHash = true;
+        location.hash = "slide-" + (current + 1);
+        window.setTimeout(() => {
+          isUpdatingHash = false;
+        }, 0);
+      }
     }
 
     document.addEventListener("click", (event) => {
@@ -124,15 +135,25 @@
     });
 
     window.addEventListener("keydown", (event) => {
-      if (event.target && ["INPUT", "TEXTAREA"].includes(event.target.tagName)) return;
+      if (event.target && ["INPUT", "TEXTAREA", "BUTTON", "A", "SELECT"].includes(event.target.tagName)) return;
       if (event.key === "Escape") setOverview(false);
       if (overview.classList.contains("is-open")) return;
       if (event.key === "ArrowRight" || event.key === " ") show(current + 1);
       if (event.key === "ArrowLeft") show(current - 1);
     });
 
+    window.addEventListener("hashchange", () => {
+      if (isUpdatingHash) return;
+      const match = location.hash.match(/slide-(\d+)/);
+      if (match) show(Number(match[1]) - 1, { updateHash: false });
+    });
+
     const hashMatch = location.hash.match(/slide-(\d+)/);
     show(hashMatch ? Number(hashMatch[1]) - 1 : 0);
+
+    if (window.Bilingual && typeof window.Bilingual.setLang === "function") {
+      window.Bilingual.setLang(window.Bilingual.getLang(), { persist: false });
+    }
   }
 
   window.LectureSlides = { init };

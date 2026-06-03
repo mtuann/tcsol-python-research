@@ -1,0 +1,6 @@
+---
+title: "Week 04: Data cleaning log"
+format: html
+---
+
+Source placeholder. The public learner deck is maintained in `slides.html` so it can use the shared interactive slide runtime and bilingual controls.

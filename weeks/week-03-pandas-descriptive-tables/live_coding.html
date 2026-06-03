@@ -11,7 +11,7 @@
   <header class="doc-topbar">
     <a class="doc-brand" href="../../" data-i18n="brand">Python Research Hub</a>
     <nav class="doc-nav" aria-label="Điều hướng notebook" data-i18n-aria-label="nav.aria">
-      <a href="./" data-i18n="nav.week">Week 01</a>
+      <a href="./" data-i18n="nav.week">Tuần 03</a>
       <a href="slides.html" data-i18n="nav.slides">Slides</a>
       <a href="interactive_demo.html" data-i18n="nav.demo">Demo</a>
       <a href="live_coding.ipynb" download data-i18n="nav.source">Source .ipynb</a>
@@ -39,7 +39,7 @@
         <div class="doc-actions">
           <a class="doc-button" href="https://colab.research.google.com/github/mtuann/tcsol-python-research/blob/main/weeks/week-03-pandas-descriptive-tables/live_coding.ipynb" data-i18n="action.colab">Chạy trong Colab</a>
           <a class="doc-button secondary" href="live_coding.ipynb" download data-i18n="action.source">Tải .ipynb</a>
-          <a class="doc-button secondary" href="./" data-i18n="action.week">Quay lại Week 01</a>
+          <a class="doc-button secondary" href="./" data-i18n="action.week">Quay lại Tuần 03</a>
         </div>
       </section>
 
@@ -62,19 +62,41 @@ from urllib.request import urlretrieve
 
 import pandas as pd
 
-WEEK_DIR = Path(&quot;weeks/week-03-pandas-descriptive-tables&quot;)
+THIS_WEEK = &quot;week-03-pandas-descriptive-tables&quot;
+
+
+def find_week_dir():
+    candidates = [
+        Path.cwd(),
+        Path.cwd() / &quot;weeks&quot; / THIS_WEEK,
+        Path.cwd().parent,
+        Path.cwd().parent / &quot;weeks&quot; / THIS_WEEK,
+    ]
+    for candidate in candidates:
+        if candidate.name == THIS_WEEK and (candidate / &quot;data/raw&quot;).exists():
+            return candidate
+        if (candidate / &quot;data/raw/week03_tcsol_scores.csv&quot;).exists():
+            return candidate
+    week_dir = Path.cwd() / &quot;weeks&quot; / THIS_WEEK
+    week_dir.mkdir(parents=True, exist_ok=True)
+    return week_dir
+
+
+WEEK_DIR = find_week_dir()
 DATA_PATH = WEEK_DIR / &quot;data/raw/week03_tcsol_scores.csv&quot;
 OUTPUT_DIR = WEEK_DIR / &quot;outputs/tables&quot;
 OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
 if not DATA_PATH.exists():
     DATA_PATH.parent.mkdir(parents=True, exist_ok=True)
-    source_url = &quot;https://raw.githubusercontent.com/mtuann/tcsol-python-research/main/weeks/week-03-pandas-descriptive-tables/data/raw/week03_tcsol_scores.csv&quot;
+    source_url = &quot;https://raw.githubusercontent.com/mtuann/tcsol-python-research/76964a1c847cff1906015d1a31875bdf30ccb910/weeks/week-03-pandas-descriptive-tables/data/raw/week03_tcsol_scores.csv&quot;
     urlretrieve(source_url, DATA_PATH)
 
 print(&quot;pandas version:&quot;, pd.__version__)
+print(&quot;Week folder:&quot;, WEEK_DIR)
 print(&quot;Data file:&quot;, DATA_PATH)</code></pre><div class="nb-output"><div class="nb-output-label">Output</div><pre><code>pandas version: 2.2.3
-Data file: weeks/week-03-pandas-descriptive-tables/data/raw/week03_tcsol_scores.csv</code></pre></div></article>
+Week folder: /Users/mitu/Desktop/work/projects/tcsol-python-research-syllabus/weeks/week-03-pandas-descriptive-tables
+Data file: /Users/mitu/Desktop/work/projects/tcsol-python-research-syllabus/weeks/week-03-pandas-descriptive-tables/data/raw/week03_tcsol_scores.csv</code></pre></div></article>
 <article class="nb-cell nb-markdown" data-cell-type="markdown" data-i18n-html="notebook.cell04"><h3>2. Đọc CSV thành DataFrame</h3>
 <p>Sau khi đọc file, luôn kiểm tra: có bao nhiêu dòng, bao nhiêu cột, và các tên cột là gì?</p></article>
 <article class="nb-cell nb-code" data-cell-type="code"><div class="nb-input-label">In [2]</div><pre><code>df = pd.read_csv(DATA_PATH)
@@ -162,20 +184,28 @@ result_complements           8      58.9       70.9       12.0
 <p>Bảng này là artifact của Week 03. Nó có thể được mở trong Excel, đưa vào Word, hoặc dùng để viết caption.</p></article>
 <article class="nb-cell nb-code" data-cell-type="code"><div class="nb-input-label">In [7]</div><pre><code>output_path = OUTPUT_DIR / &quot;week03_group_summary.csv&quot;
 summary.to_csv(output_path, index=False)
-print(&quot;Saved summary table to:&quot;, output_path)</code></pre><div class="nb-output"><div class="nb-output-label">Output</div><pre><code>Saved summary table to: weeks/week-03-pandas-descriptive-tables/outputs/tables/week03_group_summary.csv</code></pre></div></article>
+print(&quot;Saved summary table to:&quot;, output_path)</code></pre><div class="nb-output"><div class="nb-output-label">Output</div><pre><code>Saved summary table to: /Users/mitu/Desktop/work/projects/tcsol-python-research-syllabus/weeks/week-03-pandas-descriptive-tables/outputs/tables/week03_group_summary.csv</code></pre></div></article>
 <article class="nb-cell nb-markdown" data-cell-type="markdown" data-i18n-html="notebook.cell16"><h3>8. Caption cho paper</h3>
 <p>Caption tốt không chỉ nói bảng có gì. Nó nói nguồn, N, đơn vị đo, cách tính, pattern chính và giới hạn.</p></article>
 <article class="nb-cell nb-code" data-cell-type="code"><div class="nb-input-label">In [8]</div><pre><code>top_row = summary.iloc[0]
+second_row = summary.iloc[1]
 caption = (
-    f&quot;Table 1. {top_row[&#x27;activity_focus&#x27;]} shows the largest descriptive average gain &quot;
-    f&quot;({top_row[&#x27;mean_gain&#x27;]} points) in the Week 03 teaching dataset. &quot;
-    f&quot;The table includes N = {int(summary[&#x27;n_learners&#x27;].sum())} completed learner records; &quot;
-    &quot;scores are classroom scores on a 0-100 scale, and gain is post_score minus pre_score. &quot;
-    &quot;The table is descriptive and does not establish a causal effect of the activity.&quot;
+    f&quot;Table 1. The {top_row[&#x27;activity_focus&#x27;]} group shows the largest descriptive &quot;
+    f&quot;average gain ({top_row[&#x27;mean_gain&#x27;]} points), closely followed by &quot;
+    f&quot;{second_row[&#x27;activity_focus&#x27;]} ({second_row[&#x27;mean_gain&#x27;]} points). &quot;
+    &quot;Data are from an instructor-created Week 03 teaching dataset, &quot;
+    f&quot;N = {len(complete)} completed learner records; scores are on a 0-100 scale, &quot;
+    &quot;and gain is post_score minus pre_score. The table is descriptive: activity focus &quot;
+    &quot;is linked to class section in this toy dataset, so the result does not establish a causal effect.&quot;
 )
-print(caption)</code></pre><div class="nb-output"><div class="nb-output-label">Output</div><pre><code>Table 1. measure_words shows the largest descriptive average gain (12.1 points) in the Week 03 teaching dataset. The table includes N = 31 completed learner records; scores are classroom scores on a 0-100 scale, and gain is post_score minus pre_score. The table is descriptive and does not establish a causal effect of the activity.</code></pre></div></article>
+
+source_note = &quot;Source note: instructor-created synthetic Week 03 dataset, accessed 2026-06-03.&quot;
+
+print(caption)
+print(source_note)</code></pre><div class="nb-output"><div class="nb-output-label">Output</div><pre><code>Table 1. The measure_words group shows the largest descriptive average gain (12.1 points), closely followed by result_complements (12.0 points). Data are from an instructor-created Week 03 teaching dataset, N = 31 completed learner records; scores are on a 0-100 scale, and gain is post_score minus pre_score. The table is descriptive: activity focus is linked to class section in this toy dataset, so the result does not establish a causal effect.
+Source note: instructor-created synthetic Week 03 dataset, accessed 2026-06-03.</code></pre></div></article>
 <article class="nb-cell nb-markdown" data-cell-type="markdown" data-i18n-html="notebook.cell18"><h3>9. Bài tập nhỏ trong notebook</h3>
-<p>Đổi <code>group_variable</code> thành <code>class_group</code>, chạy lại cell, rồi viết một câu so sánh. Đây là bài tập Copy and Modify.</p></article>
+<p>Đổi <code>group_variable</code> thành <code>class_group</code>, chạy lại cell, rồi viết một câu so sánh. Đây là bài tập <strong>sao chép rồi sửa</strong>.</p></article>
 <article class="nb-cell nb-code" data-cell-type="code"><div class="nb-input-label">In [9]</div><pre><code>group_variable = &quot;activity_focus&quot;  # Try: &quot;class_group&quot;
 
 practice_summary = (
@@ -194,8 +224,9 @@ result_complements           8       12.0
         word_order           7        8.4
  vocabulary_review           8        7.9</code></pre></div></article>
 <article class="nb-cell nb-markdown" data-cell-type="markdown" data-i18n-html="notebook.cell20"><h3>10. Diễn giải 120-160 từ</h3>
-<p>Viết vào Markdown cell hoặc Word:</p>
-<ul><li>Pattern chính là gì?</li><li>N là bao nhiêu?</li><li>Vì sao không được kết luận nhân quả?</li><li>Cần thu thập thêm dữ liệu gì ở Week 04?</li></ul></article>
+<p>Viết trong Markdown cell hoặc Word. Dùng scaffold này:</p>
+<ul><li>Câu 1: nêu câu hỏi và metric chính (<code>mean_gain</code>).</li><li>Câu 2: nêu pattern chính và N.</li><li>Câu 3: so sánh nhóm đứng đầu với nhóm gần nhất.</li><li>Câu 4: nêu limitation: activity focus đang gắn với class section, nên không kết luận nhân quả.</li><li>Câu 5: nêu next step cho Week 04 hoặc thu thập dữ liệu.</li></ul>
+<p>Mẫu ngắn: Trong dataset Week 03, nhóm <code>measure_words</code> có mean gain cao nhất (12.1 điểm), gần sát <code>result_complements</code> (12.0 điểm). Bảng dựa trên N = 31 completed learner records. Vì activity focus gần như đi cùng class section, kết quả chỉ mô tả pattern trong dữ liệu này và không chứng minh hoạt động nào hiệu quả hơn. Bước tiếp theo là làm sạch dữ liệu và kiểm tra missing values trước khi trực quan hóa hoặc so sánh sâu hơn.</p></article>
       </section>
     </div>
   </main>
@@ -215,8 +246,8 @@ result_complements           8       12.0
                 "notebook.cell12": "<h3>6. <code>groupby</code>: nhóm rồi tính</h3>\n<p>Đọc dòng dưới bằng lời: nhóm các dòng theo <code>activity_focus</code>, rồi tính N, điểm trung bình trước học, điểm trung bình sau học, và điểm tăng trung bình.</p>",
                 "notebook.cell14": "<h3>7. Xuất bảng mô tả</h3>\n<p>Bảng này là artifact của Week 03. Nó có thể được mở trong Excel, đưa vào Word, hoặc dùng để viết caption.</p>",
                 "notebook.cell16": "<h3>8. Caption cho paper</h3>\n<p>Caption tốt không chỉ nói bảng có gì. Nó nói nguồn, N, đơn vị đo, cách tính, pattern chính và giới hạn.</p>",
-                "notebook.cell18": "<h3>9. Bài tập nhỏ trong notebook</h3>\n<p>Đổi <code>group_variable</code> thành <code>class_group</code>, chạy lại cell, rồi viết một câu so sánh. Đây là bài tập Copy and Modify.</p>",
-                "notebook.cell20": "<h3>10. Diễn giải 120-160 từ</h3>\n<p>Viết vào Markdown cell hoặc Word:</p>\n<ul><li>Pattern chính là gì?</li><li>N là bao nhiêu?</li><li>Vì sao không được kết luận nhân quả?</li><li>Cần thu thập thêm dữ liệu gì ở Week 04?</li></ul>",
+                "notebook.cell18": "<h3>9. Bài tập nhỏ trong notebook</h3>\n<p>Đổi <code>group_variable</code> thành <code>class_group</code>, chạy lại cell, rồi viết một câu so sánh. Đây là bài tập <strong>sao chép rồi sửa</strong>.</p>",
+                "notebook.cell20": "<h3>10. Diễn giải 120-160 từ</h3>\n<p>Viết trong Markdown cell hoặc Word. Dùng scaffold này:</p>\n<ul><li>Câu 1: nêu câu hỏi và metric chính (<code>mean_gain</code>).</li><li>Câu 2: nêu pattern chính và N.</li><li>Câu 3: so sánh nhóm đứng đầu với nhóm gần nhất.</li><li>Câu 4: nêu limitation: activity focus đang gắn với class section, nên không kết luận nhân quả.</li><li>Câu 5: nêu next step cho Week 04 hoặc thu thập dữ liệu.</li></ul>\n<p>Mẫu ngắn: Trong dataset Week 03, nhóm <code>measure_words</code> có mean gain cao nhất (12.1 điểm), gần sát <code>result_complements</code> (12.0 điểm). Bảng dựa trên N = 31 completed learner records. Vì activity focus gần như đi cùng class section, kết quả chỉ mô tả pattern trong dữ liệu này và không chứng minh hoạt động nào hiệu quả hơn. Bước tiếp theo là làm sạch dữ liệu và kiểm tra missing values trước khi trực quan hóa hoặc so sánh sâu hơn.</p>",
                 "brand": "Python Research Hub",
                 "meta.title": "Tuần 03: pandas cơ bản và bảng mô tả | Notebook đã render",
                 "nav.aria": "Điều hướng notebook",
@@ -255,8 +286,8 @@ result_complements           8       12.0
                 "notebook.cell12": "<h3>6. <code>groupby</code>: group then calculate</h3>\n<p>Read the code below in words: group rows by <code>activity_focus</code>, then calculate N, mean pre-test score, mean post-test score, and mean gain.</p>",
                 "notebook.cell14": "<h3>7. Export the descriptive table</h3>\n<p>This table is the Week 03 artifact. It can be opened in Excel, moved into Word, or used to write a caption.</p>",
                 "notebook.cell16": "<h3>8. Paper caption</h3>\n<p>A strong caption does not only name the table. It states source, N, measurement unit, calculation, main pattern, and limitation.</p>",
-                "notebook.cell18": "<h3>9. Small notebook exercise</h3>\n<p>Change <code>group_variable</code> to <code>class_group</code>, rerun the cell, and write one comparison sentence. This is the Copy and Modify exercise.</p>",
-                "notebook.cell20": "<h3>10. 120-160 word interpretation</h3>\n<p>Write in a Markdown cell or Word:</p>\n<ul><li>What is the main pattern?</li><li>What is N?</li><li>Why should you avoid a causal claim?</li><li>What additional data should be collected in Week 04?</li></ul>",
+                "notebook.cell18": "<h3>9. Small notebook exercise</h3>\n<p>Change <code>group_variable</code> to <code>class_group</code>, rerun the cell, and write one comparison sentence. This is the <strong>copy and modify</strong> exercise.</p>",
+                "notebook.cell20": "<h3>10. 120-160 word interpretation</h3>\n<p>Write in a Markdown cell or Word. Use this scaffold:</p>\n<ul><li>Sentence 1: state the question and main metric (<code>mean_gain</code>).</li><li>Sentence 2: report the main pattern and N.</li><li>Sentence 3: compare the top group with the closest group.</li><li>Sentence 4: state the limitation: activity focus is linked to class section, so this is not causal evidence.</li><li>Sentence 5: state a next step for Week 04 or data collection.</li></ul>\n<p>Short model: In the Week 03 dataset, the <code>measure_words</code> group has the highest mean gain (12.1 points), closely followed by <code>result_complements</code> (12.0 points). The table is based on N = 31 completed learner records. Because activity focus is closely linked to class section, the result only describes a pattern in this dataset and does not show that one activity is more effective. The next step is to clean the data and inspect missing values before visualization or deeper comparison.</p>",
                 "brand": "Python Research Hub",
                 "meta.title": "Week 03: pandas basics and descriptive tables | Rendered Notebook",
                 "nav.aria": "Notebook navigation",

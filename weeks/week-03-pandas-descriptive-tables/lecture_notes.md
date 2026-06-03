@@ -137,7 +137,7 @@ This descriptive table does not establish [limitation].
 
 Example:
 
-> Table 1. Vocabulary review and measure-word activities show the highest average post-test scores, while result-complement activities show a similar descriptive gain from a lower starting point. Data are from an instructor-created Week 03 teaching dataset, N = 31 completed learner records. Scores are classroom scores on a 0-100 scale; gain is calculated as post-test minus pre-test. The table is descriptive and does not establish a causal effect of the activity.
+> Table 1. The measure-word group shows the largest descriptive average gain (12.1 points), closely followed by result-complement activities (12.0 points). Data are from an instructor-created Week 03 teaching dataset, N = 31 completed learner records. Scores are classroom scores on a 0-100 scale; gain is calculated as post-test minus pre-test. The table is descriptive: activity focus is linked to class section in this toy dataset, so the result does not establish a causal effect.
 
 ## Common Mistakes
 

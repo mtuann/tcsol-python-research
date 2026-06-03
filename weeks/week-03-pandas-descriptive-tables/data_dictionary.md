@@ -6,6 +6,14 @@ Teaching purpose: beginner pandas practice for descriptive summaries.
 
 Unit of observation: one anonymized learner's pre/post score record for one short Chinese learning activity.
 
+Source: instructor-created synthetic teaching dataset.
+
+Access date for course site: 2026-06-03.
+
+License/reuse note: use for this course and teaching demonstrations; do not treat it as empirical classroom evidence.
+
+Missing value codes: none in the raw Week 03 CSV. The row with `completed = no` is complete as a row but excluded from the main Week 03 completed-record summary.
+
 | Column | Type | Meaning | Example | Notes |
 |---|---|---|---|---|
 | `learner_id` | string | anonymized learner ID | `S001` | No real names. |

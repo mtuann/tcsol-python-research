@@ -174,7 +174,7 @@ scores = df[score_columns]</code></pre></div>
         </div>
         <div class="stage">
           <div class="paper-card sentence-frame-card">
-            <blockquote class="sentence-frame" data-i18n-html="caption.frame">Table 1 shows that <span class="frame-slot">measure_words</span> had the highest average gain <span class="frame-slot columns">12.1 points</span>, but this result is descriptive because <span class="frame-slot purpose">groups were not randomly assigned</span>.</blockquote>
+            <blockquote class="sentence-frame" data-i18n-html="caption.frame">Table 1. Nhóm <span class="frame-slot">measure_words</span> có mean gain mô tả cao nhất <span class="frame-slot columns">12.1 điểm</span>, nhưng đây chỉ là mô tả vì <span class="frame-slot purpose">activity focus đang gắn với class section</span>.</blockquote>
           </div>
         </div>
       </section>
@@ -191,6 +191,9 @@ scores = df[score_columns]</code></pre></div>
             <div class="check-item"><b>2</b><span data-i18n="demo.2">đọc top mean_gain</span></div>
             <div class="check-item"><b>3</b><span data-i18n="demo.3">đổi sang class_group</span></div>
             <div class="check-item"><b>4</b><span data-i18n="demo.4">so sánh caption</span></div>
+          </div>
+          <div class="slide-cta-row">
+            <a class="slide-cta primary" href="interactive_demo.html" data-i18n="demo.open">Mở demo</a>
           </div>
         </div>
       </section>
@@ -261,13 +264,13 @@ scores = df[score_columns]</code></pre></div>
         "nav.jump.aria": "Đi đến slide",
         "nav.jump.label": "Slide",
         "nav.jump.input": "Số slide",
-        "nav.jump.go": "Go",
+        "nav.jump.go": "Đi",
         "nav.toc.title": "Mục lục slide",
         "nav.toc.hint": "Chọn phần muốn xem nhanh.",
         "nav.toc.close": "Đóng",
         "s1.tag": "Tuần 03",
         "s1.title": "pandas cơ bản và bảng mô tả",
-        "s1.body": "Từ CSV đến descriptive table, caption và diễn giải Results cẩn trọng.",
+        "s1.body": "Từ CSV đến bảng mô tả, caption và diễn giải Results cẩn trọng.",
         "hero.table.aria": "Bảng summary minh họa",
         "s2.tag": "Từ Week 02",
         "s2.title": "Tuần trước thiết kế bảng, tuần này tóm tắt bảng",
@@ -278,11 +281,11 @@ scores = df[score_columns]</code></pre></div>
         "flow.pandas.body": "lọc và nhóm",
         "flow.table": "Table",
         "flow.table.body": "bằng chứng mô tả",
-        "flow.caption.body": "paper-facing",
+        "flow.caption.body": "đưa vào paper",
         "s3.tag": "Khái niệm",
         "s3.title": "DataFrame là bảng đang nằm trong Python",
-        "s3.body": "Đừng học index trước. Hãy đọc DataFrame như bảng nghiên cứu: row là observation, column là variable.",
-        "df.row": "một learner pre/post score record",
+        "s3.body": "Đừng học index trước. Hãy đọc DataFrame như bảng nghiên cứu: row là một observation, column là một variable.",
+        "df.row": "một bản ghi pre/post của người học",
         "df.col": "ví dụ <span class=\"inline-token\">pre_score</span>, <span class=\"inline-token\">post_score</span>",
         "df.value": "ví dụ <span class=\"inline-token value-token\">72</span>",
         "df.table": "bảng Python có thể xử lý",
@@ -296,14 +299,14 @@ scores = df[score_columns]</code></pre></div>
         "s5.body": "Paper không cần mọi cột raw. Nó cần cột trả lời câu hỏi.",
         "s6.tag": "Filter",
         "s6.title": "Lọc dòng không phải xóa dữ liệu",
-        "s6.body": "Raw CSV giữ nguyên. Bảng mới chỉ dùng completed records để caption có N rõ.",
+        "s6.body": "Raw CSV giữ nguyên. Bảng mới chỉ dùng bản ghi completed để caption có N rõ.",
         "filter.raw": "Raw data",
         "filter.summary": "Summary data",
         "s7.tag": "Derived column",
         "s7.title": "Tạo cột gain_score",
-        "s7.body": "Một cột tính thêm phải được mô tả rõ trong caption hoặc Methods note.",
+        "s7.body": "Một cột tính thêm phải được mô tả rõ trong caption hoặc ghi chú Methods.",
         "gain.note": "Gain được tính bằng post_score trừ pre_score trên thang điểm 0-100.",
-        "s8.tag": "GroupBy",
+        "s8.tag": "Nhóm dữ liệu",
         "s8.title": "groupby = nhóm rồi tính",
         "s8.body": "Đọc code bằng lời trước khi học thuộc cú pháp.",
         "s9.tag": "Output",
@@ -311,7 +314,7 @@ scores = df[score_columns]</code></pre></div>
         "summary.table.aria": "Bảng mô tả",
         "s10.tag": "Writing",
         "s10.title": "Caption phải nói cả pattern và giới hạn",
-        "caption.frame": "Table 1 shows that <span class=\"frame-slot\">measure_words</span> had the highest average gain <span class=\"frame-slot columns\">12.1 points</span>, but this result is descriptive because <span class=\"frame-slot purpose\">groups were not randomly assigned</span>.",
+        "caption.frame": "Table 1. Nhóm <span class=\"frame-slot\">measure_words</span> có mean gain mô tả cao nhất <span class=\"frame-slot columns\">12.1 điểm</span>, nhưng đây chỉ là mô tả vì <span class=\"frame-slot purpose\">activity focus đang gắn với class section</span>.",
         "s11.tag": "Demo",
         "s11.title": "Dùng demo để thấy groupby đổi bảng",
         "s11.body": "Khi đổi grouping variable, cùng một dataset tạo ra một câu đọc khác.",
@@ -319,6 +322,7 @@ scores = df[score_columns]</code></pre></div>
         "demo.2": "đọc top mean_gain",
         "demo.3": "đổi sang class_group",
         "demo.4": "so sánh caption",
+        "demo.open": "Mở demo",
         "s12.tag": "Transfer",
         "s12.title": "Cùng pattern cho bốn hướng nghiên cứu",
         "transfer.tcsol": "mean gain",

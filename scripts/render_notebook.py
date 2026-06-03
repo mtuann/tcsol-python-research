@@ -351,7 +351,7 @@ def build_html(nb: dict[str, Any], notebook_path: Path, repo_root: Path) -> str:
   <header class="doc-topbar">
     <a class="doc-brand" href="../../" data-i18n="brand">Python Research Hub</a>
     <nav class="doc-nav" aria-label="Điều hướng notebook" data-i18n-aria-label="nav.aria">
-      <a href="./" data-i18n="nav.week">Week 01</a>
+      <a href="./" data-i18n="nav.week">{html.escape(week_label_vi)}</a>
       <a href="slides.html" data-i18n="nav.slides">Slides</a>
       <a href="interactive_demo.html" data-i18n="nav.demo">Demo</a>
       <a href="{html.escape(source_name)}" download data-i18n="nav.source">Source .ipynb</a>
@@ -379,7 +379,7 @@ def build_html(nb: dict[str, Any], notebook_path: Path, repo_root: Path) -> str:
         <div class="doc-actions">
           <a class="doc-button" href="{html.escape(colab_url)}" data-i18n="action.colab">Chạy trong Colab</a>
           <a class="doc-button secondary" href="{html.escape(source_name)}" download data-i18n="action.source">Tải .ipynb</a>
-          <a class="doc-button secondary" href="./" data-i18n="action.week">Quay lại Week 01</a>
+          <a class="doc-button secondary" href="./" data-i18n="action.week">Quay lại {html.escape(week_label_vi)}</a>
         </div>
       </section>
 

@@ -85,7 +85,7 @@
           </article>
         </div>
         <h3 data-i18n="writing.frame.title">Mẫu câu caption</h3>
-        <blockquote data-i18n="writing.frame.body">Table 1 shows that [group] had the highest average gain ([number] points), but this result is descriptive because [limitation].</blockquote>
+        <blockquote data-i18n="writing.frame.body">Table 1. Nhóm [group] có mean gain mô tả cao nhất ([number] điểm), nhưng đây chỉ là mô tả vì [limitation].</blockquote>
       </section>
 
       <section class="doc-card" id="notes">
@@ -114,31 +114,31 @@
       <section class="doc-card">
         <h2 data-i18n="workflow.title">Quy trình code tuần này</h2>
         <div class="doc-grid">
-          <article class="mini-card"><span class="swatch blue"></span><h3 data-i18n="workflow.load.title">1. Load</h3><p data-i18n-html="workflow.load.body">Đọc CSV bằng <code>pd.read_csv</code> và kiểm tra <code>shape</code>, <code>columns</code>, <code>head()</code>.</p></article>
-          <article class="mini-card"><span class="swatch green"></span><h3 data-i18n="workflow.prepare.title">2. Prepare</h3><p data-i18n-html="workflow.prepare.body">Chọn cột, lọc <code>completed == "yes"</code>, tạo <code>gain_score</code>.</p></article>
-          <article class="mini-card"><span class="swatch amber"></span><h3 data-i18n="workflow.summarize.title">3. Summarize</h3><p data-i18n-html="workflow.summarize.body">Dùng <code>groupby</code> để tính N và average gain theo <code>activity_focus</code>.</p></article>
+          <article class="mini-card"><span class="swatch blue"></span><h3 data-i18n="workflow.load.title">1. Đọc dữ liệu</h3><p data-i18n-html="workflow.load.body">Đọc CSV bằng <code>pd.read_csv</code> và kiểm tra <code>shape</code>, <code>columns</code>, <code>head()</code>.</p></article>
+          <article class="mini-card"><span class="swatch green"></span><h3 data-i18n="workflow.prepare.title">2. Chuẩn bị bảng</h3><p data-i18n-html="workflow.prepare.body">Chọn cột, lọc <code>completed == "yes"</code>, tạo <code>gain_score</code>.</p></article>
+          <article class="mini-card"><span class="swatch amber"></span><h3 data-i18n="workflow.summarize.title">3. Tóm tắt</h3><p data-i18n-html="workflow.summarize.body">Dùng <code>groupby</code> để tính N và mean gain theo <code>activity_focus</code>.</p></article>
         </div>
       </section>
 
       <section class="doc-card" id="practice">
         <h2 data-i18n="practice.title">Thực hành</h2>
         <div class="doc-grid">
-          <article class="mini-card"><span class="swatch blue"></span><h3 data-i18n="practice.a.title">A. Copy and Modify</h3><p data-i18n-html="practice.a.body">Đổi <code>group_variable</code> từ <code>activity_focus</code> sang <code>class_group</code>.</p></article>
-          <article class="mini-card"><span class="swatch green"></span><h3 data-i18n="practice.b.title">B. Guided Problem</h3><p data-i18n="practice.b.body">Tự viết lại checklist: load, filter, gain score, groupby, export.</p></article>
-          <article class="mini-card"><span class="swatch amber"></span><h3 data-i18n="practice.c.title">C. Research-Style Task</h3><p data-i18n="practice.c.body">Viết 120-160 từ diễn giải bảng và nêu một hạn chế.</p></article>
+          <article class="mini-card"><span class="swatch blue"></span><h3 data-i18n="practice.a.title">A. Sao chép rồi sửa</h3><p data-i18n-html="practice.a.body">Đổi <code>group_variable</code> từ <code>activity_focus</code> sang <code>class_group</code>.</p></article>
+          <article class="mini-card"><span class="swatch green"></span><h3 data-i18n="practice.b.title">B. Bài tập có hướng dẫn</h3><p data-i18n="practice.b.body">Đi theo checklist: đọc dữ liệu, lọc dòng, tạo gain score, groupby, export.</p></article>
+          <article class="mini-card"><span class="swatch amber"></span><h3 data-i18n="practice.c.title">C. Bài tập kiểu nghiên cứu</h3><p data-i18n="practice.c.body">Viết 120-160 từ diễn giải bảng và nêu một hạn chế.</p></article>
         </div>
       </section>
 
       <section class="doc-card" id="assignment">
         <h2 data-i18n="assignment.title">Bài nộp</h2>
-        <p data-i18n="assignment.body">Nộp notebook chạy được, bảng CSV đã export, caption, đoạn diễn giải, source note và một limitation.</p>
+        <p data-i18n="assignment.body">Nộp notebook chạy được, bảng CSV đã export, caption ngắn, đoạn diễn giải 120-160 từ, source note và một hạn chế.</p>
         <ol>
           <li data-i18n="assignment.t1">Load dataset bằng pandas.</li>
-          <li data-i18n="assignment.t2">Filter completed records.</li>
+          <li data-i18n="assignment.t2">Lọc completed records.</li>
           <li data-i18n="assignment.t3">Tạo gain score.</li>
           <li data-i18n="assignment.t4">Tạo bảng summary theo activity focus.</li>
-          <li data-i18n="assignment.t5">Export CSV output.</li>
-          <li data-i18n="assignment.t6">Viết caption và interpretation 120-160 từ.</li>
+          <li data-i18n="assignment.t5">Export bảng CSV output.</li>
+          <li data-i18n="assignment.t6">Viết caption 2-4 câu và interpretation 120-160 từ.</li>
         </ol>
       </section>
 
@@ -147,7 +147,7 @@
         <div class="doc-grid two">
           <article class="mini-card"><span class="swatch blue"></span><h3>pandas Getting Started</h3><p data-i18n="readings.pandas.body">Đọc phần DataFrame/table-oriented data để hiểu pandas xem dữ liệu dạng bảng như thế nào.</p><a class="doc-chip" href="https://pandas.pydata.org/pandas-docs/stable/getting_started/intro_tutorials/01_table_oriented.html" data-i18n="readings.open">Mở nguồn</a></article>
           <article class="mini-card"><span class="swatch green"></span><h3>pandas GroupBy</h3><p data-i18n="readings.groupby.body">Dùng như tài liệu tra cứu cho ý tưởng split-apply-combine.</p><a class="doc-chip" href="https://pandas.pydata.org/pandas-docs/stable/user_guide/groupby.html" data-i18n="readings.open2">Mở nguồn</a></article>
-          <article class="mini-card"><span class="swatch amber"></span><h3>Tidy Data</h3><p data-i18n="readings.tidy.body">Tuần này chỉ cần nhớ: row là observation, column là variable.</p><a class="doc-chip" href="https://vita.had.co.nz/papers/tidy-data.html" data-i18n="readings.open3">Mở nguồn</a></article>
+          <article class="mini-card"><span class="swatch amber"></span><h3>Tidy Data</h3><p data-i18n="readings.tidy.body">Tuần này chỉ cần nhớ: row là một observation, column là một variable.</p><a class="doc-chip" href="https://vita.had.co.nz/papers/tidy-data.html" data-i18n="readings.open3">Mở nguồn</a></article>
           <article class="mini-card"><span class="swatch rose"></span><h3>Zotero Word Plugin</h3><p data-i18n="readings.zotero.body">Đọc lướt để biết caption/source note sau này đi vào Word/Zotero như thế nào.</p><a class="doc-chip" href="https://www.zotero.org/support/word_processor_plugin_usage/" data-i18n="readings.open4">Mở nguồn</a></article>
         </div>
       </section>
@@ -224,7 +224,7 @@
         "writing.tools.title": "Công cụ hỗ trợ",
         "writing.tools.body": "Viết caption trong notebook trước, sau đó có thể paste sang Word. Zotero setup bắt đầu nhẹ bằng source note; Overleaf chưa cần.",
         "writing.frame.title": "Mẫu câu caption",
-        "writing.frame.body": "Table 1 shows that [group] had the highest average gain ([number] points), but this result is descriptive because [limitation].",
+        "writing.frame.body": "Table 1. Nhóm [group] có mean gain mô tả cao nhất ([number] điểm), nhưng đây chỉ là mô tả vì [limitation].",
         "notes.title": "Ghi chú bài học",
         "notes.intro": "pandas là công cụ làm việc với bảng. Tuần này chỉ học đủ bốn thao tác để tạo bảng mô tả cho paper.",
         "notes.term": "Khái niệm",
@@ -239,31 +239,31 @@
         "groupby.meaning": "nhóm dòng rồi tính thống kê",
         "groupby.paper": "tạo table theo nhóm/label/theme",
         "workflow.title": "Quy trình code tuần này",
-        "workflow.load.title": "1. Load",
+        "workflow.load.title": "1. Đọc dữ liệu",
         "workflow.load.body": "Đọc CSV bằng <code>pd.read_csv</code> và kiểm tra <code>shape</code>, <code>columns</code>, <code>head()</code>.",
-        "workflow.prepare.title": "2. Prepare",
+        "workflow.prepare.title": "2. Chuẩn bị bảng",
         "workflow.prepare.body": "Chọn cột, lọc <code>completed == \"yes\"</code>, tạo <code>gain_score</code>.",
-        "workflow.summarize.title": "3. Summarize",
-        "workflow.summarize.body": "Dùng <code>groupby</code> để tính N và average gain theo <code>activity_focus</code>.",
+        "workflow.summarize.title": "3. Tóm tắt",
+        "workflow.summarize.body": "Dùng <code>groupby</code> để tính N và mean gain theo <code>activity_focus</code>.",
         "practice.title": "Thực hành",
-        "practice.a.title": "A. Copy and Modify",
+        "practice.a.title": "A. Sao chép rồi sửa",
         "practice.a.body": "Đổi <code>group_variable</code> từ <code>activity_focus</code> sang <code>class_group</code>.",
-        "practice.b.title": "B. Guided Problem",
-        "practice.b.body": "Tự viết lại checklist: load, filter, gain score, groupby, export.",
-        "practice.c.title": "C. Research-Style Task",
+        "practice.b.title": "B. Bài tập có hướng dẫn",
+        "practice.b.body": "Đi theo checklist: đọc dữ liệu, lọc dòng, tạo gain score, groupby, export.",
+        "practice.c.title": "C. Bài tập kiểu nghiên cứu",
         "practice.c.body": "Viết 120-160 từ diễn giải bảng và nêu một hạn chế.",
         "assignment.title": "Bài nộp",
-        "assignment.body": "Nộp notebook chạy được, bảng CSV đã export, caption, đoạn diễn giải, source note và một limitation.",
+        "assignment.body": "Nộp notebook chạy được, bảng CSV đã export, caption ngắn, đoạn diễn giải 120-160 từ, source note và một hạn chế.",
         "assignment.t1": "Load dataset bằng pandas.",
-        "assignment.t2": "Filter completed records.",
+        "assignment.t2": "Lọc completed records.",
         "assignment.t3": "Tạo gain score.",
         "assignment.t4": "Tạo bảng summary theo activity focus.",
-        "assignment.t5": "Export CSV output.",
-        "assignment.t6": "Viết caption và interpretation 120-160 từ.",
+        "assignment.t5": "Export bảng CSV output.",
+        "assignment.t6": "Viết caption 2-4 câu và interpretation 120-160 từ.",
         "readings.title": "Bài đọc",
         "readings.pandas.body": "Đọc phần DataFrame/table-oriented data để hiểu pandas xem dữ liệu dạng bảng như thế nào.",
         "readings.groupby.body": "Dùng như tài liệu tra cứu cho ý tưởng split-apply-combine.",
-        "readings.tidy.body": "Tuần này chỉ cần nhớ: row là observation, column là variable.",
+        "readings.tidy.body": "Tuần này chỉ cần nhớ: row là một observation, column là một variable.",
         "readings.zotero.body": "Đọc lướt để biết caption/source note sau này đi vào Word/Zotero như thế nào.",
         "readings.open": "Mở nguồn",
         "readings.open2": "Mở nguồn",
@@ -362,7 +362,7 @@
         "assignment.t3": "Create gain score.",
         "assignment.t4": "Create a summary table by activity focus.",
         "assignment.t5": "Export CSV output.",
-        "assignment.t6": "Write a 120-160 word caption and interpretation.",
+        "assignment.t6": "Write a 2-4 sentence caption and a 120-160 word interpretation.",
         "readings.title": "Readings",
         "readings.pandas.body": "Read the DataFrame/table-oriented data section to understand how pandas sees tabular data.",
         "readings.groupby.body": "Use this as a lookup source for the split-apply-combine idea.",

@@ -1,0 +1,6 @@
+---
+title: "Week 04 Interactive Demo"
+format: html
+---
+
+Source placeholder. The public learner demo is maintained in `interactive_demo.html` for GitHub Pages.

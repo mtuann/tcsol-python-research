@@ -4,7 +4,7 @@ dataframe,bảng DataFrame,DataFrame,Table in memory
 read_csv,đọc CSV,read CSV,Load a CSV into pandas
 select_columns,chọn cột,select columns,Keep columns needed for the question
 filter_rows,lọc dòng,filter rows,Keep rows matching a condition
-boolean_filter,lọc điều kiện,boolean filter,Expression such as completed == yes
+boolean_filter,lọc điều kiện,boolean filter,Expression such as completed == "yes"
 derived_column,cột tính thêm,derived column,Column calculated from other columns
 gain_score,điểm tăng,gain score,post_score minus pre_score
 groupby,nhóm rồi tính,groupby,Split rows by a column and calculate statistics

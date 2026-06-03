@@ -1,0 +1,5 @@
+check,before,after,note
+activity_focus labels,18,4,standardized activity labels
+class_group labels,12,4,standardized class sections
+completed labels,4,2,mapped yes/no variants
+usable pre/post rows,19,25,normalizing completed labels recovers usable rows

@@ -113,6 +113,7 @@
       display: grid;
       gap: 1rem;
       grid-template-columns: minmax(250px, 0.72fr) minmax(0, 1.28fr);
+      min-width: 0;
     }
 
     .panel {
@@ -120,6 +121,7 @@
       border: 1px solid var(--line);
       border-radius: 8px;
       box-shadow: var(--shadow);
+      min-width: 0;
       padding: clamp(1rem, 2vw, 1.35rem);
     }
 
@@ -175,7 +177,7 @@
       font-size: clamp(1rem, 1.4vw, 1.18rem);
     }
 
-    .table-wrap { border: 1px solid var(--line); border-radius: 8px; overflow-x: auto; }
+    .table-wrap { border: 1px solid var(--line); border-radius: 8px; max-width: 100%; overflow-x: auto; }
     table { border-collapse: collapse; width: 100%; }
     th, td { border-bottom: 1px solid var(--line); padding: 0.65rem; text-align: left; vertical-align: top; }
     th { background: #f0f5ff; color: #263855; font-size: 0.78rem; text-transform: uppercase; }
@@ -219,6 +221,8 @@
     @media (max-width: 900px) {
       .demo-layout,
       .metric-grid { grid-template-columns: 1fr; }
+      main { max-width: 100%; overflow-x: hidden; }
+      .panel { width: 100%; }
     }
   </style>
 </head>
@@ -248,7 +252,7 @@
         <h2 data-i18n="controls.title">Điều khiển</h2>
         <p data-i18n="controls.hint">Chọn grouping variable, rồi đọc bảng và caption như một output paper.</p>
         <div class="control-stack">
-          <label for="group-select" data-i18n="group.label">Group rows by</label>
+          <label for="group-select" data-i18n="group.label">Nhóm dòng theo</label>
           <select id="group-select">
             <option value="activity_focus" data-i18n="group.activity">activity_focus</option>
             <option value="class_group" data-i18n="group.class">class_group</option>
@@ -270,9 +274,9 @@
         <span class="tag" id="summary-tag">activity_focus</span>
         <h2 data-i18n="summary.title">Bảng mô tả</h2>
         <div class="metric-grid">
-          <div class="metric"><span data-i18n="metric.rows">Rows used</span><strong id="rows-used">31</strong></div>
-          <div class="metric"><span data-i18n="metric.groups">Groups</span><strong id="group-count">4</strong></div>
-          <div class="metric"><span data-i18n="metric.top">Top mean gain</span><strong id="top-gain">12.1</strong></div>
+          <div class="metric"><span data-i18n="metric.rows">Số dòng dùng</span><strong id="rows-used">31</strong></div>
+          <div class="metric"><span data-i18n="metric.groups">Số nhóm</span><strong id="group-count">4</strong></div>
+          <div class="metric"><span data-i18n="metric.top">Mean gain cao nhất</span><strong id="top-gain">12.1</strong></div>
         </div>
         <div class="table-wrap">
           <table>
@@ -284,7 +288,7 @@
         </div>
 
         <div class="section-block">
-          <h2 data-i18n="caption.title">Caption draft</h2>
+          <h2 data-i18n="caption.title">Nháp caption</h2>
           <div class="caption-card" id="caption-output"></div>
           <div class="copy-row">
             <button class="copy-button primary" type="button" id="copy-caption" data-i18n="copy.caption">Sao chép caption</button>
@@ -299,7 +303,7 @@
   <script>
     const DEMO_I18N = {
       vi: {
-        "meta.title": "Tuần 03 Demo: GroupBy Table Builder",
+        "meta.title": "Tuần 03 Demo: Tạo bảng groupby",
         "nav.course.aria": "Điều hướng khóa học",
         "nav.home": "Trang chủ",
         "nav.week": "Tuần 03",
@@ -307,22 +311,22 @@
         "nav.notebook": "Notebook",
         "nav.language": "Ngôn ngữ / Language",
         "page.tag": "Demo tương tác",
-        "page.title": "GroupBy Table Builder",
+        "page.title": "Tạo bảng groupby",
         "page.intro": "Đổi cách nhóm dữ liệu để thấy cùng một CSV tạo ra các bảng mô tả khác nhau. Đây là trực giác cần có trước khi viết code pandas.",
         "demo.aria": "Demo tạo bảng groupby",
         "controls.title": "Điều khiển",
-        "controls.hint": "Chọn grouping variable, rồi đọc bảng và caption như một output paper.",
-        "group.label": "Group rows by",
+        "controls.hint": "Chọn biến dùng để nhóm dòng, rồi đọc bảng và caption như một output cho paper.",
+        "group.label": "Nhóm dòng theo",
         "group.activity": "activity_focus",
         "group.class": "class_group",
         "group.completed": "completed",
-        "filter.completed": "Chỉ dùng completed records",
+        "filter.completed": "Chỉ dùng bản ghi completed",
         "code.title": "pandas pattern",
         "summary.title": "Bảng mô tả",
-        "metric.rows": "Rows used",
-        "metric.groups": "Groups",
-        "metric.top": "Top mean gain",
-        "caption.title": "Caption draft",
+        "metric.rows": "Số dòng dùng",
+        "metric.groups": "Số nhóm",
+        "metric.top": "Mean gain cao nhất",
+        "caption.title": "Nháp caption",
         "copy.caption": "Sao chép caption",
         "copy.ok": "Đã copy caption.",
         "copy.fail": "Không copy được tự động; hãy chọn và copy caption.",
@@ -409,6 +413,9 @@
 
     function summarize() {
       const groupKey = groupSelect.value;
+      if (groupKey === "completed" && completeOnly.checked) {
+        completeOnly.checked = false;
+      }
       const filtered = completeOnly.checked ? rows.filter((row) => row.completed === "yes") : rows;
       const grouped = new Map();
       filtered.forEach((row) => {
@@ -441,8 +448,11 @@
         </tr>
       `).join("");
 
+      const firstLine = completeOnly.checked
+        ? 'complete = df[df["completed"] == "yes"].copy()'
+        : 'complete = df.copy()';
       document.getElementById("code-pattern").textContent = [
-        'complete = df[df["completed"] == "yes"].copy()',
+        firstLine,
         'complete = complete.assign(gain_score=complete["post_score"] - complete["pre_score"])',
         `summary = complete.groupby("${groupKey}").agg(...)`
       ].join("\n");

@@ -771,6 +771,11 @@ question = "How do learner answers change after a short activity?"</code></pre>
         location.hash = "slide-" + (current + 1);
       }
 
+      function slideIndexFromHash() {
+        const match = location.hash.match(/^#slide-(\d+)$/);
+        return match ? Number(match[1]) - 1 : null;
+      }
+
       nav.addEventListener("click", (event) => {
         const button = event.target.closest("button");
         if (!button || !button.dataset.dir) return;
@@ -806,9 +811,14 @@ question = "How do learner answers change after a short activity?"</code></pre>
         }
       });
 
+      window.addEventListener("hashchange", () => {
+        const hashSlide = slideIndexFromHash();
+        if (hashSlide === null || hashSlide === current) return;
+        show(hashSlide);
+      });
+
       document.body.classList.add("fallback-mode");
-      const initialMatch = location.hash.match(/^#slide-(\d+)$/);
-      const initialSlide = initialMatch ? Number(initialMatch[1]) - 1 : 0;
+      const initialSlide = slideIndexFromHash() ?? 0;
       show(initialSlide);
     }
 

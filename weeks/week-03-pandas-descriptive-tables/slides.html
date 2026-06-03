@@ -1,0 +1,451 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title data-i18n="meta.title">Tuần 03: pandas cơ bản và bảng mô tả</title>
+  <link rel="stylesheet" href="../../assets/css/bilingual.css">
+  <link rel="stylesheet" href="../../assets/css/lecture-slides.css">
+</head>
+<body class="lecture-slide-page">
+  <div class="site-tools slide-tools">
+    <nav class="slide-exit-links" aria-label="Điều hướng khóa học" data-i18n-aria-label="nav.course.aria">
+      <a class="slide-link primary" href="../../" data-i18n="nav.home">Trang chủ</a>
+      <a class="slide-link" href="./" data-i18n="nav.week">Tuần 03</a>
+      <button class="slide-link" type="button" data-toc-open data-i18n="nav.toc" data-i18n-aria-label="nav.toc.aria" aria-label="Mục lục slide">Mục lục</button>
+    </nav>
+    <div class="language-switcher" role="group" aria-label="Ngôn ngữ / Language" data-i18n-aria-label="nav.language">
+      <button type="button" data-lang-option="vi" aria-pressed="true">Tiếng Việt</button>
+      <button type="button" data-lang-option="en" aria-pressed="false">English</button>
+    </div>
+  </div>
+
+  <main class="deck">
+    <div class="slides">
+      <section class="active">
+        <div class="hero-layout">
+          <div class="slide-head">
+            <span class="tag" data-i18n="s1.tag">Tuần 03</span>
+            <h1 data-i18n="s1.title">pandas cơ bản và bảng mô tả</h1>
+            <p class="lead" data-i18n="s1.body">Từ CSV đến descriptive table, caption và diễn giải Results cẩn trọng.</p>
+          </div>
+          <div class="stage">
+            <div class="research-table" aria-label="Bảng summary minh họa" data-i18n-aria-label="hero.table.aria">
+              <div class="row header"><span>activity_focus</span><span>n</span><span>mean_pre</span><span>mean_gain</span></div>
+              <div class="row focus-row"><span>measure_words</span><span>8</span><span>61.9</span><span><strong class="value-spotlight">12.1</strong></span></div>
+              <div class="row"><span>result_complements</span><span>8</span><span>58.9</span><span>12.0</span></div>
+              <div class="row"><span>word_order</span><span>7</span><span>63.4</span><span>8.4</span></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="slide-head">
+          <span class="tag" data-i18n="s2.tag">Từ Week 02</span>
+          <h2 class="wide-title" data-i18n="s2.title">Tuần trước thiết kế bảng, tuần này tóm tắt bảng</h2>
+          <p class="lead" data-i18n="s2.body">Schema trả lời "cột nào cần có"; pandas trả lời "bảng này nói gì?".</p>
+        </div>
+        <div class="stage">
+          <div class="flow">
+            <div class="flow-step"><strong data-i18n="flow.schema">Schema</strong><span data-i18n="flow.schema.body">row và column rõ</span></div>
+            <div class="flow-step"><strong>CSV</strong><span data-i18n="flow.csv.body">dữ liệu nhỏ</span></div>
+            <div class="flow-step"><strong>pandas</strong><span data-i18n="flow.pandas.body">lọc và nhóm</span></div>
+            <div class="flow-step"><strong data-i18n="flow.table">Table</strong><span data-i18n="flow.table.body">bằng chứng mô tả</span></div>
+            <div class="flow-step"><strong>Caption</strong><span data-i18n="flow.caption.body">paper-facing</span></div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="slide-head">
+          <span class="tag" data-i18n="s3.tag">Khái niệm</span>
+          <h2 class="wide-title" data-i18n="s3.title">DataFrame là bảng đang nằm trong Python</h2>
+          <p class="lead" data-i18n="s3.body">Đừng học index trước. Hãy đọc DataFrame như bảng nghiên cứu: row là observation, column là variable.</p>
+        </div>
+        <div class="stage">
+          <div class="concept-grid">
+            <div class="concept-card row"><strong>Row</strong><span data-i18n="df.row">một learner pre/post score record</span></div>
+            <div class="concept-card column"><strong>Column</strong><span data-i18n-html="df.col">ví dụ <span class="inline-token">pre_score</span>, <span class="inline-token">post_score</span></span></div>
+            <div class="concept-card value"><strong>Value</strong><span data-i18n-html="df.value">ví dụ <span class="inline-token value-token">72</span></span></div>
+            <div class="concept-card schema"><strong>DataFrame</strong><span data-i18n="df.table">bảng Python có thể xử lý</span></div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="slide-head">
+          <span class="tag" data-i18n="s4.tag">Load</span>
+          <h2 class="wide-title" data-i18n="s4.title">Luôn đọc file rồi kiểm tra nhanh</h2>
+        </div>
+        <div class="stage">
+          <div class="code-card"><pre><code>df = pd.read_csv("week03_tcsol_scores.csv")
+print(df.shape)
+print(df.columns)
+df.head()</code></pre></div>
+          <div class="chip-row">
+            <span class="chip" data-i18n="load.shape">shape = số dòng, số cột</span>
+            <span class="chip" data-i18n="load.columns">columns = tên biến</span>
+            <span class="chip optional" data-i18n="load.head">head = vài dòng đầu</span>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="slide-head">
+          <span class="tag" data-i18n="s5.tag">Select</span>
+          <h2 class="wide-title" data-i18n="s5.title">Chọn cột là chọn bằng chứng</h2>
+          <p class="lead" data-i18n="s5.body">Paper không cần mọi cột raw. Nó cần cột trả lời câu hỏi.</p>
+        </div>
+        <div class="stage">
+          <div class="code-card"><pre><code>score_columns = [
+  "learner_id", "activity_focus",
+  "pre_score", "post_score", "completed"
+]
+scores = df[score_columns]</code></pre></div>
+        </div>
+      </section>
+
+      <section>
+        <div class="slide-head">
+          <span class="tag" data-i18n="s6.tag">Filter</span>
+          <h2 class="wide-title" data-i18n="s6.title">Lọc dòng không phải xóa dữ liệu</h2>
+          <p class="lead" data-i18n="s6.body">Raw CSV giữ nguyên. Bảng mới chỉ dùng completed records để caption có N rõ.</p>
+        </div>
+        <div class="stage">
+          <div class="code-card"><pre><code>complete = scores[scores["completed"] == "yes"].copy()</code></pre></div>
+          <div class="split">
+            <div class="concept-card column"><strong data-i18n="filter.raw">Raw data</strong><span>N = 32</span></div>
+            <div class="concept-card value"><strong data-i18n="filter.summary">Summary data</strong><span>N = 31</span></div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="slide-head">
+          <span class="tag" data-i18n="s7.tag">Derived column</span>
+          <h2 class="wide-title" data-i18n="s7.title">Tạo cột gain_score</h2>
+          <p class="lead" data-i18n="s7.body">Một cột tính thêm phải được mô tả rõ trong caption hoặc Methods note.</p>
+        </div>
+        <div class="stage">
+          <div class="code-card"><pre><code>complete = complete.assign(
+  gain_score = complete["post_score"] - complete["pre_score"]
+)</code></pre></div>
+          <div class="paper-card"><blockquote data-i18n="gain.note">Gain được tính bằng post_score trừ pre_score trên thang điểm 0-100.</blockquote></div>
+        </div>
+      </section>
+
+      <section>
+        <div class="slide-head">
+          <span class="tag" data-i18n="s8.tag">GroupBy</span>
+          <h2 class="wide-title" data-i18n="s8.title">groupby = nhóm rồi tính</h2>
+          <p class="lead" data-i18n="s8.body">Đọc code bằng lời trước khi học thuộc cú pháp.</p>
+        </div>
+        <div class="stage">
+          <div class="code-card"><pre><code>summary = (
+  complete
+  .groupby("activity_focus")
+  .agg(n_learners=("learner_id", "count"),
+       mean_gain=("gain_score", "mean"))
+  .reset_index()
+)</code></pre></div>
+        </div>
+      </section>
+
+      <section>
+        <div class="slide-head">
+          <span class="tag" data-i18n="s9.tag">Output</span>
+          <h2 class="wide-title" data-i18n="s9.title">Bảng mô tả cần N và rounding</h2>
+        </div>
+        <div class="stage">
+          <div class="research-table" aria-label="Descriptive table" data-i18n-aria-label="summary.table.aria">
+            <div class="row header"><span>activity_focus</span><span>n_learners</span><span>mean_post</span><span>mean_gain</span></div>
+            <div class="row focus-row"><span>measure_words</span><span>8</span><span>74.0</span><span>12.1</span></div>
+            <div class="row"><span>result_complements</span><span>8</span><span>70.9</span><span>12.0</span></div>
+            <div class="row"><span>word_order</span><span>7</span><span>71.9</span><span>8.4</span></div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="slide-head">
+          <span class="tag" data-i18n="s10.tag">Writing</span>
+          <h2 class="wide-title" data-i18n="s10.title">Caption phải nói cả pattern và giới hạn</h2>
+        </div>
+        <div class="stage">
+          <div class="paper-card sentence-frame-card">
+            <blockquote class="sentence-frame" data-i18n-html="caption.frame">Table 1 shows that <span class="frame-slot">measure_words</span> had the highest average gain <span class="frame-slot columns">12.1 points</span>, but this result is descriptive because <span class="frame-slot purpose">groups were not randomly assigned</span>.</blockquote>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="slide-head">
+          <span class="tag" data-i18n="s11.tag">Demo</span>
+          <h2 class="wide-title" data-i18n="s11.title">Dùng demo để thấy groupby đổi bảng</h2>
+          <p class="lead" data-i18n="s11.body">Khi đổi grouping variable, cùng một dataset tạo ra một câu đọc khác.</p>
+        </div>
+        <div class="stage">
+          <div class="checklist">
+            <div class="check-item"><b>1</b><span data-i18n="demo.1">chọn activity_focus</span></div>
+            <div class="check-item"><b>2</b><span data-i18n="demo.2">đọc top mean_gain</span></div>
+            <div class="check-item"><b>3</b><span data-i18n="demo.3">đổi sang class_group</span></div>
+            <div class="check-item"><b>4</b><span data-i18n="demo.4">so sánh caption</span></div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="slide-head">
+          <span class="tag" data-i18n="s12.tag">Transfer</span>
+          <h2 class="wide-title" data-i18n="s12.title">Cùng pattern cho bốn hướng nghiên cứu</h2>
+        </div>
+        <div class="stage">
+          <div class="schema-map">
+            <div class="lane-card"><div class="track">TCSOL</div><div><strong>activity_focus</strong><span data-i18n="transfer.tcsol">mean gain</span></div></div>
+            <div class="lane-card"><div class="track" data-i18n="transfer.contrast.track">Đối chiếu</div><div><strong>contrast_point</strong><span data-i18n="transfer.contrast">count examples</span></div></div>
+            <div class="lane-card"><div class="track">MTPE</div><div><strong>error_label</strong><span data-i18n="transfer.mtpe">count segments</span></div></div>
+            <div class="lane-card"><div class="track">Policy</div><div><strong>theme_code</strong><span data-i18n="transfer.policy">count excerpts</span></div></div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="slide-head">
+          <span class="tag" data-i18n="s13.tag">Cẩn trọng</span>
+          <h2 class="wide-title" data-i18n="s13.title">Ba lỗi cần tránh</h2>
+        </div>
+        <div class="stage">
+          <div class="concept-grid">
+            <div class="concept-card value"><strong data-i18n="mistake.n.title">Quên N</strong><span data-i18n="mistake.n.body">caption phải nói N = 31</span></div>
+            <div class="concept-card schema"><strong data-i18n="mistake.causal.title">Overclaim</strong><span data-i18n="mistake.causal.body">descriptive gain không phải causal effect</span></div>
+            <div class="concept-card column"><strong data-i18n="mistake.manual.title">Sửa tay</strong><span data-i18n="mistake.manual.body">đừng sửa output CSV bằng tay</span></div>
+            <div class="concept-card row"><strong data-i18n="mistake.group.title">Nhóm sai</strong><span data-i18n="mistake.group.body">groupby phải gắn với câu hỏi</span></div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="slide-head">
+          <span class="tag" data-i18n="s14.tag">Đi tiếp</span>
+          <h2 class="wide-title" data-i18n="s14.title">Mở notebook, demo và viết caption</h2>
+          <p class="lead" data-i18n="s14.body">Week 04 sẽ xử lý dữ liệu bẩn. Tuần này chỉ cần tạo bảng mô tả sạch và diễn giải cẩn trọng.</p>
+        </div>
+        <div class="stage">
+          <div class="slide-cta-row" aria-label="Đi tiếp sau slides" data-i18n-aria-label="cta.aria">
+            <a class="slide-cta primary" href="live_coding.html" data-i18n="cta.notebook">Xem notebook</a>
+            <a class="slide-cta" href="interactive_demo.html" data-i18n="cta.demo">Mở demo</a>
+            <a class="slide-cta" href="./" data-i18n="cta.week">Về Tuần 03</a>
+            <a class="slide-cta" href="../../" data-i18n="cta.home">Về trang chủ</a>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <script src="../../assets/js/bilingual.js"></script>
+  <script src="../../assets/js/lecture-slides.js"></script>
+  <script>
+    const SLIDE_I18N = {
+      vi: {
+        "meta.title": "Tuần 03: pandas cơ bản và bảng mô tả",
+        "nav.course.aria": "Điều hướng khóa học",
+        "nav.home": "Trang chủ",
+        "nav.week": "Tuần 03",
+        "nav.toc": "Mục lục",
+        "nav.toc.aria": "Mục lục slide",
+        "nav.language": "Ngôn ngữ / Language",
+        "nav.slides.aria": "Điều hướng slide",
+        "nav.previous": "Trước",
+        "nav.next": "Tiếp",
+        "nav.jump.aria": "Đi đến slide",
+        "nav.jump.label": "Slide",
+        "nav.jump.input": "Số slide",
+        "nav.jump.go": "Go",
+        "nav.toc.title": "Mục lục slide",
+        "nav.toc.hint": "Chọn phần muốn xem nhanh.",
+        "nav.toc.close": "Đóng",
+        "s1.tag": "Tuần 03",
+        "s1.title": "pandas cơ bản và bảng mô tả",
+        "s1.body": "Từ CSV đến descriptive table, caption và diễn giải Results cẩn trọng.",
+        "hero.table.aria": "Bảng summary minh họa",
+        "s2.tag": "Từ Week 02",
+        "s2.title": "Tuần trước thiết kế bảng, tuần này tóm tắt bảng",
+        "s2.body": "Schema trả lời \"cột nào cần có\"; pandas trả lời \"bảng này nói gì?\".",
+        "flow.schema": "Schema",
+        "flow.schema.body": "row và column rõ",
+        "flow.csv.body": "dữ liệu nhỏ",
+        "flow.pandas.body": "lọc và nhóm",
+        "flow.table": "Table",
+        "flow.table.body": "bằng chứng mô tả",
+        "flow.caption.body": "paper-facing",
+        "s3.tag": "Khái niệm",
+        "s3.title": "DataFrame là bảng đang nằm trong Python",
+        "s3.body": "Đừng học index trước. Hãy đọc DataFrame như bảng nghiên cứu: row là observation, column là variable.",
+        "df.row": "một learner pre/post score record",
+        "df.col": "ví dụ <span class=\"inline-token\">pre_score</span>, <span class=\"inline-token\">post_score</span>",
+        "df.value": "ví dụ <span class=\"inline-token value-token\">72</span>",
+        "df.table": "bảng Python có thể xử lý",
+        "s4.tag": "Load",
+        "s4.title": "Luôn đọc file rồi kiểm tra nhanh",
+        "load.shape": "shape = số dòng, số cột",
+        "load.columns": "columns = tên biến",
+        "load.head": "head = vài dòng đầu",
+        "s5.tag": "Select",
+        "s5.title": "Chọn cột là chọn bằng chứng",
+        "s5.body": "Paper không cần mọi cột raw. Nó cần cột trả lời câu hỏi.",
+        "s6.tag": "Filter",
+        "s6.title": "Lọc dòng không phải xóa dữ liệu",
+        "s6.body": "Raw CSV giữ nguyên. Bảng mới chỉ dùng completed records để caption có N rõ.",
+        "filter.raw": "Raw data",
+        "filter.summary": "Summary data",
+        "s7.tag": "Derived column",
+        "s7.title": "Tạo cột gain_score",
+        "s7.body": "Một cột tính thêm phải được mô tả rõ trong caption hoặc Methods note.",
+        "gain.note": "Gain được tính bằng post_score trừ pre_score trên thang điểm 0-100.",
+        "s8.tag": "GroupBy",
+        "s8.title": "groupby = nhóm rồi tính",
+        "s8.body": "Đọc code bằng lời trước khi học thuộc cú pháp.",
+        "s9.tag": "Output",
+        "s9.title": "Bảng mô tả cần N và rounding",
+        "summary.table.aria": "Bảng mô tả",
+        "s10.tag": "Writing",
+        "s10.title": "Caption phải nói cả pattern và giới hạn",
+        "caption.frame": "Table 1 shows that <span class=\"frame-slot\">measure_words</span> had the highest average gain <span class=\"frame-slot columns\">12.1 points</span>, but this result is descriptive because <span class=\"frame-slot purpose\">groups were not randomly assigned</span>.",
+        "s11.tag": "Demo",
+        "s11.title": "Dùng demo để thấy groupby đổi bảng",
+        "s11.body": "Khi đổi grouping variable, cùng một dataset tạo ra một câu đọc khác.",
+        "demo.1": "chọn activity_focus",
+        "demo.2": "đọc top mean_gain",
+        "demo.3": "đổi sang class_group",
+        "demo.4": "so sánh caption",
+        "s12.tag": "Transfer",
+        "s12.title": "Cùng pattern cho bốn hướng nghiên cứu",
+        "transfer.tcsol": "mean gain",
+        "transfer.contrast.track": "Đối chiếu",
+        "transfer.contrast": "count examples",
+        "transfer.mtpe": "count segments",
+        "transfer.policy": "count excerpts",
+        "s13.tag": "Cẩn trọng",
+        "s13.title": "Ba lỗi cần tránh",
+        "mistake.n.title": "Quên N",
+        "mistake.n.body": "caption phải nói N = 31",
+        "mistake.causal.title": "Overclaim",
+        "mistake.causal.body": "descriptive gain không phải causal effect",
+        "mistake.manual.title": "Sửa tay",
+        "mistake.manual.body": "đừng sửa output CSV bằng tay",
+        "mistake.group.title": "Nhóm sai",
+        "mistake.group.body": "groupby phải gắn với câu hỏi",
+        "s14.tag": "Đi tiếp",
+        "s14.title": "Mở notebook, demo và viết caption",
+        "s14.body": "Week 04 sẽ xử lý dữ liệu bẩn. Tuần này chỉ cần tạo bảng mô tả sạch và diễn giải cẩn trọng.",
+        "cta.aria": "Đi tiếp sau slides",
+        "cta.notebook": "Xem notebook",
+        "cta.demo": "Mở demo",
+        "cta.week": "Về Tuần 03",
+        "cta.home": "Về trang chủ"
+      },
+      en: {
+        "meta.title": "Week 03: pandas basics and descriptive tables",
+        "nav.course.aria": "Course navigation",
+        "nav.home": "Home",
+        "nav.week": "Week 03",
+        "nav.toc": "Overview",
+        "nav.toc.aria": "Slide overview",
+        "nav.language": "Language",
+        "nav.slides.aria": "Slide navigation",
+        "nav.previous": "Previous",
+        "nav.next": "Next",
+        "nav.jump.aria": "Go to slide",
+        "nav.jump.label": "Slide",
+        "nav.jump.input": "Slide number",
+        "nav.jump.go": "Go",
+        "nav.toc.title": "Slide overview",
+        "nav.toc.hint": "Choose a section to jump directly to the slide you need.",
+        "nav.toc.close": "Close",
+        "s1.tag": "Week 03",
+        "s1.title": "pandas basics and descriptive tables",
+        "s1.body": "From CSV to descriptive table, caption, and careful Results interpretation.",
+        "hero.table.aria": "Illustrative summary table",
+        "s2.tag": "From Week 02",
+        "s2.title": "Last week designed the table; this week summarizes the table",
+        "s2.body": "Schema answers \"which columns are needed\"; pandas answers \"what does this table show?\".",
+        "flow.schema": "Schema",
+        "flow.schema.body": "clear rows and columns",
+        "flow.csv.body": "small data",
+        "flow.pandas.body": "filter and group",
+        "flow.table": "Table",
+        "flow.table.body": "descriptive evidence",
+        "flow.caption.body": "paper-facing",
+        "s3.tag": "Concept",
+        "s3.title": "A DataFrame is a table inside Python",
+        "s3.body": "Do not learn indexes first. Read a DataFrame as a research table: rows are observations, columns are variables.",
+        "df.row": "one learner pre/post score record",
+        "df.col": "for example <span class=\"inline-token\">pre_score</span>, <span class=\"inline-token\">post_score</span>",
+        "df.value": "for example <span class=\"inline-token value-token\">72</span>",
+        "df.table": "a table Python can process",
+        "s4.tag": "Load",
+        "s4.title": "Always read the file and check it quickly",
+        "load.shape": "shape = rows, columns",
+        "load.columns": "columns = variable names",
+        "load.head": "head = first few rows",
+        "s5.tag": "Select",
+        "s5.title": "Selecting columns means selecting evidence",
+        "s5.body": "A paper does not need every raw column. It needs columns that answer the question.",
+        "s6.tag": "Filter",
+        "s6.title": "Filtering rows is not deleting data",
+        "s6.body": "The raw CSV remains unchanged. The new table uses completed records so the caption has a clear N.",
+        "filter.raw": "Raw data",
+        "filter.summary": "Summary data",
+        "s7.tag": "Derived column",
+        "s7.title": "Create gain_score",
+        "s7.body": "A derived column must be described clearly in the caption or Methods note.",
+        "gain.note": "Gain is calculated as post_score minus pre_score on a 0-100 scale.",
+        "s8.tag": "GroupBy",
+        "s8.title": "groupby = group then calculate",
+        "s8.body": "Read the code in words before memorizing syntax.",
+        "s9.tag": "Output",
+        "s9.title": "A descriptive table needs N and rounding",
+        "summary.table.aria": "Descriptive table",
+        "s10.tag": "Writing",
+        "s10.title": "A caption must state both pattern and limitation",
+        "caption.frame": "Table 1 shows that <span class=\"frame-slot\">measure_words</span> had the highest average gain <span class=\"frame-slot columns\">12.1 points</span>, but this result is descriptive because <span class=\"frame-slot purpose\">groups were not randomly assigned</span>.",
+        "s11.tag": "Demo",
+        "s11.title": "Use the demo to see groupby change the table",
+        "s11.body": "When the grouping variable changes, the same dataset produces a different reading.",
+        "demo.1": "choose activity_focus",
+        "demo.2": "read top mean_gain",
+        "demo.3": "switch to class_group",
+        "demo.4": "compare captions",
+        "s12.tag": "Transfer",
+        "s12.title": "The same pattern works for four research directions",
+        "transfer.tcsol": "mean gain",
+        "transfer.contrast.track": "Contrastive",
+        "transfer.contrast": "count examples",
+        "transfer.mtpe": "count segments",
+        "transfer.policy": "count excerpts",
+        "s13.tag": "Caution",
+        "s13.title": "Avoid three mistakes",
+        "mistake.n.title": "Missing N",
+        "mistake.n.body": "the caption must say N = 31",
+        "mistake.causal.title": "Overclaim",
+        "mistake.causal.body": "descriptive gain is not causal effect",
+        "mistake.manual.title": "Manual edits",
+        "mistake.manual.body": "do not edit output CSV by hand",
+        "mistake.group.title": "Wrong group",
+        "mistake.group.body": "groupby must match the question",
+        "s14.tag": "Next",
+        "s14.title": "Open the notebook, demo, and write the caption",
+        "s14.body": "Week 04 will handle messy data. This week only needs a clean descriptive table and careful interpretation.",
+        "cta.aria": "Next steps after slides",
+        "cta.notebook": "View notebook",
+        "cta.demo": "Open demo",
+        "cta.week": "Back to Week 03",
+        "cta.home": "Home"
+      }
+    };
+    window.Bilingual.init({ translations: SLIDE_I18N, defaultLang: "vi" });
+    window.LectureSlides.init();
+  </script>
+</body>
+</html>

@@ -1,0 +1,16 @@
+term_id,vi,en,note
+pandas,pandas,pandas,Python library for table analysis
+dataframe,bảng DataFrame,DataFrame,Table in memory
+read_csv,đọc CSV,read CSV,Load a CSV into pandas
+select_columns,chọn cột,select columns,Keep columns needed for the question
+filter_rows,lọc dòng,filter rows,Keep rows matching a condition
+boolean_filter,lọc điều kiện,boolean filter,Expression such as completed == yes
+derived_column,cột tính thêm,derived column,Column calculated from other columns
+gain_score,điểm tăng,gain score,post_score minus pre_score
+groupby,nhóm rồi tính,groupby,Split rows by a column and calculate statistics
+aggregation,tính thống kê theo nhóm,aggregation,Mean/count/max by group
+descriptive_table,bảng mô tả,descriptive table,Paper-facing summary table
+caption,caption,caption,Table explanation for paper
+causal_claim,khẳng định nhân quả,causal claim,Claim that activity caused outcome
+completed_record,bản ghi hoàn thành,completed record,Row included in the main summary
+zotero_setup,thiết lập Zotero,Zotero setup,Light start of citation workflow

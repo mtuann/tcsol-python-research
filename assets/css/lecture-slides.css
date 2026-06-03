@@ -72,6 +72,8 @@ body.lecture-slide-page {
 .slide-link {
   background: var(--paper);
   color: var(--ink);
+  cursor: pointer;
+  font: inherit;
   font-size: 0.95rem;
 }
 
@@ -566,6 +568,119 @@ blockquote {
   opacity: 0.45;
 }
 
+.fallback-nav button.nav-link {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  color: var(--ink);
+}
+
+.slide-overview {
+  align-items: center;
+  background: rgba(245, 247, 251, 0.78);
+  display: none;
+  inset: 0;
+  justify-content: center;
+  padding: clamp(1rem, 3vw, 2rem);
+  position: fixed;
+  z-index: 90;
+}
+
+.slide-overview.is-open {
+  display: flex;
+}
+
+.overview-panel {
+  background: rgba(255, 255, 255, 0.98);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  box-shadow: 0 28px 70px rgba(23, 32, 51, 0.22);
+  max-height: min(760px, calc(100vh - 2rem));
+  max-width: 940px;
+  overflow: auto;
+  padding: clamp(1rem, 2.5vw, 1.5rem);
+  width: min(940px, calc(100vw - 2rem));
+}
+
+.overview-head {
+  align-items: flex-start;
+  display: flex;
+  gap: 1rem;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.overview-head h2 {
+  font-size: clamp(1.8rem, 3.5vw, 3rem);
+  max-width: none;
+}
+
+.overview-close {
+  align-items: center;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  color: var(--ink);
+  cursor: pointer;
+  display: flex;
+  flex: 0 0 auto;
+  font-size: 1.6rem;
+  font-weight: 800;
+  height: 2.6rem;
+  justify-content: center;
+  width: 2.6rem;
+}
+
+.overview-grid {
+  display: grid;
+  gap: 0.55rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.toc-item {
+  align-items: center;
+  background: #ffffff;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  color: var(--ink);
+  cursor: pointer;
+  display: grid;
+  font: inherit;
+  gap: 0.7rem;
+  grid-template-columns: 2.6rem minmax(0, 1fr);
+  min-height: 3.2rem;
+  padding: 0.65rem;
+  text-align: left;
+}
+
+.toc-item.active {
+  background: var(--blue-soft);
+  border-color: #bfd7ff;
+  box-shadow: inset 0 0 0 2px rgba(37, 99, 235, 0.12);
+}
+
+.toc-index {
+  align-items: center;
+  background: var(--ink);
+  border-radius: 8px;
+  color: #ffffff;
+  display: flex;
+  font-weight: 850;
+  height: 2.1rem;
+  justify-content: center;
+  width: 2.1rem;
+}
+
+.toc-title {
+  font-size: clamp(0.95rem, 1.2vw, 1.08rem);
+  font-weight: 780;
+  line-height: 1.25;
+}
+
+.toc-title .inline-token {
+  display: inline-flex;
+  font-size: 0.86em;
+}
+
 .slide-counter {
   color: var(--ink);
   font-weight: 800;
@@ -637,5 +752,9 @@ blockquote {
   .fallback-nav {
     flex-wrap: wrap;
     width: calc(100% - 1.5rem);
+  }
+
+  .overview-grid {
+    grid-template-columns: 1fr;
   }
 }

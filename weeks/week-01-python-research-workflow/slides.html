@@ -12,6 +12,7 @@
     <nav class="slide-exit-links" aria-label="Điều hướng khóa học" data-i18n-aria-label="nav.course.aria">
       <a class="slide-link primary" href="../../" data-i18n="nav.home">Trang chủ</a>
       <a class="slide-link" href="./" data-i18n="nav.week">Tuần 01</a>
+      <button class="slide-link" type="button" data-toc-open data-i18n="nav.toc" data-i18n-aria-label="nav.toc.aria" aria-label="Mục lục slide">Mục lục</button>
     </nav>
     <div class="language-switcher" role="group" aria-label="Ngôn ngữ / Language" data-i18n-aria-label="nav.language">
       <button type="button" data-lang-option="vi" aria-pressed="true">Tiếng Việt</button>
@@ -247,6 +248,7 @@ question = "How do learner scores change after a short measure-word activity?"</
   </main>
 
   <script src="../../assets/js/bilingual.js"></script>
+  <script src="../../assets/js/lecture-slides.js"></script>
   <script>
     const SLIDE_I18N = {
       vi: {
@@ -262,6 +264,11 @@ question = "How do learner scores change after a short measure-word activity?"</
         "nav.jump.label": "Trang",
         "nav.jump.input": "Số trang",
         "nav.jump.go": "Đi",
+        "nav.toc": "Mục lục",
+        "nav.toc.aria": "Mở mục lục slide",
+        "nav.toc.title": "Mục lục slide",
+        "nav.toc.hint": "Chọn một phần để nhảy nhanh tới slide cần xem.",
+        "nav.toc.close": "Đóng mục lục",
         "s1.tag": "Tuần 01",
         "s1.title": "Python như một quy trình nghiên cứu",
         "s1.body": "Mục tiêu tuần này không phải là học hết Python. Mục tiêu là thấy code giúp biến câu hỏi, dữ liệu và writing thành một quy trình có thể lặp lại.",
@@ -383,6 +390,11 @@ question = "How do learner scores change after a short measure-word activity?"</
         "nav.jump.label": "Slide",
         "nav.jump.input": "Slide number",
         "nav.jump.go": "Go",
+        "nav.toc": "Overview",
+        "nav.toc.aria": "Open slide overview",
+        "nav.toc.title": "Slide overview",
+        "nav.toc.hint": "Choose a section to jump directly to the slide you need.",
+        "nav.toc.close": "Close overview",
         "s1.tag": "Week 01",
         "s1.title": "Python as a research workflow",
         "s1.body": "This week is not about learning all of Python. The goal is to see how code turns questions, data, and writing into a repeatable workflow.",
@@ -493,64 +505,7 @@ question = "How do learner scores change after a short measure-word activity?"</
       }
     };
 
-    function initFallbackSlides() {
-      const sections = Array.from(document.querySelectorAll(".slides > section"));
-      let current = 0;
-      const nav = document.createElement("nav");
-      nav.className = "fallback-nav";
-      nav.setAttribute("aria-label", "Điều hướng slides");
-      nav.setAttribute("data-i18n-aria-label", "nav.slides.aria");
-      nav.innerHTML = `
-        <button type="button" data-dir="-1" data-i18n="nav.previous">Trước</button>
-        <span class="slide-counter"></span>
-        <form class="slide-jump" aria-label="Đi tới slide" data-i18n-aria-label="nav.jump.aria">
-          <label for="slide-jump-input" data-i18n="nav.jump.label">Trang</label>
-          <input id="slide-jump-input" type="number" min="1" inputmode="numeric" aria-label="Số trang" data-i18n-aria-label="nav.jump.input">
-          <button class="jump-button" type="submit" data-i18n="nav.jump.go">Đi</button>
-        </form>
-        <button type="button" data-dir="1" data-i18n="nav.next">Tiếp</button>
-        <a class="nav-link" href="./" data-i18n="nav.week">Tuần 01</a>
-      `;
-      document.body.appendChild(nav);
-      const label = nav.querySelector(".slide-counter");
-      const input = nav.querySelector("#slide-jump-input");
-      const prev = nav.querySelector('[data-dir="-1"]');
-      const next = nav.querySelector('[data-dir="1"]');
-
-      function show(index) {
-        current = Math.max(0, Math.min(sections.length - 1, index));
-        sections.forEach((section, idx) => section.classList.toggle("active", idx === current));
-        label.textContent = (current + 1) + " / " + sections.length;
-        input.max = String(sections.length);
-        input.value = String(current + 1);
-        prev.disabled = current === 0;
-        next.disabled = current === sections.length - 1;
-        location.hash = "slide-" + (current + 1);
-      }
-
-      nav.addEventListener("click", (event) => {
-        const button = event.target.closest("button[data-dir]");
-        if (!button) return;
-        show(current + Number(button.dataset.dir));
-      });
-
-      nav.querySelector(".slide-jump").addEventListener("submit", (event) => {
-        event.preventDefault();
-        const target = Number(input.value);
-        if (Number.isFinite(target)) show(target - 1);
-      });
-
-      window.addEventListener("keydown", (event) => {
-        if (event.target && ["INPUT", "TEXTAREA"].includes(event.target.tagName)) return;
-        if (event.key === "ArrowRight" || event.key === " ") show(current + 1);
-        if (event.key === "ArrowLeft") show(current - 1);
-      });
-
-      const hashMatch = location.hash.match(/slide-(\d+)/);
-      show(hashMatch ? Number(hashMatch[1]) - 1 : 0);
-    }
-
-    initFallbackSlides();
+    window.LectureSlides.init();
     window.Bilingual.init({ translations: SLIDE_I18N, defaultLang: "vi" });
   </script>
 </body>

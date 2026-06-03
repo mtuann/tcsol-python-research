@@ -54,7 +54,7 @@ course homepage
 Required learner-facing week surfaces:
 
 - folder `index.html`: overview, research frame, writing support, notes, exercises, assignment, readings, rubric, and source links;
-- `slides.html`: bilingual stage-first deck using `assets/css/lecture-slides.css`, language switcher, page-number jump, keyboard navigation, visible course exit links, and final-slide next-step CTAs;
+- `slides.html`: bilingual stage-first deck using `assets/css/lecture-slides.css` and `assets/js/lecture-slides.js`, language switcher, slide overview/table of contents, page-number jump, keyboard navigation, visible course exit links, and final-slide next-step CTAs;
 - `live_coding.html`: rendered notebook with code/output, Colab action, source notebook download, and link back to the week overview;
 - `interactive_demo.html`: included when interaction improves learning; if not included, record the reason in the week's `README.md`;
 - homepage cards/links: point to public HTML pages first, not raw source files.
@@ -74,6 +74,8 @@ Canonical Week 01 quality rules:
 - MTPE labels used before the full MQM framework must be called simplified or MQM-inspired labels.
 - Interactive demos must include exit links back to the homepage, week overview, slides, and notebook.
 - Lecture slides must use `.inline-token` for short code/data terms inside prose and `.inline-token.value-token` or `.value-spotlight` for emphasized values such as `72`; do not leave raw Markdown backticks inside `data-i18n` strings.
+- A normal content week should have 12-16 core slides. Ten slides is acceptable only for orientation, recap, or very light weeks. If a deck has more than 12 slides, it must include a slide overview/table of contents for quick access.
+- Every new concept slide should be followed by at least one concrete example, preferably one that maps to TCSOL, contrastive linguistics, MTPE, or education policy.
 
 ## Beginner-First Layering
 

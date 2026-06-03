@@ -12,6 +12,7 @@
     <nav class="slide-exit-links" aria-label="Điều hướng khóa học" data-i18n-aria-label="nav.course.aria">
       <a class="slide-link primary" href="../../" data-i18n="nav.home">Trang chủ</a>
       <a class="slide-link" href="./" data-i18n="nav.week">Tuần 02</a>
+      <button class="slide-link" type="button" data-toc-open data-i18n="nav.toc" data-i18n-aria-label="nav.toc.aria" aria-label="Mục lục slide">Mục lục</button>
     </nav>
     <div class="language-switcher" role="group" aria-label="Ngôn ngữ / Language" data-i18n-aria-label="nav.language">
       <button type="button" data-lang-option="vi" aria-pressed="true">Tiếng Việt</button>
@@ -108,6 +109,74 @@
 
       <section>
         <div class="slide-head">
+          <span class="tag" data-i18n="ex.tcsol.tag">Ví dụ 1</span>
+          <h2 class="wide-title" data-i18n="ex.tcsol.title">TCSOL: điểm trước/sau</h2>
+          <p class="lead" data-i18n="ex.tcsol.body">Một dòng là một người học trong một hoạt động ngắn. Đây là ví dụ dễ nhất để thấy row, column và value.</p>
+        </div>
+        <div class="stage">
+          <div class="research-table" aria-label="TCSOL data example" data-i18n-aria-label="ex.tcsol.aria">
+            <div class="row header"><span>learner_id</span><span>pre_score</span><span>post_score</span><span>activity</span></div>
+            <div class="row focus-row"><span>S001</span><span>58</span><span class="focus-value"><strong class="value-spotlight">72</strong></span><span>measure_words</span></div>
+            <div class="row"><span>S002</span><span>62</span><span>75</span><span>measure_words</span></div>
+            <div class="row"><span>S003</span><span>65</span><span>78</span><span>measure_words</span></div>
+          </div>
+          <div class="chip-row">
+            <span class="chip" data-i18n="ex.tcsol.chip1">row = một người học</span>
+            <span class="chip optional" data-i18n="ex.tcsol.chip2">paper output = pre/post table</span>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="slide-head">
+          <span class="tag" data-i18n="ex.contrast.tag">Ví dụ 2</span>
+          <h2 class="wide-title" data-i18n="ex.contrast.title">Đối chiếu: một ví dụ ngữ pháp</h2>
+          <p class="lead" data-i18n="ex.contrast.body">Một dòng là một cặp ví dụ Hán-Việt kèm ghi chú giảng dạy, không phải toàn bộ bài học.</p>
+        </div>
+        <div class="stage">
+          <div class="research-table" aria-label="Contrastive example table" data-i18n-aria-label="ex.contrast.aria">
+            <div class="row three header"><span>zh_example</span><span>vi_gloss</span><span>teaching_note</span></div>
+            <div class="row three focus-row"><span>把书放在桌上</span><span>đặt sách lên bàn</span><span data-i18n="ex.contrast.note1">nhấn mạnh vị trí sau hành động</span></div>
+            <div class="row three"><span>把门关上</span><span>đóng cửa lại</span><span data-i18n="ex.contrast.note2">kết quả hành động rõ</span></div>
+            <div class="row three"><span>把问题说清楚</span><span>nói rõ vấn đề</span><span data-i18n="ex.contrast.note3">bổ ngữ kết quả cần giải thích</span></div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="slide-head">
+          <span class="tag" data-i18n="ex.mtpe.tag">Ví dụ 3</span>
+          <h2 class="wide-title" data-i18n="ex.mtpe.title">MTPE: một segment dịch</h2>
+          <p class="lead" data-i18n="ex.mtpe.body">Một dòng là một segment dịch máy và một nhãn lỗi đơn giản. Tuần này chưa dùng MQM đầy đủ.</p>
+        </div>
+        <div class="stage">
+          <div class="research-table" aria-label="MTPE segment example" data-i18n-aria-label="ex.mtpe.aria">
+            <div class="row header"><span>segment_id</span><span>mt_output</span><span>error_label</span><span>edit_note</span></div>
+            <div class="row focus-row"><span>M001</span><span data-i18n="ex.mtpe.mt1">chính sách cải thiện giáo viên</span><span>terminology</span><span data-i18n="ex.mtpe.edit1">sửa thuật ngữ ngành</span></div>
+            <div class="row"><span>M002</span><span data-i18n="ex.mtpe.mt2">đào tạo ngắn hạn cho giáo viên</span><span>fluency</span><span data-i18n="ex.mtpe.edit2">làm câu tự nhiên hơn</span></div>
+            <div class="row"><span>M003</span><span data-i18n="ex.mtpe.mt3">nền tảng học trực tuyến</span><span>accuracy</span><span data-i18n="ex.mtpe.edit3">kiểm tra nghĩa nguồn</span></div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="slide-head">
+          <span class="tag" data-i18n="ex.policy.tag">Ví dụ 4</span>
+          <h2 class="wide-title" data-i18n="ex.policy.title">Policy: một trích đoạn đã mã hóa</h2>
+          <p class="lead" data-i18n="ex.policy.body">Một dòng là một trích đoạn chính sách được mã hóa thủ công, kèm nguồn và ngày để sau này trích dẫn được.</p>
+        </div>
+        <div class="stage">
+          <div class="research-table" aria-label="Policy coded excerpt example" data-i18n-aria-label="ex.policy.aria">
+            <div class="row header"><span>doc_id</span><span>excerpt</span><span>theme_code</span><span>source_year</span></div>
+            <div class="row focus-row"><span>P001</span><span data-i18n="ex.policy.excerpt1">đẩy mạnh năng lực số cho giáo viên</span><span>digital_training</span><span>2024</span></div>
+            <div class="row"><span>P002</span><span data-i18n="ex.policy.excerpt2">xây dựng chuẩn đánh giá chương trình</span><span>quality_assurance</span><span>2023</span></div>
+            <div class="row"><span>P003</span><span data-i18n="ex.policy.excerpt3">hỗ trợ hợp tác giáo dục quốc tế</span><span>internationalization</span><span>2022</span></div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="slide-head">
           <span class="tag" data-i18n="s6.tag">Cột</span>
           <h2 class="wide-title" data-i18n="s6.title">Cột bắt buộc khác cột tùy chọn</h2>
         </div>
@@ -188,6 +257,7 @@
   </main>
 
   <script src="../../assets/js/bilingual.js"></script>
+  <script src="../../assets/js/lecture-slides.js"></script>
   <script>
     const SLIDE_I18N = {
       vi: {
@@ -203,6 +273,11 @@
         "nav.jump.label": "Trang",
         "nav.jump.input": "Số trang",
         "nav.jump.go": "Đi",
+        "nav.toc": "Mục lục",
+        "nav.toc.aria": "Mở mục lục slide",
+        "nav.toc.title": "Mục lục slide",
+        "nav.toc.hint": "Chọn một phần để nhảy nhanh tới slide cần xem.",
+        "nav.toc.close": "Đóng mục lục",
         "s1.tag": "Tuần 02",
         "s1.title": "Dữ liệu nghiên cứu dưới dạng bảng",
         "s1.body": "Từ câu hỏi nhỏ đến row, column, schema và đoạn mô tả dữ liệu cho paper.",
@@ -244,6 +319,36 @@
         "out.mtpe": "dẫn tới bảng nhãn lỗi đơn giản",
         "unit.policy": "Trích đoạn đã mã hóa",
         "out.policy": "dẫn tới theme table hoặc source matrix",
+        "ex.tcsol.tag": "Ví dụ 1",
+        "ex.tcsol.title": "TCSOL: điểm trước/sau",
+        "ex.tcsol.body": "Một dòng là một người học trong một hoạt động ngắn. Đây là ví dụ dễ nhất để thấy row, column và value.",
+        "ex.tcsol.aria": "Ví dụ dữ liệu TCSOL",
+        "ex.tcsol.chip1": "row = một người học",
+        "ex.tcsol.chip2": "paper output = pre/post table",
+        "ex.contrast.tag": "Ví dụ 2",
+        "ex.contrast.title": "Đối chiếu: một ví dụ ngữ pháp",
+        "ex.contrast.body": "Một dòng là một cặp ví dụ Hán-Việt kèm ghi chú giảng dạy, không phải toàn bộ bài học.",
+        "ex.contrast.aria": "Bảng ví dụ đối chiếu",
+        "ex.contrast.note1": "nhấn mạnh vị trí sau hành động",
+        "ex.contrast.note2": "kết quả hành động rõ",
+        "ex.contrast.note3": "bổ ngữ kết quả cần giải thích",
+        "ex.mtpe.tag": "Ví dụ 3",
+        "ex.mtpe.title": "MTPE: một segment dịch",
+        "ex.mtpe.body": "Một dòng là một segment dịch máy và một nhãn lỗi đơn giản. Tuần này chưa dùng MQM đầy đủ.",
+        "ex.mtpe.aria": "Ví dụ segment MTPE",
+        "ex.mtpe.mt1": "chính sách cải thiện giáo viên",
+        "ex.mtpe.mt2": "đào tạo ngắn hạn cho giáo viên",
+        "ex.mtpe.mt3": "nền tảng học trực tuyến",
+        "ex.mtpe.edit1": "sửa thuật ngữ ngành",
+        "ex.mtpe.edit2": "làm câu tự nhiên hơn",
+        "ex.mtpe.edit3": "kiểm tra nghĩa nguồn",
+        "ex.policy.tag": "Ví dụ 4",
+        "ex.policy.title": "Policy: một trích đoạn đã mã hóa",
+        "ex.policy.body": "Một dòng là một trích đoạn chính sách được mã hóa thủ công, kèm nguồn và ngày để sau này trích dẫn được.",
+        "ex.policy.aria": "Ví dụ trích đoạn chính sách đã mã hóa",
+        "ex.policy.excerpt1": "đẩy mạnh năng lực số cho giáo viên",
+        "ex.policy.excerpt2": "xây dựng chuẩn đánh giá chương trình",
+        "ex.policy.excerpt3": "hỗ trợ hợp tác giáo dục quốc tế",
         "s6.tag": "Cột",
         "s6.title": "Cột bắt buộc khác cột tùy chọn",
         "required.title": "Required",
@@ -291,6 +396,11 @@
         "nav.jump.label": "Slide",
         "nav.jump.input": "Slide number",
         "nav.jump.go": "Go",
+        "nav.toc": "Overview",
+        "nav.toc.aria": "Open slide overview",
+        "nav.toc.title": "Slide overview",
+        "nav.toc.hint": "Choose a section to jump directly to the slide you need.",
+        "nav.toc.close": "Close overview",
         "s1.tag": "Week 02",
         "s1.title": "Research data as tables",
         "s1.body": "From small question to row, column, schema, and a paper-facing data description.",
@@ -332,6 +442,36 @@
         "out.mtpe": "leads to a simplified error-label table",
         "unit.policy": "Coded excerpt",
         "out.policy": "leads to a theme table or source matrix",
+        "ex.tcsol.tag": "Example 1",
+        "ex.tcsol.title": "TCSOL: pre/post scores",
+        "ex.tcsol.body": "One row is one learner in one short activity. This is the easiest example for seeing row, column, and value.",
+        "ex.tcsol.aria": "TCSOL data example",
+        "ex.tcsol.chip1": "row = one learner",
+        "ex.tcsol.chip2": "paper output = pre/post table",
+        "ex.contrast.tag": "Example 2",
+        "ex.contrast.title": "Contrastive: one grammar example",
+        "ex.contrast.body": "One row is one Chinese-Vietnamese example pair with a teaching note, not the whole lesson.",
+        "ex.contrast.aria": "Contrastive example table",
+        "ex.contrast.note1": "emphasizes position after the action",
+        "ex.contrast.note2": "clear action result",
+        "ex.contrast.note3": "result complement needs explanation",
+        "ex.mtpe.tag": "Example 3",
+        "ex.mtpe.title": "MTPE: one translated segment",
+        "ex.mtpe.body": "One row is one machine-translated segment and one simplified error label. This week does not use the full MQM framework.",
+        "ex.mtpe.aria": "MTPE segment example",
+        "ex.mtpe.mt1": "policy for improving teachers",
+        "ex.mtpe.mt2": "short-term teacher training",
+        "ex.mtpe.mt3": "online learning platform",
+        "ex.mtpe.edit1": "fix field-specific terminology",
+        "ex.mtpe.edit2": "make the sentence more natural",
+        "ex.mtpe.edit3": "check source meaning",
+        "ex.policy.tag": "Example 4",
+        "ex.policy.title": "Policy: one coded excerpt",
+        "ex.policy.body": "One row is one manually coded policy excerpt with source and date, so it can be cited later.",
+        "ex.policy.aria": "Policy coded excerpt example",
+        "ex.policy.excerpt1": "strengthen teachers' digital capacity",
+        "ex.policy.excerpt2": "build standards for program evaluation",
+        "ex.policy.excerpt3": "support international education cooperation",
         "s6.tag": "Columns",
         "s6.title": "Required columns differ from optional columns",
         "required.title": "Required",
@@ -368,64 +508,7 @@
       }
     };
 
-    function initFallbackSlides() {
-      const sections = Array.from(document.querySelectorAll(".slides > section"));
-      let current = 0;
-      const nav = document.createElement("nav");
-      nav.className = "fallback-nav";
-      nav.setAttribute("aria-label", "Điều hướng slides");
-      nav.setAttribute("data-i18n-aria-label", "nav.slides.aria");
-      nav.innerHTML = `
-        <button type="button" data-dir="-1" data-i18n="nav.previous">Trước</button>
-        <span class="slide-counter"></span>
-        <form class="slide-jump" aria-label="Đi tới slide" data-i18n-aria-label="nav.jump.aria">
-          <label for="slide-jump-input" data-i18n="nav.jump.label">Trang</label>
-          <input id="slide-jump-input" type="number" min="1" inputmode="numeric" aria-label="Số trang" data-i18n-aria-label="nav.jump.input">
-          <button class="jump-button" type="submit" data-i18n="nav.jump.go">Đi</button>
-        </form>
-        <button type="button" data-dir="1" data-i18n="nav.next">Tiếp</button>
-        <a class="nav-link" href="./" data-i18n="nav.week">Tuần 02</a>
-      `;
-      document.body.appendChild(nav);
-      const label = nav.querySelector(".slide-counter");
-      const input = nav.querySelector("#slide-jump-input");
-      const prev = nav.querySelector('[data-dir="-1"]');
-      const next = nav.querySelector('[data-dir="1"]');
-
-      function show(index) {
-        current = Math.max(0, Math.min(sections.length - 1, index));
-        sections.forEach((section, idx) => section.classList.toggle("active", idx === current));
-        label.textContent = (current + 1) + " / " + sections.length;
-        input.max = String(sections.length);
-        input.value = String(current + 1);
-        prev.disabled = current === 0;
-        next.disabled = current === sections.length - 1;
-        location.hash = "slide-" + (current + 1);
-      }
-
-      nav.addEventListener("click", (event) => {
-        const button = event.target.closest("button[data-dir]");
-        if (!button) return;
-        show(current + Number(button.dataset.dir));
-      });
-
-      nav.querySelector(".slide-jump").addEventListener("submit", (event) => {
-        event.preventDefault();
-        const target = Number(input.value);
-        if (Number.isFinite(target)) show(target - 1);
-      });
-
-      window.addEventListener("keydown", (event) => {
-        if (event.target && ["INPUT", "TEXTAREA"].includes(event.target.tagName)) return;
-        if (event.key === "ArrowRight" || event.key === " ") show(current + 1);
-        if (event.key === "ArrowLeft") show(current - 1);
-      });
-
-      const hashMatch = location.hash.match(/slide-(\d+)/);
-      show(hashMatch ? Number(hashMatch[1]) - 1 : 0);
-    }
-
-    initFallbackSlides();
+    window.LectureSlides.init();
     window.Bilingual.init({ translations: SLIDE_I18N, defaultLang: "vi" });
   </script>
 </body>

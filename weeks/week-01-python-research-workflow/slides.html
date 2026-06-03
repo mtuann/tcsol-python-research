@@ -66,10 +66,51 @@
       white-space: pre-wrap;
     }
     .slide-tools {
+      align-items: center;
+      display: flex;
+      gap: 0.75rem;
+      justify-content: space-between;
+      left: 0;
       padding: 0.75rem 1rem 0;
       position: fixed;
       right: 0;
       top: 0;
+      z-index: 25;
+    }
+    .slide-exit-links {
+      align-items: center;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.45rem;
+    }
+    .slide-link,
+    .fallback-nav .nav-link,
+    .slide-cta {
+      align-items: center;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      display: inline-flex;
+      font-weight: 750;
+      justify-content: center;
+      text-decoration: none;
+    }
+    .slide-link {
+      background: rgba(255, 255, 255, 0.94);
+      color: var(--ink);
+      font-size: 0.92rem;
+      min-height: 2.2rem;
+      padding: 0.35rem 0.7rem;
+    }
+    .slide-link.primary,
+    .slide-cta.primary {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #ffffff;
+    }
+    .slide-link:hover,
+    .fallback-nav .nav-link:hover,
+    .slide-cta:hover {
+      text-decoration: none;
     }
     .tag {
       display: inline-block;
@@ -182,6 +223,26 @@
       background: var(--ink);
       padding: 0.45rem 0.7rem;
     }
+    .fallback-nav .nav-link {
+      background: #f8fbff;
+      color: var(--accent);
+      font-size: 0.9rem;
+      min-height: 2.05rem;
+      padding: 0.35rem 0.7rem;
+    }
+    .slide-cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.55rem;
+      margin-top: 1rem;
+    }
+    .slide-cta {
+      background: #f8fbff;
+      color: var(--accent);
+      font-size: 0.68em;
+      min-height: 2.25rem;
+      padding: 0.45rem 0.8rem;
+    }
     body.fallback-mode {
       background: #ffffff;
       overflow-x: hidden;
@@ -195,7 +256,7 @@
       display: flex;
       min-height: 100vh;
       justify-content: center;
-      padding: 2rem 2rem 5rem;
+      padding: 5rem 2rem 5rem;
       width: 100%;
     }
     body.fallback-mode .slides > section {
@@ -228,8 +289,8 @@
       }
       .slide-tools {
         background: rgba(255, 255, 255, 0.95);
-        left: 0;
-        right: auto;
+        align-items: flex-start;
+        flex-direction: column;
       }
       body.fallback-mode .slides {
         align-items: flex-start;
@@ -254,6 +315,10 @@
 </head>
 <body>
   <div class="site-tools slide-tools">
+    <nav class="slide-exit-links" aria-label="Điều hướng khóa học" data-i18n-aria-label="nav.course.aria">
+      <a class="slide-link primary" href="../../" data-i18n="nav.home">Trang chủ</a>
+      <a class="slide-link" href="./" data-i18n="nav.week">Tuần 01</a>
+    </nav>
     <nav class="language-switcher" aria-label="Ngôn ngữ / Language" data-i18n-aria-label="nav.language">
       <button type="button" data-lang-option="vi" aria-pressed="true">Tiếng Việt</button>
       <button type="button" data-lang-option="en" aria-pressed="false">English</button>
@@ -445,6 +510,12 @@ question = "How do learner answers change after a short activity?"</code></pre>
           <p data-i18n="slide13.body1">Hôm nay bạn không cần hiểu mọi dòng code.</p>
           <p data-i18n="slide13.body2">Bạn chỉ cần thấy code có thể hỗ trợ quy trình nghiên cứu như thế nào.</p>
         </div>
+        <div class="slide-cta-row" aria-label="Đi tiếp sau slides" data-i18n-aria-label="slide13.cta.aria">
+          <a class="slide-cta primary" href="live_coding.html" data-i18n="slide13.cta.notebook">Xem notebook</a>
+          <a class="slide-cta" href="interactive_demo.html" data-i18n="slide13.cta.demo">Mở demo</a>
+          <a class="slide-cta" href="./" data-i18n="slide13.cta.week">Về Tuần 01</a>
+          <a class="slide-cta" href="../../" data-i18n="slide13.cta.home">Về trang chủ</a>
+        </div>
       </section>
     </div>
   </div>
@@ -456,6 +527,9 @@ question = "How do learner answers change after a short activity?"</code></pre>
         "nav.language": "Ngôn ngữ / Language",
         "nav.previous": "Trước",
         "nav.next": "Tiếp",
+        "nav.home": "Trang chủ",
+        "nav.week": "Tuần 01",
+        "nav.course.aria": "Điều hướng khóa học",
         "nav.jump.aria": "Đi tới slide",
         "nav.jump.label": "Trang",
         "nav.jump.input": "Số trang",
@@ -591,13 +665,21 @@ question = "How do learner answers change after a short activity?"</code></pre>
         "success.observe": "nhìn output và kiểm tra ý nghĩa",
         "success.explain": "viết caption và memo ngắn",
         "slide13.body1": "Hôm nay bạn không cần hiểu mọi dòng code.",
-        "slide13.body2": "Bạn chỉ cần thấy code có thể hỗ trợ quy trình nghiên cứu như thế nào."
+        "slide13.body2": "Bạn chỉ cần thấy code có thể hỗ trợ quy trình nghiên cứu như thế nào.",
+        "slide13.cta.aria": "Đi tiếp sau slides",
+        "slide13.cta.notebook": "Xem notebook",
+        "slide13.cta.demo": "Mở demo",
+        "slide13.cta.week": "Về Tuần 01",
+        "slide13.cta.home": "Về trang chủ"
       },
       en: {
         "meta.title": "Week 01: Python as a Research Workflow",
         "nav.language": "Language",
         "nav.previous": "Previous",
         "nav.next": "Next",
+        "nav.home": "Home",
+        "nav.week": "Week 01",
+        "nav.course.aria": "Course navigation",
         "nav.jump.aria": "Go to slide",
         "nav.jump.label": "Slide",
         "nav.jump.input": "Slide number",
@@ -733,7 +815,12 @@ question = "How do learner answers change after a short activity?"</code></pre>
         "success.observe": "look at output and check meaning",
         "success.explain": "write a caption and short memo",
         "slide13.body1": "You do not need to understand every line of code today.",
-        "slide13.body2": "You only need to see how code can support a research workflow."
+        "slide13.body2": "You only need to see how code can support a research workflow.",
+        "slide13.cta.aria": "Next steps after slides",
+        "slide13.cta.notebook": "View notebook",
+        "slide13.cta.demo": "Open demo",
+        "slide13.cta.week": "Back to Week 01",
+        "slide13.cta.home": "Back to Home"
       }
     };
 
@@ -752,6 +839,7 @@ question = "How do learner answers change after a short activity?"</code></pre>
           <button class="jump-button" type="submit" data-i18n="nav.jump.go">Đi</button>
         </form>
         <button type="button" data-dir="1" data-i18n="nav.next">Tiếp</button>
+        <a class="nav-link" href="./" data-i18n="nav.week">Week 01</a>
       `;
       document.body.appendChild(nav);
       const label = nav.querySelector(".slide-counter");

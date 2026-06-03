@@ -18,11 +18,11 @@
 | `track_id` | ID ngắn, ổn định cho hướng nghiên cứu. | `TCSOL_SHORT` |
 | `track` | Tên hướng nghiên cứu. | `Short-term Chinese teaching` |
 | `broad_interest` | Chủ đề rộng trước khi trở thành câu hỏi có thể nghiên cứu. | `Improving short-term Chinese classes...` |
-| `small_research_question` | Câu hỏi hẹp hơn, có thể gắn với dữ liệu. | `How do learner answers change...` |
-| `unit_of_observation` | Một dòng trong dataset tương lai sẽ đại diện cho điều gì. | `learner test item` |
+| `small_research_question` | Câu hỏi hẹp hơn, có thể gắn với dữ liệu. | `How do learner scores change...` |
+| `unit_of_observation` | Một dòng trong dataset tương lai sẽ đại diện cho điều gì. | `learner pre/post score record` |
 | `starter_dataset` | Dataset template có thể dùng cho hướng đó. | `pre_post_scores.csv` |
 | `likely_output` | Bảng hoặc hình có thể xuất hiện trong paper. | `pre/post score table` |
-| `beginner_python_task` | Tác vụ Python rất đơn giản cho loại dataset đó. | `count learners...` |
+| `beginner_python_task` | Tác vụ Python rất đơn giản cho loại dataset đó. | `run the score summary...` |
 
 ## Vì sao dataset này tồn tại?
 
@@ -44,9 +44,9 @@ Tuần 01 cũng có:
 
 | Hướng | Example unit | Vì sao quan trọng |
 |---|---|---|
-| TCSOL | một câu trả lời của người học trong một item kiểm tra | nối hoạt động giảng dạy với output có thể đo |
-| Đối chiếu Hán-Việt | một cặp câu Hán-Việt | nối phân tích ngữ pháp với ghi chú giảng dạy |
-| MTPE | một segment source-MT-postedit | nối bản dịch máy với hậu hiệu đính và nhãn lỗi |
-| Policy | một trích đoạn chính sách đã mã hóa hoặc cặp document-theme | nối văn bản chính sách với metadata và theme |
+| TCSOL | một bản ghi điểm trước/sau của người học | nối hoạt động giảng dạy với output có thể đo |
+| Đối chiếu Hán-Việt | một ví dụ ngữ pháp Hán-Việt kèm ghi chú giảng dạy | nối phân tích ngữ pháp với điều chỉnh sư phạm |
+| MTPE | một segment source-MT-postedit kèm nhãn lỗi đơn giản lấy cảm hứng từ MQM | nối bản dịch máy với hậu hiệu đính và nhãn lỗi cục bộ |
+| Policy | một trích đoạn chính sách được mã hóa thủ công | nối văn bản chính sách với metadata, theme và ghi chú mã hóa |
 
 Không thêm tên thật, email, hoặc dữ liệu lớp học có thể định danh vào file dữ liệu Tuần 01.

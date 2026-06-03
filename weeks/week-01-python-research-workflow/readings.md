@@ -8,7 +8,7 @@ Source audit date: 2026-06-03.
 
 - Link: https://jupyterlab.readthedocs.io/en/stable/user/
 - Vì sao cần đọc tuần này: bạn cần biết notebook là gì và vì sao code + giải thích có thể nằm trong cùng một tài liệu.
-- Chỉ đọc: overview và basic interface. Không cần đọc sâu.
+- Chỉ đọc: overview và basic interface. Không cần đọc sâu; giảng viên có thể trích 1-2 ảnh màn hình hoặc đoạn ngắn.
 
 ### The Python Tutorial
 
@@ -44,7 +44,7 @@ Các nguồn dưới đây chỉ để định hướng bốn hướng nghiên c
 ### MTPE / Translation Quality
 
 - Link: https://themqm.org/error-types-2/typology/
-- Use: taxonomy khởi đầu để nghĩ về loại lỗi dịch.
+- Use: nguồn tham khảo cho giảng viên. Tuần 01 chỉ dùng nhãn lỗi đơn giản lấy cảm hứng từ MQM, không yêu cầu người học áp dụng toàn bộ taxonomy.
 
 ### Education Policy
 

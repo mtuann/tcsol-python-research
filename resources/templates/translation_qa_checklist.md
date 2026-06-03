@@ -13,7 +13,7 @@ Copy this file into a week folder as `translation_qa.md`.
 
 - [ ] Slide titles, body text, buttons, links, and navigation labels are bilingual.
 - [ ] Interactive demo headings, buttons, chart titles, fallback text, tables, and accessibility labels are bilingual.
-- [ ] Notebook Markdown instructions are Vietnamese-first.
+- [ ] Rendered notebook shell and notebook Markdown instructions are bilingual when a language switcher is present.
 - [ ] Assignment, exercises, rubric, readings, and data dictionary are Vietnamese-first.
 
 ## Public Navigation
@@ -23,6 +23,7 @@ Copy this file into a week folder as `translation_qa.md`.
 - [ ] Slides include persistent homepage/week links, previous/next controls, slide counter, page-number jump, and final-slide next-step CTAs.
 - [ ] Rendered notebook HTML includes Colab, source `.ipynb` download, and a link back to the week overview.
 - [ ] Raw `.md` and `.ipynb` links are clearly labeled as source or download.
+- [ ] Interactive demo pages include links back to Home, week overview, slides, and notebook.
 
 ## Terminology
 
@@ -36,6 +37,8 @@ Copy this file into a week folder as `translation_qa.md`.
 - [ ] No long Vietnamese-English parallel paragraphs in beginner-facing pages.
 - [ ] Each slide has one main idea.
 - [ ] Core task is still doable without programming background.
+- [ ] Weeks 1-2 label advanced starter code as run-only instructor code.
+- [ ] Research question, unit of observation, output, and beginner task align for every track.
 - [ ] Stretch content is clearly optional.
 
 ## Accessibility and Fallback

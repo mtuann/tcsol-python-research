@@ -29,6 +29,16 @@ REPO_NAME = "tcsol-python-research"
 REPO_OWNER = "mtuann"
 
 
+def repo_root_from(path: Path) -> Path:
+    current = path.resolve()
+    if current.is_file():
+        current = current.parent
+    for candidate in [current, *current.parents]:
+        if (candidate / ".git").exists():
+            return candidate
+    return Path.cwd().resolve()
+
+
 def source_text(cell: dict[str, Any]) -> str:
     source = cell.get("source", "")
     if isinstance(source, list):
@@ -174,17 +184,44 @@ def render_outputs(cell: dict[str, Any]) -> str:
     return "\n".join(rendered)
 
 
-def render_cells(nb: dict[str, Any]) -> str:
+def cell_i18n_key(index: int) -> str:
+    return f"notebook.cell{index:02d}"
+
+
+def cell_translation(cell: dict[str, Any], lang: str) -> str | None:
+    metadata = cell.get("metadata", {})
+    value = metadata.get("i18n", {}).get(lang)
+    if isinstance(value, list):
+        return "".join(value)
+    if isinstance(value, str):
+        return value
+    return None
+
+
+def render_cells(nb: dict[str, Any]) -> tuple[str, dict[str, dict[str, str]]]:
     parts: list[str] = []
+    translations: dict[str, dict[str, str]] = {"vi": {}, "en": {}}
     code_count = 0
     for index, cell in enumerate(nb.get("cells", []), start=1):
         cell_type = cell.get("cell_type")
         if cell_type == "markdown":
-            parts.append(
-                '<article class="nb-cell nb-markdown" data-cell-type="markdown">'
-                f"{render_markdown(source_text(cell))}"
-                "</article>"
-            )
+            key = cell.get("metadata", {}).get("i18n_key", cell_i18n_key(index))
+            vi_html = render_markdown(cell_translation(cell, "vi") or source_text(cell))
+            en_source = cell_translation(cell, "en")
+            if en_source:
+                en_html = render_markdown(en_source)
+                translations["vi"][key] = vi_html
+                translations["en"][key] = en_html
+                parts.append(
+                    '<article class="nb-cell nb-markdown" data-cell-type="markdown" '
+                    f'data-i18n-html="{html.escape(key)}">{vi_html}</article>'
+                )
+            else:
+                parts.append(
+                    '<article class="nb-cell nb-markdown" data-cell-type="markdown">'
+                    f"{vi_html}"
+                    "</article>"
+                )
         elif cell_type == "code":
             code_count += 1
             code = html.escape(source_text(cell).rstrip())
@@ -202,10 +239,13 @@ def render_cells(nb: dict[str, Any]) -> str:
                 f"<p>Unsupported cell {index}: {html.escape(str(cell_type))}</p>"
                 "</article>"
             )
-    return "\n".join(parts)
+    return "\n".join(parts), translations
 
 
 def notebook_title(nb: dict[str, Any]) -> str:
+    metadata_title = nb.get("metadata", {}).get("i18n", {}).get("title", {}).get("vi")
+    if isinstance(metadata_title, str):
+        return metadata_title
     for cell in nb.get("cells", []):
         if cell.get("cell_type") != "markdown":
             continue
@@ -218,18 +258,82 @@ def notebook_title(nb: dict[str, Any]) -> str:
 def build_html(nb: dict[str, Any], notebook_path: Path, repo_root: Path) -> str:
     rel_path = notebook_path.relative_to(repo_root).as_posix()
     title = notebook_title(nb)
+    en_title = nb.get("metadata", {}).get("i18n", {}).get("title", {}).get("en", title)
     colab_url = (
         f"https://colab.research.google.com/github/{REPO_OWNER}/{REPO_NAME}/blob/main/{rel_path}"
     )
     source_name = notebook_path.name
-    rendered_cells = render_cells(nb)
+    rendered_cells, cell_translations = render_cells(nb)
+    translations = {
+        "vi": {
+            **cell_translations["vi"],
+            "brand": "Python Research Hub",
+            "meta.title": f"{title} | Notebook đã render",
+            "nav.aria": "Điều hướng notebook",
+            "nav.week": "Tuần 01",
+            "nav.slides": "Slides",
+            "nav.demo": "Demo",
+            "nav.source": "Tải source .ipynb",
+            "nav.language": "Ngôn ngữ / Language",
+            "side.title": "Notebook",
+            "side.week": "Tổng quan tuần",
+            "side.colab": "Chạy bằng Colab",
+            "side.source": "Tải source .ipynb",
+            "side.csv": "Tải tệp CSV dữ liệu",
+            "hero.tag": "Notebook đã render",
+            "hero.title": title,
+            "hero.body": "Đây là bản HTML đã chạy sẵn để đọc trên GitHub Pages. Muốn thực hành, mở notebook trong Colab hoặc tải file .ipynb.",
+            "action.colab": "Chạy trong Colab",
+            "action.source": "Tải .ipynb",
+            "action.week": "Quay lại Tuần 01",
+            "note.title": "Cách dùng trang này",
+            "note.read.title": "Đọc",
+            "note.read.body": "Bản HTML giữ code và output cạnh nhau, phù hợp để ôn lại sau buổi học.",
+            "note.run.title": "Chạy",
+            "note.run.body": "Nút Colab mở notebook có thể chạy từng cell và tự tải CSV nếu không có file local.",
+            "note.source.title": "Source",
+            "note.source.body": "File .ipynb vẫn được giữ để tải, nộp bài hoặc chỉnh trong JupyterLab/VS Code.",
+            "notebook.cells.aria": "Các cell notebook đã render",
+        },
+        "en": {
+            **cell_translations["en"],
+            "brand": "Python Research Hub",
+            "meta.title": f"{en_title} | Rendered Notebook",
+            "nav.aria": "Notebook navigation",
+            "nav.week": "Week 01",
+            "nav.slides": "Slides",
+            "nav.demo": "Demo",
+            "nav.source": "Download source .ipynb",
+            "nav.language": "Language",
+            "side.title": "Notebook",
+            "side.week": "Week overview",
+            "side.colab": "Run in Colab",
+            "side.source": "Download source .ipynb",
+            "side.csv": "Download data CSV",
+            "hero.tag": "Rendered notebook",
+            "hero.title": en_title,
+            "hero.body": "This is the pre-run HTML version for GitHub Pages. To practice, open the notebook in Colab or download the .ipynb file.",
+            "action.colab": "Run in Colab",
+            "action.source": "Download .ipynb",
+            "action.week": "Back to Week 01",
+            "note.title": "How to use this page",
+            "note.read.title": "Read",
+            "note.read.body": "The HTML version keeps code and output together, useful for review after class.",
+            "note.run.title": "Run",
+            "note.run.body": "The Colab button opens a runnable notebook and downloads the CSV automatically when local files are unavailable.",
+            "note.source.title": "Source",
+            "note.source.body": "The .ipynb file remains available for download, submission, or editing in JupyterLab/VS Code.",
+            "notebook.cells.aria": "Rendered notebook cells",
+        },
+    }
+    translations_json = json.dumps(translations, ensure_ascii=False, indent=8)
 
     return f"""<!doctype html>
 <html lang="vi">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{html.escape(title)} | Rendered Notebook</title>
+  <title data-i18n="meta.title">{html.escape(title)} | Notebook đã render</title>
   <link rel="stylesheet" href="../../assets/css/bilingual.css">
   <link rel="stylesheet" href="../../assets/css/course-doc.css">
 </head>
@@ -241,10 +345,10 @@ def build_html(nb: dict[str, Any], notebook_path: Path, repo_root: Path) -> str:
       <a href="slides.html" data-i18n="nav.slides">Slides</a>
       <a href="interactive_demo.html" data-i18n="nav.demo">Demo</a>
       <a href="{html.escape(source_name)}" download data-i18n="nav.source">Source .ipynb</a>
-      <nav class="language-switcher" aria-label="Ngôn ngữ / Language" data-i18n-aria-label="nav.language">
+      <div class="language-switcher" role="group" aria-label="Ngôn ngữ / Language" data-i18n-aria-label="nav.language">
         <button type="button" data-lang-option="vi" aria-pressed="true">Tiếng Việt</button>
         <button type="button" data-lang-option="en" aria-pressed="false">English</button>
-      </nav>
+      </div>
     </nav>
   </header>
 
@@ -254,13 +358,13 @@ def build_html(nb: dict[str, Any], notebook_path: Path, repo_root: Path) -> str:
       <a href="./" data-i18n="side.week">Tổng quan tuần</a>
       <a href="{html.escape(colab_url)}" data-i18n="side.colab">Chạy bằng Colab</a>
       <a href="{html.escape(source_name)}" download data-i18n="side.source">Tải source .ipynb</a>
-      <a href="data/raw/week01_research_tracks.csv" data-i18n="side.csv">CSV dữ liệu</a>
+      <a href="data/raw/week01_research_tracks.csv" download data-i18n="side.csv">Tải tệp CSV dữ liệu</a>
     </aside>
 
     <div class="doc-main">
       <section class="doc-hero">
         <span class="doc-eyebrow" data-i18n="hero.tag">Rendered notebook</span>
-        <h1>{html.escape(title)}</h1>
+        <h1 data-i18n="hero.title">{html.escape(title)}</h1>
         <p class="doc-lead" data-i18n="hero.body">Đây là bản HTML đã chạy sẵn để đọc trên GitHub Pages. Muốn thực hành, mở notebook trong Colab hoặc tải file .ipynb.</p>
         <div class="doc-actions">
           <a class="doc-button" href="{html.escape(colab_url)}" data-i18n="action.colab">Chạy trong Colab</a>
@@ -278,7 +382,7 @@ def build_html(nb: dict[str, Any], notebook_path: Path, repo_root: Path) -> str:
         </div>
       </section>
 
-      <section class="notebook-document" aria-label="Rendered notebook cells">
+      <section class="notebook-document" aria-label="Các cell notebook đã render" data-i18n-aria-label="notebook.cells.aria">
         {rendered_cells}
       </section>
     </div>
@@ -288,60 +392,7 @@ def build_html(nb: dict[str, Any], notebook_path: Path, repo_root: Path) -> str:
   <script>
     window.Bilingual.init({{
       defaultLang: "vi",
-      translations: {{
-        vi: {{
-          "brand": "Python Research Hub",
-          "nav.aria": "Điều hướng notebook",
-          "nav.week": "Week 01",
-          "nav.slides": "Slides",
-          "nav.demo": "Demo",
-          "nav.source": "Source .ipynb",
-          "nav.language": "Ngôn ngữ / Language",
-          "side.title": "Notebook",
-          "side.week": "Tổng quan tuần",
-          "side.colab": "Chạy bằng Colab",
-          "side.source": "Tải source .ipynb",
-          "side.csv": "CSV dữ liệu",
-          "hero.tag": "Rendered notebook",
-          "hero.body": "Đây là bản HTML đã chạy sẵn để đọc trên GitHub Pages. Muốn thực hành, mở notebook trong Colab hoặc tải file .ipynb.",
-          "action.colab": "Chạy trong Colab",
-          "action.source": "Tải .ipynb",
-          "action.week": "Quay lại Week 01",
-          "note.title": "Cách dùng trang này",
-          "note.read.title": "Đọc",
-          "note.read.body": "Bản HTML giữ code và output cạnh nhau, phù hợp để ôn lại sau buổi học.",
-          "note.run.title": "Chạy",
-          "note.run.body": "Nút Colab mở notebook có thể chạy từng cell và tự tải CSV nếu không có file local.",
-          "note.source.title": "Source",
-          "note.source.body": "File .ipynb vẫn được giữ để tải, nộp bài hoặc chỉnh trong JupyterLab/VS Code."
-        }},
-        en: {{
-          "brand": "Python Research Hub",
-          "nav.aria": "Notebook navigation",
-          "nav.week": "Week 01",
-          "nav.slides": "Slides",
-          "nav.demo": "Demo",
-          "nav.source": "Source .ipynb",
-          "nav.language": "Language",
-          "side.title": "Notebook",
-          "side.week": "Week overview",
-          "side.colab": "Run in Colab",
-          "side.source": "Download source .ipynb",
-          "side.csv": "Data CSV",
-          "hero.tag": "Rendered notebook",
-          "hero.body": "This is the pre-run HTML version for GitHub Pages. To practice, open the notebook in Colab or download the .ipynb file.",
-          "action.colab": "Run in Colab",
-          "action.source": "Download .ipynb",
-          "action.week": "Back to Week 01",
-          "note.title": "How to use this page",
-          "note.read.title": "Read",
-          "note.read.body": "The HTML version keeps code and output together, useful for review after class.",
-          "note.run.title": "Run",
-          "note.run.body": "The Colab button opens a runnable notebook and downloads the CSV automatically when local files are unavailable.",
-          "note.source.title": "Source",
-          "note.source.body": "The .ipynb file remains available for download, submission, or editing in JupyterLab/VS Code."
-        }}
-      }}
+      translations: {translations_json}
     }});
   </script>
 </body>
@@ -353,12 +404,12 @@ def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("notebook", type=Path)
     parser.add_argument("output", type=Path)
-    parser.add_argument("--repo-root", type=Path, default=Path.cwd())
+    parser.add_argument("--repo-root", type=Path)
     parser.add_argument("--execute", action="store_true")
     parser.add_argument("--write-executed", action="store_true")
     args = parser.parse_args()
 
-    repo_root = args.repo_root.resolve()
+    repo_root = args.repo_root.resolve() if args.repo_root else repo_root_from(args.notebook)
     notebook_path = args.notebook.resolve()
     output_path = args.output.resolve()
     nb = json.loads(notebook_path.read_text(encoding="utf-8"))

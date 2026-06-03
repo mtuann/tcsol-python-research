@@ -515,10 +515,10 @@
         <a href="#syllabus" data-i18n="nav.syllabus">Syllabus</a>
         <a href="#resources" data-i18n="nav.resources">Tài nguyên</a>
       </nav>
-      <nav class="language-switcher" aria-label="Ngôn ngữ / Language" data-i18n-aria-label="nav.language">
+      <div class="language-switcher" role="group" aria-label="Ngôn ngữ / Language" data-i18n-aria-label="nav.language">
         <button type="button" data-lang-option="vi" aria-pressed="true">Tiếng Việt</button>
         <button type="button" data-lang-option="en" aria-pressed="false">English</button>
-      </nav>
+      </div>
     </div>
   </header>
 
@@ -650,7 +650,7 @@
           <div class="resource-links">
             <a class="pill-link" href="weeks/week-01-python-research-workflow/slides.html" data-i18n="link.slides">Slides</a>
             <a class="pill-link" href="weeks/week-01-python-research-workflow/interactive_demo.html" data-i18n="link.demo">Demo</a>
-            <a class="pill-link" href="weeks/week-01-python-research-workflow/#notes" data-i18n="link.notes">Notes</a>
+            <a class="pill-link" href="weeks/week-01-python-research-workflow/#notes" data-i18n="link.notes">Ghi chú</a>
           </div>
         </article>
         <article class="resource-card">
@@ -661,7 +661,7 @@
             <a class="pill-link" href="weeks/week-01-python-research-workflow/live_coding.html" data-i18n="link.notebook">Notebook HTML</a>
             <a class="pill-link" href="https://colab.research.google.com/github/mtuann/tcsol-python-research/blob/main/weeks/week-01-python-research-workflow/live_coding.ipynb" data-i18n="link.colab">Colab</a>
             <a class="pill-link" href="weeks/week-01-python-research-workflow/#practice" data-i18n="link.exercises">Exercises</a>
-            <a class="pill-link" href="weeks/week-01-python-research-workflow/data/raw/week01_research_tracks.csv" data-i18n="link.data">CSV</a>
+            <a class="pill-link" href="weeks/week-01-python-research-workflow/data/raw/week01_research_tracks.csv" download data-i18n="link.data">Tải CSV</a>
           </div>
         </article>
         <article class="resource-card">
@@ -669,9 +669,9 @@
           <h3 data-i18n="week1.submit.title">Sản phẩm nộp</h3>
           <p data-i18n="week1.submit.body">Một notebook chạy được, một bảng nhỏ, một caption và một memo 100-150 từ giải thích ý nghĩa nghiên cứu.</p>
           <div class="resource-links">
-            <a class="pill-link" href="weeks/week-01-python-research-workflow/#assignment" data-i18n="link.assignment">Assignment</a>
-            <a class="pill-link" href="weeks/week-01-python-research-workflow/#rubric" data-i18n="link.rubric">Rubric</a>
-            <a class="pill-link" href="weeks/week-01-python-research-workflow/#readings" data-i18n="link.readings">Readings</a>
+            <a class="pill-link" href="weeks/week-01-python-research-workflow/#assignment" data-i18n="link.assignment">Bài nộp</a>
+            <a class="pill-link" href="weeks/week-01-python-research-workflow/#rubric" data-i18n="link.rubric">Tiêu chí</a>
+            <a class="pill-link" href="weeks/week-01-python-research-workflow/#readings" data-i18n="link.readings">Bài đọc</a>
           </div>
         </article>
       </div>
@@ -698,7 +698,7 @@
         <article class="track-card">
           <span class="swatch purple"></span>
           <h3 data-i18n="track.contrast.title">Đối chiếu Hán-Việt</h3>
-          <p data-i18n="track.contrast.body">Xây dataset ví dụ song ngữ, phân loại hiện tượng, lỗi chuyển di và ghi chú ứng dụng sư phạm.</p>
+          <p data-i18n="track.contrast.body">Xây dataset ví dụ song ngữ, phân loại hiện tượng ngữ pháp và ghi chú ứng dụng sư phạm.</p>
           <ul>
             <li data-i18n="track.contrast.item1">contrastive example table</li>
             <li data-i18n="track.contrast.item2">teaching priority chart</li>
@@ -709,7 +709,7 @@
           <h3 data-i18n="track.mtpe.title">MT và MTPE</h3>
           <p data-i18n="track.mtpe.body">Đánh giá bản dịch máy, nhãn lỗi, hậu hiệu đính, thời gian chỉnh sửa và metric hỗ trợ.</p>
           <ul>
-            <li data-i18n="track.mtpe.item1">error frequency table</li>
+            <li data-i18n="track.mtpe.item1">simplified error-label table</li>
             <li data-i18n="track.mtpe.item2">MTPE effort summary</li>
           </ul>
         </article>
@@ -734,7 +734,7 @@
         <p data-i18n="syllabus.body">Tuần 1-4 xây nền dữ liệu và notebook; tuần 5-8 học phân tích, hình, thống kê nhẹ; tuần 9-13 đi vào track nghiên cứu; tuần 14 đóng gói paper bằng Word/Zotero, Quarto hoặc Overleaf nếu cần.</p>
       </div>
       <div class="syllabus-list" aria-label="Syllabus 14 tuần" data-i18n-aria-label="syllabus.aria">
-        <div class="week-row current"><span class="week-code">Week 01</span><a class="week-title" href="weeks/week-01-python-research-workflow/slides.html" data-i18n="w01.title">Python như một quy trình nghiên cứu</a><span class="week-skill" data-i18n="w01.skill">Jupyter, cells, variables, Markdown</span><span class="week-output" data-i18n="w01.output">1-page research idea</span></div>
+        <div class="week-row current"><span class="week-code">Week 01</span><a class="week-title" href="weeks/week-01-python-research-workflow/" data-i18n="w01.title">Python như một quy trình nghiên cứu</a><span class="week-skill" data-i18n="w01.skill">Jupyter, cells, variables, Markdown</span><span class="week-output" data-i18n="w01.output">1-page research idea</span></div>
         <div class="week-row"><span class="week-code">Week 02</span><span class="week-title" data-i18n="w02.title">Dữ liệu nghiên cứu dưới dạng bảng</span><span class="week-skill" data-i18n="w02.skill">lists, dictionaries, CSV/Excel</span><span class="week-output" data-i18n="w02.output">dataset template</span></div>
         <div class="week-row"><span class="week-code">Week 03</span><span class="week-title" data-i18n="w03.title">pandas cơ bản</span><span class="week-skill" data-i18n="w03.skill">DataFrame, select, filter, groupby</span><span class="week-output" data-i18n="w03.output">descriptive table</span></div>
         <div class="week-row"><span class="week-code">Week 04</span><span class="week-title" data-i18n="w04.title">Làm sạch dữ liệu</span><span class="week-skill" data-i18n="w04.skill">missing values, type conversion, labels</span><span class="week-output" data-i18n="w04.output">cleaned dataset</span></div>
@@ -849,14 +849,14 @@
         "week1.submit.body": "Một notebook chạy được, một bảng nhỏ, một caption và một memo 100-150 từ giải thích ý nghĩa nghiên cứu.",
         "link.slides": "Slides",
         "link.demo": "Demo",
-        "link.notes": "Notes",
+        "link.notes": "Ghi chú",
         "link.notebook": "Notebook HTML",
         "link.colab": "Colab",
         "link.exercises": "Exercises",
-        "link.data": "CSV",
-        "link.assignment": "Assignment",
-        "link.rubric": "Rubric",
-        "link.readings": "Readings",
+        "link.data": "Tải CSV",
+        "link.assignment": "Bài nộp",
+        "link.rubric": "Tiêu chí",
+        "link.readings": "Bài đọc",
         "tracks.tag": "Research tracks",
         "tracks.title": "Bốn hướng nghiên cứu luôn được nối với ví dụ thực hành",
         "tracks.body": "Các bài tập không chung chung: cùng một kỹ năng Python sẽ được đặt vào bối cảnh giảng dạy Hán ngữ, đối chiếu Hán-Việt, MTPE hoặc chính sách giáo dục.",
@@ -865,12 +865,12 @@
         "track.tcsol.item1": "pre/post table",
         "track.tcsol.item2": "learner progress figure",
         "track.contrast.title": "Đối chiếu Hán-Việt",
-        "track.contrast.body": "Xây dataset ví dụ song ngữ, phân loại hiện tượng, lỗi chuyển di và ghi chú ứng dụng sư phạm.",
+        "track.contrast.body": "Xây dataset ví dụ song ngữ, phân loại hiện tượng ngữ pháp và ghi chú ứng dụng sư phạm.",
         "track.contrast.item1": "contrastive example table",
         "track.contrast.item2": "teaching priority chart",
         "track.mtpe.title": "MT và MTPE",
         "track.mtpe.body": "Đánh giá bản dịch máy, nhãn lỗi, hậu hiệu đính, thời gian chỉnh sửa và metric hỗ trợ.",
-        "track.mtpe.item1": "error frequency table",
+        "track.mtpe.item1": "simplified error-label table",
         "track.mtpe.item2": "MTPE effort summary",
         "track.policy.title": "Chính sách giáo dục",
         "track.policy.body": "Tổ chức văn bản chính sách, metadata, coding scheme, timeline và chủ đề nổi bật.",
@@ -1030,12 +1030,12 @@
         "track.tcsol.item1": "pre/post table",
         "track.tcsol.item2": "learner progress figure",
         "track.contrast.title": "Chinese-Vietnamese contrast",
-        "track.contrast.body": "Build bilingual example datasets, classify phenomena, transfer errors, and pedagogical notes.",
+        "track.contrast.body": "Build bilingual example datasets, classify grammatical phenomena, and write pedagogical notes.",
         "track.contrast.item1": "contrastive example table",
         "track.contrast.item2": "teaching priority chart",
         "track.mtpe.title": "MT and MTPE",
         "track.mtpe.body": "Evaluate machine translation, error labels, post-editing, editing time, and supporting metrics.",
-        "track.mtpe.item1": "error frequency table",
+        "track.mtpe.item1": "simplified error-label table",
         "track.mtpe.item2": "MTPE effort summary",
         "track.policy.title": "Education policy",
         "track.policy.body": "Organize policy texts, metadata, coding schemes, timelines, and key themes.",

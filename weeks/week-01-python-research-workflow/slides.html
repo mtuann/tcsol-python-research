@@ -319,10 +319,10 @@
       <a class="slide-link primary" href="../../" data-i18n="nav.home">Trang chủ</a>
       <a class="slide-link" href="./" data-i18n="nav.week">Tuần 01</a>
     </nav>
-    <nav class="language-switcher" aria-label="Ngôn ngữ / Language" data-i18n-aria-label="nav.language">
+    <div class="language-switcher" role="group" aria-label="Ngôn ngữ / Language" data-i18n-aria-label="nav.language">
       <button type="button" data-lang-option="vi" aria-pressed="true">Tiếng Việt</button>
       <button type="button" data-lang-option="en" aria-pressed="false">English</button>
-    </nav>
+    </div>
   </div>
   <noscript>
     <p class="noscript-note">Trang này đang hiển thị tiếng Việt. Bật JavaScript để dùng nút chuyển sang English.</p>
@@ -373,7 +373,7 @@
         <h2 data-i18n="slide03.title">Bốn hướng cho dự án sau này</h2>
         <div class="visual-grid two">
           <div class="story-card blue"><span class="card-label">TCSOL</span><strong class="card-title" data-i18n="track.tcsol.name">Giảng dạy Hán ngữ ngắn hạn</strong><p data-i18n="track.tcsol">Tiến bộ người học, dữ liệu lớp học, bài kiểm tra trước/sau.</p></div>
-          <div class="story-card purple"><span class="card-label" data-i18n="track.contrastive.short">Đối chiếu</span><strong class="card-title" data-i18n="track.contrastive.name">Đối chiếu Hán-Việt</strong><p data-i18n="track.contrastive">Ví dụ Hán-Việt, chuyển di ngôn ngữ, ghi chú giảng dạy.</p></div>
+          <div class="story-card purple"><span class="card-label" data-i18n="track.contrastive.short">Đối chiếu</span><strong class="card-title" data-i18n="track.contrastive.name">Đối chiếu Hán-Việt</strong><p data-i18n="track.contrastive">Ví dụ Hán-Việt và ghi chú giảng dạy dựa trên so sánh ngữ pháp.</p></div>
           <div class="story-card amber"><span class="card-label">MT/MTPE</span><strong class="card-title" data-i18n="track.mtpe.name">Dịch máy và MTPE</strong><p data-i18n="track.mtpe">Bản dịch máy, hậu hiệu đính, nhãn lỗi do con người đánh giá.</p></div>
           <div class="story-card green"><span class="card-label" data-i18n="track.policy.short">Policy</span><strong class="card-title" data-i18n="track.policy.name">Chính sách giáo dục</strong><p data-i18n="track.policy">Văn bản chính sách, chủ đề, dòng thời gian, bối cảnh thể chế.</p></div>
         </div>
@@ -387,10 +387,10 @@
             <tr><th data-i18n="table.broad">Chủ đề rộng</th><th data-i18n="table.ready">Câu hỏi sẵn sàng cho dữ liệu</th></tr>
           </thead>
           <tbody>
-            <tr><td data-i18n="topic.grammar">Dạy ngữ pháp tiếng Trung</td><td data-i18n="question.grammar">Câu trả lời của người học thay đổi thế nào trước và sau một hoạt động về lượng từ?</td></tr>
-            <tr><td data-i18n="topic.contrastive">Đối chiếu Hán-Việt</td><td data-i18n="question.contrastive">Ví dụ cấu trúc 把 nào dễ tạo vấn đề chuyển di về trật tự từ?</td></tr>
-            <tr><td data-i18n="topic.mt">Chất lượng dịch máy</td><td data-i18n="question.mt">Loại lỗi MT nào xuất hiện nhiều nhất trong câu chính sách giáo dục Hán-Việt?</td></tr>
-            <tr><td data-i18n="topic.policy">Chính sách giáo dục</td><td data-i18n="question.policy">Các trích đoạn chính sách gần đây nói về phát triển giáo viên như thế nào?</td></tr>
+            <tr><td data-i18n="topic.grammar">Dạy ngữ pháp tiếng Trung</td><td data-i18n="question.grammar">Điểm của người học thay đổi thế nào trước và sau một hoạt động về lượng từ?</td></tr>
+            <tr><td data-i18n="topic.contrastive">Đối chiếu Hán-Việt</td><td data-i18n="question.contrastive">Đặc điểm nào của cấu trúc 把 cần được giải thích rõ bằng đối chiếu Hán-Việt trong ghi chú giảng dạy?</td></tr>
+            <tr><td data-i18n="topic.mt">Chất lượng dịch máy</td><td data-i18n="question.mt">Nhãn lỗi MT đơn giản nào xuất hiện nhiều nhất trong câu chính sách giáo dục Hán-Việt?</td></tr>
+            <tr><td data-i18n="topic.policy">Chính sách giáo dục</td><td data-i18n="question.policy">Chủ đề nào xuất hiện trong các trích đoạn chính sách đã mã hóa về phát triển giáo viên và chuyển đổi số?</td></tr>
           </tbody>
         </table>
       </section>
@@ -398,12 +398,12 @@
       <section>
         <span class="tag" data-i18n="slide05.tag">Thói quen dữ liệu</span>
         <h2 data-i18n="slide05.title">Một dòng dữ liệu nghĩa là gì?</h2>
-        <div class="mini-table" aria-label="Ví dụ đơn vị quan sát" data-i18n-aria-label="row.examples.aria">
-          <div class="row header"><span data-i18n="row.table.track">Hướng</span><span data-i18n="row.table.one">Một dòng có thể là</span><span data-i18n="row.table.output">Output sau này</span></div>
-          <div class="row"><span>TCSOL</span><span data-i18n="row.answer">một câu trả lời trong bài kiểm tra</span><span data-i18n="row.output.prepost">bảng pre/post</span></div>
-          <div class="row"><span data-i18n="row.track.contrastive">Đối chiếu</span><span data-i18n="row.pair">một cặp câu Hán-Việt</span><span data-i18n="row.output.examples">bảng ví dụ</span></div>
-          <div class="row"><span>MTPE</span><span data-i18n="row.segment">một đoạn dịch máy</span><span data-i18n="row.output.errors">bảng lỗi</span></div>
-          <div class="row"><span data-i18n="row.track.policy">Policy</span><span data-i18n="row.policy">một trích đoạn chính sách đã mã hóa</span><span data-i18n="row.output.timeline">timeline/chủ đề</span></div>
+        <div class="mini-table" role="table" aria-label="Ví dụ đơn vị quan sát" data-i18n-aria-label="row.examples.aria">
+          <div class="row header" role="row"><span role="columnheader" data-i18n="row.table.track">Hướng</span><span role="columnheader" data-i18n="row.table.one">Một dòng có thể là</span><span role="columnheader" data-i18n="row.table.output">Output sau này</span></div>
+          <div class="row" role="row"><span role="cell">TCSOL</span><span role="cell" data-i18n="row.answer">một bản ghi điểm trước/sau</span><span role="cell" data-i18n="row.output.prepost">bảng pre/post</span></div>
+          <div class="row" role="row"><span role="cell" data-i18n="row.track.contrastive">Đối chiếu</span><span role="cell" data-i18n="row.pair">một ví dụ Hán-Việt kèm ghi chú</span><span role="cell" data-i18n="row.output.examples">bảng ví dụ</span></div>
+          <div class="row" role="row"><span role="cell">MTPE</span><span role="cell" data-i18n="row.segment">một đoạn dịch máy</span><span role="cell" data-i18n="row.output.errors">bảng lỗi đơn giản</span></div>
+          <div class="row" role="row"><span role="cell" data-i18n="row.track.policy">Policy</span><span role="cell" data-i18n="row.policy">một trích đoạn chính sách mã hóa thủ công</span><span role="cell" data-i18n="row.output.timeline">timeline/chủ đề</span></div>
         </div>
         <div class="question-box">
           <p><strong data-i18n="beginner.rule">Quy tắc cho người mới:</strong> <span data-i18n="slide05.rule">trước khi viết code, hãy nói rõ một dòng dữ liệu đại diện cho điều gì.</span></p>
@@ -438,7 +438,7 @@
         <h2 data-i18n="slide07.title">Biến (variable) lưu một giá trị</h2>
         <pre><code class="language-python">research_area = "TCSOL"
 topic = "Chinese measure words"
-question = "How do learner answers change after a short activity?"</code></pre>
+question = "How do learner scores change after a short activity?"</code></pre>
         <p data-i18n="slide07.body">Biến là một nơi có nhãn để Python ghi nhớ thông tin.</p>
       </section>
 
@@ -454,10 +454,10 @@ question = "How do learner answers change after a short activity?"</code></pre>
         <h2 data-i18n="slide09.title">Tệp CSV đầu tiên</h2>
         <p><code>data/raw/week01_research_tracks.csv</code></p>
         <p data-i18n="slide09.body">Tệp này có bốn dòng. Mỗi dòng là một hướng dự án có thể phát triển sau này.</p>
-        <div class="mini-table" aria-label="CSV preview" data-i18n-aria-label="csv.preview.aria">
-          <div class="row header"><span>track</span><span>small_research_question</span><span>unit_of_observation</span></div>
-          <div class="row"><span>TCSOL</span><span data-i18n="csv.preview.q1">Câu trả lời thay đổi thế nào sau hoạt động lượng từ?</span><span>learner test item</span></div>
-          <div class="row"><span>MTPE</span><span data-i18n="csv.preview.q2">Loại lỗi MT nào xuất hiện nhiều nhất?</span><span>translation segment</span></div>
+        <div class="mini-table" role="table" aria-label="CSV preview" data-i18n-aria-label="csv.preview.aria">
+          <div class="row header" role="row"><span role="columnheader">track</span><span role="columnheader">small_research_question</span><span role="columnheader">unit_of_observation</span></div>
+          <div class="row" role="row"><span role="cell">TCSOL</span><span role="cell" data-i18n="csv.preview.q1">Điểm thay đổi thế nào sau hoạt động lượng từ?</span><span role="cell">learner pre/post score record</span></div>
+          <div class="row" role="row"><span role="cell">MTPE</span><span role="cell" data-i18n="csv.preview.q2">Nhãn lỗi MT đơn giản nào xuất hiện nhiều nhất?</span><span role="cell">translation segment</span></div>
         </div>
         <p class="small-note" data-i18n="slide09.note">Dữ liệu cố ý rất nhỏ để bạn tập trung vào quy trình.</p>
       </section>
@@ -530,6 +530,7 @@ question = "How do learner answers change after a short activity?"</code></pre>
         "nav.home": "Trang chủ",
         "nav.week": "Tuần 01",
         "nav.course.aria": "Điều hướng khóa học",
+        "nav.slides.aria": "Điều hướng slides",
         "nav.jump.aria": "Đi tới slide",
         "nav.jump.label": "Trang",
         "nav.jump.input": "Số trang",
@@ -570,7 +571,7 @@ question = "How do learner answers change after a short activity?"</code></pre>
         "track.tcsol": "Tiến bộ người học, dữ liệu lớp học, bài kiểm tra trước/sau.",
         "track.contrastive.short": "Đối chiếu",
         "track.contrastive.name": "Đối chiếu Hán-Việt",
-        "track.contrastive": "Ví dụ Hán-Việt, chuyển di ngôn ngữ, ghi chú giảng dạy.",
+        "track.contrastive": "Ví dụ Hán-Việt và ghi chú giảng dạy dựa trên so sánh ngữ pháp.",
         "track.mtpe.name": "Dịch máy và MTPE",
         "track.mtpe": "Bản dịch máy, hậu hiệu đính, nhãn lỗi do con người đánh giá.",
         "track.policy.short": "Policy",
@@ -581,21 +582,21 @@ question = "How do learner answers change after a short activity?"</code></pre>
         "table.broad": "Chủ đề rộng",
         "table.ready": "Câu hỏi sẵn sàng cho dữ liệu",
         "topic.grammar": "Dạy ngữ pháp tiếng Trung",
-        "question.grammar": "Câu trả lời của người học thay đổi thế nào trước và sau một hoạt động về lượng từ?",
+        "question.grammar": "Điểm của người học thay đổi thế nào trước và sau một hoạt động về lượng từ?",
         "topic.contrastive": "Đối chiếu Hán-Việt",
-        "question.contrastive": "Ví dụ cấu trúc 把 nào dễ tạo vấn đề chuyển di về trật tự từ?",
+        "question.contrastive": "Đặc điểm nào của cấu trúc 把 cần được giải thích rõ bằng đối chiếu Hán-Việt trong ghi chú giảng dạy?",
         "topic.mt": "Chất lượng dịch máy",
-        "question.mt": "Loại lỗi MT nào xuất hiện nhiều nhất trong câu chính sách giáo dục Hán-Việt?",
+        "question.mt": "Nhãn lỗi MT đơn giản nào xuất hiện nhiều nhất trong câu chính sách giáo dục Hán-Việt?",
         "topic.policy": "Chính sách giáo dục",
-        "question.policy": "Các trích đoạn chính sách gần đây nói về phát triển giáo viên như thế nào?",
+        "question.policy": "Chủ đề nào xuất hiện trong các trích đoạn chính sách đã mã hóa về phát triển giáo viên và chuyển đổi số?",
         "slide05.tag": "Thói quen dữ liệu",
         "slide05.title": "Một dòng dữ liệu nghĩa là gì?",
         "slide05.body": "Một dòng có thể là:",
         "row.learner": "một người học;",
-        "row.answer": "một câu trả lời trong bài kiểm tra;",
-        "row.pair": "một cặp câu Hán-Việt;",
+        "row.answer": "một bản ghi điểm trước/sau;",
+        "row.pair": "một ví dụ Hán-Việt kèm ghi chú;",
         "row.segment": "một đoạn dịch máy;",
-        "row.policy": "một trích đoạn chính sách đã mã hóa.",
+        "row.policy": "một trích đoạn chính sách mã hóa thủ công.",
         "row.examples.aria": "Ví dụ đơn vị quan sát",
         "row.table.track": "Hướng",
         "row.table.one": "Một dòng có thể là",
@@ -604,7 +605,7 @@ question = "How do learner answers change after a short activity?"</code></pre>
         "row.track.policy": "Policy",
         "row.output.prepost": "bảng pre/post",
         "row.output.examples": "bảng ví dụ",
-        "row.output.errors": "bảng lỗi",
+        "row.output.errors": "bảng lỗi đơn giản",
         "row.output.timeline": "timeline/chủ đề",
         "beginner.rule": "Quy tắc cho người mới:",
         "slide05.rule": "trước khi viết code, hãy nói rõ một dòng dữ liệu đại diện cho điều gì.",
@@ -629,8 +630,8 @@ question = "How do learner answers change after a short activity?"</code></pre>
         "slide09.title": "Tệp CSV đầu tiên",
         "slide09.body": "Tệp này có bốn dòng. Mỗi dòng là một hướng dự án có thể phát triển sau này.",
         "csv.preview.aria": "Xem trước CSV",
-        "csv.preview.q1": "Câu trả lời thay đổi thế nào sau hoạt động lượng từ?",
-        "csv.preview.q2": "Loại lỗi MT nào xuất hiện nhiều nhất?",
+        "csv.preview.q1": "Điểm thay đổi thế nào sau hoạt động lượng từ?",
+        "csv.preview.q2": "Nhãn lỗi MT đơn giản nào xuất hiện nhiều nhất?",
         "slide09.note": "Dữ liệu cố ý rất nhỏ để bạn tập trung vào quy trình.",
         "slide10.tag": "Tương tác",
         "slide10.title": "Mở demo",
@@ -680,6 +681,7 @@ question = "How do learner answers change after a short activity?"</code></pre>
         "nav.home": "Home",
         "nav.week": "Week 01",
         "nav.course.aria": "Course navigation",
+        "nav.slides.aria": "Slide navigation",
         "nav.jump.aria": "Go to slide",
         "nav.jump.label": "Slide",
         "nav.jump.input": "Slide number",
@@ -720,7 +722,7 @@ question = "How do learner answers change after a short activity?"</code></pre>
         "track.tcsol": "Learner progress, classroom data, pre/post tests.",
         "track.contrastive.short": "Contrastive",
         "track.contrastive.name": "Chinese-Vietnamese contrastive analysis",
-        "track.contrastive": "Chinese-Vietnamese examples, transfer, teaching notes.",
+        "track.contrastive": "Chinese-Vietnamese examples and teaching notes based on grammar comparison.",
         "track.mtpe.name": "Machine translation and MTPE",
         "track.mtpe": "Machine translation output, post-editing, human error labels.",
         "track.policy.short": "Policy",
@@ -731,21 +733,21 @@ question = "How do learner answers change after a short activity?"</code></pre>
         "table.broad": "Broad topic",
         "table.ready": "Data-ready question",
         "topic.grammar": "Teaching Chinese grammar",
-        "question.grammar": "How do learner answers change before and after a measure-word activity?",
+        "question.grammar": "How do learner scores change before and after a measure-word activity?",
         "topic.contrastive": "Chinese-Vietnamese comparison",
-        "question.contrastive": "Which ba-construction examples create word-order transfer problems?",
+        "question.contrastive": "Which ba-construction features need explicit Chinese-Vietnamese comparison in teaching notes?",
         "topic.mt": "Translation quality",
-        "question.mt": "Which MT error type is most frequent in Chinese-Vietnamese education-policy sentences?",
+        "question.mt": "Which simplified MT error label is most frequent in Chinese-Vietnamese education-policy sentences?",
         "topic.policy": "Education policy",
-        "question.policy": "How do recent policy excerpts discuss teacher development?",
+        "question.policy": "Which themes appear in manually coded excerpts about teacher development and digitalization?",
         "slide05.tag": "Data habit",
         "slide05.title": "What does one row mean?",
         "slide05.body": "One row can be:",
         "row.learner": "one learner;",
-        "row.answer": "one test answer;",
-        "row.pair": "one Chinese-Vietnamese sentence pair;",
+        "row.answer": "one learner pre/post score record;",
+        "row.pair": "one Chinese-Vietnamese example with teaching note;",
         "row.segment": "one MT segment;",
-        "row.policy": "one coded policy excerpt.",
+        "row.policy": "one manually coded policy excerpt.",
         "row.examples.aria": "Unit of observation examples",
         "row.table.track": "Track",
         "row.table.one": "One row can be",
@@ -754,7 +756,7 @@ question = "How do learner answers change after a short activity?"</code></pre>
         "row.track.policy": "Policy",
         "row.output.prepost": "pre/post table",
         "row.output.examples": "example table",
-        "row.output.errors": "error table",
+        "row.output.errors": "simple error table",
         "row.output.timeline": "timeline/themes",
         "beginner.rule": "Beginner rule:",
         "slide05.rule": "before writing code, say what one row represents.",
@@ -779,8 +781,8 @@ question = "How do learner answers change after a short activity?"</code></pre>
         "slide09.title": "The first CSV file",
         "slide09.body": "This file has four rows. Each row is one possible future project track.",
         "csv.preview.aria": "CSV preview",
-        "csv.preview.q1": "How do answers change after a measure-word activity?",
-        "csv.preview.q2": "Which MT error type appears most often?",
+        "csv.preview.q1": "How do scores change after a measure-word activity?",
+        "csv.preview.q2": "Which simplified MT error label appears most often?",
         "slide09.note": "The dataset is intentionally small so the learner can focus on the workflow.",
         "slide10.tag": "Interactive",
         "slide10.title": "Open the demo",
@@ -829,7 +831,8 @@ question = "How do learner answers change after a short activity?"</code></pre>
       let current = 0;
       const nav = document.createElement("nav");
       nav.className = "fallback-nav";
-      nav.setAttribute("aria-label", "Slide navigation");
+      nav.setAttribute("aria-label", "Điều hướng slides");
+      nav.setAttribute("data-i18n-aria-label", "nav.slides.aria");
       nav.innerHTML = `
         <button type="button" data-dir="-1" data-i18n="nav.previous">Trước</button>
         <span class="slide-counter"></span>

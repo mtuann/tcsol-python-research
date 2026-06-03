@@ -60,7 +60,7 @@ Hãy tưởng tượng biến như một mảnh giấy có nhãn. Python ghi nh�
 Text trong Python thường đặt trong dấu ngoặc kép.
 
 ```python
-question = "How do learner answers change after a short measure-word lesson?"
+question = "How do learner scores change after a short measure-word lesson?"
 ```
 
 ### 4. Danh sách các dòng

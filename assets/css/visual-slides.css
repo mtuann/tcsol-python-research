@@ -163,12 +163,14 @@
   border-radius: 8px;
   box-shadow: 0 8px 20px rgba(23, 32, 51, 0.08);
   display: grid;
-  overflow: hidden;
+  overflow-x: auto;
+  overflow-y: hidden;
 }
 
 .reveal .mini-table .row {
   display: grid;
   grid-template-columns: 0.9fr 1.35fr 1fr;
+  min-width: 34rem;
 }
 
 .reveal .mini-table .row > span {

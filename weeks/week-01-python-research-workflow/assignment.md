@@ -17,6 +17,15 @@
 
 Nộp **một notebook đã hoàn thành**: `live_coding.ipynb`.
 
+Start here:
+
+1. Mở `live_coding.html` để đọc trước.
+2. Mở Colab bằng nút trên trang nếu muốn chạy trong browser.
+3. Trong Colab, chọn **File -> Save a copy in Drive**.
+4. Chạy từng cell từ trên xuống.
+5. Chỉ sửa các cell có ghi **Bạn sửa**.
+6. Nộp bản `.ipynb` đã hoàn thành.
+
 Trong notebook:
 
 1. Sửa các biến về hướng nghiên cứu cá nhân.
@@ -25,7 +34,7 @@ Trong notebook:
 4. Giữ hoặc tạo một bảng tóm tắt nhỏ.
 5. Viết caption 1-2 câu.
 6. Viết một diễn giải 100-150 từ.
-7. Dùng sentence frame để viết một đoạn paper-facing đầu tiên.
+7. Dùng sentence frame để viết một câu paper-facing đầu tiên.
 8. Ghi một hạn chế hoặc câu hỏi bạn còn băn khoăn.
 
 Các cell đọc CSV và xuất bảng là code mẫu. Ở Tuần 01, bạn chỉ cần chạy và quan sát kết quả.

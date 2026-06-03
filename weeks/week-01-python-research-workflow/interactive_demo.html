@@ -185,14 +185,47 @@
         justify-content: flex-start;
       }
     }
+    .site-tools {
+      align-items: center;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      justify-content: space-between;
+      padding: 0.75rem 1rem 0;
+    }
+    .demo-exit-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.45rem;
+    }
+    .demo-link {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: var(--ink);
+      font-weight: 750;
+      padding: 0.35rem 0.7rem;
+      text-decoration: none;
+    }
+    .demo-link:hover {
+      background: var(--soft);
+      color: var(--accent-dark);
+      text-decoration: none;
+    }
   </style>
 </head>
 <body>
   <div class="site-tools">
-    <nav class="language-switcher" aria-label="Ngôn ngữ / Language" data-i18n-aria-label="nav.language">
+    <nav class="demo-exit-links" aria-label="Điều hướng khóa học" data-i18n-aria-label="nav.course.aria">
+      <a class="demo-link" href="../../" data-i18n="nav.home">Trang chủ</a>
+      <a class="demo-link" href="./" data-i18n="nav.week">Tuần 01</a>
+      <a class="demo-link" href="slides.html" data-i18n="nav.slides">Slides</a>
+      <a class="demo-link" href="live_coding.html" data-i18n="nav.notebook">Notebook</a>
+    </nav>
+    <div class="language-switcher" role="group" aria-label="Ngôn ngữ / Language" data-i18n-aria-label="nav.language">
       <button type="button" data-lang-option="vi" aria-pressed="true">Tiếng Việt</button>
       <button type="button" data-lang-option="en" aria-pressed="false">English</button>
-    </nav>
+    </div>
   </div>
   <noscript>
     <p class="noscript-note">Trang này đang hiển thị tiếng Việt. Bật JavaScript để dùng tương tác và chuyển sang English.</p>
@@ -219,11 +252,11 @@
 
       <section class="panel" id="track-detail" aria-live="polite">
         <h2 id="track-title">Giảng dạy Hán ngữ ngắn hạn</h2>
-        <p id="track-question">Câu trả lời của người học thay đổi thế nào trước và sau một hoạt động hai tuần về lượng từ?</p>
+        <p id="track-question">Điểm của người học thay đổi thế nào trước và sau một hoạt động hai tuần về lượng từ?</p>
         <div class="detail-grid">
           <div class="detail">
             <span data-i18n="detail.unit">Đơn vị quan sát</span>
-            <strong id="track-unit">một câu trả lời của một người học trong một item kiểm tra</strong>
+            <strong id="track-unit">một bản ghi điểm trước/sau của người học</strong>
           </div>
           <div class="detail">
             <span data-i18n="detail.output">Kết quả có thể tạo</span>
@@ -264,10 +297,10 @@
           </tr>
         </thead>
         <tbody id="fallback-table">
-          <tr><td>Giảng dạy Hán ngữ ngắn hạn</td><td>Câu trả lời của người học thay đổi thế nào trước và sau một hoạt động hai tuần về lượng từ?</td><td>một câu trả lời của một người học trong một item kiểm tra</td></tr>
-          <tr><td>Đối chiếu Hán-Việt</td><td>Ví dụ cấu trúc 把 nào dễ tạo vấn đề chuyển di về trật tự từ cho người học Việt Nam?</td><td>một cặp câu Hán-Việt</td></tr>
-          <tr><td>Dịch máy và MTPE</td><td>Loại lỗi MT nào xuất hiện nhiều nhất trong câu chính sách giáo dục Hán-Việt?</td><td>một đoạn dịch có bản hậu hiệu đính của con người</td></tr>
-          <tr><td>Chính sách giáo dục</td><td>Các trích đoạn chính sách gần đây nói về phát triển giáo viên và chuyển đổi số như thế nào?</td><td>một trích đoạn chính sách đã mã hóa hoặc một cặp văn bản-chủ đề</td></tr>
+          <tr><td>Giảng dạy Hán ngữ ngắn hạn</td><td>Điểm của người học thay đổi thế nào trước và sau một hoạt động hai tuần về lượng từ?</td><td>một bản ghi điểm trước/sau của người học</td></tr>
+          <tr><td>Đối chiếu Hán-Việt</td><td>Đặc điểm nào của cấu trúc 把 cần được giải thích rõ bằng đối chiếu Hán-Việt trong ghi chú giảng dạy?</td><td>một ví dụ ngữ pháp Hán-Việt kèm ghi chú giảng dạy</td></tr>
+          <tr><td>Dịch máy và MTPE</td><td>Nhãn lỗi MT đơn giản nào xuất hiện nhiều nhất trong câu chính sách giáo dục Hán-Việt?</td><td>một đoạn dịch có bản hậu hiệu đính của con người</td></tr>
+          <tr><td>Chính sách giáo dục</td><td>Chủ đề nào xuất hiện trong các trích đoạn chính sách đã mã hóa về phát triển giáo viên và chuyển đổi số?</td><td>một trích đoạn chính sách được mã hóa thủ công</td></tr>
         </tbody>
       </table>
     </section>
@@ -278,6 +311,11 @@
     const DEMO_I18N = {
       vi: {
         "meta.title": "Tuần 01 Demo: Khám phá hướng nghiên cứu",
+        "nav.course.aria": "Điều hướng khóa học",
+        "nav.home": "Trang chủ",
+        "nav.week": "Tuần 01",
+        "nav.slides": "Slides",
+        "nav.notebook": "Notebook",
         "nav.language": "Ngôn ngữ / Language",
         "page.title": "Khám phá hướng nghiên cứu",
         "page.intro": "Bấm một hướng. Quan sát cách một sở thích rộng biến thành câu hỏi nhỏ, đơn vị dữ liệu, và bảng/hình có thể dùng trong paper. Ở Tuần 01, nhiệm vụ của bạn chỉ là diễn giải demo.",
@@ -302,6 +340,11 @@
       },
       en: {
         "meta.title": "Week 01 Demo: Research Track Explorer",
+        "nav.course.aria": "Course navigation",
+        "nav.home": "Home",
+        "nav.week": "Week 01",
+        "nav.slides": "Slides",
+        "nav.notebook": "Notebook",
         "nav.language": "Language",
         "page.title": "Research Track Explorer",
         "page.intro": "Click one track. Notice how a broad interest becomes a small question, a data unit, and a future table or figure. In Week 01, your job is only to interpret the demo.",
@@ -333,12 +376,12 @@
         shortLabel: { vi: "TCSOL", en: "TCSOL" },
         title: { vi: "Giảng dạy Hán ngữ ngắn hạn", en: "Short-term Chinese teaching" },
         question: {
-          vi: "Câu trả lời của người học thay đổi thế nào trước và sau một hoạt động hai tuần về lượng từ?",
-          en: "How do learner answers change before and after a two-week measure-word activity?"
+          vi: "Điểm của người học thay đổi thế nào trước và sau một hoạt động hai tuần về lượng từ?",
+          en: "How do learner scores change before and after a two-week measure-word activity?"
         },
         unit: {
-          vi: "một câu trả lời của một người học trong một item kiểm tra",
-          en: "one learner test item"
+          vi: "một bản ghi điểm trước/sau của người học",
+          en: "one learner pre/post score record"
         },
         output: {
           vi: "bảng điểm trước/sau hoặc hình tiến bộ người học",
@@ -346,8 +389,8 @@
         },
         dataset: "pre_post_scores.csv",
         task: {
-          vi: "đếm số người học và mô tả thay đổi điểm",
-          en: "count learners and describe score change"
+          vi: "chạy bảng tóm tắt điểm và mô tả thay đổi",
+          en: "run the score summary and describe change"
         },
         chartTitle: {
           vi: "Điểm minh họa trước và sau một bài học ngắn",
@@ -365,21 +408,21 @@
         shortLabel: { vi: "Đối chiếu", en: "Contrastive" },
         title: { vi: "Đối chiếu Hán-Việt", en: "Chinese-Vietnamese contrastive analysis" },
         question: {
-          vi: "Ví dụ cấu trúc 把 nào dễ tạo vấn đề chuyển di về trật tự từ cho người học Việt Nam?",
-          en: "Which Chinese ba-construction examples create word-order transfer problems for Vietnamese learners?"
+          vi: "Đặc điểm nào của cấu trúc 把 cần được giải thích rõ bằng đối chiếu Hán-Việt trong ghi chú giảng dạy?",
+          en: "Which Chinese ba-construction features need explicit Chinese-Vietnamese comparison in teaching notes?"
         },
         unit: {
-          vi: "một cặp câu Hán-Việt",
-          en: "one Chinese-Vietnamese sentence pair"
+          vi: "một ví dụ ngữ pháp Hán-Việt kèm ghi chú giảng dạy",
+          en: "one Chinese-Vietnamese grammar example with teaching note"
         },
         output: {
-          vi: "bảng ví dụ đối chiếu hoặc bảng tần suất lỗi",
-          en: "contrastive examples table or error frequency table"
+          vi: "bảng ghi chú giảng dạy đối chiếu",
+          en: "contrastive teaching-note table"
         },
         dataset: "hv_contrastive_examples.csv",
         task: {
-          vi: "đếm ví dụ theo cấu trúc",
-          en: "count examples by structure"
+          vi: "đếm ví dụ theo đặc điểm ngữ pháp",
+          en: "count examples by grammar feature"
         },
         chartTitle: {
           vi: "Số lượng minh họa các điểm giảng dạy đối chiếu",
@@ -400,25 +443,25 @@
         shortLabel: { vi: "MT/MTPE", en: "MT/MTPE" },
         title: { vi: "Dịch máy và MTPE", en: "Machine translation and MTPE" },
         question: {
-          vi: "Loại lỗi MT nào xuất hiện nhiều nhất trong câu chính sách giáo dục Hán-Việt?",
-          en: "Which MT error type appears most often in Chinese-Vietnamese education-policy sentences?"
+          vi: "Nhãn lỗi MT đơn giản nào xuất hiện nhiều nhất trong câu chính sách giáo dục Hán-Việt?",
+          en: "Which simplified MT error label appears most often in Chinese-Vietnamese education-policy sentences?"
         },
         unit: {
           vi: "một đoạn dịch có bản hậu hiệu đính của con người",
           en: "one translation segment with human post-editing"
         },
         output: {
-          vi: "bảng loại lỗi hoặc biểu đồ so sánh hệ thống MT",
-          en: "error type table or MT system comparison chart"
+          vi: "bảng lỗi đơn giản lấy cảm hứng từ MQM hoặc biểu đồ so sánh hệ thống MT",
+          en: "simplified MQM-inspired error table or MT system comparison chart"
         },
         dataset: "mt_eval.csv",
         task: {
-          vi: "đếm đoạn dịch theo loại lỗi",
-          en: "count segments by error type"
+          vi: "đếm đoạn dịch theo nhãn lỗi cục bộ",
+          en: "count segments by local error label"
         },
         chartTitle: {
-          vi: "Số lỗi MT minh họa",
-          en: "Illustrative MT error counts"
+          vi: "Số nhãn lỗi MT minh họa",
+          en: "Illustrative simplified MT error-label counts"
         },
         x: {
           vi: ["Thuật ngữ", "Dịch sát chữ", "Trật tự từ", "Lược bỏ"],
@@ -435,25 +478,25 @@
         shortLabel: { vi: "Chính sách", en: "Policy" },
         title: { vi: "Chính sách giáo dục", en: "Education policy" },
         question: {
-          vi: "Các trích đoạn chính sách gần đây nói về phát triển giáo viên và chuyển đổi số như thế nào?",
-          en: "How do recent policy excerpts discuss teacher development and digitalization?"
+          vi: "Chủ đề nào xuất hiện trong các trích đoạn chính sách đã mã hóa về phát triển giáo viên và chuyển đổi số?",
+          en: "Which themes appear in manually coded excerpts about teacher development and digitalization?"
         },
         unit: {
-          vi: "một trích đoạn chính sách đã mã hóa hoặc một cặp văn bản-chủ đề",
-          en: "one coded policy excerpt or document-theme pair"
+          vi: "một trích đoạn chính sách được mã hóa thủ công",
+          en: "one manually coded policy excerpt"
         },
         output: {
-          vi: "dòng thời gian chính sách hoặc bảng tần suất chủ đề",
-          en: "policy timeline or theme frequency table"
+          vi: "bảng tần suất chủ đề hoặc timeline trích đoạn chính sách",
+          en: "theme count table or policy excerpt timeline"
         },
         dataset: "policy_docs.csv",
         task: {
-          vi: "đếm văn bản theo chủ đề",
-          en: "count documents by theme"
+          vi: "đếm trích đoạn theo chủ đề",
+          en: "count excerpts by theme"
         },
         chartTitle: {
-          vi: "Số chủ đề chính sách minh họa",
-          en: "Illustrative policy theme counts"
+          vi: "Số chủ đề trong trích đoạn chính sách minh họa",
+          en: "Illustrative theme counts in policy excerpts"
         },
         x: {
           vi: ["Phát triển giáo viên", "Chuyển đổi số", "Công bằng", "Quốc tế hóa"],
@@ -461,7 +504,7 @@
         },
         y1: [8, 7, 5, 3],
         y2: null,
-        y1Name: { vi: "Văn bản", en: "Documents" },
+        y1Name: { vi: "Trích đoạn", en: "Excerpts" },
         y2Name: { vi: "", en: "" }
       }
     ];

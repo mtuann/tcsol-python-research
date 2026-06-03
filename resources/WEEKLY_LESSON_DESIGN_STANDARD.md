@@ -61,9 +61,18 @@ Required learner-facing week surfaces:
 
 Required source surfaces:
 
-- Markdown files remain editable source and may be exposed only in a clearly labeled "Source Markdown" area;
+- Markdown files remain editable source and may be exposed only in a clearly labeled instructor/source area;
 - `.ipynb` remains the runnable source and may be exposed only as source/download or through Colab;
 - generated/rendered HTML is the main learner reading experience.
+
+Canonical Week 01 quality rules:
+
+- If a rendered notebook page has a language switcher, notebook Markdown instructions must also be bilingual, not only the shell navigation.
+- Advanced code cells in Weeks 1-2 must be labeled as run-only instructor code; learner tasks should say "run and read output" unless the learner has already practiced the construct.
+- The research question, unit of observation, starter dataset, likely output, and beginner task must align in every track.
+- Track examples must not claim learner-transfer evidence unless the dataset includes learner production or learner-error rows.
+- MTPE labels used before the full MQM framework must be called simplified or MQM-inspired labels.
+- Interactive demos must include exit links back to the homepage, week overview, slides, and notebook.
 
 ## Beginner-First Layering
 
@@ -357,7 +366,7 @@ Public HTML pages must:
 - use the shared bilingual language switcher;
 - preserve headings, tables, lists, code blocks, and links in rendered HTML;
 - include clear actions to slides, rendered notebook, Colab, demo, and writing roadmap where relevant;
-- include a small "Source Markdown" section only when source access is useful;
+- include a small instructor/source section only when source access is useful;
 - avoid sending learners directly to raw Markdown from homepage/course navigation.
 
 ## Notebook Publication Standard
@@ -675,7 +684,7 @@ Core schema:
 
 ```csv
 example_id,zh_sentence,pinyin,vi_equivalent,feature,contrast_type,pedagogical_note
-C001,我把书放在桌子上,wo3 ba3 shu1 fang4 zai4 zhuo1zi shang,Tôi đặt sách lên bàn,把-construction,word_order,Vietnamese learners may omit 把 or use SVO transfer
+C001,我把书放在桌子上,wo3 ba3 shu1 fang4 zai4 zhuo1zi shang,Tôi đặt sách lên bàn,把-construction,word_order,Explain why 把 marks a disposal-like structure before comparing Vietnamese word order
 ```
 
 Required research habit:
@@ -709,7 +718,7 @@ Minimum human evaluation:
 | Terminology | wrong terms | partly inconsistent | consistent terms |
 | Style/register | wrong register | acceptable | fits genre |
 
-MQM-lite labels:
+Simplified MQM-inspired labels:
 
 - `accuracy`;
 - `fluency`;

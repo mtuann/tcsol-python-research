@@ -42,7 +42,7 @@ Cuối tuần này, bạn có thể:
 - [ ] Trong notebook, bạn giữ hoặc tạo một bảng tóm tắt nhỏ.
 - [ ] Trong notebook, bạn viết chú thích bảng/hình 1-2 câu.
 - [ ] Trong notebook, bạn viết một diễn giải 100-150 từ.
-- [ ] Bạn dùng sentence frame để viết một đoạn có thể phát triển thành phần Introduction/Methods sau này.
+- [ ] Bạn dùng sentence frame để viết một câu paper-facing có thể phát triển thành phần Introduction/Methods sau này.
 - [ ] Notebook ghi nguồn/ngày truy cập được cung cấp và không chứa dữ liệu riêng tư.
 
 ## Files
@@ -89,7 +89,7 @@ Core:
 Stretch:
 
 - mở lại `interactive_demo.html` sau buổi học và giải thích một pattern bạn thấy;
-- thêm một dòng mới vào bản sao của CSV template;
+- sau Week 2, thêm một dòng mới vào bản sao của CSV template;
 - đề xuất một bảng hoặc hình cho paper tương lai của bạn.
 
 Instructor-only:

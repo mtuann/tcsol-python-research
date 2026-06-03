@@ -11,16 +11,16 @@
   <header class="doc-topbar">
     <a class="doc-brand" href="../../" data-i18n="brand">Python Research Hub</a>
     <nav class="doc-nav" aria-label="Điều hướng tài liệu" data-i18n-aria-label="nav.aria">
-      <a href="#overview" data-i18n="nav.overview">Overview</a>
-      <a href="#notes" data-i18n="nav.notes">Notes</a>
-      <a href="#practice" data-i18n="nav.practice">Practice</a>
-      <a href="#assignment" data-i18n="nav.assignment">Assignment</a>
-      <a href="#readings" data-i18n="nav.readings">Readings</a>
-      <a href="#rubric" data-i18n="nav.rubric">Rubric</a>
-      <nav class="language-switcher" aria-label="Ngôn ngữ / Language" data-i18n-aria-label="nav.language">
+      <a href="#overview" data-i18n="nav.overview">Tổng quan</a>
+      <a href="#notes" data-i18n="nav.notes">Ghi chú</a>
+      <a href="#practice" data-i18n="nav.practice">Thực hành</a>
+      <a href="#assignment" data-i18n="nav.assignment">Bài nộp</a>
+      <a href="#readings" data-i18n="nav.readings">Bài đọc</a>
+      <a href="#rubric" data-i18n="nav.rubric">Tiêu chí</a>
+      <div class="language-switcher" role="group" aria-label="Ngôn ngữ / Language" data-i18n-aria-label="nav.language">
         <button type="button" data-lang-option="vi" aria-pressed="true">Tiếng Việt</button>
         <button type="button" data-lang-option="en" aria-pressed="false">English</button>
-      </nav>
+      </div>
     </nav>
   </header>
 
@@ -30,9 +30,9 @@
       <a href="slides.html" data-i18n="side.slides">Slides</a>
       <a href="interactive_demo.html" data-i18n="side.demo">Demo tương tác</a>
       <a href="live_coding.html" data-i18n="side.notebook">Notebook HTML</a>
-      <a href="https://colab.research.google.com/github/mtuann/tcsol-python-research/blob/main/weeks/week-01-python-research-workflow/live_coding.ipynb" data-i18n="side.colab">Run in Colab</a>
-      <a href="live_coding.ipynb" download data-i18n="side.notebookSource">Source .ipynb</a>
-      <a href="data/raw/week01_research_tracks.csv" data-i18n="side.csv">Research tracks CSV</a>
+      <a href="https://colab.research.google.com/github/mtuann/tcsol-python-research/blob/main/weeks/week-01-python-research-workflow/live_coding.ipynb" data-i18n="side.colab">Chạy trong Colab</a>
+      <a href="live_coding.ipynb" download data-i18n="side.notebookSource">Tải source .ipynb</a>
+      <a href="data/raw/week01_research_tracks.csv" download data-i18n="side.csv">Tải tệp CSV dữ liệu</a>
       <a href="../../resources/writing-and-paper-tooling.html" data-i18n="side.writing">Writing roadmap</a>
     </aside>
 
@@ -71,7 +71,7 @@
       </section>
 
       <section class="doc-card">
-        <h2 data-i18n="writing.title">Writing support</h2>
+        <h2 data-i18n="writing.title">Hỗ trợ viết paper</h2>
         <div class="doc-grid two">
           <article class="mini-card">
             <span class="swatch purple"></span>
@@ -80,11 +80,11 @@
           </article>
           <article class="mini-card">
             <span class="swatch rose"></span>
-            <h3 data-i18n="writing.tools.title">Tool support</h3>
+            <h3 data-i18n="writing.tools.title">Công cụ hỗ trợ</h3>
             <p data-i18n="writing.tools.body">Viết trong Markdown cell của notebook. Word/Zotero có thể bắt đầu ở Week 3; Overleaf chưa cần trong Week 01.</p>
           </article>
         </div>
-        <h3 data-i18n="writing.frame.title">Sentence frame</h3>
+        <h3 data-i18n="writing.frame.title">Mẫu câu viết học thuật</h3>
         <pre><code>This project asks [small question] because [research reason].
 The first dataset would contain [unit of observation],
 so Python can help by [table/figure/output].</code></pre>
@@ -110,7 +110,7 @@ so Python can help by [table/figure/output].</code></pre>
         </div>
         <pre><code>topic = "Chinese measure words"
 research_area = "TCSOL"
-question = "How do learner answers change after a short activity?"</code></pre>
+question = "How do learner scores change after a short activity?"</code></pre>
       </section>
 
       <section class="doc-card">
@@ -120,16 +120,16 @@ question = "How do learner answers change after a short activity?"</code></pre>
             <tr><th data-i18n="question.broad">Chủ đề rộng</th><th data-i18n="question.ready">Câu hỏi tốt hơn</th></tr>
           </thead>
           <tbody>
-            <tr><td data-i18n="q.grammar.topic">Dạy ngữ pháp tiếng Trung</td><td data-i18n="q.grammar.ready">Câu trả lời của người học thay đổi thế nào trước và sau một hoạt động ngắn về lượng từ?</td></tr>
-            <tr><td data-i18n="q.contrast.topic">Đối chiếu Hán-Việt</td><td data-i18n="q.contrast.ready">Ví dụ cấu trúc 把 nào tạo vấn đề chuyển di về trật tự từ cho người học Việt Nam?</td></tr>
-            <tr><td data-i18n="q.mt.topic">Dịch máy</td><td data-i18n="q.mt.ready">Loại lỗi MT nào xuất hiện nhiều nhất trong câu chính sách giáo dục Hán-Việt?</td></tr>
-            <tr><td data-i18n="q.policy.topic">Chính sách giáo dục</td><td data-i18n="q.policy.ready">Các trích đoạn chính sách gần đây nói về phát triển giáo viên như thế nào?</td></tr>
+            <tr><td data-i18n="q.grammar.topic">Dạy ngữ pháp tiếng Trung</td><td data-i18n="q.grammar.ready">Điểm của người học thay đổi thế nào trước và sau một hoạt động ngắn về lượng từ?</td></tr>
+            <tr><td data-i18n="q.contrast.topic">Đối chiếu Hán-Việt</td><td data-i18n="q.contrast.ready">Đặc điểm nào của cấu trúc 把 cần được giải thích rõ bằng đối chiếu Hán-Việt trong ghi chú giảng dạy?</td></tr>
+            <tr><td data-i18n="q.mt.topic">Dịch máy</td><td data-i18n="q.mt.ready">Nhãn lỗi MT đơn giản nào xuất hiện nhiều nhất trong câu chính sách giáo dục Hán-Việt?</td></tr>
+            <tr><td data-i18n="q.policy.topic">Chính sách giáo dục</td><td data-i18n="q.policy.ready">Chủ đề nào xuất hiện trong các trích đoạn chính sách đã mã hóa về phát triển giáo viên và chuyển đổi số?</td></tr>
           </tbody>
         </table>
       </section>
 
       <section class="doc-card" id="practice">
-        <h2 data-i18n="practice.title">Exercises</h2>
+        <h2 data-i18n="practice.title">Thực hành</h2>
         <div class="doc-grid">
           <article class="mini-card">
             <span class="swatch blue"></span>
@@ -139,7 +139,7 @@ question = "How do learner answers change after a short activity?"</code></pre>
           <article class="mini-card">
             <span class="swatch green"></span>
             <h3 data-i18n="practice.b.title">B. Guided Problem</h3>
-            <p data-i18n="practice.b.body">Dùng CSV research tracks: đếm bốn hướng, in tên hướng, chọn một hướng gần dự định học Master.</p>
+            <p data-i18n="practice.b.body">Chạy code mẫu với CSV research tracks, đọc output, rồi chọn một hướng gần dự định học Master.</p>
           </article>
           <article class="mini-card">
             <span class="swatch amber"></span>
@@ -153,7 +153,7 @@ my_topic = "short-term Chinese teaching"</code></pre>
       </section>
 
       <section class="doc-card" id="assignment">
-        <h2 data-i18n="assignment.title">Assignment</h2>
+        <h2 data-i18n="assignment.title">Bài nộp</h2>
         <p data-i18n="assignment.goal">Nộp một notebook đã hoàn thành: chạy được từ đầu đến cuối, có hướng nghiên cứu đã chọn, bảng/summary, caption, memo và một câu paper-facing.</p>
         <ol>
           <li data-i18n="assignment.t1">Sửa các biến về hướng nghiên cứu cá nhân.</li>
@@ -173,7 +173,7 @@ Limitation:</code></pre>
       </section>
 
       <section class="doc-card" id="readings">
-        <h2 data-i18n="readings.title">Readings</h2>
+        <h2 data-i18n="readings.title">Bài đọc</h2>
         <div class="doc-grid two">
           <article class="mini-card">
             <span class="swatch blue"></span>
@@ -191,13 +191,15 @@ Limitation:</code></pre>
       </section>
 
       <section class="doc-card" id="rubric">
-        <h2 data-i18n="rubric.title">Rubric</h2>
+        <h2 data-i18n="rubric.title">Tiêu chí</h2>
         <table>
           <thead>
             <tr><th data-i18n="rubric.criteria">Tiêu chí</th><th data-i18n="rubric.points">Điểm</th><th data-i18n="rubric.good">Bài làm tốt</th></tr>
           </thead>
           <tbody>
             <tr><td data-i18n="rubric.run">Notebook chạy được</td><td>20</td><td data-i18n="rubric.run.body">Notebook chạy từ đầu đến cuối, không có cell bị hỏng.</td></tr>
+            <tr><td data-i18n="rubric.variables">Biến cá nhân</td><td>10</td><td data-i18n="rubric.variables.body">Bạn sửa name, topic, research area, và question.</td></tr>
+            <tr><td data-i18n="rubric.data">Kiểm tra dữ liệu</td><td>15</td><td data-i18n="rubric.data.body">Bạn chạy code mẫu đọc CSV, thấy số dòng, và giải thích một dòng đại diện cho điều gì.</td></tr>
             <tr><td data-i18n="rubric.question">Câu hỏi nghiên cứu</td><td>15</td><td data-i18n="rubric.question.body">Câu hỏi đủ nhỏ và gắn với dữ liệu quan sát được.</td></tr>
             <tr><td data-i18n="rubric.caption">Bảng/caption</td><td>15</td><td data-i18n="rubric.caption.body">Có bảng tóm tắt nhỏ và caption rõ.</td></tr>
             <tr><td data-i18n="rubric.writing">Writing và diễn giải</td><td>15</td><td data-i18n="rubric.writing.body">Memo có quan sát, hạn chế, và một câu paper-facing dùng được.</td></tr>
@@ -207,8 +209,8 @@ Limitation:</code></pre>
       </section>
 
       <section class="doc-card">
-        <h2 data-i18n="source.title">Source Markdown</h2>
-        <p data-i18n="source.body">Các file Markdown vẫn được giữ làm source biên soạn. Learner-facing navigation nên dùng trang HTML này.</p>
+        <h2 data-i18n="source.title">Nguồn biên soạn cho giảng viên</h2>
+        <p data-i18n="source.body">Các file Markdown dưới đây là source để sửa bài giảng. Người học nên dùng trang HTML này, slides, demo và notebook HTML thay vì mở file Markdown raw.</p>
         <div class="doc-links">
           <a class="doc-chip" href="README.md">README.md</a>
           <a class="doc-chip" href="lecture_notes.md">lecture_notes.md</a>
@@ -229,19 +231,19 @@ Limitation:</code></pre>
         "brand": "Python Research Hub",
         "nav.aria": "Điều hướng tài liệu",
         "nav.language": "Ngôn ngữ / Language",
-        "nav.overview": "Overview",
-        "nav.notes": "Notes",
-        "nav.practice": "Practice",
-        "nav.assignment": "Assignment",
-        "nav.readings": "Readings",
-        "nav.rubric": "Rubric",
+        "nav.overview": "Tổng quan",
+        "nav.notes": "Ghi chú",
+        "nav.practice": "Thực hành",
+        "nav.assignment": "Bài nộp",
+        "nav.readings": "Bài đọc",
+        "nav.rubric": "Tiêu chí",
         "side.title": "Tuần 01",
         "side.slides": "Slides",
         "side.demo": "Demo tương tác",
         "side.notebook": "Notebook HTML",
-        "side.colab": "Run in Colab",
-        "side.notebookSource": "Source .ipynb",
-        "side.csv": "Research tracks CSV",
+        "side.colab": "Chạy trong Colab",
+        "side.notebookSource": "Tải source .ipynb",
+        "side.csv": "Tải tệp CSV dữ liệu",
         "side.writing": "Writing roadmap",
         "hero.tag": "Tuần 01",
         "hero.title": "Python như một quy trình nghiên cứu",
@@ -257,12 +259,12 @@ Limitation:</code></pre>
         "frame.question.body": "Làm thế nào để chuyển một sở thích rộng thành câu hỏi sẵn sàng cho dữ liệu?",
         "frame.why.title": "Vì sao quan trọng?",
         "frame.why.body": "Trước khi học nhiều lệnh Python, người học cần biết paper sẽ dùng loại dữ liệu nào và Python giúp tạo bằng chứng gì.",
-        "writing.title": "Writing support",
+        "writing.title": "Hỗ trợ viết paper",
         "writing.output.title": "Output viết tuần này",
         "writing.output.body": "Một research question và một memo 100-150 từ giải thích vì sao dataset nhỏ có thể trả lời câu hỏi đó.",
-        "writing.tools.title": "Tool support",
+        "writing.tools.title": "Công cụ hỗ trợ",
         "writing.tools.body": "Viết trong Markdown cell của notebook. Word/Zotero có thể bắt đầu ở Week 3; Overleaf chưa cần trong Week 01.",
-        "writing.frame.title": "Sentence frame",
+        "writing.frame.title": "Mẫu câu viết học thuật",
         "notes.title": "Lecture notes",
         "notes.intro": "Python không phải là mục tiêu. Python là công cụ giúp công việc nghiên cứu rõ ràng, kiểm tra được, và dễ chuyển thành bằng chứng trong paper.",
         "notes.table.type": "Loại ô",
@@ -279,21 +281,21 @@ Limitation:</code></pre>
         "question.broad": "Chủ đề rộng",
         "question.ready": "Câu hỏi tốt hơn",
         "q.grammar.topic": "Dạy ngữ pháp tiếng Trung",
-        "q.grammar.ready": "Câu trả lời của người học thay đổi thế nào trước và sau một hoạt động ngắn về lượng từ?",
+        "q.grammar.ready": "Điểm của người học thay đổi thế nào trước và sau một hoạt động ngắn về lượng từ?",
         "q.contrast.topic": "Đối chiếu Hán-Việt",
-        "q.contrast.ready": "Ví dụ cấu trúc 把 nào tạo vấn đề chuyển di về trật tự từ cho người học Việt Nam?",
+        "q.contrast.ready": "Đặc điểm nào của cấu trúc 把 cần được giải thích rõ bằng đối chiếu Hán-Việt trong ghi chú giảng dạy?",
         "q.mt.topic": "Dịch máy",
-        "q.mt.ready": "Loại lỗi MT nào xuất hiện nhiều nhất trong câu chính sách giáo dục Hán-Việt?",
+        "q.mt.ready": "Nhãn lỗi MT đơn giản nào xuất hiện nhiều nhất trong câu chính sách giáo dục Hán-Việt?",
         "q.policy.topic": "Chính sách giáo dục",
-        "q.policy.ready": "Các trích đoạn chính sách gần đây nói về phát triển giáo viên như thế nào?",
-        "practice.title": "Exercises",
+        "q.policy.ready": "Chủ đề nào xuất hiện trong các trích đoạn chính sách đã mã hóa về phát triển giáo viên và chuyển đổi số?",
+        "practice.title": "Thực hành",
         "practice.a.title": "A. Copy and Modify",
         "practice.a.body": "Mở notebook, sửa text trong biến `my_name`, `my_research_area`, `my_topic`, rồi chạy cell.",
         "practice.b.title": "B. Guided Problem",
-        "practice.b.body": "Dùng CSV research tracks: đếm bốn hướng, in tên hướng, chọn một hướng gần dự định học Master.",
+        "practice.b.body": "Chạy code mẫu với CSV research tracks, đọc output, rồi chọn một hướng gần dự định học Master.",
         "practice.c.title": "C. Research-Style Task",
         "practice.c.body": "Viết 100-150 từ về hướng nghiên cứu hữu ích nhất, dataset đầu tiên cần có, và một hạn chế.",
-        "assignment.title": "Assignment",
+        "assignment.title": "Bài nộp",
         "assignment.goal": "Nộp một notebook đã hoàn thành: chạy được từ đầu đến cuối, có hướng nghiên cứu đã chọn, bảng/summary, caption, memo và một câu paper-facing.",
         "assignment.t1": "Sửa các biến về hướng nghiên cứu cá nhân.",
         "assignment.t2": "Chạy toàn bộ cell từ đầu đến cuối.",
@@ -302,17 +304,21 @@ Limitation:</code></pre>
         "assignment.t5": "Viết caption 1-2 câu.",
         "assignment.t6": "Viết một diễn giải 100-150 từ.",
         "assignment.t7": "Dùng sentence frame để viết một câu paper-facing đầu tiên.",
-        "readings.title": "Readings",
+        "readings.title": "Bài đọc",
         "readings.jupyter": "Đọc overview và basic interface để hiểu notebook là gì.",
         "readings.tidy": "Tuần này chỉ mượn một câu hỏi: một dòng dữ liệu đại diện cho điều gì?",
         "readings.open": "Mở nguồn",
         "readings.open2": "Mở nguồn",
-        "rubric.title": "Rubric",
+        "rubric.title": "Tiêu chí",
         "rubric.criteria": "Tiêu chí",
         "rubric.points": "Điểm",
         "rubric.good": "Bài làm tốt",
         "rubric.run": "Notebook chạy được",
         "rubric.run.body": "Notebook chạy từ đầu đến cuối, không có cell bị hỏng.",
+        "rubric.variables": "Biến cá nhân",
+        "rubric.variables.body": "Bạn sửa name, topic, research area, và question.",
+        "rubric.data": "Kiểm tra dữ liệu",
+        "rubric.data.body": "Bạn chạy code mẫu đọc CSV, thấy số dòng, và giải thích một dòng đại diện cho điều gì.",
         "rubric.question": "Câu hỏi nghiên cứu",
         "rubric.question.body": "Câu hỏi đủ nhỏ và gắn với dữ liệu quan sát được.",
         "rubric.caption": "Bảng/caption",
@@ -321,8 +327,8 @@ Limitation:</code></pre>
         "rubric.writing.body": "Memo có quan sát, hạn chế, và một câu paper-facing dùng được.",
         "rubric.repro": "Thói quen tái lập",
         "rubric.repro.body": "Ghi nguồn/ngày truy cập, tránh thông tin riêng tư, không sửa output thủ công.",
-        "source.title": "Source Markdown",
-        "source.body": "Các file Markdown vẫn được giữ làm source biên soạn. Learner-facing navigation nên dùng trang HTML này."
+        "source.title": "Nguồn biên soạn cho giảng viên",
+        "source.body": "Các file Markdown dưới đây là source để sửa bài giảng. Người học nên dùng trang HTML này, slides, demo và notebook HTML thay vì mở file Markdown raw."
       },
       en: {
         "meta.title": "Week 01: Python as a Research Workflow",
@@ -379,18 +385,18 @@ Limitation:</code></pre>
         "question.broad": "Broad topic",
         "question.ready": "Better question",
         "q.grammar.topic": "Teaching Chinese grammar",
-        "q.grammar.ready": "How do learner answers change before and after a short measure-word activity?",
+        "q.grammar.ready": "How do learner scores change before and after a short measure-word activity?",
         "q.contrast.topic": "Chinese-Vietnamese contrast",
-        "q.contrast.ready": "Which ba-construction examples create word-order transfer problems for Vietnamese learners?",
+        "q.contrast.ready": "Which ba-construction features need explicit Chinese-Vietnamese comparison in teaching notes?",
         "q.mt.topic": "Machine translation",
-        "q.mt.ready": "Which MT error type appears most often in Chinese-Vietnamese education-policy sentences?",
+        "q.mt.ready": "Which simplified MT error label appears most often in Chinese-Vietnamese education-policy sentences?",
         "q.policy.topic": "Education policy",
-        "q.policy.ready": "How do recent policy excerpts discuss teacher development?",
+        "q.policy.ready": "Which themes appear in manually coded excerpts about teacher development and digitalization?",
         "practice.title": "Exercises",
         "practice.a.title": "A. Copy and Modify",
         "practice.a.body": "Open the notebook, edit the text inside `my_name`, `my_research_area`, and `my_topic`, then run the cell.",
         "practice.b.title": "B. Guided Problem",
-        "practice.b.body": "Use the research tracks CSV: count four tracks, print track names, and choose one close to the Master's plan.",
+        "practice.b.body": "Run the sample code with the research tracks CSV, read the output, and choose one track close to the Master's plan.",
         "practice.c.title": "C. Research-Style Task",
         "practice.c.body": "Write 100-150 words about the most useful research direction, the first dataset needed, and one limitation.",
         "assignment.title": "Assignment",
@@ -413,6 +419,10 @@ Limitation:</code></pre>
         "rubric.good": "Strong work",
         "rubric.run": "Runnable notebook",
         "rubric.run.body": "The notebook runs from top to bottom with no broken cells.",
+        "rubric.variables": "Personal variables",
+        "rubric.variables.body": "The learner edits name, topic, research area, and question.",
+        "rubric.data": "Data check",
+        "rubric.data.body": "The learner runs the sample CSV code, sees the row count, and explains what one row represents.",
         "rubric.question": "Research question",
         "rubric.question.body": "The question is small enough and tied to observable data.",
         "rubric.caption": "Table/caption",
@@ -421,8 +431,8 @@ Limitation:</code></pre>
         "rubric.writing.body": "The memo includes an observation, limitation, and one usable paper-facing sentence.",
         "rubric.repro": "Reproducibility habit",
         "rubric.repro.body": "Sources/access dates are recorded, private information is avoided, and output is not manually edited.",
-        "source.title": "Source Markdown",
-        "source.body": "Markdown files remain as authoring sources. Learner-facing navigation should use this HTML page."
+        "source.title": "Instructor authoring sources",
+        "source.body": "The Markdown files below are source files for editing the lesson. Learners should use this HTML page, slides, demo, and notebook HTML instead of opening raw Markdown."
       }
     };
     window.Bilingual.init({ translations: WEEK01_I18N, defaultLang: "vi" });

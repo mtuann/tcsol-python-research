@@ -124,7 +124,7 @@ For future slide work, use:
 ```text
 tcsol-python-research-syllabus/
 ├── README.md
-├── docs/                  # future GitHub Pages site
+├── .github/workflows/     # GitHub Pages Actions deployment
 ├── weeks/                 # week-by-week lesson packages
 ├── notebooks/             # lesson notebooks and student exercises
 ├── data/
@@ -217,21 +217,19 @@ Paper contribution:
 
 Possible research question:
 
-> How do Vietnamese learners transfer Vietnamese word order patterns when using Chinese complements or disposal constructions?
+> Which Chinese grammar features need explicit Chinese-Vietnamese comparison when designing teaching notes for Vietnamese learners?
 
 Data:
 
 - Chinese example;
 - Vietnamese equivalent;
 - grammatical feature;
-- learner translation or learner production;
-- error type;
+- contrastive point;
 - pedagogical note.
 
 Python analysis:
 
 - frequency of contrastive phenomena;
-- error distribution by structure;
 - examples selected for qualitative interpretation;
 - charts showing high-priority teaching points.
 
@@ -328,7 +326,7 @@ S001,Q03,result_complement,他写错了字,complement_order,minor,"needs more in
 
 ```csv
 example_id,zh_sentence,vi_equivalent,feature,contrast_type,pedagogical_note
-C001,我把书放在桌子上,Tôi đặt sách lên bàn,把-construction,word_order,"Vietnamese learners may omit 把"
+C001,我把书放在桌子上,Tôi đặt sách lên bàn,把-construction,word_order,"Explain why 把 marks a disposal-like structure before comparing Vietnamese word order"
 ```
 
 ### `mt_eval.csv`
@@ -370,17 +368,18 @@ pip install unbabel-comet
 
 Only add COMET after the learner understands reference-based metrics and human error annotation. COMET is useful, but it can shift the course too far toward NLP if introduced too early.
 
-## GitHub Pages Plan
+## GitHub Pages Deployment
 
-This repository can later become a GitHub Pages site.
+This repository is deployed through `.github/workflows/deploy-pages.yml`.
 
-Recommended path:
+On every push to `main`, the workflow copies `index.html`, `README.md`, `assets/`, `weeks/`, and `resources/` into `_site/`, uploads that static artifact, and deploys it to GitHub Pages.
 
-1. Keep `README.md` as the main repository overview.
-2. Put public-facing website pages in `docs/`.
-3. Configure GitHub Pages to publish from the `main` branch and `/docs` folder.
-4. Keep raw or private research data out of `docs/`.
-5. Add an `index.md` in `docs/` when the syllabus is ready to publish.
+Repository setup required on GitHub:
+
+1. Go to **Settings -> Pages**.
+2. Set **Source** to **GitHub Actions**.
+3. Keep learner-facing links pointed to folder `index.html` pages or rendered `.html` files, not raw `.md` or `.ipynb` files.
+4. Keep identifiable classroom data out of the public repository.
 
 ## Assessment Plan
 
@@ -482,9 +481,8 @@ These topics are useful later, but they are not the shortest path to a good Appl
 
 ## Next Content Tasks
 
-- Create `docs/index.md` as a public landing page.
 - Review and refine `weeks/week-01-python-research-workflow/`.
-- Create `weeks/week-02-data-tables-and-codebooks/`.
+- Create `weeks/week-02-research-data-tables/`.
 - Create blank CSV templates in `resources/templates/`.
 - Add a one-page learner setup guide in Vietnamese.
 - Add a Zotero + Word workflow guide.

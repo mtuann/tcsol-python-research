@@ -23,7 +23,7 @@ Copy this file into a week folder as `content_blocks.md`.
 | nav.demo | Demo tương tác | Interactive demo | Link to `interactive_demo.html` when available |
 | nav.notebook_html | Notebook HTML | Notebook HTML | Link to rendered notebook |
 | nav.colab | Chạy trong Colab | Run in Colab | Browser-based execution link |
-| nav.source_md | Source Markdown | Source Markdown | Clearly labeled source link |
+| nav.source_md | Nguồn biên soạn | Authoring source | Clearly labeled instructor/source link |
 | nav.source_ipynb | Source .ipynb | Source .ipynb | Clearly labeled notebook source/download |
 
 ## Slide Blocks

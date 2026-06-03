@@ -65,6 +65,14 @@ Do not let the deck become a single-color theme.
 
 Reuse a small set of components:
 
+- `deck` + `slides` + `stage`: canonical stage-first lecture layout;
+- `flow` / `flow six`: research process steps;
+- `concept-grid` / `concept-card`: compact concept cards;
+- `research-table`: simplified dataset preview with row/column/value highlights;
+- `schema-map` / `lane-card`: track-specific comparisons;
+- `notebook-grid` / `notebook-card`: Markdown, code, output anatomy;
+- `inline-token`: column names, function names, and short values inside prose;
+- `value-token` / `value-spotlight`: emphasized cell values such as `72`;
 - `visual-grid`: two or three explanatory panels;
 - `story-card`: compact concept card;
 - `question-box`: key research question;
@@ -73,7 +81,22 @@ Reuse a small set of components:
 - `bridge-strip`: "we just learned / next problem / next step";
 - `caption-card`: paper-ready caption example.
 
-### 6. Track Prompt And Sources
+### 6. Canonical Stage-First Lecture Deck
+
+Week 02 is the canonical slide visual style as of 2026-06-03. Week 01 has been updated to follow it. New lecture decks must:
+
+- load `../../assets/css/bilingual.css` and `../../assets/css/lecture-slides.css`;
+- set `<body class="lecture-slide-page">`;
+- use `<main class="deck"><div class="slides">...` with one `.stage` area per slide;
+- keep persistent top links to Home and the current week;
+- keep the bottom navigation with previous/next, visible counter, and page-number jump;
+- use `.inline-token` for short code/data terms in prose, such as `post_score`;
+- use `.inline-token.value-token` for short values in prose, such as `72`;
+- use `.value-spotlight` only when a specific table cell value is the visual focus;
+- avoid raw Markdown backticks inside `data-i18n` strings because they render as plain text in HTML;
+- pass a browser QA check for no top-nav overlap, no bottom-nav overlap, and no horizontal overflow.
+
+### 7. Track Prompt And Sources
 
 Every visual artifact must be traceable:
 
@@ -86,7 +109,7 @@ Every visual artifact must be traceable:
 
 Use `resources/templates/slide_prompt_sources_template.md` for each week and save the filled file as `slide_prompt_sources.md`.
 
-### 7. Never Leave A Dead-End Deck
+### 8. Never Leave A Dead-End Deck
 
 Each slide deck must give the learner a way out of the deck without using the browser back button.
 

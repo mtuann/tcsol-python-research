@@ -37,7 +37,7 @@ Do not add a hard dataset and a hard Python concept in the same week. If the Pyt
 
 ## Canonical Week Pattern
 
-Week 01 is the current canonical implementation pattern. Future weeks should reuse its structure unless the week's `README.md` records a clear reason to differ.
+Week 01 is the canonical beginner content pattern. Week 02 is the canonical visual slide pattern. Future weeks should reuse this combined structure unless the week's `README.md` records a clear reason to differ.
 
 The canonical public path pattern is:
 
@@ -54,7 +54,7 @@ course homepage
 Required learner-facing week surfaces:
 
 - folder `index.html`: overview, research frame, writing support, notes, exercises, assignment, readings, rubric, and source links;
-- `slides.html`: bilingual deck with language switcher, page-number jump, keyboard navigation, visible course exit links, and final-slide next-step CTAs;
+- `slides.html`: bilingual stage-first deck using `assets/css/lecture-slides.css`, language switcher, page-number jump, keyboard navigation, visible course exit links, and final-slide next-step CTAs;
 - `live_coding.html`: rendered notebook with code/output, Colab action, source notebook download, and link back to the week overview;
 - `interactive_demo.html`: included when interaction improves learning; if not included, record the reason in the week's `README.md`;
 - homepage cards/links: point to public HTML pages first, not raw source files.
@@ -73,6 +73,7 @@ Canonical Week 01 quality rules:
 - Track examples must not claim learner-transfer evidence unless the dataset includes learner production or learner-error rows.
 - MTPE labels used before the full MQM framework must be called simplified or MQM-inspired labels.
 - Interactive demos must include exit links back to the homepage, week overview, slides, and notebook.
+- Lecture slides must use `.inline-token` for short code/data terms inside prose and `.inline-token.value-token` or `.value-spotlight` for emphasized values such as `72`; do not leave raw Markdown backticks inside `data-i18n` strings.
 
 ## Beginner-First Layering
 

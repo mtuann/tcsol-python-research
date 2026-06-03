@@ -1,0 +1,422 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title data-i18n="meta.title">Tuần 01: Python như một quy trình nghiên cứu</title>
+  <link rel="stylesheet" href="../../assets/css/bilingual.css">
+  <link rel="stylesheet" href="../../assets/css/course-doc.css">
+</head>
+<body>
+  <header class="doc-topbar">
+    <a class="doc-brand" href="../../" data-i18n="brand">Python Research Hub</a>
+    <nav class="doc-nav" aria-label="Điều hướng tài liệu" data-i18n-aria-label="nav.aria">
+      <a href="#overview" data-i18n="nav.overview">Overview</a>
+      <a href="#notes" data-i18n="nav.notes">Notes</a>
+      <a href="#practice" data-i18n="nav.practice">Practice</a>
+      <a href="#assignment" data-i18n="nav.assignment">Assignment</a>
+      <a href="#readings" data-i18n="nav.readings">Readings</a>
+      <a href="#rubric" data-i18n="nav.rubric">Rubric</a>
+      <nav class="language-switcher" aria-label="Ngôn ngữ / Language" data-i18n-aria-label="nav.language">
+        <button type="button" data-lang-option="vi" aria-pressed="true">Tiếng Việt</button>
+        <button type="button" data-lang-option="en" aria-pressed="false">English</button>
+      </nav>
+    </nav>
+  </header>
+
+  <main class="doc-shell">
+    <aside class="doc-sidebar">
+      <strong data-i18n="side.title">Tuần 01</strong>
+      <a href="slides.html" data-i18n="side.slides">Slides</a>
+      <a href="interactive_demo.html" data-i18n="side.demo">Demo tương tác</a>
+      <a href="live_coding.ipynb" data-i18n="side.notebook">Notebook</a>
+      <a href="data/raw/week01_research_tracks.csv" data-i18n="side.csv">Research tracks CSV</a>
+      <a href="../../resources/writing-and-paper-tooling.html" data-i18n="side.writing">Writing roadmap</a>
+    </aside>
+
+    <div class="doc-main">
+      <section class="doc-hero" id="overview">
+        <span class="doc-eyebrow" data-i18n="hero.tag">Tuần 01</span>
+        <h1 data-i18n="hero.title">Python như một quy trình nghiên cứu</h1>
+        <p class="doc-lead" data-i18n="hero.body">Tuần đầu giúp người học chạy notebook, xem một CSV nhỏ, chọn một hướng nghiên cứu, và viết một đoạn memo có thể phát triển thành paper.</p>
+        <div class="doc-actions">
+          <a class="doc-button" href="slides.html" data-i18n="action.slides">Mở slides</a>
+          <a class="doc-button secondary" href="interactive_demo.html" data-i18n="action.demo">Mở demo</a>
+          <a class="doc-button secondary" href="live_coding.ipynb" data-i18n="action.notebook">Mở notebook</a>
+        </div>
+      </section>
+
+      <section class="doc-card">
+        <h2 data-i18n="frame.title">Khung nghiên cứu</h2>
+        <div class="doc-grid">
+          <article class="mini-card">
+            <span class="swatch blue"></span>
+            <h3 data-i18n="frame.area.title">Hướng nghiên cứu</h3>
+            <p data-i18n="frame.area.body">TCSOL, đối chiếu Hán-Việt, MTPE, và chính sách giáo dục.</p>
+          </article>
+          <article class="mini-card">
+            <span class="swatch green"></span>
+            <h3 data-i18n="frame.question.title">Câu hỏi nhỏ</h3>
+            <p data-i18n="frame.question.body">Làm thế nào để chuyển một sở thích rộng thành câu hỏi sẵn sàng cho dữ liệu?</p>
+          </article>
+          <article class="mini-card">
+            <span class="swatch amber"></span>
+            <h3 data-i18n="frame.why.title">Vì sao quan trọng?</h3>
+            <p data-i18n="frame.why.body">Trước khi học nhiều lệnh Python, người học cần biết paper sẽ dùng loại dữ liệu nào và Python giúp tạo bằng chứng gì.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="doc-card">
+        <h2 data-i18n="writing.title">Writing support</h2>
+        <div class="doc-grid two">
+          <article class="mini-card">
+            <span class="swatch purple"></span>
+            <h3 data-i18n="writing.output.title">Output viết tuần này</h3>
+            <p data-i18n="writing.output.body">Một research question và một memo 100-150 từ giải thích vì sao dataset nhỏ có thể trả lời câu hỏi đó.</p>
+          </article>
+          <article class="mini-card">
+            <span class="swatch rose"></span>
+            <h3 data-i18n="writing.tools.title">Tool support</h3>
+            <p data-i18n="writing.tools.body">Viết trong Markdown cell của notebook. Word/Zotero có thể bắt đầu ở Week 3; Overleaf chưa cần trong Week 01.</p>
+          </article>
+        </div>
+        <h3 data-i18n="writing.frame.title">Sentence frame</h3>
+        <pre><code>This project asks [small question] because [research reason].
+The first dataset would contain [unit of observation],
+so Python can help by [table/figure/output].</code></pre>
+      </section>
+
+      <section class="doc-card" id="notes">
+        <h2 data-i18n="notes.title">Lecture notes</h2>
+        <p data-i18n="notes.intro">Python không phải là mục tiêu. Python là công cụ giúp công việc nghiên cứu rõ ràng, kiểm tra được, và dễ chuyển thành bằng chứng trong paper.</p>
+        <table>
+          <thead>
+            <tr><th data-i18n="notes.table.type">Loại ô</th><th data-i18n="notes.table.use">Dùng để làm gì</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Markdown</td><td data-i18n="notes.markdown">Viết giải thích, tiêu đề, câu hỏi nghiên cứu, caption và diễn giải.</td></tr>
+            <tr><td>Code</td><td data-i18n="notes.code">Chạy lệnh Python.</td></tr>
+          </tbody>
+        </table>
+        <h3 data-i18n="notes.python.title">Ý tưởng Python đầu tiên</h3>
+        <div class="doc-grid">
+          <article class="mini-card"><h3><code>print</code></h3><p data-i18n="notes.print">Hiển thị một thông điệp hoặc kết quả.</p></article>
+          <article class="mini-card"><h3 data-i18n="notes.variable.title">Biến (variable)</h3><p data-i18n="notes.variable">Một tên dùng để lưu giá trị.</p></article>
+          <article class="mini-card"><h3 data-i18n="notes.string.title">Chuỗi văn bản (string)</h3><p data-i18n="notes.string">Text trong Python thường đặt trong dấu ngoặc kép.</p></article>
+        </div>
+        <pre><code>topic = "Chinese measure words"
+research_area = "TCSOL"
+question = "How do learner answers change after a short activity?"</code></pre>
+      </section>
+
+      <section class="doc-card">
+        <h2 data-i18n="question.title">Chủ đề rộng và câu hỏi sẵn sàng cho dữ liệu</h2>
+        <table>
+          <thead>
+            <tr><th data-i18n="question.broad">Chủ đề rộng</th><th data-i18n="question.ready">Câu hỏi tốt hơn</th></tr>
+          </thead>
+          <tbody>
+            <tr><td data-i18n="q.grammar.topic">Dạy ngữ pháp tiếng Trung</td><td data-i18n="q.grammar.ready">Câu trả lời của người học thay đổi thế nào trước và sau một hoạt động ngắn về lượng từ?</td></tr>
+            <tr><td data-i18n="q.contrast.topic">Đối chiếu Hán-Việt</td><td data-i18n="q.contrast.ready">Ví dụ cấu trúc 把 nào tạo vấn đề chuyển di về trật tự từ cho người học Việt Nam?</td></tr>
+            <tr><td data-i18n="q.mt.topic">Dịch máy</td><td data-i18n="q.mt.ready">Loại lỗi MT nào xuất hiện nhiều nhất trong câu chính sách giáo dục Hán-Việt?</td></tr>
+            <tr><td data-i18n="q.policy.topic">Chính sách giáo dục</td><td data-i18n="q.policy.ready">Các trích đoạn chính sách gần đây nói về phát triển giáo viên như thế nào?</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section class="doc-card" id="practice">
+        <h2 data-i18n="practice.title">Exercises</h2>
+        <div class="doc-grid">
+          <article class="mini-card">
+            <span class="swatch blue"></span>
+            <h3 data-i18n="practice.a.title">A. Copy and Modify</h3>
+            <p data-i18n="practice.a.body">Mở notebook, sửa text trong biến `my_name`, `my_research_area`, `my_topic`, rồi chạy cell.</p>
+          </article>
+          <article class="mini-card">
+            <span class="swatch green"></span>
+            <h3 data-i18n="practice.b.title">B. Guided Problem</h3>
+            <p data-i18n="practice.b.body">Dùng CSV research tracks: đếm bốn hướng, in tên hướng, chọn một hướng gần dự định học Master.</p>
+          </article>
+          <article class="mini-card">
+            <span class="swatch amber"></span>
+            <h3 data-i18n="practice.c.title">C. Research-Style Task</h3>
+            <p data-i18n="practice.c.body">Viết 100-150 từ về hướng nghiên cứu hữu ích nhất, dataset đầu tiên cần có, và một hạn chế.</p>
+          </article>
+        </div>
+        <pre><code>my_name = "Your name"
+my_research_area = "TCSOL"
+my_topic = "short-term Chinese teaching"</code></pre>
+      </section>
+
+      <section class="doc-card" id="assignment">
+        <h2 data-i18n="assignment.title">Assignment</h2>
+        <p data-i18n="assignment.goal">Nộp một notebook đã hoàn thành: chạy được từ đầu đến cuối, có hướng nghiên cứu đã chọn, bảng/summary, caption, memo và một câu paper-facing.</p>
+        <ol>
+          <li data-i18n="assignment.t1">Sửa các biến về hướng nghiên cứu cá nhân.</li>
+          <li data-i18n="assignment.t2">Chạy toàn bộ cell từ đầu đến cuối.</li>
+          <li data-i18n="assignment.t3">Chọn một hướng nghiên cứu.</li>
+          <li data-i18n="assignment.t4">Giữ hoặc tạo một bảng tóm tắt nhỏ.</li>
+          <li data-i18n="assignment.t5">Viết caption 1-2 câu.</li>
+          <li data-i18n="assignment.t6">Viết một diễn giải 100-150 từ.</li>
+          <li data-i18n="assignment.t7">Dùng sentence frame để viết một câu paper-facing đầu tiên.</li>
+        </ol>
+        <pre><code>Chosen track:
+Small research question:
+Data I would need:
+Possible table or figure:
+Paper-facing sentence:
+Limitation:</code></pre>
+      </section>
+
+      <section class="doc-card" id="readings">
+        <h2 data-i18n="readings.title">Readings</h2>
+        <div class="doc-grid two">
+          <article class="mini-card">
+            <span class="swatch blue"></span>
+            <h3>JupyterLab User Guide</h3>
+            <p data-i18n="readings.jupyter">Đọc overview và basic interface để hiểu notebook là gì.</p>
+            <a class="doc-chip" href="https://jupyterlab.readthedocs.io/en/stable/user/" data-i18n="readings.open">Mở nguồn</a>
+          </article>
+          <article class="mini-card">
+            <span class="swatch green"></span>
+            <h3>Tidy Data</h3>
+            <p data-i18n="readings.tidy">Tuần này chỉ mượn một câu hỏi: một dòng dữ liệu đại diện cho điều gì?</p>
+            <a class="doc-chip" href="https://vita.had.co.nz/papers/tidy-data.html" data-i18n="readings.open2">Mở nguồn</a>
+          </article>
+        </div>
+      </section>
+
+      <section class="doc-card" id="rubric">
+        <h2 data-i18n="rubric.title">Rubric</h2>
+        <table>
+          <thead>
+            <tr><th data-i18n="rubric.criteria">Tiêu chí</th><th data-i18n="rubric.points">Điểm</th><th data-i18n="rubric.good">Bài làm tốt</th></tr>
+          </thead>
+          <tbody>
+            <tr><td data-i18n="rubric.run">Notebook chạy được</td><td>20</td><td data-i18n="rubric.run.body">Notebook chạy từ đầu đến cuối, không có cell bị hỏng.</td></tr>
+            <tr><td data-i18n="rubric.question">Câu hỏi nghiên cứu</td><td>15</td><td data-i18n="rubric.question.body">Câu hỏi đủ nhỏ và gắn với dữ liệu quan sát được.</td></tr>
+            <tr><td data-i18n="rubric.caption">Bảng/caption</td><td>15</td><td data-i18n="rubric.caption.body">Có bảng tóm tắt nhỏ và caption rõ.</td></tr>
+            <tr><td data-i18n="rubric.writing">Writing và diễn giải</td><td>15</td><td data-i18n="rubric.writing.body">Memo có quan sát, hạn chế, và một câu paper-facing dùng được.</td></tr>
+            <tr><td data-i18n="rubric.repro">Thói quen tái lập</td><td>10</td><td data-i18n="rubric.repro.body">Ghi nguồn/ngày truy cập, tránh thông tin riêng tư, không sửa output thủ công.</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section class="doc-card">
+        <h2 data-i18n="source.title">Source Markdown</h2>
+        <p data-i18n="source.body">Các file Markdown vẫn được giữ làm source biên soạn. Learner-facing navigation nên dùng trang HTML này.</p>
+        <div class="doc-links">
+          <a class="doc-chip" href="README.md">README.md</a>
+          <a class="doc-chip" href="lecture_notes.md">lecture_notes.md</a>
+          <a class="doc-chip" href="exercises.md">exercises.md</a>
+          <a class="doc-chip" href="assignment.md">assignment.md</a>
+          <a class="doc-chip" href="readings.md">readings.md</a>
+          <a class="doc-chip" href="rubric.md">rubric.md</a>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <script src="../../assets/js/bilingual.js"></script>
+  <script>
+    const WEEK01_I18N = {
+      vi: {
+        "meta.title": "Tuần 01: Python như một quy trình nghiên cứu",
+        "brand": "Python Research Hub",
+        "nav.aria": "Điều hướng tài liệu",
+        "nav.language": "Ngôn ngữ / Language",
+        "nav.overview": "Overview",
+        "nav.notes": "Notes",
+        "nav.practice": "Practice",
+        "nav.assignment": "Assignment",
+        "nav.readings": "Readings",
+        "nav.rubric": "Rubric",
+        "side.title": "Tuần 01",
+        "side.slides": "Slides",
+        "side.demo": "Demo tương tác",
+        "side.notebook": "Notebook",
+        "side.csv": "Research tracks CSV",
+        "side.writing": "Writing roadmap",
+        "hero.tag": "Tuần 01",
+        "hero.title": "Python như một quy trình nghiên cứu",
+        "hero.body": "Tuần đầu giúp người học chạy notebook, xem một CSV nhỏ, chọn một hướng nghiên cứu, và viết một đoạn memo có thể phát triển thành paper.",
+        "action.slides": "Mở slides",
+        "action.demo": "Mở demo",
+        "action.notebook": "Mở notebook",
+        "frame.title": "Khung nghiên cứu",
+        "frame.area.title": "Hướng nghiên cứu",
+        "frame.area.body": "TCSOL, đối chiếu Hán-Việt, MTPE, và chính sách giáo dục.",
+        "frame.question.title": "Câu hỏi nhỏ",
+        "frame.question.body": "Làm thế nào để chuyển một sở thích rộng thành câu hỏi sẵn sàng cho dữ liệu?",
+        "frame.why.title": "Vì sao quan trọng?",
+        "frame.why.body": "Trước khi học nhiều lệnh Python, người học cần biết paper sẽ dùng loại dữ liệu nào và Python giúp tạo bằng chứng gì.",
+        "writing.title": "Writing support",
+        "writing.output.title": "Output viết tuần này",
+        "writing.output.body": "Một research question và một memo 100-150 từ giải thích vì sao dataset nhỏ có thể trả lời câu hỏi đó.",
+        "writing.tools.title": "Tool support",
+        "writing.tools.body": "Viết trong Markdown cell của notebook. Word/Zotero có thể bắt đầu ở Week 3; Overleaf chưa cần trong Week 01.",
+        "writing.frame.title": "Sentence frame",
+        "notes.title": "Lecture notes",
+        "notes.intro": "Python không phải là mục tiêu. Python là công cụ giúp công việc nghiên cứu rõ ràng, kiểm tra được, và dễ chuyển thành bằng chứng trong paper.",
+        "notes.table.type": "Loại ô",
+        "notes.table.use": "Dùng để làm gì",
+        "notes.markdown": "Viết giải thích, tiêu đề, câu hỏi nghiên cứu, caption và diễn giải.",
+        "notes.code": "Chạy lệnh Python.",
+        "notes.python.title": "Ý tưởng Python đầu tiên",
+        "notes.print": "Hiển thị một thông điệp hoặc kết quả.",
+        "notes.variable.title": "Biến (variable)",
+        "notes.variable": "Một tên dùng để lưu giá trị.",
+        "notes.string.title": "Chuỗi văn bản (string)",
+        "notes.string": "Text trong Python thường đặt trong dấu ngoặc kép.",
+        "question.title": "Chủ đề rộng và câu hỏi sẵn sàng cho dữ liệu",
+        "question.broad": "Chủ đề rộng",
+        "question.ready": "Câu hỏi tốt hơn",
+        "q.grammar.topic": "Dạy ngữ pháp tiếng Trung",
+        "q.grammar.ready": "Câu trả lời của người học thay đổi thế nào trước và sau một hoạt động ngắn về lượng từ?",
+        "q.contrast.topic": "Đối chiếu Hán-Việt",
+        "q.contrast.ready": "Ví dụ cấu trúc 把 nào tạo vấn đề chuyển di về trật tự từ cho người học Việt Nam?",
+        "q.mt.topic": "Dịch máy",
+        "q.mt.ready": "Loại lỗi MT nào xuất hiện nhiều nhất trong câu chính sách giáo dục Hán-Việt?",
+        "q.policy.topic": "Chính sách giáo dục",
+        "q.policy.ready": "Các trích đoạn chính sách gần đây nói về phát triển giáo viên như thế nào?",
+        "practice.title": "Exercises",
+        "practice.a.title": "A. Copy and Modify",
+        "practice.a.body": "Mở notebook, sửa text trong biến `my_name`, `my_research_area`, `my_topic`, rồi chạy cell.",
+        "practice.b.title": "B. Guided Problem",
+        "practice.b.body": "Dùng CSV research tracks: đếm bốn hướng, in tên hướng, chọn một hướng gần dự định học Master.",
+        "practice.c.title": "C. Research-Style Task",
+        "practice.c.body": "Viết 100-150 từ về hướng nghiên cứu hữu ích nhất, dataset đầu tiên cần có, và một hạn chế.",
+        "assignment.title": "Assignment",
+        "assignment.goal": "Nộp một notebook đã hoàn thành: chạy được từ đầu đến cuối, có hướng nghiên cứu đã chọn, bảng/summary, caption, memo và một câu paper-facing.",
+        "assignment.t1": "Sửa các biến về hướng nghiên cứu cá nhân.",
+        "assignment.t2": "Chạy toàn bộ cell từ đầu đến cuối.",
+        "assignment.t3": "Chọn một hướng nghiên cứu.",
+        "assignment.t4": "Giữ hoặc tạo một bảng tóm tắt nhỏ.",
+        "assignment.t5": "Viết caption 1-2 câu.",
+        "assignment.t6": "Viết một diễn giải 100-150 từ.",
+        "assignment.t7": "Dùng sentence frame để viết một câu paper-facing đầu tiên.",
+        "readings.title": "Readings",
+        "readings.jupyter": "Đọc overview và basic interface để hiểu notebook là gì.",
+        "readings.tidy": "Tuần này chỉ mượn một câu hỏi: một dòng dữ liệu đại diện cho điều gì?",
+        "readings.open": "Mở nguồn",
+        "readings.open2": "Mở nguồn",
+        "rubric.title": "Rubric",
+        "rubric.criteria": "Tiêu chí",
+        "rubric.points": "Điểm",
+        "rubric.good": "Bài làm tốt",
+        "rubric.run": "Notebook chạy được",
+        "rubric.run.body": "Notebook chạy từ đầu đến cuối, không có cell bị hỏng.",
+        "rubric.question": "Câu hỏi nghiên cứu",
+        "rubric.question.body": "Câu hỏi đủ nhỏ và gắn với dữ liệu quan sát được.",
+        "rubric.caption": "Bảng/caption",
+        "rubric.caption.body": "Có bảng tóm tắt nhỏ và caption rõ.",
+        "rubric.writing": "Writing và diễn giải",
+        "rubric.writing.body": "Memo có quan sát, hạn chế, và một câu paper-facing dùng được.",
+        "rubric.repro": "Thói quen tái lập",
+        "rubric.repro.body": "Ghi nguồn/ngày truy cập, tránh thông tin riêng tư, không sửa output thủ công.",
+        "source.title": "Source Markdown",
+        "source.body": "Các file Markdown vẫn được giữ làm source biên soạn. Learner-facing navigation nên dùng trang HTML này."
+      },
+      en: {
+        "meta.title": "Week 01: Python as a Research Workflow",
+        "brand": "Python Research Hub",
+        "nav.aria": "Document navigation",
+        "nav.language": "Language",
+        "nav.overview": "Overview",
+        "nav.notes": "Notes",
+        "nav.practice": "Practice",
+        "nav.assignment": "Assignment",
+        "nav.readings": "Readings",
+        "nav.rubric": "Rubric",
+        "side.title": "Week 01",
+        "side.slides": "Slides",
+        "side.demo": "Interactive demo",
+        "side.notebook": "Notebook",
+        "side.csv": "Research tracks CSV",
+        "side.writing": "Writing roadmap",
+        "hero.tag": "Week 01",
+        "hero.title": "Python as a research workflow",
+        "hero.body": "The first week helps the learner run a notebook, inspect a small CSV, choose a research direction, and write a memo that can grow into a paper.",
+        "action.slides": "Open slides",
+        "action.demo": "Open demo",
+        "action.notebook": "Open notebook",
+        "frame.title": "Research frame",
+        "frame.area.title": "Research areas",
+        "frame.area.body": "TCSOL, Chinese-Vietnamese contrastive research, MTPE, and education policy.",
+        "frame.question.title": "Small question",
+        "frame.question.body": "How can a broad interest become a data-ready question?",
+        "frame.why.title": "Why it matters",
+        "frame.why.body": "Before learning many Python commands, the learner needs to know what data a paper will use and what evidence Python can create.",
+        "writing.title": "Writing support",
+        "writing.output.title": "This week's writing output",
+        "writing.output.body": "One research question and one 100-150 word memo explaining why a small dataset could answer it.",
+        "writing.tools.title": "Tool support",
+        "writing.tools.body": "Write in notebook Markdown cells. Word/Zotero can start in Week 3; Overleaf is not needed in Week 01.",
+        "writing.frame.title": "Sentence frame",
+        "notes.title": "Lecture notes",
+        "notes.intro": "Python is not the goal. Python helps make research work clearer, checkable, and easier to turn into paper evidence.",
+        "notes.table.type": "Cell type",
+        "notes.table.use": "Use",
+        "notes.markdown": "Write explanations, headings, research questions, captions, and interpretations.",
+        "notes.code": "Run Python commands.",
+        "notes.python.title": "First Python ideas",
+        "notes.print": "Shows a message or result.",
+        "notes.variable.title": "Variable",
+        "notes.variable": "A name used to store a value.",
+        "notes.string.title": "String",
+        "notes.string": "Text in Python is usually placed inside quotation marks.",
+        "question.title": "Broad topic and data-ready question",
+        "question.broad": "Broad topic",
+        "question.ready": "Better question",
+        "q.grammar.topic": "Teaching Chinese grammar",
+        "q.grammar.ready": "How do learner answers change before and after a short measure-word activity?",
+        "q.contrast.topic": "Chinese-Vietnamese contrast",
+        "q.contrast.ready": "Which ba-construction examples create word-order transfer problems for Vietnamese learners?",
+        "q.mt.topic": "Machine translation",
+        "q.mt.ready": "Which MT error type appears most often in Chinese-Vietnamese education-policy sentences?",
+        "q.policy.topic": "Education policy",
+        "q.policy.ready": "How do recent policy excerpts discuss teacher development?",
+        "practice.title": "Exercises",
+        "practice.a.title": "A. Copy and Modify",
+        "practice.a.body": "Open the notebook, edit the text inside `my_name`, `my_research_area`, and `my_topic`, then run the cell.",
+        "practice.b.title": "B. Guided Problem",
+        "practice.b.body": "Use the research tracks CSV: count four tracks, print track names, and choose one close to the Master's plan.",
+        "practice.c.title": "C. Research-Style Task",
+        "practice.c.body": "Write 100-150 words about the most useful research direction, the first dataset needed, and one limitation.",
+        "assignment.title": "Assignment",
+        "assignment.goal": "Submit one completed notebook: runnable from top to bottom, with a selected track, table/summary, caption, memo, and one paper-facing sentence.",
+        "assignment.t1": "Edit variables for the personal research direction.",
+        "assignment.t2": "Run all cells from top to bottom.",
+        "assignment.t3": "Choose one research direction.",
+        "assignment.t4": "Keep or create one small summary table.",
+        "assignment.t5": "Write a 1-2 sentence caption.",
+        "assignment.t6": "Write a 100-150 word interpretation.",
+        "assignment.t7": "Use the sentence frame to write one first paper-facing sentence.",
+        "readings.title": "Readings",
+        "readings.jupyter": "Read the overview and basic interface to understand what a notebook is.",
+        "readings.tidy": "This week borrows one question: what does one row of data represent?",
+        "readings.open": "Open source",
+        "readings.open2": "Open source",
+        "rubric.title": "Rubric",
+        "rubric.criteria": "Criterion",
+        "rubric.points": "Points",
+        "rubric.good": "Strong work",
+        "rubric.run": "Runnable notebook",
+        "rubric.run.body": "The notebook runs from top to bottom with no broken cells.",
+        "rubric.question": "Research question",
+        "rubric.question.body": "The question is small enough and tied to observable data.",
+        "rubric.caption": "Table/caption",
+        "rubric.caption.body": "There is a small summary table and a clear caption.",
+        "rubric.writing": "Writing and interpretation",
+        "rubric.writing.body": "The memo includes an observation, limitation, and one usable paper-facing sentence.",
+        "rubric.repro": "Reproducibility habit",
+        "rubric.repro.body": "Sources/access dates are recorded, private information is avoided, and output is not manually edited.",
+        "source.title": "Source Markdown",
+        "source.body": "Markdown files remain as authoring sources. Learner-facing navigation should use this HTML page."
+      }
+    };
+    window.Bilingual.init({ translations: WEEK01_I18N, defaultLang: "vi" });
+  </script>
+</body>
+</html>

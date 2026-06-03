@@ -89,6 +89,8 @@ The current design supports both Markdown/Quarto sources and deployable HTML:
 - `interactive_demo.qmd` and `interactive_demo.html` when interaction improves learning;
 - static HTML files that can be served by GitHub Pages.
 
+Public learner-facing navigation should target HTML pages or folder `index.html` pages. Markdown files remain authoring sources; direct `.md` links on GitHub Pages render as raw text in this static deployment and should not be the main learner experience.
+
 ## Bilingual Website Policy
 
 Public learner-facing HTML defaults to Vietnamese and provides an English option through a language switcher. The course uses Vietnamese-first explanations with English anchor terms, rather than long side-by-side duplicate paragraphs, so a beginner can focus on the concept without extra reading load.

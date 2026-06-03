@@ -71,6 +71,7 @@ Recommended delivery:
 - Larger future pages may use two route trees: Vietnamese unprefixed paths and English under `/en/`.
 - Shared data, images, figures, and code examples must not be duplicated for each language.
 - HTML files must set `<html lang="vi">` by default and update the language when the learner switches to English.
+- Learner-facing navigation on GitHub Pages must link to `.html` pages or folder `index.html` pages, not raw `.md` files. Markdown remains the authoring source and may be linked only as clearly labeled source material.
 
 Content style:
 
@@ -308,6 +309,22 @@ The rendered `slides.html` should:
 - link to `interactive_demo.html` when interaction would distract from the main slide flow.
 
 Do not require the learner to edit HTML, CSS, or JavaScript in Weeks 1-8.
+
+## Public HTML Document Standard
+
+Markdown files such as `README.md`, `lecture_notes.md`, `exercises.md`, `assignment.md`, `readings.md`, and `rubric.md` are source files. GitHub Pages serves direct `.md` URLs as text/markdown in this static deployment, so they are not appropriate as the main learner reading experience.
+
+Every learner-facing Markdown source should have one of these public HTML paths:
+
+- a folder `index.html` that collects the week's overview, notes, exercises, assignment, readings, and rubric;
+- or a dedicated `.html` page when the document is long enough to stand alone.
+
+Public HTML pages must:
+
+- use the shared bilingual language switcher;
+- preserve headings, tables, lists, code blocks, and links in rendered HTML;
+- include a small "Source Markdown" section only when source access is useful;
+- avoid sending learners directly to raw Markdown from homepage/course navigation.
 
 ## Interactive Demo Standard
 

@@ -118,6 +118,7 @@ For future slide work, use:
 ## Current Lesson Packages
 
 - [`Tuần 01: Python như một quy trình nghiên cứu`](weeks/week-01-python-research-workflow/)
+- [`Tuần 02: Dữ liệu nghiên cứu dưới dạng bảng`](weeks/week-02-research-data-tables/)
 
 ## Suggested Repository Structure
 
@@ -482,7 +483,7 @@ These topics are useful later, but they are not the shortest path to a good Appl
 ## Next Content Tasks
 
 - Review and refine `weeks/week-01-python-research-workflow/`.
-- Create `weeks/week-02-research-data-tables/`.
+- Review and refine `weeks/week-02-research-data-tables/`.
 - Create blank CSV templates in `resources/templates/`.
 - Add a one-page learner setup guide in Vietnamese.
 - Add a Zotero + Word workflow guide.

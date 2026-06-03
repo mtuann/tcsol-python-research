@@ -1,0 +1,10 @@
+term,vi,en,note
+row,dòng,row,One unit of observation.
+column,cột,column,A variable or attribute.
+value,giá trị,value,One cell's content.
+schema,sơ đồ cột/schema,schema,List of columns and meanings.
+unit_of_observation,đơn vị quan sát,unit of observation,What one row represents.
+required_column,cột bắt buộc,required column,Needed to answer the question.
+optional_column,cột tùy chọn,optional column,Useful but not core.
+data_description,mô tả dữ liệu,data description,Paper-facing paragraph about the dataset.
+privacy_risk,rủi ro dữ liệu riêng tư,privacy risk,Risk of identifying people or sensitive information.

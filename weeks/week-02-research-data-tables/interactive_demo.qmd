@@ -1,0 +1,5 @@
+---
+title: "Tuần 02 Demo: Table Schema Planner"
+---
+
+Source note: `interactive_demo.html` is the learner-facing demo. This `.qmd` is an authoring placeholder for future Quarto export.

@@ -255,10 +255,20 @@ def notebook_title(nb: dict[str, Any]) -> str:
     return "Rendered Notebook"
 
 
+def metadata_i18n(nb: dict[str, Any], key: str, lang: str, fallback: str) -> str:
+    value = nb.get("metadata", {}).get("i18n", {}).get(key, {}).get(lang)
+    return value if isinstance(value, str) else fallback
+
+
 def build_html(nb: dict[str, Any], notebook_path: Path, repo_root: Path) -> str:
     rel_path = notebook_path.relative_to(repo_root).as_posix()
     title = notebook_title(nb)
     en_title = nb.get("metadata", {}).get("i18n", {}).get("title", {}).get("en", title)
+    week_label_vi = metadata_i18n(nb, "week", "vi", "Tuần 01")
+    week_label_en = metadata_i18n(nb, "week", "en", "Week 01")
+    data_csv = nb.get("metadata", {}).get(
+        "data_csv", "data/raw/week01_research_tracks.csv"
+    )
     colab_url = (
         f"https://colab.research.google.com/github/{REPO_OWNER}/{REPO_NAME}/blob/main/{rel_path}"
     )
@@ -270,7 +280,7 @@ def build_html(nb: dict[str, Any], notebook_path: Path, repo_root: Path) -> str:
             "brand": "Python Research Hub",
             "meta.title": f"{title} | Notebook đã render",
             "nav.aria": "Điều hướng notebook",
-            "nav.week": "Tuần 01",
+            "nav.week": week_label_vi,
             "nav.slides": "Slides",
             "nav.demo": "Demo",
             "nav.source": "Tải source .ipynb",
@@ -285,7 +295,7 @@ def build_html(nb: dict[str, Any], notebook_path: Path, repo_root: Path) -> str:
             "hero.body": "Đây là bản HTML đã chạy sẵn để đọc trên GitHub Pages. Muốn thực hành, mở notebook trong Colab hoặc tải file .ipynb.",
             "action.colab": "Chạy trong Colab",
             "action.source": "Tải .ipynb",
-            "action.week": "Quay lại Tuần 01",
+            "action.week": f"Quay lại {week_label_vi}",
             "note.title": "Cách dùng trang này",
             "note.read.title": "Đọc",
             "note.read.body": "Bản HTML giữ code và output cạnh nhau, phù hợp để ôn lại sau buổi học.",
@@ -300,7 +310,7 @@ def build_html(nb: dict[str, Any], notebook_path: Path, repo_root: Path) -> str:
             "brand": "Python Research Hub",
             "meta.title": f"{en_title} | Rendered Notebook",
             "nav.aria": "Notebook navigation",
-            "nav.week": "Week 01",
+            "nav.week": week_label_en,
             "nav.slides": "Slides",
             "nav.demo": "Demo",
             "nav.source": "Download source .ipynb",
@@ -315,7 +325,7 @@ def build_html(nb: dict[str, Any], notebook_path: Path, repo_root: Path) -> str:
             "hero.body": "This is the pre-run HTML version for GitHub Pages. To practice, open the notebook in Colab or download the .ipynb file.",
             "action.colab": "Run in Colab",
             "action.source": "Download .ipynb",
-            "action.week": "Back to Week 01",
+            "action.week": f"Back to {week_label_en}",
             "note.title": "How to use this page",
             "note.read.title": "Read",
             "note.read.body": "The HTML version keeps code and output together, useful for review after class.",
@@ -358,7 +368,7 @@ def build_html(nb: dict[str, Any], notebook_path: Path, repo_root: Path) -> str:
       <a href="./" data-i18n="side.week">Tổng quan tuần</a>
       <a href="{html.escape(colab_url)}" data-i18n="side.colab">Chạy bằng Colab</a>
       <a href="{html.escape(source_name)}" download data-i18n="side.source">Tải source .ipynb</a>
-      <a href="data/raw/week01_research_tracks.csv" download data-i18n="side.csv">Tải tệp CSV dữ liệu</a>
+      <a href="{html.escape(str(data_csv))}" download data-i18n="side.csv">Tải tệp CSV dữ liệu</a>
     </aside>
 
     <div class="doc-main">

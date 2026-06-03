@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title data-i18n="meta.title">Tuần 02 Demo: Table Schema Planner</title>
+  <link rel="stylesheet" href="../../assets/css/bilingual.css">
+  <style>
+    :root { --bg:#f6f8fb; --card:#fff; --ink:#172033; --muted:#5b6578; --line:#dbe4f0; --blue:#2563eb; --green:#1f7a4d; --amber:#b45309; }
+    * { box-sizing: border-box; }
+    body { background: var(--bg); color: var(--ink); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; line-height: 1.55; margin: 0; }
+    .site-tools { align-items: center; display: flex; flex-wrap: wrap; gap: .75rem; justify-content: space-between; padding: .75rem 1rem 0; }
+    .demo-exit-links { display: flex; flex-wrap: wrap; gap: .45rem; }
+    .demo-link { background: #fff; border: 1px solid var(--line); border-radius: 999px; color: var(--ink); font-weight: 750; padding: .35rem .7rem; text-decoration: none; }
+    main { margin: 0 auto; max-width: 1120px; padding: 16px 20px 48px; }
+    h1 { font-size: clamp(1.9rem, 4vw, 3.2rem); line-height: 1.1; margin: 0 0 .75rem; }
+    h2 { font-size: 1.25rem; margin: 0 0 .75rem; }
+    p { color: var(--muted); margin: 0 0 .75rem; }
+    .layout { display: grid; gap: 18px; grid-template-columns: minmax(260px, .8fr) minmax(320px, 1.2fr); }
+    .panel { background: var(--card); border: 1px solid var(--line); border-radius: 8px; box-shadow: 0 12px 30px rgba(23,32,51,.06); padding: 18px; }
+    .buttons { display: grid; gap: 10px; }
+    .buttons button { background: #fff; border: 1px solid var(--line); border-radius: 8px; color: var(--ink); cursor: pointer; font: inherit; padding: 12px 14px; text-align: left; width: 100%; }
+    .buttons button:hover, .buttons button[aria-pressed="true"] { background: #eef4ff; border-color: var(--blue); color: #1d4ed8; }
+    .schema-grid { display: grid; gap: 12px; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .detail { background: #f8fbff; border: 1px solid var(--line); border-radius: 8px; padding: 12px; }
+    .detail span { color: var(--muted); display: block; font-size: .78rem; font-weight: 700; margin-bottom: 4px; text-transform: uppercase; }
+    .column-list { display: flex; flex-wrap: wrap; gap: .45rem; margin: .25rem 0 1rem; }
+    .chip { border: 1px solid #cfe1ff; border-radius: 999px; background: #edf4ff; color: #1d4ed8; font-weight: 750; padding: .3rem .55rem; }
+    .chip.optional { background: #fff7ed; border-color: #fed7aa; color: #9a3412; }
+    table { border-collapse: collapse; display: block; overflow-x: auto; width: 100%; }
+    th, td { border-bottom: 1px solid var(--line); padding: 10px; text-align: left; vertical-align: top; }
+    th { background: #f0f5ff; color: #263855; }
+    @media (max-width: 860px) { .layout, .schema-grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <div class="site-tools">
+    <nav class="demo-exit-links" aria-label="Điều hướng khóa học" data-i18n-aria-label="nav.course.aria">
+      <a class="demo-link" href="../../" data-i18n="nav.home">Trang chủ</a>
+      <a class="demo-link" href="./" data-i18n="nav.week">Tuần 02</a>
+      <a class="demo-link" href="slides.html" data-i18n="nav.slides">Slides</a>
+      <a class="demo-link" href="live_coding.html" data-i18n="nav.notebook">Notebook</a>
+    </nav>
+    <div class="language-switcher" role="group" aria-label="Ngôn ngữ / Language" data-i18n-aria-label="nav.language">
+      <button type="button" data-lang-option="vi" aria-pressed="true">Tiếng Việt</button>
+      <button type="button" data-lang-option="en" aria-pressed="false">English</button>
+    </div>
+  </div>
+  <main>
+    <header>
+      <h1 data-i18n="page.title">Table Schema Planner</h1>
+      <p data-i18n="page.intro">Chọn một track. Demo cho thấy một dòng dữ liệu là gì, cột nào bắt buộc, cột nào optional, và output paper dự kiến.</p>
+    </header>
+    <section class="layout" aria-label="Demo lập schema bảng dữ liệu" data-i18n-aria-label="demo.aria">
+      <aside class="panel">
+        <h2 data-i18n="choose.title">Chọn track</h2>
+        <div class="buttons" id="track-buttons" role="group" aria-label="Track nghiên cứu" data-i18n-aria-label="buttons.aria">
+          <button type="button" data-track="TCSOL_SHORT" aria-pressed="true">Giảng dạy Hán ngữ ngắn hạn</button>
+          <button type="button" data-track="CONTRASTIVE" aria-pressed="false">Đối chiếu Hán-Việt</button>
+          <button type="button" data-track="MTPE" aria-pressed="false">Dịch máy và MTPE</button>
+          <button type="button" data-track="POLICY" aria-pressed="false">Chính sách giáo dục</button>
+        </div>
+      </aside>
+      <section class="panel" aria-live="polite">
+        <h2 id="track-title">Giảng dạy Hán ngữ ngắn hạn</h2>
+        <div class="schema-grid">
+          <div class="detail"><span data-i18n="detail.unit">Một dòng là</span><strong id="track-unit"></strong></div>
+          <div class="detail"><span data-i18n="detail.output">Output paper</span><strong id="track-output"></strong></div>
+        </div>
+        <h2 data-i18n="columns.required">Cột bắt buộc</h2>
+        <div class="column-list" id="required-columns"></div>
+        <h2 data-i18n="columns.optional">Cột tùy chọn</h2>
+        <div class="column-list" id="optional-columns"></div>
+      </section>
+    </section>
+    <section class="panel" style="margin-top:18px;">
+      <h2 data-i18n="fallback.title">Bảng tóm tắt</h2>
+      <table>
+        <thead><tr><th data-i18n="table.track">Track</th><th data-i18n="table.unit">Một dòng là</th><th data-i18n="table.output">Output</th></tr></thead>
+        <tbody id="summary-table"></tbody>
+      </table>
+    </section>
+  </main>
+  <script src="../../assets/js/bilingual.js"></script>
+  <script>
+    const DEMO_I18N = {
+      vi: {
+        "meta.title": "Tuần 02 Demo: Table Schema Planner",
+        "nav.course.aria": "Điều hướng khóa học",
+        "nav.home": "Trang chủ",
+        "nav.week": "Tuần 02",
+        "nav.slides": "Slides",
+        "nav.notebook": "Notebook",
+        "nav.language": "Ngôn ngữ / Language",
+        "page.title": "Table Schema Planner",
+        "page.intro": "Chọn một track. Demo cho thấy một dòng dữ liệu là gì, cột nào bắt buộc, cột nào optional, và output paper dự kiến.",
+        "demo.aria": "Demo lập schema bảng dữ liệu",
+        "choose.title": "Chọn track",
+        "buttons.aria": "Track nghiên cứu",
+        "detail.unit": "Một dòng là",
+        "detail.output": "Output paper",
+        "columns.required": "Cột bắt buộc",
+        "columns.optional": "Cột tùy chọn",
+        "fallback.title": "Bảng tóm tắt",
+        "table.track": "Track",
+        "table.unit": "Một dòng là",
+        "table.output": "Output"
+      },
+      en: {
+        "meta.title": "Week 02 Demo: Table Schema Planner",
+        "nav.course.aria": "Course navigation",
+        "nav.home": "Home",
+        "nav.week": "Week 02",
+        "nav.slides": "Slides",
+        "nav.notebook": "Notebook",
+        "nav.language": "Language",
+        "page.title": "Table Schema Planner",
+        "page.intro": "Choose one track. The demo shows what one row means, which columns are required, which are optional, and the likely paper output.",
+        "demo.aria": "Table schema planning demo",
+        "choose.title": "Choose a track",
+        "buttons.aria": "Research tracks",
+        "detail.unit": "One row means",
+        "detail.output": "Paper output",
+        "columns.required": "Required columns",
+        "columns.optional": "Optional columns",
+        "fallback.title": "Summary table",
+        "table.track": "Track",
+        "table.unit": "One row means",
+        "table.output": "Output"
+      }
+    };
+    const tracks = [
+      { id:"TCSOL_SHORT", label:{vi:"Giảng dạy Hán ngữ ngắn hạn", en:"Short-term Chinese teaching"}, unit:{vi:"một bản ghi điểm trước/sau của người học", en:"one learner pre/post score record"}, output:{vi:"clean data template và source note", en:"clean data template and source note"}, required:["learner_id","group","pre_score","post_score","focus","activity_date"], optional:["attendance_hours","notes"] },
+      { id:"CONTRASTIVE", label:{vi:"Đối chiếu Hán-Việt", en:"Chinese-Vietnamese contrastive analysis"}, unit:{vi:"một ví dụ ngữ pháp Hán-Việt kèm ghi chú", en:"one Chinese-Vietnamese grammar example with teaching note"}, output:{vi:"bảng ví dụ đối chiếu", en:"contrastive example table"}, required:["example_id","zh_sentence","vi_equivalent","feature","contrast_point","teaching_note"], optional:["pinyin","source","lesson_unit"] },
+      { id:"MTPE", label:{vi:"Dịch máy và MTPE", en:"Machine translation and MTPE"}, unit:{vi:"một segment dịch có hậu hiệu đính và nhãn lỗi đơn giản", en:"one translation segment with post-editing and simplified error label"}, output:{vi:"bảng nhãn lỗi đơn giản", en:"simplified error-label table"}, required:["segment_id","zh_source","vi_mt","vi_postedit","local_error_label","severity"], optional:["mt_system","pe_time_seconds","mqm_dimension"] },
+      { id:"POLICY", label:{vi:"Chính sách giáo dục", en:"Education policy"}, unit:{vi:"một trích đoạn chính sách được mã hóa thủ công", en:"one manually coded policy excerpt"}, output:{vi:"bảng chủ đề hoặc source matrix", en:"theme table or source matrix"}, required:["doc_id","title","issuing_body","date","excerpt","theme_code"], optional:["policy_level","url","access_date","coding_note"] }
+    ];
+    const buttonBox = document.getElementById("track-buttons");
+    let activeIndex = 0;
+    function lang() { return window.Bilingual ? window.Bilingual.getLang() : "vi"; }
+    function localize(value) { return value[lang()] || value.vi || value.en; }
+    function chips(columns, optional) { return columns.map(col => `<span class="chip${optional ? " optional" : ""}">${col}</span>`).join(""); }
+    function render(index) {
+      activeIndex = index;
+      const track = tracks[index];
+      document.getElementById("track-title").textContent = localize(track.label);
+      document.getElementById("track-unit").textContent = localize(track.unit);
+      document.getElementById("track-output").textContent = localize(track.output);
+      document.getElementById("required-columns").innerHTML = chips(track.required, false);
+      document.getElementById("optional-columns").innerHTML = chips(track.optional, true);
+      [...buttonBox.querySelectorAll("button")].forEach(button => button.setAttribute("aria-pressed", String(button.dataset.track === track.id)));
+    }
+    function renderLabels() {
+      tracks.forEach(track => {
+        const button = buttonBox.querySelector(`[data-track="${track.id}"]`);
+        button.textContent = localize(track.label);
+      });
+      document.getElementById("summary-table").innerHTML = tracks.map(track => `<tr><td>${localize(track.label)}</td><td>${localize(track.unit)}</td><td>${localize(track.output)}</td></tr>`).join("");
+      render(activeIndex);
+    }
+    tracks.forEach((track, index) => {
+      const button = buttonBox.querySelector(`[data-track="${track.id}"]`);
+      button.addEventListener("click", () => render(index));
+    });
+    window.Bilingual.init({ translations: DEMO_I18N, defaultLang: "vi", onChange: renderLabels });
+  </script>
+</body>
+</html>

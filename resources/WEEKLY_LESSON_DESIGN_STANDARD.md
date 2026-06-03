@@ -34,6 +34,26 @@ Every week must include:
 
 Do not add a hard dataset and a hard Python concept in the same week. If the Python skill is new, the dataset must be simple. If the dataset is messy or realistic, the Python skill must already be familiar.
 
+## Beginner-First Layering
+
+The standard is comprehensive for the instructor, but the learner is a complete programming beginner. Each weekly file must separate content into three levels:
+
+| Level | Audience | Meaning |
+|---|---|---|
+| Core | learner | Required. Must be short, concrete, and doable in the week. |
+| Stretch | learner, optional | Extra practice for curiosity or faster progress. |
+| Instructor-only | instructor | Pedagogical notes, advanced explanation, source audit, and future expansion. |
+
+For Weeks 1-4, the learner-facing Core must stay light:
+
+- no more than one new Python concept;
+- one dataset with 10-100 rows;
+- one short table or figure;
+- one 100-150 word interpretation;
+- no regression, COMET, advanced Git, APIs, scraping, or JavaScript authoring.
+
+The instructor may prepare HTML slides, interactive visualizations, and source audits, but the learner only needs to use them, not build them, until later weeks.
+
 ## Standard Week Folder
 
 Each week should use this structure:
@@ -41,7 +61,10 @@ Each week should use this structure:
 ```text
 weeks/week-XX-topic-slug/
 ├── README.md
-├── slides.md
+├── slides.qmd
+├── slides.html
+├── interactive_demo.qmd
+├── interactive_demo.html
 ├── lecture_notes.md
 ├── live_coding.ipynb
 ├── exercises.md
@@ -49,12 +72,14 @@ weeks/week-XX-topic-slug/
 ├── readings.md
 ├── data_dictionary.md
 ├── rubric.md
+├── instructor_notes.md
 ├── data/
 │   ├── raw/
 │   └── processed/
 ├── outputs/
 │   ├── figures/
-│   └── tables/
+│   ├── tables/
+│   └── interactive/
 └── references/
 ```
 
@@ -103,6 +128,7 @@ By the end of this week, the learner can:
 ## Files
 
 - Slides:
+- Interactive demo:
 - Lecture notes:
 - Notebook:
 - Exercises:
@@ -124,7 +150,13 @@ By the end of this week, the learner can:
 
 ## Slide Deck Standard
 
-Each week needs 10-18 slides. Use Markdown first; export later if needed.
+Each week needs 10-18 slides. Use Quarto Reveal.js as the preferred source format:
+
+```text
+slides.qmd -> slides.html
+```
+
+If Quarto is not installed locally, still create `slides.qmd` as the source and provide a static `slides.html` fallback that can be opened in a browser or deployed to GitHub Pages.
 
 Required slide sequence:
 
@@ -147,6 +179,49 @@ Optional slides:
 - MT/MTPE error examples;
 - education policy timeline or coding example;
 - paper Methods/Results excerpt.
+
+### HTML Slide Requirements
+
+The rendered `slides.html` should:
+
+- run as a static file on GitHub Pages;
+- not require a Python server;
+- use Reveal.js through Quarto when available, or a documented standalone static HTML fallback;
+- include keyboard navigation;
+- include speaker notes when useful;
+- avoid heavy animation in beginner weeks;
+- link to `interactive_demo.html` when interaction would distract from the main slide flow.
+
+Do not require the learner to edit HTML, CSS, or JavaScript in Weeks 1-8.
+
+## Interactive Demo Standard
+
+Each week should include one lightweight interactive demo when it improves learning. The default path is:
+
+```text
+interactive_demo.qmd -> interactive_demo.html
+```
+
+Recommended tools:
+
+| Tool | Use | Beginner suitability |
+|---|---|---|
+| Plotly | hover, zoom, dropdowns, interactive figures from Python | best default |
+| Altair / Vega-Lite | concise statistical charts and selections | good after pandas basics |
+| Observable Plot | rich web-native explanation | instructor-only unless learner knows JS |
+| JupyterLite / Pyodide | run Python in browser | optional advanced, not default |
+
+Avoid Dash and Streamlit for the public course site because they require a running server and are not suitable for plain GitHub Pages.
+
+The interactive demo must include:
+
+- a one-sentence learning goal;
+- a small dataset or embedded data sample;
+- one interaction only in beginner weeks, such as hover, select, filter, or toggle;
+- a plain-language interpretation guide;
+- a non-interactive fallback table or summary in case JavaScript fails.
+
+The learner's Week 1-6 task is to interpret the interactive visualization, not to build it from scratch.
 
 ## Lecture Notes Standard
 
@@ -580,6 +655,16 @@ Use these as starting points, then update readings when building each week.
 - [sacreBLEU on PyPI](https://pypi.org/pypi/sacrebleu)
 - [COMET documentation](https://unbabel.github.io/COMET/html/index.html)
 
+### HTML Slides and Interactive Visualization
+
+- [Quarto Reveal.js presentations](https://quarto.org/docs/presentations/revealjs/)
+- [Quarto presenting slides](https://quarto.org/docs/presentations/revealjs/presenting.html)
+- [Quarto GitHub Pages publishing](https://quarto.org/docs/publishing/github-pages.html)
+- [Quarto interactive documents](https://quarto.org/docs/interactive/)
+- [Plotly Python getting started](https://plotly.com/python/getting-started/)
+- [Plotly `write_html`](https://plotly.com/python-api-reference/generated/plotly.io.write_html.html)
+- [JupyterLite documentation](https://jupyterlite.readthedocs.io/)
+
 ### Research Design, Tables, Figures, Reproducibility
 
 - [Tidy Data](https://vita.had.co.nz/papers/tidy-data.html)
@@ -622,7 +707,7 @@ This table does not replace the syllabus. It defines the artifact emphasis for e
 
 | Week | Main build | Required paper-facing output |
 |---|---|---|
-| 1 | research notebook basics | reproducible notebook with source note |
+| 1 | research notebook basics + HTML slide demo | reproducible notebook with source note |
 | 2 | data table and data dictionary | clean CSV template + codebook |
 | 3 | pandas summaries | descriptive table |
 | 4 | data cleaning log | before/after cleaning table |
@@ -642,7 +727,8 @@ This table does not replace the syllabus. It defines the artifact emphasis for e
 A week is complete only when all are true:
 
 - `README.md` states the research question and Python skill.
-- Slides exist and follow the slide deck standard.
+- `slides.qmd` and `slides.html` exist and follow the slide deck standard.
+- `interactive_demo.html` exists or the week explicitly explains why no interaction is useful.
 - Lecture notes explain the concept, code, mistakes, and research use.
 - Notebook runs from top to bottom.
 - Dataset is documented.
@@ -652,6 +738,7 @@ A week is complete only when all are true:
 - Caption and interpretation are included.
 - Readings include links and source audit notes.
 - Rubric is present.
+- Learner-facing Core is clearly separated from Stretch and Instructor-only content.
 - No private learner data is exposed.
 
 ## Design Smell Checklist
@@ -661,10 +748,11 @@ Revise the week if any of these are true:
 - The week teaches more than two new Python concepts.
 - The dataset has no research context.
 - The assignment only asks for code and no interpretation.
+- The HTML slide/demo requires the learner to understand JavaScript in beginner weeks.
+- The interactive demo has no plain-language fallback summary.
 - The figure has no caption or N.
 - The reading list has no current source or official documentation.
 - MT metrics are treated as final truth.
 - Education policy analysis quotes documents without metadata.
 - Learner data is identifiable.
 - The notebook only works if cells are run manually in a special order.
-

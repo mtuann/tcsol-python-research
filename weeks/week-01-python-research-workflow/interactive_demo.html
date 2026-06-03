@@ -1,0 +1,427 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Week 01 Interactive Demo: Research Track Explorer</title>
+  <script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+  <style>
+    :root {
+      --bg: #f7f9fc;
+      --card: #ffffff;
+      --ink: #172033;
+      --muted: #5b6578;
+      --accent: #2563eb;
+      --accent-dark: #1d4ed8;
+      --line: #dbe4f0;
+      --soft: #eef4ff;
+    }
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.55;
+      margin: 0;
+    }
+    main {
+      margin: 0 auto;
+      max-width: 1120px;
+      padding: 32px 20px 48px;
+    }
+    header {
+      margin-bottom: 24px;
+    }
+    h1 {
+      font-size: clamp(1.8rem, 4vw, 3rem);
+      letter-spacing: 0;
+      line-height: 1.1;
+      margin: 0 0 12px;
+    }
+    h2 {
+      font-size: 1.25rem;
+      margin: 0 0 12px;
+    }
+    p {
+      color: var(--muted);
+      margin: 0 0 12px;
+    }
+    .layout {
+      display: grid;
+      gap: 18px;
+      grid-template-columns: minmax(260px, 0.85fr) minmax(320px, 1.15fr);
+    }
+    .panel {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      box-shadow: 0 12px 30px rgba(23, 32, 51, 0.06);
+      padding: 18px;
+    }
+    .buttons {
+      display: grid;
+      gap: 10px;
+    }
+    button {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      color: var(--ink);
+      cursor: pointer;
+      font: inherit;
+      padding: 12px 14px;
+      text-align: left;
+      transition: border-color 140ms ease, background 140ms ease, color 140ms ease;
+      width: 100%;
+    }
+    button:hover, button.active {
+      background: var(--soft);
+      border-color: var(--accent);
+      color: var(--accent-dark);
+    }
+    .detail-grid {
+      display: grid;
+      gap: 10px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      margin: 12px 0 16px;
+    }
+    .detail {
+      background: #f8fbff;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 12px;
+    }
+    .detail span {
+      color: var(--muted);
+      display: block;
+      font-size: 0.78rem;
+      margin-bottom: 4px;
+      text-transform: uppercase;
+    }
+    .detail strong {
+      display: block;
+      font-size: 0.95rem;
+    }
+    #chart {
+      min-height: 360px;
+    }
+    .fallback-bars {
+      display: grid;
+      gap: 12px;
+      padding: 14px 4px;
+    }
+    .fallback-bars h3 {
+      font-size: 1rem;
+      margin: 0 0 8px;
+    }
+    .bar-row {
+      display: grid;
+      gap: 8px;
+      grid-template-columns: minmax(110px, 160px) 1fr minmax(32px, auto);
+      align-items: center;
+    }
+    .bar-label {
+      color: var(--ink);
+      font-size: 0.88rem;
+    }
+    .bar-track {
+      background: #e8eef8;
+      border-radius: 999px;
+      height: 14px;
+      overflow: hidden;
+    }
+    .bar-fill {
+      background: var(--accent);
+      height: 100%;
+    }
+    .bar-value {
+      color: var(--muted);
+      font-variant-numeric: tabular-nums;
+      text-align: right;
+    }
+    table {
+      border-collapse: collapse;
+      display: block;
+      margin-top: 16px;
+      overflow-x: auto;
+      width: 100%;
+    }
+    th, td {
+      border-bottom: 1px solid var(--line);
+      padding: 10px;
+      text-align: left;
+      vertical-align: top;
+    }
+    th {
+      background: #f0f5ff;
+      color: #263855;
+      font-size: 0.86rem;
+    }
+    td {
+      color: #2d3748;
+      font-size: 0.9rem;
+    }
+    .callout {
+      background: #fff7ed;
+      border: 1px solid #fed7aa;
+      border-radius: 8px;
+      color: #7c2d12;
+      margin-top: 16px;
+      padding: 12px 14px;
+    }
+    .callout p {
+      color: #7c2d12;
+      margin: 0;
+    }
+    @media (max-width: 860px) {
+      .layout, .detail-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>Research Track Explorer</h1>
+      <p>Click one track. Notice how a broad interest becomes a small question, a data unit, and a future table or figure. In Week 01, your job is only to interpret the demo.</p>
+    </header>
+
+    <section class="layout" aria-label="Interactive research track explorer">
+      <aside class="panel">
+        <h2>Choose a track</h2>
+        <div class="buttons" id="track-buttons" role="group" aria-label="Research tracks">
+          <button type="button" data-track="TCSOL_SHORT" aria-pressed="true">Short-term Chinese teaching</button>
+          <button type="button" data-track="CONTRASTIVE" aria-pressed="false">Chinese-Vietnamese contrastive analysis</button>
+          <button type="button" data-track="MTPE" aria-pressed="false">Machine translation and MTPE</button>
+          <button type="button" data-track="POLICY" aria-pressed="false">Education policy</button>
+        </div>
+        <div class="callout">
+          <p><strong>Beginner rule:</strong> before Python analysis, define what one row of data represents.</p>
+        </div>
+      </aside>
+
+      <section class="panel" id="track-detail" aria-live="polite">
+        <h2 id="track-title">Short-term Chinese teaching</h2>
+        <p id="track-question">How do learner answers change before and after a two-week measure-word activity?</p>
+        <div class="detail-grid">
+          <div class="detail">
+            <span>Unit of observation</span>
+            <strong id="track-unit">one learner test item</strong>
+          </div>
+          <div class="detail">
+            <span>Likely output</span>
+            <strong id="track-output">pre/post score table or learner progress figure</strong>
+          </div>
+          <div class="detail">
+            <span>Starter dataset</span>
+            <strong id="track-dataset">pre_post_scores.csv</strong>
+          </div>
+          <div class="detail">
+            <span>Beginner Python task</span>
+            <strong id="track-task">count learners and describe score change</strong>
+          </div>
+        </div>
+        <div id="chart" role="img" aria-label="Illustrative learner scores before and after a short lesson">
+          <div class="fallback-bars">
+            <h3>Illustrative learner scores before and after a short lesson</h3>
+            <p>Static fallback chart. JavaScript may enhance this area with an interactive chart.</p>
+            <div class="bar-row"><div class="bar-label">S001</div><div class="bar-track"><div class="bar-fill" style="width: 90%"></div></div><div class="bar-value">72</div></div>
+            <div class="bar-row"><div class="bar-label">S002</div><div class="bar-track"><div class="bar-fill" style="width: 94%"></div></div><div class="bar-value">75</div></div>
+            <div class="bar-row"><div class="bar-label">S003</div><div class="bar-track"><div class="bar-fill" style="width: 98%"></div></div><div class="bar-value">78</div></div>
+            <div class="bar-row"><div class="bar-label">S004</div><div class="bar-track"><div class="bar-fill" style="width: 100%"></div></div><div class="bar-value">80</div></div>
+          </div>
+        </div>
+      </section>
+    </section>
+
+    <section class="panel" style="margin-top: 18px;">
+      <h2>Fallback summary table</h2>
+      <p>If the interactive chart does not load, use this table instead.</p>
+      <table>
+        <thead>
+          <tr>
+            <th>Track</th>
+            <th>Small research question</th>
+            <th>One row means</th>
+          </tr>
+        </thead>
+        <tbody id="fallback-table">
+          <tr><td>Short-term Chinese teaching</td><td>How do learner answers change before and after a two-week measure-word activity?</td><td>one learner test item</td></tr>
+          <tr><td>Chinese-Vietnamese contrastive analysis</td><td>Which Chinese ba-construction examples create word-order transfer problems for Vietnamese learners?</td><td>one Chinese-Vietnamese sentence pair</td></tr>
+          <tr><td>Machine translation and MTPE</td><td>Which MT error type appears most often in Chinese-Vietnamese education-policy sentences?</td><td>one translation segment with human post-editing</td></tr>
+          <tr><td>Education policy</td><td>How do recent policy excerpts discuss teacher development and digitalization?</td><td>one coded policy excerpt or document-theme pair</td></tr>
+        </tbody>
+      </table>
+    </section>
+  </main>
+
+  <script>
+    const tracks = [
+      {
+        id: "TCSOL_SHORT",
+        label: "TCSOL",
+        title: "Short-term Chinese teaching",
+        question: "How do learner answers change before and after a two-week measure-word activity?",
+        unit: "one learner test item",
+        output: "pre/post score table or learner progress figure",
+        dataset: "pre_post_scores.csv",
+        task: "count learners and describe score change",
+        chartTitle: "Illustrative learner scores before and after a short lesson",
+        x: ["S001", "S002", "S003", "S004", "S005", "S006"],
+        y1: [58, 62, 65, 70, 55, 60],
+        y2: [72, 75, 78, 80, 68, 73],
+        y1Name: "Pre-test",
+        y2Name: "Post-test"
+      },
+      {
+        id: "CONTRASTIVE",
+        label: "Contrastive",
+        title: "Chinese-Vietnamese contrastive analysis",
+        question: "Which Chinese ba-construction examples create word-order transfer problems for Vietnamese learners?",
+        unit: "one Chinese-Vietnamese sentence pair",
+        output: "contrastive examples table or error frequency table",
+        dataset: "hv_contrastive_examples.csv",
+        task: "count examples by structure",
+        chartTitle: "Illustrative count of contrastive teaching points",
+        x: ["Word order", "Function word", "Collocation", "Register"],
+        y1: [14, 9, 6, 3],
+        y2: null,
+        y1Name: "Examples",
+        y2Name: ""
+      },
+      {
+        id: "MTPE",
+        label: "MT/MTPE",
+        title: "Machine translation and MTPE",
+        question: "Which MT error type appears most often in Chinese-Vietnamese education-policy sentences?",
+        unit: "one translation segment with human post-editing",
+        output: "error type table or MT system comparison chart",
+        dataset: "mt_eval.csv",
+        task: "count segments by error type",
+        chartTitle: "Illustrative MT error counts",
+        x: ["Terminology", "Literal translation", "Word order", "Omission"],
+        y1: [12, 10, 7, 4],
+        y2: null,
+        y1Name: "Errors",
+        y2Name: ""
+      },
+      {
+        id: "POLICY",
+        label: "Policy",
+        title: "Education policy",
+        question: "How do recent policy excerpts discuss teacher development and digitalization?",
+        unit: "one coded policy excerpt or document-theme pair",
+        output: "policy timeline or theme frequency table",
+        dataset: "policy_docs.csv",
+        task: "count documents by theme",
+        chartTitle: "Illustrative policy theme counts",
+        x: ["Teacher development", "Digitalization", "Equity", "Internationalization"],
+        y1: [8, 7, 5, 3],
+        y2: null,
+        y1Name: "Documents",
+        y2Name: ""
+      }
+    ];
+
+    const buttonBox = document.getElementById("track-buttons");
+    const fallbackTable = document.getElementById("fallback-table");
+
+    tracks.forEach((track, index) => {
+      const button = buttonBox.querySelector(`[data-track="${track.id}"]`);
+      if (button) button.addEventListener("click", () => selectTrack(index));
+    });
+
+    function selectTrack(index) {
+      const track = tracks[index];
+      document.getElementById("track-title").textContent = track.title;
+      document.getElementById("track-question").textContent = track.question;
+      document.getElementById("track-unit").textContent = track.unit;
+      document.getElementById("track-output").textContent = track.output;
+      document.getElementById("track-dataset").textContent = track.dataset;
+      document.getElementById("track-task").textContent = track.task;
+
+      [...buttonBox.querySelectorAll("button")].forEach((button) => {
+        const isActive = button.dataset.track === track.id;
+        button.classList.toggle("active", isActive);
+        button.setAttribute("aria-pressed", String(isActive));
+      });
+      const chart = document.getElementById("chart");
+      chart.setAttribute("aria-label", track.chartTitle);
+
+      const traces = [{
+        x: track.x,
+        y: track.y1,
+        name: track.y1Name,
+        type: "bar",
+        marker: { color: "#2563eb" },
+        hovertemplate: "%{x}<br>%{y}<extra>" + track.y1Name + "</extra>"
+      }];
+
+      if (track.y2) {
+        traces.push({
+          x: track.x,
+          y: track.y2,
+          name: track.y2Name,
+          type: "bar",
+          marker: { color: "#f97316" },
+          hovertemplate: "%{x}<br>%{y}<extra>" + track.y2Name + "</extra>"
+        });
+      }
+
+      if (!window.Plotly) {
+        renderFallbackBars(track);
+        return;
+      }
+
+      try {
+        Plotly.newPlot("chart", traces, {
+        title: { text: track.chartTitle, font: { size: 16 } },
+        barmode: track.y2 ? "group" : "relative",
+        margin: { t: 60, r: 20, b: 70, l: 55 },
+        yaxis: { title: "Illustrative value", rangemode: "tozero" },
+        xaxis: { tickangle: -20 },
+        paper_bgcolor: "#ffffff",
+        plot_bgcolor: "#ffffff",
+        font: { family: "-apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" }
+      }, {
+        responsive: true,
+        displaylogo: false
+      });
+      } catch (error) {
+        renderFallbackBars(track);
+      }
+    }
+
+    function renderFallbackBars(track) {
+      const chart = document.getElementById("chart");
+      const values = track.y2 ? track.y2 : track.y1;
+      const labels = track.x;
+      const maxValue = Math.max(...values, 1);
+      const rows = labels.map((label, index) => {
+        const value = values[index];
+        const width = Math.max(4, Math.round((value / maxValue) * 100));
+        return `
+          <div class="bar-row">
+            <div class="bar-label">${label}</div>
+            <div class="bar-track"><div class="bar-fill" style="width: ${width}%"></div></div>
+            <div class="bar-value">${value}</div>
+          </div>
+        `;
+      }).join("");
+      chart.setAttribute("aria-label", track.chartTitle + ". Values: " + labels.map((label, index) => `${label} ${values[index]}`).join(", "));
+      chart.innerHTML = `
+        <div class="fallback-bars">
+          <h3>${track.chartTitle}</h3>
+          <p>Static fallback chart. Plotly is not loaded, but the main pattern is still visible.</p>
+          ${rows}
+        </div>
+      `;
+    }
+
+    selectTrack(0);
+  </script>
+</body>
+</html>

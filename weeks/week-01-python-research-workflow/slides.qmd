@@ -1,0 +1,145 @@
+---
+title: "Week 01: Python as a Research Workflow"
+subtitle: "From topic to data-ready question"
+format:
+  revealjs:
+    theme: simple
+    slide-number: true
+    transition: fade
+    navigation-mode: vertical
+    preview-links: true
+---
+
+## Today in One Sentence
+
+Python is a tool for making a research workflow visible:
+
+```text
+question -> data -> code -> table/figure -> interpretation -> paper
+```
+
+This week is not about becoming a programmer.
+
+It is about running your first research notebook.
+
+## The Four Research Tracks
+
+1. Short-term Chinese teaching / TCSOL
+2. Chinese-Vietnamese contrastive analysis
+3. Machine translation and MTPE
+4. Education policy analysis
+
+## Broad Topic vs Data-Ready Question
+
+| Broad topic | Data-ready question |
+|---|---|
+| Teaching Chinese grammar | How do learner answers change before and after a measure-word activity? |
+| Chinese-Vietnamese comparison | Which ba-construction examples create word-order transfer problems? |
+| Translation quality | Which MT error type is most frequent in policy sentences? |
+| Education policy | How do recent policy excerpts discuss teacher development? |
+
+## What Counts as Data?
+
+One row can represent:
+
+- one learner;
+- one test answer;
+- one sentence pair;
+- one MT segment;
+- one coded policy excerpt.
+
+The key question:
+
+```text
+What does one row mean?
+```
+
+## What Is a Notebook?
+
+A notebook combines:
+
+- Markdown: explanation, headings, captions;
+- Code: Python commands;
+- Output: tables, figures, printed results.
+
+The notebook should read like a transparent Methods/Results draft.
+
+## First Python Idea: A Variable
+
+```python
+research_area = "TCSOL"
+topic = "Chinese measure words"
+question = "How do learner answers change after a short activity?"
+```
+
+A variable stores a value so we can reuse it.
+
+## First Python Idea: Print
+
+```python
+print(question)
+```
+
+`print` asks Python to show something.
+
+In Week 01, showing and checking values is already useful.
+
+## First Dataset
+
+File:
+
+```text
+data/raw/week01_research_tracks.csv
+```
+
+This dataset has four rows. Each row is one possible project track.
+
+## Interactive Demo
+
+Open:
+
+```text
+interactive_demo.html
+```
+
+Use it to compare the four tracks.
+
+Do not worry about how the web interaction is built yet.
+
+## Week 01 Output
+
+By the end of the week, you will submit:
+
+1. a notebook that runs;
+2. one selected research track;
+3. one short table or printed summary;
+4. one caption;
+5. one 100-150 word memo.
+
+## Caption Example
+
+Weak:
+
+```text
+Table 1. Research tracks.
+```
+
+Better:
+
+```text
+Table 1. Four possible research tracks connect broad interests to data-ready questions. Each row represents one track and identifies the unit of observation needed for future Python analysis.
+```
+
+## Remember
+
+You do not need to understand every line of code today.
+
+Core goal:
+
+```text
+run -> observe -> edit safely -> explain
+```
+
+::: {.notes}
+Emphasize psychological safety. The learner should leave Week 01 feeling that Python is a research assistant, not a barrier.
+:::

@@ -73,6 +73,16 @@ By the end of the course, the learner should be able to:
 
 All weekly lessons must follow the contract in [`resources/WEEKLY_LESSON_DESIGN_STANDARD.md`](resources/WEEKLY_LESSON_DESIGN_STANDARD.md). That file defines the required weekly artifacts: slides, lecture notes, live-coding notebook, dataset/data dictionary, exercises, assignment, readings, figure/table output, caption, interpretation paragraph, rubric, and reproducibility checklist.
 
+The current design supports both Markdown/Quarto sources and deployable HTML:
+
+- `slides.qmd` and `slides.html` for each week;
+- `interactive_demo.qmd` and `interactive_demo.html` when interaction improves learning;
+- static HTML files that can be served by GitHub Pages.
+
+## Current Lesson Packages
+
+- [`Week 01: Python as a Research Workflow`](weeks/week-01-python-research-workflow/)
+
 ## Suggested Repository Structure
 
 ```text
@@ -420,8 +430,8 @@ These topics are useful later, but they are not the shortest path to a good Appl
 ## Next Content Tasks
 
 - Create `docs/index.md` as a public landing page.
-- Create `weeks/week-01-python-research-workflow/` from the weekly design standard.
-- Create a first lesson notebook: `notebooks/week-01-python-as-research-tool.ipynb`.
+- Review and refine `weeks/week-01-python-research-workflow/`.
+- Create `weeks/week-02-data-tables-and-codebooks/`.
 - Create blank CSV templates in `resources/templates/`.
 - Add a one-page learner setup guide in Vietnamese.
 - Add a Zotero + Word workflow guide.

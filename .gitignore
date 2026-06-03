@@ -15,10 +15,25 @@ data/raw/*
 data/processed/*
 !data/raw/.gitkeep
 !data/processed/.gitkeep
+weeks/**/data/raw/*
+weeks/**/data/processed/*
+!weeks/**/data/raw/.gitkeep
+!weeks/**/data/processed/.gitkeep
+!weeks/week-01-python-research-workflow/data/raw/week01_research_tracks.csv
+!weeks/week-01-python-research-workflow/data/raw/week01_mini_examples.csv
+submissions/
+weeks/**/submissions/
 
 # Generated outputs
 outputs/figures/*
 !outputs/figures/.gitkeep
+weeks/**/outputs/figures/*
+weeks/**/outputs/tables/*
+weeks/**/outputs/interactive/*
+!weeks/**/outputs/figures/.gitkeep
+!weeks/**/outputs/tables/.gitkeep
+!weeks/**/outputs/interactive/.gitkeep
+!weeks/week-01-python-research-workflow/outputs/tables/week01_selected_track_summary.csv
 
 # Office temporary files
 ~$*

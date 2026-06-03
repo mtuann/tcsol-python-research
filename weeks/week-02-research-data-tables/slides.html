@@ -5,35 +5,478 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title data-i18n="meta.title">Tuần 02: Dữ liệu nghiên cứu dưới dạng bảng</title>
   <link rel="stylesheet" href="../../assets/css/bilingual.css">
-  <link rel="stylesheet" href="../../assets/css/visual-slides.css">
   <style>
-    :root { --accent:#2563eb; --ink:#172033; --line:#dbe4f0; --soft:#eef4ff; }
-    body { margin: 0; }
-    .reveal { color: var(--ink); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
-    .reveal h1 { font-size: 2.05em; }
-    .reveal h2 { font-size: 1.45em; }
-    .reveal p, .reveal li, .reveal td, .reveal th { font-size: .78em; line-height: 1.35; }
-    .slide-tools { align-items:center; display:flex; gap:.75rem; justify-content:space-between; left:0; padding:.75rem 1rem 0; position:fixed; right:0; top:0; z-index:25; }
-    .slide-exit-links { display:flex; flex-wrap:wrap; gap:.45rem; }
-    .slide-link, .fallback-nav .nav-link, .slide-cta { align-items:center; border:1px solid var(--line); border-radius:999px; display:inline-flex; font-weight:750; justify-content:center; text-decoration:none; }
-    .slide-link { background:#fff; color:var(--ink); min-height:2.2rem; padding:.35rem .7rem; }
-    .slide-link.primary, .slide-cta.primary { background:var(--accent); border-color:var(--accent); color:#fff; }
-    .tag { border:1px solid var(--line); border-radius:999px; color:var(--accent); display:inline-block; font-size:.48em; font-weight:800; letter-spacing:.05em; padding:.35em .7em; text-transform:uppercase; }
-    .concept-grid { display:grid; gap:.75rem; grid-template-columns:repeat(3,minmax(0,1fr)); }
-    .card { border:1px solid var(--line); border-radius:8px; padding:.8rem; }
-    .card strong { display:block; font-size:.8em; margin-bottom:.25rem; }
-    .flow { display:grid; gap:.65rem; grid-template-columns:repeat(5,minmax(0,1fr)); }
-    .flow div { background:#f8fbff; border:1px solid var(--line); border-radius:8px; padding:.7rem; text-align:center; }
-    .fallback-nav { align-items:center; background:rgba(255,255,255,.94); border:1px solid var(--line); border-radius:999px; bottom:1rem; box-shadow:0 14px 34px rgba(23,32,51,.12); display:flex; gap:.75rem; left:50%; padding:.65rem .8rem; position:fixed; transform:translateX(-50%); z-index:30; }
-    .fallback-nav button, .jump-button { background:var(--accent); border:0; border-radius:999px; color:#fff; cursor:pointer; font:inherit; font-weight:800; padding:.5rem .8rem; }
-    .fallback-nav button:disabled { opacity:.45; }
-    .slide-jump { align-items:center; display:flex; gap:.35rem; }
-    .slide-jump input { border:1px solid var(--line); border-radius:999px; font:inherit; max-width:4.5rem; padding:.35rem .55rem; }
-    .slides > section { display:none; }
-    .slides > section.active { display:block; }
-    .slide-cta-row { display:flex; flex-wrap:wrap; gap:.5rem; margin-top:1rem; }
-    .slide-cta { background:#fff; color:var(--ink); font-size:.62em; min-height:2.2rem; padding:.4rem .7rem; }
-    @media (max-width: 760px) { .concept-grid, .flow { grid-template-columns:1fr; } .fallback-nav { border-radius:16px; flex-wrap:wrap; width:calc(100% - 2rem); } }
+    :root {
+      --accent: #2563eb;
+      --green: #1f7a4d;
+      --amber: #b45309;
+      --rose: #b8325f;
+      --ink: #172033;
+      --muted: #5b6578;
+      --line: #dbe4f0;
+      --paper: #ffffff;
+      --bg: #f5f7fb;
+      --blue-soft: #edf4ff;
+      --green-soft: #edf7ee;
+      --amber-soft: #fff7ed;
+      --rose-soft: #fff0f5;
+      --shadow: 0 18px 44px rgba(23, 32, 51, 0.10);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      background:
+        linear-gradient(90deg, rgba(219, 228, 240, 0.45) 1px, transparent 1px),
+        linear-gradient(0deg, rgba(219, 228, 240, 0.45) 1px, transparent 1px),
+        var(--bg);
+      background-size: 40px 40px;
+      color: var(--ink);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      margin: 0;
+      overflow: hidden;
+    }
+
+    .slide-tools {
+      align-items: center;
+      background: rgba(255, 255, 255, 0.94);
+      border-bottom: 1px solid var(--line);
+      display: flex;
+      gap: 0.7rem;
+      justify-content: space-between;
+      left: 0;
+      min-height: 58px;
+      padding: 0.55rem clamp(0.8rem, 2vw, 1.5rem);
+      position: fixed;
+      right: 0;
+      top: 0;
+      z-index: 40;
+    }
+
+    .slide-exit-links,
+    .language-switcher {
+      align-items: center;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.45rem;
+    }
+
+    .slide-link,
+    .slide-cta,
+    .fallback-nav .nav-link {
+      align-items: center;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      display: inline-flex;
+      font-weight: 780;
+      justify-content: center;
+      min-height: 34px;
+      padding: 0.35rem 0.65rem;
+      text-decoration: none;
+    }
+
+    .slide-link {
+      background: var(--paper);
+      color: var(--ink);
+      font-size: 0.95rem;
+    }
+
+    .slide-link.primary,
+    .slide-cta.primary {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #fff;
+    }
+
+    .deck {
+      min-height: 100vh;
+      padding: 76px clamp(20px, 4vw, 72px) 102px;
+      width: 100vw;
+    }
+
+    .slides {
+      height: calc(100vh - 178px);
+      margin: 0 auto;
+      max-width: 1180px;
+      width: 100%;
+    }
+
+    .slides > section {
+      display: none;
+    }
+
+    .slides > section.active {
+      animation: slideIn 180ms ease-out;
+      display: grid;
+      gap: clamp(1rem, 2vw, 1.5rem);
+      grid-template-rows: auto 1fr;
+      height: 100%;
+      overflow: hidden;
+    }
+
+    @keyframes slideIn {
+      from { opacity: 0.35; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .slide-head {
+      max-width: 900px;
+    }
+
+    .tag {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: var(--accent);
+      display: inline-block;
+      font-size: 0.82rem;
+      font-weight: 850;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.85rem;
+      padding: 0.35rem 0.65rem;
+      text-transform: uppercase;
+    }
+
+    h1,
+    h2,
+    h3,
+    p {
+      letter-spacing: 0;
+      margin: 0;
+    }
+
+    h1 {
+      font-size: clamp(3.2rem, 7vw, 6rem);
+      line-height: 0.98;
+      max-width: 10.5ch;
+    }
+
+    h2 {
+      font-size: clamp(2rem, 4.4vw, 4rem);
+      line-height: 1.05;
+      max-width: 13ch;
+    }
+
+    .wide-title {
+      max-width: 17ch;
+    }
+
+    .lead {
+      color: var(--muted);
+      font-size: clamp(1.15rem, 1.7vw, 1.55rem);
+      line-height: 1.45;
+      margin-top: 1rem;
+      max-width: 58ch;
+    }
+
+    .stage {
+      align-content: center;
+      display: grid;
+      gap: 1rem;
+      min-height: 0;
+    }
+
+    .hero-layout {
+      align-items: center;
+      display: grid;
+      gap: clamp(1.5rem, 4vw, 3rem);
+      grid-template-columns: minmax(0, 0.95fr) minmax(320px, 1.05fr);
+    }
+
+    .research-table {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .research-table .row {
+      display: grid;
+      grid-template-columns: 0.9fr 1fr 1fr 1.1fr;
+    }
+
+    .research-table .row > span {
+      border-bottom: 1px solid var(--line);
+      border-right: 1px solid var(--line);
+      min-height: 54px;
+      padding: 0.7rem;
+    }
+
+    .research-table .row > span:last-child { border-right: 0; }
+    .research-table .row:last-child > span { border-bottom: 0; }
+
+    .research-table .header span {
+      background: #f0f5ff;
+      color: #263855;
+      font-size: 0.86rem;
+      font-weight: 820;
+      min-height: 42px;
+      text-transform: uppercase;
+    }
+
+    .focus-row > span { background: var(--green-soft); }
+    .focus-column { background: var(--blue-soft) !important; }
+    .focus-value { background: var(--amber-soft) !important; }
+
+    .flow {
+      display: grid;
+      gap: 0.8rem;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+    }
+
+    .flow-step {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-top: 6px solid var(--accent);
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+      min-height: 140px;
+      padding: 0.9rem;
+    }
+
+    .flow-step:nth-child(2) { border-top-color: var(--green); }
+    .flow-step:nth-child(3) { border-top-color: var(--amber); }
+    .flow-step:nth-child(4) { border-top-color: var(--rose); }
+    .flow-step:nth-child(5) { border-top-color: var(--accent); }
+
+    .flow-step strong,
+    .concept-card strong,
+    .lane-card strong {
+      display: block;
+      font-size: clamp(1.1rem, 1.8vw, 1.45rem);
+      margin-bottom: 0.45rem;
+    }
+
+    .flow-step span,
+    .concept-card span,
+    .lane-card span {
+      color: var(--muted);
+      display: block;
+      font-size: clamp(0.95rem, 1.35vw, 1.15rem);
+      line-height: 1.35;
+    }
+
+    .concept-grid {
+      display: grid;
+      gap: 1rem;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .concept-card,
+    .lane-card,
+    .paper-card,
+    .code-card {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+      padding: clamp(1rem, 2vw, 1.35rem);
+    }
+
+    .concept-card.row { border-left: 7px solid var(--green); }
+    .concept-card.column { border-left: 7px solid var(--accent); }
+    .concept-card.value { border-left: 7px solid var(--amber); }
+    .concept-card.schema { border-left: 7px solid var(--rose); }
+
+    .schema-map {
+      display: grid;
+      gap: 1rem;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .lane-card {
+      display: grid;
+      gap: 0.7rem;
+      grid-template-columns: minmax(100px, 0.7fr) minmax(0, 1.3fr);
+    }
+
+    .lane-card .track {
+      align-items: center;
+      background: var(--blue-soft);
+      border-radius: 8px;
+      color: var(--accent);
+      display: flex;
+      font-weight: 850;
+      justify-content: center;
+      padding: 0.65rem;
+      text-align: center;
+    }
+
+    .chip-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.45rem;
+      margin-top: 0.6rem;
+    }
+
+    .chip {
+      background: var(--blue-soft);
+      border: 1px solid #cfe1ff;
+      border-radius: 999px;
+      color: #1d4ed8;
+      font-weight: 760;
+      padding: 0.35rem 0.55rem;
+    }
+
+    .chip.optional {
+      background: var(--amber-soft);
+      border-color: #fed7aa;
+      color: #9a3412;
+    }
+
+    .split {
+      display: grid;
+      gap: 1rem;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .code-card pre {
+      background: #102a43;
+      border-radius: 8px;
+      color: #e6f1ff;
+      font-size: clamp(1rem, 1.7vw, 1.35rem);
+      line-height: 1.45;
+      margin: 0;
+      overflow-x: auto;
+      padding: 1rem;
+      white-space: pre-wrap;
+    }
+
+    .paper-card {
+      border-left: 8px solid var(--green);
+      max-width: 980px;
+    }
+
+    blockquote {
+      color: var(--ink);
+      font-size: clamp(1.35rem, 2.4vw, 2rem);
+      line-height: 1.35;
+      margin: 0;
+    }
+
+    .checklist {
+      display: grid;
+      gap: 0.9rem;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .check-item {
+      align-items: center;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+      display: grid;
+      gap: 0.8rem;
+      grid-template-columns: 3rem minmax(0, 1fr);
+      padding: 0.95rem;
+    }
+
+    .check-item b {
+      align-items: center;
+      background: var(--green-soft);
+      border: 1px solid rgba(31, 122, 77, 0.25);
+      border-radius: 50%;
+      color: var(--green);
+      display: flex;
+      font-size: 1.4rem;
+      height: 2.4rem;
+      justify-content: center;
+      width: 2.4rem;
+    }
+
+    .slide-cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.65rem;
+      margin-top: 1rem;
+    }
+
+    .slide-cta {
+      background: var(--paper);
+      color: var(--ink);
+      font-size: 1.05rem;
+    }
+
+    .fallback-nav {
+      align-items: center;
+      background: rgba(255, 255, 255, 0.96);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      bottom: 1rem;
+      box-shadow: 0 14px 34px rgba(23, 32, 51, 0.14);
+      display: flex;
+      gap: 0.55rem;
+      left: 50%;
+      padding: 0.55rem;
+      position: fixed;
+      transform: translateX(-50%);
+      z-index: 50;
+    }
+
+    .fallback-nav button,
+    .jump-button {
+      background: var(--accent);
+      border: 0;
+      border-radius: 8px;
+      color: #fff;
+      cursor: pointer;
+      font: inherit;
+      font-weight: 820;
+      min-height: 36px;
+      padding: 0.35rem 0.65rem;
+    }
+
+    .fallback-nav button:disabled { opacity: 0.45; }
+
+    .slide-counter {
+      color: var(--ink);
+      font-weight: 800;
+      min-width: 3.3rem;
+      text-align: center;
+    }
+
+    .slide-jump {
+      align-items: center;
+      display: flex;
+      gap: 0.35rem;
+    }
+
+    .slide-jump label {
+      font-weight: 760;
+    }
+
+    .slide-jump input {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      font: inherit;
+      max-width: 4.5rem;
+      min-height: 36px;
+      padding: 0.25rem 0.45rem;
+      text-align: center;
+    }
+
+    @media (max-width: 900px) {
+      body { overflow: auto; }
+      .deck { min-height: 100vh; padding: 96px 18px 140px; }
+      .slides { height: auto; min-height: calc(100vh - 236px); }
+      .slides > section.active { min-height: calc(100vh - 236px); overflow: visible; }
+      .hero-layout,
+      .flow,
+      .concept-grid,
+      .schema-map,
+      .split,
+      .checklist {
+        grid-template-columns: 1fr;
+      }
+      h1 { max-width: 12ch; }
+      h2 { max-width: 16ch; }
+      .fallback-nav {
+        flex-wrap: wrap;
+        width: calc(100% - 1.5rem);
+      }
+    }
   </style>
 </head>
 <body>
@@ -47,103 +490,340 @@
       <button type="button" data-lang-option="en" aria-pressed="false">English</button>
     </div>
   </div>
-  <main class="reveal">
+
+  <main class="deck">
     <div class="slides">
       <section class="active">
-        <span class="tag" data-i18n="s1.tag">Tuần 02</span>
-        <h1 data-i18n="s1.title">Dữ liệu nghiên cứu dưới dạng bảng</h1>
-        <p data-i18n="s1.body">Từ câu hỏi nhỏ đến row, column, schema và data description.</p>
-      </section>
-      <section>
-        <span class="tag" data-i18n="s2.tag">Thông điệp chính</span>
-        <h2 data-i18n="s2.title">Bảng dữ liệu là một quyết định phương pháp</h2>
-        <div class="flow" aria-label="Luồng thiết kế dữ liệu" data-i18n-aria-label="flow.aria">
-          <div data-i18n="flow.q">Câu hỏi</div>
-          <div data-i18n="flow.row">Một dòng</div>
-          <div data-i18n="flow.cols">Cột</div>
-          <div data-i18n="flow.source">Nguồn</div>
-          <div data-i18n="flow.paper">Paper</div>
+        <div class="hero-layout">
+          <div class="slide-head">
+            <span class="tag" data-i18n="s1.tag">Tuần 02</span>
+            <h1 data-i18n="s1.title">Dữ liệu nghiên cứu dưới dạng bảng</h1>
+            <p class="lead" data-i18n="s1.body">Từ câu hỏi nhỏ đến row, column, schema và đoạn mô tả dữ liệu cho paper.</p>
+          </div>
+          <div class="stage">
+            <div class="research-table" aria-label="Bảng dữ liệu minh họa" data-i18n-aria-label="hero.table.aria">
+              <div class="row header"><span>learner_id</span><span>pre_score</span><span>post_score</span><span>focus</span></div>
+              <div class="row focus-row"><span>S001</span><span>58</span><span>72</span><span>measure_words</span></div>
+              <div class="row"><span>S002</span><span>62</span><span>75</span><span>measure_words</span></div>
+              <div class="row"><span>S003</span><span>65</span><span>78</span><span>measure_words</span></div>
+            </div>
+          </div>
         </div>
       </section>
+
       <section>
-        <span class="tag" data-i18n="s3.tag">Khái niệm</span>
-        <h2 data-i18n="s3.title">Row, column, value, schema</h2>
-        <div class="concept-grid">
-          <div class="card"><strong>Row</strong><p data-i18n="row.body">một đơn vị quan sát</p></div>
-          <div class="card"><strong>Column</strong><p data-i18n="column.body">một biến hoặc thuộc tính</p></div>
-          <div class="card"><strong>Schema</strong><p data-i18n="schema.body">danh sách cột và ý nghĩa</p></div>
+        <div class="slide-head">
+          <span class="tag" data-i18n="s2.tag">Thông điệp chính</span>
+          <h2 class="wide-title" data-i18n="s2.title">Bảng dữ liệu là một quyết định phương pháp</h2>
+          <p class="lead" data-i18n="s2.body">Nếu row và column không rõ, Python vẫn có thể chạy nhưng paper sẽ không có bằng chứng tốt.</p>
+        </div>
+        <div class="stage">
+          <div class="flow" aria-label="Luồng thiết kế dữ liệu" data-i18n-aria-label="flow.aria">
+            <div class="flow-step"><strong data-i18n="flow.q">Câu hỏi</strong><span data-i18n="flow.q.body">muốn trả lời điều gì?</span></div>
+            <div class="flow-step"><strong data-i18n="flow.row">Một dòng</strong><span data-i18n="flow.row.body">đơn vị quan sát là gì?</span></div>
+            <div class="flow-step"><strong data-i18n="flow.cols">Cột</strong><span data-i18n="flow.cols.body">cần thông tin nào?</span></div>
+            <div class="flow-step"><strong data-i18n="flow.source">Nguồn</strong><span data-i18n="flow.source.body">lấy từ đâu, ngày nào?</span></div>
+            <div class="flow-step"><strong data-i18n="flow.paper">Paper</strong><span data-i18n="flow.paper.body">output nào sẽ trích dẫn?</span></div>
+          </div>
         </div>
       </section>
+
       <section>
-        <span class="tag" data-i18n="s4.tag">Track examples</span>
-        <h2 data-i18n="s4.title">Một dòng khác nhau theo track</h2>
-        <div class="mini-table" role="table" aria-label="Ví dụ đơn vị quan sát" data-i18n-aria-label="units.aria">
-          <div class="row header" role="row"><span role="columnheader">Track</span><span role="columnheader" data-i18n="table.unit">Một dòng là</span><span role="columnheader" data-i18n="table.output">Output</span></div>
-          <div class="row" role="row"><span role="cell">TCSOL</span><span role="cell" data-i18n="unit.tcsol">pre/post score record</span><span role="cell" data-i18n="out.tcsol">data template</span></div>
-          <div class="row" role="row"><span role="cell" data-i18n="track.contrast">Đối chiếu</span><span role="cell" data-i18n="unit.contrast">grammar example + teaching note</span><span role="cell" data-i18n="out.contrast">example table</span></div>
-          <div class="row" role="row"><span role="cell">MTPE</span><span role="cell" data-i18n="unit.mtpe">translation segment + label</span><span role="cell" data-i18n="out.mtpe">error-label table</span></div>
-          <div class="row" role="row"><span role="cell">Policy</span><span role="cell" data-i18n="unit.policy">coded excerpt</span><span role="cell" data-i18n="out.policy">theme table</span></div>
+        <div class="slide-head">
+          <span class="tag" data-i18n="s3.tag">Khái niệm</span>
+          <h2 class="wide-title" data-i18n="s3.title">Một bảng có bốn lớp cần đọc</h2>
+        </div>
+        <div class="stage">
+          <div class="concept-grid">
+            <div class="concept-card row"><strong>Row</strong><span data-i18n="row.body">một đơn vị quan sát, ví dụ một learner pre/post score record</span></div>
+            <div class="concept-card column"><strong>Column</strong><span data-i18n="column.body">một biến hoặc thuộc tính, ví dụ `post_score`</span></div>
+            <div class="concept-card value"><strong>Value</strong><span data-i18n="value.body">một giá trị cụ thể trong ô, ví dụ `72`</span></div>
+            <div class="concept-card schema"><strong>Schema</strong><span data-i18n="schema.body">danh sách cột và ý nghĩa của từng cột</span></div>
+          </div>
         </div>
       </section>
+
       <section>
-        <span class="tag" data-i18n="s5.tag">Python</span>
-        <h2 data-i18n="s5.title">CSV thành list of dictionaries</h2>
-        <pre><code>rows = [
+        <div class="slide-head">
+          <span class="tag" data-i18n="s4.tag">Minh họa</span>
+          <h2 class="wide-title" data-i18n="s4.title">Row, column, value nằm ở đâu?</h2>
+        </div>
+        <div class="stage">
+          <div class="research-table" aria-label="Bảng có highlight row column value" data-i18n-aria-label="anatomy.aria">
+            <div class="row header"><span>learner_id</span><span class="focus-column">pre_score</span><span>post_score</span><span>focus</span></div>
+            <div class="row focus-row"><span>S001</span><span class="focus-value">58</span><span>72</span><span>measure_words</span></div>
+            <div class="row"><span>S002</span><span class="focus-column">62</span><span>75</span><span>measure_words</span></div>
+            <div class="row"><span>S003</span><span class="focus-column">65</span><span>78</span><span>measure_words</span></div>
+          </div>
+          <div class="chip-row" aria-label="Legend">
+            <span class="chip" data-i18n="legend.column">Cột được highlight</span>
+            <span class="chip optional" data-i18n="legend.value">Một value trong ô</span>
+            <span class="chip" data-i18n="legend.row">Dòng xanh là một observation</span>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="slide-head">
+          <span class="tag" data-i18n="s5.tag">Track examples</span>
+          <h2 class="wide-title" data-i18n="s5.title">Mỗi track có một đơn vị quan sát khác nhau</h2>
+        </div>
+        <div class="stage">
+          <div class="schema-map">
+            <div class="lane-card"><div class="track">TCSOL</div><div><strong data-i18n="unit.tcsol">Bản ghi điểm trước/sau</strong><span data-i18n="out.tcsol">dẫn tới data template và source note</span></div></div>
+            <div class="lane-card"><div class="track" data-i18n="track.contrast">Đối chiếu</div><div><strong data-i18n="unit.contrast">Ví dụ ngữ pháp + ghi chú</strong><span data-i18n="out.contrast">dẫn tới contrastive example table</span></div></div>
+            <div class="lane-card"><div class="track">MTPE</div><div><strong data-i18n="unit.mtpe">Segment dịch + nhãn lỗi</strong><span data-i18n="out.mtpe">dẫn tới bảng nhãn lỗi đơn giản</span></div></div>
+            <div class="lane-card"><div class="track">Policy</div><div><strong data-i18n="unit.policy">Trích đoạn đã mã hóa</strong><span data-i18n="out.policy">dẫn tới theme table hoặc source matrix</span></div></div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="slide-head">
+          <span class="tag" data-i18n="s6.tag">Cột</span>
+          <h2 class="wide-title" data-i18n="s6.title">Cột bắt buộc khác cột tùy chọn</h2>
+        </div>
+        <div class="stage">
+          <div class="split">
+            <div class="concept-card column"><strong data-i18n="required.title">Required</strong><span data-i18n="required.body">thiếu cột này thì không trả lời được câu hỏi</span><div class="chip-row"><span class="chip">doc_id</span><span class="chip">excerpt</span><span class="chip">theme_code</span></div></div>
+            <div class="concept-card value"><strong data-i18n="optional.title">Optional</strong><span data-i18n="optional.body">hữu ích, nhưng có thể thêm sau</span><div class="chip-row"><span class="chip optional">coding_note</span><span class="chip optional">policy_level</span></div></div>
+            <div class="concept-card schema"><strong data-i18n="privacy.title">Privacy</strong><span data-i18n="privacy.body">cột có thể làm lộ danh tính phải được tránh hoặc anonymize</span><div class="chip-row"><span class="chip optional">real_name</span><span class="chip optional">email</span></div></div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="slide-head">
+          <span class="tag" data-i18n="s7.tag">Python</span>
+          <h2 class="wide-title" data-i18n="s7.title">CSV thành list of dictionaries</h2>
+          <p class="lead" data-i18n="s7.body">Tuần này bạn đọc output, chưa cần tự viết toàn bộ code đọc file.</p>
+        </div>
+        <div class="stage">
+          <div class="code-card">
+            <pre><code>rows = [
   {"track": "TCSOL", "data_unit": "..."},
   {"track": "MTPE", "data_unit": "..."}
 ]</code></pre>
-        <p data-i18n="s5.body">Tuần này bạn đọc output, chưa cần tự viết toàn bộ code đọc file.</p>
-      </section>
-      <section>
-        <span class="tag" data-i18n="s6.tag">Cột</span>
-        <h2 data-i18n="s6.title">Cột bắt buộc và cột tùy chọn</h2>
-        <div class="concept-grid">
-          <div class="card"><strong data-i18n="required.title">Required</strong><p data-i18n="required.body">thiếu cột này thì không trả lời được câu hỏi</p></div>
-          <div class="card"><strong data-i18n="optional.title">Optional</strong><p data-i18n="optional.body">hữu ích nhưng có thể thêm sau</p></div>
-          <div class="card"><strong data-i18n="privacy.title">Privacy</strong><p data-i18n="privacy.body">cột có thể làm lộ danh tính phải được tránh hoặc anonymize</p></div>
+          </div>
         </div>
       </section>
+
       <section>
-        <span class="tag" data-i18n="s7.tag">Demo</span>
-        <h2 data-i18n="s7.title">Mở schema planner</h2>
-        <p><a href="interactive_demo.html">interactive_demo.html</a></p>
-        <p data-i18n="s7.body">Bạn chỉ cần chọn track và đọc schema. HTML/JavaScript là phần giảng viên chuẩn bị.</p>
+        <div class="slide-head">
+          <span class="tag" data-i18n="s8.tag">Writing</span>
+          <h2 class="wide-title" data-i18n="s8.title">Data description cho paper</h2>
+        </div>
+        <div class="stage">
+          <div class="paper-card">
+            <blockquote data-i18n="sentence.frame">The dataset is organized at the level of [unit of observation]. Each row contains [required columns], which allows the study to [paper purpose].</blockquote>
+          </div>
+        </div>
       </section>
+
       <section>
-        <span class="tag" data-i18n="s8.tag">Writing</span>
-        <h2 data-i18n="s8.title">Data description cho paper</h2>
-        <blockquote data-i18n="sentence.frame">The dataset is organized at the level of [unit of observation]. Each row contains [required columns], which allows the study to [paper purpose].</blockquote>
+        <div class="slide-head">
+          <span class="tag" data-i18n="s9.tag">Thực hành</span>
+          <h2 class="wide-title" data-i18n="s9.title">Hôm nay chỉ cần làm bốn việc</h2>
+        </div>
+        <div class="stage">
+          <div class="checklist">
+            <div class="check-item"><b>1</b><span data-i18n="submit.1">chạy notebook từ đầu đến cuối</span></div>
+            <div class="check-item"><b>2</b><span data-i18n="submit.2">chọn một track và row unit</span></div>
+            <div class="check-item"><b>3</b><span data-i18n="submit.3">xuất table plan CSV</span></div>
+            <div class="check-item"><b>4</b><span data-i18n="submit.4">viết data description 120-160 từ</span></div>
+          </div>
+        </div>
       </section>
+
       <section>
-        <span class="tag" data-i18n="s9.tag">Bài nộp</span>
-        <h2 data-i18n="s9.title">Sản phẩm Week 02</h2>
-        <ul>
-          <li data-i18n="submit.1">notebook chạy được</li>
-          <li data-i18n="submit.2">table plan CSV</li>
-          <li data-i18n="submit.3">data description 120-160 từ</li>
-          <li data-i18n="submit.4">source/privacy note</li>
-        </ul>
-        <div class="slide-cta-row" aria-label="Đi tiếp sau slides" data-i18n-aria-label="cta.aria">
-          <a class="slide-cta primary" href="live_coding.html" data-i18n="cta.notebook">Xem notebook</a>
-          <a class="slide-cta" href="interactive_demo.html" data-i18n="cta.demo">Mở demo</a>
-          <a class="slide-cta" href="./" data-i18n="cta.week">Về Tuần 02</a>
-          <a class="slide-cta" href="../../" data-i18n="cta.home">Về trang chủ</a>
+        <div class="slide-head">
+          <span class="tag" data-i18n="s10.tag">Đi tiếp</span>
+          <h2 class="wide-title" data-i18n="s10.title">Mở notebook và schema planner</h2>
+          <p class="lead" data-i18n="s10.body">HTML/JavaScript là phần giảng viên chuẩn bị; người học chỉ cần chọn track, đọc schema và viết mô tả dữ liệu.</p>
+        </div>
+        <div class="stage">
+          <div class="slide-cta-row" aria-label="Đi tiếp sau slides" data-i18n-aria-label="cta.aria">
+            <a class="slide-cta primary" href="live_coding.html" data-i18n="cta.notebook">Xem notebook</a>
+            <a class="slide-cta" href="interactive_demo.html" data-i18n="cta.demo">Mở demo</a>
+            <a class="slide-cta" href="./" data-i18n="cta.week">Về Tuần 02</a>
+            <a class="slide-cta" href="../../" data-i18n="cta.home">Về trang chủ</a>
+          </div>
         </div>
       </section>
     </div>
   </main>
+
   <script src="../../assets/js/bilingual.js"></script>
   <script>
     const SLIDE_I18N = {
       vi: {
-        "meta.title":"Tuần 02: Dữ liệu nghiên cứu dưới dạng bảng","nav.language":"Ngôn ngữ / Language","nav.home":"Trang chủ","nav.week":"Tuần 02","nav.course.aria":"Điều hướng khóa học","nav.slides.aria":"Điều hướng slides","nav.previous":"Trước","nav.next":"Tiếp","nav.jump.aria":"Đi tới slide","nav.jump.label":"Trang","nav.jump.input":"Số trang","nav.jump.go":"Đi",
-        "s1.tag":"Tuần 02","s1.title":"Dữ liệu nghiên cứu dưới dạng bảng","s1.body":"Từ câu hỏi nhỏ đến row, column, schema và data description.","s2.tag":"Thông điệp chính","s2.title":"Bảng dữ liệu là một quyết định phương pháp","flow.aria":"Luồng thiết kế dữ liệu","flow.q":"Câu hỏi","flow.row":"Một dòng","flow.cols":"Cột","flow.source":"Nguồn","flow.paper":"Paper","s3.tag":"Khái niệm","s3.title":"Row, column, value, schema","row.body":"một đơn vị quan sát","column.body":"một biến hoặc thuộc tính","schema.body":"danh sách cột và ý nghĩa","s4.tag":"Track examples","s4.title":"Một dòng khác nhau theo track","units.aria":"Ví dụ đơn vị quan sát","table.unit":"Một dòng là","table.output":"Output","unit.tcsol":"bản ghi điểm trước/sau","out.tcsol":"data template","track.contrast":"Đối chiếu","unit.contrast":"ví dụ ngữ pháp + ghi chú","out.contrast":"bảng ví dụ","unit.mtpe":"segment dịch + nhãn lỗi","out.mtpe":"bảng nhãn lỗi","unit.policy":"trích đoạn đã mã hóa","out.policy":"bảng chủ đề","s5.tag":"Python","s5.title":"CSV thành list of dictionaries","s5.body":"Tuần này bạn đọc output, chưa cần tự viết toàn bộ code đọc file.","s6.tag":"Cột","s6.title":"Cột bắt buộc và cột tùy chọn","required.title":"Required","required.body":"thiếu cột này thì không trả lời được câu hỏi","optional.title":"Optional","optional.body":"hữu ích nhưng có thể thêm sau","privacy.title":"Privacy","privacy.body":"cột có thể làm lộ danh tính phải được tránh hoặc anonymize","s7.tag":"Demo","s7.title":"Mở schema planner","s7.body":"Bạn chỉ cần chọn track và đọc schema. HTML/JavaScript là phần giảng viên chuẩn bị.","s8.tag":"Writing","s8.title":"Data description cho paper","sentence.frame":"The dataset is organized at the level of [unit of observation]. Each row contains [required columns], which allows the study to [paper purpose].","s9.tag":"Bài nộp","s9.title":"Sản phẩm Week 02","submit.1":"notebook chạy được","submit.2":"table plan CSV","submit.3":"data description 120-160 từ","submit.4":"source/privacy note","cta.aria":"Đi tiếp sau slides","cta.notebook":"Xem notebook","cta.demo":"Mở demo","cta.week":"Về Tuần 02","cta.home":"Về trang chủ"
+        "meta.title": "Tuần 02: Dữ liệu nghiên cứu dưới dạng bảng",
+        "nav.language": "Ngôn ngữ / Language",
+        "nav.home": "Trang chủ",
+        "nav.week": "Tuần 02",
+        "nav.course.aria": "Điều hướng khóa học",
+        "nav.slides.aria": "Điều hướng slides",
+        "nav.previous": "Trước",
+        "nav.next": "Tiếp",
+        "nav.jump.aria": "Đi tới slide",
+        "nav.jump.label": "Trang",
+        "nav.jump.input": "Số trang",
+        "nav.jump.go": "Đi",
+        "s1.tag": "Tuần 02",
+        "s1.title": "Dữ liệu nghiên cứu dưới dạng bảng",
+        "s1.body": "Từ câu hỏi nhỏ đến row, column, schema và đoạn mô tả dữ liệu cho paper.",
+        "hero.table.aria": "Bảng dữ liệu minh họa",
+        "s2.tag": "Thông điệp chính",
+        "s2.title": "Bảng dữ liệu là một quyết định phương pháp",
+        "s2.body": "Nếu row và column không rõ, Python vẫn có thể chạy nhưng paper sẽ không có bằng chứng tốt.",
+        "flow.aria": "Luồng thiết kế dữ liệu",
+        "flow.q": "Câu hỏi",
+        "flow.q.body": "muốn trả lời điều gì?",
+        "flow.row": "Một dòng",
+        "flow.row.body": "đơn vị quan sát là gì?",
+        "flow.cols": "Cột",
+        "flow.cols.body": "cần thông tin nào?",
+        "flow.source": "Nguồn",
+        "flow.source.body": "lấy từ đâu, ngày nào?",
+        "flow.paper": "Paper",
+        "flow.paper.body": "output nào sẽ trích dẫn?",
+        "s3.tag": "Khái niệm",
+        "s3.title": "Một bảng có bốn lớp cần đọc",
+        "row.body": "một đơn vị quan sát, ví dụ một learner pre/post score record",
+        "column.body": "một biến hoặc thuộc tính, ví dụ `post_score`",
+        "value.body": "một giá trị cụ thể trong ô, ví dụ `72`",
+        "schema.body": "danh sách cột và ý nghĩa của từng cột",
+        "s4.tag": "Minh họa",
+        "s4.title": "Row, column, value nằm ở đâu?",
+        "anatomy.aria": "Bảng có highlight row column value",
+        "legend.column": "Cột được highlight",
+        "legend.value": "Một value trong ô",
+        "legend.row": "Dòng xanh là một observation",
+        "s5.tag": "Track examples",
+        "s5.title": "Mỗi track có một đơn vị quan sát khác nhau",
+        "unit.tcsol": "Bản ghi điểm trước/sau",
+        "out.tcsol": "dẫn tới data template và source note",
+        "track.contrast": "Đối chiếu",
+        "unit.contrast": "Ví dụ ngữ pháp + ghi chú",
+        "out.contrast": "dẫn tới contrastive example table",
+        "unit.mtpe": "Segment dịch + nhãn lỗi",
+        "out.mtpe": "dẫn tới bảng nhãn lỗi đơn giản",
+        "unit.policy": "Trích đoạn đã mã hóa",
+        "out.policy": "dẫn tới theme table hoặc source matrix",
+        "s6.tag": "Cột",
+        "s6.title": "Cột bắt buộc khác cột tùy chọn",
+        "required.title": "Required",
+        "required.body": "thiếu cột này thì không trả lời được câu hỏi",
+        "optional.title": "Optional",
+        "optional.body": "hữu ích, nhưng có thể thêm sau",
+        "privacy.title": "Privacy",
+        "privacy.body": "cột có thể làm lộ danh tính phải được tránh hoặc anonymize",
+        "s7.tag": "Python",
+        "s7.title": "CSV thành list of dictionaries",
+        "s7.body": "Tuần này bạn đọc output, chưa cần tự viết toàn bộ code đọc file.",
+        "s8.tag": "Writing",
+        "s8.title": "Data description cho paper",
+        "sentence.frame": "The dataset is organized at the level of [unit of observation]. Each row contains [required columns], which allows the study to [paper purpose].",
+        "s9.tag": "Thực hành",
+        "s9.title": "Hôm nay chỉ cần làm bốn việc",
+        "submit.1": "chạy notebook từ đầu đến cuối",
+        "submit.2": "chọn một track và row unit",
+        "submit.3": "xuất table plan CSV",
+        "submit.4": "viết data description 120-160 từ",
+        "s10.tag": "Đi tiếp",
+        "s10.title": "Mở notebook và schema planner",
+        "s10.body": "HTML/JavaScript là phần giảng viên chuẩn bị; người học chỉ cần chọn track, đọc schema và viết mô tả dữ liệu.",
+        "cta.aria": "Đi tiếp sau slides",
+        "cta.notebook": "Xem notebook",
+        "cta.demo": "Mở demo",
+        "cta.week": "Về Tuần 02",
+        "cta.home": "Về trang chủ"
       },
       en: {
-        "meta.title":"Week 02: Research data as tables","nav.language":"Language","nav.home":"Home","nav.week":"Week 02","nav.course.aria":"Course navigation","nav.slides.aria":"Slide navigation","nav.previous":"Previous","nav.next":"Next","nav.jump.aria":"Go to slide","nav.jump.label":"Slide","nav.jump.input":"Slide number","nav.jump.go":"Go",
-        "s1.tag":"Week 02","s1.title":"Research data as tables","s1.body":"From small question to row, column, schema, and data description.","s2.tag":"Core message","s2.title":"A data table is a methods decision","flow.aria":"Data design flow","flow.q":"Question","flow.row":"One row","flow.cols":"Columns","flow.source":"Source","flow.paper":"Paper","s3.tag":"Concepts","s3.title":"Row, column, value, schema","row.body":"one unit of observation","column.body":"one variable or attribute","schema.body":"the list of columns and meanings","s4.tag":"Track examples","s4.title":"One row differs by track","units.aria":"Unit of observation examples","table.unit":"One row means","table.output":"Output","unit.tcsol":"pre/post score record","out.tcsol":"data template","track.contrast":"Contrastive","unit.contrast":"grammar example + teaching note","out.contrast":"example table","unit.mtpe":"translation segment + error label","out.mtpe":"error-label table","unit.policy":"coded excerpt","out.policy":"theme table","s5.tag":"Python","s5.title":"CSV to list of dictionaries","s5.body":"This week you read output; you do not need to write the whole file-reading script yet.","s6.tag":"Columns","s6.title":"Required and optional columns","required.title":"Required","required.body":"without this column, the question cannot be answered","optional.title":"Optional","optional.body":"useful but can be added later","privacy.title":"Privacy","privacy.body":"columns that could identify people must be avoided or anonymized","s7.tag":"Demo","s7.title":"Open the schema planner","s7.body":"You only choose a track and read the schema. HTML/JavaScript is prepared by the instructor.","s8.tag":"Writing","s8.title":"Data description for a paper","sentence.frame":"The dataset is organized at the level of [unit of observation]. Each row contains [required columns], which allows the study to [paper purpose].","s9.tag":"Assignment","s9.title":"Week 02 products","submit.1":"runnable notebook","submit.2":"table plan CSV","submit.3":"120-160 word data description","submit.4":"source/privacy note","cta.aria":"Next steps after slides","cta.notebook":"View notebook","cta.demo":"Open demo","cta.week":"Back to Week 02","cta.home":"Back to Home"
+        "meta.title": "Week 02: Research data as tables",
+        "nav.language": "Language",
+        "nav.home": "Home",
+        "nav.week": "Week 02",
+        "nav.course.aria": "Course navigation",
+        "nav.slides.aria": "Slide navigation",
+        "nav.previous": "Previous",
+        "nav.next": "Next",
+        "nav.jump.aria": "Go to slide",
+        "nav.jump.label": "Slide",
+        "nav.jump.input": "Slide number",
+        "nav.jump.go": "Go",
+        "s1.tag": "Week 02",
+        "s1.title": "Research data as tables",
+        "s1.body": "From small question to row, column, schema, and a paper-facing data description.",
+        "hero.table.aria": "Illustrative data table",
+        "s2.tag": "Core message",
+        "s2.title": "A data table is a methods decision",
+        "s2.body": "If rows and columns are unclear, Python may still run, but the paper will not have good evidence.",
+        "flow.aria": "Data design flow",
+        "flow.q": "Question",
+        "flow.q.body": "what do we need to answer?",
+        "flow.row": "One row",
+        "flow.row.body": "what is the unit of observation?",
+        "flow.cols": "Columns",
+        "flow.cols.body": "what information is needed?",
+        "flow.source": "Source",
+        "flow.source.body": "where and when?",
+        "flow.paper": "Paper",
+        "flow.paper.body": "which output will be cited?",
+        "s3.tag": "Concepts",
+        "s3.title": "A table has four layers to read",
+        "row.body": "one unit of observation, for example one learner pre/post score record",
+        "column.body": "one variable or attribute, for example `post_score`",
+        "value.body": "one specific cell value, for example `72`",
+        "schema.body": "the list of columns and the meaning of each column",
+        "s4.tag": "Visual example",
+        "s4.title": "Where are row, column, and value?",
+        "anatomy.aria": "Table highlighting row column value",
+        "legend.column": "Highlighted column",
+        "legend.value": "One cell value",
+        "legend.row": "Green row is one observation",
+        "s5.tag": "Track examples",
+        "s5.title": "Each track has a different unit of observation",
+        "unit.tcsol": "Pre/post score record",
+        "out.tcsol": "leads to a data template and source note",
+        "track.contrast": "Contrastive",
+        "unit.contrast": "Grammar example + teaching note",
+        "out.contrast": "leads to a contrastive example table",
+        "unit.mtpe": "Translation segment + error label",
+        "out.mtpe": "leads to a simplified error-label table",
+        "unit.policy": "Coded excerpt",
+        "out.policy": "leads to a theme table or source matrix",
+        "s6.tag": "Columns",
+        "s6.title": "Required columns differ from optional columns",
+        "required.title": "Required",
+        "required.body": "without this column, the question cannot be answered",
+        "optional.title": "Optional",
+        "optional.body": "useful, but can be added later",
+        "privacy.title": "Privacy",
+        "privacy.body": "columns that could identify people must be avoided or anonymized",
+        "s7.tag": "Python",
+        "s7.title": "CSV to list of dictionaries",
+        "s7.body": "This week you read output; you do not need to write the whole file-reading script yet.",
+        "s8.tag": "Writing",
+        "s8.title": "Data description for a paper",
+        "sentence.frame": "The dataset is organized at the level of [unit of observation]. Each row contains [required columns], which allows the study to [paper purpose].",
+        "s9.tag": "Practice",
+        "s9.title": "Today only has four tasks",
+        "submit.1": "run the notebook from top to bottom",
+        "submit.2": "choose one track and row unit",
+        "submit.3": "export the table plan CSV",
+        "submit.4": "write a 120-160 word data description",
+        "s10.tag": "Next",
+        "s10.title": "Open the notebook and schema planner",
+        "s10.body": "HTML/JavaScript is prepared by the instructor; the learner only chooses a track, reads the schema, and writes the data description.",
+        "cta.aria": "Next steps after slides",
+        "cta.notebook": "View notebook",
+        "cta.demo": "Open demo",
+        "cta.week": "Back to Week 02",
+        "cta.home": "Back to Home"
       }
     };
+
     function initFallbackSlides() {
       const sections = Array.from(document.querySelectorAll(".slides > section"));
       let current = 0;
@@ -151,12 +831,23 @@
       nav.className = "fallback-nav";
       nav.setAttribute("aria-label", "Điều hướng slides");
       nav.setAttribute("data-i18n-aria-label", "nav.slides.aria");
-      nav.innerHTML = `<button type="button" data-dir="-1" data-i18n="nav.previous">Trước</button><span class="slide-counter"></span><form class="slide-jump" aria-label="Đi tới slide" data-i18n-aria-label="nav.jump.aria"><label for="slide-jump-input" data-i18n="nav.jump.label">Trang</label><input id="slide-jump-input" type="number" min="1" inputmode="numeric" aria-label="Số trang" data-i18n-aria-label="nav.jump.input"><button class="jump-button" type="submit" data-i18n="nav.jump.go">Đi</button></form><button type="button" data-dir="1" data-i18n="nav.next">Tiếp</button><a class="nav-link" href="./" data-i18n="nav.week">Tuần 02</a>`;
+      nav.innerHTML = `
+        <button type="button" data-dir="-1" data-i18n="nav.previous">Trước</button>
+        <span class="slide-counter"></span>
+        <form class="slide-jump" aria-label="Đi tới slide" data-i18n-aria-label="nav.jump.aria">
+          <label for="slide-jump-input" data-i18n="nav.jump.label">Trang</label>
+          <input id="slide-jump-input" type="number" min="1" inputmode="numeric" aria-label="Số trang" data-i18n-aria-label="nav.jump.input">
+          <button class="jump-button" type="submit" data-i18n="nav.jump.go">Đi</button>
+        </form>
+        <button type="button" data-dir="1" data-i18n="nav.next">Tiếp</button>
+        <a class="nav-link" href="./" data-i18n="nav.week">Tuần 02</a>
+      `;
       document.body.appendChild(nav);
       const label = nav.querySelector(".slide-counter");
       const input = nav.querySelector("#slide-jump-input");
       const prev = nav.querySelector('[data-dir="-1"]');
       const next = nav.querySelector('[data-dir="1"]');
+
       function show(index) {
         current = Math.max(0, Math.min(sections.length - 1, index));
         sections.forEach((section, idx) => section.classList.toggle("active", idx === current));
@@ -167,19 +858,29 @@
         next.disabled = current === sections.length - 1;
         location.hash = "slide-" + (current + 1);
       }
-      nav.addEventListener("click", event => {
+
+      nav.addEventListener("click", (event) => {
         const button = event.target.closest("button[data-dir]");
         if (!button) return;
         show(current + Number(button.dataset.dir));
       });
-      nav.querySelector(".slide-jump").addEventListener("submit", event => {
+
+      nav.querySelector(".slide-jump").addEventListener("submit", (event) => {
         event.preventDefault();
         const target = Number(input.value);
         if (Number.isFinite(target)) show(target - 1);
       });
+
+      window.addEventListener("keydown", (event) => {
+        if (event.target && ["INPUT", "TEXTAREA"].includes(event.target.tagName)) return;
+        if (event.key === "ArrowRight" || event.key === " ") show(current + 1);
+        if (event.key === "ArrowLeft") show(current - 1);
+      });
+
       const hashMatch = location.hash.match(/slide-(\d+)/);
       show(hashMatch ? Number(hashMatch[1]) - 1 : 0);
     }
+
     initFallbackSlides();
     window.Bilingual.init({ translations: SLIDE_I18N, defaultLang: "vi" });
   </script>

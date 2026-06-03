@@ -5,9 +5,9 @@ format: html
 
 Source note: learner-facing slides are authored directly in `slides.html` so the deck can use the shared interactive slide controller, bilingual toggle, quick overview, and GitHub Pages-safe navigation. This `.qmd` records the canonical slide plan.
 
-1. TCSOL short-course research.
+1. TCSOL short-course research with one shared target structure.
 2. Research loop.
-3. Small research question.
+3. Small descriptive gain research question.
 4. Specific target structure.
 5. Rubric as task observation.
 6. Variable map.

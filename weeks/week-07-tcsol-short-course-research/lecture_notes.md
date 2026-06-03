@@ -14,15 +14,19 @@ By the end of Week 07, the learner should be able to:
 
 Short-term teaching research often fails because the activity is interesting but the evidence is vague. Week 07 teaches the learner to design observable evidence before analyzing it. A paper-ready Methods section needs a clear unit of analysis, task, rubric, and limitation.
 
+This week uses one shared target structure: result complements in service dialogues. Concrete examples include `找到了`, `听懂了`, and `写完了`. A learner task might ask the student to role-play a service encounter and say whether an action has reached its result.
+
 ## Concept Ladder
 
 | Concept | Plain Meaning | Methods Use |
 |---|---|---|
-| `target_structure` | language feature being taught | defines the teaching focus |
+| `target_structure` | language feature being taught, e.g. `找到了` | defines the teaching focus |
 | learner task | what the learner does | creates observable evidence |
 | rubric | consistent scoring guide | makes evidence comparable |
 | `activity_focus` | teaching activity type | grouping variable |
 | `main_difficulty` | coded learner problem | qualitative teaching insight |
+
+Important distinction: the unit of analysis is one row, meaning one learner task record. `learner_id` is only the identifier attached to that row.
 
 ## Main Workflow
 
@@ -44,6 +48,28 @@ A beginner-friendly rubric should be:
 - task-specific: it matches the target structure and activity;
 - not moralizing: avoid vague labels like "weak student" or "good student".
 
+Model descriptor for `accuracy` in a result-complement service task:
+
+| Score | Descriptor |
+|---:|---|
+| 1 | Learner rarely uses a result complement in the response. |
+| 3 | Learner uses a result complement such as `找到了`, but sometimes puts it in the wrong place or omits `了`. |
+| 5 | Learner uses result complements accurately and naturally across most service-dialogue turns. |
+
+`confidence` must be defined before scoring: it can be teacher-observed confidence during the task, or learner self-rating if the class collected self-report data.
+
+## Gain Mini Example
+
+Before reading the code, use the arithmetic:
+
+```text
+accuracy_pre = 2
+accuracy_post = 4
+accuracy_gain = 4 - 2 = 2
+```
+
+`total_gain` is the average post score across the five criteria minus the average pre score across the same five criteria.
+
 ## Reading The Week 07 Tables
 
 Start with:
@@ -55,6 +81,8 @@ Start with:
 5. Which difficulty appears most often?
 
 Do not write "feedback cycle is best" from this small synthetic dataset. Write "feedback cycle showed the highest descriptive rubric gain in the usable synthetic records."
+
+Exclusion rule: use rows where `completed_task == True` and `usable_task == True`. In the sample data, `L010` and `L019` are excluded because their post-task rubric scores are incomplete.
 
 ## Source Alignment
 

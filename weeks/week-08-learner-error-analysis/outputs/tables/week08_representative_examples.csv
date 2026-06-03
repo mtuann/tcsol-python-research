@@ -1,0 +1,7 @@
+error_category,target_structure,prompt_vi,learner_answer,expected_answer,severity,correction_note
+measure_word,shopping measure words,Nói bằng tiếng Trung: two cups of tea.,两茶。,两杯茶。,3.0,"Teach object-specific classifier chunks such as 一杯茶, 两本书, 三张票."
+measure_word,time-place word order,Nói bằng tiếng Trung: I study Chinese at school.,两个票。,我在学校学习汉语。,3.0,"Teach object-specific classifier chunks such as yi bei cha, liang ben shu, san zhang piao."
+tone_marking,tone-marked pinyin check,Viết pinyin có thanh điệu cho 马.,mà,mǎ,3.0,Use minimal tone pairs and require tone marks in written rehearsal.
+tone_marking,tone-marked pinyin check,Viết pinyin có thanh điệu cho 马.,mā,mǎ,3.0,Use minimal tone pairs and require tone marks in written rehearsal.
+word_order,result complements in service dialogues,Nói bằng tiếng Trung: I found the ticket.,我学习汉语在学校。,我找到票了。,3.0,Practice subject + time/place + verb phrase frames before open production.
+word_order,time-place word order,Nói bằng tiếng Trung: I study Chinese at school.,我学习在学校汉语。,我在学校学习汉语。,3.0,Practice subject + time/place + verb phrase frames before open production.

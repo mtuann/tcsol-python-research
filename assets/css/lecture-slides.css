@@ -194,6 +194,10 @@ h2 {
   grid-template-columns: 0.9fr 1fr 1fr 1.1fr;
 }
 
+.research-table .row.four {
+  grid-template-columns: 1fr 0.55fr 0.85fr 1.2fr;
+}
+
 .research-table .row.three {
   grid-template-columns: 0.9fr 1.35fr 1fr;
 }
@@ -487,6 +491,10 @@ h2 {
   max-width: 100%;
   object-fit: contain;
   width: 100%;
+}
+
+.slide-figure.large {
+  max-height: min(54vh, 500px);
 }
 
 .sentence-frame-card {

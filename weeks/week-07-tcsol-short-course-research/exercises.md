@@ -2,7 +2,7 @@
 
 ## A. Copy And Modify
 
-Change one right-hand display label in the notebook, for example:
+Change one right-hand display label in the notebook's `activity_display` mapping, for example:
 
 ```python
 "role_play": "Role play"
@@ -27,7 +27,7 @@ Answer in short phrases:
 
 ## C. Rubric Descriptor
 
-Choose one criterion and write a 1-5 descriptor in Vietnamese for a short-course Chinese task.
+Choose one criterion and write a 1/3/5 descriptor in Vietnamese for a short-course Chinese task. Use a concrete target such as result complements in a service dialogue: `找到了`, `听懂了`, `写完了`.
 
 ## D. Methods Draft
 
@@ -41,4 +41,9 @@ Write 120-180 words using the frame in `assignment.md`. Mark:
 
 ## E. Stretch
 
-Add one `main_difficulty` code and explain which source or teaching framework makes it meaningful.
+Add one `main_difficulty` code in a copied DataFrame, not in the raw CSV, and explain which source or teaching framework makes it meaningful.
+
+```python
+usable_stretch = usable.copy()
+usable_stretch.loc[usable_stretch["learner_id"] == "L003", "main_difficulty"] = "needs result-complement contrast"
+```

@@ -1,0 +1,6 @@
+error_category,n,mean_severity,target_count,priority_score,teaching_move
+word_order,17,1.88,4,31.96,drill subject + place/time + verb phrase frames
+measure_word,13,2.15,2,27.95,teach classifier chunks with shopping objects
+tone_marking,13,1.85,1,24.05,use minimal tone pairs and written tone-mark checks
+aspect_marker,12,1.83,2,21.96,practice 了 placement in completed-event sentences
+result_complement,11,1.91,1,21.01,contrast action vs result with short service dialogues

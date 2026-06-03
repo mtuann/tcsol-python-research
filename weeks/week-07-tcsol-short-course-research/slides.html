@@ -21,6 +21,8 @@
     <nav class="slide-exit-links" aria-label="Điều hướng khóa học" data-i18n-aria-label="nav.course.aria">
       <a class="slide-link primary" href="../../" data-i18n="nav.home">Trang chủ</a>
       <a class="slide-link" href="./" data-i18n="nav.week">Tuần 07</a>
+      <a class="slide-link" href="interactive_demo.html" data-i18n="nav.demo">Demo</a>
+      <a class="slide-link" href="live_coding.html" data-i18n="nav.notebook">Notebook</a>
       <button class="slide-link" type="button" data-toc-open data-i18n="nav.toc" data-i18n-aria-label="nav.toc.aria" aria-label="Mục lục slide">Mục lục</button>
     </nav>
     <div class="language-switcher" role="group" aria-label="Ngôn ngữ / Language" data-i18n-aria-label="nav.language">
@@ -35,14 +37,14 @@
         <div class="hero-layout">
           <div class="slide-head">
             <span class="tag" data-i18n="s1.tag">Tuần 07</span>
-            <h1 data-i18n="s1.title">TCSOL short-course research</h1>
+            <h1 data-i18n="s1.title">Nghiên cứu TCSOL khóa ngắn hạn</h1>
             <p class="lead" data-i18n="s1.body">Từ hoạt động dạy học đến rubric, dữ liệu và Methods draft.</p>
           </div>
           <div class="stage">
             <div class="concept-grid three">
               <div class="concept-card row"><strong>30</strong><span data-i18n="hero.raw">bản ghi task</span></div>
               <div class="concept-card value"><strong>28</strong><span data-i18n="hero.usable">bản ghi dùng được</span></div>
-              <div class="concept-card schema"><strong>5</strong><span data-i18n="hero.rubric">rubric criteria</span></div>
+              <div class="concept-card schema"><strong>5</strong><span data-i18n="hero.rubric">tiêu chí rubric</span></div>
             </div>
           </div>
         </div>
@@ -69,11 +71,11 @@
       <section>
         <div class="slide-head">
           <span class="tag" data-i18n="s3.tag">Câu hỏi</span>
-          <h2 class="wide-title" data-i18n="s3.title">Activity focus tạo evidence gì?</h2>
+          <h2 class="wide-title" data-i18n="s3.title">Activity focus tạo gain mô tả nào?</h2>
           <p class="lead" data-i18n="s3.body">Câu hỏi nhỏ đủ để viết Methods và chuẩn bị Results sau này.</p>
         </div>
         <div class="stage">
-          <div class="paper-card"><blockquote data-i18n="rq.text">Trong một khóa Hán ngữ ngắn hạn, activity focus nào tạo ra learner-task evidence rõ nhất cho target structure?</blockquote></div>
+          <div class="paper-card"><blockquote data-i18n="rq.text">Trong một khóa Hán ngữ ngắn hạn về result complements, activity focus nào có descriptive rubric gain cao hơn?</blockquote></div>
         </div>
       </section>
 
@@ -85,7 +87,7 @@
         <div class="stage">
           <div class="concept-grid three">
             <div class="concept-card schema"><strong data-i18n="target.bad.title">Quá rộng</strong><span data-i18n="target.bad">ngữ pháp Hán ngữ</span></div>
-            <div class="concept-card value"><strong data-i18n="target.ok.title">Tốt hơn</strong><span data-i18n="target.ok">result complements</span></div>
+            <div class="concept-card value"><strong data-i18n="target.ok.title">Tốt hơn</strong><span data-i18n-html="target.ok">result complements: <span class="inline-token">找到了</span>, <span class="inline-token">听懂了</span></span></div>
             <div class="concept-card row"><strong data-i18n="target.best.title">Paper-ready</strong><span data-i18n="target.best">result complements trong service dialogue</span></div>
           </div>
         </div>
@@ -102,6 +104,7 @@
             <div class="concept-card row"><strong data-i18n="crit.acc.title">Accuracy</strong><span data-i18n="crit.acc">cấu trúc đúng</span></div>
             <div class="concept-card column"><strong data-i18n="crit.fluency.title">Fluency</strong><span data-i18n="crit.fluency">mạch lạc vừa đủ</span></div>
             <div class="concept-card schema"><strong data-i18n="crit.strategy.title">Strategy</strong><span data-i18n="crit.strategy">hỏi lại, sửa, kéo dài tương tác</span></div>
+            <div class="concept-card value"><strong data-i18n="crit.confidence.title">Confidence</strong><span data-i18n="crit.confidence">tự tin hoặc self-rating</span></div>
           </div>
         </div>
       </section>
@@ -112,12 +115,13 @@
           <h2 class="wide-title" data-i18n="s6.title">Methods cần biết mỗi cột làm gì</h2>
         </div>
         <div class="stage">
-          <div class="research-table compact">
-            <div class="row three header"><span>column</span><span>role</span><span>use</span></div>
-            <div class="row three focus-row"><span>learner_id</span><span data-i18n="map.unit">unit id</span><span data-i18n="map.unit.use">một task record</span></div>
-            <div class="row three"><span>activity_focus</span><span data-i18n="map.group">grouping variable</span><span data-i18n="map.group.use">mô tả activity</span></div>
-            <div class="row three"><span>accuracy_post</span><span data-i18n="map.rubric">rubric variable</span><span data-i18n="map.rubric.use">score 1-5</span></div>
-            <div class="row three"><span>main_difficulty</span><span data-i18n="map.qual">qualitative code</span><span data-i18n="map.qual.use">insight dạy học</span></div>
+          <div class="research-table compact" role="table" aria-label="Variable map">
+            <div class="row three header" role="row"><span role="columnheader">column</span><span role="columnheader">role</span><span role="columnheader">use</span></div>
+            <div class="row three focus-row" role="row"><span role="cell">one row</span><span role="cell" data-i18n="map.unit">unit</span><span role="cell" data-i18n="map.unit.use">một learner task record</span></div>
+            <div class="row three" role="row"><span role="cell">learner_id</span><span role="cell" data-i18n="map.id">identifier</span><span role="cell" data-i18n="map.id.use">mã ID, không phải unit</span></div>
+            <div class="row three" role="row"><span role="cell">activity_focus</span><span role="cell" data-i18n="map.group">grouping variable</span><span role="cell" data-i18n="map.group.use">mô tả activity</span></div>
+            <div class="row three" role="row"><span role="cell">confidence_post</span><span role="cell" data-i18n="map.rubric">rubric variable</span><span role="cell" data-i18n="map.rubric.use">score 1-5</span></div>
+            <div class="row three" role="row"><span role="cell">main_difficulty</span><span role="cell" data-i18n="map.qual">qualitative code</span><span role="cell" data-i18n="map.qual.use">insight dạy học</span></div>
           </div>
         </div>
       </section>
@@ -131,6 +135,7 @@
           <div class="code-card"><pre><code>for stem, label in criteria:
     usable[f"{stem}_gain"] =
         usable[f"{stem}_post"] - usable[f"{stem}_pre"]</code></pre></div>
+          <div class="paper-card"><blockquote data-i18n="gain.example">Ví dụ không cần code: accuracy pre = 2, post = 4, vậy gain = 2.</blockquote></div>
         </div>
       </section>
 
@@ -140,11 +145,11 @@
           <h2 class="wide-title" data-i18n="s8.title">Bảng activity không phải causal ranking</h2>
         </div>
         <div class="stage">
-          <div class="research-table compact">
-            <div class="row four header"><span>activity</span><span>n</span><span>mean gain</span><span>difficulty</span></div>
-            <div class="row four focus-row"><span>Feedback cycle</span><span>10</span><span>1.78</span><span>self-correction</span></div>
-            <div class="row four"><span>Role play</span><span>9</span><span>1.36</span><span>measure word choice</span></div>
-            <div class="row four"><span>Input practice</span><span>9</span><span>1.22</span><span>meaning-form link</span></div>
+          <div class="research-table compact" role="table" aria-label="Activity summary">
+            <div class="row four header" role="row"><span role="columnheader">activity</span><span role="columnheader">n</span><span role="columnheader">mean gain</span><span role="columnheader">difficulty</span></div>
+            <div class="row four focus-row" role="row"><span role="cell">Feedback cycle</span><span role="cell">10</span><span role="cell">1.78</span><span role="cell">self-correction</span></div>
+            <div class="row four" role="row"><span role="cell">Role play</span><span role="cell">9</span><span role="cell">1.36</span><span role="cell">complement choice</span></div>
+            <div class="row four" role="row"><span role="cell">Input practice</span><span role="cell">9</span><span role="cell">1.22</span><span role="cell">meaning-form link</span></div>
           </div>
         </div>
       </section>
@@ -156,7 +161,7 @@
         </div>
         <div class="stage">
           <div class="paper-card">
-            <img class="slide-figure" src="outputs/figures/week07_total_gain_by_activity.png" alt="Total rubric gain by activity focus" data-i18n-alt="figure.activity.alt">
+            <img class="slide-figure large" src="outputs/figures/week07_total_gain_by_activity.svg" alt="Total rubric gain by activity focus" data-i18n-alt="figure.activity.alt">
           </div>
         </div>
       </section>
@@ -168,7 +173,7 @@
         </div>
         <div class="stage">
           <div class="paper-card">
-            <img class="slide-figure" src="outputs/figures/week07_rubric_gain_by_criterion.png" alt="Rubric criterion gains" data-i18n-alt="figure.criterion.alt">
+            <img class="slide-figure large" src="outputs/figures/week07_rubric_gain_by_criterion.svg" alt="Rubric criterion gains" data-i18n-alt="figure.criterion.alt">
           </div>
         </div>
       </section>
@@ -255,6 +260,8 @@
         "nav.course.aria": "Điều hướng khóa học",
         "nav.home": "Trang chủ",
         "nav.week": "Tuần 07",
+        "nav.demo": "Demo",
+        "nav.notebook": "Notebook",
         "nav.toc": "Mục lục",
         "nav.toc.aria": "Mục lục slide",
         "nav.language": "Ngôn ngữ / Language",
@@ -269,11 +276,11 @@
         "nav.toc.hint": "Chọn phần muốn xem nhanh.",
         "nav.toc.close": "Đóng",
         "s1.tag": "Tuần 07",
-        "s1.title": "TCSOL short-course research",
+        "s1.title": "Nghiên cứu TCSOL khóa ngắn hạn",
         "s1.body": "Từ hoạt động dạy học đến rubric, dữ liệu và Methods draft.",
         "hero.raw": "bản ghi task",
         "hero.usable": "bản ghi dùng được",
-        "hero.rubric": "rubric criteria",
+        "hero.rubric": "tiêu chí rubric",
         "s2.tag": "Research loop",
         "s2.title": "Không bắt đầu bằng chart",
         "s2.body": "Bắt đầu bằng evidence design: learner làm gì, ta quan sát gì, và ta viết Methods thế nào.",
@@ -290,15 +297,15 @@
         "loop.methods.title": "Methods",
         "loop.methods": "đoạn viết",
         "s3.tag": "Câu hỏi",
-        "s3.title": "Activity focus tạo evidence gì?",
+        "s3.title": "Activity focus tạo gain mô tả nào?",
         "s3.body": "Câu hỏi nhỏ đủ để viết Methods và chuẩn bị Results sau này.",
-        "rq.text": "Trong một khóa Hán ngữ ngắn hạn, activity focus nào tạo ra learner-task evidence rõ nhất cho target structure?",
+        "rq.text": "Trong một khóa Hán ngữ ngắn hạn về result complements, activity focus nào có descriptive rubric gain cao hơn?",
         "s4.tag": "Target",
         "s4.title": "Target structure phải đủ cụ thể",
         "target.bad.title": "Quá rộng",
         "target.bad": "ngữ pháp Hán ngữ",
         "target.ok.title": "Tốt hơn",
-        "target.ok": "result complements",
+        "target.ok": "result complements: <span class=\"inline-token\">找到了</span>, <span class=\"inline-token\">听懂了</span>",
         "target.best.title": "Paper-ready",
         "target.best": "result complements trong service dialogue",
         "s5.tag": "Rubric",
@@ -311,10 +318,14 @@
         "crit.fluency": "mạch lạc vừa đủ",
         "crit.strategy.title": "Strategy",
         "crit.strategy": "hỏi lại, sửa, kéo dài tương tác",
+        "crit.confidence.title": "Confidence",
+        "crit.confidence": "tự tin hoặc self-rating",
         "s6.tag": "Variable map",
         "s6.title": "Methods cần biết mỗi cột làm gì",
-        "map.unit": "unit id",
-        "map.unit.use": "một task record",
+        "map.unit": "unit",
+        "map.unit.use": "một learner task record",
+        "map.id": "identifier",
+        "map.id.use": "mã ID, không phải unit",
         "map.group": "grouping variable",
         "map.group.use": "mô tả activity",
         "map.rubric": "rubric variable",
@@ -323,6 +334,7 @@
         "map.qual.use": "insight dạy học",
         "s7.tag": "Code",
         "s7.title": "Gain = post score minus pre score",
+        "gain.example": "Ví dụ không cần code: accuracy pre = 2, post = 4, vậy gain = 2.",
         "s8.tag": "Summary",
         "s8.title": "Bảng activity không phải causal ranking",
         "s9.tag": "Figure",
@@ -365,6 +377,8 @@
         "nav.course.aria": "Course navigation",
         "nav.home": "Home",
         "nav.week": "Week 07",
+        "nav.demo": "Demo",
+        "nav.notebook": "Notebook",
         "nav.toc": "Overview",
         "nav.toc.aria": "Slide overview",
         "nav.language": "Language",
@@ -400,15 +414,15 @@
         "loop.methods.title": "Methods",
         "loop.methods": "paper paragraph",
         "s3.tag": "Question",
-        "s3.title": "What evidence does activity focus create?",
+        "s3.title": "What descriptive gain does activity focus show?",
         "s3.body": "A small question is enough to write Methods and prepare future Results.",
-        "rq.text": "In a short-term Chinese course, which activity focus produces clearer learner-task evidence for the target structure?",
+        "rq.text": "In a short-term Chinese course on result complements, which activity focus shows higher descriptive rubric gain?",
         "s4.tag": "Target",
         "s4.title": "Target structure must be specific",
         "target.bad.title": "Too broad",
         "target.bad": "Chinese grammar",
         "target.ok.title": "Better",
-        "target.ok": "result complements",
+        "target.ok": "result complements: <span class=\"inline-token\">找到了</span>, <span class=\"inline-token\">听懂了</span>",
         "target.best.title": "Paper-ready",
         "target.best": "result complements in service dialogue",
         "s5.tag": "Rubric",
@@ -421,10 +435,14 @@
         "crit.fluency": "sufficient flow",
         "crit.strategy.title": "Strategy",
         "crit.strategy": "ask, repair, extend interaction",
+        "crit.confidence.title": "Confidence",
+        "crit.confidence": "confidence or self-rating",
         "s6.tag": "Variable map",
         "s6.title": "Methods needs to know what each column does",
-        "map.unit": "unit id",
-        "map.unit.use": "one task record",
+        "map.unit": "unit",
+        "map.unit.use": "one learner task record",
+        "map.id": "identifier",
+        "map.id.use": "ID, not the unit",
         "map.group": "grouping variable",
         "map.group.use": "describes activity",
         "map.rubric": "rubric variable",
@@ -433,6 +451,7 @@
         "map.qual.use": "teaching insight",
         "s7.tag": "Code",
         "s7.title": "Gain = post score minus pre score",
+        "gain.example": "No-code example: accuracy pre = 2, post = 4, so gain = 2.",
         "s8.tag": "Summary",
         "s8.title": "The activity table is not a causal ranking",
         "s9.tag": "Figure",

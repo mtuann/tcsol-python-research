@@ -1,31 +1,31 @@
 learner_id,class_group,activity_focus,activity_label,target_structure,attendance_hours,task_completion_pre,task_completion_post,accuracy_pre,accuracy_post,fluency_pre,fluency_post,interaction_strategy_pre,interaction_strategy_post,confidence_pre,confidence_post,main_difficulty,teacher_feedback,completed_task,usable_task
-L001,A,input_practice,Input practice,result complements,5.5,2,3,2,3,1,2,1,2,3,4,meaning-form link,needs clearer example contrast,True,True
-L002,A,input_practice,Input practice,result complements,6.0,2,3,3,4,2,3,1,2,2,3,word order,recognizes pattern after model input,True,True
-L003,A,input_practice,Input practice,result complements,6.5,2,3,2,3,2,3,2,3,2,3,complement choice,needs slower teacher check,True,True
-L004,A,input_practice,Input practice,result complements,7.0,3,4,4,5,2,3,3,4,3,4,tone fluency,needs clearer example contrast,True,True
-L005,A,input_practice,Input practice,result complements,5.5,2,4,2,4,2,4,1,3,2,4,meaning-form link,recognizes pattern after model input,True,True
-L006,A,input_practice,Input practice,result complements,6.0,3,4,4,5,3,4,2,3,4,5,meaning-form link,needs slower teacher check,True,True
-L007,A,input_practice,Input practice,result complements,6.5,2,3,2,3,1,2,2,3,2,3,word order,needs clearer example contrast,True,True
-L008,A,input_practice,Input practice,result complements,7.0,2,4,3,5,2,4,2,4,2,4,complement choice,recognizes pattern after model input,True,True
-L009,A,input_practice,Input practice,result complements,5.5,3,4,3,4,3,4,2,3,3,4,tone fluency,needs slower teacher check,True,True
-L010,A,input_practice,Input practice,result complements,6.0,2,,3,,1,,1,,2,,meaning-form link,needs clearer example contrast,False,False
-L011,A,role_play,Role play,shopping measure words,5.5,2,3,2,3,1,2,1,2,3,4,measure word choice,can complete exchange with prompts,True,True
-L012,A,role_play,Role play,shopping measure words,6.0,3,5,4,5,3,5,2,4,3,5,response speed,needs measure word support,True,True
-L013,A,role_play,Role play,shopping measure words,6.5,2,3,2,3,2,3,2,3,2,3,classifier transfer,uses formulaic phrases well,True,True
-L014,A,role_play,Role play,shopping measure words,7.0,2,4,3,5,1,3,2,4,2,4,turn-taking,can complete exchange with prompts,True,True
-L015,A,role_play,Role play,shopping measure words,5.5,3,4,3,4,3,5,2,3,3,4,measure word choice,needs measure word support,True,True
-L016,B,role_play,Role play,shopping measure words,6.0,2,4,3,5,2,4,1,3,3,5,measure word choice,uses formulaic phrases well,True,True
-L017,B,role_play,Role play,shopping measure words,6.5,3,4,3,4,2,3,3,4,3,4,response speed,can complete exchange with prompts,True,True
-L018,B,role_play,Role play,shopping measure words,7.0,2,3,3,4,2,4,2,3,2,3,classifier transfer,needs measure word support,True,True
-L019,B,role_play,Role play,shopping measure words,5.5,2,,2,,2,,1,,2,,turn-taking,uses formulaic phrases well,False,False
-L020,B,role_play,Role play,shopping measure words,6.0,3,4,4,5,2,3,2,3,3,4,measure word choice,can complete exchange with prompts,True,True
-L021,B,feedback_cycle,Feedback cycle,result complements in service dialogues,5.9,2,4,2,4,1,3,1,4,3,5,self-correction,responds to corrective feedback,True,True
+L001,A,input_practice,Input practice,result complements in service dialogues,5.5,2,3,2,3,1,2,1,2,3,4,meaning-form link,needs clearer example contrast,True,True
+L002,B,input_practice,Input practice,result complements in service dialogues,6.0,2,3,3,4,2,3,1,2,2,3,word order,recognizes pattern after model input,True,True
+L003,A,input_practice,Input practice,result complements in service dialogues,6.5,2,3,2,3,2,3,2,3,2,3,complement choice,needs slower teacher check,True,True
+L004,B,input_practice,Input practice,result complements in service dialogues,7.0,3,4,4,5,2,3,3,4,3,4,tone fluency,needs clearer example contrast,True,True
+L005,A,input_practice,Input practice,result complements in service dialogues,5.5,2,4,2,4,2,4,1,3,2,4,meaning-form link,recognizes pattern after model input,True,True
+L006,B,input_practice,Input practice,result complements in service dialogues,6.0,3,4,4,5,3,4,2,3,4,5,meaning-form link,needs slower teacher check,True,True
+L007,A,input_practice,Input practice,result complements in service dialogues,6.5,2,3,2,3,1,2,2,3,2,3,word order,needs clearer example contrast,True,True
+L008,B,input_practice,Input practice,result complements in service dialogues,7.0,2,4,3,5,2,4,2,4,2,4,complement choice,recognizes pattern after model input,True,True
+L009,A,input_practice,Input practice,result complements in service dialogues,5.5,3,4,3,4,3,4,2,3,3,4,tone fluency,needs slower teacher check,True,True
+L010,B,input_practice,Input practice,result complements in service dialogues,6.0,2,,3,,1,,1,,2,,meaning-form link,needs clearer example contrast,False,False
+L011,A,role_play,Role play,result complements in service dialogues,5.5,2,3,2,3,1,2,1,2,3,4,complement choice,can use result complement after role cue,True,True
+L012,B,role_play,Role play,result complements in service dialogues,6.0,3,5,4,5,3,5,2,4,3,5,response speed,needs faster response after service prompt,True,True
+L013,A,role_play,Role play,result complements in service dialogues,6.5,2,3,2,3,2,3,2,3,2,3,word order,places complement after object once,True,True
+L014,B,role_play,Role play,result complements in service dialogues,7.0,2,4,3,5,1,3,2,4,2,4,turn-taking,can complete service exchange with prompts,True,True
+L015,A,role_play,Role play,result complements in service dialogues,5.5,3,4,3,4,3,5,2,3,3,4,complement choice,needs contrast between 找到 and 找,True,True
+L016,B,role_play,Role play,result complements in service dialogues,6.0,2,4,3,5,2,4,1,3,3,5,feedback uptake,uses formulaic repair phrase well,True,True
+L017,A,role_play,Role play,result complements in service dialogues,6.5,3,4,3,4,2,3,3,4,3,4,response speed,can answer after one repetition,True,True
+L018,B,role_play,Role play,result complements in service dialogues,7.0,2,3,3,4,2,4,2,3,2,3,word order,needs model for 把句 with result complement,True,True
+L019,A,role_play,Role play,result complements in service dialogues,5.5,2,,2,,2,,1,,2,,turn-taking,can maintain turn with teacher support,False,False
+L020,B,role_play,Role play,result complements in service dialogues,6.0,3,4,4,5,2,3,2,3,3,4,complement choice,uses result complement in final response,True,True
+L021,A,feedback_cycle,Feedback cycle,result complements in service dialogues,5.9,2,4,2,4,1,3,1,4,3,5,self-correction,responds to corrective feedback,True,True
 L022,B,feedback_cycle,Feedback cycle,result complements in service dialogues,6.4,2,4,3,5,2,4,1,3,2,4,complement choice,can revise output after cue,True,True
-L023,B,feedback_cycle,Feedback cycle,result complements in service dialogues,6.9,3,4,3,4,3,4,3,5,3,4,feedback uptake,needs one more guided cycle,True,True
+L023,A,feedback_cycle,Feedback cycle,result complements in service dialogues,6.9,3,4,3,4,3,4,3,5,3,4,feedback uptake,needs one more guided cycle,True,True
 L024,B,feedback_cycle,Feedback cycle,result complements in service dialogues,7.4,2,4,3,5,1,3,2,4,2,4,word order,responds to corrective feedback,True,True
-L025,B,feedback_cycle,Feedback cycle,result complements in service dialogues,5.9,3,5,3,5,3,5,2,5,3,5,self-correction,can revise output after cue,True,True
+L025,A,feedback_cycle,Feedback cycle,result complements in service dialogues,5.9,3,5,3,5,3,5,2,5,3,5,self-correction,can revise output after cue,True,True
 L026,B,feedback_cycle,Feedback cycle,result complements in service dialogues,6.4,2,4,3,5,2,4,1,3,3,5,self-correction,needs one more guided cycle,True,True
-L027,B,feedback_cycle,Feedback cycle,result complements in service dialogues,6.9,2,3,2,3,1,2,2,4,2,3,complement choice,responds to corrective feedback,True,True
+L027,A,feedback_cycle,Feedback cycle,result complements in service dialogues,6.9,2,3,2,3,1,2,2,4,2,3,complement choice,responds to corrective feedback,True,True
 L028,B,feedback_cycle,Feedback cycle,result complements in service dialogues,7.4,3,5,4,5,3,5,3,5,3,5,feedback uptake,can revise output after cue,True,True
-L029,B,feedback_cycle,Feedback cycle,result complements in service dialogues,5.9,2,4,2,4,2,4,1,4,2,4,word order,needs one more guided cycle,True,True
+L029,A,feedback_cycle,Feedback cycle,result complements in service dialogues,5.9,2,4,2,4,2,4,1,4,2,4,word order,needs one more guided cycle,True,True
 L030,B,feedback_cycle,Feedback cycle,result complements in service dialogues,6.4,2,3,3,4,1,2,1,2,2,3,self-correction,responds to corrective feedback,True,True

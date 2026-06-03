@@ -55,6 +55,9 @@
       <section class="notebook-document" aria-label="Các cell notebook đã render" data-i18n-aria-label="notebook.cells.aria">
         <article class="nb-cell nb-markdown" data-cell-type="markdown"><h2>Tuần 07: TCSOL Short-Course Research</h2>
 <p>Mục tiêu: biến một hoạt động Hán ngữ ngắn hạn thành một mini teaching-study có rubric, classroom variables, learner-task evidence và Methods draft. Tuần này ưu tiên thiết kế nghiên cứu rõ ràng hơn là chạy thống kê phức tạp.</p></article>
+<article class="nb-cell nb-markdown" data-cell-type="markdown"><h3>Trước khi chạy code</h3>
+<p>Cell setup bên dưới nhìn dài vì nó chuẩn bị môi trường, kiểm tra file data và tạo folder output. Bạn chỉ cần <strong>Run</strong> cell này trước; chưa cần hiểu từng dòng.</p>
+<ul><li>Cell này làm gì? Import thư viện, tìm folder Week 07, kiểm tra SHA-256 của CSV.</li><li>Kết quả mong đợi: in ra <code>Week folder</code>, <code>Data file</code>, và <code>SHA-256</code>.</li><li>Nếu lỗi: kiểm tra đã mở notebook từ project root hoặc folder Week 07; nếu thiếu package, chạy <code>python -m pip install -r requirements.txt</code>.</li></ul></article>
 <article class="nb-cell nb-code" data-cell-type="code"><div class="nb-input-label">In [1]</div><pre><code>from pathlib import Path
 from urllib.request import urlretrieve
 import hashlib
@@ -72,7 +75,7 @@ except ImportError as exc:
     ) from exc
 
 THIS_WEEK = &quot;week-07-tcsol-short-course-research&quot;
-EXPECTED_SHA256 = &quot;5071470f422fb53651c8ceae8d400d51414054cab62a048a7e70e225a913c62b&quot;
+EXPECTED_SHA256 = &quot;d1cb69df35232bce0845394fe179c9ba4b1c3ecce15e7a2171f2397b6ca3fed6&quot;
 
 
 def find_week_dir():
@@ -115,17 +118,25 @@ actual_sha = sha256_file(DATA_PATH)
 if actual_sha != EXPECTED_SHA256:
     raise ValueError(f&quot;Data hash mismatch. Expected {EXPECTED_SHA256}, got {actual_sha}&quot;)
 
-print(&quot;Week folder:&quot;, WEEK_DIR)
-print(&quot;Data file:&quot;, DATA_PATH)
-print(&quot;SHA-256:&quot;, actual_sha)</code></pre><div class="nb-output"><div class="nb-output-label">Output</div><pre><code>Week folder: /Users/mitu/Desktop/work/projects/tcsol-python-research-syllabus/weeks/week-07-tcsol-short-course-research
-Data file: /Users/mitu/Desktop/work/projects/tcsol-python-research-syllabus/weeks/week-07-tcsol-short-course-research/data/raw/week07_short_course_learner_tasks.csv
-SHA-256: 5071470f422fb53651c8ceae8d400d51414054cab62a048a7e70e225a913c62b</code></pre></div></article>
+print(&quot;Week folder:&quot;, f&quot;weeks/{THIS_WEEK}&quot;)
+print(&quot;Data file:&quot;, &quot;data/raw/week07_short_course_learner_tasks.csv&quot;)
+print(&quot;SHA-256:&quot;, actual_sha)</code></pre><div class="nb-output"><div class="nb-output-label">Output</div><pre><code>Week folder: weeks/week-07-tcsol-short-course-research
+Data file: data/raw/week07_short_course_learner_tasks.csv
+SHA-256: d1cb69df35232bce0845394fe179c9ba4b1c3ecce15e7a2171f2397b6ca3fed6</code></pre></div></article>
 <article class="nb-cell nb-markdown" data-cell-type="markdown"><h3>1. Research loop của tuần này</h3>
 <p>Ta dùng một vòng đơn giản:</p>
 <p>``<code>text teaching goal -&gt; target structure -&gt; learner task -&gt; rubric -&gt; classroom variables -&gt; Methods draft </code>``</p>
-<p>Câu hỏi mẫu: <strong>Trong một khóa Hán ngữ ngắn hạn, activity focus nào tạo ra learner-task evidence rõ nhất cho target structure?</strong></p></article>
+<p>Câu hỏi mẫu: <strong>Trong một khóa Hán ngữ ngắn hạn về result complements trong service dialogues, activity focus nào có descriptive rubric gain cao hơn?</strong></p>
+<p>Lưu ý về unit of analysis: <strong>mỗi dòng là một learner task record</strong>. <code>learner_id</code> chỉ là mã định danh, không phải unit. Ví dụ: dòng <code>L001</code> là một bản ghi task của một learner trong activity <code>input_practice</code>.</p></article>
 <article class="nb-cell nb-code" data-cell-type="code"><div class="nb-input-label">In [2]</div><pre><code>df = pd.read_csv(DATA_PATH)
 usable = df[df[&quot;usable_task&quot;] == True].copy()
+
+activity_display = {
+    &quot;input_practice&quot;: &quot;Input practice&quot;,
+    &quot;role_play&quot;: &quot;Role play&quot;,
+    &quot;feedback_cycle&quot;: &quot;Feedback cycle&quot;,
+}
+usable[&quot;activity_label&quot;] = usable[&quot;activity_focus&quot;].map(activity_display).fillna(usable[&quot;activity_focus&quot;])
 
 score_columns = [
     &quot;task_completion_pre&quot;, &quot;task_completion_post&quot;,
@@ -139,20 +150,26 @@ for column in score_columns:
 
 print(&quot;Raw rows:&quot;, len(df))
 print(&quot;Usable rows:&quot;, len(usable))
-print(usable[[&quot;learner_id&quot;, &quot;activity_focus&quot;, &quot;target_structure&quot;, &quot;completed_task&quot;, &quot;usable_task&quot;]].head(8).to_string(index=False))</code></pre><div class="nb-output"><div class="nb-output-label">Output</div><pre><code>Raw rows: 30
+print(&quot;Excluded rows:&quot;, len(df) - len(usable))
+print(usable[[&quot;learner_id&quot;, &quot;class_group&quot;, &quot;activity_focus&quot;, &quot;target_structure&quot;, &quot;completed_task&quot;, &quot;usable_task&quot;]].head(8).to_string(index=False))</code></pre><div class="nb-output"><div class="nb-output-label">Output</div><pre><code>Raw rows: 30
 Usable rows: 28
-learner_id activity_focus   target_structure  completed_task  usable_task
-      L001 input_practice result complements            True         True
-      L002 input_practice result complements            True         True
-      L003 input_practice result complements            True         True
-      L004 input_practice result complements            True         True
-      L005 input_practice result complements            True         True
-      L006 input_practice result complements            True         True
-      L007 input_practice result complements            True         True
-      L008 input_practice result complements            True         True</code></pre></div></article>
+Excluded rows: 2
+learner_id class_group activity_focus                        target_structure  completed_task  usable_task
+      L001           A input_practice result complements in service dialogues            True         True
+      L002           B input_practice result complements in service dialogues            True         True
+      L003           A input_practice result complements in service dialogues            True         True
+      L004           B input_practice result complements in service dialogues            True         True
+      L005           A input_practice result complements in service dialogues            True         True
+      L006           B input_practice result complements in service dialogues            True         True
+      L007           A input_practice result complements in service dialogues            True         True
+      L008           B input_practice result complements in service dialogues            True         True</code></pre></div></article>
 <article class="nb-cell nb-markdown" data-cell-type="markdown"><h3>2. Rubric 1-5 trước khi phân tích</h3>
 <p>Rubric trong notebook này không phải chấm điểm cuối kỳ. Nó là công cụ biến learner task thành dữ liệu có thể mô tả.</p>
-<ul><li><code>task_completion</code>: hoàn thành nhiệm vụ giao tiếp.</li><li><code>accuracy</code>: dùng cấu trúc đích tương đối đúng.</li><li><code>fluency</code>: nói/viết mạch lạc vừa đủ cho nhiệm vụ.</li><li><code>interaction_strategy</code>: biết hỏi lại, sửa, hoặc kéo dài tương tác.</li><li><code>confidence</code>: mức tự tin trong task.</li></ul>
+<ul><li><code>task_completion</code>: hoàn thành nhiệm vụ giao tiếp.</li><li><code>accuracy</code>: dùng cấu trúc đích tương đối đúng.</li><li><code>fluency</code>: nói/viết mạch lạc vừa đủ cho nhiệm vụ.</li><li><code>interaction_strategy</code>: biết hỏi lại, sửa, hoặc kéo dài tương tác.</li><li><code>confidence</code>: mức tự tin quan sát được trong task hoặc learner self-rating nếu có thu thập.</li></ul>
+<p>Ví dụ target cụ thể:</p>
+<p>| Target structure | Ví dụ Hán ngữ | Learner task | |---|---|---| | Result complements in service dialogues | <code>找到了</code>, <code>听懂了</code>, <code>写完了</code> | Learner đóng vai hỏi/đáp trong bối cảnh dịch vụ và phải nói kết quả của hành động. |</p>
+<p>Model descriptor ngắn cho <code>accuracy</code>:</p>
+<p>| Score | Descriptor | |---:|---| | 1 | Hầu như chưa dùng được result complement trong câu trả lời. | | 3 | Dùng được một số cụm như <code>找到了</code>, nhưng còn sai vị trí hoặc thiếu <code>了</code>. | | 5 | Dùng result complement đúng và phù hợp với service dialogue trong hầu hết lượt trả lời. |</p>
 <p>Nguyên tắc: rubric phải gắn với task cụ thể, không dùng như nhãn chung chung “giỏi/yếu”.</p></article>
 <article class="nb-cell nb-code" data-cell-type="code"><div class="nb-input-label">In [3]</div><pre><code>criteria = [
     (&quot;task_completion&quot;, &quot;Task completion&quot;),
@@ -162,6 +179,8 @@ learner_id activity_focus   target_structure  completed_task  usable_task
     (&quot;confidence&quot;, &quot;Confidence&quot;),
 ]
 
+# Mini arithmetic example before the loop:
+# if accuracy_pre = 2 and accuracy_post = 4, then accuracy_gain = 2.
 for stem, label in criteria:
     usable[f&quot;{stem}_gain&quot;] = usable[f&quot;{stem}_post&quot;] - usable[f&quot;{stem}_pre&quot;]
 
@@ -179,34 +198,51 @@ print(usable[[&quot;learner_id&quot;, &quot;activity_label&quot;, &quot;total_pr
       L007 Input practice        1.8         2.8         1.0
       L008 Input practice        2.2         4.2         2.0</code></pre></div></article>
 <article class="nb-cell nb-markdown" data-cell-type="markdown"><h3>3. Variable map giúp viết Methods</h3>
-<p>Một bài paper ngắn cần nói rõ: đơn vị phân tích là gì, biến nhóm là gì, outcome được đo thế nào, và limitation nằm ở đâu. Vì vậy Week 07 xuất <code>week07_variable_map.csv</code> trước khi viết Methods.</p></article>
+<p>Một bài paper ngắn cần nói rõ: mỗi dòng dữ liệu là gì, biến nhóm là gì, outcome được đo thế nào, và limitation nằm ở đâu. Vì vậy Week 07 xuất <code>week07_variable_map.csv</code> trước khi viết Methods.</p>
+<p>Exclusion rule: giữ các dòng có <code>completed_task == True</code> và <code>usable_task == True</code>, tức learner hoàn thành task và có đủ rubric pre/post để tính gain. Trong dữ liệu này, <code>L010</code> và <code>L019</code> bị loại vì thiếu post scores.</p></article>
 <article class="nb-cell nb-code" data-cell-type="code"><div class="nb-input-label">In [4]</div><pre><code>variable_map = pd.DataFrame([
-    {&quot;variable&quot;:&quot;learner_id&quot;,&quot;role&quot;:&quot;unit id&quot;,&quot;measurement&quot;:&quot;one synthetic learner task record&quot;},
+    {&quot;variable&quot;:&quot;learner_id&quot;,&quot;role&quot;:&quot;identifier&quot;,&quot;measurement&quot;:&quot;ID for the synthetic learner task record; not the unit by itself&quot;},
+    {&quot;variable&quot;:&quot;class_group&quot;,&quot;role&quot;:&quot;context variable&quot;,&quot;measurement&quot;:&quot;synthetic class label&quot;},
     {&quot;variable&quot;:&quot;activity_focus&quot;,&quot;role&quot;:&quot;grouping variable&quot;,&quot;measurement&quot;:&quot;input practice, role play, or feedback cycle&quot;},
-    {&quot;variable&quot;:&quot;target_structure&quot;,&quot;role&quot;:&quot;teaching focus&quot;,&quot;measurement&quot;:&quot;short-course Chinese target structure&quot;},
+    {&quot;variable&quot;:&quot;activity_label&quot;,&quot;role&quot;:&quot;display label&quot;,&quot;measurement&quot;:&quot;human-readable activity label for tables and figures&quot;},
+    {&quot;variable&quot;:&quot;target_structure&quot;,&quot;role&quot;:&quot;teaching focus&quot;,&quot;measurement&quot;:&quot;result complements in service dialogues&quot;},
+    {&quot;variable&quot;:&quot;attendance_hours&quot;,&quot;role&quot;:&quot;context variable&quot;,&quot;measurement&quot;:&quot;synthetic attendance hours&quot;},
     {&quot;variable&quot;:&quot;task_completion_*&quot;,&quot;role&quot;:&quot;rubric criterion&quot;,&quot;measurement&quot;:&quot;1-5 score before/after activity&quot;},
     {&quot;variable&quot;:&quot;accuracy_*&quot;,&quot;role&quot;:&quot;rubric criterion&quot;,&quot;measurement&quot;:&quot;1-5 score before/after activity&quot;},
     {&quot;variable&quot;:&quot;fluency_*&quot;,&quot;role&quot;:&quot;rubric criterion&quot;,&quot;measurement&quot;:&quot;1-5 score before/after activity&quot;},
     {&quot;variable&quot;:&quot;interaction_strategy_*&quot;,&quot;role&quot;:&quot;rubric criterion&quot;,&quot;measurement&quot;:&quot;1-5 score before/after activity&quot;},
+    {&quot;variable&quot;:&quot;confidence_*&quot;,&quot;role&quot;:&quot;rubric criterion&quot;,&quot;measurement&quot;:&quot;1-5 observed confidence or self-rating before/after activity&quot;},
+    {&quot;variable&quot;:&quot;*_gain&quot;,&quot;role&quot;:&quot;derived outcome&quot;,&quot;measurement&quot;:&quot;post score minus pre score for each rubric criterion&quot;},
+    {&quot;variable&quot;:&quot;total_gain&quot;,&quot;role&quot;:&quot;derived outcome&quot;,&quot;measurement&quot;:&quot;mean post score minus mean pre score across five criteria&quot;},
     {&quot;variable&quot;:&quot;main_difficulty&quot;,&quot;role&quot;:&quot;qualitative code&quot;,&quot;measurement&quot;:&quot;teacher-coded learning difficulty&quot;},
     {&quot;variable&quot;:&quot;teacher_feedback&quot;,&quot;role&quot;:&quot;qualitative note&quot;,&quot;measurement&quot;:&quot;short teacher observation&quot;},
+    {&quot;variable&quot;:&quot;completed_task&quot;,&quot;role&quot;:&quot;cleaning flag&quot;,&quot;measurement&quot;:&quot;whether the learner completed the task&quot;},
+    {&quot;variable&quot;:&quot;usable_task&quot;,&quot;role&quot;:&quot;analysis filter&quot;,&quot;measurement&quot;:&quot;use only True rows for Week 07 summaries&quot;},
 ])
 variable_map_path = TABLE_DIR / &quot;week07_variable_map.csv&quot;
 variable_map.to_csv(variable_map_path, index=False)
-print(&quot;Saved:&quot;, variable_map_path)
-print(variable_map.to_string(index=False))</code></pre><div class="nb-output"><div class="nb-output-label">Output</div><pre><code>Saved: /Users/mitu/Desktop/work/projects/tcsol-python-research-syllabus/weeks/week-07-tcsol-short-course-research/outputs/tables/week07_variable_map.csv
-              variable              role                                  measurement
-            learner_id           unit id            one synthetic learner task record
-        activity_focus grouping variable input practice, role play, or feedback cycle
-      target_structure    teaching focus        short-course Chinese target structure
-     task_completion_*  rubric criterion              1-5 score before/after activity
-            accuracy_*  rubric criterion              1-5 score before/after activity
-             fluency_*  rubric criterion              1-5 score before/after activity
-interaction_strategy_*  rubric criterion              1-5 score before/after activity
-       main_difficulty  qualitative code            teacher-coded learning difficulty
-      teacher_feedback  qualitative note                    short teacher observation</code></pre></div></article>
+print(&quot;Saved:&quot;, variable_map_path.relative_to(WEEK_DIR))
+print(variable_map.to_string(index=False))</code></pre><div class="nb-output"><div class="nb-output-label">Output</div><pre><code>Saved: outputs/tables/week07_variable_map.csv
+              variable              role                                                      measurement
+            learner_id        identifier ID for the synthetic learner task record; not the unit by itself
+           class_group  context variable                                            synthetic class label
+        activity_focus grouping variable                     input practice, role play, or feedback cycle
+        activity_label     display label             human-readable activity label for tables and figures
+      target_structure    teaching focus                          result complements in service dialogues
+      attendance_hours  context variable                                       synthetic attendance hours
+     task_completion_*  rubric criterion                                  1-5 score before/after activity
+            accuracy_*  rubric criterion                                  1-5 score before/after activity
+             fluency_*  rubric criterion                                  1-5 score before/after activity
+interaction_strategy_*  rubric criterion                                  1-5 score before/after activity
+          confidence_*  rubric criterion     1-5 observed confidence or self-rating before/after activity
+                *_gain   derived outcome             post score minus pre score for each rubric criterion
+            total_gain   derived outcome        mean post score minus mean pre score across five criteria
+       main_difficulty  qualitative code                                teacher-coded learning difficulty
+      teacher_feedback  qualitative note                                        short teacher observation
+        completed_task     cleaning flag                           whether the learner completed the task
+           usable_task   analysis filter                         use only True rows for Week 07 summaries</code></pre></div></article>
 <article class="nb-cell nb-markdown" data-cell-type="markdown"><h3>4. Hai bảng summary</h3>
-<ul><li><code>week07_rubric_gain_summary.csv</code>: criterion nào tăng nhiều nhất?</li><li><code>week07_activity_summary.csv</code>: activity focus nào có total rubric gain cao hơn và difficulty phổ biến là gì?</li></ul>
+<ul><li><code>week07_rubric_gain_summary.csv</code>: criterion nào tăng nhiều nhất?</li><li><code>week07_activity_summary.csv</code>: activity focus nào có total rubric gain mô tả cao hơn và difficulty phổ biến là gì?</li></ul>
 <p>Đây vẫn là descriptive evidence. Không viết “activity này hiệu quả nhất” nếu chưa có thiết kế kiểm soát tốt.</p></article>
 <article class="nb-cell nb-code" data-cell-type="code"><div class="nb-input-label">In [5]</div><pre><code>criterion_rows = []
 for stem, label in criteria:
@@ -241,10 +277,10 @@ activity_summary = (
 activity_path = TABLE_DIR / &quot;week07_activity_summary.csv&quot;
 activity_summary.to_csv(activity_path, index=False)
 
-print(&quot;Saved:&quot;, criterion_path)
+print(&quot;Saved:&quot;, criterion_path.relative_to(WEEK_DIR))
 print(criterion_summary.to_string(index=False))
-print(&quot;\nSaved:&quot;, activity_path)
-print(activity_summary.to_string(index=False))</code></pre><div class="nb-output"><div class="nb-output-label">Output</div><pre><code>Saved: /Users/mitu/Desktop/work/projects/tcsol-python-research-syllabus/weeks/week-07-tcsol-short-course-research/outputs/tables/week07_rubric_gain_summary.csv
+print(&quot;\nSaved:&quot;, activity_path.relative_to(WEEK_DIR))
+print(activity_summary.to_string(index=False))</code></pre><div class="nb-output"><div class="nb-output-label">Output</div><pre><code>Saved: outputs/tables/week07_rubric_gain_summary.csv
            criterion      criterion_label  pre_mean  post_mean  mean_gain
      task_completion      Task completion      2.36       3.79       1.43
             accuracy             Accuracy      2.86       4.21       1.36
@@ -252,22 +288,22 @@ print(activity_summary.to_string(index=False))</code></pre><div class="nb-output
 interaction_strategy Interaction strategy      1.79       3.39       1.61
           confidence           Confidence      2.57       4.00       1.43
 
-Saved: /Users/mitu/Desktop/work/projects/tcsol-python-research-syllabus/weeks/week-07-tcsol-short-course-research/outputs/tables/week07_activity_summary.csv
-activity_focus activity_label  n  attendance_mean  total_pre_mean  total_post_mean  total_gain_mean      top_difficulty
-feedback_cycle Feedback cycle 10             6.55            2.24             4.02             1.78     self-correction
-input_practice Input practice  9             6.17            2.29             3.51             1.22   meaning-form link
-     role_play      Role play  9             6.22            2.40             3.76             1.36 measure word choice</code></pre></div></article>
+Saved: outputs/tables/week07_activity_summary.csv
+activity_focus activity_label  n  attendance_mean  total_pre_mean  total_post_mean  total_gain_mean    top_difficulty
+feedback_cycle Feedback cycle 10             6.55            2.24             4.02             1.78   self-correction
+input_practice Input practice  9             6.17            2.29             3.51             1.22 meaning-form link
+     role_play      Role play  9             6.22            2.40             3.76             1.36 complement choice</code></pre></div></article>
 <article class="nb-cell nb-markdown" data-cell-type="markdown"><h3>5. Figure để present teaching-study design</h3>
 <p>Figure trong Week 07 phục vụ Methods/Design discussion: nó giúp nói activity focus, rubric criterion và learner evidence ăn khớp thế nào.</p></article>
 <article class="nb-cell nb-code" data-cell-type="code"><div class="nb-input-label">In [6]</div><pre><code>palette = [&quot;#2563eb&quot;, &quot;#1f7a4d&quot;, &quot;#b45309&quot;]
 figure_metadata = {&quot;Date&quot;: &quot;2026-06-03&quot;}
 
-fig, ax = plt.subplots(figsize=(8.4, 5.0))
+fig, ax = plt.subplots(figsize=(9.6, 5.6))
 ax.barh(activity_summary[&quot;activity_label&quot;], activity_summary[&quot;total_gain_mean&quot;], color=palette, alpha=0.9)
 for i, row in activity_summary.iterrows():
-    ax.text(row[&quot;total_gain_mean&quot;] + 0.03, i, f&quot;n={int(row[&#x27;n&#x27;])}; {row[&#x27;total_gain_mean&#x27;]:.2f}&quot;, va=&quot;center&quot;, fontsize=10, color=&quot;#172033&quot;)
-ax.set_xlabel(&quot;Mean rubric gain (post - pre)&quot;)
-ax.set_title(&quot;Short-course task gain by activity focus&quot;)
+    ax.text(row[&quot;total_gain_mean&quot;] + 0.03, i, f&quot;n={int(row[&#x27;n&#x27;])}; {row[&#x27;total_gain_mean&#x27;]:.2f}&quot;, va=&quot;center&quot;, fontsize=12, color=&quot;#172033&quot;)
+ax.set_xlabel(&quot;Mean rubric gain (post - pre)&quot;, fontsize=12)
+ax.set_title(&quot;Short-course task gain by activity focus&quot;, fontsize=15, weight=&quot;bold&quot;)
 ax.grid(axis=&quot;x&quot;, color=&quot;#dbe4f0&quot;, linewidth=0.8)
 ax.set_axisbelow(True)
 for spine in [&quot;top&quot;, &quot;right&quot;, &quot;left&quot;]:
@@ -275,16 +311,16 @@ for spine in [&quot;top&quot;, &quot;right&quot;, &quot;left&quot;]:
 fig.tight_layout()
 activity_png = FIGURE_DIR / &quot;week07_total_gain_by_activity.png&quot;
 activity_svg = FIGURE_DIR / &quot;week07_total_gain_by_activity.svg&quot;
-fig.savefig(activity_png, dpi=180, metadata=figure_metadata)
-fig.savefig(activity_svg, format=&quot;svg&quot;, metadata=figure_metadata)
+fig.savefig(activity_png, dpi=220, metadata=figure_metadata, bbox_inches=&quot;tight&quot;)
+fig.savefig(activity_svg, format=&quot;svg&quot;, metadata=figure_metadata, bbox_inches=&quot;tight&quot;)
 strip_svg_whitespace(activity_svg)
 plt.close(fig)
 
-fig, ax = plt.subplots(figsize=(8.4, 4.8))
+fig, ax = plt.subplots(figsize=(9.6, 5.2))
 ax.bar(criterion_summary[&quot;criterion_label&quot;], criterion_summary[&quot;mean_gain&quot;], color=[&quot;#2563eb&quot;, &quot;#1f7a4d&quot;, &quot;#b8325f&quot;, &quot;#b45309&quot;, &quot;#6d28d9&quot;], alpha=0.9)
-ax.set_ylabel(&quot;Mean gain&quot;)
-ax.set_title(&quot;Rubric criterion gains across usable tasks&quot;)
-ax.tick_params(axis=&quot;x&quot;, rotation=18)
+ax.set_ylabel(&quot;Mean gain&quot;, fontsize=12)
+ax.set_title(&quot;Rubric criterion gains across usable tasks&quot;, fontsize=15, weight=&quot;bold&quot;)
+ax.tick_params(axis=&quot;x&quot;, rotation=16, labelsize=11)
 ax.grid(axis=&quot;y&quot;, color=&quot;#dbe4f0&quot;, linewidth=0.8)
 ax.set_axisbelow(True)
 for spine in [&quot;top&quot;, &quot;right&quot;]:
@@ -292,14 +328,14 @@ for spine in [&quot;top&quot;, &quot;right&quot;]:
 fig.tight_layout()
 criterion_png = FIGURE_DIR / &quot;week07_rubric_gain_by_criterion.png&quot;
 criterion_svg = FIGURE_DIR / &quot;week07_rubric_gain_by_criterion.svg&quot;
-fig.savefig(criterion_png, dpi=180, metadata=figure_metadata)
-fig.savefig(criterion_svg, format=&quot;svg&quot;, metadata=figure_metadata)
+fig.savefig(criterion_png, dpi=220, metadata=figure_metadata, bbox_inches=&quot;tight&quot;)
+fig.savefig(criterion_svg, format=&quot;svg&quot;, metadata=figure_metadata, bbox_inches=&quot;tight&quot;)
 strip_svg_whitespace(criterion_svg)
 plt.close(fig)
 
-print(&quot;Saved:&quot;, activity_png)
-print(&quot;Saved:&quot;, criterion_png)</code></pre><div class="nb-output"><div class="nb-output-label">Output</div><pre><code>Saved: /Users/mitu/Desktop/work/projects/tcsol-python-research-syllabus/weeks/week-07-tcsol-short-course-research/outputs/figures/week07_total_gain_by_activity.png
-Saved: /Users/mitu/Desktop/work/projects/tcsol-python-research-syllabus/weeks/week-07-tcsol-short-course-research/outputs/figures/week07_rubric_gain_by_criterion.png</code></pre></div></article>
+print(&quot;Saved:&quot;, activity_png.relative_to(WEEK_DIR))
+print(&quot;Saved:&quot;, criterion_png.relative_to(WEEK_DIR))</code></pre><div class="nb-output"><div class="nb-output-label">Output</div><pre><code>Saved: outputs/figures/week07_total_gain_by_activity.png
+Saved: outputs/figures/week07_rubric_gain_by_criterion.png</code></pre></div></article>
 <article class="nb-cell nb-markdown" data-cell-type="markdown"><h3>6. Output kiểm tra nhanh</h3>
 <p><img src="outputs/figures/week07_total_gain_by_activity.png" alt="Figure 1: Total rubric gain by activity focus" class="nb-image"></p>
 <p><img src="outputs/figures/week07_rubric_gain_by_criterion.png" alt="Figure 2: Rubric criterion gains" class="nb-image"></p>
@@ -309,16 +345,17 @@ Saved: /Users/mitu/Desktop/work/projects/tcsol-python-research-syllabus/weeks/we
 <ol><li>Ai/lớp nào là đơn vị quan sát?</li><li>Activity focus và target structure là gì?</li><li>Rubric được dùng ra sao?</li><li>Dữ liệu bị giới hạn thế nào?</li></ol>
 <p>Không cần viết Results dài trong tuần này. Viết Methods trước để research design chắc.</p></article>
 <article class="nb-cell nb-code" data-cell-type="code"><div class="nb-input-label">In [7]</div><pre><code>methods_draft = f&quot;&quot;&quot;
-This mini study uses a synthetic short-course TCSOL task dataset with {len(df)} learner task records, of which {len(usable)} were usable after excluding incomplete tasks. The unit of analysis is one learner task record. The teaching focus is short-term practice of Chinese target structures, including result complements and measure-word use. Activity focus is coded as input practice, role play, or feedback cycle. Learner task evidence is summarized with a five-criterion 1-5 rubric: task completion, accuracy, fluency, interaction strategy, and confidence. For each criterion, pre-task and post-task scores are used to compute descriptive gains. The analysis reports rubric gain by activity focus and identifies the most frequent teacher-coded learning difficulty. Because the dataset is synthetic, small, and not randomly assigned, the analysis is used to practice research design and descriptive reporting rather than to claim causal teaching effectiveness.
+This mini study uses a synthetic short-course TCSOL task dataset with {len(df)} learner task records, of which {len(usable)} were usable after excluding incomplete tasks. Each row is one learner task record; `learner_id` is only the record identifier. The teaching focus is result complements in service dialogues, such as 找到了, 听懂了, and 写完了. Activity focus is coded as input practice, role play, or feedback cycle. Learner task evidence is summarized with a five-criterion 1-5 rubric: task completion, accuracy, fluency, interaction strategy, and confidence. For each criterion, pre-task and post-task scores are used to compute descriptive gains. The analysis reports rubric gain by activity focus and identifies the most frequent teacher-coded learning difficulty. Because the dataset is synthetic, small, and not randomly assigned, the analysis is used to practice research design and descriptive reporting rather than to claim causal teaching effectiveness.
 &quot;&quot;&quot;.strip()
 print(methods_draft)
-print(&quot;\nWord count:&quot;, len(methods_draft.split()))</code></pre><div class="nb-output"><div class="nb-output-label">Output</div><pre><code>This mini study uses a synthetic short-course TCSOL task dataset with 30 learner task records, of which 28 were usable after excluding incomplete tasks. The unit of analysis is one learner task record. The teaching focus is short-term practice of Chinese target structures, including result complements and measure-word use. Activity focus is coded as input practice, role play, or feedback cycle. Learner task evidence is summarized with a five-criterion 1-5 rubric: task completion, accuracy, fluency, interaction strategy, and confidence. For each criterion, pre-task and post-task scores are used to compute descriptive gains. The analysis reports rubric gain by activity focus and identifies the most frequent teacher-coded learning difficulty. Because the dataset is synthetic, small, and not randomly assigned, the analysis is used to practice research design and descriptive reporting rather than to claim causal teaching effectiveness.
+print(&quot;\nWord count:&quot;, len(methods_draft.split()))</code></pre><div class="nb-output"><div class="nb-output-label">Output</div><pre><code>This mini study uses a synthetic short-course TCSOL task dataset with 30 learner task records, of which 28 were usable after excluding incomplete tasks. Each row is one learner task record; `learner_id` is only the record identifier. The teaching focus is result complements in service dialogues, such as 找到了, 听懂了, and 写完了. Activity focus is coded as input practice, role play, or feedback cycle. Learner task evidence is summarized with a five-criterion 1-5 rubric: task completion, accuracy, fluency, interaction strategy, and confidence. For each criterion, pre-task and post-task scores are used to compute descriptive gains. The analysis reports rubric gain by activity focus and identifies the most frequent teacher-coded learning difficulty. Because the dataset is synthetic, small, and not randomly assigned, the analysis is used to practice research design and descriptive reporting rather than to claim causal teaching effectiveness.
 
-Word count: 136</code></pre></div></article>
+Word count: 139</code></pre></div></article>
 <article class="nb-cell nb-markdown" data-cell-type="markdown"><h3>8. Transfer sang hướng nghiên cứu của học viên</h3>
 <ul><li>TCSOL: đổi <code>target_structure</code> thành cấu trúc đang dạy trong khóa ngắn hạn.</li><li>Đối chiếu Hán-Việt: đổi rubric thành “feature difficulty”, “transfer risk”, “teaching priority”.</li><li>MT/MTPE: đổi rubric thành “adequacy”, “fluency”, “terminology”, “post-editing effort”.</li><li>Chính sách giáo dục: đổi learner task thành policy documents, rubric thành coding scheme.</li></ul></article>
 <article class="nb-cell nb-markdown" data-cell-type="markdown"><h3>9. Exercise</h3>
-<ol><li>Chọn một <code>target_structure</code> phù hợp với khóa Hán ngữ ngắn hạn.</li><li>Sửa rubric descriptor cho 5 tiêu chí bằng ngôn ngữ dễ chấm.</li><li>Chạy notebook để xuất <code>week07_variable_map.csv</code>, <code>week07_rubric_gain_summary.csv</code>, <code>week07_activity_summary.csv</code> và hai figures.</li><li>Viết Methods draft 120-180 từ.</li><li>Thêm source note: ACTFL/Can-Do hoặc CEFR/Chinese Proficiency Standards nào hỗ trợ cách viết learning outcome của bạn?</li><li>Stretch: thêm một qualitative code mới cho <code>main_difficulty</code> và giải thích vì sao nó cần thiết.</li></ol></article>
+<ol><li>Chọn một <code>target_structure</code> phù hợp với khóa Hán ngữ ngắn hạn.</li><li>Sửa một label trong <code>activity_display</code>, ví dụ đổi <code>&quot;role_play&quot;: &quot;Role play&quot;</code> thành <code>&quot;role_play&quot;: &quot;Đóng vai dịch vụ&quot;</code>, rồi rerun notebook. Không đổi raw key <code>role_play</code>.</li><li>Chạy notebook để xuất <code>week07_variable_map.csv</code>, <code>week07_rubric_gain_summary.csv</code>, <code>week07_activity_summary.csv</code> và hai figures.</li><li>Viết hai captions: Figure 1 nói activity focus, mean gain, usable N và limitation; Figure 2 nói criterion gains và không claim causal effect.</li><li>Viết Methods draft 120-180 từ.</li><li>Thêm source note: ACTFL/Can-Do hoặc CEFR/Chinese Proficiency Standards nào hỗ trợ cách viết learning outcome của bạn?</li><li>Stretch: tạo <code>usable_stretch = usable.copy()</code>, sửa một <code>main_difficulty</code> trong bản copy, và giải thích vì sao code mới cần thiết. Không sửa file CSV gốc vì notebook đang kiểm tra SHA-256 để giữ reproducibility.</li></ol>
+<p>``<code>python usable_stretch = usable.copy() usable_stretch.loc[usable_stretch[&quot;learner_id&quot;] == &quot;L003&quot;, &quot;main_difficulty&quot;] = &quot;needs result-complement contrast&quot; </code>``</p></article>
       </section>
     </div>
   </main>

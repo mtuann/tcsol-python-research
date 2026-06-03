@@ -119,6 +119,12 @@ For future slide work, use:
 
 - [`Tuần 01: Python như một quy trình nghiên cứu`](weeks/week-01-python-research-workflow/)
 - [`Tuần 02: Dữ liệu nghiên cứu dưới dạng bảng`](weeks/week-02-research-data-tables/)
+- [`Tuần 03: pandas và bảng mô tả`](weeks/week-03-pandas-descriptive-tables/)
+- [`Tuần 04: Làm sạch dữ liệu`](weeks/week-04-data-cleaning-log/)
+- [`Tuần 05: Visualization cho paper`](weeks/week-05-visualization-for-paper/)
+- [`Tuần 06: Thống kê cho Results`](weeks/week-06-intro-statistics-for-results/)
+- [`Tuần 07: Nghiên cứu TCSOL ngắn hạn`](weeks/week-07-tcsol-short-course-research/)
+- [`Tuần 08: Phân tích lỗi người học`](weeks/week-08-learner-error-analysis/)
 
 ## Suggested Repository Structure
 
@@ -484,8 +490,8 @@ These topics are useful later, but they are not the shortest path to a good Appl
 
 ## Next Content Tasks
 
-- Review and refine `weeks/week-07-tcsol-short-course-research/` after learner testing.
-- Start detailed content for Week 08 learner error analysis.
+- Review and refine `weeks/week-08-learner-error-analysis/` after learner testing.
+- Start detailed content for Week 09 Chinese-Vietnamese contrastive analysis.
 - Create blank CSV templates in `resources/templates/`.
 - Add a one-page learner setup guide in Vietnamese.
 - Add a Zotero + Word workflow guide.

@@ -6,7 +6,7 @@ Use the Week 07 notebook to create a small research-design package for a short-t
 
 ## Core Minimum
 
-1. Choose one `target_structure` that could be taught in a short course.
+1. Choose one `target_structure` that could be taught in a short course, for example result complements such as `找到了`, `听懂了`, or `写完了`.
 2. Identify the unit of analysis.
 3. Identify the grouping variable.
 4. Read the five rubric criteria.
@@ -25,6 +25,25 @@ Use the Week 07 notebook to create a small research-design package for a short-t
    - `week07_rubric_gain_by_criterion.png`
 5. Write one figure caption for each figure.
 
+## Minimum Path
+
+Follow this order if programming still feels new:
+
+1. Run the setup cell and check that it prints the Week 07 folder and SHA-256.
+2. Run all notebook cells from top to bottom.
+3. Open the 3 exported CSV files.
+4. Inspect the 2 exported figures.
+5. Write 2 captions.
+6. Write the Methods draft.
+
+Caption frame for Figure 1:
+
+> Figure 1. Mean rubric gain by activity focus in the synthetic Week 07 TCSOL task dataset (`N = ___` usable records). The figure is descriptive because activity groups are small and not randomly assigned.
+
+Caption frame for Figure 2:
+
+> Figure 2. Mean gain by rubric criterion across usable learner task records. The figure shows where task evidence is strongest, not which teaching activity caused improvement.
+
 ## Required Writing
 
 Your Methods draft must include:
@@ -38,6 +57,8 @@ Your Methods draft must include:
 - one limitation sentence;
 - no causal claim such as "proved", "caused", or "most effective".
 
+Write the unit clearly: one row is one learner task record. `learner_id` is only the identifier.
+
 ## Sentence Frames
 
 Vietnamese thinking frame:
@@ -50,7 +71,14 @@ English paper frame:
 
 ## Stretch
 
-Add one qualitative code to `main_difficulty` and write two sentences:
+Add one qualitative code to `main_difficulty` in a copied DataFrame, not in the raw CSV. The notebook checks the raw-data hash for reproducibility, so editing the raw CSV will trigger an error.
+
+```python
+usable_stretch = usable.copy()
+usable_stretch.loc[usable_stretch["learner_id"] == "L003", "main_difficulty"] = "needs result-complement contrast"
+```
+
+Then write two sentences:
 
 1. What learning difficulty does this code capture?
 2. Which source or teaching framework makes the code meaningful?

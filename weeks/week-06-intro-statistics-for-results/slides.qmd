@@ -1,0 +1,7 @@
+---
+title: "Week 06: Intro Statistics for Results"
+format: html
+---
+
+The source deck for Week 06 is maintained in `slides.html` because the course uses a custom bilingual static slide framework with slide overview and page-number jump controls.
+

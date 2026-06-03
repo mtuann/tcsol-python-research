@@ -164,9 +164,9 @@
   <main>
     <header>
       <span class="tag" data-i18n="page.tag">Demo tương tác</span>
-      <h1 data-i18n="page.title">Figure Choice Lab</h1>
+      <h1 data-i18n="page.title">Phòng thử chọn hình</h1>
       <p class="lead" data-i18n="page.intro">Chọn bar, dots, hoặc caption để thấy cùng một dataset hỗ trợ claim khác nhau như thế nào.</p>
-      <noscript><p class="lead">Không có JavaScript: result complements có mean gain cao nhất (13.0, n = 6), nhưng mỗi group chỉ có 5-8 usable records nên cần dot plot và caption có limitation.</p></noscript>
+      <noscript><p class="lead">Không có JavaScript: nhóm bổ ngữ kết quả có mean gain cao nhất (13.0, n = 6), nhưng mỗi nhóm chỉ có 5-8 bản ghi usable nên cần biểu đồ điểm và caption có limitation.</p></noscript>
     </header>
 
     <section class="demo-layout" aria-label="Figure choice lab" data-i18n-aria-label="demo.aria">
@@ -174,26 +174,26 @@
         <h2 data-i18n="controls.title">Chọn cách nhìn</h2>
         <p data-i18n="controls.hint">Mỗi mode trả lời một câu hỏi khác nhau.</p>
         <div class="mode-controls" role="group" aria-label="Figure mode" data-i18n-aria-label="controls.mode.aria">
-          <button class="mode-button" type="button" data-mode="bar" aria-pressed="true" data-i18n="mode.bar">Bar</button>
-          <button class="mode-button" type="button" data-mode="dots" aria-pressed="false" data-i18n="mode.dots">Dots</button>
+          <button class="mode-button" type="button" data-mode="bar" aria-pressed="true" data-i18n="mode.bar">Cột</button>
+          <button class="mode-button" type="button" data-mode="dots" aria-pressed="false" data-i18n="mode.dots">Điểm</button>
           <button class="mode-button" type="button" data-mode="caption" aria-pressed="false" data-i18n="mode.caption">Caption</button>
         </div>
         <div class="insight-list">
-          <div class="insight"><strong data-i18n="insight.question.title">Question</strong><p id="question-text"></p></div>
-          <div class="insight green"><strong data-i18n="insight.good.title">Good for</strong><p id="good-text"></p></div>
-          <div class="insight amber"><strong data-i18n="insight.risk.title">Risk</strong><p id="risk-text"></p></div>
+          <div class="insight"><strong data-i18n="insight.question.title">Câu hỏi</strong><p id="question-text"></p></div>
+          <div class="insight green"><strong data-i18n="insight.good.title">Phù hợp để</strong><p id="good-text"></p></div>
+          <div class="insight amber"><strong data-i18n="insight.risk.title">Rủi ro</strong><p id="risk-text"></p></div>
         </div>
         <div class="mini-table" aria-label="Figure summary">
-          <div class="row header"><span data-i18n="table.group">Group</span><span>n</span><span data-i18n="table.mean">Mean</span></div>
-          <div class="row"><span>Result complements</span><span>6</span><span>13.00</span></div>
-          <div class="row"><span>Measure words</span><span>5</span><span>12.60</span></div>
-          <div class="row"><span>Vocabulary review</span><span>8</span><span>9.75</span></div>
-          <div class="row"><span>Word order</span><span>6</span><span>8.83</span></div>
+          <div class="row header"><span data-i18n="table.group">Nhóm</span><span>n</span><span data-i18n="table.mean">Mean</span></div>
+          <div class="row"><span data-i18n="group.result_complements">Bổ ngữ kết quả</span><span>6</span><span>13.00</span></div>
+          <div class="row"><span data-i18n="group.measure_words">Lượng từ</span><span>5</span><span>12.60</span></div>
+          <div class="row"><span data-i18n="group.vocabulary_review">Ôn từ vựng</span><span>8</span><span>9.75</span></div>
+          <div class="row"><span data-i18n="group.word_order">Trật tự từ</span><span>6</span><span>8.83</span></div>
         </div>
       </aside>
 
       <section class="panel">
-        <span class="tag" data-i18n="figure.tag">Live figure</span>
+        <span class="tag" data-i18n="figure.tag">Hình live</span>
         <h2 id="figure-title"></h2>
         <div class="figure-card" id="figure-card" aria-live="polite"></div>
         <div class="caption-card" id="caption-card" aria-live="polite"></div>
@@ -213,35 +213,49 @@
         "nav.notebook": "Notebook",
         "nav.language": "Ngôn ngữ / Language",
         "page.tag": "Demo tương tác",
-        "page.title": "Figure Choice Lab",
+        "page.title": "Phòng thử chọn hình",
         "page.intro": "Chọn bar, dots, hoặc caption để thấy cùng một dataset hỗ trợ claim khác nhau như thế nào.",
         "demo.aria": "Demo chọn figure cho paper",
         "controls.title": "Chọn cách nhìn",
         "controls.hint": "Mỗi mode trả lời một câu hỏi khác nhau.",
         "controls.mode.aria": "Chế độ figure",
-        "mode.bar": "Bar",
-        "mode.dots": "Dots",
+        "mode.bar": "Cột",
+        "mode.dots": "Điểm",
         "mode.caption": "Caption",
-        "insight.question.title": "Question",
-        "insight.good.title": "Good for",
-        "insight.risk.title": "Risk",
-        "table.group": "Group",
+        "insight.question.title": "Câu hỏi",
+        "insight.good.title": "Phù hợp để",
+        "insight.risk.title": "Rủi ro",
+        "table.group": "Nhóm",
         "table.mean": "Mean",
-        "figure.tag": "Live figure",
-        "bar.title": "Mean gain by activity focus",
+        "figure.tag": "Hình live",
+        "axis.x": "Nhóm hoạt động",
+        "axis.y": "Gain score",
+        "group.result_complements": "Bổ ngữ kết quả",
+        "group.measure_words": "Lượng từ",
+        "group.vocabulary_review": "Ôn từ vựng",
+        "group.word_order": "Trật tự từ",
+        "group.short.result_complements": "Bổ ngữ|kết quả",
+        "group.short.measure_words": "Lượng từ",
+        "group.short.vocabulary_review": "Ôn|từ vựng",
+        "group.short.word_order": "Trật tự|từ",
+        "bar.title": "Mean gain theo nhóm hoạt động",
         "bar.question": "Nhóm nào có mean gain cao nhất?",
         "bar.good": "So sánh group mean nhanh, phù hợp mở đầu Results.",
-        "bar.risk": "Bar chart một mình che mất individual points và small N.",
-        "dots.title": "Individual gain scores by activity focus",
+        "bar.risk": "Biểu đồ cột một mình che mất từng learner record và small N.",
+        "dots.title": "Gain score từng learner theo nhóm hoạt động",
         "dots.question": "Learner records trong mỗi group phân bố ra sao?",
         "dots.good": "Cho thấy mỗi group chỉ có 5-8 usable records và spread khá hẹp.",
-        "dots.risk": "Nếu không có summary/caption, reader khó biết group nào cao hơn.",
-        "caption.title": "Caption and interpretation",
+        "dots.risk": "Nếu không có summary/caption, người đọc khó biết group nào cao hơn.",
+        "caption.title": "Caption và interpretation",
         "caption.question": "Có thể viết claim nào mà không overclaim?",
         "caption.good": "Kết nối figure với Results paragraph: pattern + N + limitation.",
         "caption.risk": "Nếu caption thiếu N hoặc dùng causal language, figure dễ gây hiểu nhầm.",
-        "caption.text": "<strong>Figure 1.</strong> Mean gain score by activity focus in the synthetic Week 05 TCSOL dataset (N = 25 usable learner records). Result complements has the highest descriptive mean gain, but the figure does not establish causal effects.",
-        "caption.dot": "Dot plot view: individual learner records make the small sample visible, so the interpretation should stay descriptive."
+        "caption.text": "<strong>Figure 1.</strong> Gain score theo nhóm hoạt động trong dataset TCSOL synthetic Week 05 (N = 25 usable learner records). Panel A trình bày group means; Panel B trình bày từng learner record. Đây là hình mô tả, không phải bằng chứng nhân quả.",
+        "caption.dot": "Góc nhìn biểu đồ điểm: từng learner record làm small N hiện rõ, vì vậy interpretation phải giữ giọng mô tả.",
+        "checklist.title": "Checklist claim của figure",
+        "checklist.1": "1. Biến: gain_score theo activity_focus",
+        "checklist.2": "2. N: 25 usable learner records",
+        "checklist.3": "3. Claim: pattern mô tả, không causal"
       },
       en: {
         "meta.title": "Week 05 Demo: Figure Choice Lab",
@@ -267,6 +281,16 @@
         "table.group": "Group",
         "table.mean": "Mean",
         "figure.tag": "Live figure",
+        "axis.x": "Activity focus",
+        "axis.y": "Gain score",
+        "group.result_complements": "Result complements",
+        "group.measure_words": "Measure words",
+        "group.vocabulary_review": "Vocabulary review",
+        "group.word_order": "Word order",
+        "group.short.result_complements": "Result|complements",
+        "group.short.measure_words": "Measure|words",
+        "group.short.vocabulary_review": "Vocabulary|review",
+        "group.short.word_order": "Word|order",
         "bar.title": "Mean gain by activity focus",
         "bar.question": "Which group has the highest mean gain?",
         "bar.good": "Quick group-mean comparison, useful at the start of Results.",
@@ -279,16 +303,20 @@
         "caption.question": "What claim can be written without overclaiming?",
         "caption.good": "Connects the figure to Results: pattern + N + limitation.",
         "caption.risk": "If the caption omits N or uses causal language, the figure can mislead.",
-        "caption.text": "<strong>Figure 1.</strong> Mean gain score by activity focus in the synthetic Week 05 TCSOL dataset (N = 25 usable learner records). Result complements has the highest descriptive mean gain, but the figure does not establish causal effects.",
-        "caption.dot": "Dot plot view: individual learner records make the small sample visible, so the interpretation should stay descriptive."
+        "caption.text": "<strong>Figure 1.</strong> Gain score by activity focus in the synthetic Week 05 TCSOL dataset (N = 25 usable learner records). Panel A shows group means; Panel B shows individual learner records. The figure is descriptive and does not establish causal effects.",
+        "caption.dot": "Dot plot view: individual learner records make the small sample visible, so the interpretation should stay descriptive.",
+        "checklist.title": "Figure claim checklist",
+        "checklist.1": "1. Variable: gain_score by activity_focus",
+        "checklist.2": "2. N: 25 usable learner records",
+        "checklist.3": "3. Claim: descriptive pattern, not causal effect"
       }
     };
 
     const groups = [
-      { key: "Result complements", n: 6, mean: 13.0, color: "#2563eb", values: [13,14,13,12,12,14] },
-      { key: "Measure words", n: 5, mean: 12.6, color: "#1f7a4d", values: [13,12,12,13,13] },
-      { key: "Vocabulary review", n: 8, mean: 9.75, color: "#b45309", values: [10,10,10,10,9,9,9,11] },
-      { key: "Word order", n: 6, mean: 8.83, color: "#b8325f", values: [9,9,9,9,8,9] }
+      { key: "result_complements", n: 6, mean: 13.0, color: "#2563eb", values: [13,14,13,12,12,14] },
+      { key: "measure_words", n: 5, mean: 12.6, color: "#1f7a4d", values: [13,12,12,13,13] },
+      { key: "vocabulary_review", n: 8, mean: 9.75, color: "#b45309", values: [10,10,10,10,9,9,9,11] },
+      { key: "word_order", n: 6, mean: 8.83, color: "#b8325f", values: [9,9,9,9,8,9] }
     ];
     let currentMode = "bar";
 
@@ -296,13 +324,23 @@
       return window.Bilingual ? window.Bilingual.t(key) : key;
     }
 
+    function labelLines(g) {
+      return t("group.short." + g.key).split("|");
+    }
+
+    function svgMultilineLabel(x, y, lines, size = 14) {
+      return `<text x="${x}" y="${y}" text-anchor="middle" fill="#172033" font-size="${size}">` +
+        lines.map((line, index) => `<tspan x="${x}" dy="${index === 0 ? 0 : 16}">${line}</tspan>`).join("") +
+        `</text>`;
+    }
+
     function axisSvg(content) {
       return `<svg viewBox="0 0 760 430" role="img" aria-label="${t(currentMode + ".title")}">
         <rect x="0" y="0" width="760" height="430" fill="#ffffff"/>
         <line x1="72" y1="354" x2="720" y2="354" stroke="#172033" stroke-width="2"/>
         <line x1="72" y1="56" x2="72" y2="354" stroke="#172033" stroke-width="2"/>
-        <text x="380" y="414" text-anchor="middle" fill="#5b6578" font-size="18">Activity focus</text>
-        <text x="22" y="210" text-anchor="middle" fill="#5b6578" font-size="18" transform="rotate(-90 22 210)">Gain score</text>
+        <text x="380" y="420" text-anchor="middle" fill="#5b6578" font-size="18">${t("axis.x")}</text>
+        <text x="22" y="210" text-anchor="middle" fill="#5b6578" font-size="18" transform="rotate(-90 22 210)">${t("axis.y")}</text>
         <text x="72" y="380" text-anchor="middle" fill="#5b6578" font-size="14">0</text>
         <text x="60" y="248" text-anchor="end" fill="#5b6578" font-size="14">7</text>
         <text x="60" y="126" text-anchor="end" fill="#5b6578" font-size="14">14</text>
@@ -322,8 +360,8 @@
         const h = 354 - y(g.mean);
         return `<rect x="${centers[i]-44}" y="${y(g.mean)}" width="88" height="${h}" rx="6" fill="${g.color}" opacity="0.88"/>
           <text x="${centers[i]}" y="${y(g.mean)-12}" text-anchor="middle" fill="#172033" font-weight="800" font-size="17">${g.mean.toFixed(2)}</text>
-          <text x="${centers[i]}" y="382" text-anchor="middle" fill="#172033" font-size="14">${g.key}</text>
-          <text x="${centers[i]}" y="402" text-anchor="middle" fill="#5b6578" font-size="13">n=${g.n}</text>`;
+          ${svgMultilineLabel(centers[i], 378, labelLines(g), 13)}
+          <text x="${centers[i]}" y="410" text-anchor="middle" fill="#5b6578" font-size="13">n=${g.n}</text>`;
       }).join("");
       return axisSvg(bars);
     }
@@ -336,17 +374,17 @@
           const offset = (j - (g.values.length - 1) / 2) * 13;
           return `<circle cx="${centers[i]+offset}" cy="${y(v)}" r="7" fill="${g.color}" opacity="0.82"/>`;
         }).join("");
-        return `${meanLine}${points}<text x="${centers[i]}" y="382" text-anchor="middle" fill="#172033" font-size="14">${g.key}</text><text x="${centers[i]}" y="402" text-anchor="middle" fill="#5b6578" font-size="13">n=${g.n}</text>`;
+        return `${meanLine}${points}${svgMultilineLabel(centers[i], 378, labelLines(g), 13)}<text x="${centers[i]}" y="410" text-anchor="middle" fill="#5b6578" font-size="13">n=${g.n}</text>`;
       }).join("");
       return axisSvg(dots);
     }
 
     function renderCaptionFigure() {
       return axisSvg(`<rect x="92" y="86" width="628" height="230" rx="10" fill="#f8fbff" stroke="#dbe4f0"/>
-        <text x="116" y="134" fill="#172033" font-size="26" font-weight="850">Figure claim checklist</text>
-        <text x="116" y="180" fill="#172033" font-size="22">1. Variable: gain_score by activity_focus</text>
-        <text x="116" y="220" fill="#172033" font-size="22">2. N: 25 usable learner records</text>
-        <text x="116" y="260" fill="#172033" font-size="22">3. Claim: descriptive pattern, not causal effect</text>`);
+        <text x="116" y="134" fill="#172033" font-size="26" font-weight="850">${t("checklist.title")}</text>
+        <text x="116" y="180" fill="#172033" font-size="22">${t("checklist.1")}</text>
+        <text x="116" y="220" fill="#172033" font-size="22">${t("checklist.2")}</text>
+        <text x="116" y="260" fill="#172033" font-size="22">${t("checklist.3")}</text>`);
     }
 
     function setText(mode) {

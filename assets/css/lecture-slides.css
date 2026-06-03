@@ -107,7 +107,9 @@ body.lecture-slide-page {
   gap: clamp(1rem, 2vw, 1.5rem);
   grid-template-rows: auto 1fr;
   height: 100%;
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: auto;
+  padding-right: 0.25rem;
 }
 
 @keyframes slideIn {

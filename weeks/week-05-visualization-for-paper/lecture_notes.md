@@ -24,6 +24,18 @@ A paper figure is for the reader. It needs:
 
 Week 05 uses the Week 04 cleaned TCSOL dataset so the technical focus is visualization.
 
+## Tool Mental Model
+
+Keep the tool roles simple:
+
+| Tool | Job in Week 05 | Learner edits? |
+|---|---|---|
+| `pandas` | prepare `usable` rows and summary table | yes, lightly |
+| `seaborn` | draw the chart from columns | yes, one line at a time |
+| `matplotlib` | add labels and save the figure | mostly run-only |
+
+The learner should understand the workflow before they understand every styling line. The polished axis labels, `n` annotations, layout settings, and SVG export can be treated as run-only scaffolding in the first pass.
+
 ## Figure Question
 
 The figure question is:
@@ -91,7 +103,19 @@ fig.savefig("outputs/figures/week05_mean_gain_by_activity.svg", bbox_inches="tig
 ## Caption Frame
 
 ```text
-Figure 1. Mean gain score by activity focus in the synthetic Week 05 TCSOL dataset (N = [N] usable learner records). Bars show group means after filtering to completed records with numeric pre/post scores. The figure is descriptive and does not establish causal effects.
+Figure 1. Gain score by activity focus in the synthetic Week 05 TCSOL dataset (N = [N] usable learner records). Panel A shows group mean gain; Panel B shows individual learner records with group means. The figure is descriptive and does not establish causal effects.
+```
+
+Weak caption:
+
+```text
+Figure 1. Scores by activity.
+```
+
+Better caption:
+
+```text
+Figure 1. Gain score by activity focus in the synthetic Week 05 TCSOL dataset (N = 25 usable learner records). Panel A shows group mean gain; Panel B shows individual learner records and mean lines. The figure is descriptive because activity groups were not randomly assigned.
 ```
 
 ## Interpretation Frame
@@ -108,5 +132,11 @@ The figure suggests that [group] has the highest mean gain ([value]), followed b
 | Contrastive analysis | Which error category appears more often in Chinese-Vietnamese examples? | frequency bar chart |
 | MTPE | Which MT engine has more post-editing changes? | dot plot or box plot by engine |
 | Education policy | How many policy documents appear by year or region? | bar chart or line chart, depending on time order |
+
+Mini transfer frames:
+
+- Contrastive analysis: "Figure 1 shows the frequency of selected Chinese-Vietnamese contrastive features in the coded example set (N = [examples]). Bars count examples, not learner difficulty; each claim still needs representative examples."
+- MTPE: "Figure 1 shows post-editing time by MT system for [N] segments. Dots show segment-level variation, so the figure should be read with qualitative error examples rather than as an automatic quality ranking."
+- Education policy: "Figure 1 shows the number of policy documents by year in the collected corpus (N = [documents]). The figure describes publication patterns, not policy effectiveness."
 
 Week 05 prepares the learner to ask whether a figure helps the reader see the data, not whether it looks impressive.

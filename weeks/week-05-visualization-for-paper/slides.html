@@ -6,6 +6,15 @@
   <title data-i18n="meta.title">Tuần 05: Visualization cho paper</title>
   <link rel="stylesheet" href="../../assets/css/bilingual.css">
   <link rel="stylesheet" href="../../assets/css/lecture-slides.css">
+  <noscript>
+    <style>
+      body.lecture-slide-page { overflow: auto; }
+      .deck { padding-bottom: 2rem; }
+      .slides { height: auto; }
+      .slides > section { display: grid; margin-bottom: 2rem; min-height: 70vh; }
+      .fallback-nav { display: none; }
+    </style>
+  </noscript>
 </head>
 <body class="lecture-slide-page">
   <div class="site-tools slide-tools">
@@ -26,7 +35,7 @@
         <div class="hero-layout">
           <div class="slide-head">
             <span class="tag" data-i18n="s1.tag">Tuần 05</span>
-            <h1 data-i18n="s1.title">Visualization cho paper</h1>
+          <h1 data-i18n="s1.title">Trực quan hóa cho paper</h1>
             <p class="lead" data-i18n="s1.body">Từ cleaned data đến figure có thể đưa vào Results section.</p>
           </div>
           <div class="stage">
@@ -85,7 +94,7 @@
       <section>
         <div class="slide-head">
           <span class="tag" data-i18n="s5.tag">Chart choice</span>
-          <h2 class="wide-title" data-i18n="s5.title">Bar chart trả lời mean; dot plot trả lời variation</h2>
+          <h2 class="wide-title" data-i18n="s5.title">Biểu đồ cột trả lời mean; biểu đồ điểm trả lời variation</h2>
         </div>
         <div class="stage">
           <div class="concept-grid">
@@ -149,7 +158,7 @@ ax.set_ylabel("Gain score")</code></pre></div>
           <h2 class="wide-title" data-i18n="s9.title">Individual points làm small-N visible</h2>
         </div>
         <div class="stage">
-          <div class="paper-card"><blockquote data-i18n="dot.note">Nếu mỗi group chỉ có 5-8 learner records, dot plot giúp reader thấy mean không phải là toàn bộ câu chuyện.</blockquote></div>
+          <div class="paper-card"><blockquote data-i18n="dot.note">Nếu mỗi nhóm chỉ có 5-8 learner records, biểu đồ điểm giúp người đọc thấy mean không phải là toàn bộ câu chuyện.</blockquote></div>
           <div class="code-card"><pre><code>sns.stripplot(
     data=usable,
     x="activity_label",
@@ -186,7 +195,7 @@ ax.set_ylabel("Gain score")</code></pre></div>
             dpi=300, bbox_inches="tight")
 fig.savefig("outputs/figures/week05_mean_gain_by_activity.svg",
             bbox_inches="tight")</code></pre></div>
-          <div class="chip-row"><span class="chip">PNG for Word/web</span><span class="chip optional">SVG for vector layout</span></div>
+          <div class="chip-row"><span class="chip">PNG for Word/web</span><span class="chip optional">SVG stretch</span></div>
         </div>
       </section>
 
@@ -196,7 +205,7 @@ fig.savefig("outputs/figures/week05_mean_gain_by_activity.svg",
           <h2 class="wide-title" data-i18n="s12.title">Caption nói figure đang show gì</h2>
         </div>
         <div class="stage">
-          <div class="paper-card sentence-frame-card"><blockquote class="sentence-frame" data-i18n-html="caption.frame">Figure 1. Mean gain score by activity focus in the synthetic Week 05 TCSOL dataset (<span class="frame-slot">N = 25 usable records</span>). Bars show group means; the figure is <span class="frame-slot purpose">descriptive</span>, not causal.</blockquote></div>
+          <div class="paper-card sentence-frame-card"><blockquote class="sentence-frame" data-i18n-html="caption.frame">Figure 1. Gain score by activity focus in the synthetic Week 05 TCSOL dataset (<span class="frame-slot">N = 25 usable records</span>). Panel A shows group means; Panel B shows individual records; the figure is <span class="frame-slot purpose">descriptive</span>, not causal.</blockquote></div>
         </div>
       </section>
 
@@ -206,7 +215,7 @@ fig.savefig("outputs/figures/week05_mean_gain_by_activity.svg",
           <h2 class="wide-title" data-i18n="s13.title">Viết pattern + limitation trong cùng đoạn</h2>
         </div>
         <div class="stage">
-          <div class="paper-card"><blockquote data-i18n="interpret.frame">Result complements has the highest descriptive mean gain, but each activity group has only 5-8 usable records. The dot plot is needed because mean bars alone hide individual variation.</blockquote></div>
+          <div class="paper-card"><blockquote data-i18n="interpret.frame">Result complements has the highest descriptive mean gain, while word order has the lowest. Because each group has only 5-8 usable records, the companion dot plot is needed to keep the Results paragraph cautious.</blockquote></div>
         </div>
       </section>
 
@@ -219,7 +228,7 @@ fig.savefig("outputs/figures/week05_mean_gain_by_activity.svg",
           <div class="checklist">
             <div class="check-item"><b>1</b><span data-i18n="check.1">notebook chạy từ đầu đến cuối</span></div>
             <div class="check-item"><b>2</b><span data-i18n="check.2">summary table có N và mean gain</span></div>
-            <div class="check-item"><b>3</b><span data-i18n="check.3">bar + dot figures export PNG/SVG</span></div>
+            <div class="check-item"><b>3</b><span data-i18n="check.3">bar figure export PNG; dot/SVG là stretch</span></div>
             <div class="check-item"><b>4</b><span data-i18n="check.4">caption và interpretation không causal overclaim</span></div>
           </div>
         </div>
@@ -229,7 +238,7 @@ fig.savefig("outputs/figures/week05_mean_gain_by_activity.svg",
         <div class="slide-head">
           <span class="tag" data-i18n="s15.tag">Đi tiếp</span>
           <h2 class="wide-title" data-i18n="s15.title">Mở demo, chạy notebook, rồi export figures</h2>
-          <p class="lead" data-i18n="s15.body">Khi đã có figure tốt, Week 06 sẽ tiếp tục với dữ liệu phức tạp hơn và workflow so sánh/join.</p>
+          <p class="lead" data-i18n="s15.body">Khi đã có figure tốt, Week 06 thêm mean, SD, standard error và confidence interval để viết Results paragraph thận trọng.</p>
         </div>
         <div class="stage">
           <div class="slide-cta-row" aria-label="Đi tiếp sau slides" data-i18n-aria-label="cta.aria">
@@ -266,7 +275,7 @@ fig.savefig("outputs/figures/week05_mean_gain_by_activity.svg",
         "nav.toc.hint": "Chọn phần muốn xem nhanh.",
         "nav.toc.close": "Đóng",
         "s1.tag": "Tuần 05",
-        "s1.title": "Visualization cho paper",
+        "s1.title": "Trực quan hóa cho paper",
         "s1.body": "Từ cleaned data đến figure có thể đưa vào Results section.",
         "hero.usable": "usable records",
         "hero.groups": "activity groups",
@@ -285,7 +294,7 @@ fig.savefig("outputs/figures/week05_mean_gain_by_activity.svg",
         "s4.tag": "Data preview",
         "s4.title": "Một row vẫn là một learner record",
         "s5.tag": "Chart choice",
-        "s5.title": "Bar chart trả lời mean; dot plot trả lời variation",
+        "s5.title": "Biểu đồ cột trả lời mean; biểu đồ điểm trả lời variation",
         "bar.title": "Bar",
         "bar.body": "so sánh group means",
         "dot.title": "Dots",
@@ -303,7 +312,7 @@ fig.savefig("outputs/figures/week05_mean_gain_by_activity.svg",
         "s8.title": "Bar chart nên có N và axis labels",
         "s9.tag": "Dotplot",
         "s9.title": "Individual points làm small-N visible",
-        "dot.note": "Nếu mỗi group chỉ có 5-8 learner records, dot plot giúp reader thấy mean không phải là toàn bộ câu chuyện.",
+        "dot.note": "Nếu mỗi nhóm chỉ có 5-8 learner records, biểu đồ điểm giúp người đọc thấy mean không phải là toàn bộ câu chuyện.",
         "s10.tag": "Color",
         "s10.title": "Color phải có lý do",
         "s10.body": "Dùng palette để phân biệt group, không dùng màu chỉ vì đẹp. Khi không cần highlight, giữ màu giản dị.",
@@ -311,19 +320,19 @@ fig.savefig("outputs/figures/week05_mean_gain_by_activity.svg",
         "s11.title": "Export bằng code, không screenshot",
         "s12.tag": "Caption",
         "s12.title": "Caption nói figure đang show gì",
-        "caption.frame": "Figure 1. Mean gain score by activity focus in the synthetic Week 05 TCSOL dataset (<span class=\"frame-slot\">N = 25 usable records</span>). Bars show group means; the figure is <span class=\"frame-slot purpose\">descriptive</span>, not causal.",
+        "caption.frame": "Figure 1. Gain score by activity focus in the synthetic Week 05 TCSOL dataset (<span class=\"frame-slot\">N = 25 usable records</span>). Panel A shows group means; Panel B shows individual records; the figure is <span class=\"frame-slot purpose\">descriptive</span>, not causal.",
         "s13.tag": "Interpretation",
         "s13.title": "Viết pattern + limitation trong cùng đoạn",
-        "interpret.frame": "Result complements has the highest descriptive mean gain, but each activity group has only 5-8 usable records. The dot plot is needed because mean bars alone hide individual variation.",
+        "interpret.frame": "Result complements has the highest descriptive mean gain, while word order has the lowest. Because each group has only 5-8 usable records, the companion dot plot is needed to keep the Results paragraph cautious.",
         "s14.tag": "Thực hành",
         "s14.title": "Checklist bài nộp",
         "check.1": "notebook chạy từ đầu đến cuối",
         "check.2": "summary table có N và mean gain",
-        "check.3": "bar + dot figures export PNG/SVG",
+        "check.3": "bar figure export PNG; dot/SVG là stretch",
         "check.4": "caption và interpretation không causal overclaim",
         "s15.tag": "Đi tiếp",
         "s15.title": "Mở demo, chạy notebook, rồi export figures",
-        "s15.body": "Khi đã có figure tốt, Week 06 sẽ tiếp tục với dữ liệu phức tạp hơn và workflow so sánh/join.",
+        "s15.body": "Khi đã có figure tốt, Week 06 thêm mean, SD, standard error và confidence interval để viết Results paragraph thận trọng.",
         "cta.aria": "Đi tiếp sau slides",
         "cta.demo": "Mở demo",
         "cta.notebook": "Xem notebook",
@@ -394,19 +403,19 @@ fig.savefig("outputs/figures/week05_mean_gain_by_activity.svg",
         "s11.title": "Export with code, not screenshots",
         "s12.tag": "Caption",
         "s12.title": "A caption says what the figure shows",
-        "caption.frame": "Figure 1. Mean gain score by activity focus in the synthetic Week 05 TCSOL dataset (<span class=\"frame-slot\">N = 25 usable records</span>). Bars show group means; the figure is <span class=\"frame-slot purpose\">descriptive</span>, not causal.",
+        "caption.frame": "Figure 1. Gain score by activity focus in the synthetic Week 05 TCSOL dataset (<span class=\"frame-slot\">N = 25 usable records</span>). Panel A shows group means; Panel B shows individual records; the figure is <span class=\"frame-slot purpose\">descriptive</span>, not causal.",
         "s13.tag": "Interpretation",
         "s13.title": "Write the pattern and limitation in one paragraph",
-        "interpret.frame": "Result complements has the highest descriptive mean gain, but each activity group has only 5-8 usable records. The dot plot is needed because mean bars alone hide individual variation.",
+        "interpret.frame": "Result complements has the highest descriptive mean gain, while word order has the lowest. Because each group has only 5-8 usable records, the companion dot plot is needed to keep the Results paragraph cautious.",
         "s14.tag": "Practice",
         "s14.title": "Assignment checklist",
         "check.1": "notebook runs from top to bottom",
         "check.2": "summary table has N and mean gain",
-        "check.3": "bar + dot figures export PNG/SVG",
+        "check.3": "bar figure exports PNG; dot/SVG are stretch",
         "check.4": "caption and interpretation avoid causal overclaiming",
         "s15.tag": "Next",
         "s15.title": "Open the demo, run the notebook, then export figures",
-        "s15.body": "Once we have a good figure, Week 06 continues with more complex data and comparison/join workflows.",
+        "s15.body": "Once we have a good figure, Week 06 adds mean, SD, standard error, and confidence intervals for a cautious Results paragraph.",
         "cta.aria": "Next steps after slides",
         "cta.demo": "Open demo",
         "cta.notebook": "View notebook",

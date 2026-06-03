@@ -1,0 +1,2 @@
+raw_n,usable_n,pre_mean,post_mean,mean_gain,sd_gain,se_gain,t_critical_95,ci95_low,ci95_high,min_gain,max_gain
+36,25,64.68,75.56,10.88,1.9,0.38,2.06,10.1,11.66,8.0,14.0

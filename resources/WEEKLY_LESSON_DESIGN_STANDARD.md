@@ -76,6 +76,8 @@ Canonical Week 01 quality rules:
 - Lecture slides must use `.inline-token` for short code/data terms inside prose and `.inline-token.value-token` or `.value-spotlight` for emphasized values such as `72`; do not leave raw Markdown backticks inside `data-i18n` strings.
 - A normal content week should have 12-16 core slides. Ten slides is acceptable only for orientation, recap, or very light weeks. If a deck has more than 12 slides, it must include a slide overview/table of contents for quick access.
 - Every new concept slide should be followed by at least one concrete example, preferably one that maps to TCSOL, contrastive linguistics, MTPE, or education policy.
+- From Week 05 onward, learner-facing assignments must explicitly separate Core and Stretch. A second figure, SVG export, t-test, correlation, or extra methodological note should be Stretch unless it is necessary for the week's main research output.
+- For light statistics weeks, teach estimate-first reporting: `n`, mean, variation, uncertainty interval, limitation. p-values may appear as Stretch but must not replace effect/estimate, interval, and bounded interpretation.
 
 ## Beginner-First Layering
 

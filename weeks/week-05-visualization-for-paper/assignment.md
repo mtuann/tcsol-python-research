@@ -1,8 +1,8 @@
-# Assignment: Paper-Ready Figure and Caption
+# Assignment: Paper-Ready Figure Package and Caption
 
 ## Goal
 
-- Python skill: create paper-ready figures with seaborn and matplotlib.
+- Python skill: create one paper-ready figure package with seaborn and matplotlib.
 - Research skill: choose a figure that matches a descriptive claim.
 - Paper section supported: Results / Figure caption.
 - Writing output: figure caption plus interpretation paragraph.
@@ -20,12 +20,18 @@
 2. Filter to usable records.
 3. Create a figure summary table.
 4. Make a mean-gain bar chart.
-5. Make an individual-gain dot plot.
+5. Inspect the companion individual-gain dot plot.
 6. Label axes and add a sample-size note.
-7. Export both figures as `.png` and `.svg`.
-8. Write a figure caption.
+7. Export the primary bar figure as `.png`.
+8. Write a Figure 1A/1B caption.
 9. Write a 120-160 word interpretation paragraph.
 10. Add one limitation.
+
+Stretch:
+
+- export `.svg` copies;
+- export the dot plot as a second image;
+- revise the dot plot style without changing the data.
 
 ## Submission
 
@@ -33,9 +39,9 @@ Submit:
 
 - completed `.ipynb` notebook;
 - figure summary CSV;
-- two PNG figures;
-- two SVG figures;
-- figure caption;
+- primary PNG figure;
+- companion dot plot screenshot or exported PNG if doing Stretch;
+- Figure 1A/1B caption;
 - interpretation paragraph;
 - source note with access date.
 
@@ -46,19 +52,26 @@ Submit:
 | Raw rows loaded | 36 |
 | Usable rows after filter | 25 |
 | Activity groups in usable data | 4 |
+| Core figure files exported | at least 1 PNG |
+
+After running the notebook, compare your own result with the answer key:
+
+| Check | Answer key |
+|---|---:|
 | Highest mean gain | `result_complements` |
-| Figure files exported | 4 files |
+| Lowest mean gain | `word_order` |
+| Companion figure files exported by notebook | 4 files |
 
 ## Caption Frame
 
 ```text
-Figure 1. Mean gain score by activity focus in the synthetic Week 05 TCSOL dataset (N = [N] usable learner records). Bars show group means after filtering to completed records with numeric pre/post scores. The figure is descriptive and does not establish causal effects.
+Figure 1. Gain score by activity focus in the synthetic Week 05 TCSOL dataset (N = [N] usable learner records). Panel A shows group mean gain; Panel B shows individual learner records with group means. The figure is descriptive and does not establish causal effects.
 ```
 
 ## Interpretation Frame
 
 ```text
-The figure suggests that [activity focus] has the highest descriptive mean gain ([value]), while [activity focus] has the lowest ([value]). The individual-point figure is important because each group contains only [n range] usable learner records, so the mean bar alone hides the small sample and spread. Therefore, the figure supports a cautious descriptive statement rather than a causal claim.
+Figure 1 suggests that [activity focus] has the highest descriptive mean gain ([value]), while [activity focus] has the lowest ([value]). This pattern is useful for a Results paragraph because it summarizes where the largest observed gains appear after the short activity. However, Panel B is necessary because each group contains only [n range] usable learner records. The dot plot shows the actual learner records behind the mean, so the interpretation should stay descriptive. The figure can support a cautious statement about observed gain patterns, but it cannot prove that one activity caused better learning because [limitation].
 ```
 
 ## Limitation Menu

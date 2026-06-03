@@ -1,0 +1,10 @@
+jupyterlab==4.5.0
+pandas==2.3.3
+numpy==2.0.2
+openpyxl==3.1.5
+matplotlib==3.9.4
+seaborn==0.13.2
+scipy==1.13.1
+statsmodels==0.14.5
+rapidfuzz==3.13.0
+sacrebleu==2.5.1

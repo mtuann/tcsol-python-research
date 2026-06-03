@@ -1,0 +1,10 @@
+term_vi,term_en,plain_meaning,why_it_matters
+cỡ mẫu,sample size,number of usable records,tells readers how much evidence supports the estimate
+trung bình,mean,average value,the main descriptive estimate
+độ lệch chuẩn,standard deviation,spread among individual records,shows how different learners are
+sai số chuẩn,standard error,uncertainty of the mean estimate,used to build confidence intervals
+khoảng tin cậy,confidence interval,interval around an estimate,helps write cautious Results
+kiểm định t,t-test,test comparing a mean difference with zero,optional stretch evidence
+p-value,p-value,probability of data as or more extreme under assumptions,should not be reported alone
+giới hạn nghiên cứu,limitation,boundary of what the result can claim,prevents overclaiming
+

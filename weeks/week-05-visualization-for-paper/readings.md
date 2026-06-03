@@ -6,10 +6,12 @@ Last source audit: 2026-06-03
 
 1. Matplotlib: Plot types
    - Link: https://matplotlib.org/stable/plot_types/index.html
+   - What to read: only the bar chart and scatter/dot-style examples.
    - Why: quick overview of common plot types and when they are used.
 
 2. seaborn tutorial: Visualizing categorical data
    - Link: https://seaborn.pydata.org/tutorial/categorical.html
+   - What to read: only the sections that explain categorical scatterplots and bar plots.
    - Why: Week 05 uses categorical groups such as `activity_focus`.
 
 ## Required Technical Reading
@@ -26,10 +28,6 @@ Last source audit: 2026-06-03
    - Link: https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.savefig.html
    - Why: figures must be exported as `.png` and `.svg` for paper drafting.
 
-4. Matplotlib: Choosing colormaps
-   - Link: https://matplotlib.org/stable/users/explain/colors/colormaps.html
-   - Why: supports intentional, accessible color choices.
-
 ## Required Research/Method Reading
 
 1. Ten Simple Rules for Better Figures
@@ -38,14 +36,10 @@ Last source audit: 2026-06-03
    - Research question/method: practical rules for making scientific figures clearer and less misleading.
    - What we borrow: simple figure type, clear labels, careful color, and no visual exaggeration.
 
-2. Tidy Data
-   - Link: https://vita.had.co.nz/papers/tidy-data.html
-   - Citation: Wickham (2014), Journal of Statistical Software.
-   - Research question/method: how table structure supports consistent data visualization and analysis.
-   - What we borrow: one row per observation and one column per variable before plotting.
-
 ## Optional
 
+- Matplotlib: Choosing colormaps: https://matplotlib.org/stable/users/explain/colors/colormaps.html
+- Tidy Data: https://vita.had.co.nz/papers/tidy-data.html
 - Matplotlib tutorials: https://matplotlib.org/stable/tutorials/index.html
 - seaborn examples gallery: https://seaborn.pydata.org/examples/index.html
 - PLOS guide collection: https://collections.plos.org/collection/ten-simple-rules/
@@ -58,6 +52,7 @@ Last source audit: 2026-06-03
 | 2026-06-03 | seaborn categorical barplot stripplot docs | seaborn official docs | categorical tutorial, `barplot`, `stripplot` | current official reference for categorical visualizations |
 | 2026-06-03 | better scientific figures misleading color labels | PLOS Computational Biology | Ten Simple Rules for Better Figures | research-facing figure-design guidance |
 | 2026-06-03 | matplotlib colormap colorblind perceptual official | Matplotlib official docs | Choosing colormaps | supports intentional color choices |
+| 2026-06-03 | tidy data visualization table structure | Journal of Statistical Software / author page | Tidy Data | optional method background for one-row-per-observation plotting |
 
 ## Reading Questions
 

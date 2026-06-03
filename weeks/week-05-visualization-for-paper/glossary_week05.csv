@@ -1,11 +1,11 @@
 term_vi,term_en,plain_meaning,why_it_matters
-figure,hình/bảng trực quan,A visual display used in a paper,Supports a specific Results claim
-caption,chú thích hình,Text explaining what the figure shows,Connects figure to paper argument
-axis,trục,Horizontal or vertical scale,Readers need to know variables and units
-bar chart,biểu đồ cột,Shows group summaries,Useful but can hide individual variation
-dot plot,biểu đồ điểm,Shows individual observations,Useful for small-N data
-sample size,cỡ mẫu,Number of usable observations,Prevents overclaiming
-descriptive,mô tả,Reports what appears in the data,Not the same as causal evidence
-causal,nhân quả,Claims one thing causes another,Requires stronger design than Week 05 data
+hình trực quan,figure,A visual display used in a paper,Supports a specific Results claim
+chú thích hình,caption,Text explaining what the figure shows,Connects figure to paper argument
+trục,axis,Horizontal or vertical scale,Readers need to know variables and units
+biểu đồ cột,bar chart,Shows group summaries,Useful but can hide individual variation
+biểu đồ điểm,dot plot,Shows individual observations,Useful for small-N data
+cỡ mẫu,sample size,Number of usable observations,Prevents overclaiming
+mô tả,descriptive,Reports what appears in the data,Not the same as causal evidence
+nhân quả,causal,Claims one thing causes another,Requires stronger design than Week 05 data
 PNG,PNG,Raster image format,Good for Word drafts and web pages
 SVG,SVG,Vector image format,Good for resizing and paper layouts

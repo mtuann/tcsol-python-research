@@ -36,3 +36,4 @@ Status: locally validated on 2026-06-03.
 - [x] Interactive demo has a screen-reader chart summary.
 - [x] Slide keyboard navigation ignores focused buttons/links.
 - [x] Local browser test confirms language switch and track interaction.
+- [x] Visual slide refresh checked in local browser: workflow cards, mini tables, notebook visual, and caption mockup render without overlap on desktop.

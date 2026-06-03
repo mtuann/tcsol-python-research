@@ -142,5 +142,5 @@ run -> observe -> edit safely -> explain
 ```
 
 ::: {.notes}
-Emphasize psychological safety. The learner should leave Week 01 feeling that Python is a research assistant, not a barrier. The public `slides.html` adds a Vietnamese-default / English-toggle layer using shared bilingual assets.
+Emphasize psychological safety. The learner should leave Week 01 feeling that Python is a research assistant, not a barrier. The public `slides.html` adds a Vietnamese-default / English-toggle layer and original visual components using shared assets. Visual references and source notes are tracked in `slide_prompt_sources.md`.
 :::

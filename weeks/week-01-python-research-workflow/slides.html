@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title data-i18n="meta.title">Tuần 01: Python như một quy trình nghiên cứu</title>
   <link rel="stylesheet" href="../../assets/css/bilingual.css">
+  <link rel="stylesheet" href="../../assets/css/visual-slides.css">
   <style>
     :root {
       --accent: #2563eb;
@@ -210,6 +211,23 @@
         <span class="tag" data-i18n="slide01.tag">Tuần 01</span>
         <h1 data-i18n="slide01.title">Python như một quy trình nghiên cứu</h1>
         <p data-i18n="slide01.subtitle">Từ chủ đề rộng đến câu hỏi sẵn sàng cho dữ liệu</p>
+        <div class="visual-grid">
+          <div class="story-card blue">
+            <span class="card-label" data-i18n="hero.step1.label">Bước 1</span>
+            <strong class="card-title" data-i18n="hero.step1.title">Chọn câu hỏi nhỏ</strong>
+            <p data-i18n="hero.step1.body">Bắt đầu từ điều bạn thật sự muốn nghiên cứu.</p>
+          </div>
+          <div class="story-card purple">
+            <span class="card-label" data-i18n="hero.step2.label">Bước 2</span>
+            <strong class="card-title" data-i18n="hero.step2.title">Tìm dữ liệu có thể quan sát</strong>
+            <p data-i18n="hero.step2.body">Nói rõ một dòng dữ liệu đại diện cho điều gì.</p>
+          </div>
+          <div class="story-card green">
+            <span class="card-label" data-i18n="hero.step3.label">Bước 3</span>
+            <strong class="card-title" data-i18n="hero.step3.title">Tạo bằng chứng cho paper</strong>
+            <p data-i18n="hero.step3.body">Một bảng, một caption, một diễn giải ngắn.</p>
+          </div>
+        </div>
         <p class="small-note" data-i18n="slide01.goal">Mục tiêu: chạy một notebook, xem một bộ dữ liệu rất nhỏ, và viết một memo nghiên cứu ngắn.</p>
       </section>
 
@@ -217,13 +235,13 @@
         <span class="tag" data-i18n="slide02.tag">Thông điệp chính</span>
         <h2 data-i18n="slide02.title">Python không phải là đích đến</h2>
         <p data-i18n="slide02.body">Python là công cụ giúp công việc nghiên cứu trở nên nhìn thấy được và có thể lặp lại.</p>
-        <div class="workflow" aria-label="Quy trình nghiên cứu" data-i18n-aria-label="workflow.label">
-          <span data-i18n="workflow.question">Câu hỏi</span>
-          <span data-i18n="workflow.data">Dữ liệu</span>
-          <span data-i18n="workflow.code">Code</span>
-          <span data-i18n="workflow.output">Bảng/Hình</span>
-          <span data-i18n="workflow.interpretation">Diễn giải</span>
-          <span data-i18n="workflow.paper">Paper</span>
+        <div class="research-map" aria-label="Quy trình nghiên cứu" data-i18n-aria-label="workflow.label">
+          <div class="research-step"><strong data-i18n="workflow.question">Câu hỏi</strong><span data-i18n="workflow.question.desc">nhỏ và trả lời được</span></div>
+          <div class="research-step"><strong data-i18n="workflow.data">Dữ liệu</strong><span data-i18n="workflow.data.desc">dòng, cột, nguồn</span></div>
+          <div class="research-step"><strong data-i18n="workflow.code">Code</strong><span data-i18n="workflow.code.desc">chạy và kiểm tra</span></div>
+          <div class="research-step"><strong data-i18n="workflow.output">Bảng/Hình</strong><span data-i18n="workflow.output.desc">output có thể trích dẫn</span></div>
+          <div class="research-step"><strong data-i18n="workflow.interpretation">Diễn giải</strong><span data-i18n="workflow.interpretation.desc">quan sát + hạn chế</span></div>
+          <div class="research-step"><strong data-i18n="workflow.paper">Paper</strong><span data-i18n="workflow.paper.desc">Methods/Results rõ hơn</span></div>
         </div>
         <p class="small-note" data-i18n="slide02.note">Tuần này ưu tiên sự tự tin, chưa cần đi sâu kỹ thuật.</p>
       </section>
@@ -231,11 +249,11 @@
       <section>
         <span class="tag" data-i18n="slide03.tag">Hướng nghiên cứu</span>
         <h2 data-i18n="slide03.title">Bốn hướng cho dự án sau này</h2>
-        <div class="track-grid">
-          <div class="track-card"><strong>TCSOL</strong><p data-i18n="track.tcsol">Giảng dạy Hán ngữ ngắn hạn, tiến bộ người học, dữ liệu lớp học.</p></div>
-          <div class="track-card"><strong data-i18n="track.contrastive.name">Đối chiếu Hán-Việt</strong><p data-i18n="track.contrastive">Ví dụ Hán-Việt, chuyển di ngôn ngữ, ghi chú giảng dạy.</p></div>
-          <div class="track-card"><strong>MT/MTPE</strong><p data-i18n="track.mtpe">Bản dịch máy, hậu hiệu đính, nhãn lỗi do con người đánh giá.</p></div>
-          <div class="track-card"><strong data-i18n="track.policy.name">Chính sách giáo dục</strong><p data-i18n="track.policy">Văn bản chính sách, chủ đề, dòng thời gian, bối cảnh thể chế.</p></div>
+        <div class="visual-grid two">
+          <div class="story-card blue"><span class="card-label">TCSOL</span><strong class="card-title" data-i18n="track.tcsol.name">Giảng dạy Hán ngữ ngắn hạn</strong><p data-i18n="track.tcsol">Tiến bộ người học, dữ liệu lớp học, bài kiểm tra trước/sau.</p></div>
+          <div class="story-card purple"><span class="card-label" data-i18n="track.contrastive.short">Đối chiếu</span><strong class="card-title" data-i18n="track.contrastive.name">Đối chiếu Hán-Việt</strong><p data-i18n="track.contrastive">Ví dụ Hán-Việt, chuyển di ngôn ngữ, ghi chú giảng dạy.</p></div>
+          <div class="story-card amber"><span class="card-label">MT/MTPE</span><strong class="card-title" data-i18n="track.mtpe.name">Dịch máy và MTPE</strong><p data-i18n="track.mtpe">Bản dịch máy, hậu hiệu đính, nhãn lỗi do con người đánh giá.</p></div>
+          <div class="story-card green"><span class="card-label" data-i18n="track.policy.short">Policy</span><strong class="card-title" data-i18n="track.policy.name">Chính sách giáo dục</strong><p data-i18n="track.policy">Văn bản chính sách, chủ đề, dòng thời gian, bối cảnh thể chế.</p></div>
         </div>
       </section>
 
@@ -258,35 +276,38 @@
       <section>
         <span class="tag" data-i18n="slide05.tag">Thói quen dữ liệu</span>
         <h2 data-i18n="slide05.title">Một dòng dữ liệu nghĩa là gì?</h2>
-        <div class="two-col">
-          <div>
-            <p data-i18n="slide05.body">Một dòng có thể là:</p>
-            <ul>
-              <li data-i18n="row.learner">một người học;</li>
-              <li data-i18n="row.answer">một câu trả lời trong bài kiểm tra;</li>
-              <li data-i18n="row.pair">một cặp câu Hán-Việt;</li>
-              <li data-i18n="row.segment">một đoạn dịch máy;</li>
-              <li data-i18n="row.policy">một trích đoạn chính sách đã mã hóa.</li>
-            </ul>
-          </div>
-          <div class="caption-good">
-            <p><strong data-i18n="beginner.rule">Quy tắc cho người mới:</strong> <span data-i18n="slide05.rule">trước khi viết code, hãy nói rõ một dòng dữ liệu đại diện cho điều gì.</span></p>
-          </div>
+        <div class="mini-table" aria-label="Ví dụ đơn vị quan sát" data-i18n-aria-label="row.examples.aria">
+          <div class="row header"><span data-i18n="row.table.track">Hướng</span><span data-i18n="row.table.one">Một dòng có thể là</span><span data-i18n="row.table.output">Output sau này</span></div>
+          <div class="row"><span>TCSOL</span><span data-i18n="row.answer">một câu trả lời trong bài kiểm tra</span><span data-i18n="row.output.prepost">bảng pre/post</span></div>
+          <div class="row"><span data-i18n="row.track.contrastive">Đối chiếu</span><span data-i18n="row.pair">một cặp câu Hán-Việt</span><span data-i18n="row.output.examples">bảng ví dụ</span></div>
+          <div class="row"><span>MTPE</span><span data-i18n="row.segment">một đoạn dịch máy</span><span data-i18n="row.output.errors">bảng lỗi</span></div>
+          <div class="row"><span data-i18n="row.track.policy">Policy</span><span data-i18n="row.policy">một trích đoạn chính sách đã mã hóa</span><span data-i18n="row.output.timeline">timeline/chủ đề</span></div>
+        </div>
+        <div class="question-box">
+          <p><strong data-i18n="beginner.rule">Quy tắc cho người mới:</strong> <span data-i18n="slide05.rule">trước khi viết code, hãy nói rõ một dòng dữ liệu đại diện cho điều gì.</span></p>
         </div>
       </section>
 
       <section>
         <span class="tag" data-i18n="slide06.tag">Notebook</span>
         <h2 data-i18n="slide06.title">Ô Markdown và ô code</h2>
-        <table>
-          <thead>
-            <tr><th data-i18n="cell.type">Loại ô</th><th data-i18n="cell.use">Dùng để làm gì</th></tr>
-          </thead>
-          <tbody>
-            <tr><td>Markdown</td><td data-i18n="cell.markdown">Câu hỏi nghiên cứu, giải thích, chú thích bảng/hình, diễn giải.</td></tr>
-            <tr><td>Code</td><td data-i18n="cell.code">Lệnh Python để đọc dữ liệu và tạo kết quả.</td></tr>
-          </tbody>
-        </table>
+        <div class="notebook-visual">
+          <div class="notebook-cell markdown">
+            <span class="card-label">Markdown</span>
+            <strong class="card-title" data-i18n="cell.markdown.title">Viết ý nghiên cứu</strong>
+            <p data-i18n="cell.markdown">Câu hỏi nghiên cứu, giải thích, chú thích bảng/hình, diễn giải.</p>
+          </div>
+          <div class="notebook-cell">
+            <span class="card-label">Code</span>
+            <strong class="card-title" data-i18n="cell.code.title">Chạy Python</strong>
+            <pre><code>print(question)</code></pre>
+          </div>
+          <div class="notebook-cell output">
+            <span class="card-label">Output</span>
+            <strong class="card-title" data-i18n="cell.output.title">Đọc kết quả</strong>
+            <p data-i18n="cell.output">Bảng, hình, hoặc text Python in ra để bạn diễn giải.</p>
+          </div>
+        </div>
         <p class="small-note" data-i18n="slide06.note">Một notebook tốt nên đọc giống bản nháp Methods/Results minh bạch.</p>
       </section>
 
@@ -309,8 +330,13 @@ question = "How do learner answers change after a short activity?"</code></pre>
       <section>
         <span class="tag" data-i18n="slide09.tag">Dữ liệu</span>
         <h2 data-i18n="slide09.title">Tệp CSV đầu tiên</h2>
-        <pre><code>data/raw/week01_research_tracks.csv</code></pre>
+        <p><code>data/raw/week01_research_tracks.csv</code></p>
         <p data-i18n="slide09.body">Tệp này có bốn dòng. Mỗi dòng là một hướng dự án có thể phát triển sau này.</p>
+        <div class="mini-table" aria-label="CSV preview" data-i18n-aria-label="csv.preview.aria">
+          <div class="row header"><span>track</span><span>small_research_question</span><span>unit_of_observation</span></div>
+          <div class="row"><span>TCSOL</span><span data-i18n="csv.preview.q1">Câu trả lời thay đổi thế nào sau hoạt động lượng từ?</span><span>learner test item</span></div>
+          <div class="row"><span>MTPE</span><span data-i18n="csv.preview.q2">Loại lỗi MT nào xuất hiện nhiều nhất?</span><span>translation segment</span></div>
+        </div>
         <p class="small-note" data-i18n="slide09.note">Dữ liệu cố ý rất nhỏ để bạn tập trung vào quy trình.</p>
       </section>
 
@@ -319,37 +345,49 @@ question = "How do learner answers change after a short activity?"</code></pre>
         <h2 data-i18n="slide10.title">Mở demo</h2>
         <p data-i18n="slide10.body">Dùng trang tương tác tĩnh để so sánh bốn hướng nghiên cứu:</p>
         <p><a href="interactive_demo.html">interactive_demo.html</a></p>
+        <div class="bridge-strip">
+          <div class="bridge learned"><strong data-i18n="demo.bridge.read">Bạn đọc</strong><span data-i18n="demo.bridge.read.body">câu hỏi, đơn vị dữ liệu, output gợi ý</span></div>
+          <div class="bridge problem"><strong data-i18n="demo.bridge.not">Bạn chưa cần</strong><span data-i18n="demo.bridge.not.body">viết HTML, CSS, hoặc JavaScript</span></div>
+          <div class="bridge next"><strong data-i18n="demo.bridge.do">Bạn làm</strong><span data-i18n="demo.bridge.do.body">chọn một hướng và diễn giải vì sao</span></div>
+        </div>
         <p class="small-note" data-i18n="slide10.note">Tuần này bạn chỉ cần diễn giải demo. Phần HTML/JavaScript là việc của giảng viên.</p>
       </section>
 
       <section>
         <span class="tag" data-i18n="slide11.tag">Sản phẩm</span>
         <h2 data-i18n="slide11.title">Bạn nộp gì trong tuần này?</h2>
-        <ol>
-          <li data-i18n="submit.notebook">một notebook chạy được;</li>
-          <li data-i18n="submit.track">một hướng nghiên cứu đã chọn;</li>
-          <li data-i18n="submit.table">một bảng nhỏ hoặc phần tóm tắt đã in ra;</li>
-          <li data-i18n="submit.caption">một chú thích bảng/hình;</li>
-          <li data-i18n="submit.memo">một memo 100-150 từ.</li>
-        </ol>
+        <div class="visual-grid">
+          <div class="story-card blue"><span class="card-label">Notebook</span><strong class="card-title" data-i18n="submit.notebook.title">Chạy được</strong><p data-i18n="submit.notebook">một notebook chạy từ đầu đến cuối</p></div>
+          <div class="story-card green"><span class="card-label">Output</span><strong class="card-title" data-i18n="submit.table.title">Có bảng nhỏ</strong><p data-i18n="submit.table">một bảng nhỏ hoặc phần tóm tắt đã in ra</p></div>
+          <div class="story-card amber"><span class="card-label">Writing</span><strong class="card-title" data-i18n="submit.memo.title">Có diễn giải</strong><p data-i18n="submit.memo">một caption và memo 100-150 từ</p></div>
+        </div>
       </section>
 
       <section>
         <span class="tag" data-i18n="slide12.tag">Chú thích</span>
         <h2 data-i18n="slide12.title">Chú thích cần giải thích kết quả</h2>
-        <p data-i18n="caption.weak.label">Chú thích yếu:</p>
-        <pre><code data-i18n="caption.weak">Bảng 1. Các hướng nghiên cứu.</code></pre>
-        <div class="caption-good">
-          <p><strong data-i18n="caption.better.label">Tốt hơn:</strong> <span data-i18n="caption.better">Bảng 1. Bốn hướng nghiên cứu cho thấy cách chuyển sở thích rộng thành câu hỏi sẵn sàng cho dữ liệu. Mỗi dòng đại diện cho một hướng và xác định đơn vị quan sát cần cho phân tích Python sau này.</span></p>
+        <div class="paper-card">
+          <div class="paper-line"></div>
+          <div class="paper-line short"></div>
+          <div class="paper-caption">
+            <p><strong data-i18n="caption.better.label">Tốt hơn:</strong> <span data-i18n="caption.better">Bảng 1. Bốn hướng nghiên cứu cho thấy cách chuyển sở thích rộng thành câu hỏi sẵn sàng cho dữ liệu. Mỗi dòng đại diện cho một hướng và xác định đơn vị quan sát cần cho phân tích Python sau này.</span></p>
+          </div>
+          <p class="small-note" data-i18n="caption.formula">Caption tốt trả lời: dữ liệu nào, N bao nhiêu, bảng/hình đo gì, và đọc kết quả ra sao.</p>
         </div>
       </section>
 
       <section>
         <span class="tag" data-i18n="slide13.tag">Ghi nhớ</span>
         <h2 data-i18n="slide13.title">Thành công của Tuần 01</h2>
-        <pre><code>run -> observe -> edit safely -> explain</code></pre>
-        <p data-i18n="slide13.body1">Hôm nay bạn không cần hiểu mọi dòng code.</p>
-        <p data-i18n="slide13.body2">Bạn chỉ cần thấy code có thể hỗ trợ quy trình nghiên cứu như thế nào.</p>
+        <div class="bridge-strip">
+          <div class="bridge learned"><strong>run</strong><span data-i18n="success.run">chạy notebook từ đầu đến cuối</span></div>
+          <div class="bridge next"><strong>observe</strong><span data-i18n="success.observe">nhìn output và kiểm tra ý nghĩa</span></div>
+          <div class="bridge learned"><strong>explain</strong><span data-i18n="success.explain">viết caption và memo ngắn</span></div>
+        </div>
+        <div class="question-box">
+          <p data-i18n="slide13.body1">Hôm nay bạn không cần hiểu mọi dòng code.</p>
+          <p data-i18n="slide13.body2">Bạn chỉ cần thấy code có thể hỗ trợ quy trình nghiên cứu như thế nào.</p>
+        </div>
       </section>
     </div>
   </div>
@@ -372,16 +410,35 @@ question = "How do learner answers change after a short activity?"</code></pre>
         "slide01.title": "Python như một quy trình nghiên cứu",
         "slide01.subtitle": "Từ chủ đề rộng đến câu hỏi sẵn sàng cho dữ liệu",
         "slide01.goal": "Mục tiêu: chạy một notebook, xem một bộ dữ liệu rất nhỏ, và viết một memo nghiên cứu ngắn.",
+        "hero.step1.label": "Bước 1",
+        "hero.step1.title": "Chọn câu hỏi nhỏ",
+        "hero.step1.body": "Bắt đầu từ điều bạn thật sự muốn nghiên cứu.",
+        "hero.step2.label": "Bước 2",
+        "hero.step2.title": "Tìm dữ liệu có thể quan sát",
+        "hero.step2.body": "Nói rõ một dòng dữ liệu đại diện cho điều gì.",
+        "hero.step3.label": "Bước 3",
+        "hero.step3.title": "Tạo bằng chứng cho paper",
+        "hero.step3.body": "Một bảng, một caption, một diễn giải ngắn.",
         "slide02.tag": "Thông điệp chính",
         "slide02.title": "Python không phải là đích đến",
         "slide02.body": "Python là công cụ giúp công việc nghiên cứu trở nên nhìn thấy được và có thể lặp lại.",
         "slide02.note": "Tuần này ưu tiên sự tự tin, chưa cần đi sâu kỹ thuật.",
+        "workflow.question.desc": "nhỏ và trả lời được",
+        "workflow.data.desc": "dòng, cột, nguồn",
+        "workflow.code.desc": "chạy và kiểm tra",
+        "workflow.output.desc": "output có thể trích dẫn",
+        "workflow.interpretation.desc": "quan sát + hạn chế",
+        "workflow.paper.desc": "Methods/Results rõ hơn",
         "slide03.tag": "Hướng nghiên cứu",
         "slide03.title": "Bốn hướng cho dự án sau này",
-        "track.tcsol": "Giảng dạy Hán ngữ ngắn hạn, tiến bộ người học, dữ liệu lớp học.",
+        "track.tcsol.name": "Giảng dạy Hán ngữ ngắn hạn",
+        "track.tcsol": "Tiến bộ người học, dữ liệu lớp học, bài kiểm tra trước/sau.",
+        "track.contrastive.short": "Đối chiếu",
         "track.contrastive.name": "Đối chiếu Hán-Việt",
         "track.contrastive": "Ví dụ Hán-Việt, chuyển di ngôn ngữ, ghi chú giảng dạy.",
+        "track.mtpe.name": "Dịch máy và MTPE",
         "track.mtpe": "Bản dịch máy, hậu hiệu đính, nhãn lỗi do con người đánh giá.",
+        "track.policy.short": "Policy",
         "track.policy.name": "Chính sách giáo dục",
         "track.policy": "Văn bản chính sách, chủ đề, dòng thời gian, bối cảnh thể chế.",
         "slide04.tag": "Tư duy nghiên cứu",
@@ -404,14 +461,28 @@ question = "How do learner answers change after a short activity?"</code></pre>
         "row.pair": "một cặp câu Hán-Việt;",
         "row.segment": "một đoạn dịch máy;",
         "row.policy": "một trích đoạn chính sách đã mã hóa.",
+        "row.examples.aria": "Ví dụ đơn vị quan sát",
+        "row.table.track": "Hướng",
+        "row.table.one": "Một dòng có thể là",
+        "row.table.output": "Output sau này",
+        "row.track.contrastive": "Đối chiếu",
+        "row.track.policy": "Policy",
+        "row.output.prepost": "bảng pre/post",
+        "row.output.examples": "bảng ví dụ",
+        "row.output.errors": "bảng lỗi",
+        "row.output.timeline": "timeline/chủ đề",
         "beginner.rule": "Quy tắc cho người mới:",
         "slide05.rule": "trước khi viết code, hãy nói rõ một dòng dữ liệu đại diện cho điều gì.",
         "slide06.tag": "Notebook",
         "slide06.title": "Ô Markdown và ô code",
         "cell.type": "Loại ô",
         "cell.use": "Dùng để làm gì",
+        "cell.markdown.title": "Viết ý nghiên cứu",
         "cell.markdown": "Câu hỏi nghiên cứu, giải thích, chú thích bảng/hình, diễn giải.",
+        "cell.code.title": "Chạy Python",
         "cell.code": "Lệnh Python để đọc dữ liệu và tạo kết quả.",
+        "cell.output.title": "Đọc kết quả",
+        "cell.output": "Bảng, hình, hoặc text Python in ra để bạn diễn giải.",
         "slide06.note": "Một notebook tốt nên đọc giống bản nháp Methods/Results minh bạch.",
         "slide07.tag": "Code đầu tiên",
         "slide07.title": "Biến (variable) lưu một giá trị",
@@ -422,26 +493,42 @@ question = "How do learner answers change after a short activity?"</code></pre>
         "slide09.tag": "Dữ liệu",
         "slide09.title": "Tệp CSV đầu tiên",
         "slide09.body": "Tệp này có bốn dòng. Mỗi dòng là một hướng dự án có thể phát triển sau này.",
+        "csv.preview.aria": "Xem trước CSV",
+        "csv.preview.q1": "Câu trả lời thay đổi thế nào sau hoạt động lượng từ?",
+        "csv.preview.q2": "Loại lỗi MT nào xuất hiện nhiều nhất?",
         "slide09.note": "Dữ liệu cố ý rất nhỏ để bạn tập trung vào quy trình.",
         "slide10.tag": "Tương tác",
         "slide10.title": "Mở demo",
         "slide10.body": "Dùng trang tương tác tĩnh để so sánh bốn hướng nghiên cứu:",
+        "demo.bridge.read": "Bạn đọc",
+        "demo.bridge.read.body": "câu hỏi, đơn vị dữ liệu, output gợi ý",
+        "demo.bridge.not": "Bạn chưa cần",
+        "demo.bridge.not.body": "viết HTML, CSS, hoặc JavaScript",
+        "demo.bridge.do": "Bạn làm",
+        "demo.bridge.do.body": "chọn một hướng và diễn giải vì sao",
         "slide10.note": "Tuần này bạn chỉ cần diễn giải demo. Phần HTML/JavaScript là việc của giảng viên.",
         "slide11.tag": "Sản phẩm",
         "slide11.title": "Bạn nộp gì trong tuần này?",
-        "submit.notebook": "một notebook chạy được;",
+        "submit.notebook.title": "Chạy được",
+        "submit.notebook": "một notebook chạy từ đầu đến cuối",
         "submit.track": "một hướng nghiên cứu đã chọn;",
-        "submit.table": "một bảng nhỏ hoặc phần tóm tắt đã in ra;",
+        "submit.table.title": "Có bảng nhỏ",
+        "submit.table": "một bảng nhỏ hoặc phần tóm tắt đã in ra",
         "submit.caption": "một chú thích bảng/hình;",
-        "submit.memo": "một memo 100-150 từ.",
+        "submit.memo.title": "Có diễn giải",
+        "submit.memo": "một caption và memo 100-150 từ",
         "slide12.tag": "Chú thích",
         "slide12.title": "Chú thích cần giải thích kết quả",
         "caption.weak.label": "Chú thích yếu:",
         "caption.weak": "Bảng 1. Các hướng nghiên cứu.",
         "caption.better.label": "Tốt hơn:",
         "caption.better": "Bảng 1. Bốn hướng nghiên cứu cho thấy cách chuyển sở thích rộng thành câu hỏi sẵn sàng cho dữ liệu. Mỗi dòng đại diện cho một hướng và xác định đơn vị quan sát cần cho phân tích Python sau này.",
+        "caption.formula": "Caption tốt trả lời: dữ liệu nào, N bao nhiêu, bảng/hình đo gì, và đọc kết quả ra sao.",
         "slide13.tag": "Ghi nhớ",
         "slide13.title": "Thành công của Tuần 01",
+        "success.run": "chạy notebook từ đầu đến cuối",
+        "success.observe": "nhìn output và kiểm tra ý nghĩa",
+        "success.explain": "viết caption và memo ngắn",
         "slide13.body1": "Hôm nay bạn không cần hiểu mọi dòng code.",
         "slide13.body2": "Bạn chỉ cần thấy code có thể hỗ trợ quy trình nghiên cứu như thế nào."
       },
@@ -461,16 +548,35 @@ question = "How do learner answers change after a short activity?"</code></pre>
         "slide01.title": "Python as a Research Workflow",
         "slide01.subtitle": "From topic to data-ready question",
         "slide01.goal": "Goal: run a notebook, inspect a tiny dataset, and write one short research memo.",
+        "hero.step1.label": "Step 1",
+        "hero.step1.title": "Choose a small question",
+        "hero.step1.body": "Start from what you truly want to study.",
+        "hero.step2.label": "Step 2",
+        "hero.step2.title": "Find observable data",
+        "hero.step2.body": "Say what one row of data represents.",
+        "hero.step3.label": "Step 3",
+        "hero.step3.title": "Build paper evidence",
+        "hero.step3.body": "One table, one caption, one short interpretation.",
         "slide02.tag": "Core message",
         "slide02.title": "Python is not the goal",
         "slide02.body": "Python is a tool for making research work visible and repeatable.",
         "slide02.note": "This week is about confidence, not technical depth.",
+        "workflow.question.desc": "small and answerable",
+        "workflow.data.desc": "rows, columns, source",
+        "workflow.code.desc": "run and check",
+        "workflow.output.desc": "citable output",
+        "workflow.interpretation.desc": "observation + limitation",
+        "workflow.paper.desc": "clearer Methods/Results",
         "slide03.tag": "Research tracks",
         "slide03.title": "Four directions for future projects",
-        "track.tcsol": "Short-term Chinese teaching, learner progress, classroom data.",
+        "track.tcsol.name": "Short-term Chinese teaching",
+        "track.tcsol": "Learner progress, classroom data, pre/post tests.",
+        "track.contrastive.short": "Contrastive",
         "track.contrastive.name": "Chinese-Vietnamese contrastive analysis",
         "track.contrastive": "Chinese-Vietnamese examples, transfer, teaching notes.",
+        "track.mtpe.name": "Machine translation and MTPE",
         "track.mtpe": "Machine translation output, post-editing, human error labels.",
+        "track.policy.short": "Policy",
         "track.policy.name": "Education policy",
         "track.policy": "Policy documents, themes, timeline, institutional context.",
         "slide04.tag": "Research thinking",
@@ -493,14 +599,28 @@ question = "How do learner answers change after a short activity?"</code></pre>
         "row.pair": "one Chinese-Vietnamese sentence pair;",
         "row.segment": "one MT segment;",
         "row.policy": "one coded policy excerpt.",
+        "row.examples.aria": "Unit of observation examples",
+        "row.table.track": "Track",
+        "row.table.one": "One row can be",
+        "row.table.output": "Future output",
+        "row.track.contrastive": "Contrastive",
+        "row.track.policy": "Policy",
+        "row.output.prepost": "pre/post table",
+        "row.output.examples": "example table",
+        "row.output.errors": "error table",
+        "row.output.timeline": "timeline/themes",
         "beginner.rule": "Beginner rule:",
         "slide05.rule": "before writing code, say what one row represents.",
         "slide06.tag": "Notebook",
         "slide06.title": "Markdown cells and code cells",
         "cell.type": "Cell type",
         "cell.use": "Use",
+        "cell.markdown.title": "Write research ideas",
         "cell.markdown": "Research question, explanation, caption, interpretation.",
+        "cell.code.title": "Run Python",
         "cell.code": "Python commands that load data and produce output.",
+        "cell.output.title": "Read the result",
+        "cell.output": "A table, figure, or printed text for you to interpret.",
         "slide06.note": "A good notebook should read like a transparent Methods/Results draft.",
         "slide07.tag": "First code",
         "slide07.title": "A variable stores a value",
@@ -511,26 +631,42 @@ question = "How do learner answers change after a short activity?"</code></pre>
         "slide09.tag": "Dataset",
         "slide09.title": "The first CSV file",
         "slide09.body": "This file has four rows. Each row is one possible future project track.",
+        "csv.preview.aria": "CSV preview",
+        "csv.preview.q1": "How do answers change after a measure-word activity?",
+        "csv.preview.q2": "Which MT error type appears most often?",
         "slide09.note": "The dataset is intentionally small so the learner can focus on the workflow.",
         "slide10.tag": "Interactive",
         "slide10.title": "Open the demo",
         "slide10.body": "Use the static interactive page to compare the four tracks:",
+        "demo.bridge.read": "You read",
+        "demo.bridge.read.body": "question, data unit, suggested output",
+        "demo.bridge.not": "Not required yet",
+        "demo.bridge.not.body": "writing HTML, CSS, or JavaScript",
+        "demo.bridge.do": "You do",
+        "demo.bridge.do.body": "choose a track and explain why",
         "slide10.note": "The learner only interprets the demo this week. The instructor owns the HTML/JavaScript.",
         "slide11.tag": "Output",
         "slide11.title": "What you submit this week",
-        "submit.notebook": "a notebook that runs;",
+        "submit.notebook.title": "Runnable",
+        "submit.notebook": "a notebook that runs from top to bottom",
         "submit.track": "one selected research track;",
-        "submit.table": "one small table or printed summary;",
+        "submit.table.title": "Small table",
+        "submit.table": "one small table or printed summary",
         "submit.caption": "one caption;",
-        "submit.memo": "one 100-150 word memo.",
+        "submit.memo.title": "Interpretation",
+        "submit.memo": "one caption and one 100-150 word memo",
         "slide12.tag": "Caption",
         "slide12.title": "A caption should explain the output",
         "caption.weak.label": "Weak caption:",
         "caption.weak": "Table 1. Research tracks.",
         "caption.better.label": "Better:",
         "caption.better": "Table 1. Four possible research tracks connect broad interests to data-ready questions. Each row represents one track and identifies the unit of observation needed for future Python analysis.",
+        "caption.formula": "A good caption answers: what data, what N, what the table/figure measures, and how to read the result.",
         "slide13.tag": "Takeaway",
         "slide13.title": "Week 01 success",
+        "success.run": "run the notebook from top to bottom",
+        "success.observe": "look at output and check meaning",
+        "success.explain": "write a caption and short memo",
         "slide13.body1": "You do not need to understand every line of code today.",
         "slide13.body2": "You only need to see how code can support a research workflow."
       }

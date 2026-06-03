@@ -90,6 +90,7 @@ Required support files for every week:
 - `content_blocks.md`: bilingual source blocks for slide/demo text and key learner instructions.
 - `glossary_weekXX.csv`: week-specific terms with Vietnamese, English, and notes.
 - `translation_qa.md`: final checklist for language switch, terminology, accessibility, and learner load.
+- `slide_prompt_sources.md`: source and prompt log for visual slide references, generated assets, and original diagrams.
 
 Course-wide support files:
 
@@ -97,6 +98,8 @@ Course-wide support files:
 - `resources/glossary/core_glossary.csv`;
 - `resources/templates/bilingual_content_blocks_template.md`;
 - `resources/templates/translation_qa_checklist.md`.
+- `resources/templates/slide_prompt_sources_template.md`;
+- `resources/slide_design/visual_slide_playbook.md`.
 
 ## Standard Week Folder
 
@@ -120,6 +123,7 @@ weeks/week-XX-topic-slug/
 ├── instructor_notes.md
 ├── glossary_weekXX.csv
 ├── translation_qa.md
+├── slide_prompt_sources.md
 ├── data/
 │   ├── raw/
 │   └── processed/
@@ -226,6 +230,21 @@ Optional slides:
 - MT/MTPE error examples;
 - education policy timeline or coding example;
 - paper Methods/Results excerpt.
+
+### Visual Slide Standard
+
+Each deck should feel like a guided research explanation, not a text document broken into slides. Follow `resources/slide_design/visual_slide_playbook.md`.
+
+Required visual rhythm:
+
+1. Start with a concrete visual hook.
+2. Use one slide for one conceptual job.
+3. Prefer original HTML/CSS/SVG diagrams over long paragraphs.
+4. Use color semantically: blue for Python/action, green for evidence/output, amber for caution/limitation, red for mistakes, gray for metadata/source.
+5. Include at least three original visual components per week, such as workflow maps, dataset previews, paper-output mockups, before/after cards, or caption anatomy cards.
+6. Track every external visual reference, generated-image prompt, or AI-assisted diagram in `slide_prompt_sources.md`.
+
+Never copy images, diagrams, or exact CSS from an external slide deck unless the license explicitly allows reuse and the source is recorded.
 
 ### HTML Slide Requirements
 
@@ -778,7 +797,7 @@ A week is complete only when all are true:
 
 - `README.md` states the research question and Python skill.
 - Learner-facing website content opens in Vietnamese by default and can switch to English.
-- `content_blocks.md`, `glossary_weekXX.csv`, and `translation_qa.md` are updated.
+- `content_blocks.md`, `glossary_weekXX.csv`, `translation_qa.md`, and `slide_prompt_sources.md` are updated.
 - `slides.qmd` and `slides.html` exist and follow the slide deck standard.
 - `interactive_demo.html` exists or the week explicitly explains why no interaction is useful.
 - Lecture notes explain the concept, code, mistakes, and research use.
@@ -792,6 +811,7 @@ A week is complete only when all are true:
 - Rubric is present.
 - Learner-facing Core is clearly separated from Stretch and Instructor-only content.
 - Language switch, keyboard navigation, and no-JavaScript fallback are tested for public HTML.
+- Slide visuals are original or properly sourced, and all prompts/sources are logged.
 - No private learner data is exposed.
 
 ## Design Smell Checklist

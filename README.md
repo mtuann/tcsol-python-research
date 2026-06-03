@@ -90,6 +90,15 @@ For future weeks, start from:
 - [`resources/templates/translation_qa_checklist.md`](resources/templates/translation_qa_checklist.md)
 - [`resources/glossary/core_glossary.csv`](resources/glossary/core_glossary.csv)
 
+## Visual Slide And Source Tracking Policy
+
+Slides should use original visual explanations: workflow maps, dataset previews, paper-output mockups, caption anatomy cards, and research-track comparison panels. External decks may be used as design references, but their images, diagrams, and exact CSS should not be copied unless the license explicitly allows reuse.
+
+For future slide work, use:
+
+- [`resources/slide_design/visual_slide_playbook.md`](resources/slide_design/visual_slide_playbook.md)
+- [`resources/templates/slide_prompt_sources_template.md`](resources/templates/slide_prompt_sources_template.md)
+
 ## Current Lesson Packages
 
 - [`Tuần 01: Python như một quy trình nghiên cứu`](weeks/week-01-python-research-workflow/)

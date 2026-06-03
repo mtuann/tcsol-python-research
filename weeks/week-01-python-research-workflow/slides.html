@@ -45,11 +45,25 @@
       color: #102a43;
       padding: 0.08em 0.22em;
     }
+    .reveal pre {
+      background: transparent;
+      box-shadow: none;
+      margin: 0.85rem 0;
+      max-width: 100%;
+      overflow: visible;
+      white-space: normal;
+    }
     .reveal pre code {
+      box-sizing: border-box;
+      display: block;
       border-radius: 8px;
-      font-size: 0.8em;
-      line-height: 1.25;
+      font-size: 0.68em;
+      line-height: 1.45;
+      max-width: 100%;
+      overflow-x: auto;
+      overflow-wrap: anywhere;
       padding: 1em;
+      white-space: pre-wrap;
     }
     .slide-tools {
       padding: 0.75rem 1rem 0;
@@ -143,23 +157,52 @@
       min-width: 4.5rem;
       text-align: center;
     }
+    .fallback-nav form {
+      align-items: center;
+      display: flex;
+      gap: 0.35rem;
+      margin: 0;
+    }
+    .fallback-nav label {
+      color: var(--muted);
+      font-size: 0.86rem;
+    }
+    .fallback-nav input {
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: var(--ink);
+      font: inherit;
+      font-size: 0.9rem;
+      min-height: 2.05rem;
+      padding: 0.25rem 0.45rem;
+      text-align: center;
+      width: 4.2rem;
+    }
+    .fallback-nav .jump-button {
+      background: var(--ink);
+      padding: 0.45rem 0.7rem;
+    }
     body.fallback-mode {
       background: #ffffff;
+      overflow-x: hidden;
     }
     body.fallback-mode .reveal {
       min-height: 100vh;
     }
     body.fallback-mode .slides {
       align-items: center;
+      box-sizing: border-box;
       display: flex;
       min-height: 100vh;
       justify-content: center;
       padding: 2rem 2rem 5rem;
+      width: 100%;
     }
     body.fallback-mode .slides > section {
+      box-sizing: border-box;
       display: none;
-      max-width: 980px;
-      width: 100%;
+      max-width: min(980px, calc(100vw - 4rem));
+      width: 100% !important;
     }
     body.fallback-mode .slides > section.active {
       display: block;
@@ -190,7 +233,21 @@
       }
       body.fallback-mode .slides {
         align-items: flex-start;
+        padding-left: 1rem;
+        padding-right: 1rem;
         padding-top: 4.8rem;
+      }
+      body.fallback-mode .slides > section {
+        max-width: calc(100vw - 2rem);
+      }
+      .reveal pre code {
+        font-size: 0.62em;
+      }
+      body.fallback-mode .fallback-nav {
+        border-radius: 18px;
+        flex-wrap: wrap;
+        justify-content: center;
+        max-width: calc(100vw - 24px);
       }
     }
   </style>
@@ -399,6 +456,10 @@ question = "How do learner answers change after a short activity?"</code></pre>
         "nav.language": "Ngôn ngữ / Language",
         "nav.previous": "Trước",
         "nav.next": "Tiếp",
+        "nav.jump.aria": "Đi tới slide",
+        "nav.jump.label": "Trang",
+        "nav.jump.input": "Số trang",
+        "nav.jump.go": "Đi",
         "workflow.label": "Quy trình nghiên cứu",
         "workflow.question": "Câu hỏi",
         "workflow.data": "Dữ liệu",
@@ -537,6 +598,10 @@ question = "How do learner answers change after a short activity?"</code></pre>
         "nav.language": "Language",
         "nav.previous": "Previous",
         "nav.next": "Next",
+        "nav.jump.aria": "Go to slide",
+        "nav.jump.label": "Slide",
+        "nav.jump.input": "Slide number",
+        "nav.jump.go": "Go",
         "workflow.label": "Research workflow",
         "workflow.question": "Question",
         "workflow.data": "Data",
@@ -678,9 +743,20 @@ question = "How do learner answers change after a short activity?"</code></pre>
       const nav = document.createElement("nav");
       nav.className = "fallback-nav";
       nav.setAttribute("aria-label", "Slide navigation");
-      nav.innerHTML = '<button type="button" data-dir="-1" data-i18n="nav.previous">Trước</button><span></span><button type="button" data-dir="1" data-i18n="nav.next">Tiếp</button>';
+      nav.innerHTML = `
+        <button type="button" data-dir="-1" data-i18n="nav.previous">Trước</button>
+        <span class="slide-counter"></span>
+        <form class="slide-jump" data-i18n-aria-label="nav.jump.aria" aria-label="Đi tới slide">
+          <label for="slide-jump-input" data-i18n="nav.jump.label">Trang</label>
+          <input id="slide-jump-input" type="number" min="1" inputmode="numeric" data-i18n-aria-label="nav.jump.input" aria-label="Số trang">
+          <button class="jump-button" type="submit" data-i18n="nav.jump.go">Đi</button>
+        </form>
+        <button type="button" data-dir="1" data-i18n="nav.next">Tiếp</button>
+      `;
       document.body.appendChild(nav);
-      const label = nav.querySelector("span");
+      const label = nav.querySelector(".slide-counter");
+      const jumpForm = nav.querySelector(".slide-jump");
+      const jumpInput = nav.querySelector("#slide-jump-input");
       const prevButton = nav.querySelector('[data-dir="-1"]');
       const nextButton = nav.querySelector('[data-dir="1"]');
 
@@ -688,6 +764,8 @@ question = "How do learner answers change after a short activity?"</code></pre>
         current = Math.max(0, Math.min(sections.length - 1, index));
         sections.forEach((section, idx) => section.classList.toggle("active", idx === current));
         label.textContent = (current + 1) + " / " + sections.length;
+        jumpInput.max = String(sections.length);
+        jumpInput.value = String(current + 1);
         prevButton.disabled = current === 0;
         nextButton.disabled = current === sections.length - 1;
         location.hash = "slide-" + (current + 1);
@@ -695,8 +773,25 @@ question = "How do learner answers change after a short activity?"</code></pre>
 
       nav.addEventListener("click", (event) => {
         const button = event.target.closest("button");
-        if (!button) return;
+        if (!button || !button.dataset.dir) return;
         show(current + Number(button.dataset.dir));
+      });
+
+      function jumpToRequestedSlide() {
+        const requested = Number(jumpInput.value);
+        if (!Number.isFinite(requested)) return;
+        show(requested - 1);
+      }
+
+      jumpForm.addEventListener("submit", (event) => {
+        event.preventDefault();
+        jumpToRequestedSlide();
+      });
+
+      jumpInput.addEventListener("keydown", (event) => {
+        if (event.key !== "Enter") return;
+        event.preventDefault();
+        jumpToRequestedSlide();
       });
 
       document.addEventListener("keydown", (event) => {
@@ -712,7 +807,9 @@ question = "How do learner answers change after a short activity?"</code></pre>
       });
 
       document.body.classList.add("fallback-mode");
-      show(0);
+      const initialMatch = location.hash.match(/^#slide-(\d+)$/);
+      const initialSlide = initialMatch ? Number(initialMatch[1]) - 1 : 0;
+      show(initialSlide);
     }
 
     initFallbackSlides();

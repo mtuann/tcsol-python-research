@@ -139,11 +139,17 @@
       <section>
         <div class="slide-head">
           <span class="tag" data-i18n="s8.tag">Writing</span>
-          <h2 class="wide-title" data-i18n="s8.title">Data description cho paper</h2>
+          <h2 class="wide-title" data-i18n="s8.title">Mẫu mô tả dữ liệu</h2>
+          <p class="lead" data-i18n="s8.body">Điền ba phần được tô màu trước khi đưa câu này vào Methods hoặc Data section.</p>
         </div>
         <div class="stage">
-          <div class="paper-card">
-            <blockquote data-i18n="sentence.frame">The dataset is organized at the level of [unit of observation]. Each row contains [required columns], which allows the study to [paper purpose].</blockquote>
+          <div class="paper-card sentence-frame-card">
+            <blockquote class="sentence-frame" data-i18n-html="sentence.frame">The dataset is organized at the level of <span class="frame-slot">unit of observation</span>. Each row contains <span class="frame-slot columns">required columns</span>, which allows the study to <span class="frame-slot purpose">paper purpose</span>.</blockquote>
+            <div class="chip-row" aria-label="Sentence frame slots" data-i18n-aria-label="sentence.slots.aria">
+              <span class="chip" data-i18n="sentence.slot.unit">unit = một dòng là gì</span>
+              <span class="chip" data-i18n="sentence.slot.columns">columns = cột bắt buộc</span>
+              <span class="chip optional" data-i18n="sentence.slot.purpose">purpose = dùng để chứng minh gì</span>
+            </div>
           </div>
         </div>
       </section>
@@ -250,8 +256,13 @@
         "s7.title": "CSV thành list of dictionaries",
         "s7.body": "Tuần này bạn đọc output, chưa cần tự viết toàn bộ code đọc file.",
         "s8.tag": "Writing",
-        "s8.title": "Data description cho paper",
-        "sentence.frame": "The dataset is organized at the level of [unit of observation]. Each row contains [required columns], which allows the study to [paper purpose].",
+        "s8.title": "Mẫu mô tả dữ liệu",
+        "s8.body": "Điền ba phần được tô màu trước khi đưa câu này vào Methods hoặc Data section.",
+        "sentence.frame": "The dataset is organized at the level of <span class=\"frame-slot\">unit of observation</span>. Each row contains <span class=\"frame-slot columns\">required columns</span>, which allows the study to <span class=\"frame-slot purpose\">paper purpose</span>.",
+        "sentence.slots.aria": "Các phần cần thay trong sentence frame",
+        "sentence.slot.unit": "unit = một dòng là gì",
+        "sentence.slot.columns": "columns = cột bắt buộc",
+        "sentence.slot.purpose": "purpose = dùng để chứng minh gì",
         "s9.tag": "Thực hành",
         "s9.title": "Hôm nay chỉ cần làm bốn việc",
         "submit.1": "chạy notebook từ đầu đến cuối",
@@ -333,8 +344,13 @@
         "s7.title": "CSV to list of dictionaries",
         "s7.body": "This week you read output; you do not need to write the whole file-reading script yet.",
         "s8.tag": "Writing",
-        "s8.title": "Data description for a paper",
-        "sentence.frame": "The dataset is organized at the level of [unit of observation]. Each row contains [required columns], which allows the study to [paper purpose].",
+        "s8.title": "Data description",
+        "s8.body": "Fill the three highlighted parts before moving this sentence into a Methods or Data section.",
+        "sentence.frame": "The dataset is organized at the level of <span class=\"frame-slot\">unit of observation</span>. Each row contains <span class=\"frame-slot columns\">required columns</span>, which allows the study to <span class=\"frame-slot purpose\">paper purpose</span>.",
+        "sentence.slots.aria": "Replaceable parts in the sentence frame",
+        "sentence.slot.unit": "unit = what one row means",
+        "sentence.slot.columns": "columns = required columns",
+        "sentence.slot.purpose": "purpose = what it supports",
         "s9.tag": "Practice",
         "s9.title": "Today only has four tasks",
         "submit.1": "run the notebook from top to bottom",

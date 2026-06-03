@@ -450,11 +450,43 @@ h2 {
   max-width: 980px;
 }
 
+.sentence-frame-card {
+  max-width: 1080px;
+}
+
 blockquote {
   color: var(--ink);
   font-size: clamp(1.35rem, 2.4vw, 2rem);
   line-height: 1.35;
   margin: 0;
+}
+
+.sentence-frame {
+  font-size: clamp(1.15rem, 1.9vw, 1.75rem);
+  line-height: 1.5;
+}
+
+.frame-slot {
+  background: var(--blue-soft);
+  border: 1px solid #cfe1ff;
+  border-radius: 8px;
+  color: #1d4ed8;
+  display: inline-block;
+  font-weight: 850;
+  line-height: 1.15;
+  padding: 0.08em 0.34em;
+}
+
+.frame-slot.columns {
+  background: var(--green-soft);
+  border-color: rgba(31, 122, 77, 0.25);
+  color: var(--green);
+}
+
+.frame-slot.purpose {
+  background: var(--amber-soft);
+  border-color: #fed7aa;
+  color: #9a3412;
 }
 
 .checklist {

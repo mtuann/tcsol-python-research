@@ -69,12 +69,17 @@ By the end of the course, the learner should be able to:
 - **Quarto** for a later reproducible report workflow.
 - **Markdown** for README, notes, and simple GitHub Pages content.
 
+## Course Design Standard
+
+All weekly lessons must follow the contract in [`resources/WEEKLY_LESSON_DESIGN_STANDARD.md`](resources/WEEKLY_LESSON_DESIGN_STANDARD.md). That file defines the required weekly artifacts: slides, lecture notes, live-coding notebook, dataset/data dictionary, exercises, assignment, readings, figure/table output, caption, interpretation paragraph, rubric, and reproducibility checklist.
+
 ## Suggested Repository Structure
 
 ```text
 tcsol-python-research-syllabus/
 ├── README.md
 ├── docs/                  # future GitHub Pages site
+├── weeks/                 # week-by-week lesson packages
 ├── notebooks/             # lesson notebooks and student exercises
 ├── data/
 │   ├── raw/               # original data, usually not public
@@ -415,6 +420,7 @@ These topics are useful later, but they are not the shortest path to a good Appl
 ## Next Content Tasks
 
 - Create `docs/index.md` as a public landing page.
+- Create `weeks/week-01-python-research-workflow/` from the weekly design standard.
 - Create a first lesson notebook: `notebooks/week-01-python-as-research-tool.ipynb`.
 - Create blank CSV templates in `resources/templates/`.
 - Add a one-page learner setup guide in Vietnamese.

@@ -1,68 +1,68 @@
-# Week 01 Lecture Notes: Python as a Research Workflow
+# Tuần 01 Lecture Notes: Python như một quy trình nghiên cứu
 
-## Core Idea
+## Ý chính
 
-Python is not the goal of this course. Python is the tool we use to make research work clearer, more repeatable, and easier to turn into paper evidence.
+Python không phải là mục tiêu của khóa học. Python là công cụ giúp công việc nghiên cứu rõ ràng hơn, có thể kiểm tra lại, và dễ chuyển thành bằng chứng trong paper.
 
-For this learner, Python will usually help with four kinds of work:
+Với hướng học của bạn, Python thường giúp bốn việc:
 
-1. organizing data from a class, test, survey, translation task, or policy document;
-2. checking the data instead of relying on memory or manual counting;
-3. producing a table or figure;
-4. writing a more transparent Methods and Results section.
+1. tổ chức dữ liệu từ lớp học, bài kiểm tra, khảo sát, bài dịch, hoặc văn bản chính sách;
+2. kiểm tra dữ liệu thay vì đếm thủ công hoặc dựa vào trí nhớ;
+3. tạo bảng hoặc hình;
+4. viết phần Methods và Results minh bạch hơn.
 
-## What Is a Notebook?
+## Jupyter Notebook là gì?
 
-A Jupyter notebook has two important cell types.
+Jupyter notebook có hai loại ô quan trọng.
 
-| Cell type | Use |
+| Loại ô | Dùng để làm gì |
 |---|---|
-| Markdown | Write explanations, headings, research questions, captions, and interpretation. |
-| Code | Run Python commands. |
+| Markdown | Viết giải thích, tiêu đề, câu hỏi nghiên cứu, caption, và diễn giải. |
+| Code | Chạy lệnh Python. |
 
-The best research notebook reads like a small paper draft:
+Một notebook nghiên cứu tốt nên đọc giống một bản nháp paper nhỏ:
 
 ```text
-research question
-data source
+câu hỏi nghiên cứu
+nguồn dữ liệu
 code
-table or figure
-interpretation
-limitation
+bảng hoặc hình
+diễn giải
+hạn chế
 ```
 
-## The First Python Ideas
+## Ý tưởng Python đầu tiên
 
 ### 1. `print`
 
-`print` shows a message or result.
+`print` hiển thị một thông điệp hoặc kết quả.
 
 ```python
 print("My research topic is short-term Chinese teaching.")
 ```
 
-### 2. Variables
+### 2. Biến (variable)
 
-A variable is a name that stores a value.
+Biến là một tên dùng để lưu giá trị.
 
 ```python
 topic = "Chinese measure words"
 research_area = "TCSOL"
 ```
 
-Think of a variable as a labeled note. Python remembers the value so we can reuse it later.
+Hãy tưởng tượng biến như một mảnh giấy có nhãn. Python ghi nhớ giá trị đó để mình dùng lại sau.
 
-### 3. Strings
+### 3. Chuỗi văn bản (string)
 
-Text in Python is usually written inside quotation marks.
+Text trong Python thường đặt trong dấu ngoặc kép.
 
 ```python
 question = "How do learner answers change after a short measure-word lesson?"
 ```
 
-### 4. Lists of rows
+### 4. Danh sách các dòng
 
-When we read a CSV file, Python can store the rows in a list.
+Khi đọc một tệp CSV, Python có thể lưu các dòng vào một danh sách.
 
 ```python
 rows = [
@@ -71,126 +71,126 @@ rows = [
 ]
 ```
 
-For Week 01, the learner only needs to know that:
+Trong Tuần 01, bạn chỉ cần biết:
 
-- a list can contain several rows;
-- `len(rows)` counts how many rows there are;
-- `rows[0]` shows the first row.
+- danh sách có thể chứa nhiều dòng;
+- `len(rows)` đếm có bao nhiêu dòng;
+- `rows[0]` cho xem dòng đầu tiên.
 
-## Research Skill: Topic vs Research Question
+## Kỹ năng nghiên cứu: chủ đề rộng và câu hỏi nghiên cứu
 
-A broad topic is not yet ready for data analysis.
+Chủ đề rộng chưa đủ để phân tích dữ liệu.
 
-| Broad topic | Better research question |
+| Chủ đề rộng | Câu hỏi tốt hơn |
 |---|---|
-| Teaching Chinese grammar | How do learner answers change before and after a short measure-word activity? |
-| Chinese-Vietnamese comparison | Which ba-construction examples create word-order transfer problems for Vietnamese learners? |
-| Machine translation | Which MT error type is most frequent in Chinese-Vietnamese policy sentences? |
-| Education policy | How do recent policy excerpts discuss teacher development? |
+| Dạy ngữ pháp tiếng Trung | Câu trả lời của người học thay đổi thế nào trước và sau một hoạt động ngắn về lượng từ? |
+| Đối chiếu Hán-Việt | Ví dụ cấu trúc 把 nào tạo vấn đề chuyển di về trật tự từ cho người học Việt Nam? |
+| Dịch máy | Loại lỗi MT nào xuất hiện nhiều nhất trong câu chính sách giáo dục Hán-Việt? |
+| Chính sách giáo dục | Các trích đoạn chính sách gần đây nói về phát triển giáo viên như thế nào? |
 
-A useful beginner research question should be:
+Một câu hỏi nghiên cứu tốt cho người mới nên:
 
-- small enough for one project;
-- connected to observable data;
-- clear about the unit of observation;
-- able to produce at least one table or figure.
+- đủ nhỏ cho một project;
+- gắn với dữ liệu quan sát được;
+- nói rõ đơn vị quan sát (unit of observation);
+- có thể tạo ít nhất một bảng hoặc hình.
 
-## Worked Example
+## Ví dụ đã làm mẫu
 
-Broad interest:
-
-```text
-I care about short-term Chinese teaching.
-```
-
-Data-ready question:
+Sở thích rộng:
 
 ```text
-How do learner answers change before and after a two-week measure-word activity?
+Tôi quan tâm đến giảng dạy Hán ngữ ngắn hạn.
 ```
 
-Possible data:
+Câu hỏi sẵn sàng cho dữ liệu:
 
 ```text
-one row = one learner's answer to one test item
+Câu trả lời của người học thay đổi thế nào trước và sau một hoạt động hai tuần về lượng từ?
 ```
 
-Possible output:
+Dữ liệu có thể cần:
 
 ```text
-a descriptive table comparing pre-test and post-test answers
+một dòng = câu trả lời của một người học cho một item kiểm tra
 ```
 
-Important limitation:
+Kết quả có thể tạo:
 
 ```text
-A pre/post change is descriptive. It does not prove causality by itself.
+bảng mô tả so sánh câu trả lời trước và sau hoạt động
 ```
 
-## Four Tiny Data Examples
+Hạn chế quan trọng:
 
-These examples show what future research data might look like. They are for orientation only; the learner does not analyze them in Week 01.
+```text
+Thay đổi pre/post chỉ mang tính mô tả. Tự nó chưa chứng minh quan hệ nhân quả.
+```
 
-| Track | One possible row |
+## Bốn ví dụ dữ liệu rất nhỏ
+
+Các ví dụ này chỉ giúp bạn hình dung dữ liệu tương lai. Tuần 01 chưa yêu cầu phân tích chúng.
+
+| Hướng | Một dòng có thể là |
 |---|---|
 | TCSOL | `learner_id=S001; item_id=Q03; pre_answer=一书; post_answer=一本书; target=measure_word` |
-| Contrastive | `zh=我把书放在桌子上; vi=Tôi đặt sách lên bàn; predicted_difficulty=把 omitted` |
+| Đối chiếu | `zh=我把书放在桌子上; vi=Tôi đặt sách lên bàn; predicted_difficulty=把 omitted` |
 | MTPE | `zh_source=教育数字化推动资源共享; vi_mt=Giáo dục số thúc đẩy tài nguyên chia sẻ; vi_postedit=Giáo dục số thúc đẩy việc chia sẻ tài nguyên` |
 | Policy | `title=教育强国建设规划纲要（2024-2035年）; theme=digitalization; excerpt=教育数字化` |
 
-## Common Mistakes
+## Lỗi thường gặp
 
-### Mistake 1: Trying to learn everything at once
+### Lỗi 1: Muốn học mọi thứ cùng lúc
 
-Do not try to learn pandas, statistics, MT metrics, and visualization in Week 01. The goal is only to run a notebook and understand the research workflow.
+Đừng cố học pandas, thống kê, MT metrics, và visualization ngay ở Tuần 01. Mục tiêu chỉ là chạy notebook và hiểu quy trình nghiên cứu.
 
-### Mistake 2: Choosing a question too broad for data
+### Lỗi 2: Chọn câu hỏi quá rộng
 
-Too broad:
-
-```text
-How should Chinese be taught to Vietnamese students?
-```
-
-Better:
+Quá rộng:
 
 ```text
-Which three measure-word errors are most frequent in a beginner class after a short lesson?
+Nên dạy tiếng Trung cho sinh viên Việt Nam như thế nào?
 ```
 
-### Mistake 3: Forgetting the unit of observation
-
-Always ask:
+Tốt hơn:
 
 ```text
-What does one row in my dataset represent?
+Ba lỗi lượng từ nào xuất hiện nhiều nhất trong lớp beginner sau một bài học ngắn?
 ```
 
-Examples:
+### Lỗi 3: Quên đơn vị quan sát
 
-- one learner;
-- one test answer;
-- one sentence pair;
-- one translation segment;
-- one coded policy excerpt.
+Luôn hỏi:
+
+```text
+Một dòng trong dataset của mình đại diện cho điều gì?
+```
+
+Ví dụ:
+
+- một người học;
+- một câu trả lời kiểm tra;
+- một cặp câu Hán-Việt;
+- một đoạn dịch;
+- một trích đoạn chính sách đã mã hóa.
 
 ## Mini Cheat Sheet
 
 ```python
-print("message")              # show a message
-topic = "TCSOL"               # store text in a variable
-len(rows)                     # count items
-rows[0]                       # first item
-row["track"]                  # value in the track column
+print("message")              # hiển thị thông điệp
+topic = "TCSOL"               # lưu text vào biến
+len(rows)                     # đếm số phần tử
+rows[0]                       # phần tử đầu tiên
+row["track"]                  # giá trị ở cột track
 ```
 
-## Connection to Final Projects
+## Liên hệ với project cuối khóa
 
-By the end of this course, the learner may choose one of these final project paths:
+Cuối khóa, bạn có thể chọn một trong các hướng:
 
-- TCSOL: pre-test/post-test and learner errors;
-- Chinese-Vietnamese contrastive analysis: sentence pairs and teaching notes;
-- MTPE: MT output, human post-editing, and error labels;
-- education policy: policy excerpts, themes, metadata, and timelines.
+- TCSOL: pre-test/post-test và lỗi người học;
+- Đối chiếu Hán-Việt: cặp câu và ghi chú giảng dạy;
+- MTPE: bản dịch máy, hậu hiệu đính của con người, nhãn lỗi;
+- Chính sách giáo dục: trích đoạn chính sách, chủ đề, metadata, timeline.
 
-Week 01 prepares the foundation: every project needs a clear question, a data unit, and a small output that can become part of a paper.
+Tuần 01 tạo nền tảng: mọi project đều cần câu hỏi rõ, đơn vị dữ liệu rõ, và một output nhỏ có thể đưa vào paper.

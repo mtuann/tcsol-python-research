@@ -1,80 +1,85 @@
-# Week 01: Python as a Research Workflow
+# Tuần 01: Python như một quy trình nghiên cứu
 
-## Research Frame
+English option: public HTML pages include a Tiếng Việt / English language switcher. Markdown notes are Vietnamese-first with English anchor terms.
 
-- Research area: TCSOL, Chinese-Vietnamese contrastive research, MTPE, and education policy.
-- Small research question: How can one broad research interest become a small, data-ready question?
-- Why this matters: before learning many Python commands, the learner needs to understand what kind of data a paper can use and what Python will help produce.
+## Khung nghiên cứu
 
-## Python Skill
+- Hướng nghiên cứu: TCSOL, đối chiếu Hán-Việt, MTPE, và chính sách giáo dục.
+- Câu hỏi nhỏ: Làm thế nào để chuyển một sở thích nghiên cứu rộng thành câu hỏi sẵn sàng cho dữ liệu?
+- Vì sao quan trọng: trước khi học nhiều lệnh Python, bạn cần hiểu paper sẽ dùng loại dữ liệu nào và Python giúp tạo ra bằng chứng gì.
 
-- Main skill: run a notebook and create simple variables.
-- Supporting skills: distinguish Markdown cells from code cells, edit text safely, read output, write a short interpretation.
-- Functions/libraries: the learner only needs to edit text variables and run cells. CSV/path code is instructor-provided sample code to run and observe.
+## Kỹ năng Python
 
-## Beginner Promise
+- Kỹ năng chính: chạy một Jupyter notebook và tạo biến văn bản đơn giản.
+- Kỹ năng hỗ trợ: phân biệt ô Markdown và ô code, sửa text an toàn, đọc output, viết diễn giải ngắn.
+- Hàm/thư viện: người học chỉ cần sửa biến text và chạy cell. Code đọc CSV/path/export là mẫu giảng viên cung cấp để chạy và quan sát.
 
-This week is intentionally light. The learner does **not** need to understand programming theory, statistics, pandas, web design, or machine learning. The goal is to run a notebook, edit a few values, and see how a research question connects to data.
+## Cam kết cho người mới
 
-## Learning Objectives
+Tuần này cố ý nhẹ. Bạn **không** cần hiểu lý thuyết lập trình, thống kê, pandas, thiết kế web, hay machine learning. Mục tiêu là chạy notebook, sửa vài giá trị an toàn, và thấy một câu hỏi nghiên cứu kết nối với dữ liệu như thế nào.
 
-By the end of this week, the learner can:
+## Mục tiêu học tập
 
-1. open and run a Jupyter notebook from top to bottom;
-2. explain the difference between a broad topic and a data-ready research question;
-3. read a small CSV file and describe what each row represents;
-4. write a 100-150 word research memo based on a simple table.
+Cuối tuần này, bạn có thể:
 
-## Required Outputs
+1. mở và chạy một Jupyter notebook từ đầu đến cuối;
+2. giải thích khác biệt giữa chủ đề rộng và câu hỏi sẵn sàng cho dữ liệu;
+3. đọc một tệp CSV nhỏ và nói rõ mỗi dòng đại diện cho điều gì;
+4. viết một memo nghiên cứu 100-150 từ dựa trên một bảng đơn giản.
 
-- [ ] One completed `live_coding.ipynb` runs from top to bottom.
-- [ ] Inside the notebook, the learner selects one research track.
-- [ ] Inside the notebook, the learner keeps or creates one small summary table.
-- [ ] Inside the notebook, the learner writes a 1-2 sentence caption.
-- [ ] Inside the notebook, the learner writes one 100-150 word interpretation.
-- [ ] The notebook records the provided source/access-date note and does not include private learner data.
+## Sản phẩm cần có
+
+- [ ] `live_coding.ipynb` chạy từ đầu đến cuối.
+- [ ] Trong notebook, bạn chọn một hướng nghiên cứu.
+- [ ] Trong notebook, bạn giữ hoặc tạo một bảng tóm tắt nhỏ.
+- [ ] Trong notebook, bạn viết chú thích bảng/hình 1-2 câu.
+- [ ] Trong notebook, bạn viết một diễn giải 100-150 từ.
+- [ ] Notebook ghi nguồn/ngày truy cập được cung cấp và không chứa dữ liệu riêng tư.
 
 ## Files
 
 - Slides source: `slides.qmd`
-- Slides HTML: `slides.html`
+- Slides HTML song ngữ: `slides.html`
 - Interactive demo source: `interactive_demo.qmd`
-- Interactive demo HTML: `interactive_demo.html`
+- Interactive demo HTML song ngữ: `interactive_demo.html`
 - Lecture notes: `lecture_notes.md`
 - Notebook: `live_coding.ipynb`
 - Exercises: `exercises.md`
 - Assignment: `assignment.md`
+- Content blocks: `content_blocks.md`
+- Week glossary: `glossary_week01.csv`
+- Translation QA: `translation_qa.md`
 - Data dictionary: `data_dictionary.md`
 - Rubric: `rubric.md`
 - Instructor notes: `instructor_notes.md`
 
-## In-Class Flow
+## Luồng học trên lớp
 
-| Stage | Time | Activity |
+| Giai đoạn | Thời lượng | Hoạt động |
 |---|---:|---|
-| Warm-up | 10 min | Discuss the difference between a topic and a research question. |
-| Slides | 20 min | Walk through the research workflow and four project tracks. |
-| Instructor demo | 10 min | Instructor opens `interactive_demo.html` to show how a small dataset can become a table or figure. |
-| Live coding | 35 min | Run the notebook, edit variables, read the CSV file. |
-| Guided practice | 25 min | Complete Exercises A and B. |
-| Wrap-up | 10 min | Choose one possible final project track. |
+| Warm-up | 10 phút | Thảo luận khác biệt giữa chủ đề và câu hỏi nghiên cứu. |
+| Slides | 20 phút | Đi qua quy trình nghiên cứu và bốn hướng dự án. |
+| Instructor demo | 10 phút | Giảng viên mở `interactive_demo.html` để cho thấy dataset nhỏ có thể dẫn tới bảng/hình. |
+| Live coding | 35 phút | Chạy notebook, sửa biến, đọc tệp CSV. |
+| Guided practice | 25 phút | Làm Exercise A và B. |
+| Wrap-up | 10 phút | Chọn một hướng dự án có thể phát triển sau này. |
 
 ## Core vs Stretch
 
 Core:
 
-- run the notebook;
-- edit your topic/question variables;
-- choose one track;
-- write the caption and short memo inside the notebook.
+- chạy notebook;
+- sửa biến topic/question;
+- chọn một hướng nghiên cứu;
+- viết caption và memo ngắn trong notebook.
 
 Stretch:
 
-- open `interactive_demo.html` again after class and explain one pattern you see;
-- add one new row to the CSV template;
-- suggest one possible table or figure for your own future paper.
+- mở lại `interactive_demo.html` sau buổi học và giải thích một pattern bạn thấy;
+- thêm một dòng mới vào bản sao của CSV template;
+- đề xuất một bảng hoặc hình cho paper tương lai của bạn.
 
 Instructor-only:
 
-- explain why Week 01 avoids pandas and statistics;
-- preview how the same workflow will later become pre/post-test analysis, MTPE evaluation, or policy coding.
+- giải thích vì sao Tuần 01 tránh pandas và thống kê;
+- preview cách cùng quy trình này phát triển thành phân tích pre/post-test, MTPE evaluation, hoặc policy coding.

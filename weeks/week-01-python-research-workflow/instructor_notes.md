@@ -1,68 +1,74 @@
-# Week 01 Instructor Notes
+# Tuần 01 Instructor Notes
 
 ## Teaching Goal
 
-The learner has no programming background. Week 01 should reduce fear, not maximize technical coverage.
+Người học chưa có nền tảng lập trình. Tuần 01 nên giảm sợ hãi, không tối đa hóa lượng kỹ thuật.
 
-The main message:
+Thông điệp chính:
 
 ```text
-Python helps you make a paper workflow reproducible.
-You do not need to become a software engineer.
+Python giúp quy trình viết paper có thể tái lập.
+Bạn không cần trở thành software engineer.
 ```
 
-## Keep Core Very Light
+## Giữ Core thật nhẹ
 
-Required learner-facing concepts:
+Khái niệm bắt buộc ở phần learner-facing:
 
 - notebook cells;
 - Markdown vs code;
 - variables;
 - strings;
-- CSV as a table;
+- CSV như một bảng;
 - one row = one observation.
 
-Avoid:
+Tránh:
 
 - pandas;
-- statistics;
-- installation troubleshooting during the main lesson;
+- thống kê;
+- xử lý lỗi cài đặt trong phần chính;
 - COMET, BLEU, regression, APIs, scraping;
-- asking the learner to write HTML, CSS, or JavaScript.
+- yêu cầu người học viết HTML, CSS, hoặc JavaScript.
 
 ## Suggested Teaching Script
 
-1. Start with a familiar academic task: "I need to write a Methods section."
-2. Show that Methods needs data source, rows, columns, and procedure.
-3. Open `slides.html`.
-4. Open `interactive_demo.html` and show that a dataset can become a table or figure.
-5. Open `live_coding.ipynb`.
-6. Let the learner edit variables only.
-7. Run the CSV cells together.
-8. Ask the learner to choose one future track.
+1. Bắt đầu từ việc học thuật quen thuộc: "Tôi cần viết phần Methods."
+2. Cho thấy Methods cần nguồn dữ liệu, dòng, cột, và quy trình.
+3. Mở `slides.html`.
+4. Mở `interactive_demo.html` và cho thấy dataset nhỏ có thể thành bảng/hình.
+5. Mở `live_coding.ipynb`.
+6. Để người học chỉ sửa variables.
+7. Cùng chạy các CSV cells.
+8. Hỏi người học muốn chọn hướng nào cho tương lai.
 
 ## Common Learner Reactions
 
-| Reaction | Instructor response |
+| Phản ứng | Câu trả lời của giảng viên |
 |---|---|
-| "I don't understand all the code." | "You do not need to yet. Today you only need to run it and identify what changed." |
-| "Can Python write my paper?" | "Python can produce evidence and transparent methods; you still interpret the result." |
-| "Why not use Excel?" | "Excel is useful. Python helps when the workflow must be repeated, checked, and documented." |
-| "Do I need machine learning?" | "No. Most useful research starts with clean data, tables, figures, and careful interpretation." |
+| "Em không hiểu hết code." | "Hôm nay chưa cần. Em chỉ cần chạy được và biết điều gì thay đổi." |
+| "Python có viết paper giúp em không?" | "Python tạo bằng chứng và quy trình minh bạch; phần diễn giải vẫn là của em." |
+| "Sao không dùng Excel?" | "Excel hữu ích. Python mạnh khi quy trình cần lặp lại, kiểm tra, và ghi lại rõ." |
+| "Em có cần machine learning không?" | "Không. Nghiên cứu tốt thường bắt đầu bằng dữ liệu sạch, bảng, hình, và diễn giải cẩn thận." |
+
+## Bilingual Teaching Note
+
+- Website mặc định tiếng Việt; English là lựa chọn.
+- Không đọc cả hai ngôn ngữ trên lớp.
+- Khi thuật ngữ quan trọng xuất hiện lần đầu, dùng Vietnamese + English anchor: `biến (variable)`, `đơn vị quan sát (unit of observation)`.
+- Nếu người học học ở Trung Quốc và cần viết tiếng Anh học thuật, dùng English toggle để review cách diễn đạt, không biến nó thành bài dịch riêng.
 
 ## Optional Demonstration
 
-If the learner is curious, show the HTML interactive demo. Do not explain JavaScript. Say:
+Nếu người học tò mò, cho xem HTML interactive demo. Không giải thích JavaScript. Nói:
 
 ```text
-Later, Python can export interactive figures like this. For now, your job is to read and interpret them.
+Sau này Python có thể xuất biểu đồ tương tác kiểu này. Hiện tại nhiệm vụ của em là đọc và diễn giải nó.
 ```
 
 ## Success Criteria
 
-The week is successful if the learner says:
+Tuần này thành công nếu người học nói được:
 
-- "I can run a notebook."
-- "I know what kind of data my question needs."
-- "I can write a short interpretation of a simple output."
-
+- "Em chạy được notebook."
+- "Em biết câu hỏi của mình cần loại dữ liệu nào."
+- "Em viết được diễn giải ngắn cho một output đơn giản."

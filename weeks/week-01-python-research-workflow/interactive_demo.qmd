@@ -1,23 +1,24 @@
 ---
-title: "Week 01 Interactive Demo"
+title: "Tuần 01 Interactive Demo"
 format:
   html:
     toc: false
     theme: cosmo
+lang: vi
 ---
 
-## Research Track Explorer
+## Khám phá hướng nghiên cứu
 
-This demo lets the learner click a research track and see:
+Demo này cho phép người học bấm một hướng nghiên cứu và xem:
 
-- a small question;
-- the unit of observation;
-- a possible paper output;
-- a beginner Python task.
+- một câu hỏi nhỏ;
+- đơn vị quan sát;
+- output có thể dùng trong paper;
+- tác vụ Python phù hợp với người mới.
 
-The rendered HTML version is `interactive_demo.html`. It is designed for static deployment on GitHub Pages.
+Bản HTML đã render là `interactive_demo.html`. File HTML mặc định tiếng Việt và có nút English. Nó được thiết kế để deploy tĩnh trên GitHub Pages.
 
-Source note: Quarto is not installed in the current authoring environment, so `interactive_demo.html` is currently a hand-authored static fallback that mirrors this design. When Quarto is available, move the same HTML/JavaScript block into this QMD and render it with:
+Source note: Quarto chưa được cài trong môi trường authoring hiện tại, nên `interactive_demo.html` đang là static fallback viết tay theo đúng design này. Khi có Quarto, chuyển cùng block HTML/JavaScript song ngữ vào QMD và render bằng:
 
 ```bash
 quarto render interactive_demo.qmd
@@ -27,4 +28,4 @@ quarto render interactive_demo.qmd
 <div id="track-demo"></div>
 ```
 
-In the rendered fallback HTML, this area is replaced by a Plotly-backed interactive chart and track selector.
+Trong bản fallback HTML, vùng này được thay bằng selector hướng nghiên cứu, biểu đồ Plotly nếu CDN tải được, và bảng fallback nếu JavaScript/Plotly không sẵn sàng.

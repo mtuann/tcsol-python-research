@@ -1,6 +1,6 @@
 ---
-title: "Week 01: Python as a Research Workflow"
-subtitle: "From topic to data-ready question"
+title: "Tuần 01: Python như một quy trình nghiên cứu"
+subtitle: "Từ chủ đề rộng đến câu hỏi sẵn sàng cho dữ liệu"
 format:
   revealjs:
     theme: simple
@@ -8,63 +8,64 @@ format:
     transition: fade
     navigation-mode: vertical
     preview-links: true
+lang: vi
 ---
 
-## Today in One Sentence
+## Hôm nay trong một câu
 
-Python is a tool for making a research workflow visible:
+Python là công cụ giúp quy trình nghiên cứu trở nên nhìn thấy được:
 
 ```text
 question -> data -> code -> table/figure -> interpretation -> paper
 ```
 
-This week is not about becoming a programmer.
+Tuần này chưa phải học để trở thành programmer.
 
-It is about running your first research notebook.
+Mục tiêu là chạy notebook nghiên cứu đầu tiên.
 
-## The Four Research Tracks
+## Bốn hướng nghiên cứu
 
-1. Short-term Chinese teaching / TCSOL
-2. Chinese-Vietnamese contrastive analysis
-3. Machine translation and MTPE
-4. Education policy analysis
+1. Giảng dạy Hán ngữ ngắn hạn / TCSOL
+2. Đối chiếu Hán-Việt
+3. Dịch máy và MTPE
+4. Chính sách giáo dục
 
-## Broad Topic vs Data-Ready Question
+## Chủ đề rộng vs câu hỏi sẵn sàng cho dữ liệu
 
-| Broad topic | Data-ready question |
+| Chủ đề rộng | Câu hỏi sẵn sàng cho dữ liệu |
 |---|---|
-| Teaching Chinese grammar | How do learner answers change before and after a measure-word activity? |
-| Chinese-Vietnamese comparison | Which ba-construction examples create word-order transfer problems? |
-| Translation quality | Which MT error type is most frequent in policy sentences? |
-| Education policy | How do recent policy excerpts discuss teacher development? |
+| Dạy ngữ pháp tiếng Trung | Câu trả lời của người học thay đổi thế nào trước và sau hoạt động về lượng từ? |
+| Đối chiếu Hán-Việt | Ví dụ cấu trúc 把 nào tạo vấn đề chuyển di về trật tự từ? |
+| Chất lượng dịch máy | Loại lỗi MT nào xuất hiện nhiều nhất trong câu chính sách? |
+| Chính sách giáo dục | Các trích đoạn chính sách gần đây nói về phát triển giáo viên như thế nào? |
 
-## What Counts as Data?
+## Dữ liệu là gì?
 
-One row can represent:
+Một dòng có thể đại diện cho:
 
-- one learner;
-- one test answer;
-- one sentence pair;
-- one MT segment;
-- one coded policy excerpt.
+- một người học;
+- một câu trả lời kiểm tra;
+- một cặp câu Hán-Việt;
+- một đoạn dịch máy;
+- một trích đoạn chính sách đã mã hóa.
 
-The key question:
+Câu hỏi chính:
 
 ```text
-What does one row mean?
+Một dòng nghĩa là gì?
 ```
 
-## What Is a Notebook?
+## Notebook là gì?
 
-A notebook combines:
+Notebook kết hợp:
 
-- Markdown: explanation, headings, captions;
-- Code: Python commands;
-- Output: tables, figures, printed results.
+- Markdown: giải thích, headings, captions;
+- Code: lệnh Python;
+- Output: bảng, hình, kết quả in ra.
 
-The notebook should read like a transparent Methods/Results draft.
+Notebook nên đọc giống bản nháp Methods/Results minh bạch.
 
-## First Python Idea: A Variable
+## Ý tưởng Python đầu tiên: biến
 
 ```python
 research_area = "TCSOL"
@@ -72,19 +73,19 @@ topic = "Chinese measure words"
 question = "How do learner answers change after a short activity?"
 ```
 
-A variable stores a value so we can reuse it.
+Biến (variable) lưu một giá trị để mình dùng lại.
 
-## First Python Idea: Print
+## Ý tưởng Python đầu tiên: print
 
 ```python
 print(question)
 ```
 
-`print` asks Python to show something.
+`print` yêu cầu Python hiển thị một thứ gì đó.
 
-In Week 01, showing and checking values is already useful.
+Trong Tuần 01, hiển thị và kiểm tra giá trị đã là hữu ích.
 
-## First Dataset
+## Dataset đầu tiên
 
 File:
 
@@ -92,54 +93,54 @@ File:
 data/raw/week01_research_tracks.csv
 ```
 
-This dataset has four rows. Each row is one possible project track.
+Dataset này có bốn dòng. Mỗi dòng là một hướng project có thể phát triển.
 
 ## Interactive Demo
 
-Open:
+Mở:
 
 ```text
 interactive_demo.html
 ```
 
-Use it to compare the four tracks.
+Dùng demo để so sánh bốn hướng.
 
-Do not worry about how the web interaction is built yet.
+Chưa cần quan tâm tương tác web được xây dựng như thế nào.
 
-## Week 01 Output
+## Sản phẩm Tuần 01
 
-By the end of the week, you will submit:
+Cuối tuần này, bạn nộp:
 
-1. a notebook that runs;
-2. one selected research track;
-3. one short table or printed summary;
-4. one caption;
-5. one 100-150 word memo.
+1. một notebook chạy được;
+2. một hướng nghiên cứu đã chọn;
+3. một bảng nhỏ hoặc summary in ra;
+4. một caption;
+5. một memo 100-150 từ.
 
-## Caption Example
+## Ví dụ caption
 
-Weak:
-
-```text
-Table 1. Research tracks.
-```
-
-Better:
+Yếu:
 
 ```text
-Table 1. Four possible research tracks connect broad interests to data-ready questions. Each row represents one track and identifies the unit of observation needed for future Python analysis.
+Bảng 1. Các hướng nghiên cứu.
 ```
 
-## Remember
+Tốt hơn:
 
-You do not need to understand every line of code today.
+```text
+Bảng 1. Bốn hướng nghiên cứu cho thấy cách chuyển sở thích rộng thành câu hỏi sẵn sàng cho dữ liệu. Mỗi dòng đại diện cho một hướng và xác định đơn vị quan sát cần cho phân tích Python sau này.
+```
 
-Core goal:
+## Ghi nhớ
+
+Hôm nay bạn không cần hiểu mọi dòng code.
+
+Mục tiêu cốt lõi:
 
 ```text
 run -> observe -> edit safely -> explain
 ```
 
 ::: {.notes}
-Emphasize psychological safety. The learner should leave Week 01 feeling that Python is a research assistant, not a barrier.
+Emphasize psychological safety. The learner should leave Week 01 feeling that Python is a research assistant, not a barrier. The public `slides.html` adds a Vietnamese-default / English-toggle layer using shared bilingual assets.
 :::

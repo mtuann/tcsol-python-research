@@ -1,0 +1,14 @@
+term_id,vi,en,note
+python_workflow,quy trình nghiên cứu bằng Python,Python research workflow,Main Week 01 frame.
+notebook,sổ tay Jupyter,Jupyter notebook,Do not translate Jupyter.
+markdown_cell,ô Markdown,Markdown cell,Used for explanation/caption/interpretation.
+code_cell,ô code,code cell,Used for Python commands.
+variable,biến,variable,First Python concept.
+string,chuỗi văn bản,string,Text inside quotation marks.
+csv_file,tệp CSV,CSV file,Table saved as text.
+data_ready_question,câu hỏi sẵn sàng cho dữ liệu,data-ready question,Question linked to observable data.
+unit_observation,đơn vị quan sát,unit of observation,What one row represents.
+research_track,hướng nghiên cứu,research track,One possible future project direction.
+caption,chú thích bảng/hình,caption,Paper-facing explanation of output.
+memo,memo nghiên cứu ngắn,short research memo,100-150 word interpretation.
+fallback_table,bảng dự phòng,fallback table,Static table if interaction does not load.

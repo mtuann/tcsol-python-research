@@ -1,8 +1,8 @@
-# Week 01 Exercises
+# Tuần 01 Exercises
 
 ## Core Exercise A: Copy and Modify
 
-Open `live_coding.ipynb`. Find the cell with these variables:
+Mở `live_coding.ipynb`. Tìm cell có các biến này:
 
 ```python
 my_name = "Your name"
@@ -10,56 +10,58 @@ my_research_area = "TCSOL"
 my_topic = "short-term Chinese teaching"
 ```
 
-Change them to fit your own interest.
+Chỉ sửa phần text nằm trong dấu ngoặc kép để phù hợp với hướng bạn quan tâm.
 
-Run the cell. Then write one sentence:
+Chạy cell. Sau đó viết một câu:
 
 ```text
 My current research area is ..., and I want to study ...
 ```
 
+Bạn có thể viết câu này bằng tiếng Việt hoặc English.
+
 ## Core Exercise B: Guided Problem
 
-Use the dataset `data/raw/week01_research_tracks.csv`.
+Dùng dataset `data/raw/week01_research_tracks.csv`.
 
-Complete these tasks in the notebook:
+Hoàn thành các việc sau trong notebook:
 
-1. Count how many research tracks are listed.
-2. Print the name of each track.
-3. Choose one track that feels closest to your future study.
-4. Copy its small research question into your notebook.
+1. Đếm có bao nhiêu hướng nghiên cứu.
+2. In tên từng hướng.
+3. Chọn một hướng gần nhất với dự định học Master của bạn.
+4. Copy câu hỏi nghiên cứu nhỏ của hướng đó vào notebook.
 
-The CSV-loading code is sample code. Your job is to run it and read the output, not to understand every symbol yet.
+Code đọc CSV là code mẫu. Tuần này nhiệm vụ của bạn là chạy và đọc output, chưa cần hiểu mọi ký hiệu.
 
 Checklist:
 
-- [ ] I ran the CSV loading cell.
-- [ ] I saw four rows.
-- [ ] I can explain what one row means.
-- [ ] I selected one track.
+- [ ] Tôi đã chạy cell đọc CSV.
+- [ ] Tôi thấy có bốn dòng.
+- [ ] Tôi giải thích được một dòng nghĩa là gì.
+- [ ] Tôi đã chọn một hướng nghiên cứu.
 
 ## Core Exercise C: Research-Style Task
 
-This is the draft of the memo you will submit in the assignment. It is not a second separate memo.
+Đây là bản nháp memo sẽ nộp trong assignment, không phải một memo riêng thứ hai.
 
-Write a 100-150 word paragraph answering:
+Viết 100-150 từ trả lời:
 
 ```text
-Which research track seems most useful for your future Master's study, and what data would you need first?
+Hướng nghiên cứu nào hữu ích nhất cho việc học Master của bạn, và bạn cần dữ liệu gì trước tiên?
 ```
 
-Your paragraph should include:
+Đoạn viết nên có:
 
-- one research area;
-- one small question;
-- one possible dataset;
-- one limitation.
+- một hướng nghiên cứu;
+- một câu hỏi nhỏ;
+- một dataset có thể cần;
+- một hạn chế.
 
 ## Stretch Exercise
 
-Add one new row to a copy of the CSV file. The new row should describe a project you might actually want to do.
+Thêm một dòng mới vào **bản sao** của tệp CSV. Dòng mới nên mô tả một project bạn thật sự có thể muốn làm.
 
-Suggested columns to fill:
+Cột gợi ý:
 
 - `track_id`
 - `track`
@@ -70,7 +72,7 @@ Suggested columns to fill:
 - `likely_output`
 - `beginner_python_task`
 
-Do not edit the original raw file. Save your copy as:
+Không sửa file raw gốc. Lưu bản sao thành:
 
 ```text
 data/processed/week01_my_research_track.csv

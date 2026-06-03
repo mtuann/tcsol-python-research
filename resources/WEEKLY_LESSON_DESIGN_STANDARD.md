@@ -54,6 +54,50 @@ For Weeks 1-4, the learner-facing Core must stay light:
 
 The instructor may prepare HTML slides, interactive visualizations, and source audits, but the learner only needs to use them, not build them, until later weeks.
 
+## Bilingual Website Standard
+
+All public website content must support Vietnamese and English.
+
+Default language:
+
+- Vietnamese is the default language for learner-facing website content.
+- English is available through a clear language switcher.
+- Use language codes `vi` and `en`; do not use `vn`.
+
+Recommended delivery:
+
+- Beginner weeks use one HTML page with a Vietnamese default and an English toggle.
+- Larger future pages may use two route trees: Vietnamese unprefixed paths and English under `/en/`.
+- Shared data, images, figures, and code examples must not be duplicated for each language.
+- HTML files must set `<html lang="vi">` by default and update the language when the learner switches to English.
+
+Content style:
+
+- Use Vietnamese-first explanations with English anchor terms in parentheses when useful, such as `biến (variable)` or `đơn vị quan sát (unit of observation)`.
+- Do not show full Vietnamese and full English paragraphs side by side in beginner weeks.
+- Keep code, file names, column names, package names, function names, and citation metadata in English.
+- Translate learner-facing instructions, slide text, labels, buttons, chart titles, captions, and accessibility labels.
+- Instructor notes may be Vietnamese-first with concise English labels only when they help future reuse.
+
+Production workflow:
+
+```text
+week brief -> content blocks -> glossary check -> bilingual draft -> artifact build -> translation QA -> learner release
+```
+
+Required support files for every week:
+
+- `content_blocks.md`: bilingual source blocks for slide/demo text and key learner instructions.
+- `glossary_weekXX.csv`: week-specific terms with Vietnamese, English, and notes.
+- `translation_qa.md`: final checklist for language switch, terminology, accessibility, and learner load.
+
+Course-wide support files:
+
+- `resources/style_guides/bilingual_style_guide.md`;
+- `resources/glossary/core_glossary.csv`;
+- `resources/templates/bilingual_content_blocks_template.md`;
+- `resources/templates/translation_qa_checklist.md`.
+
 ## Standard Week Folder
 
 Each week should use this structure:
@@ -61,6 +105,7 @@ Each week should use this structure:
 ```text
 weeks/week-XX-topic-slug/
 ├── README.md
+├── content_blocks.md
 ├── slides.qmd
 ├── slides.html
 ├── interactive_demo.qmd
@@ -73,6 +118,8 @@ weeks/week-XX-topic-slug/
 ├── data_dictionary.md
 ├── rubric.md
 ├── instructor_notes.md
+├── glossary_weekXX.csv
+├── translation_qa.md
 ├── data/
 │   ├── raw/
 │   └── processed/
@@ -187,6 +234,8 @@ The rendered `slides.html` should:
 - run as a static file on GitHub Pages;
 - not require a Python server;
 - use Reveal.js through Quarto when available, or a documented standalone static HTML fallback;
+- include the shared bilingual language switcher when published on the website;
+- default to Vietnamese and allow English without duplicating the whole file in beginner weeks;
 - include keyboard navigation;
 - include speaker notes when useful;
 - avoid heavy animation in beginner weeks;
@@ -216,6 +265,7 @@ Avoid Dash and Streamlit for the public course site because they require a runni
 The interactive demo must include:
 
 - a one-sentence learning goal;
+- bilingual labels, chart titles, fallback text, and accessibility labels;
 - a small dataset or embedded data sample;
 - one interaction only in beginner weeks, such as hover, select, filter, or toggle;
 - a plain-language interpretation guide;
@@ -727,6 +777,8 @@ This table does not replace the syllabus. It defines the artifact emphasis for e
 A week is complete only when all are true:
 
 - `README.md` states the research question and Python skill.
+- Learner-facing website content opens in Vietnamese by default and can switch to English.
+- `content_blocks.md`, `glossary_weekXX.csv`, and `translation_qa.md` are updated.
 - `slides.qmd` and `slides.html` exist and follow the slide deck standard.
 - `interactive_demo.html` exists or the week explicitly explains why no interaction is useful.
 - Lecture notes explain the concept, code, mistakes, and research use.
@@ -739,6 +791,7 @@ A week is complete only when all are true:
 - Readings include links and source audit notes.
 - Rubric is present.
 - Learner-facing Core is clearly separated from Stretch and Instructor-only content.
+- Language switch, keyboard navigation, and no-JavaScript fallback are tested for public HTML.
 - No private learner data is exposed.
 
 ## Design Smell Checklist

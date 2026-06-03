@@ -1,4 +1,4 @@
-# Week 01 Readings
+# Tuần 01 Readings
 
 Source audit date: 2026-06-03.
 
@@ -7,15 +7,15 @@ Source audit date: 2026-06-03.
 ### JupyterLab User Guide
 
 - Link: https://jupyterlab.readthedocs.io/en/stable/user/
-- Why it matters this week: the learner needs to know what notebooks are and how code plus explanation can live in one document.
-- Sections to read: overview and basic interface only.
+- Vì sao cần đọc tuần này: bạn cần biết notebook là gì và vì sao code + giải thích có thể nằm trong cùng một tài liệu.
+- Chỉ đọc: overview và basic interface. Không cần đọc sâu.
 
 ### The Python Tutorial
 
 - Link: https://docs.python.org/3/tutorial/
-- Status: optional skim.
-- Why it matters this week: it is the official beginner-oriented Python tutorial.
-- Sections to skim for 5 minutes only: "Using Python as a Calculator" and "An Informal Introduction to Python"; do not try to master everything.
+- Trạng thái: optional skim.
+- Vì sao cần biết: đây là tài liệu chính thức, định hướng cho người mới học Python.
+- Chỉ skim 5 phút: "Using Python as a Calculator" và "An Informal Introduction to Python". Không cố học hết.
 
 ## Required Research/Method Reading
 
@@ -23,45 +23,45 @@ Source audit date: 2026-06-03.
 
 - Citation: Wickham, H. (2014). Tidy Data. Journal of Statistical Software, 59(10), 1-23.
 - Link: https://vita.had.co.nz/papers/tidy-data.html
-- Status: instructor-provided excerpt in Week 01; full reading is optional.
-- Why it matters this week: it introduces the idea that data should have clear rows, columns, and units of observation.
-- What we borrow this week: the habit of asking "what does one row represent?"
+- Trạng thái: giảng viên cung cấp excerpt trong Tuần 01; full reading là optional.
+- Vì sao quan trọng: bài này giúp hình thành thói quen dữ liệu có dòng, cột, và đơn vị quan sát rõ.
+- Tuần này chỉ mượn một câu hỏi: "một dòng đại diện cho điều gì?"
 
 ## Domain Starter Sources
 
-These are orientation sources for the four tracks. The learner does not need to read all of them in Week 01.
+Các nguồn dưới đây chỉ để định hướng bốn hướng nghiên cứu. Tuần 01 không yêu cầu đọc hết.
 
 ### TCSOL / Chinese Proficiency Standards
 
 - Link: https://en.moe.gov.cn/news/press_releases/202104/t20210428_528917.html
-- Use: background for international Chinese education standards.
+- Use: bối cảnh về chuẩn năng lực tiếng Trung quốc tế.
 
 ### Chinese-Vietnamese Contrastive / Learner Error Direction
 
 - Link: https://scholars.lib.ntu.edu.tw/handle/123456789/637277
-- Use: example of research on Vietnamese learners and Mandarin tonal errors.
+- Use: ví dụ hướng nghiên cứu về lỗi thanh điệu Mandarin của người học Việt Nam.
 
 ### MTPE / Translation Quality
 
 - Link: https://themqm.org/error-types-2/typology/
-- Use: starter taxonomy for thinking about translation error types.
+- Use: taxonomy khởi đầu để nghĩ về loại lỗi dịch.
 
 ### Education Policy
 
 - Link: https://www.moe.gov.cn/jyb_xxgk/moe_1777/moe_1778/202501/t20250119_1176193.html
-- Use: example of a current official Chinese education policy document with metadata.
+- Use: ví dụ văn bản chính sách giáo dục chính thức của Trung Quốc với metadata.
 
 ## Optional Instructor Reading
 
 ### Quarto Reveal.js Presentations
 
 - Link: https://quarto.org/docs/presentations/revealjs/
-- Why it matters: this course uses `slides.qmd` and `slides.html` so future weeks can become GitHub Pages-friendly HTML lessons.
+- Vì sao liên quan: khóa học dùng `slides.qmd` và `slides.html` để bài học có thể deploy lên GitHub Pages.
 
 ### Plotly `write_html`
 
 - Link: https://plotly.com/python-api-reference/generated/plotly.io.write_html.html
-- Why it matters: Plotly figures can be saved as interactive HTML files for static deployment.
+- Vì sao liên quan: Plotly figures có thể lưu thành HTML tương tác để deploy tĩnh.
 
 ## Source Update Log
 
@@ -72,5 +72,5 @@ These are orientation sources for the four tracks. The learner does not need to 
   - `Tidy Data Wickham paper`
   - `Quarto Reveal.js official documentation`
   - `Plotly write_html official documentation`
-- Sources selected: official documentation for tools and a widely cited methods paper for data structure.
-- Why selected: Week 01 needs reliable beginner sources, not advanced tutorials.
+- Sources selected: tài liệu chính thức cho công cụ và một paper phương pháp được trích dẫn rộng.
+- Why selected: Tuần 01 cần nguồn đáng tin cậy, beginner-friendly, không phải tutorial nâng cao.

@@ -1,0 +1,15 @@
+term_id,vi,en,note
+python_workflow,quy trình nghiên cứu bằng Python,Python research workflow,Use in Week 01 framing.
+notebook,sổ tay Jupyter,Jupyter notebook,Keep Jupyter in English.
+markdown,ô Markdown,Markdown cell,Used for explanation/caption/interpretation.
+code_cell,ô code,code cell,Used for Python commands.
+variable,biến,variable,Introduce as a named place that stores a value.
+string,chuỗi văn bản,string,Text inside quotation marks.
+csv_file,tệp CSV,CSV file,Table saved as text.
+unit_observation,đơn vị quan sát,unit of observation,What one row represents.
+research_question,câu hỏi nghiên cứu,research question,Prefer "câu hỏi sẵn sàng cho dữ liệu" for data-ready question.
+data_ready_question,câu hỏi sẵn sàng cho dữ liệu,data-ready question,Small question linked to observable data.
+caption,chú thích bảng/hình,caption,Must state data N variables and main reading.
+interpretation,diễn giải kết quả,interpretation,Separate observation from inference and limitation.
+reproducibility,tính tái lập,reproducibility,Workflow can be rerun and checked.
+fallback,phương án dự phòng,fallback,Static table/summary when JS does not load.

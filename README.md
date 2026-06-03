@@ -79,9 +79,20 @@ The current design supports both Markdown/Quarto sources and deployable HTML:
 - `interactive_demo.qmd` and `interactive_demo.html` when interaction improves learning;
 - static HTML files that can be served by GitHub Pages.
 
+## Bilingual Website Policy
+
+Public learner-facing HTML defaults to Vietnamese and provides an English option through a language switcher. The course uses Vietnamese-first explanations with English anchor terms, rather than long side-by-side duplicate paragraphs, so a beginner can focus on the concept without extra reading load.
+
+For future weeks, start from:
+
+- [`resources/style_guides/bilingual_style_guide.md`](resources/style_guides/bilingual_style_guide.md)
+- [`resources/templates/bilingual_content_blocks_template.md`](resources/templates/bilingual_content_blocks_template.md)
+- [`resources/templates/translation_qa_checklist.md`](resources/templates/translation_qa_checklist.md)
+- [`resources/glossary/core_glossary.csv`](resources/glossary/core_glossary.csv)
+
 ## Current Lesson Packages
 
-- [`Week 01: Python as a Research Workflow`](weeks/week-01-python-research-workflow/)
+- [`Tuần 01: Python như một quy trình nghiên cứu`](weeks/week-01-python-research-workflow/)
 
 ## Suggested Repository Structure
 

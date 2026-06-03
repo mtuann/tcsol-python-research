@@ -1,4 +1,4 @@
-# Week 01 Data Dictionary
+# Tuần 01 Data Dictionary
 
 ## Dataset
 
@@ -6,47 +6,47 @@
 - Source: instructor-created teaching dataset.
 - Access date: 2026-06-03.
 - License/reuse note: may be reused for this course.
-- Unit of observation: one possible research project track.
-- Row count: 4 synthetic instructor-created rows.
-- Missing values: none expected; blank cells are not valid in this teaching dataset.
-- Private data: no private or learner-identifiable data.
+- Đơn vị quan sát: một hướng project nghiên cứu có thể phát triển.
+- Số dòng: 4 dòng synthetic do giảng viên tạo.
+- Missing values: không kỳ vọng có missing; ô trống không hợp lệ trong teaching dataset này.
+- Private data: không có dữ liệu riêng tư hoặc định danh người học.
 
 ## Columns
 
-| Column | Meaning | Example |
+| Column | Ý nghĩa | Ví dụ |
 |---|---|---|
-| `track_id` | Short stable ID for the research track. | `TCSOL_SHORT` |
-| `track` | Name of the research direction. | `Short-term Chinese teaching` |
-| `broad_interest` | A broad topic before it becomes researchable. | `Improving short-term Chinese classes...` |
-| `small_research_question` | A narrower question that can be linked to data. | `How do learner answers change...` |
-| `unit_of_observation` | What one row would represent in a future dataset. | `learner test item` |
-| `starter_dataset` | A future dataset template for that track. | `pre_post_scores.csv` |
-| `likely_output` | A table or figure that could appear in a paper. | `pre/post score table` |
-| `beginner_python_task` | A very simple Python task for that dataset type. | `count learners...` |
+| `track_id` | ID ngắn, ổn định cho hướng nghiên cứu. | `TCSOL_SHORT` |
+| `track` | Tên hướng nghiên cứu. | `Short-term Chinese teaching` |
+| `broad_interest` | Chủ đề rộng trước khi trở thành câu hỏi có thể nghiên cứu. | `Improving short-term Chinese classes...` |
+| `small_research_question` | Câu hỏi hẹp hơn, có thể gắn với dữ liệu. | `How do learner answers change...` |
+| `unit_of_observation` | Một dòng trong dataset tương lai sẽ đại diện cho điều gì. | `learner test item` |
+| `starter_dataset` | Dataset template có thể dùng cho hướng đó. | `pre_post_scores.csv` |
+| `likely_output` | Bảng hoặc hình có thể xuất hiện trong paper. | `pre/post score table` |
+| `beginner_python_task` | Tác vụ Python rất đơn giản cho loại dataset đó. | `count learners...` |
 
-## Why This Dataset Exists
+## Vì sao dataset này tồn tại?
 
-Week 01 uses a small planning dataset instead of real classroom or translation data. This keeps the first lesson focused on the research workflow:
+Tuần 01 dùng dataset lập kế hoạch rất nhỏ thay vì dữ liệu lớp học hoặc dịch thuật thật. Như vậy bài học tập trung vào quy trình:
 
 ```text
 topic -> question -> data unit -> Python task -> paper output
 ```
 
-The learner should not worry yet about advanced analysis. The important question is: "What data would I need to answer this research question?"
+Bạn chưa cần lo về phân tích nâng cao. Câu hỏi quan trọng là: "Mình cần dữ liệu gì để trả lời câu hỏi nghiên cứu này?"
 
 ## Mini Data Examples
 
-Week 01 also includes:
+Tuần 01 cũng có:
 
 - File: `data/raw/week01_mini_examples.csv`
-- Purpose: show what one future row of research data may look like in each track.
-- Required for learner: no, instructor demo only.
+- Purpose: cho thấy một dòng dữ liệu tương lai có thể trông như thế nào ở từng hướng.
+- Required for learner: không; chỉ dùng cho instructor demo.
 
-| Track | Example unit | Why it matters |
+| Hướng | Example unit | Vì sao quan trọng |
 |---|---|---|
-| TCSOL | one learner's answer to one test item | connects classroom teaching to measurable learner output |
-| Contrastive analysis | one Chinese-Vietnamese sentence pair | connects grammar comparison to teaching notes |
-| MTPE | one source-MT-postedit segment | connects machine output to human post-editing and error labels |
-| Policy | one coded policy excerpt or document-theme pair | connects policy text to metadata and themes |
+| TCSOL | một câu trả lời của người học trong một item kiểm tra | nối hoạt động giảng dạy với output có thể đo |
+| Đối chiếu Hán-Việt | một cặp câu Hán-Việt | nối phân tích ngữ pháp với ghi chú giảng dạy |
+| MTPE | một segment source-MT-postedit | nối bản dịch máy với hậu hiệu đính và nhãn lỗi |
+| Policy | một trích đoạn chính sách đã mã hóa hoặc cặp document-theme | nối văn bản chính sách với metadata và theme |
 
-Do not add real learner names, emails, or identifiable classroom records to Week 01 data files.
+Không thêm tên thật, email, hoặc dữ liệu lớp học có thể định danh vào file dữ liệu Tuần 01.

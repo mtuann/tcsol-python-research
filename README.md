@@ -91,6 +91,8 @@ The current design supports both Markdown/Quarto sources and deployable HTML:
 
 Public learner-facing navigation should target HTML pages or folder `index.html` pages. Markdown files remain authoring sources; direct `.md` links on GitHub Pages render as raw text in this static deployment and should not be the main learner experience.
 
+Notebook files follow the same rule. Direct `.ipynb` links on GitHub Pages may render as raw notebook JSON, so public navigation should point to a rendered notebook HTML page such as `live_coding.html`. Keep the `.ipynb` as downloadable/runnable source, and add a Colab link when the notebook should be executed without local setup.
+
 ## Bilingual Website Policy
 
 Public learner-facing HTML defaults to Vietnamese and provides an English option through a language switcher. The course uses Vietnamese-first explanations with English anchor terms, rather than long side-by-side duplicate paragraphs, so a beginner can focus on the concept without extra reading load.
@@ -146,6 +148,7 @@ Important: do not publish identifiable student data. If this repository becomes 
 - Treat writing as a weekly output, not a final-week clean-up task.
 - Keep Overleaf optional and late: Week 14 paper packaging, not Week 1-6 concept load.
 - Make the final notebook runnable from top to bottom.
+- Publish a rendered notebook HTML page for the website; use Colab as the default browser-based run option.
 
 ## 14-Week Syllabus
 

@@ -71,7 +71,7 @@ Recommended delivery:
 - Larger future pages may use two route trees: Vietnamese unprefixed paths and English under `/en/`.
 - Shared data, images, figures, and code examples must not be duplicated for each language.
 - HTML files must set `<html lang="vi">` by default and update the language when the learner switches to English.
-- Learner-facing navigation on GitHub Pages must link to `.html` pages or folder `index.html` pages, not raw `.md` files. Markdown remains the authoring source and may be linked only as clearly labeled source material.
+- Learner-facing navigation on GitHub Pages must link to `.html` pages or folder `index.html` pages, not raw `.md` or raw `.ipynb` files. Markdown and notebooks remain authoring/runnable sources and may be linked only as clearly labeled source material.
 
 Content style:
 
@@ -117,6 +117,7 @@ weeks/week-XX-topic-slug/
 ├── interactive_demo.html
 ├── lecture_notes.md
 ├── live_coding.ipynb
+├── live_coding.html
 ├── exercises.md
 ├── assignment.md
 ├── readings.md
@@ -325,6 +326,24 @@ Public HTML pages must:
 - preserve headings, tables, lists, code blocks, and links in rendered HTML;
 - include a small "Source Markdown" section only when source access is useful;
 - avoid sending learners directly to raw Markdown from homepage/course navigation.
+
+## Notebook Publication Standard
+
+Notebook files such as `live_coding.ipynb` are runnable source files. GitHub Pages may serve direct `.ipynb` URLs as raw notebook JSON, so they are not appropriate as the main learner reading experience.
+
+Every week with a notebook must publish:
+
+- `live_coding.ipynb`: runnable source notebook;
+- `live_coding.html`: rendered notebook with code, output, and learner-facing action buttons;
+- a Colab link for browser-based execution when the notebook can run without local setup.
+
+Public links should use this order:
+
+1. rendered notebook HTML for reading;
+2. Colab for running;
+3. raw `.ipynb` only as clearly labeled source/download.
+
+For beginner weeks, make Colab notebooks self-contained: either commit the small CSV data needed for the lesson or add a fallback download from the public repository. For later weeks with rich plots or heavier dependencies, use `nbconvert` or Quarto to render notebooks, but keep the same public-link policy.
 
 ## Interactive Demo Standard
 

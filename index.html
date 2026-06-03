@@ -1,0 +1,259 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title data-i18n="meta.title">Python cho nghiên cứu TCSOL</title>
+  <link rel="stylesheet" href="assets/css/bilingual.css">
+  <style>
+    :root {
+      --bg: #f7f9fc;
+      --ink: #172033;
+      --muted: #5b6578;
+      --line: #dbe4f0;
+      --blue: #2563eb;
+      --green: #2e7d32;
+      --amber: #c2610f;
+      --purple: #6d5bd0;
+      --paper: #ffffff;
+    }
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.55;
+      margin: 0;
+    }
+    main {
+      margin: 0 auto;
+      max-width: 1120px;
+      padding: 24px 20px 52px;
+    }
+    header {
+      display: grid;
+      gap: 1.2rem;
+      grid-template-columns: minmax(0, 1.15fr) minmax(280px, 0.85fr);
+      padding: 32px 0 28px;
+    }
+    h1 {
+      font-size: clamp(2rem, 5vw, 4.2rem);
+      letter-spacing: 0;
+      line-height: 1.03;
+      margin: 0 0 14px;
+    }
+    h2 {
+      font-size: 1.3rem;
+      margin: 0 0 12px;
+    }
+    p {
+      color: var(--muted);
+      margin: 0 0 12px;
+    }
+    a {
+      color: var(--blue);
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    .site-tools {
+      justify-content: flex-end;
+    }
+    .hero-text {
+      align-self: center;
+    }
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.7rem;
+      margin-top: 18px;
+    }
+    .button {
+      align-items: center;
+      background: var(--blue);
+      border: 1px solid var(--blue);
+      border-radius: 8px;
+      color: #ffffff;
+      display: inline-flex;
+      font-weight: 700;
+      min-height: 44px;
+      padding: 0.65rem 0.9rem;
+    }
+    .button.secondary {
+      background: #ffffff;
+      color: var(--blue);
+    }
+    .button:hover {
+      text-decoration: none;
+    }
+    .workflow-panel {
+      background: #ffffff;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      box-shadow: 0 18px 40px rgba(23, 32, 51, 0.08);
+      display: grid;
+      gap: 0.55rem;
+      padding: 18px;
+    }
+    .step {
+      border-left: 5px solid var(--blue);
+      border-radius: 8px;
+      background: #f8fbff;
+      padding: 0.72rem 0.85rem;
+    }
+    .step:nth-child(2) {
+      border-left-color: var(--purple);
+    }
+    .step:nth-child(3) {
+      border-left-color: var(--green);
+    }
+    .step:nth-child(4) {
+      border-left-color: var(--amber);
+    }
+    .step strong {
+      display: block;
+      margin-bottom: 0.18rem;
+    }
+    .grid {
+      display: grid;
+      gap: 16px;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      margin-top: 18px;
+    }
+    .card {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      box-shadow: 0 12px 30px rgba(23, 32, 51, 0.06);
+      padding: 18px;
+    }
+    .card strong {
+      display: block;
+      margin-bottom: 0.35rem;
+    }
+    .tag {
+      color: var(--blue);
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+    @media (max-width: 840px) {
+      header,
+      .grid {
+        grid-template-columns: 1fr;
+      }
+      .site-tools {
+        justify-content: flex-start;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="site-tools">
+    <nav class="language-switcher" aria-label="Ngôn ngữ / Language" data-i18n-aria-label="nav.language">
+      <button type="button" data-lang-option="vi" aria-pressed="true">Tiếng Việt</button>
+      <button type="button" data-lang-option="en" aria-pressed="false">English</button>
+    </nav>
+  </div>
+  <main>
+    <header>
+      <section class="hero-text">
+        <span class="tag" data-i18n="hero.tag">Khóa học nghiên cứu</span>
+        <h1 data-i18n="hero.title">Python cho TCSOL, đối chiếu Hán-Việt, MTPE và chính sách giáo dục</h1>
+        <p data-i18n="hero.body">Một lộ trình beginner-first giúp người học dùng Python để thiết kế dữ liệu, phân tích, trực quan hóa, và viết paper.</p>
+        <div class="hero-actions">
+          <a class="button" href="weeks/week-01-python-research-workflow/slides.html" data-i18n="action.slides">Mở slide Tuần 01</a>
+          <a class="button secondary" href="weeks/week-01-python-research-workflow/interactive_demo.html" data-i18n="action.demo">Mở demo tương tác</a>
+        </div>
+      </section>
+      <aside class="workflow-panel" aria-label="Quy trình nghiên cứu" data-i18n-aria-label="workflow.aria">
+        <div class="step"><strong data-i18n="step.question">Câu hỏi</strong><p data-i18n="step.question.body">Chuyển chủ đề rộng thành câu hỏi nhỏ.</p></div>
+        <div class="step"><strong data-i18n="step.data">Dữ liệu</strong><p data-i18n="step.data.body">Nói rõ dòng, cột, nguồn, và đơn vị quan sát.</p></div>
+        <div class="step"><strong data-i18n="step.output">Output</strong><p data-i18n="step.output.body">Tạo bảng/hình có thể dùng trong paper.</p></div>
+        <div class="step"><strong data-i18n="step.paper">Paper</strong><p data-i18n="step.paper.body">Viết caption, diễn giải, và giới hạn.</p></div>
+      </aside>
+    </header>
+
+    <section>
+      <h2 data-i18n="section.week1">Tuần đang có</h2>
+      <div class="grid">
+        <article class="card">
+          <span class="tag">Week 01</span>
+          <strong data-i18n="week1.title">Python như một quy trình nghiên cứu</strong>
+          <p data-i18n="week1.body">Chạy notebook, xem CSV nhỏ, chọn một hướng nghiên cứu, và viết memo ngắn.</p>
+        </article>
+        <article class="card">
+          <span class="tag">Slides</span>
+          <strong data-i18n="slides.title">Song ngữ và trực quan</strong>
+          <p data-i18n="slides.body">Slide mặc định tiếng Việt, có English toggle, visual cards, workflow map và caption mockup.</p>
+        </article>
+        <article class="card">
+          <span class="tag">Demo</span>
+          <strong data-i18n="demo.title">Research Track Explorer</strong>
+          <p data-i18n="demo.body">Chọn TCSOL, đối chiếu Hán-Việt, MTPE hoặc chính sách giáo dục để xem câu hỏi và dữ liệu gợi ý.</p>
+        </article>
+      </div>
+    </section>
+  </main>
+  <script src="assets/js/bilingual.js"></script>
+  <script>
+    const HOME_I18N = {
+      vi: {
+        "meta.title": "Python cho nghiên cứu TCSOL",
+        "nav.language": "Ngôn ngữ / Language",
+        "hero.tag": "Khóa học nghiên cứu",
+        "hero.title": "Python cho TCSOL, đối chiếu Hán-Việt, MTPE và chính sách giáo dục",
+        "hero.body": "Một lộ trình beginner-first giúp người học dùng Python để thiết kế dữ liệu, phân tích, trực quan hóa, và viết paper.",
+        "action.slides": "Mở slide Tuần 01",
+        "action.demo": "Mở demo tương tác",
+        "workflow.aria": "Quy trình nghiên cứu",
+        "step.question": "Câu hỏi",
+        "step.question.body": "Chuyển chủ đề rộng thành câu hỏi nhỏ.",
+        "step.data": "Dữ liệu",
+        "step.data.body": "Nói rõ dòng, cột, nguồn, và đơn vị quan sát.",
+        "step.output": "Output",
+        "step.output.body": "Tạo bảng/hình có thể dùng trong paper.",
+        "step.paper": "Paper",
+        "step.paper.body": "Viết caption, diễn giải, và giới hạn.",
+        "section.week1": "Tuần đang có",
+        "week1.title": "Python như một quy trình nghiên cứu",
+        "week1.body": "Chạy notebook, xem CSV nhỏ, chọn một hướng nghiên cứu, và viết memo ngắn.",
+        "slides.title": "Song ngữ và trực quan",
+        "slides.body": "Slide mặc định tiếng Việt, có English toggle, visual cards, workflow map và caption mockup.",
+        "demo.title": "Research Track Explorer",
+        "demo.body": "Chọn TCSOL, đối chiếu Hán-Việt, MTPE hoặc chính sách giáo dục để xem câu hỏi và dữ liệu gợi ý."
+      },
+      en: {
+        "meta.title": "Python for TCSOL Research",
+        "nav.language": "Language",
+        "hero.tag": "Research Course",
+        "hero.title": "Python for TCSOL, Chinese-Vietnamese contrastive research, MTPE, and education policy",
+        "hero.body": "A beginner-first path for using Python to design data, analyze, visualize, and write research papers.",
+        "action.slides": "Open Week 01 slides",
+        "action.demo": "Open interactive demo",
+        "workflow.aria": "Research workflow",
+        "step.question": "Question",
+        "step.question.body": "Turn a broad topic into a small question.",
+        "step.data": "Data",
+        "step.data.body": "Define rows, columns, source, and unit of observation.",
+        "step.output": "Output",
+        "step.output.body": "Create a table or figure for a paper.",
+        "step.paper": "Paper",
+        "step.paper.body": "Write a caption, interpretation, and limitation.",
+        "section.week1": "Available Week",
+        "week1.title": "Python as a Research Workflow",
+        "week1.body": "Run a notebook, inspect a small CSV, choose a research track, and write a short memo.",
+        "slides.title": "Bilingual and visual",
+        "slides.body": "Slides default to Vietnamese, include an English toggle, visual cards, a workflow map, and a caption mockup.",
+        "demo.title": "Research Track Explorer",
+        "demo.body": "Choose TCSOL, Chinese-Vietnamese contrastive analysis, MTPE, or education policy to inspect suggested questions and data."
+      }
+    };
+    window.Bilingual.init({ translations: HOME_I18N, defaultLang: "vi" });
+  </script>
+</body>
+</html>

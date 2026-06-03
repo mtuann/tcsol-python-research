@@ -8,216 +8,443 @@
   <script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
   <style>
     :root {
-      --bg: #f7f9fc;
-      --card: #ffffff;
+      --accent: #2563eb;
+      --green: #1f7a4d;
+      --amber: #b45309;
+      --rose: #b8325f;
       --ink: #172033;
       --muted: #5b6578;
-      --accent: #2563eb;
-      --accent-dark: #1d4ed8;
       --line: #dbe4f0;
-      --soft: #eef4ff;
+      --paper: #ffffff;
+      --bg: #f5f7fb;
+      --blue-soft: #edf4ff;
+      --green-soft: #edf7ee;
+      --amber-soft: #fff7ed;
+      --rose-soft: #fff1f4;
+      --shadow: 0 18px 44px rgba(23, 32, 51, 0.10);
     }
+
     * {
       box-sizing: border-box;
     }
+
     body {
-      background: var(--bg);
+      background:
+        linear-gradient(90deg, rgba(219, 228, 240, 0.45) 1px, transparent 1px),
+        linear-gradient(0deg, rgba(219, 228, 240, 0.45) 1px, transparent 1px),
+        var(--bg);
+      background-size: 40px 40px;
       color: var(--ink);
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       line-height: 1.55;
       margin: 0;
     }
-    main {
-      margin: 0 auto;
-      max-width: 1120px;
-      padding: 16px 20px 48px;
+
+    .site-tools {
+      align-items: center;
+      background: rgba(255, 255, 255, 0.94);
+      border-bottom: 1px solid var(--line);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      justify-content: space-between;
+      padding: 0.75rem 1rem;
+      position: sticky;
+      top: 0;
+      z-index: 20;
     }
-    header {
-      margin-bottom: 24px;
+
+    .demo-exit-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.45rem;
     }
-    h1 {
-      font-size: clamp(1.8rem, 4vw, 3rem);
-      letter-spacing: 0;
-      line-height: 1.1;
-      margin: 0 0 12px;
-    }
-    h2 {
-      font-size: 1.25rem;
-      margin: 0 0 12px;
-    }
-    p {
-      color: var(--muted);
-      margin: 0 0 12px;
-    }
-    .layout {
-      display: grid;
-      gap: 18px;
-      grid-template-columns: minmax(260px, 0.85fr) minmax(320px, 1.15fr);
-    }
-    .panel {
-      background: var(--card);
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      box-shadow: 0 12px 30px rgba(23, 32, 51, 0.06);
-      padding: 18px;
-    }
-    .buttons {
-      display: grid;
-      gap: 10px;
-    }
-    .buttons button {
-      background: #fff;
+
+    .demo-link,
+    .copy-button {
+      align-items: center;
+      background: var(--paper);
       border: 1px solid var(--line);
       border-radius: 8px;
       color: var(--ink);
       cursor: pointer;
+      display: inline-flex;
       font: inherit;
-      padding: 12px 14px;
-      text-align: left;
-      transition: border-color 140ms ease, background 140ms ease, color 140ms ease;
-      width: 100%;
+      font-weight: 780;
+      justify-content: center;
+      min-height: 34px;
+      padding: 0.35rem 0.65rem;
+      text-decoration: none;
     }
-    .buttons button:hover,
-    .buttons button[aria-pressed="true"] {
-      background: var(--soft);
+
+    .demo-link.primary,
+    .copy-button.primary {
+      background: var(--accent);
       border-color: var(--accent);
-      color: var(--accent-dark);
+      color: #ffffff;
     }
+
+    main {
+      margin: 0 auto;
+      max-width: 1180px;
+      padding: clamp(1.2rem, 3vw, 2.4rem) clamp(1rem, 3vw, 2rem) 3rem;
+    }
+
+    header {
+      display: grid;
+      gap: 0.7rem;
+      margin-bottom: 1.2rem;
+      max-width: 900px;
+    }
+
+    .tag {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: var(--accent);
+      display: inline-block;
+      font-size: 0.82rem;
+      font-weight: 850;
+      letter-spacing: 0.05em;
+      padding: 0.35rem 0.65rem;
+      text-transform: uppercase;
+      width: max-content;
+    }
+
+    h1,
+    h2,
+    h3,
+    p {
+      letter-spacing: 0;
+      margin: 0;
+    }
+
+    h1 {
+      font-size: clamp(2.4rem, 6vw, 5.4rem);
+      line-height: 0.98;
+      max-width: 12ch;
+    }
+
+    h2 {
+      font-size: clamp(1.35rem, 2.4vw, 2rem);
+      line-height: 1.15;
+    }
+
+    h3 {
+      font-size: 1rem;
+      line-height: 1.2;
+    }
+
+    p {
+      color: var(--muted);
+    }
+
+    .lead {
+      font-size: clamp(1.05rem, 1.6vw, 1.35rem);
+      max-width: 68ch;
+    }
+
+    .explorer-layout {
+      display: grid;
+      gap: 1rem;
+      grid-template-columns: minmax(230px, 0.75fr) minmax(0, 1.25fr);
+      margin-top: 1rem;
+    }
+
+    .panel {
+      background: rgba(255, 255, 255, 0.96);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+      padding: clamp(1rem, 2vw, 1.35rem);
+    }
+
+    .track-buttons {
+      display: grid;
+      gap: 0.65rem;
+      margin-top: 0.8rem;
+    }
+
+    .track-buttons button {
+      background: #ffffff;
+      border: 1px solid var(--line);
+      border-left: 6px solid var(--line);
+      border-radius: 8px;
+      color: var(--ink);
+      cursor: pointer;
+      display: grid;
+      font: inherit;
+      gap: 0.25rem;
+      padding: 0.75rem;
+      text-align: left;
+    }
+
+    .track-buttons button[aria-pressed="true"] {
+      background: var(--blue-soft);
+      border-color: #bfd7ff;
+      border-left-color: var(--accent);
+      color: #1d4ed8;
+    }
+
+    .track-buttons strong {
+      display: block;
+      font-size: 1rem;
+    }
+
+    .track-buttons span {
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .beginner-rule {
+      background: var(--amber-soft);
+      border: 1px solid #fed7aa;
+      border-left: 7px solid var(--amber);
+      border-radius: 8px;
+      color: #7c2d12;
+      margin-top: 1rem;
+      padding: 0.85rem;
+    }
+
+    .beginner-rule p {
+      color: #7c2d12;
+    }
+
+    .track-head {
+      display: grid;
+      gap: 0.45rem;
+      margin-bottom: 1rem;
+    }
+
     .detail-grid {
       display: grid;
-      gap: 10px;
+      gap: 0.75rem;
       grid-template-columns: repeat(2, minmax(0, 1fr));
-      margin: 12px 0 16px;
+      margin-bottom: 1rem;
     }
+
     .detail {
       background: #f8fbff;
       border: 1px solid var(--line);
       border-radius: 8px;
-      padding: 12px;
+      padding: 0.85rem;
     }
+
     .detail span {
       color: var(--muted);
       display: block;
       font-size: 0.78rem;
-      margin-bottom: 4px;
+      font-weight: 800;
+      margin-bottom: 0.25rem;
       text-transform: uppercase;
     }
+
     .detail strong {
       display: block;
-      font-size: 0.95rem;
+      line-height: 1.3;
     }
+
+    .section-block {
+      border-top: 1px solid var(--line);
+      display: grid;
+      gap: 0.7rem;
+      padding-top: 1rem;
+    }
+
+    .section-block + .section-block {
+      margin-top: 1rem;
+    }
+
+    .chart-wrap {
+      background: #ffffff;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      min-height: 370px;
+      overflow: hidden;
+    }
+
     #chart {
-      min-height: 360px;
+      min-height: 370px;
     }
+
     .fallback-bars {
       display: grid;
-      gap: 12px;
-      padding: 14px 4px;
+      gap: 0.75rem;
+      padding: 1rem;
     }
-    .fallback-bars h3 {
-      font-size: 1rem;
-      margin: 0 0 8px;
-    }
+
     .bar-row {
-      display: grid;
-      gap: 8px;
-      grid-template-columns: minmax(110px, 160px) 1fr minmax(32px, auto);
       align-items: center;
+      display: grid;
+      gap: 0.65rem;
+      grid-template-columns: minmax(100px, 180px) 1fr minmax(32px, auto);
     }
+
     .bar-label {
       color: var(--ink);
-      font-size: 0.88rem;
+      font-weight: 700;
     }
+
     .bar-track {
       background: #e8eef8;
       border-radius: 999px;
       height: 14px;
       overflow: hidden;
     }
+
     .bar-fill {
       background: var(--accent);
       height: 100%;
     }
+
     .bar-value {
       color: var(--muted);
       font-variant-numeric: tabular-nums;
       text-align: right;
     }
-    table {
-      border-collapse: collapse;
-      display: block;
-      margin-top: 16px;
-      overflow-x: auto;
-      width: 100%;
+
+    .reading-grid {
+      display: grid;
+      gap: 0.75rem;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
     }
-    th, td {
-      border-bottom: 1px solid var(--line);
-      padding: 10px;
-      text-align: left;
-      vertical-align: top;
-    }
-    th {
-      background: #f0f5ff;
-      color: #263855;
-      font-size: 0.86rem;
-    }
-    td {
-      color: #2d3748;
-      font-size: 0.9rem;
-    }
-    .callout {
-      background: #fff7ed;
-      border: 1px solid #fed7aa;
+
+    .reading-box {
+      border: 1px solid var(--line);
       border-radius: 8px;
-      color: #7c2d12;
-      margin-top: 16px;
-      padding: 12px 14px;
+      padding: 0.85rem;
     }
-    .callout p {
-      color: #7c2d12;
+
+    .reading-box[data-tone="blue"] {
+      background: var(--blue-soft);
+    }
+
+    .reading-box[data-tone="green"] {
+      background: var(--green-soft);
+    }
+
+    .reading-box[data-tone="rose"] {
+      background: var(--rose-soft);
+    }
+
+    .reading-box p {
+      margin-top: 0.35rem;
+    }
+
+    .sentence-frame {
+      background: #ffffff;
+      border: 1px solid var(--line);
+      border-left: 7px solid var(--green);
+      border-radius: 8px;
+      color: var(--ink);
+      font-size: clamp(1rem, 1.4vw, 1.2rem);
+      line-height: 1.55;
+      padding: 0.9rem 1rem;
+    }
+
+    .frame-slot {
+      background: var(--blue-soft);
+      border: 1px solid #cfe1ff;
+      border-radius: 8px;
+      color: #1d4ed8;
+      display: inline-block;
+      font-weight: 850;
+      line-height: 1.15;
+      padding: 0.08em 0.34em;
+    }
+
+    .frame-slot.output {
+      background: var(--green-soft);
+      border-color: rgba(31, 122, 77, 0.25);
+      color: var(--green);
+    }
+
+    .frame-slot.limit {
+      background: var(--amber-soft);
+      border-color: #fed7aa;
+      color: #9a3412;
+    }
+
+    .memo-output {
+      background: #102a43;
+      border-radius: 8px;
+      color: #e6f1ff;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 0.92rem;
+      line-height: 1.5;
       margin: 0;
+      overflow-x: auto;
+      padding: 0.9rem;
+      white-space: pre-wrap;
     }
-    @media (max-width: 860px) {
-      .layout, .detail-grid {
-        grid-template-columns: 1fr;
-      }
-      .site-tools {
-        justify-content: flex-start;
-      }
-    }
-    .site-tools {
+
+    .copy-row {
       align-items: center;
       display: flex;
       flex-wrap: wrap;
-      gap: 0.75rem;
-      justify-content: space-between;
-      padding: 0.75rem 1rem 0;
+      gap: 0.65rem;
     }
-    .demo-exit-links {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.45rem;
+
+    .copy-status {
+      color: var(--muted);
+      font-size: 0.92rem;
     }
-    .demo-link {
-      background: #fff;
-      border: 1px solid var(--line);
-      border-radius: 999px;
-      color: var(--ink);
-      font-weight: 750;
-      padding: 0.35rem 0.7rem;
-      text-decoration: none;
+
+    .summary-panel {
+      margin-top: 1rem;
     }
-    .demo-link:hover {
-      background: var(--soft);
-      color: var(--accent-dark);
-      text-decoration: none;
+
+    .summary-table-wrap {
+      overflow-x: auto;
+    }
+
+    table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+
+    th,
+    td {
+      border-bottom: 1px solid var(--line);
+      padding: 0.65rem;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    th {
+      background: #f0f5ff;
+      color: #263855;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+    }
+
+    tr:last-child td {
+      border-bottom: 0;
+    }
+
+    @media (max-width: 940px) {
+      .explorer-layout,
+      .detail-grid,
+      .reading-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 620px) {
+      .bar-row {
+        grid-template-columns: 1fr minmax(32px, auto);
+      }
+
+      .bar-track {
+        grid-column: 1 / -1;
+      }
     }
   </style>
 </head>
 <body>
   <div class="site-tools">
     <nav class="demo-exit-links" aria-label="Điều hướng khóa học" data-i18n-aria-label="nav.course.aria">
-      <a class="demo-link" href="../../" data-i18n="nav.home">Trang chủ</a>
+      <a class="demo-link primary" href="../../" data-i18n="nav.home">Trang chủ</a>
       <a class="demo-link" href="./" data-i18n="nav.week">Tuần 01</a>
       <a class="demo-link" href="slides.html" data-i18n="nav.slides">Slides</a>
       <a class="demo-link" href="live_coding.html" data-i18n="nav.notebook">Notebook</a>
@@ -227,82 +454,108 @@
       <button type="button" data-lang-option="en" aria-pressed="false">English</button>
     </div>
   </div>
+
   <noscript>
     <p class="noscript-note">Trang này đang hiển thị tiếng Việt. Bật JavaScript để dùng tương tác và chuyển sang English.</p>
   </noscript>
+
   <main>
     <header>
+      <span class="tag" data-i18n="page.tag">Demo tương tác</span>
       <h1 data-i18n="page.title">Khám phá hướng nghiên cứu</h1>
-      <p data-i18n="page.intro">Bấm một hướng. Quan sát cách một sở thích rộng biến thành câu hỏi nhỏ, đơn vị dữ liệu, và bảng/hình có thể dùng trong paper. Ở Tuần 01, nhiệm vụ của bạn chỉ là diễn giải demo.</p>
+      <p class="lead" data-i18n="page.intro">Chọn một hướng để xem sở thích rộng biến thành câu hỏi nhỏ, đơn vị dữ liệu, bảng/hình minh họa, và câu có thể đưa vào memo nghiên cứu.</p>
     </header>
 
-    <section class="layout" aria-label="Demo tương tác khám phá hướng nghiên cứu" data-i18n-aria-label="demo.aria">
+    <section class="explorer-layout" aria-label="Demo tương tác khám phá hướng nghiên cứu" data-i18n-aria-label="demo.aria">
       <aside class="panel">
         <h2 data-i18n="choose.title">Chọn một hướng</h2>
-        <div class="buttons" id="track-buttons" role="group" aria-label="Hướng nghiên cứu" data-i18n-aria-label="buttons.aria">
-          <button type="button" data-track="TCSOL_SHORT" aria-pressed="true" aria-controls="track-detail chart">Giảng dạy Hán ngữ ngắn hạn</button>
-          <button type="button" data-track="CONTRASTIVE" aria-pressed="false" aria-controls="track-detail chart">Đối chiếu Hán-Việt</button>
-          <button type="button" data-track="MTPE" aria-pressed="false" aria-controls="track-detail chart">Dịch máy và MTPE</button>
-          <button type="button" data-track="POLICY" aria-pressed="false" aria-controls="track-detail chart">Chính sách giáo dục</button>
-        </div>
-        <div class="callout">
+        <p data-i18n="choose.hint">Demo này dành cho người mới: đọc, bấm, giải thích bằng lời trước khi viết code.</p>
+        <div class="track-buttons" id="track-buttons" role="group" aria-label="Hướng nghiên cứu" data-i18n-aria-label="buttons.aria"></div>
+        <div class="beginner-rule">
           <p><strong data-i18n="beginner.rule">Quy tắc cho người mới:</strong> <span data-i18n="beginner.rule.text">trước khi phân tích bằng Python, hãy định nghĩa một dòng dữ liệu đại diện cho điều gì.</span></p>
         </div>
       </aside>
 
       <section class="panel" id="track-detail" aria-live="polite">
-        <h2 id="track-title">Giảng dạy Hán ngữ ngắn hạn</h2>
-        <p id="track-question">Điểm của người học thay đổi thế nào trước và sau một hoạt động hai tuần về lượng từ?</p>
+        <div class="track-head">
+          <span class="tag" id="track-tag">TCSOL</span>
+          <h2 id="track-title">Giảng dạy Hán ngữ ngắn hạn</h2>
+          <p id="track-question"></p>
+        </div>
+
         <div class="detail-grid">
-          <div class="detail">
-            <span data-i18n="detail.unit">Đơn vị quan sát</span>
-            <strong id="track-unit">một bản ghi điểm trước/sau của người học</strong>
-          </div>
-          <div class="detail">
-            <span data-i18n="detail.output">Kết quả có thể tạo</span>
-            <strong id="track-output">bảng điểm trước/sau hoặc hình tiến bộ người học</strong>
-          </div>
-          <div class="detail">
-            <span data-i18n="detail.dataset">Dataset khởi đầu</span>
-            <strong id="track-dataset">pre_post_scores.csv</strong>
-          </div>
-          <div class="detail">
-            <span data-i18n="detail.task">Tác vụ Python cho người mới</span>
-            <strong id="track-task">đếm số người học và mô tả thay đổi điểm</strong>
+          <div class="detail"><span data-i18n="detail.unit">Đơn vị quan sát</span><strong id="track-unit"></strong></div>
+          <div class="detail"><span data-i18n="detail.output">Sản phẩm có thể tạo</span><strong id="track-output"></strong></div>
+          <div class="detail"><span data-i18n="detail.dataset">Dataset khởi đầu</span><strong id="track-dataset"></strong></div>
+          <div class="detail"><span data-i18n="detail.task">Tác vụ Python đầu tiên</span><strong id="track-task"></strong></div>
+        </div>
+
+        <div class="section-block">
+          <h2 data-i18n="chart.title">Bảng/hình minh họa</h2>
+          <p data-i18n="chart.hint">Mục tiêu là đọc pattern, không phải học hết biểu đồ ngay trong Week 01.</p>
+          <p id="chart-summary" class="sr-only" aria-live="polite"></p>
+          <div class="chart-wrap">
+            <div id="chart" role="img" aria-label="Điểm minh họa trước và sau một bài học ngắn" data-i18n-aria-label="chart.initial">
+              <div class="fallback-bars">
+                <h3>Điểm minh họa trước và sau một bài học ngắn</h3>
+                <p>Biểu đồ tĩnh dự phòng. JavaScript có thể nâng cấp phần này thành biểu đồ tương tác.</p>
+                <div class="bar-row"><div class="bar-label">S001</div><div class="bar-track"><div class="bar-fill" style="width: 90%"></div></div><div class="bar-value">72</div></div>
+                <div class="bar-row"><div class="bar-label">S002</div><div class="bar-track"><div class="bar-fill" style="width: 94%"></div></div><div class="bar-value">75</div></div>
+                <div class="bar-row"><div class="bar-label">S003</div><div class="bar-track"><div class="bar-fill" style="width: 98%"></div></div><div class="bar-value">78</div></div>
+              </div>
+            </div>
           </div>
         </div>
-        <p id="chart-summary" class="sr-only" aria-live="polite"></p>
-        <div id="chart" role="img" aria-label="Điểm minh họa trước và sau một bài học ngắn" data-i18n-aria-label="chart.initial">
-          <div class="fallback-bars">
-            <h3>Điểm minh họa trước và sau một bài học ngắn</h3>
-            <p>Biểu đồ tĩnh dự phòng. JavaScript có thể nâng cấp phần này thành biểu đồ tương tác.</p>
-            <div class="bar-row"><div class="bar-label">S001</div><div class="bar-track"><div class="bar-fill" style="width: 90%"></div></div><div class="bar-value">72</div></div>
-            <div class="bar-row"><div class="bar-label">S002</div><div class="bar-track"><div class="bar-fill" style="width: 94%"></div></div><div class="bar-value">75</div></div>
-            <div class="bar-row"><div class="bar-label">S003</div><div class="bar-track"><div class="bar-fill" style="width: 98%"></div></div><div class="bar-value">78</div></div>
-            <div class="bar-row"><div class="bar-label">S004</div><div class="bar-track"><div class="bar-fill" style="width: 100%"></div></div><div class="bar-value">80</div></div>
+
+        <div class="section-block">
+          <h2 data-i18n="reading.title">Đọc demo theo ba bước</h2>
+          <div class="reading-grid">
+            <div class="reading-box" data-tone="blue">
+              <h3 data-i18n="reading.step1">1. Câu hỏi nhỏ</h3>
+              <p id="read-question"></p>
+            </div>
+            <div class="reading-box" data-tone="green">
+              <h3 data-i18n="reading.step2">2. Một dòng dữ liệu</h3>
+              <p id="read-unit"></p>
+            </div>
+            <div class="reading-box" data-tone="rose">
+              <h3 data-i18n="reading.step3">3. Python giúp gì</h3>
+              <p id="read-task"></p>
+            </div>
+          </div>
+        </div>
+
+        <div class="section-block">
+          <h2 data-i18n="sentence.title">Khung câu cho memo</h2>
+          <div class="sentence-frame" id="sentence-frame"></div>
+        </div>
+
+        <div class="section-block">
+          <h2 data-i18n="memo.title">Memo template</h2>
+          <pre class="memo-output" id="memo-output"></pre>
+          <div class="copy-row">
+            <button class="copy-button primary" type="button" id="copy-memo" data-i18n="copy.memo">Sao chép memo template</button>
+            <span class="copy-status" id="copy-status" aria-live="polite"></span>
           </div>
         </div>
       </section>
     </section>
 
-    <section class="panel" style="margin-top: 18px;">
-      <h2 data-i18n="fallback.title">Bảng tóm tắt dự phòng</h2>
-      <p data-i18n="fallback.text">Nếu biểu đồ tương tác không tải, hãy dùng bảng này.</p>
-      <table>
-        <thead>
-          <tr>
-            <th data-i18n="table.track">Hướng</th>
-            <th data-i18n="table.question">Câu hỏi nghiên cứu nhỏ</th>
-            <th data-i18n="table.row">Một dòng nghĩa là</th>
-          </tr>
-        </thead>
-        <tbody id="fallback-table">
-          <tr><td>Giảng dạy Hán ngữ ngắn hạn</td><td>Điểm của người học thay đổi thế nào trước và sau một hoạt động hai tuần về lượng từ?</td><td>một bản ghi điểm trước/sau của người học</td></tr>
-          <tr><td>Đối chiếu Hán-Việt</td><td>Đặc điểm nào của cấu trúc 把 cần được giải thích rõ bằng đối chiếu Hán-Việt trong ghi chú giảng dạy?</td><td>một ví dụ ngữ pháp Hán-Việt kèm ghi chú giảng dạy</td></tr>
-          <tr><td>Dịch máy và MTPE</td><td>Nhãn lỗi MT đơn giản nào xuất hiện nhiều nhất trong câu chính sách giáo dục Hán-Việt?</td><td>một đoạn dịch có bản hậu hiệu đính của con người</td></tr>
-          <tr><td>Chính sách giáo dục</td><td>Chủ đề nào xuất hiện trong các trích đoạn chính sách đã mã hóa về phát triển giáo viên và chuyển đổi số?</td><td>một trích đoạn chính sách được mã hóa thủ công</td></tr>
-        </tbody>
-      </table>
+    <section class="panel summary-panel">
+      <h2 data-i18n="summary.title">Bảng overview bốn hướng</h2>
+      <p data-i18n="summary.text">Dùng bảng này khi muốn so sánh nhanh trước khi chọn một hướng để mở notebook Week 01.</p>
+      <div class="summary-table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th data-i18n="table.track">Hướng</th>
+              <th data-i18n="table.question">Câu hỏi nhỏ</th>
+              <th data-i18n="table.output">Sản phẩm</th>
+            </tr>
+          </thead>
+          <tbody id="summary-table"></tbody>
+        </table>
+      </div>
     </section>
   </main>
 
@@ -317,26 +570,39 @@
         "nav.slides": "Slides",
         "nav.notebook": "Notebook",
         "nav.language": "Ngôn ngữ / Language",
+        "page.tag": "Demo tương tác",
         "page.title": "Khám phá hướng nghiên cứu",
-        "page.intro": "Bấm một hướng. Quan sát cách một sở thích rộng biến thành câu hỏi nhỏ, đơn vị dữ liệu, và bảng/hình có thể dùng trong paper. Ở Tuần 01, nhiệm vụ của bạn chỉ là diễn giải demo.",
+        "page.intro": "Chọn một hướng để xem sở thích rộng biến thành câu hỏi nhỏ, đơn vị dữ liệu, bảng/hình minh họa, và câu có thể đưa vào memo nghiên cứu.",
         "demo.aria": "Demo tương tác khám phá hướng nghiên cứu",
         "choose.title": "Chọn một hướng",
+        "choose.hint": "Demo này dành cho người mới: đọc, bấm, giải thích bằng lời trước khi viết code.",
         "buttons.aria": "Hướng nghiên cứu",
         "beginner.rule": "Quy tắc cho người mới:",
         "beginner.rule.text": "trước khi phân tích bằng Python, hãy định nghĩa một dòng dữ liệu đại diện cho điều gì.",
         "detail.unit": "Đơn vị quan sát",
-        "detail.output": "Kết quả có thể tạo",
+        "detail.output": "Sản phẩm có thể tạo",
         "detail.dataset": "Dataset khởi đầu",
-        "detail.task": "Tác vụ Python cho người mới",
+        "detail.task": "Tác vụ Python đầu tiên",
+        "chart.title": "Bảng/hình minh họa",
+        "chart.hint": "Mục tiêu là đọc pattern, không phải học hết biểu đồ ngay trong Week 01.",
         "chart.initial": "Điểm minh họa trước và sau một bài học ngắn",
         "chart.fallback": "Biểu đồ tĩnh dự phòng. Plotly chưa tải, nhưng mẫu chính vẫn có thể đọc được.",
         "chart.yaxis": "Giá trị minh họa",
         "chart.summary": "Tóm tắt biểu đồ",
-        "fallback.title": "Bảng tóm tắt dự phòng",
-        "fallback.text": "Nếu biểu đồ tương tác không tải, hãy dùng bảng này.",
+        "reading.title": "Đọc demo theo ba bước",
+        "reading.step1": "1. Câu hỏi nhỏ",
+        "reading.step2": "2. Một dòng dữ liệu",
+        "reading.step3": "3. Python giúp gì",
+        "sentence.title": "Khung câu cho memo",
+        "memo.title": "Memo template",
+        "copy.memo": "Sao chép memo template",
+        "copy.ok": "Đã copy memo template.",
+        "copy.fail": "Không copy được tự động; hãy chọn và copy text trong khung.",
+        "summary.title": "Bảng overview bốn hướng",
+        "summary.text": "Dùng bảng này khi muốn so sánh nhanh trước khi chọn một hướng để mở notebook Week 01.",
         "table.track": "Hướng",
-        "table.question": "Câu hỏi nghiên cứu nhỏ",
-        "table.row": "Một dòng nghĩa là"
+        "table.question": "Câu hỏi nhỏ",
+        "table.output": "Sản phẩm"
       },
       en: {
         "meta.title": "Week 01 Demo: Research Track Explorer",
@@ -346,57 +612,66 @@
         "nav.slides": "Slides",
         "nav.notebook": "Notebook",
         "nav.language": "Language",
+        "page.tag": "Interactive demo",
         "page.title": "Research Track Explorer",
-        "page.intro": "Click one track. Notice how a broad interest becomes a small question, a data unit, and a future table or figure. In Week 01, your job is only to interpret the demo.",
+        "page.intro": "Choose one track to see how a broad interest becomes a small question, a data unit, an illustrative table or figure, and a sentence for a research memo.",
         "demo.aria": "Interactive research track explorer",
         "choose.title": "Choose a track",
+        "choose.hint": "This beginner demo asks the learner to read, click, and explain in words before writing code.",
         "buttons.aria": "Research tracks",
         "beginner.rule": "Beginner rule:",
         "beginner.rule.text": "before Python analysis, define what one row of data represents.",
         "detail.unit": "Unit of observation",
         "detail.output": "Likely output",
         "detail.dataset": "Starter dataset",
-        "detail.task": "Beginner Python task",
+        "detail.task": "First Python task",
+        "chart.title": "Illustrative table/figure",
+        "chart.hint": "The goal is to read the pattern, not to master charts in Week 01.",
         "chart.initial": "Illustrative learner scores before and after a short lesson",
         "chart.fallback": "Static fallback chart. Plotly is not loaded, but the main pattern is still visible.",
         "chart.yaxis": "Illustrative value",
         "chart.summary": "Chart summary",
-        "fallback.title": "Fallback summary table",
-        "fallback.text": "If the interactive chart does not load, use this table instead.",
+        "reading.title": "Read the demo in three steps",
+        "reading.step1": "1. Small question",
+        "reading.step2": "2. One data row",
+        "reading.step3": "3. What Python helps with",
+        "sentence.title": "Memo sentence frame",
+        "memo.title": "Memo template",
+        "copy.memo": "Copy memo template",
+        "copy.ok": "Memo template copied.",
+        "copy.fail": "Automatic copy failed; select and copy the text in the box.",
+        "summary.title": "Four-track overview",
+        "summary.text": "Use this table to compare the tracks before opening the Week 01 notebook.",
         "table.track": "Track",
-        "table.question": "Small research question",
-        "table.row": "One row means"
+        "table.question": "Small question",
+        "table.output": "Output"
       }
     };
 
     const tracks = [
       {
         id: "TCSOL_SHORT",
+        short: "TCSOL",
         label: { vi: "Giảng dạy Hán ngữ ngắn hạn", en: "Short-term Chinese teaching" },
-        shortLabel: { vi: "TCSOL", en: "TCSOL" },
-        title: { vi: "Giảng dạy Hán ngữ ngắn hạn", en: "Short-term Chinese teaching" },
+        hint: { vi: "điểm trước/sau", en: "pre/post scores" },
         question: {
-          vi: "Điểm của người học thay đổi thế nào trước và sau một hoạt động hai tuần về lượng từ?",
-          en: "How do learner scores change before and after a two-week measure-word activity?"
+          vi: "Điểm người học thay đổi thế nào trước và sau hoạt động ngắn về lượng từ?",
+          en: "How do learner scores change before and after a short measure-word activity?"
         },
         unit: {
-          vi: "một bản ghi điểm trước/sau của người học",
-          en: "one learner pre/post score record"
+          vi: "một bản ghi điểm trước/sau của một người học",
+          en: "one pre/post score record for one learner"
         },
-        output: {
-          vi: "bảng điểm trước/sau hoặc hình tiến bộ người học",
-          en: "pre/post score table or learner progress figure"
-        },
+        output: { vi: "bảng trước/sau hoặc hình tiến bộ người học", en: "pre/post table or learner progress figure" },
         dataset: "pre_post_scores.csv",
-        task: {
-          vi: "chạy bảng tóm tắt điểm và mô tả thay đổi",
-          en: "run the score summary and describe change"
-        },
+        task: { vi: "tính chênh lệch điểm và mô tả pattern", en: "calculate score change and describe the pattern" },
+        reason: { vi: "nó gắn trực tiếp với hiệu quả hoạt động dạy ngắn hạn", en: "it connects directly to the effect of a short teaching activity" },
+        limitation: { vi: "đây mới là dữ liệu minh họa, chưa đủ để kết luận nhân quả", en: "the data are illustrative and cannot support a causal claim yet" },
         chartTitle: {
-          vi: "Điểm minh họa trước và sau một bài học ngắn",
-          en: "Illustrative learner scores before and after a short lesson"
+          vi: "Điểm minh họa trước và sau một hoạt động ngắn",
+          en: "Illustrative learner scores before and after a short activity"
         },
-        x: { vi: ["S001", "S002", "S003", "S004", "S005", "S006"], en: ["S001", "S002", "S003", "S004", "S005", "S006"] },
+        x: ["S001", "S002", "S003", "S004", "S005", "S006"],
         y1: [58, 62, 65, 70, 55, 60],
         y2: [72, 75, 78, 80, 68, 73],
         y1Name: { vi: "Trước học", en: "Pre-test" },
@@ -404,29 +679,25 @@
       },
       {
         id: "CONTRASTIVE",
+        short: { vi: "Đối chiếu", en: "Contrastive" },
         label: { vi: "Đối chiếu Hán-Việt", en: "Chinese-Vietnamese contrastive analysis" },
-        shortLabel: { vi: "Đối chiếu", en: "Contrastive" },
-        title: { vi: "Đối chiếu Hán-Việt", en: "Chinese-Vietnamese contrastive analysis" },
+        hint: { vi: "ví dụ ngữ pháp", en: "grammar examples" },
         question: {
-          vi: "Đặc điểm nào của cấu trúc 把 cần được giải thích rõ bằng đối chiếu Hán-Việt trong ghi chú giảng dạy?",
-          en: "Which Chinese ba-construction features need explicit Chinese-Vietnamese comparison in teaching notes?"
+          vi: "Đặc điểm nào của cấu trúc 把 cần được giải thích rõ bằng đối chiếu Hán-Việt?",
+          en: "Which ba-construction features need explicit Chinese-Vietnamese comparison?"
         },
         unit: {
-          vi: "một ví dụ ngữ pháp Hán-Việt kèm ghi chú giảng dạy",
-          en: "one Chinese-Vietnamese grammar example with teaching note"
+          vi: "một ví dụ Hán-Việt kèm ghi chú giảng dạy",
+          en: "one Chinese-Vietnamese example with a teaching note"
         },
-        output: {
-          vi: "bảng ghi chú giảng dạy đối chiếu",
-          en: "contrastive teaching-note table"
-        },
+        output: { vi: "bảng ví dụ đối chiếu và ghi chú giảng dạy", en: "contrastive example table with teaching notes" },
         dataset: "hv_contrastive_examples.csv",
-        task: {
-          vi: "đếm ví dụ theo đặc điểm ngữ pháp",
-          en: "count examples by grammar feature"
-        },
+        task: { vi: "đếm ví dụ theo điểm đối chiếu", en: "count examples by contrastive point" },
+        reason: { vi: "nó giúp biến phân tích ngôn ngữ thành quyết định giảng dạy", en: "it turns linguistic analysis into teaching decisions" },
+        limitation: { vi: "cần kiểm tra ví dụ với giáo viên hoặc người học thật", en: "the examples still need checking with teachers or real learners" },
         chartTitle: {
-          vi: "Số lượng minh họa các điểm giảng dạy đối chiếu",
-          en: "Illustrative count of contrastive teaching points"
+          vi: "Số lượng ví dụ theo điểm đối chiếu",
+          en: "Example counts by contrastive point"
         },
         x: {
           vi: ["Trật tự từ", "Hư từ", "Kết hợp từ", "Văn phong"],
@@ -439,29 +710,25 @@
       },
       {
         id: "MTPE",
+        short: "MTPE",
         label: { vi: "Dịch máy và MTPE", en: "Machine translation and MTPE" },
-        shortLabel: { vi: "MT/MTPE", en: "MT/MTPE" },
-        title: { vi: "Dịch máy và MTPE", en: "Machine translation and MTPE" },
+        hint: { vi: "segment + lỗi", en: "segment + error" },
         question: {
-          vi: "Nhãn lỗi MT đơn giản nào xuất hiện nhiều nhất trong câu chính sách giáo dục Hán-Việt?",
-          en: "Which simplified MT error label appears most often in Chinese-Vietnamese education-policy sentences?"
+          vi: "Nhãn lỗi MT đơn giản nào xuất hiện nhiều nhất trong câu chính sách giáo dục?",
+          en: "Which simplified MT error label appears most often in education-policy sentences?"
         },
         unit: {
-          vi: "một đoạn dịch có bản hậu hiệu đính của con người",
-          en: "one translation segment with human post-editing"
+          vi: "một segment dịch máy kèm bản hậu hiệu đính và nhãn lỗi",
+          en: "one MT segment with post-edit and error label"
         },
-        output: {
-          vi: "bảng lỗi đơn giản lấy cảm hứng từ MQM hoặc biểu đồ so sánh hệ thống MT",
-          en: "simplified MQM-inspired error table or MT system comparison chart"
-        },
+        output: { vi: "bảng nhãn lỗi hoặc biểu đồ tần suất lỗi", en: "error-label table or error-frequency chart" },
         dataset: "mt_eval.csv",
-        task: {
-          vi: "đếm đoạn dịch theo nhãn lỗi cục bộ",
-          en: "count segments by local error label"
-        },
+        task: { vi: "đếm segment theo nhãn lỗi", en: "count segments by error label" },
+        reason: { vi: "nó cho thấy phần nào của bản dịch cần hậu hiệu đính nhiều nhất", en: "it shows which parts of MT output need the most post-editing" },
+        limitation: { vi: "nhãn lỗi ban đầu còn đơn giản và cần quy tắc mã hóa rõ hơn", en: "the initial labels are simple and need clearer coding rules" },
         chartTitle: {
           vi: "Số nhãn lỗi MT minh họa",
-          en: "Illustrative simplified MT error-label counts"
+          en: "Illustrative MT error-label counts"
         },
         x: {
           vi: ["Thuật ngữ", "Dịch sát chữ", "Trật tự từ", "Lược bỏ"],
@@ -474,26 +741,22 @@
       },
       {
         id: "POLICY",
+        short: { vi: "Chính sách", en: "Policy" },
         label: { vi: "Chính sách giáo dục", en: "Education policy" },
-        shortLabel: { vi: "Chính sách", en: "Policy" },
-        title: { vi: "Chính sách giáo dục", en: "Education policy" },
+        hint: { vi: "trích đoạn mã hóa", en: "coded excerpts" },
         question: {
-          vi: "Chủ đề nào xuất hiện trong các trích đoạn chính sách đã mã hóa về phát triển giáo viên và chuyển đổi số?",
-          en: "Which themes appear in manually coded excerpts about teacher development and digitalization?"
+          vi: "Chủ đề nào xuất hiện trong các trích đoạn chính sách về phát triển giáo viên và chuyển đổi số?",
+          en: "Which themes appear in policy excerpts about teacher development and digitalization?"
         },
         unit: {
           vi: "một trích đoạn chính sách được mã hóa thủ công",
           en: "one manually coded policy excerpt"
         },
-        output: {
-          vi: "bảng tần suất chủ đề hoặc timeline trích đoạn chính sách",
-          en: "theme count table or policy excerpt timeline"
-        },
+        output: { vi: "bảng tần suất chủ đề hoặc ma trận nguồn", en: "theme-frequency table or source matrix" },
         dataset: "policy_docs.csv",
-        task: {
-          vi: "đếm trích đoạn theo chủ đề",
-          en: "count excerpts by theme"
-        },
+        task: { vi: "đếm trích đoạn theo theme_code", en: "count excerpts by theme_code" },
+        reason: { vi: "nó giúp chuyển tài liệu chính sách dài thành pattern có thể thảo luận", en: "it turns long policy documents into discussable patterns" },
+        limitation: { vi: "cần ghi rõ nguồn, năm, và cách mã hóa trích đoạn", en: "sources, years, and coding rules must be documented clearly" },
         chartTitle: {
           vi: "Số chủ đề trong trích đoạn chính sách minh họa",
           en: "Illustrative theme counts in policy excerpts"
@@ -509,12 +772,17 @@
       }
     ];
 
+    const state = { activeIndex: 0 };
     const buttonBox = document.getElementById("track-buttons");
-    const fallbackTable = document.getElementById("fallback-table");
-    let activeIndex = 0;
+    const copyButton = document.getElementById("copy-memo");
+    const copyStatus = document.getElementById("copy-status");
 
     function lang() {
       return window.Bilingual ? window.Bilingual.getLang() : "vi";
+    }
+
+    function t(key) {
+      return window.Bilingual ? window.Bilingual.t(key) : key;
     }
 
     function localize(value) {
@@ -524,47 +792,114 @@
       return value;
     }
 
-    function setButtonLabels() {
-      tracks.forEach((track) => {
-        const button = buttonBox.querySelector(`[data-track="${track.id}"]`);
-        if (!button) return;
-        button.textContent = localize(track.label);
-        button.setAttribute("aria-label", localize(track.label));
-      });
+    function escapeHtml(value) {
+      return String(value)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;");
     }
 
-    function renderFallbackTable() {
-      fallbackTable.innerHTML = tracks.map((track) => `
+    function renderButtons() {
+      buttonBox.innerHTML = tracks.map((track, index) => `
+        <button type="button" data-track-index="${index}" aria-pressed="${String(index === state.activeIndex)}" aria-controls="track-detail chart">
+          <strong>${escapeHtml(localize(track.label))}</strong>
+          <span>${escapeHtml(localize(track.hint))}</span>
+        </button>
+      `).join("");
+    }
+
+    function chartLabels(track) {
+      return Array.isArray(track.x) ? track.x : localize(track.x);
+    }
+
+    function sentenceFrame(track) {
+      const question = `<span class="frame-slot">${escapeHtml(localize(track.question))}</span>`;
+      const unit = `<span class="frame-slot">${escapeHtml(localize(track.unit))}</span>`;
+      const output = `<span class="frame-slot output">${escapeHtml(localize(track.output))}</span>`;
+      const limit = `<span class="frame-slot limit">${escapeHtml(localize(track.limitation))}</span>`;
+      if (lang() === "vi") {
+        return `Dự án hỏi: ${question} Dữ liệu đầu tiên nên ở cấp độ ${unit}. Python có thể giúp tạo ${output}. Hạn chế ban đầu là ${limit}.`;
+      }
+      return `This project asks: ${question} The first dataset should be organized at the level of ${unit}. Python can help produce ${output}. The first limitation is that ${limit}.`;
+    }
+
+    function memoTemplate(track) {
+      if (lang() === "vi") {
+        return [
+          `Hướng chọn: ${localize(track.label)}`,
+          `Câu hỏi nhỏ: ${localize(track.question)}`,
+          `Một dòng dữ liệu: ${localize(track.unit)}`,
+          `Dataset khởi đầu: ${track.dataset}`,
+          `Python sẽ giúp: ${localize(track.task)}`,
+          `Sản phẩm dự kiến: ${localize(track.output)}`,
+          `Vì sao đáng nghiên cứu: ${localize(track.reason)}`,
+          `Hạn chế ban đầu: ${localize(track.limitation)}`
+        ].join("\n");
+      }
+      return [
+        `Chosen track: ${localize(track.label)}`,
+        `Small question: ${localize(track.question)}`,
+        `One data row: ${localize(track.unit)}`,
+        `Starter dataset: ${track.dataset}`,
+        `Python helps with: ${localize(track.task)}`,
+        `Likely output: ${localize(track.output)}`,
+        `Research reason: ${localize(track.reason)}`,
+        `First limitation: ${localize(track.limitation)}`
+      ].join("\n");
+    }
+
+    function renderSummary() {
+      document.getElementById("summary-table").innerHTML = tracks.map((track) => `
         <tr>
-          <td>${localize(track.title)}</td>
-          <td>${localize(track.question)}</td>
-          <td>${localize(track.unit)}</td>
+          <td>${escapeHtml(localize(track.label))}</td>
+          <td>${escapeHtml(localize(track.question))}</td>
+          <td>${escapeHtml(localize(track.output))}</td>
         </tr>
       `).join("");
     }
 
-    function selectTrack(index) {
-      activeIndex = index;
-      const track = tracks[index];
-      document.getElementById("track-title").textContent = localize(track.title);
-      document.getElementById("track-question").textContent = localize(track.question);
-      document.getElementById("track-unit").textContent = localize(track.unit);
-      document.getElementById("track-output").textContent = localize(track.output);
-      document.getElementById("track-dataset").textContent = track.dataset;
-      document.getElementById("track-task").textContent = localize(track.task);
+    function updateChartSummary(track, values) {
+      const labels = chartLabels(track);
+      document.getElementById("chart-summary").textContent = t("chart.summary") + ": " + localize(track.chartTitle) + ". " + labels.map((label, index) => `${label}: ${values[index]}`).join("; ") + ".";
+    }
 
-      [...buttonBox.querySelectorAll("button")].forEach((button) => {
-        const isActive = button.dataset.track === track.id;
-        button.setAttribute("aria-pressed", String(isActive));
-      });
+    function renderFallbackBars(track) {
+      const chart = document.getElementById("chart");
+      const values = track.y2 ? track.y2 : track.y1;
+      const labels = chartLabels(track);
+      const title = localize(track.chartTitle);
+      const maxValue = Math.max(...values, 1);
+      const rows = labels.map((label, index) => {
+        const value = values[index];
+        const width = Math.max(4, Math.round((value / maxValue) * 100));
+        return `
+          <div class="bar-row">
+            <div class="bar-label">${escapeHtml(label)}</div>
+            <div class="bar-track"><div class="bar-fill" style="width: ${width}%"></div></div>
+            <div class="bar-value">${escapeHtml(value)}</div>
+          </div>
+        `;
+      }).join("");
+      chart.setAttribute("aria-label", title + ". " + labels.map((label, index) => `${label} ${values[index]}`).join(", "));
+      chart.innerHTML = `
+        <div class="fallback-bars">
+          <h3>${escapeHtml(title)}</h3>
+          <p>${escapeHtml(t("chart.fallback"))}</p>
+          ${rows}
+        </div>
+      `;
+      updateChartSummary(track, values);
+    }
 
+    function renderChart(track) {
       const chart = document.getElementById("chart");
       const title = localize(track.chartTitle);
-      chart.setAttribute("aria-label", title);
-
-      const xValues = localize(track.x);
+      const xValues = chartLabels(track);
       const y1Name = localize(track.y1Name);
       const y2Name = localize(track.y2Name);
+      chart.setAttribute("aria-label", title);
+
       const traces = [{
         x: xValues,
         y: track.y1,
@@ -580,7 +915,7 @@
           y: track.y2,
           name: y2Name,
           type: "bar",
-          marker: { color: "#f97316" },
+          marker: { color: "#1f7a4d" },
           hovertemplate: "%{x}<br>%{y}<extra>" + y2Name + "</extra>"
         });
       }
@@ -594,9 +929,9 @@
         Plotly.newPlot("chart", traces, {
           title: { text: title, font: { size: 16 } },
           barmode: track.y2 ? "group" : "relative",
-          margin: { t: 60, r: 20, b: 70, l: 55 },
-          yaxis: { title: window.Bilingual.t("chart.yaxis"), rangemode: "tozero" },
-          xaxis: { tickangle: -20 },
+          margin: { t: 58, r: 20, b: 72, l: 54 },
+          yaxis: { title: t("chart.yaxis"), rangemode: "tozero" },
+          xaxis: { tickangle: -18 },
           paper_bgcolor: "#ffffff",
           plot_bgcolor: "#ffffff",
           font: { family: "-apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" }
@@ -610,48 +945,53 @@
       }
     }
 
-    function renderFallbackBars(track) {
-      const chart = document.getElementById("chart");
-      const values = track.y2 ? track.y2 : track.y1;
-      const labels = localize(track.x);
-      const title = localize(track.chartTitle);
-      const maxValue = Math.max(...values, 1);
-      const rows = labels.map((label, index) => {
-        const value = values[index];
-        const width = Math.max(4, Math.round((value / maxValue) * 100));
-        return `
-          <div class="bar-row">
-            <div class="bar-label">${label}</div>
-            <div class="bar-track"><div class="bar-fill" style="width: ${width}%"></div></div>
-            <div class="bar-value">${value}</div>
-          </div>
-        `;
-      }).join("");
-      chart.setAttribute("aria-label", title + ". " + labels.map((label, index) => `${label} ${values[index]}`).join(", "));
-      chart.innerHTML = `
-        <div class="fallback-bars">
-          <h3>${title}</h3>
-          <p>${window.Bilingual.t("chart.fallback")}</p>
-          ${rows}
-        </div>
-      `;
-      updateChartSummary(track, values);
+    function renderTrack(index) {
+      state.activeIndex = index;
+      const track = tracks[index];
+      document.getElementById("track-tag").textContent = localize(track.short);
+      document.getElementById("track-title").textContent = localize(track.label);
+      document.getElementById("track-question").textContent = localize(track.question);
+      document.getElementById("track-unit").textContent = localize(track.unit);
+      document.getElementById("track-output").textContent = localize(track.output);
+      document.getElementById("track-dataset").textContent = track.dataset;
+      document.getElementById("track-task").textContent = localize(track.task);
+      document.getElementById("read-question").textContent = localize(track.question);
+      document.getElementById("read-unit").textContent = localize(track.unit);
+      document.getElementById("read-task").textContent = localize(track.task);
+      document.getElementById("sentence-frame").innerHTML = sentenceFrame(track);
+      document.getElementById("memo-output").textContent = memoTemplate(track);
+      renderButtons();
+      renderSummary();
+      renderChart(track);
+      copyStatus.textContent = "";
     }
 
-    function updateChartSummary(track, values) {
-      const labels = localize(track.x);
-      document.getElementById("chart-summary").textContent = window.Bilingual.t("chart.summary") + ": " + localize(track.chartTitle) + ". " + labels.map((label, index) => `${label}: ${values[index]}`).join("; ") + ".";
+    async function copyText(text) {
+      if (navigator.clipboard && window.isSecureContext) {
+        await navigator.clipboard.writeText(text);
+        return true;
+      }
+
+      const textarea = document.createElement("textarea");
+      textarea.value = text;
+      textarea.setAttribute("readonly", "");
+      textarea.style.position = "fixed";
+      textarea.style.top = "-9999px";
+      document.body.appendChild(textarea);
+      textarea.select();
+      let copied = false;
+      try {
+        copied = document.execCommand("copy");
+      } finally {
+        document.body.removeChild(textarea);
+      }
+      return copied;
     }
 
-    function updateLanguage() {
-      setButtonLabels();
-      renderFallbackTable();
-      selectTrack(activeIndex);
-    }
-
-    tracks.forEach((track, index) => {
-      const button = buttonBox.querySelector(`[data-track="${track.id}"]`);
-      if (button) button.addEventListener("click", () => selectTrack(index));
+    buttonBox.addEventListener("click", (event) => {
+      const button = event.target.closest("button[data-track-index]");
+      if (!button) return;
+      renderTrack(Number(button.dataset.trackIndex));
     });
 
     buttonBox.addEventListener("keydown", (event) => {
@@ -666,14 +1006,24 @@
       if (next !== current) {
         event.preventDefault();
         buttons[next].focus();
-        selectTrack(next);
+        renderTrack(next);
+      }
+    });
+
+    copyButton.addEventListener("click", async () => {
+      const text = document.getElementById("memo-output").textContent;
+      try {
+        const copied = await copyText(text);
+        copyStatus.textContent = copied ? t("copy.ok") : t("copy.fail");
+      } catch (error) {
+        copyStatus.textContent = t("copy.fail");
       }
     });
 
     window.Bilingual.init({
       translations: DEMO_I18N,
       defaultLang: "vi",
-      onChange: updateLanguage
+      onChange: () => renderTrack(state.activeIndex)
     });
   </script>
 </body>

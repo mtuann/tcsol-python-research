@@ -16,6 +16,14 @@
 | `post_editor_note` | text | short note explaining edit | qualitative evidence |
 | `source_note` | text | provenance note | source note |
 
+Revision type guide:
+
+- `omission`: meaning was missing and restored.
+- `terminology`: a domain or policy term was repaired.
+- `word_order`: Vietnamese sentence order was repaired.
+- `style`: meaning was acceptable, but register or phrasing was polished.
+- `no_error`: accepted variant; `vi_postedit` should equal `vi_mt_output`.
+
 Computed in notebook:
 
 | Computed column | Meaning |

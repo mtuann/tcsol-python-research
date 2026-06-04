@@ -1,0 +1,381 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title data-i18n="meta.title">Tuần 13: Notebook dữ liệu chính sách giáo dục | Notebook đã render</title>
+  <link rel="stylesheet" href="../../assets/css/bilingual.css">
+  <link rel="stylesheet" href="../../assets/css/course-doc.css">
+</head>
+<body>
+  <header class="doc-topbar">
+    <a class="doc-brand" href="../../" data-i18n="brand">Python Research Hub</a>
+    <nav class="doc-nav" aria-label="Điều hướng notebook" data-i18n-aria-label="nav.aria">
+      <a href="./" data-i18n="nav.week">Tuần 13</a>
+      <a href="slides.html" data-i18n="nav.slides">Slides</a>
+      <a href="interactive_demo.html" data-i18n="nav.demo">Demo</a>
+      <div class="language-switcher" role="group" aria-label="Ngôn ngữ / Language" data-i18n-aria-label="nav.language">
+        <button type="button" data-lang-option="vi" aria-pressed="true">Tiếng Việt</button>
+        <button type="button" data-lang-option="en" aria-pressed="false">English</button>
+      </div>
+    </nav>
+  </header>
+
+  <main class="doc-shell notebook-shell">
+    <aside class="doc-sidebar">
+      <strong data-i18n="side.title">Notebook</strong>
+      <a href="./" data-i18n="side.week">Tổng quan tuần</a>
+      <a href="https://colab.research.google.com/github/mtuann/tcsol-python-research/blob/main/weeks/week-13-education-policy-data/live_coding.ipynb" data-i18n="side.colab">Chạy bằng Colab</a>
+      <strong data-i18n="side.sections">Các phần trong notebook</strong>
+      <a href="#section-read-metadata" data-i18n="toc.read_metadata">1. Read policy metadata</a>
+      <a href="#section-timeline" data-i18n="toc.timeline">2. Convert dates and build a timeline</a>
+      <a href="#section-counts" data-i18n="toc.counts">3. Count policy areas and source types</a>
+      <a href="#section-crosstab" data-i18n="toc.crosstab">4. Cross-tab evidence type by policy area</a>
+      <a href="#section-figures" data-i18n="toc.figures">5. Export figures</a>
+      <a href="#section-writing" data-i18n="toc.writing">6. Paper-facing writing</a>
+
+    </aside>
+
+    <div class="doc-main">
+      <section class="doc-hero">
+        <span class="doc-eyebrow" data-i18n="hero.tag">Rendered notebook</span>
+        <h1 data-i18n="hero.title">Tuần 13: Notebook dữ liệu chính sách giáo dục</h1>
+        <p class="doc-lead" data-i18n="hero.body">Đây là bản HTML đã chạy sẵn để đọc trên GitHub Pages. Muốn thực hành, mở notebook trong Colab hoặc tải file .ipynb.</p>
+        <div class="doc-actions">
+          <a class="doc-button" href="https://colab.research.google.com/github/mtuann/tcsol-python-research/blob/main/weeks/week-13-education-policy-data/live_coding.ipynb" data-i18n="action.colab">Chạy trong Colab</a>
+          <a class="doc-button secondary" href="./" data-i18n="action.week">Quay lại Tuần 13</a>
+        </div>
+      </section>
+
+      <section class="doc-card notebook-note">
+        <h2 data-i18n="note.title">Cách dùng trang này</h2>
+        <div class="doc-grid three">
+          <article class="mini-card"><span class="swatch blue"></span><h3 data-i18n="note.read.title">Đọc</h3><p data-i18n="note.read.body">Bản HTML giữ code và output cạnh nhau, phù hợp để ôn lại sau buổi học.</p></article>
+          <article class="mini-card"><span class="swatch green"></span><h3 data-i18n="note.run.title">Chạy</h3><p data-i18n="note.run.body">Nút Colab mở notebook có thể chạy từng cell và tự tải CSV nếu không có file local.</p></article>
+          <article class="mini-card"><span class="swatch amber"></span><h3 data-i18n="note.source.title">Source</h3><p data-i18n="note.source.body">File .ipynb vẫn được giữ để tải, nộp bài hoặc chỉnh trong JupyterLab/VS Code.</p></article>
+        </div>
+        <details>
+          <summary><strong data-i18n="source.files.title">Source files</strong></summary>
+          <p data-i18n="source.files.body">Các file dưới đây dành cho thực hành, nộp bài, hoặc chỉnh notebook. Người học nên đọc trang HTML trước.</p>
+          <div class="doc-links">
+            <a class="doc-chip" href="live_coding.ipynb" download data-i18n="source.files.notebook">Tải source .ipynb</a>
+            <a class="doc-chip" href="data/raw/week13_policy_coding.csv" download data-i18n="source.files.csv">Tải tệp CSV dữ liệu</a>
+          </div>
+        </details>
+      </section>
+
+      <section class="notebook-document" aria-label="Các cell notebook đã render" data-i18n-aria-label="notebook.cells.aria">
+        <article class="nb-cell nb-markdown" data-cell-type="markdown" data-i18n-html="intro"><h2>Week 13 live coding: Education policy data</h2>
+<p>Mục tiêu: biến policy sources thành bảng metadata + coding scheme có thể kiểm tra, đếm, vẽ timeline và viết Results thận trọng.</p>
+<p>Core tuần này: chạy notebook, đọc policy-area summary, xuất timeline/figure, và viết caption + source note + Results paragraph.</p></article>
+<article class="nb-cell nb-code" data-cell-type="code"><div class="nb-input-label">In [1]</div><pre><code>import hashlib
+import subprocess
+import sys
+from pathlib import Path
+from urllib.request import urlretrieve
+try:
+    import pandas as pd
+    import matplotlib.pyplot as plt
+except ModuleNotFoundError:
+    subprocess.check_call([sys.executable, &quot;-m&quot;, &quot;pip&quot;, &quot;install&quot;, &quot;pandas==2.3.3&quot;, &quot;matplotlib==3.9.4&quot;])
+    import pandas as pd
+    import matplotlib.pyplot as plt
+plt.rcParams[&quot;svg.hashsalt&quot;] = &quot;week13-education-policy-data&quot;
+WEEK_PATH = Path(&quot;weeks/week-13-education-policy-data&quot;)
+WEEK_DIR = WEEK_PATH if WEEK_PATH.exists() else Path(&quot;.&quot;)
+DATA_PATH = WEEK_DIR / &quot;data&quot; / &quot;raw&quot; / &quot;week13_policy_coding.csv&quot;
+TABLE_DIR = WEEK_DIR / &quot;outputs&quot; / &quot;tables&quot;
+FIG_DIR = WEEK_DIR / &quot;outputs&quot; / &quot;figures&quot;
+TABLE_DIR.mkdir(parents=True, exist_ok=True)
+FIG_DIR.mkdir(parents=True, exist_ok=True)
+EXPECTED_SHA = &quot;f2e45d989c7f4f10365dd9c5103ffd7c9cc264c5e4b2a866df5431f1e6827e58&quot;
+REMOTE_DATA = &quot;https://raw.githubusercontent.com/mtuann/tcsol-python-research/main/weeks/week-13-education-policy-data/data/raw/week13_policy_coding.csv&quot;
+if not DATA_PATH.exists():
+    DATA_PATH.parent.mkdir(parents=True, exist_ok=True)
+    urlretrieve(REMOTE_DATA, DATA_PATH)
+actual_sha = hashlib.sha256(DATA_PATH.read_bytes()).hexdigest()
+print(&quot;Data file:&quot;, DATA_PATH)
+print(&quot;SHA-256:&quot;, actual_sha)
+if actual_sha != EXPECTED_SHA:
+    print(&quot;Note: SHA differs from the course snapshot. Continue only if you intentionally changed the data.&quot;)</code></pre><div class="nb-output"><div class="nb-output-label">Output</div><pre><code>Data file: weeks/week-13-education-policy-data/data/raw/week13_policy_coding.csv
+SHA-256: f2e45d989c7f4f10365dd9c5103ffd7c9cc264c5e4b2a866df5431f1e6827e58</code></pre></div></article>
+<article id="section-read-metadata" class="nb-cell nb-markdown" data-cell-type="markdown" data-i18n-html="read_metadata"><h3>1. Read policy metadata</h3>
+<p>Một row là một coded source row. Trước khi giải thích chính sách, hãy đọc metadata: source title, issuing body, date, URL và access date.</p></article>
+<article class="nb-cell nb-code" data-cell-type="code"><div class="nb-input-label">In [2]</div><pre><code>policy = pd.read_csv(DATA_PATH)
+print(&quot;Rows:&quot;, len(policy))
+print(&quot;Documents:&quot;, policy[&quot;doc_id&quot;].nunique())
+print(&quot;Source types:&quot;, &quot;, &quot;.join(policy[&quot;source_type&quot;].drop_duplicates()))
+print(policy[[&quot;coding_id&quot;, &quot;title&quot;, &quot;issuing_body&quot;, &quot;issue_date&quot;, &quot;source_type&quot;, &quot;policy_area&quot;]].head(6).to_string(index=False))</code></pre><div class="nb-output"><div class="nb-output-label">Output</div><pre><code>Rows: 12
+Documents: 6
+Source types: policy_plan, statistical_bulletin, metadata_standard, data_portal, coding_model, policy_dashboard, comparative_report
+coding_id                                                    title                            issuing_body issue_date          source_type          policy_area
+     C001                      Education Powerhouse Plan 2024-2035 CPC Central Committee and State Council 2025-01-19          policy_plan    system_governance
+     C002                      Education Powerhouse Plan 2024-2035 CPC Central Committee and State Council 2025-01-19          policy_plan       digitalization
+     C003                      Education Powerhouse Plan 2024-2035 CPC Central Committee and State Council 2025-01-19          policy_plan  teacher_development
+     C004                      Education Powerhouse Plan 2024-2035 CPC Central Committee and State Council 2025-01-19          policy_plan internationalization
+     C005 2024 National Education Development Statistical Bulletin        Ministry of Education of the PRC 2025-06-11 statistical_bulletin education_statistics
+     C006 2024 National Education Development Statistical Bulletin        Ministry of Education of the PRC 2025-06-11 statistical_bulletin  teacher_development</code></pre></div></article>
+<article id="section-timeline" class="nb-cell nb-markdown" data-cell-type="markdown" data-i18n-html="timeline"><h3>2. Convert dates and build a timeline</h3>
+<p><code>pd.to_datetime()</code> biến date text thành dữ liệu thời gian. Sau đó <code>sort_values()</code> giúp xếp nguồn theo thứ tự xuất hiện.</p></article>
+<article class="nb-cell nb-code" data-cell-type="code"><div class="nb-input-label">In [3]</div><pre><code>policy[&quot;issue_date_parsed&quot;] = pd.to_datetime(policy[&quot;issue_date&quot;], errors=&quot;coerce&quot;)
+policy[&quot;issue_year&quot;] = policy[&quot;issue_date_parsed&quot;].dt.year
+policy[&quot;source_label&quot;] = policy[&quot;doc_id&quot;] + &quot; &quot; + policy[&quot;source_type&quot;]
+timeline = policy[[&quot;coding_id&quot;, &quot;doc_id&quot;, &quot;title&quot;, &quot;issuing_body&quot;, &quot;issue_date&quot;, &quot;issue_date_parsed&quot;, &quot;source_type&quot;, &quot;policy_area&quot;, &quot;theme_code&quot;, &quot;url&quot;, &quot;access_date&quot;]].sort_values([&quot;issue_date_parsed&quot;, &quot;coding_id&quot;])
+timeline.to_csv(TABLE_DIR / &quot;week13_timeline.csv&quot;, index=False)
+print(timeline[[&quot;coding_id&quot;, &quot;doc_id&quot;, &quot;issue_date&quot;, &quot;source_type&quot;, &quot;policy_area&quot;, &quot;theme_code&quot;]].to_string(index=False))</code></pre><div class="nb-output"><div class="nb-output-label">Output</div><pre><code>coding_id doc_id issue_date          source_type          policy_area              theme_code
+     C001   D001 2025-01-19          policy_plan    system_governance          strategic_goal
+     C002   D001 2025-01-19          policy_plan       digitalization        digital_strategy
+     C003   D001 2025-01-19          policy_plan  teacher_development         teacher_quality
+     C004   D001 2025-01-19          policy_plan internationalization international_influence
+     C005   D002 2025-06-11 statistical_bulletin education_statistics    statistical_snapshot
+     C006   D002 2025-06-11 statistical_bulletin  teacher_development          teacher_supply
+     C007   D002 2025-06-11 statistical_bulletin        equity_access   access_and_enrollment
+     C012   D006 2025-11-28   comparative_report   comparative_policy       policy_comparison
+     C008   D003 2026-06-04    metadata_standard   indicator_metadata          sdg4_indicator
+     C009   D003 2026-06-04          data_portal   indicator_metadata               sdg4_data
+     C010   D004 2026-06-04         coding_model policy_coding_method          policy_profile
+     C011   D005 2026-06-04     policy_dashboard policy_coding_method        policy_indicator</code></pre></div></article>
+<article id="section-counts" class="nb-cell nb-markdown" data-cell-type="markdown" data-i18n-html="counts"><h3>3. Count policy areas and source types</h3>
+<p>Đếm code không phải để chứng minh policy impact. Đếm để biết source set của mình đang thiên về chủ đề nào.</p></article>
+<article class="nb-cell nb-code" data-cell-type="code"><div class="nb-input-label">In [4]</div><pre><code>policy_area_summary = policy[&quot;policy_area&quot;].value_counts().rename_axis(&quot;policy_area&quot;).reset_index(name=&quot;row_count&quot;)
+policy_area_summary[&quot;percent&quot;] = (policy_area_summary[&quot;row_count&quot;] / len(policy) * 100).round(1)
+policy_area_summary.to_csv(TABLE_DIR / &quot;week13_policy_area_summary.csv&quot;, index=False)
+print(policy_area_summary.to_string(index=False))
+source_type_summary = policy[&quot;source_type&quot;].value_counts().rename_axis(&quot;source_type&quot;).reset_index(name=&quot;row_count&quot;)
+source_type_summary.to_csv(TABLE_DIR / &quot;week13_source_type_summary.csv&quot;, index=False)
+print()
+print(source_type_summary.to_string(index=False))</code></pre><div class="nb-output"><div class="nb-output-label">Output</div><pre><code>         policy_area  row_count  percent
+ teacher_development          2     16.7
+  indicator_metadata          2     16.7
+policy_coding_method          2     16.7
+   system_governance          1      8.3
+      digitalization          1      8.3
+internationalization          1      8.3
+education_statistics          1      8.3
+       equity_access          1      8.3
+  comparative_policy          1      8.3
+
+         source_type  row_count
+         policy_plan          4
+statistical_bulletin          3
+   metadata_standard          1
+         data_portal          1
+        coding_model          1
+    policy_dashboard          1
+  comparative_report          1</code></pre></div></article>
+<article id="section-crosstab" class="nb-cell nb-markdown" data-cell-type="markdown" data-i18n-html="crosstab"><h3>4. Cross-tab evidence type by policy area</h3>
+<p><code>pd.crosstab()</code> giúp kiểm tra xem một policy area đến từ policy text, statistics, metadata hay coding model. Đây là bước chống overclaim.</p></article>
+<article class="nb-cell nb-code" data-cell-type="code"><div class="nb-input-label">In [5]</div><pre><code>theme_by_source = pd.crosstab(policy[&quot;policy_area&quot;], policy[&quot;evidence_type&quot;])
+theme_by_source.to_csv(TABLE_DIR / &quot;week13_theme_by_source_crosstab.csv&quot;)
+print(theme_by_source.to_string())
+sample = policy[[&quot;coding_id&quot;, &quot;title&quot;, &quot;policy_area&quot;, &quot;theme_code&quot;, &quot;evidence_type&quot;, &quot;excerpt_paraphrase&quot;, &quot;coder_note&quot;]].head(8)
+sample.to_csv(TABLE_DIR / &quot;week13_policy_coding_sample.csv&quot;, index=False)
+print()
+print(&quot;Coding sample:&quot;)
+print(sample.to_string(index=False))</code></pre><div class="nb-output"><div class="nb-output-label">Output</div><pre><code>evidence_type         metadata  method_model  milestone  policy_text  report  statistical_indicator
+policy_area
+comparative_policy           0             0          0            0       1                      0
+digitalization               0             0          0            1       0                      0
+education_statistics         0             0          0            0       0                      1
+equity_access                0             0          0            0       0                      1
+indicator_metadata           2             0          0            0       0                      0
+internationalization         0             0          0            1       0                      0
+policy_coding_method         0             2          0            0       0                      0
+system_governance            0             0          1            0       0                      0
+teacher_development          0             0          0            1       0                      1
+
+Coding sample:
+coding_id                                                    title          policy_area              theme_code         evidence_type                                                                        excerpt_paraphrase                                        coder_note
+     C001                      Education Powerhouse Plan 2024-2035    system_governance          strategic_goal             milestone         paraphrased policy goal: phased progress by 2027 and education powerhouse by 2035     description only; do not evaluate feasibility
+     C002                      Education Powerhouse Plan 2024-2035       digitalization        digital_strategy           policy_text paraphrased policy action: promote national education digitalization and resource sharing                        code as theme, not outcome
+     C003                      Education Powerhouse Plan 2024-2035  teacher_development         teacher_quality           policy_text           paraphrased policy action: strengthen teacher capacity and professional support       connect to TCSOL teacher-training questions
+     C004                      Education Powerhouse Plan 2024-2035 internationalization international_influence           policy_text    paraphrased policy action: expand international influence and cooperation in education                           use neutral description
+     C005 2024 National Education Development Statistical Bulletin education_statistics    statistical_snapshot statistical_indicator    paraphrased bulletin scope: reports national education development indicators for 2024            record indicator family before numbers
+     C006 2024 National Education Development Statistical Bulletin  teacher_development          teacher_supply statistical_indicator       paraphrased indicator family: reports teacher counts and education level categories         do not mix policy plan with outcome claim
+     C007 2024 National Education Development Statistical Bulletin        equity_access   access_and_enrollment statistical_indicator       paraphrased indicator family: reports enrolment and school-level access information    statistics describe context, not causal impact
+     C008                              UNESCO UIS SDG 4 Indicators   indicator_metadata          sdg4_indicator              metadata  paraphrased metadata source: defines global and thematic indicators for SDG 4 monitoring use for metadata fields and comparability caution</code></pre></div></article>
+<article id="section-figures" class="nb-cell nb-markdown" data-cell-type="markdown" data-i18n-html="figures"><h3>5. Export figures</h3>
+<p>Figure 1 là timeline source dates. Figure 2 là policy-area counts. Cả hai mô tả source set, không đánh giá hiệu quả chính sách.</p></article>
+<article class="nb-cell nb-code" data-cell-type="code"><div class="nb-input-label">In [6]</div><pre><code>plt.rcParams.update({&quot;font.size&quot;: 11, &quot;axes.titlesize&quot;: 14, &quot;axes.labelsize&quot;: 11})
+plot_timeline = timeline.drop_duplicates(&quot;doc_id&quot;).sort_values(&quot;issue_date_parsed&quot;)
+fig, ax = plt.subplots(figsize=(9, 4.8))
+ax.scatter(plot_timeline[&quot;issue_date_parsed&quot;], range(len(plot_timeline)), color=&quot;#2f63ea&quot;, s=90)
+for y, (_, row) in enumerate(plot_timeline.iterrows()):
+    ax.text(row[&quot;issue_date_parsed&quot;], y + 0.12, f&quot;{row[&#x27;doc_id&#x27;]} · {row[&#x27;source_type&#x27;]}&quot;, fontsize=9, ha=&quot;center&quot;)
+ax.set_yticks(range(len(plot_timeline)))
+ax.set_yticklabels(plot_timeline[&quot;doc_id&quot;])
+ax.set_title(&quot;Week 13 policy source timeline&quot;)
+ax.set_xlabel(&quot;Source date or access-date placeholder&quot;)
+ax.set_ylabel(&quot;Document ID&quot;)
+ax.grid(axis=&quot;x&quot;, color=&quot;#d8e2f0&quot;)
+fig.tight_layout()
+fig.savefig(FIG_DIR / &quot;week13_policy_timeline.png&quot;, dpi=200)
+fig.savefig(FIG_DIR / &quot;week13_policy_timeline.svg&quot;, metadata={&quot;Date&quot;: &quot;2026-06-04&quot;})
+plt.close(fig)
+plot_area = policy_area_summary.sort_values(&quot;row_count&quot;)
+fig, ax = plt.subplots(figsize=(8.2, 5.2))
+ax.barh(plot_area[&quot;policy_area&quot;], plot_area[&quot;row_count&quot;], color=&quot;#1f7a4d&quot;)
+ax.set_title(&quot;Week 13 policy area counts&quot;)
+ax.set_xlabel(&quot;Coded rows&quot;)
+ax.set_ylabel(&quot;Policy area&quot;)
+for i, value in enumerate(plot_area[&quot;row_count&quot;]):
+    ax.text(value + 0.05, i, str(value), va=&quot;center&quot;, fontweight=&quot;bold&quot;)
+fig.tight_layout()
+fig.savefig(FIG_DIR / &quot;week13_policy_area_counts.png&quot;, dpi=200)
+fig.savefig(FIG_DIR / &quot;week13_policy_area_counts.svg&quot;, metadata={&quot;Date&quot;: &quot;2026-06-04&quot;})
+plt.close(fig)
+print(&quot;Figures exported:&quot;)
+print(FIG_DIR / &quot;week13_policy_timeline.png&quot;)
+print(FIG_DIR / &quot;week13_policy_area_counts.png&quot;)</code></pre><div class="nb-output"><div class="nb-output-label">Output</div><pre><code>Figures exported:
+weeks/week-13-education-policy-data/outputs/figures/week13_policy_timeline.png
+weeks/week-13-education-policy-data/outputs/figures/week13_policy_area_counts.png</code></pre></div></article>
+<article id="section-writing" class="nb-cell nb-markdown" data-cell-type="markdown" data-i18n-html="writing"><h3>6. Paper-facing writing</h3>
+<p>Đoạn Results phải tách ba ý: source set có gì, evidence type là gì, và limitation là gì.</p></article>
+<article class="nb-cell nb-code" data-cell-type="code"><div class="nb-input-label">In [7]</div><pre><code>top_area = policy_area_summary.iloc[0]
+evidence_types = &quot;, &quot;.join(sorted(policy[&quot;evidence_type&quot;].unique()))
+paragraph = (
+    f&quot;In the synthetic Week 13 policy-source coding dataset, {top_area[&#x27;policy_area&#x27;]} is one of the most frequent policy areas, &quot;
+    f&quot;with {int(top_area[&#x27;row_count&#x27;])} of {len(policy)} coded rows ({top_area[&#x27;percent&#x27;]}%). Several other areas have the same small count, so this should be read as a sample pattern rather than a ranking. The table also includes policy plans, &quot;
+    &quot;a statistical bulletin, metadata sources, coding-model sources, and a comparative report, so the rows should not be read as one type of evidence. &quot;
+    f&quot;The evidence types are {evidence_types}. For a paper draft, this table is most useful as a transparent source map: it shows which policy areas and source types are present before the researcher writes interpretation. &quot;
+    &quot;However, the dataset is a small classroom sample with paraphrased excerpts. It describes source coverage and coding decisions, but it does not prove implementation quality, learner outcomes, or causal policy effects.&quot;
+)
+print(paragraph)
+print()
+print(&quot;Word count:&quot;, len(paragraph.split()))
+caption = &quot;Figure 1 shows the timeline of 12 coded policy-source rows in the Week 13 classroom dataset. Rows are based on paraphrased source metadata and describe source coverage rather than policy impact.&quot;
+source_note = (
+    &quot;Source note: policy/source metadata were checked on 2026-06-04. Core sources include the PRC State Council education blueprint page, the PRC MOE 2024 statistical bulletin, UNESCO UIS SDG 4 indicators, and UNESCO GEM PEER. &quot;
+    f&quot;The classroom CSV is synthetic/paraphrased, SHA-256 {EXPECTED_SHA}, and should not be treated as a full policy corpus.&quot;
+)
+submission_text = f&quot;&quot;&quot;# Week 13 Submission Text Model
+
+## Caption
+
+{caption}
+
+## Source Note
+
+{source_note}
+
+## Results Paragraph
+
+{paragraph}
+&quot;&quot;&quot;
+(TABLE_DIR / &quot;week13_submission_text.md&quot;).write_text(submission_text, encoding=&quot;utf-8&quot;)
+print(&quot;Submission text exported:&quot;, TABLE_DIR / &quot;week13_submission_text.md&quot;)
+print()
+print(&quot;Caption:&quot;)
+print(caption)
+print()
+print(&quot;Source note:&quot;)
+print(source_note)</code></pre><div class="nb-output"><div class="nb-output-label">Output</div><pre><code>In the synthetic Week 13 policy-source coding dataset, teacher_development is one of the most frequent policy areas, with 2 of 12 coded rows (16.7%). Several other areas have the same small count, so this should be read as a sample pattern rather than a ranking. The table also includes policy plans, a statistical bulletin, metadata sources, coding-model sources, and a comparative report, so the rows should not be read as one type of evidence. The evidence types are metadata, method_model, milestone, policy_text, report, statistical_indicator. For a paper draft, this table is most useful as a transparent source map: it shows which policy areas and source types are present before the researcher writes interpretation. However, the dataset is a small classroom sample with paraphrased excerpts. It describes source coverage and coding decisions, but it does not prove implementation quality, learner outcomes, or causal policy effects.
+
+Word count: 144
+Submission text exported: weeks/week-13-education-policy-data/outputs/tables/week13_submission_text.md
+
+Caption:
+Figure 1 shows the timeline of 12 coded policy-source rows in the Week 13 classroom dataset. Rows are based on paraphrased source metadata and describe source coverage rather than policy impact.
+
+Source note:
+Source note: policy/source metadata were checked on 2026-06-04. Core sources include the PRC State Council education blueprint page, the PRC MOE 2024 statistical bulletin, UNESCO UIS SDG 4 indicators, and UNESCO GEM PEER. The classroom CSV is synthetic/paraphrased, SHA-256 f2e45d989c7f4f10365dd9c5103ffd7c9cc264c5e4b2a866df5431f1e6827e58, and should not be treated as a full policy corpus.</code></pre></div></article>
+      </section>
+    </div>
+  </main>
+
+  <script src="../../assets/js/bilingual.js"></script>
+  <script>
+    window.Bilingual.init({
+      defaultLang: "vi",
+      translations: {
+        "vi": {
+                "intro": "<h2>Week 13 live coding: Education policy data</h2>\n<p>Mục tiêu: biến policy sources thành bảng metadata + coding scheme có thể kiểm tra, đếm, vẽ timeline và viết Results thận trọng.</p>\n<p>Core tuần này: chạy notebook, đọc policy-area summary, xuất timeline/figure, và viết caption + source note + Results paragraph.</p>",
+                "toc.read_metadata": "1. Read policy metadata",
+                "read_metadata": "<h3>1. Read policy metadata</h3>\n<p>Một row là một coded source row. Trước khi giải thích chính sách, hãy đọc metadata: source title, issuing body, date, URL và access date.</p>",
+                "toc.timeline": "2. Convert dates and build a timeline",
+                "timeline": "<h3>2. Convert dates and build a timeline</h3>\n<p><code>pd.to_datetime()</code> biến date text thành dữ liệu thời gian. Sau đó <code>sort_values()</code> giúp xếp nguồn theo thứ tự xuất hiện.</p>",
+                "toc.counts": "3. Count policy areas and source types",
+                "counts": "<h3>3. Count policy areas and source types</h3>\n<p>Đếm code không phải để chứng minh policy impact. Đếm để biết source set của mình đang thiên về chủ đề nào.</p>",
+                "toc.crosstab": "4. Cross-tab evidence type by policy area",
+                "crosstab": "<h3>4. Cross-tab evidence type by policy area</h3>\n<p><code>pd.crosstab()</code> giúp kiểm tra xem một policy area đến từ policy text, statistics, metadata hay coding model. Đây là bước chống overclaim.</p>",
+                "toc.figures": "5. Export figures",
+                "figures": "<h3>5. Export figures</h3>\n<p>Figure 1 là timeline source dates. Figure 2 là policy-area counts. Cả hai mô tả source set, không đánh giá hiệu quả chính sách.</p>",
+                "toc.writing": "6. Paper-facing writing",
+                "writing": "<h3>6. Paper-facing writing</h3>\n<p>Đoạn Results phải tách ba ý: source set có gì, evidence type là gì, và limitation là gì.</p>",
+                "brand": "Python Research Hub",
+                "meta.title": "Tuần 13: Notebook dữ liệu chính sách giáo dục | Notebook đã render",
+                "nav.aria": "Điều hướng notebook",
+                "nav.week": "Tuần 13",
+                "nav.slides": "Slides",
+                "nav.demo": "Demo",
+                "nav.language": "Ngôn ngữ / Language",
+                "side.title": "Notebook",
+                "side.week": "Tổng quan tuần",
+                "side.colab": "Chạy bằng Colab",
+                "side.sections": "Các phần trong notebook",
+                "hero.tag": "Notebook đã render",
+                "hero.title": "Tuần 13: Notebook dữ liệu chính sách giáo dục",
+                "hero.body": "Đây là bản HTML đã chạy sẵn để đọc trên GitHub Pages. Muốn thực hành, mở notebook trong Colab hoặc tải file .ipynb.",
+                "action.colab": "Chạy trong Colab",
+                "action.week": "Quay lại Tuần 13",
+                "note.title": "Cách dùng trang này",
+                "note.read.title": "Đọc",
+                "note.read.body": "Bản HTML giữ code và output cạnh nhau, phù hợp để ôn lại sau buổi học.",
+                "note.run.title": "Chạy",
+                "note.run.body": "Nút Colab mở notebook có thể chạy từng cell và tự tải CSV nếu không có file local.",
+                "note.source.title": "Source",
+                "note.source.body": "File .ipynb vẫn được giữ để tải, nộp bài hoặc chỉnh trong JupyterLab/VS Code.",
+                "source.files.title": "Source files",
+                "source.files.body": "Các file dưới đây dành cho thực hành, nộp bài, hoặc chỉnh notebook. Người học nên đọc trang HTML trước.",
+                "source.files.notebook": "Tải source .ipynb",
+                "source.files.csv": "Tải tệp CSV dữ liệu",
+                "notebook.cells.aria": "Các cell notebook đã render"
+        },
+        "en": {
+                "intro": "<h2>Week 13 live coding: Education policy data</h2>\n<p>Goal: turn policy sources into a metadata + coding-scheme table that can be checked, counted, visualized as a timeline, and written up cautiously.</p>\n<p>Core task: run the notebook, read the policy-area summary, export a timeline/figure, and write a caption + source note + Results paragraph.</p>",
+                "toc.read_metadata": "1. Read policy metadata",
+                "read_metadata": "<h3>1. Read policy metadata</h3>\n<p>One row is one coded source row. Before interpreting policy, read the metadata: source title, issuing body, date, URL, and access date.</p>",
+                "toc.timeline": "2. Convert dates and build a timeline",
+                "timeline": "<h3>2. Convert dates and build a timeline</h3>\n<p><code>pd.to_datetime()</code> turns date text into time data. Then <code>sort_values()</code> orders sources by publication/access date.</p>",
+                "toc.counts": "3. Count policy areas and source types",
+                "counts": "<h3>3. Count policy areas and source types</h3>\n<p>Counting codes does not prove policy impact. Counting shows which topics dominate the source set.</p>",
+                "toc.crosstab": "4. Cross-tab evidence type by policy area",
+                "crosstab": "<h3>4. Cross-tab evidence type by policy area</h3>\n<p><code>pd.crosstab()</code> checks whether a policy area comes from policy text, statistics, metadata, or a coding model. This is an anti-overclaiming step.</p>",
+                "toc.figures": "5. Export figures",
+                "figures": "<h3>5. Export figures</h3>\n<p>Figure 1 is a timeline of source dates. Figure 2 is policy-area counts. Both describe the source set; neither evaluates policy effectiveness.</p>",
+                "toc.writing": "6. Paper-facing writing",
+                "writing": "<h3>6. Paper-facing writing</h3>\n<p>The Results paragraph should separate three ideas: what the source set contains, what the evidence types are, and what the limitation is.</p>",
+                "brand": "Python Research Hub",
+                "meta.title": "Week 13: Education Policy Data Notebook | Rendered Notebook",
+                "nav.aria": "Notebook navigation",
+                "nav.week": "Week 13",
+                "nav.slides": "Slides",
+                "nav.demo": "Demo",
+                "nav.language": "Language",
+                "side.title": "Notebook",
+                "side.week": "Week overview",
+                "side.colab": "Run in Colab",
+                "side.sections": "Notebook sections",
+                "hero.tag": "Rendered notebook",
+                "hero.title": "Week 13: Education Policy Data Notebook",
+                "hero.body": "This is the pre-run HTML version for GitHub Pages. To practice, open the notebook in Colab or download the .ipynb file.",
+                "action.colab": "Run in Colab",
+                "action.week": "Back to Week 13",
+                "note.title": "How to use this page",
+                "note.read.title": "Read",
+                "note.read.body": "The HTML version keeps code and output together, useful for review after class.",
+                "note.run.title": "Run",
+                "note.run.body": "The Colab button opens a runnable notebook and downloads the CSV automatically when local files are unavailable.",
+                "note.source.title": "Source",
+                "note.source.body": "The .ipynb file remains available for download, submission, or editing in JupyterLab/VS Code.",
+                "source.files.title": "Source files",
+                "source.files.body": "The files below are for practice, submission, or notebook editing. Learners should read the HTML page first.",
+                "source.files.notebook": "Download source .ipynb",
+                "source.files.csv": "Download data CSV",
+                "notebook.cells.aria": "Rendered notebook cells"
+        }
+}
+    });
+  </script>
+</body>
+</html>

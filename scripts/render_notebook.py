@@ -198,6 +198,21 @@ def cell_i18n_key(index: int) -> str:
     return f"notebook.cell{index:02d}"
 
 
+def slugify(value: str) -> str:
+    value = value.lower()
+    value = re.sub(r"[^a-z0-9]+", "-", value)
+    value = value.strip("-")
+    return value or "section"
+
+
+def first_section_heading(markdown: str) -> str | None:
+    for line in markdown.splitlines():
+        match = re.match(r"^##+\s+(.+)$", line.strip())
+        if match:
+            return re.sub(r"`([^`]+)`", r"\1", match.group(1)).strip()
+    return None
+
+
 def cell_translation(cell: dict[str, Any], lang: str) -> str | None:
     metadata = cell.get("metadata", {})
     value = metadata.get("i18n", {}).get(lang)
@@ -208,27 +223,41 @@ def cell_translation(cell: dict[str, Any], lang: str) -> str | None:
     return None
 
 
-def render_cells(nb: dict[str, Any]) -> tuple[str, dict[str, dict[str, str]]]:
+def render_cells(
+    nb: dict[str, Any],
+) -> tuple[str, dict[str, dict[str, str]], list[dict[str, str]]]:
     parts: list[str] = []
     translations: dict[str, dict[str, str]] = {"vi": {}, "en": {}}
+    toc_items: list[dict[str, str]] = []
     code_count = 0
     for index, cell in enumerate(nb.get("cells", []), start=1):
         cell_type = cell.get("cell_type")
         if cell_type == "markdown":
             key = cell.get("metadata", {}).get("i18n_key", cell_i18n_key(index))
-            vi_html = render_markdown(cell_translation(cell, "vi") or source_text(cell))
+            vi_source = cell_translation(cell, "vi") or source_text(cell)
             en_source = cell_translation(cell, "en")
+            section_id = ""
+            vi_heading = first_section_heading(vi_source)
+            en_heading = first_section_heading(en_source or vi_source)
+            if vi_heading:
+                section_id = f"section-{slugify(str(key))}"
+                toc_key = f"toc.{key}"
+                translations["vi"][toc_key] = html.escape(vi_heading)
+                translations["en"][toc_key] = html.escape(en_heading or vi_heading)
+                toc_items.append({"id": section_id, "key": toc_key, "label": vi_heading})
+            id_attr = f' id="{html.escape(section_id)}"' if section_id else ""
+            vi_html = render_markdown(vi_source)
             if en_source:
                 en_html = render_markdown(en_source)
                 translations["vi"][key] = vi_html
                 translations["en"][key] = en_html
                 parts.append(
-                    '<article class="nb-cell nb-markdown" data-cell-type="markdown" '
+                    f'<article{id_attr} class="nb-cell nb-markdown" data-cell-type="markdown" '
                     f'data-i18n-html="{html.escape(key)}">{vi_html}</article>'
                 )
             else:
                 parts.append(
-                    '<article class="nb-cell nb-markdown" data-cell-type="markdown">'
+                    f'<article{id_attr} class="nb-cell nb-markdown" data-cell-type="markdown">'
                     f"{vi_html}"
                     "</article>"
                 )
@@ -249,7 +278,7 @@ def render_cells(nb: dict[str, Any]) -> tuple[str, dict[str, dict[str, str]]]:
                 f"<p>Unsupported cell {index}: {html.escape(str(cell_type))}</p>"
                 "</article>"
             )
-    return "\n".join(parts), translations
+    return "\n".join(parts), translations, toc_items
 
 
 def notebook_title(nb: dict[str, Any]) -> str:
@@ -292,7 +321,20 @@ def build_html(nb: dict[str, Any], notebook_path: Path, repo_root: Path) -> str:
         f"https://colab.research.google.com/github/{REPO_OWNER}/{REPO_NAME}/blob/main/{rel_path}"
     )
     source_name = notebook_path.name
-    rendered_cells, cell_translations = render_cells(nb)
+    rendered_cells, cell_translations, toc_items = render_cells(nb)
+    toc_html = ""
+    if toc_items:
+        toc_links = "\n".join(
+            (
+                f'      <a href="#{html.escape(item["id"])}" '
+                f'data-i18n="{html.escape(item["key"])}">{html.escape(item["label"])}</a>'
+            )
+            for item in toc_items
+        )
+        toc_html = (
+            '      <strong data-i18n="side.sections">Các phần trong notebook</strong>\n'
+            f"{toc_links}\n"
+        )
     translations = {
         "vi": {
             **cell_translations["vi"],
@@ -306,8 +348,7 @@ def build_html(nb: dict[str, Any], notebook_path: Path, repo_root: Path) -> str:
             "side.title": "Notebook",
             "side.week": "Tổng quan tuần",
             "side.colab": "Chạy bằng Colab",
-            "side.source": "Tải source .ipynb",
-            "side.csv": "Tải tệp CSV dữ liệu",
+            "side.sections": "Các phần trong notebook",
             "hero.tag": "Notebook đã render",
             "hero.title": title,
             "hero.body": "Đây là bản HTML đã chạy sẵn để đọc trên GitHub Pages. Muốn thực hành, mở notebook trong Colab hoặc tải file .ipynb.",
@@ -320,6 +361,10 @@ def build_html(nb: dict[str, Any], notebook_path: Path, repo_root: Path) -> str:
             "note.run.body": "Nút Colab mở notebook có thể chạy từng cell và tự tải CSV nếu không có file local.",
             "note.source.title": "Source",
             "note.source.body": "File .ipynb vẫn được giữ để tải, nộp bài hoặc chỉnh trong JupyterLab/VS Code.",
+            "source.files.title": "Source files",
+            "source.files.body": "Các file dưới đây dành cho thực hành, nộp bài, hoặc chỉnh notebook. Người học nên đọc trang HTML trước.",
+            "source.files.notebook": "Tải source .ipynb",
+            "source.files.csv": "Tải tệp CSV dữ liệu",
             "notebook.cells.aria": "Các cell notebook đã render",
         },
         "en": {
@@ -334,8 +379,7 @@ def build_html(nb: dict[str, Any], notebook_path: Path, repo_root: Path) -> str:
             "side.title": "Notebook",
             "side.week": "Week overview",
             "side.colab": "Run in Colab",
-            "side.source": "Download source .ipynb",
-            "side.csv": "Download data CSV",
+            "side.sections": "Notebook sections",
             "hero.tag": "Rendered notebook",
             "hero.title": en_title,
             "hero.body": "This is the pre-run HTML version for GitHub Pages. To practice, open the notebook in Colab or download the .ipynb file.",
@@ -348,6 +392,10 @@ def build_html(nb: dict[str, Any], notebook_path: Path, repo_root: Path) -> str:
             "note.run.body": "The Colab button opens a runnable notebook and downloads the CSV automatically when local files are unavailable.",
             "note.source.title": "Source",
             "note.source.body": "The .ipynb file remains available for download, submission, or editing in JupyterLab/VS Code.",
+            "source.files.title": "Source files",
+            "source.files.body": "The files below are for practice, submission, or notebook editing. Learners should read the HTML page first.",
+            "source.files.notebook": "Download source .ipynb",
+            "source.files.csv": "Download data CSV",
             "notebook.cells.aria": "Rendered notebook cells",
         },
     }
@@ -381,8 +429,7 @@ def build_html(nb: dict[str, Any], notebook_path: Path, repo_root: Path) -> str:
       <strong data-i18n="side.title">Notebook</strong>
       <a href="./" data-i18n="side.week">Tổng quan tuần</a>
       <a href="{html.escape(colab_url)}" data-i18n="side.colab">Chạy bằng Colab</a>
-      <a href="{html.escape(source_name)}" download data-i18n="side.source">Tải source .ipynb</a>
-      <a href="{html.escape(str(data_csv))}" download data-i18n="side.csv">Tải tệp CSV dữ liệu</a>
+{toc_html}
     </aside>
 
     <div class="doc-main">
@@ -403,6 +450,14 @@ def build_html(nb: dict[str, Any], notebook_path: Path, repo_root: Path) -> str:
           <article class="mini-card"><span class="swatch green"></span><h3 data-i18n="note.run.title">Chạy</h3><p data-i18n="note.run.body">Nút Colab mở notebook có thể chạy từng cell và tự tải CSV nếu không có file local.</p></article>
           <article class="mini-card"><span class="swatch amber"></span><h3 data-i18n="note.source.title">Source</h3><p data-i18n="note.source.body">File .ipynb vẫn được giữ để tải, nộp bài hoặc chỉnh trong JupyterLab/VS Code.</p></article>
         </div>
+        <details>
+          <summary><strong data-i18n="source.files.title">Source files</strong></summary>
+          <p data-i18n="source.files.body">Các file dưới đây dành cho thực hành, nộp bài, hoặc chỉnh notebook. Người học nên đọc trang HTML trước.</p>
+          <div class="doc-links">
+            <a class="doc-chip" href="{html.escape(source_name)}" download data-i18n="source.files.notebook">Tải source .ipynb</a>
+            <a class="doc-chip" href="{html.escape(str(data_csv))}" download data-i18n="source.files.csv">Tải tệp CSV dữ liệu</a>
+          </div>
+        </details>
       </section>
 
       <section class="notebook-document" aria-label="Các cell notebook đã render" data-i18n-aria-label="notebook.cells.aria">

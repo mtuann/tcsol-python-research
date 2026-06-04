@@ -1,0 +1,3 @@
+# Week 13 slides source
+
+Rendered as `slides.html`. Update the HTML deck directly for now.

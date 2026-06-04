@@ -1,0 +1,9 @@
+coding_id,title,policy_area,theme_code,evidence_type,excerpt_paraphrase,coder_note
+C001,Education Powerhouse Plan 2024-2035,system_governance,strategic_goal,milestone,paraphrased policy goal: phased progress by 2027 and education powerhouse by 2035,description only; do not evaluate feasibility
+C002,Education Powerhouse Plan 2024-2035,digitalization,digital_strategy,policy_text,paraphrased policy action: promote national education digitalization and resource sharing,"code as theme, not outcome"
+C003,Education Powerhouse Plan 2024-2035,teacher_development,teacher_quality,policy_text,paraphrased policy action: strengthen teacher capacity and professional support,connect to TCSOL teacher-training questions
+C004,Education Powerhouse Plan 2024-2035,internationalization,international_influence,policy_text,paraphrased policy action: expand international influence and cooperation in education,use neutral description
+C005,2024 National Education Development Statistical Bulletin,education_statistics,statistical_snapshot,statistical_indicator,paraphrased bulletin scope: reports national education development indicators for 2024,record indicator family before numbers
+C006,2024 National Education Development Statistical Bulletin,teacher_development,teacher_supply,statistical_indicator,paraphrased indicator family: reports teacher counts and education level categories,do not mix policy plan with outcome claim
+C007,2024 National Education Development Statistical Bulletin,equity_access,access_and_enrollment,statistical_indicator,paraphrased indicator family: reports enrolment and school-level access information,"statistics describe context, not causal impact"
+C008,UNESCO UIS SDG 4 Indicators,indicator_metadata,sdg4_indicator,metadata,paraphrased metadata source: defines global and thematic indicators for SDG 4 monitoring,use for metadata fields and comparability caution

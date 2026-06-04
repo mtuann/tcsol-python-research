@@ -23,7 +23,7 @@ Week 12 moves from evaluating raw MT outputs to analyzing post-editing effort. T
 - Paper section supported: Results / MTPE workflow analysis.
 - Writing output: one paragraph reporting time, edit distance, revision labels, and limitation.
 - Tool support: use the effort table and time figure as Results evidence; paste caption and source note into Word, Quarto, or Overleaf later.
-- Sentence frame: "Profile `___` required the lowest mean post-editing time, while profile `___` required the highest. The revision labels suggest `___`. However, edit distance is only a surface proxy, and the time logs are synthetic classroom values."
+- Sentence frame: "Profile `___` had the lowest observed mean post-editing time, while profile `___` had the highest. The revision labels suggest `___`. However, edit distance is only a surface proxy, and the time logs are synthetic classroom values."
 - Common writing risk: treating edit distance as the same thing as human cognitive effort.
 
 ## Learning Objectives
@@ -43,6 +43,7 @@ By the end of this week, the learner can:
 - [ ] `week12_mtpe_effort_summary.csv` is exported.
 - [ ] `week12_revision_type_summary.csv` is exported.
 - [ ] `week12_time_by_system.png` is exported.
+- [ ] `week12_submission_text.md` is exported or copied from notebook output.
 - [ ] Caption states systems, N, unit, and lower-is-less-effort direction.
 - [ ] Results paragraph separates time, edit distance/revision labels, and limitation.
 - [ ] Source note cites RapidFuzz and MTPE source with access date.
@@ -63,5 +64,5 @@ By the end of this week, the learner can:
 
 - File: `data/raw/week12_mtpe_segments.csv`
 - Type: synthetic MTPE workflow dataset, not output from named commercial systems and not real translator productivity data.
-- SHA-256: `30aec481b239782d4da67e2b9fd7d373348c2be85a420c05721d8b973ff0b71f`
+- SHA-256: `f4a22aed428056220b9617dd4259dbe7efa27a6f9308b525a4bd0032b19e3363`
 - Design basis: Chinese-Vietnamese education-policy examples with synthetic MT outputs, post-edited text, time logs, and simplified revision labels.

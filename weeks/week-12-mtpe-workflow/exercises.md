@@ -4,10 +4,11 @@
 
 Look at segment `P001`.
 
-1. Copy `vi_mt_output` for each profile.
-2. Copy `vi_postedit` for each profile.
-3. Highlight one phrase that changed during post-editing.
-4. Write one sentence explaining why the edit was needed.
+1. Copy `zh_source`, `vi_reference`, `vi_mt_output`, and `vi_postedit` for each profile.
+2. Mark which two columns are compared for edit distance.
+3. Mark which column is only a reference anchor for meaning.
+4. Highlight one phrase that changed during post-editing.
+5. Write one sentence explaining why the edit was needed.
 
 ## B. Edit Distance Direction
 
@@ -37,6 +38,14 @@ Write 2 sentences:
 ## D. Revision Labels
 
 Use `week12_revision_type_summary.csv`.
+
+Mini guide:
+
+- `omission`: meaning was missing and had to be restored.
+- `terminology`: a domain or policy term was repaired.
+- `word_order`: Vietnamese sentence order was repaired.
+- `style`: meaning was acceptable, but register or phrasing was polished.
+- `no_error`: accepted variant; no post-edit was needed.
 
 Write 2-3 sentences explaining whether the high-effort profile mostly needs omission, terminology, word-order, or style edits.
 

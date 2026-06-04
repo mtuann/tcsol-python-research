@@ -1,0 +1,8 @@
+term,plain_meaning,week13_use
+policy metadata,information that identifies a policy source,title issuing body date URL access date
+coding scheme,a controlled set of labels,keeps policy rows comparable
+timeline,ordered source dates,shows when sources appeared
+evidence type,kind of source support,prevents overclaiming
+policy area,broad topic category,main summary variable
+source note,short reproducibility note,cites official sources and access date
+paraphrase,restated source idea,avoids long copied quotations

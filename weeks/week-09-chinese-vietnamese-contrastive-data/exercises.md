@@ -15,19 +15,26 @@ Run the cell again. Write one sentence:
 
 ## B. Guided Problem
 
-Create a table with only high-risk examples:
+Create a table with only high-risk examples, then count them by phenomenon:
 
 ```python
 high_risk = analysis_rows[analysis_rows["teaching_risk"] == "high"]
 high_risk[["example_id", "phenomenon", "chinese_example", "vietnamese_rendering"]]
+high_risk["phenomenon"].value_counts()
 ```
 
-Answer: which phenomenon has the most high-risk examples, which example is clearest for a beginner lesson, and what teaching note would you write?
+Answer these in order:
+
+1. Which phenomenon has the most high-risk examples?
+2. Which one example is clearest for a beginner lesson?
+3. What one-sentence teaching note would you write?
 
 ## C. Research-Style Task
 
-Choose one phenomenon and write 120-150 words with one definition, one example pair, one teaching implication, and one limitation.
+Choose one phenomenon and write 120-170 words with one definition, one example pair, one teaching implication, and one limitation.
 
 ## D. Figure Caption Practice
 
 > Figure 1 shows the frequency of contrastive phenomena in the usable Week 09 synthetic example bank (`N = ___`). The figure is descriptive and should be used to select teaching examples, not to estimate population-level difficulty.
+
+> Figure 2 shows the distribution of low, medium, and high teacher-assigned risk labels by phenomenon (`N = ___`). The figure helps prioritize explanation, but it does not prove that learners made these errors.

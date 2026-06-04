@@ -2,7 +2,7 @@
 
 > Working syllabus and project hub for teaching Python to a beginner graduate student in Applied Linguistics, TCSOL, Contrastive Linguistics, Translation Studies, and Education Policy.
 
-Last source check: 2026-06-03
+Last source check: 2026-06-04
 
 ## Project Purpose
 
@@ -126,6 +126,7 @@ For future slide work, use:
 - [`Tuần 07: Nghiên cứu TCSOL ngắn hạn`](weeks/week-07-tcsol-short-course-research/)
 - [`Tuần 08: Phân tích lỗi người học`](weeks/week-08-learner-error-analysis/)
 - [`Tuần 09: Dữ liệu đối chiếu Hán-Việt`](weeks/week-09-chinese-vietnamese-contrastive-data/)
+- [`Tuần 10: Pedagogical adaptation`](weeks/week-10-pedagogical-adaptation/)
 
 ## Suggested Repository Structure
 
@@ -492,7 +493,7 @@ These topics are useful later, but they are not the shortest path to a good Appl
 ## Next Content Tasks
 
 - Review and refine `weeks/week-08-learner-error-analysis/` after learner testing.
-- Start detailed content for Week 09 Chinese-Vietnamese contrastive analysis.
+- Continue detailed content for Week 11 machine translation evaluation.
 - Create blank CSV templates in `resources/templates/`.
 - Add a one-page learner setup guide in Vietnamese.
 - Add a Zotero + Word workflow guide.

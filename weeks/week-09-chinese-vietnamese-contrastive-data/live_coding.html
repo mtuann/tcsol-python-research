@@ -11,7 +11,7 @@
   <header class="doc-topbar">
     <a class="doc-brand" href="../../" data-i18n="brand">Python Research Hub</a>
     <nav class="doc-nav" aria-label="Điều hướng notebook" data-i18n-aria-label="nav.aria">
-      <a href="./" data-i18n="nav.week">Tuần 01</a>
+      <a href="./" data-i18n="nav.week">Tuần 09</a>
       <a href="slides.html" data-i18n="nav.slides">Slides</a>
       <a href="interactive_demo.html" data-i18n="nav.demo">Demo</a>
       <a href="live_coding.ipynb" download data-i18n="nav.source">Source .ipynb</a>
@@ -28,7 +28,7 @@
       <a href="./" data-i18n="side.week">Tổng quan tuần</a>
       <a href="https://colab.research.google.com/github/mtuann/tcsol-python-research/blob/main/weeks/week-09-chinese-vietnamese-contrastive-data/live_coding.ipynb" data-i18n="side.colab">Chạy bằng Colab</a>
       <a href="live_coding.ipynb" download data-i18n="side.source">Tải source .ipynb</a>
-      <a href="data/raw/week01_research_tracks.csv" download data-i18n="side.csv">Tải tệp CSV dữ liệu</a>
+      <a href="data/raw/week09_contrastive_examples.csv" download data-i18n="side.csv">Tải tệp CSV dữ liệu</a>
     </aside>
 
     <div class="doc-main">
@@ -39,7 +39,7 @@
         <div class="doc-actions">
           <a class="doc-button" href="https://colab.research.google.com/github/mtuann/tcsol-python-research/blob/main/weeks/week-09-chinese-vietnamese-contrastive-data/live_coding.ipynb" data-i18n="action.colab">Chạy trong Colab</a>
           <a class="doc-button secondary" href="live_coding.ipynb" download data-i18n="action.source">Tải .ipynb</a>
-          <a class="doc-button secondary" href="./" data-i18n="action.week">Quay lại Tuần 01</a>
+          <a class="doc-button secondary" href="./" data-i18n="action.week">Quay lại Tuần 09</a>
         </div>
       </section>
 
@@ -56,7 +56,7 @@
         <article class="nb-cell nb-markdown" data-cell-type="markdown" data-i18n-html="nb.title"><h2>Tuần 09: Dữ liệu đối chiếu Hán-Việt</h2>
 <p>Mục tiêu: biến một example bank Hán-Việt thành bảng evidence, figure và analysis paragraph. Tuần này không làm NLP; ta học cách tổ chức ví dụ đối chiếu để viết paper rõ hơn.</p></article>
 <article class="nb-cell nb-markdown" data-cell-type="markdown" data-i18n-html="nb.setup"><h3>Trước khi chạy code</h3>
-<p>Cell setup import thư viện, kiểm tra data và tạo output folders. Bạn chỉ cần Run cell này trước.</p></article>
+<p>Cell setup import thư viện, kiểm tra data và tạo output folders. Đây là cell <strong>run-only</strong>: bạn chỉ cần Run, chưa cần học hết từng dòng.</p></article>
 <article class="nb-cell nb-code" data-cell-type="code"><div class="nb-input-label">In [1]</div><pre><code>from pathlib import Path
 from urllib.request import urlretrieve
 import hashlib
@@ -66,24 +66,35 @@ import matplotlib
 matplotlib.use(&quot;Agg&quot;)
 import matplotlib.pyplot as plt
 
-WEEK_DIR = Path(&quot;weeks/week-09-chinese-vietnamese-contrastive-data&quot;)
+# Run-only setup: this works from the repo root, the week folder, or Colab.
+CANDIDATES = [
+    Path(&quot;weeks/week-09-chinese-vietnamese-contrastive-data&quot;),
+    Path(&quot;.&quot;),
+]
+WEEK_DIR = next(
+    candidate for candidate in CANDIDATES
+    if (candidate / &quot;data&quot; / &quot;raw&quot; / &quot;week09_contrastive_examples.csv&quot;).exists()
+    or candidate.name == &quot;week-09-chinese-vietnamese-contrastive-data&quot;
+)
 DATA_PATH = WEEK_DIR / &quot;data&quot; / &quot;raw&quot; / &quot;week09_contrastive_examples.csv&quot;
 TABLE_DIR = WEEK_DIR / &quot;outputs&quot; / &quot;tables&quot;
 FIG_DIR = WEEK_DIR / &quot;outputs&quot; / &quot;figures&quot;
 TABLE_DIR.mkdir(parents=True, exist_ok=True)
 FIG_DIR.mkdir(parents=True, exist_ok=True)
 
-EXPECTED_SHA = &quot;78cbedef8cdd1eb5d093864ee4e4c1c75aeb963b9537b540b49c4a251faba3a8&quot;
+EXPECTED_SHA = &quot;b80e88ea2cfa12e88cab9198a5aafa22aca669264d8683098c3935e0c55f9686&quot;
+REMOTE_DATA = &quot;https://raw.githubusercontent.com/mtuann/tcsol-python-research/main/weeks/week-09-chinese-vietnamese-contrastive-data/data/raw/week09_contrastive_examples.csv&quot;
 if not DATA_PATH.exists():
-    url = &quot;https://raw.githubusercontent.com/mtuann/tcsol-python-research/main/weeks/week-09-chinese-vietnamese-contrastive-data/data/raw/week09_contrastive_examples.csv&quot;
     DATA_PATH.parent.mkdir(parents=True, exist_ok=True)
-    urlretrieve(url, DATA_PATH)
+    urlretrieve(REMOTE_DATA, DATA_PATH)
 actual_sha = hashlib.sha256(DATA_PATH.read_bytes()).hexdigest()
 print(&quot;Data file:&quot;, DATA_PATH)
-print(&quot;SHA ok:&quot;, actual_sha == EXPECTED_SHA)</code></pre><div class="nb-output"><div class="nb-output-label">Output</div><pre><code>Data file: weeks/week-09-chinese-vietnamese-contrastive-data/data/raw/week09_contrastive_examples.csv
-SHA ok: True</code></pre></div></article>
+print(&quot;SHA-256:&quot;, actual_sha)
+if actual_sha != EXPECTED_SHA:
+    print(&quot;Note: SHA differs from the course snapshot. Continue only if you intentionally changed the data.&quot;)</code></pre><div class="nb-output"><div class="nb-output-label">Output</div><pre><code>Data file: weeks/week-09-chinese-vietnamese-contrastive-data/data/raw/week09_contrastive_examples.csv
+SHA-256: b80e88ea2cfa12e88cab9198a5aafa22aca669264d8683098c3935e0c55f9686</code></pre></div></article>
 <article class="nb-cell nb-markdown" data-cell-type="markdown" data-i18n-html="nb.loop"><h3>1. Research loop của tuần này</h3>
-<p>``<code>text Chinese example + Vietnamese rendering -&gt; phenomenon code -&gt; pattern check -&gt; frequency/risk table -&gt; selected examples -&gt; analysis paragraph </code>``</p>
+<p>Chinese example + Vietnamese rendering -&gt; phenomenon code -&gt; pattern check -&gt; frequency/risk table -&gt; selected examples -&gt; analysis paragraph</p>
 <p>Một row là một cặp ví dụ. Đừng đọc nó như dữ liệu của một learner.</p></article>
 <article class="nb-cell nb-code" data-cell-type="code"><div class="nb-input-label">In [2]</div><pre><code>df = pd.read_csv(DATA_PATH)
 df[&quot;include_in_table&quot;] = df[&quot;include_in_table&quot;].astype(str).str.lower().eq(&quot;true&quot;)
@@ -215,19 +226,21 @@ fig.savefig(FIG_DIR / &quot;week09_risk_by_phenomenon_heatmap.svg&quot;)
 plt.close(fig)
 print(&quot;Saved figures to&quot;, FIG_DIR)</code></pre><div class="nb-output"><div class="nb-output-label">Output</div><pre><code>Saved figures to weeks/week-09-chinese-vietnamese-contrastive-data/outputs/figures</code></pre></div></article>
 <article class="nb-cell nb-markdown" data-cell-type="markdown" data-i18n-html="nb.writing"><h3>8. Analysis paragraph</h3>
-<p>Dùng bảng + một ví dụ để viết. Giữ claim ở mức descriptive.</p>
-<blockquote>Trong <code>60</code> contrastive examples dùng được, <code>result_complement</code> có priority score cao nhất. Một ví dụ đại diện là <code>___</code>, nơi Chinese dùng <code>___</code> còn Vietnamese diễn đạt bằng <code>___</code>. Pattern này nên được dạy rõ vì <code>___</code>. Vì dữ liệu synthetic và nhỏ, kết quả chỉ giúp chọn teaching examples, không chứng minh transfer.</blockquote></article>
+<p>Dùng bảng + một ví dụ để viết. Giữ claim ở mức descriptive. Điền số liệu sau khi bạn đọc output.</p>
+<blockquote>Trong <code>N = ___</code> contrastive examples dùng được, <code>___</code> có priority score cao nhất. Một ví dụ đại diện là <code>___</code>, nơi Chinese dùng <code>___</code> còn Vietnamese diễn đạt bằng <code>___</code>. Pattern này nên được dạy rõ vì <code>___</code>. Vì dữ liệu synthetic và nhỏ, kết quả chỉ giúp chọn teaching examples, không chứng minh transfer.</blockquote></article>
 <article class="nb-cell nb-code" data-cell-type="code"><div class="nb-input-label">In [9]</div><pre><code>top = priority.iloc[0]
 example = selected_examples[selected_examples[&quot;phenomenon&quot;] == top[&quot;phenomenon&quot;]].iloc[0]
 paragraph = (
     f&quot;In the usable contrastive examples (N = {len(analysis_rows)}), &quot;
     f&quot;{top[&#x27;phenomenon&#x27;]} had the highest teaching-priority score ({top[&#x27;priority_score&#x27;]}). &quot;
-    f&quot;Example {example[&#x27;example_id&#x27;]} shows &#x27;{example[&#x27;chinese_example&#x27;]}&#x27; alongside &quot;
-    f&quot;&#x27;{example[&#x27;vietnamese_rendering&#x27;]}&#x27;. The contrast is useful for teaching because it makes &quot;
-    &quot;the Chinese pattern visible before learners translate or produce sentences. Because the dataset is synthetic and small, &quot;
-    &quot;the result should guide example selection rather than prove learner transfer.&quot;
+    f&quot;Example {example[&#x27;example_id&#x27;]} contrasts &#x27;{example[&#x27;chinese_example&#x27;]}&#x27; with &quot;
+    f&quot;&#x27;{example[&#x27;vietnamese_rendering&#x27;]}&#x27;. In this pair, Chinese uses {example[&#x27;chinese_pattern&#x27;]}, &quot;
+    f&quot;while Vietnamese uses {example[&#x27;vietnamese_pattern&#x27;]}. &quot;
+    f&quot;This contrast matters for teaching because {example[&#x27;evidence_note&#x27;]} &quot;
+    &quot;Because the dataset is synthetic and small, the result should guide example selection &quot;
+    &quot;rather than prove learner transfer.&quot;
 )
-print(paragraph)</code></pre><div class="nb-output"><div class="nb-output-label">Output</div><pre><code>In the usable contrastive examples (N = 60), result_complement had the highest teaching-priority score (28.0). Example C030 shows &#x27;我找到票了。&#x27; alongside &#x27;Tôi tìm thấy vé rồi.&#x27;. The contrast is useful for teaching because it makes the Chinese pattern visible before learners translate or produce sentences. Because the dataset is synthetic and small, the result should guide example selection rather than prove learner transfer.</code></pre></div></article>
+print(paragraph)</code></pre><div class="nb-output"><div class="nb-output-label">Output</div><pre><code>In the usable contrastive examples (N = 60), result_complement had the highest teaching-priority score (28.0). Example C030 contrasts &#x27;我找到票了。&#x27; with &#x27;Tôi tìm thấy vé rồi.&#x27;. In this pair, Chinese uses verb + result complement, while Vietnamese uses verb + result word. This contrast matters for teaching because Contrast 找 and 找到 before asking learners to translate. Because the dataset is synthetic and small, the result should guide example selection rather than prove learner transfer.</code></pre></div></article>
       </section>
     </div>
   </main>
@@ -239,19 +252,19 @@ print(paragraph)</code></pre><div class="nb-output"><div class="nb-output-label"
       translations: {
         "vi": {
                 "nb.title": "<h2>Tuần 09: Dữ liệu đối chiếu Hán-Việt</h2>\n<p>Mục tiêu: biến một example bank Hán-Việt thành bảng evidence, figure và analysis paragraph. Tuần này không làm NLP; ta học cách tổ chức ví dụ đối chiếu để viết paper rõ hơn.</p>",
-                "nb.setup": "<h3>Trước khi chạy code</h3>\n<p>Cell setup import thư viện, kiểm tra data và tạo output folders. Bạn chỉ cần Run cell này trước.</p>",
-                "nb.loop": "<h3>1. Research loop của tuần này</h3>\n<p>``<code>text Chinese example + Vietnamese rendering -&gt; phenomenon code -&gt; pattern check -&gt; frequency/risk table -&gt; selected examples -&gt; analysis paragraph </code>``</p>\n<p>Một row là một cặp ví dụ. Đừng đọc nó như dữ liệu của một learner.</p>",
+                "nb.setup": "<h3>Trước khi chạy code</h3>\n<p>Cell setup import thư viện, kiểm tra data và tạo output folders. Đây là cell <strong>run-only</strong>: bạn chỉ cần Run, chưa cần học hết từng dòng.</p>",
+                "nb.loop": "<h3>1. Research loop của tuần này</h3>\n<p>Chinese example + Vietnamese rendering -&gt; phenomenon code -&gt; pattern check -&gt; frequency/risk table -&gt; selected examples -&gt; analysis paragraph</p>\n<p>Một row là một cặp ví dụ. Đừng đọc nó như dữ liệu của một learner.</p>",
                 "nb.pattern": "<h3>2. Visible pattern check với <code>str.contains()</code></h3>\n<p><code>str.contains()</code> trả lời câu hỏi rất nhỏ: text có chứa marker này không? Nó không tự giải thích ngữ pháp. Ta vẫn phải đọc ví dụ.</p>",
                 "nb.frequency": "<h3>3. Frequency table</h3>\n<p><code>value_counts()</code> cho biết example bank đang có nhiều ví dụ ở phenomenon nào. Đây là mô tả dataset, chưa phải kết luận về độ khó thật.</p>",
                 "nb.crosstab": "<h3>4. Crosstab: phenomenon by teaching risk</h3>\n<p><code>pd.crosstab()</code> giúp đọc risk theo từng phenomenon. High-risk nghĩa là nên ưu tiên giải thích, không phải bằng chứng learner chắc chắn sai.</p>",
                 "nb.priority": "<h3>5. Teaching priority</h3>\n<p>Priority score là heuristic đơn giản: <code>n * mean_risk</code>. Nó giúp chọn ví dụ dạy học trước, không thay thế judgment của giáo viên.</p>",
                 "nb.examples": "<h3>6. Representative examples</h3>\n<p>Một paragraph tốt thường cần một ví dụ thật rõ. Ta chọn một high-risk example cho mỗi phenomenon, rồi dùng nó để viết implication.</p>",
                 "nb.figures": "<h3>7. Figures cho paper</h3>\n<p>Ta xuất cả PNG và SVG. PNG dễ xem nhanh; SVG hữu ích khi cần hình sắc nét trong paper hoặc slide.</p>",
-                "nb.writing": "<h3>8. Analysis paragraph</h3>\n<p>Dùng bảng + một ví dụ để viết. Giữ claim ở mức descriptive.</p>\n<blockquote>Trong <code>60</code> contrastive examples dùng được, <code>result_complement</code> có priority score cao nhất. Một ví dụ đại diện là <code>___</code>, nơi Chinese dùng <code>___</code> còn Vietnamese diễn đạt bằng <code>___</code>. Pattern này nên được dạy rõ vì <code>___</code>. Vì dữ liệu synthetic và nhỏ, kết quả chỉ giúp chọn teaching examples, không chứng minh transfer.</blockquote>",
+                "nb.writing": "<h3>8. Analysis paragraph</h3>\n<p>Dùng bảng + một ví dụ để viết. Giữ claim ở mức descriptive. Điền số liệu sau khi bạn đọc output.</p>\n<blockquote>Trong <code>N = ___</code> contrastive examples dùng được, <code>___</code> có priority score cao nhất. Một ví dụ đại diện là <code>___</code>, nơi Chinese dùng <code>___</code> còn Vietnamese diễn đạt bằng <code>___</code>. Pattern này nên được dạy rõ vì <code>___</code>. Vì dữ liệu synthetic và nhỏ, kết quả chỉ giúp chọn teaching examples, không chứng minh transfer.</blockquote>",
                 "brand": "Python Research Hub",
                 "meta.title": "Tuần 09: Dữ liệu đối chiếu Hán-Việt | Notebook đã render",
                 "nav.aria": "Điều hướng notebook",
-                "nav.week": "Tuần 01",
+                "nav.week": "Tuần 09",
                 "nav.slides": "Slides",
                 "nav.demo": "Demo",
                 "nav.source": "Tải source .ipynb",
@@ -266,7 +279,7 @@ print(paragraph)</code></pre><div class="nb-output"><div class="nb-output-label"
                 "hero.body": "Đây là bản HTML đã chạy sẵn để đọc trên GitHub Pages. Muốn thực hành, mở notebook trong Colab hoặc tải file .ipynb.",
                 "action.colab": "Chạy trong Colab",
                 "action.source": "Tải .ipynb",
-                "action.week": "Quay lại Tuần 01",
+                "action.week": "Quay lại Tuần 09",
                 "note.title": "Cách dùng trang này",
                 "note.read.title": "Đọc",
                 "note.read.body": "Bản HTML giữ code và output cạnh nhau, phù hợp để ôn lại sau buổi học.",
@@ -278,19 +291,19 @@ print(paragraph)</code></pre><div class="nb-output"><div class="nb-output-label"
         },
         "en": {
                 "nb.title": "<h2>Week 09: Chinese-Vietnamese Contrastive Data</h2>\n<p>Goal: turn a Chinese-Vietnamese example bank into evidence tables, figures, and an analysis paragraph. This week is not NLP; we organize contrastive examples for clearer paper writing.</p>",
-                "nb.setup": "<h3>Before Running Code</h3>\n<p>The setup cell imports libraries, checks the data file, and creates output folders. Just run this cell first.</p>",
-                "nb.loop": "<h3>1. This Week&#x27;s Research Loop</h3>\n<p>``<code>text Chinese example + Vietnamese rendering -&gt; phenomenon code -&gt; pattern check -&gt; frequency/risk table -&gt; selected examples -&gt; analysis paragraph </code>``</p>\n<p>One row is one example pair. Do not read it as one learner&#x27;s data.</p>",
+                "nb.setup": "<h3>Before running code</h3>\n<p>The setup cell imports libraries, checks data, and creates output folders. This is a <strong>run-only</strong> cell: run it first, but do not study every line yet.</p>",
+                "nb.loop": "<h3>1. This week&#x27;s research loop</h3>\n<p>Chinese example + Vietnamese rendering -&gt; phenomenon code -&gt; pattern check -&gt; frequency/risk table -&gt; selected examples -&gt; analysis paragraph</p>\n<p>One row is one example pair. Do not read it as data from one learner.</p>",
                 "nb.pattern": "<h3>2. Visible Pattern Check With <code>str.contains()</code></h3>\n<p><code>str.contains()</code> answers a very small question: does the text contain this marker? It does not explain grammar by itself. We still read the examples.</p>",
                 "nb.frequency": "<h3>3. Frequency Table</h3>\n<p><code>value_counts()</code> shows which phenomena have more examples in the example bank. This describes the dataset; it is not yet a claim about true difficulty.</p>",
                 "nb.crosstab": "<h3>4. Crosstab: Phenomenon By Teaching Risk</h3>\n<p><code>pd.crosstab()</code> helps read risk by phenomenon. High risk means explanation priority, not proof that learners will definitely make errors.</p>",
                 "nb.priority": "<h3>5. Teaching Priority</h3>\n<p>The priority score is a simple heuristic: <code>n * mean_risk</code>. It helps choose teaching examples first; it does not replace teacher judgment.</p>",
                 "nb.examples": "<h3>6. Representative Examples</h3>\n<p>A good paragraph usually needs one very clear example. We choose one high-risk example for each phenomenon, then use it to write the implication.</p>",
                 "nb.figures": "<h3>7. Figures For A Paper</h3>\n<p>We export both PNG and SVG. PNG is easy to preview; SVG is useful for sharp paper or slide figures.</p>",
-                "nb.writing": "<h3>8. Analysis Paragraph</h3>\n<p>Use the table + one example to write. Keep the claim descriptive.</p>\n<blockquote>In the <code>60</code> usable contrastive examples, <code>result_complement</code> had the highest priority score. One representative example is <code>___</code>, where Chinese uses <code>___</code> and Vietnamese expresses it as <code>___</code>. This pattern should be taught explicitly because <code>___</code>. Because the dataset is synthetic and small, the result helps select teaching examples; it does not prove transfer.</blockquote>",
+                "nb.writing": "<h3>8. Analysis paragraph</h3>\n<p>Use the table plus one example to write. Keep the claim descriptive. Fill in the values after reading the output.</p>\n<blockquote>In the usable contrastive examples (<code>N = ___</code>), <code>___</code> had the highest priority score. One representative example is <code>___</code>, where Chinese uses <code>___</code> while Vietnamese uses <code>___</code>. This pattern should be explained explicitly because <code>___</code>. Because the dataset is synthetic and small, the result helps select teaching examples; it does not prove transfer.</blockquote>",
                 "brand": "Python Research Hub",
-                "meta.title": "Tuần 09: Dữ liệu đối chiếu Hán-Việt | Rendered Notebook",
+                "meta.title": "Week 09: Chinese-Vietnamese Contrastive Data | Rendered Notebook",
                 "nav.aria": "Notebook navigation",
-                "nav.week": "Week 01",
+                "nav.week": "Week 09",
                 "nav.slides": "Slides",
                 "nav.demo": "Demo",
                 "nav.source": "Download source .ipynb",
@@ -301,11 +314,11 @@ print(paragraph)</code></pre><div class="nb-output"><div class="nb-output-label"
                 "side.source": "Download source .ipynb",
                 "side.csv": "Download data CSV",
                 "hero.tag": "Rendered notebook",
-                "hero.title": "Tuần 09: Dữ liệu đối chiếu Hán-Việt",
+                "hero.title": "Week 09: Chinese-Vietnamese Contrastive Data",
                 "hero.body": "This is the pre-run HTML version for GitHub Pages. To practice, open the notebook in Colab or download the .ipynb file.",
                 "action.colab": "Run in Colab",
                 "action.source": "Download .ipynb",
-                "action.week": "Back to Week 01",
+                "action.week": "Back to Week 09",
                 "note.title": "How to use this page",
                 "note.read.title": "Read",
                 "note.read.body": "The HTML version keeps code and output together, useful for review after class.",

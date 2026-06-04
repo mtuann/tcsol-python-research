@@ -14,7 +14,7 @@
 | `chinese_pattern` | text | simplified Chinese pattern label | Methods/data description |
 | `vietnamese_pattern` | text | simplified Vietnamese pattern label | Methods/data description |
 | `similarity_level` | text | similar, partial, different, or background | caution for interpretation |
-| `teaching_risk` | text | low, medium, high, or exclude | crosstab columns |
+| `teaching_risk` | text | low, medium, high, or exclude; teacher-assigned priority heuristic, not measured learner difficulty | crosstab columns |
 | `risk_score` | nullable numeric | 1 low, 2 medium, 3 high; blank for excluded rows | priority score |
 | `learner_error_link` | text | Week 08 category this may connect to | cross-week bridge |
 | `evidence_note` | text | short analytic/teaching note | paragraph evidence |
@@ -27,6 +27,6 @@ Important: this is a synthetic teaching dataset for learning workflow, not a cor
 
 - Source role: synthetic Chinese-Vietnamese contrastive example dataset.
 - Privacy: contains no real learner records.
-- SHA-256: `78cbedef8cdd1eb5d093864ee4e4c1c75aeb963b9537b540b49c4a251faba3a8`
+- SHA-256: `b80e88ea2cfa12e88cab9198a5aafa22aca669264d8683098c3935e0c55f9686`
 - Unit of analysis: one row, meaning one contrastive example pair.
 - Required filter: use rows where `include_in_table == True`; excluded rows are kept only to teach filtering and documentation.

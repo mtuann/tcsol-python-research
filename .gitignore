@@ -26,6 +26,7 @@ weeks/**/data/processed/*
 !weeks/week-07-tcsol-short-course-research/data/raw/week07_short_course_learner_tasks.csv
 !weeks/week-08-learner-error-analysis/data/raw/week08_learner_error_coding.csv
 !weeks/week-09-chinese-vietnamese-contrastive-data/data/raw/week09_contrastive_examples.csv
+!weeks/week-10-pedagogical-adaptation/data/raw/week10_pedagogical_adaptation_activities.csv
 submissions/
 weeks/**/submissions/
 
@@ -54,6 +55,10 @@ weeks/**/outputs/interactive/*
 !weeks/week-09-chinese-vietnamese-contrastive-data/outputs/tables/week09_pattern_by_risk.csv
 !weeks/week-09-chinese-vietnamese-contrastive-data/outputs/tables/week09_teaching_priority_table.csv
 !weeks/week-09-chinese-vietnamese-contrastive-data/outputs/tables/week09_selected_contrastive_examples.csv
+!weeks/week-10-pedagogical-adaptation/outputs/tables/week10_adaptation_summary.csv
+!weeks/week-10-pedagogical-adaptation/outputs/tables/week10_short_lesson_plan.csv
+!weeks/week-10-pedagogical-adaptation/outputs/tables/week10_phase_minutes.csv
+!weeks/week-10-pedagogical-adaptation/outputs/tables/week10_activity_priority_table.csv
 !weeks/week-05-visualization-for-paper/outputs/figures/week05_mean_gain_by_activity.png
 !weeks/week-05-visualization-for-paper/outputs/figures/week05_mean_gain_by_activity.svg
 !weeks/week-05-visualization-for-paper/outputs/figures/week05_gain_distribution_by_activity.png
@@ -72,6 +77,10 @@ weeks/**/outputs/interactive/*
 !weeks/week-09-chinese-vietnamese-contrastive-data/outputs/figures/week09_phenomenon_frequency.svg
 !weeks/week-09-chinese-vietnamese-contrastive-data/outputs/figures/week09_risk_by_phenomenon_heatmap.png
 !weeks/week-09-chinese-vietnamese-contrastive-data/outputs/figures/week09_risk_by_phenomenon_heatmap.svg
+!weeks/week-10-pedagogical-adaptation/outputs/figures/week10_lesson_phase_minutes.svg
+!weeks/week-10-pedagogical-adaptation/outputs/figures/week10_lesson_phase_minutes.png
+!weeks/week-10-pedagogical-adaptation/outputs/figures/week10_activity_priority.svg
+!weeks/week-10-pedagogical-adaptation/outputs/figures/week10_activity_priority.png
 
 # Office temporary files
 ~$*

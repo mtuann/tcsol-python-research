@@ -17,3 +17,14 @@
 - 20 min: representative examples.
 - 20 min: figure caption and analysis paragraph.
 - 15 min: assignment setup.
+
+## Instructor Answer Key
+
+- Raw rows: 66.
+- Included rows after `include_in_table == True`: 60.
+- Background/excluded rows: 6.
+- Highest teaching-priority phenomenon in the current synthetic data: `result_complement`.
+- Top priority details: `n = 11`, mean risk = 2.55, priority score = 28.0.
+- Suggested representative example: C030 `我找到票了。` / `Tôi tìm thấy vé rồi.`
+
+Keep these numbers out of the first learner-facing writing frame until after the learner has read the table.

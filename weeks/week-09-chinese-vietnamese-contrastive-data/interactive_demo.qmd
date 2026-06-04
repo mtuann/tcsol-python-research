@@ -1,0 +1,6 @@
+---
+title: "Week 09: Contrastive Risk Demo"
+format: html
+---
+
+Source note: the deployable demo is authored in `interactive_demo.html` for GitHub Pages. It lets learners choose a contrastive phenomenon, adjust count and mean risk, inspect one representative example pair, and read a dynamically updated analysis sentence.

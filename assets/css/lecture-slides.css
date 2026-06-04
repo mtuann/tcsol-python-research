@@ -494,7 +494,7 @@ h2 {
 }
 
 .slide-figure.large {
-  max-height: min(54vh, 500px);
+  max-height: min(46vh, 420px);
 }
 
 .sentence-frame-card {

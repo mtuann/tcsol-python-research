@@ -2,12 +2,12 @@
 
 | Criterion | Points | Strong Work |
 |---|---:|---|
-| Data filtering | 15 | Correctly separates raw rows, usable rows, coded-error rows, and no-error rows. |
+| Data filtering | 20 | Correctly separates raw rows, on-prompt usable rows, coded-error rows, no-error rows, and excluded rows. |
 | Frequency table | 20 | Exports correct counts and percentages for error categories. |
-| Crosstab reading | 20 | Explains a target-structure by error-category pattern without overclaiming. |
+| Crosstab reading | 15 | Explains a target-structure by error-category pattern without overclaiming. |
 | Representative examples | 15 | Selects clear learner/expected pairs and links them to teaching interpretation. |
 | Figures and captions | 15 | Figures are readable and captions state N, variable, and limitation. |
-| Results writing | 15 | Paragraph reports count, pattern, teaching implication, and limitation in 120-160 words. |
+| Results writing + source note | 15 | Paragraph reports count, pattern, teaching implication, limitation, and one relevant source note in 120-160 words. |
 
 ## Codebook Anchor Example
 

@@ -1,0 +1,7 @@
+phenomenon,example_id,chinese_example,pinyin,vietnamese_rendering,chinese_pattern,vietnamese_pattern,teaching_risk,evidence_note
+aspect_marker,C020,我吃饭了。,Wǒ chīfàn le.,Tôi ăn cơm rồi.,verb/action + 了,verb/action + rồi,high,Do not teach 了 as simply past tense.
+measure_classifier,C012,一张票,yì zhāng piào,một vé / một tấm vé,number + flat-object classifier + noun,classifier may be omitted or lexicalized,high,"Vietnamese can omit the classifier in natural speech, so 张 needs attention."
+result_complement,C030,我找到票了。,Wǒ zhǎodào piào le.,Tôi tìm thấy vé rồi.,verb + result complement,verb + result word,high,Contrast 找 and 找到 before asking learners to translate.
+sino_vietnamese_lexical,C053,先生,xiānsheng,ông / thầy / anh,polite address noun,Vietnamese Hán-Việt form is archaic/formal,high,Cognate recognition is not enough for translation.
+time_place_order,C001,我在学校学习汉语。,Wǒ zài xuéxiào xuéxí Hànyǔ.,Tôi học tiếng Trung ở trường.,S + place + V + object,S + V + object + place,high,"Vietnamese often places location after the verb, so the Chinese pre-verbal location frame needs practice."
+tone_pinyin_mapping,C041,买 / 卖,mǎi / mài,mua / bán,tone distinguishes lexical meaning,Vietnamese tones are a separate system,high,Vietnamese tone knowledge does not directly map to Mandarin tone marks.

@@ -125,6 +125,7 @@ For future slide work, use:
 - [`Tuần 06: Thống kê cho Results`](weeks/week-06-intro-statistics-for-results/)
 - [`Tuần 07: Nghiên cứu TCSOL ngắn hạn`](weeks/week-07-tcsol-short-course-research/)
 - [`Tuần 08: Phân tích lỗi người học`](weeks/week-08-learner-error-analysis/)
+- [`Tuần 09: Dữ liệu đối chiếu Hán-Việt`](weeks/week-09-chinese-vietnamese-contrastive-data/)
 
 ## Suggested Repository Structure
 

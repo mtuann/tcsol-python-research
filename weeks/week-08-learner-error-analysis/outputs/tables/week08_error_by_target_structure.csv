@@ -1,6 +1,6 @@
 target_structure,aspect_marker,measure_word,result_complement,tone_marking,word_order
-aspect marker le in daily routines,11,0,0,0,2
-result complements in service dialogues,1,0,11,0,2
-shopping measure words,0,11,0,0,2
-time-place word order,0,2,0,0,11
+aspect marker le in daily routines,11,0,0,0,0
+result complements in service dialogues,0,0,11,0,0
+shopping measure words,0,11,0,0,0
+time-place word order,0,0,0,0,11
 tone-marked pinyin check,0,0,0,13,0

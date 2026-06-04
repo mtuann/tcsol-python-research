@@ -9,10 +9,10 @@ Source note: learner-facing slides are authored directly in `slides.html` so the
 2. Bridge from Week 07.
 3. Response row as unit.
 4. Error codebook.
-5. Filtering usable/error rows.
+5. Filtering usable/on-prompt/error rows.
 6. Frequency table.
 7. Crosstab.
-8. Teaching priority heuristic.
+8. Teaching priority heuristic after off-prompt exclusion.
 9. Representative examples.
 10. Frequency figure.
 11. Crosstab heatmap.

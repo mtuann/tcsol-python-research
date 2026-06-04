@@ -1,6 +1,6 @@
-error_category,n,percent_of_errors,error_feature
-word_order,17,25.8,place phrase placed after verb phrase
-measure_word,13,19.7,generic 个 used for object classifier
-tone_marking,13,19.7,missing or wrong tone mark
-aspect_marker,12,18.2,missing or misplaced 了
-result_complement,11,16.7,missing or wrong result complement
+error_category,n,percent_coded_errors
+tone_marking,13,22.8
+result_complement,11,19.3
+measure_word,11,19.3
+aspect_marker,11,19.3
+word_order,11,19.3

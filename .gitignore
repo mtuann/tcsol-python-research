@@ -25,6 +25,7 @@ weeks/**/data/processed/*
 !weeks/week-06-intro-statistics-for-results/data/raw/week06_tcsol_prepost_scores.csv
 !weeks/week-07-tcsol-short-course-research/data/raw/week07_short_course_learner_tasks.csv
 !weeks/week-08-learner-error-analysis/data/raw/week08_learner_error_coding.csv
+!weeks/week-09-chinese-vietnamese-contrastive-data/data/raw/week09_contrastive_examples.csv
 submissions/
 weeks/**/submissions/
 
@@ -49,6 +50,10 @@ weeks/**/outputs/interactive/*
 !weeks/week-08-learner-error-analysis/outputs/tables/week08_error_by_target_structure.csv
 !weeks/week-08-learner-error-analysis/outputs/tables/week08_teaching_priority_table.csv
 !weeks/week-08-learner-error-analysis/outputs/tables/week08_representative_examples.csv
+!weeks/week-09-chinese-vietnamese-contrastive-data/outputs/tables/week09_phenomenon_frequency.csv
+!weeks/week-09-chinese-vietnamese-contrastive-data/outputs/tables/week09_pattern_by_risk.csv
+!weeks/week-09-chinese-vietnamese-contrastive-data/outputs/tables/week09_teaching_priority_table.csv
+!weeks/week-09-chinese-vietnamese-contrastive-data/outputs/tables/week09_selected_contrastive_examples.csv
 !weeks/week-05-visualization-for-paper/outputs/figures/week05_mean_gain_by_activity.png
 !weeks/week-05-visualization-for-paper/outputs/figures/week05_mean_gain_by_activity.svg
 !weeks/week-05-visualization-for-paper/outputs/figures/week05_gain_distribution_by_activity.png
@@ -63,6 +68,10 @@ weeks/**/outputs/interactive/*
 !weeks/week-08-learner-error-analysis/outputs/figures/week08_error_category_frequency.svg
 !weeks/week-08-learner-error-analysis/outputs/figures/week08_error_by_target_heatmap.png
 !weeks/week-08-learner-error-analysis/outputs/figures/week08_error_by_target_heatmap.svg
+!weeks/week-09-chinese-vietnamese-contrastive-data/outputs/figures/week09_phenomenon_frequency.png
+!weeks/week-09-chinese-vietnamese-contrastive-data/outputs/figures/week09_phenomenon_frequency.svg
+!weeks/week-09-chinese-vietnamese-contrastive-data/outputs/figures/week09_risk_by_phenomenon_heatmap.png
+!weeks/week-09-chinese-vietnamese-contrastive-data/outputs/figures/week09_risk_by_phenomenon_heatmap.svg
 
 # Office temporary files
 ~$*

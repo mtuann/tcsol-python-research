@@ -28,8 +28,8 @@ Error analysis is useful for TCSOL only when it connects learner responses to te
 ## Main Workflow
 
 ```python
-usable = df[df["usable_error"] == True].copy()
-error_rows = usable[usable["has_error"] == True].copy()
+analysis_rows = df[(df["usable_error"] == True) & (df["on_prompt"] == True)].copy()
+error_rows = analysis_rows[analysis_rows["has_error"] == True].copy()
 error_frequency = error_rows["error_category"].value_counts()
 error_by_target = pd.crosstab(error_rows["target_structure"], error_rows["error_category"])
 ```
@@ -48,27 +48,28 @@ A beginner-friendly error code should be:
 
 Start with:
 
-1. How many response rows are usable?
-2. How many usable rows contain coded errors?
+1. How many response rows are on-prompt and usable?
+2. How many on-prompt usable rows contain coded errors?
 3. Which error category is most frequent?
 4. Which target structures show the top error?
 5. Which examples best explain the pattern?
 
-Do not write "Vietnamese learners have word-order problems" from this dataset. Write "In the synthetic usable responses, `word_order` was the most frequent coded error and appeared across multiple target structures."
+Do not write "Vietnamese learners have tone problems" from this dataset. Write "In the synthetic on-prompt usable responses, `tone_marking` was the most frequent coded error."
 
 ## Results Writing Frame
 
 Vietnamese thinking frame:
 
-> Trong `N = ___` usable response rows, `___` dòng có coded learner error. Error category xuất hiện nhiều nhất là `___` (`n = ___`), tiếp theo là `___`. Bảng chéo cho thấy `___` xuất hiện ở `___`. Vì dữ liệu synthetic và sample nhỏ, kết quả nên dùng để chọn teaching priority, không dùng để chẩn đoán cá nhân hoặc khái quát rộng.
+> Trong `N = ___` on-prompt usable response rows, `___` dòng có coded learner error. Error category xuất hiện nhiều nhất là `___` (`n = ___`), tiếp theo là `___`. Bảng chéo cho thấy `___` xuất hiện ở `___`. Vì dữ liệu synthetic, sample nhỏ và off-prompt rows bị loại khỏi bảng chính, kết quả nên dùng để chọn teaching priority, không dùng để chẩn đoán cá nhân hoặc khái quát rộng.
 
 English paper frame:
 
-> In the usable learner-response records (`N = ___`), `___` rows contained a coded learner error. The most frequent error category was `___` (`n = ___`), followed by `___`. The crosstab suggests that `___` appeared in `___`. Because the dataset is synthetic and small, the result should be used to identify teaching priorities rather than diagnose individual learners.
+> In the on-prompt usable learner-response records (`N = ___`), `___` rows contained a coded learner error. The most frequent error category was `___` (`n = ___`), followed by `___`. The crosstab suggests that `___` appeared in `___`. Because the dataset is synthetic and small, and off-prompt rows were excluded from the main table, the result should be used to identify teaching priorities rather than diagnose individual learners.
 
 ## Common Risks
 
 - Counting `no_error` as an error category.
+- Counting `off_prompt_response` as target-structure evidence.
 - Treating possible Vietnamese transfer as proven transfer.
 - Forgetting that severity is a simple teaching heuristic.
 - Choosing examples that are unclear or too idiosyncratic.

@@ -1,0 +1,26 @@
+---
+title: "Week 09: Chinese-Vietnamese Contrastive Data"
+format: html
+---
+
+Source note: learner-facing slides are authored directly in `slides.html` so the deck can use the shared interactive slide controller, bilingual toggle, quick overview, and GitHub Pages-safe navigation.
+
+1. Chinese-Vietnamese contrastive data.
+2. Bridge from Week 08.
+3. Contrastive example as unit.
+4. Contrast is not word-for-word translation.
+5. Dataset schema.
+6. Filtering usable/background examples.
+7. `str.contains()` as visible-pattern check.
+8. Frequency table.
+9. Risk crosstab.
+10. Time/place order example.
+11. Measure/classifier example.
+12. Aspect marker example.
+13. Result complement example.
+14. Sino-Vietnamese lexical caution.
+15. Frequency figure.
+16. Risk heatmap.
+17. Analysis writing frame.
+18. Assignment package.
+19. Week 10 bridge.

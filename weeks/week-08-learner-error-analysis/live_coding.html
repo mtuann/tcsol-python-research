@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title data-i18n="meta.title">Tuần 08: Phân tích lỗi người học | Notebook đã render</title>
+  <title data-i18n="meta.title">Tuần 08: Learner Error Analysis | Notebook đã render</title>
   <link rel="stylesheet" href="../../assets/css/bilingual.css">
   <link rel="stylesheet" href="../../assets/css/course-doc.css">
 </head>
@@ -11,7 +11,7 @@
   <header class="doc-topbar">
     <a class="doc-brand" href="../../" data-i18n="brand">Python Research Hub</a>
     <nav class="doc-nav" aria-label="Điều hướng notebook" data-i18n-aria-label="nav.aria">
-      <a href="./" data-i18n="nav.week">Tuần 08</a>
+      <a href="./" data-i18n="nav.week">Tuần 01</a>
       <a href="slides.html" data-i18n="nav.slides">Slides</a>
       <a href="interactive_demo.html" data-i18n="nav.demo">Demo</a>
       <a href="live_coding.ipynb" download data-i18n="nav.source">Source .ipynb</a>
@@ -28,18 +28,18 @@
       <a href="./" data-i18n="side.week">Tổng quan tuần</a>
       <a href="https://colab.research.google.com/github/mtuann/tcsol-python-research/blob/main/weeks/week-08-learner-error-analysis/live_coding.ipynb" data-i18n="side.colab">Chạy bằng Colab</a>
       <a href="live_coding.ipynb" download data-i18n="side.source">Tải source .ipynb</a>
-      <a href="data/raw/week08_learner_error_coding.csv" download data-i18n="side.csv">Tải tệp CSV dữ liệu</a>
+      <a href="data/raw/week01_research_tracks.csv" download data-i18n="side.csv">Tải tệp CSV dữ liệu</a>
     </aside>
 
     <div class="doc-main">
       <section class="doc-hero">
         <span class="doc-eyebrow" data-i18n="hero.tag">Rendered notebook</span>
-        <h1 data-i18n="hero.title">Tuần 08: Phân tích lỗi người học</h1>
+        <h1 data-i18n="hero.title">Tuần 08: Learner Error Analysis</h1>
         <p class="doc-lead" data-i18n="hero.body">Đây là bản HTML đã chạy sẵn để đọc trên GitHub Pages. Muốn thực hành, mở notebook trong Colab hoặc tải file .ipynb.</p>
         <div class="doc-actions">
           <a class="doc-button" href="https://colab.research.google.com/github/mtuann/tcsol-python-research/blob/main/weeks/week-08-learner-error-analysis/live_coding.ipynb" data-i18n="action.colab">Chạy trong Colab</a>
           <a class="doc-button secondary" href="live_coding.ipynb" download data-i18n="action.source">Tải .ipynb</a>
-          <a class="doc-button secondary" href="./" data-i18n="action.week">Quay lại Tuần 08</a>
+          <a class="doc-button secondary" href="./" data-i18n="action.week">Quay lại Tuần 01</a>
         </div>
       </section>
 
@@ -53,9 +53,9 @@
       </section>
 
       <section class="notebook-document" aria-label="Các cell notebook đã render" data-i18n-aria-label="notebook.cells.aria">
-        <article class="nb-cell nb-markdown" data-cell-type="markdown"><h2>Tuần 08: Learner Error Analysis</h2>
-<p>Mục tiêu: biến câu trả lời của người học thành bằng chứng có thể đọc được trong paper. Tuần này học cách đếm lỗi, làm bảng chéo theo target structure, chọn ví dụ đại diện và viết một đoạn Results thận trọng.</p></article>
-<article class="nb-cell nb-markdown" data-cell-type="markdown"><h3>Trước khi chạy code</h3>
+        <article class="nb-cell nb-markdown" data-cell-type="markdown" data-i18n-html="nb.title"><h2>Tuần 08: Learner Error Analysis</h2>
+<p>Mục tiêu: biến câu trả lời của người học thành bằng chứng có thể đọc được trong paper. Tuần này học cách đếm lỗi, loại off-prompt rows, làm bảng chéo, chọn ví dụ đại diện và viết Results paragraph.</p></article>
+<article class="nb-cell nb-markdown" data-cell-type="markdown" data-i18n-html="nb.setup"><h3>Trước khi chạy code</h3>
 <p>Cell setup bên dưới chuẩn bị thư viện, kiểm tra file data và tạo folder output. Bạn chỉ cần <strong>Run</strong> cell này trước; chưa cần hiểu từng dòng.</p>
 <ul><li>Cell này làm gì? Import thư viện, tìm folder Week 08, kiểm tra SHA-256 của CSV.</li><li>Kết quả mong đợi: in ra <code>Week folder</code>, <code>Data file</code>, và <code>SHA-256</code>.</li><li>Nếu lỗi: kiểm tra đã mở notebook từ project root hoặc folder Week 08; nếu thiếu package, chạy <code>python -m pip install -r requirements.txt</code>.</li></ul></article>
 <article class="nb-cell nb-code" data-cell-type="code"><div class="nb-input-label">In [1]</div><pre><code>from pathlib import Path
@@ -66,42 +66,27 @@ try:
     import pandas as pd
     import numpy as np
     import matplotlib
-    matplotlib.use(&quot;Agg&quot;)
-    matplotlib.rcParams[&quot;svg.hashsalt&quot;] = &quot;week08-learner-error-analysis&quot;
     import matplotlib.pyplot as plt
-except ImportError as exc:
-    raise SystemExit(
-        &quot;Missing package. From the project root, run: &quot;
-        &quot;python -m pip install -r requirements.txt&quot;
-    ) from exc
+    import seaborn as sns
+except ImportError as error:
+    raise ImportError(&quot;Install course packages first: python -m pip install -r requirements.txt&quot;) from error
 
-THIS_WEEK = &quot;week-08-learner-error-analysis&quot;
-EXPECTED_SHA256 = &quot;a96e92a6fa3d746e77e0b6bb97a5ee01bf55f15c6690e23bac0b240feedd6fc0&quot;
+EXPECTED_SHA256 = &quot;0f17314ecc223b8a0228f46212949ba0bc4b56aeca6848b891e9c00cc263d3d4&quot;
+RAW_URL = &quot;https://raw.githubusercontent.com/mtuann/tcsol-python-research/main/weeks/week-08-learner-error-analysis/data/raw/week08_learner_error_coding.csv&quot;
 
 
-def find_week_dir():
-    candidates = [
-        Path.cwd(),
-        Path.cwd() / &quot;weeks&quot; / THIS_WEEK,
-        Path.cwd().parent,
-        Path.cwd().parent / &quot;weeks&quot; / THIS_WEEK,
-    ]
+def find_week_dir(start=Path.cwd()):
+    candidates = [start, *start.parents]
     for candidate in candidates:
-        if candidate.name == THIS_WEEK and (candidate / &quot;data/raw&quot;).exists():
+        direct = candidate / &quot;data/raw/week08_learner_error_coding.csv&quot;
+        nested = candidate / &quot;weeks/week-08-learner-error-analysis/data/raw/week08_learner_error_coding.csv&quot;
+        if direct.exists():
             return candidate
-        if (candidate / &quot;data/raw/week08_learner_error_coding.csv&quot;).exists():
-            return candidate
-    raise FileNotFoundError(&quot;Cannot find the Week 08 folder. Run this notebook from the project root or the Week 08 folder.&quot;)
-
-
-def sha256_file(path):
-    return hashlib.sha256(path.read_bytes()).hexdigest()
-
-
-def strip_svg_whitespace(path):
-    text = path.read_text(encoding=&quot;utf-8&quot;)
-    clean_text = &quot;\n&quot;.join(line.rstrip() for line in text.splitlines()) + &quot;\n&quot;
-    path.write_text(clean_text, encoding=&quot;utf-8&quot;)
+        if nested.exists():
+            return candidate / &quot;weeks/week-08-learner-error-analysis&quot;
+    fallback = Path(&quot;weeks/week-08-learner-error-analysis&quot;)
+    fallback.mkdir(parents=True, exist_ok=True)
+    return fallback
 
 WEEK_DIR = find_week_dir()
 DATA_PATH = WEEK_DIR / &quot;data/raw/week08_learner_error_coding.csv&quot;
@@ -111,102 +96,90 @@ TABLE_DIR.mkdir(parents=True, exist_ok=True)
 FIGURE_DIR.mkdir(parents=True, exist_ok=True)
 
 if not DATA_PATH.exists():
-    source = &quot;https://raw.githubusercontent.com/mtuann/tcsol-python-research/main/weeks/week-08-learner-error-analysis/data/raw/week08_learner_error_coding.csv&quot;
-    print(&quot;Local data not found. Downloading synthetic learner-error dataset...&quot;)
-    urlretrieve(source, DATA_PATH)
+    DATA_PATH.parent.mkdir(parents=True, exist_ok=True)
+    urlretrieve(RAW_URL, DATA_PATH)
 
-actual_sha = sha256_file(DATA_PATH)
+actual_sha = hashlib.sha256(DATA_PATH.read_bytes()).hexdigest()
 if actual_sha != EXPECTED_SHA256:
-    raise ValueError(f&quot;Data hash mismatch. Expected {EXPECTED_SHA256}, got {actual_sha}&quot;)
+    raise ValueError(f&quot;Raw data changed. Expected {EXPECTED_SHA256}, got {actual_sha}&quot;)
 
-print(&quot;Week folder:&quot;, f&quot;weeks/{THIS_WEEK}&quot;)
-print(&quot;Data file:&quot;, &quot;data/raw/week08_learner_error_coding.csv&quot;)
-print(&quot;SHA-256:&quot;, actual_sha)</code></pre><div class="nb-output"><div class="nb-output-label">Output</div><pre><code>Week folder: weeks/week-08-learner-error-analysis
+print(f&quot;Week folder: {WEEK_DIR}&quot;)
+print(f&quot;Data file: {DATA_PATH.relative_to(WEEK_DIR)}&quot;)
+print(f&quot;SHA-256: {actual_sha}&quot;)</code></pre><div class="nb-output"><div class="nb-output-label">Output</div><pre><code>Week folder: /Users/mitu/Desktop/work/projects/tcsol-python-research-syllabus/weeks/week-08-learner-error-analysis
 Data file: data/raw/week08_learner_error_coding.csv
-SHA-256: a96e92a6fa3d746e77e0b6bb97a5ee01bf55f15c6690e23bac0b240feedd6fc0</code></pre></div></article>
-<article class="nb-cell nb-markdown" data-cell-type="markdown"><h3>1. Research loop của tuần này</h3>
+SHA-256: 0f17314ecc223b8a0228f46212949ba0bc4b56aeca6848b891e9c00cc263d3d4</code></pre></div></article>
+<article class="nb-cell nb-markdown" data-cell-type="markdown" data-i18n-html="nb.loop"><h3>1. Research loop của tuần này</h3>
 <p>Ta dùng một vòng rất ngắn:</p>
-<p>``<code>text learner response -&gt; error code -&gt; frequency table -&gt; representative examples -&gt; Results paragraph </code>``</p>
-<p>Câu hỏi mẫu: <strong>Trong các câu trả lời dùng được, lỗi nào xuất hiện nhiều nhất và lỗi đó gắn với target structure nào?</strong></p>
-<p>Unit of analysis: <strong>mỗi dòng là một learner response cho một item</strong>. <code>learner_id</code> chỉ là mã định danh.</p></article>
+<p>``<code>text learner response -&gt; on-prompt filter -&gt; error code -&gt; frequency table -&gt; representative examples -&gt; Results paragraph </code>``</p>
+<p>Điểm mới sau review: không phân tích dòng trả lời nhầm prompt trong crosstab chính. Một dòng phải vừa <code>usable_error == True</code> vừa <code>on_prompt == True</code>.</p></article>
 <article class="nb-cell nb-code" data-cell-type="code"><div class="nb-input-label">In [2]</div><pre><code>df = pd.read_csv(DATA_PATH)
-usable = df[df[&quot;usable_error&quot;] == True].copy()
-error_rows = usable[usable[&quot;has_error&quot;] == True].copy()
 
-usable[&quot;severity&quot;] = pd.to_numeric(usable[&quot;severity&quot;], errors=&quot;coerce&quot;).fillna(0)
-error_rows[&quot;severity&quot;] = pd.to_numeric(error_rows[&quot;severity&quot;], errors=&quot;coerce&quot;)
+analysis_rows = df[(df[&quot;usable_error&quot;] == True) &amp; (df[&quot;on_prompt&quot;] == True)].copy()
+error_rows = analysis_rows[analysis_rows[&quot;has_error&quot;] == True].copy()
+no_error_rows = analysis_rows[analysis_rows[&quot;has_error&quot;] == False].copy()
+excluded_rows = df[(df[&quot;usable_error&quot;] != True) | (df[&quot;on_prompt&quot;] != True)].copy()
+
+for table in [analysis_rows, error_rows, no_error_rows]:
+    table[&quot;severity&quot;] = pd.to_numeric(table[&quot;severity&quot;], errors=&quot;coerce&quot;)
 
 print(&quot;Raw response rows:&quot;, len(df))
-print(&quot;Usable response rows:&quot;, len(usable))
-print(&quot;Rows with coded errors:&quot;, len(error_rows))
-print(usable[[&quot;response_id&quot;, &quot;learner_id&quot;, &quot;item_id&quot;, &quot;target_structure&quot;, &quot;error_category&quot;, &quot;severity&quot;]].head(10).to_string(index=False))</code></pre><div class="nb-output"><div class="nb-output-label">Output</div><pre><code>Raw response rows: 80
-Usable response rows: 76
-Rows with coded errors: 66
-response_id learner_id item_id                        target_structure    error_category  severity
-       R001       L001     I01 result complements in service dialogues result_complement       2.0
-       R002       L001     I02                  shopping measure words      measure_word       3.0
-       R003       L001     I03      aspect marker le in daily routines     aspect_marker       1.0
-       R004       L001     I04                   time-place word order        word_order       2.0
-       R005       L001     I05                tone-marked pinyin check      tone_marking       2.0
-       R006       L002     I01 result complements in service dialogues result_complement       3.0
-       R007       L002     I02                  shopping measure words          no_error       0.0
-       R008       L002     I03      aspect marker le in daily routines        word_order       2.0
-       R009       L002     I04                   time-place word order        word_order       2.0
-       R010       L002     I05                tone-marked pinyin check      tone_marking       1.0</code></pre></div></article>
-<article class="nb-cell nb-markdown" data-cell-type="markdown"><h3>2. Error codebook tối thiểu</h3>
-<p>Một error code tốt phải giúp giáo viên quyết định nên dạy lại gì. Tuần này không chẩn đoán cá nhân; ta chỉ đọc pattern trong dữ liệu synthetic nhỏ.</p>
-<p>| Code | Plain meaning | Teaching use | |---|---|---| | <code>result_complement</code> | thiếu/sai bổ ngữ kết quả | luyện cặp hành động - kết quả như <code>找</code> vs <code>找到</code> | | <code>measure_word</code> | dùng sai lượng từ | luyện chunks như <code>一杯茶</code>, <code>两本书</code> | | <code>aspect_marker</code> | thiếu/sai vị trí <code>了</code> | luyện câu sự kiện đã xảy ra với le | | <code>word_order</code> | đặt time/place sai vị trí | luyện frame subject + place/time + verb | | <code>tone_marking</code> | thiếu/sai thanh điệu pinyin | luyện minimal tone pairs |</p>
-<p>Beginner rule: first count codes; then read examples. Do not jump from one example to a big claim.</p></article>
-<article class="nb-cell nb-code" data-cell-type="code"><div class="nb-input-label">In [3]</div><pre><code>error_frequency = (
+print(&quot;On-prompt usable rows:&quot;, len(analysis_rows))
+print(&quot;Coded error rows:&quot;, len(error_rows))
+print(&quot;No-error rows:&quot;, len(no_error_rows))
+print(&quot;Excluded rows:&quot;, len(excluded_rows))
+print(&quot;Excluded categories:&quot;)
+print(excluded_rows[&quot;error_category&quot;].value_counts().to_string())</code></pre><div class="nb-output"><div class="nb-output-label">Output</div><pre><code>Raw response rows: 80
+On-prompt usable rows: 68
+Coded error rows: 57
+No-error rows: 11
+Excluded rows: 12
+Excluded categories:
+error_category
+off_prompt_response    8
+unusable_response      4</code></pre></div></article>
+<article class="nb-cell nb-markdown" data-cell-type="markdown" data-i18n-html="nb.codebook"><h3>2. Codebook tối thiểu</h3>
+<p>Không phải mọi dòng đều là lỗi. Ta giữ ba loại nhãn ngoài phân tích lỗi:</p>
+<ul><li><code>no_error</code>: câu trả lời target-like, không count là lỗi;</li><li><code>unusable_response</code>: blank/off-task, không phân tích;</li><li><code>off_prompt_response</code>: câu trả lời có thể đọc được nhưng không trả lời đúng prompt, không đưa vào crosstab target structure.</li></ul></article>
+<article class="nb-cell nb-code" data-cell-type="code"><div class="nb-input-label">In [3]</div><pre><code>active_codebook = {
+    &quot;aspect_marker&quot;: &quot;了 placement or aspect marking&quot;,
+    &quot;measure_word&quot;: &quot;classifier choice or classifier omission&quot;,
+    &quot;result_complement&quot;: &quot;missing/wrong result complement&quot;,
+    &quot;tone_marking&quot;: &quot;pinyin tone mark problem&quot;,
+    &quot;word_order&quot;: &quot;target word-order frame problem&quot;,
+}
+
+pd.DataFrame(
+    [{&quot;error_category&quot;: key, &quot;teaching_meaning&quot;: value} for key, value in active_codebook.items()]
+)</code></pre></article>
+<article class="nb-cell nb-markdown" data-cell-type="markdown" data-i18n-html="nb.frequency"><h3>3. Frequency table: lỗi nào nhiều nhất?</h3>
+<p><code>value_counts()</code> trả lời câu hỏi: nhãn lỗi nào xuất hiện nhiều nhất trong các coded error rows?</p></article>
+<article class="nb-cell nb-code" data-cell-type="code"><div class="nb-input-label">In [4]</div><pre><code>error_frequency = (
     error_rows[&quot;error_category&quot;]
     .value_counts()
     .rename_axis(&quot;error_category&quot;)
     .reset_index(name=&quot;n&quot;)
 )
-error_frequency[&quot;percent_of_errors&quot;] = (error_frequency[&quot;n&quot;] / error_frequency[&quot;n&quot;].sum() * 100).round(1)
-
-feature_lookup = error_rows.groupby(&quot;error_category&quot;)[&quot;error_feature&quot;].agg(lambda s: s.mode().iloc[0]).reset_index()
-error_frequency = error_frequency.merge(feature_lookup, on=&quot;error_category&quot;, how=&quot;left&quot;)
-
-frequency_path = TABLE_DIR / &quot;week08_error_frequency.csv&quot;
-error_frequency.to_csv(frequency_path, index=False)
-print(&quot;Saved:&quot;, frequency_path.relative_to(WEEK_DIR))
-print(error_frequency.to_string(index=False))</code></pre><div class="nb-output"><div class="nb-output-label">Output</div><pre><code>Saved: outputs/tables/week08_error_frequency.csv
-   error_category  n  percent_of_errors                         error_feature
-       word_order 17               25.8 place phrase placed after verb phrase
-     measure_word 13               19.7  generic 个 used for object classifier
-     tone_marking 13               19.7            missing or wrong tone mark
-    aspect_marker 12               18.2                missing or misplaced 了
-result_complement 11               16.7    missing or wrong result complement</code></pre></div></article>
-<article class="nb-cell nb-markdown" data-cell-type="markdown"><h3>3. Crosstab: lỗi nào gắn với target nào?</h3>
-<p><code>pd.crosstab</code> tạo bảng hai chiều. Ở đây hàng là <code>target_structure</code>, cột là <code>error_category</code>, ô là số lỗi.</p>
-<p>Đọc bảng theo câu hỏi: lỗi nào nổi bật trong target nào? Nếu một ô cao, đó là teaching priority candidate, chưa phải bằng chứng nguyên nhân.</p></article>
-<article class="nb-cell nb-code" data-cell-type="code"><div class="nb-input-label">In [4]</div><pre><code>error_by_target = pd.crosstab(
+error_frequency[&quot;percent_coded_errors&quot;] = (error_frequency[&quot;n&quot;] / len(error_rows) * 100).round(1)
+error_frequency.to_csv(TABLE_DIR / &quot;week08_error_frequency.csv&quot;, index=False)
+error_frequency</code></pre></article>
+<article class="nb-cell nb-markdown" data-cell-type="markdown" data-i18n-html="nb.crosstab"><h3>4. Crosstab: lỗi nào gắn với target nào?</h3>
+<p><code>pd.crosstab()</code> cho biết mỗi target structure có bao nhiêu dòng thuộc từng error category. Vì đã loại <code>off_prompt_response</code>, bảng này chỉ đọc các lỗi trong đúng prompt.</p></article>
+<article class="nb-cell nb-code" data-cell-type="code"><div class="nb-input-label">In [5]</div><pre><code>error_by_target = pd.crosstab(
     error_rows[&quot;target_structure&quot;],
     error_rows[&quot;error_category&quot;]
-).reset_index()
-
-crosstab_path = TABLE_DIR / &quot;week08_error_by_target_structure.csv&quot;
-error_by_target.to_csv(crosstab_path, index=False)
-print(&quot;Saved:&quot;, crosstab_path.relative_to(WEEK_DIR))
-print(error_by_target.to_string(index=False))</code></pre><div class="nb-output"><div class="nb-output-label">Output</div><pre><code>Saved: outputs/tables/week08_error_by_target_structure.csv
-                       target_structure  aspect_marker  measure_word  result_complement  tone_marking  word_order
-     aspect marker le in daily routines             11             0                  0             0           2
-result complements in service dialogues              1             0                 11             0           2
-                 shopping measure words              0            11                  0             0           2
-                  time-place word order              0             2                  0             0          11
-               tone-marked pinyin check              0             0                  0            13           0</code></pre></div></article>
-<article class="nb-cell nb-markdown" data-cell-type="markdown"><h3>4. Teaching priority không chỉ là nhiều hay ít</h3>
-<p>Một lỗi xuất hiện nhiều nhưng nhẹ có thể cần xử lý khác với lỗi ít hơn nhưng rất nặng. Ta dùng priority score đơn giản:</p>
-<p>``<code>text priority_score = frequency * mean severity </code>``</p>
-<p>Đây là heuristic để viết teaching implication, không phải mô hình thống kê.</p></article>
-<article class="nb-cell nb-code" data-cell-type="code"><div class="nb-input-label">In [5]</div><pre><code>teaching_moves = {
-    &quot;result_complement&quot;: &quot;contrast action vs result with short service dialogues&quot;,
-    &quot;measure_word&quot;: &quot;teach classifier chunks with shopping objects&quot;,
-    &quot;aspect_marker&quot;: &quot;practice 了 placement in completed-event sentences&quot;,
-    &quot;word_order&quot;: &quot;drill subject + place/time + verb phrase frames&quot;,
-    &quot;tone_marking&quot;: &quot;use minimal tone pairs and written tone-mark checks&quot;,
+)
+error_by_target.to_csv(TABLE_DIR / &quot;week08_error_by_target_structure.csv&quot;)
+error_by_target</code></pre></article>
+<article class="nb-cell nb-markdown" data-cell-type="markdown" data-i18n-html="nb.priority"><h3>5. Teaching priority không chỉ là nhiều hay ít</h3>
+<p>Ta dùng heuristic đơn giản: <code>priority_score = n * mean_severity</code>. Đây là gợi ý dạy lại, không phải bằng chứng nguyên nhân.</p></article>
+<article class="nb-cell nb-code" data-cell-type="code"><div class="nb-input-label">In [6]</div><pre><code>teaching_moves = {
+    &quot;aspect_marker&quot;: &quot;Use short action-result routines and compare verb-final 了 with sentence-final 了.&quot;,
+    &quot;measure_word&quot;: &quot;Teach object-specific classifier chunks such as 一杯茶, 两本书, 三张票.&quot;,
+    &quot;result_complement&quot;: &quot;Contrast 找票 and 找到票了; ask whether the action reached a result.&quot;,
+    &quot;tone_marking&quot;: &quot;Use minimal tone pairs and require tone marks in written rehearsal.&quot;,
+    &quot;word_order&quot;: &quot;Practice subject + time/place + verb phrase frames before open production.&quot;,
 }
+
 priority_table = (
     error_rows.groupby(&quot;error_category&quot;)
     .agg(
@@ -216,113 +189,91 @@ priority_table = (
     )
     .reset_index()
 )
-priority_table[&quot;mean_severity&quot;] = priority_table[&quot;mean_severity&quot;].round(2)
 priority_table[&quot;priority_score&quot;] = (priority_table[&quot;n&quot;] * priority_table[&quot;mean_severity&quot;]).round(2)
+priority_table[&quot;mean_severity&quot;] = priority_table[&quot;mean_severity&quot;].round(2)
 priority_table[&quot;teaching_move&quot;] = priority_table[&quot;error_category&quot;].map(teaching_moves)
 priority_table = priority_table.sort_values([&quot;priority_score&quot;, &quot;n&quot;], ascending=False)
-
-priority_path = TABLE_DIR / &quot;week08_teaching_priority_table.csv&quot;
-priority_table.to_csv(priority_path, index=False)
-print(&quot;Saved:&quot;, priority_path.relative_to(WEEK_DIR))
-print(priority_table.to_string(index=False))</code></pre><div class="nb-output"><div class="nb-output-label">Output</div><pre><code>Saved: outputs/tables/week08_teaching_priority_table.csv
-   error_category  n  mean_severity  target_count  priority_score                                          teaching_move
-       word_order 17           1.88             4           31.96        drill subject + place/time + verb phrase frames
-     measure_word 13           2.15             2           27.95          teach classifier chunks with shopping objects
-     tone_marking 13           1.85             1           24.05    use minimal tone pairs and written tone-mark checks
-    aspect_marker 12           1.83             2           21.96      practice 了 placement in completed-event sentences
-result_complement 11           1.91             1           21.01 contrast action vs result with short service dialogues</code></pre></div></article>
-<article class="nb-cell nb-markdown" data-cell-type="markdown"><h3>5. Representative examples</h3>
-<p>Một Results paragraph tốt không chỉ nói <code>n</code>. Nó chọn 2-3 ví dụ đại diện để người đọc hiểu lỗi là gì.</p>
-<p>Chọn ví dụ theo nguyên tắc:</p>
-<ul><li>lỗi thuộc nhóm có tần suất/priority cao;</li><li>learner answer và expected answer đều rõ;</li><li>correction note giúp viết implication.</li></ul></article>
-<article class="nb-cell nb-code" data-cell-type="code"><div class="nb-input-label">In [6]</div><pre><code>top_categories = priority_table[&quot;error_category&quot;].head(3).tolist()
-representative_examples = (
-    error_rows[error_rows[&quot;error_category&quot;].isin(top_categories)]
-    .sort_values([&quot;error_category&quot;, &quot;severity&quot;], ascending=[True, False])
-    .groupby(&quot;error_category&quot;)
-    .head(2)
-    [[&quot;error_category&quot;, &quot;target_structure&quot;, &quot;prompt_vi&quot;, &quot;learner_answer&quot;, &quot;expected_answer&quot;, &quot;severity&quot;, &quot;correction_note&quot;]]
-    .reset_index(drop=True)
+priority_table.to_csv(TABLE_DIR / &quot;week08_teaching_priority_table.csv&quot;, index=False)
+priority_table</code></pre></article>
+<article class="nb-cell nb-markdown" data-cell-type="markdown" data-i18n-html="nb.examples"><h3>6. Representative examples</h3>
+<p>Ví dụ đại diện nên rõ prompt, learner answer, expected answer và teaching note. Không chọn <code>off_prompt_response</code> làm ví dụ chính.</p></article>
+<article class="nb-cell nb-code" data-cell-type="code"><div class="nb-input-label">In [7]</div><pre><code>representative_examples = (
+    error_rows.sort_values([&quot;error_category&quot;, &quot;severity&quot;, &quot;response_id&quot;], ascending=[True, False, True])
+    .groupby(&quot;error_category&quot;, as_index=False)
+    .head(1)[[
+        &quot;error_category&quot;, &quot;response_id&quot;, &quot;target_structure&quot;, &quot;prompt_vi&quot;,
+        &quot;learner_answer&quot;, &quot;expected_answer&quot;, &quot;error_feature&quot;, &quot;correction_note&quot;
+    ]]
+    .sort_values(&quot;error_category&quot;)
 )
-examples_path = TABLE_DIR / &quot;week08_representative_examples.csv&quot;
-representative_examples.to_csv(examples_path, index=False)
-print(&quot;Saved:&quot;, examples_path.relative_to(WEEK_DIR))
-print(representative_examples.to_string(index=False))</code></pre><div class="nb-output"><div class="nb-output-label">Output</div><pre><code>Saved: outputs/tables/week08_representative_examples.csv
-error_category                        target_structure                                        prompt_vi learner_answer expected_answer  severity                                                                            correction_note
-  measure_word                  shopping measure words           Nói bằng tiếng Trung: two cups of tea.            两茶。            两杯茶。       3.0                             Teach object-specific classifier chunks such as 一杯茶, 两本书, 三张票.
-  measure_word                   time-place word order Nói bằng tiếng Trung: I study Chinese at school.           两个票。       我在学校学习汉语。       3.0 Teach object-specific classifier chunks such as yi bei cha, liang ben shu, san zhang piao.
-  tone_marking                tone-marked pinyin check                 Viết pinyin có thanh điệu cho 马.             mà              mǎ       3.0                        Use minimal tone pairs and require tone marks in written rehearsal.
-  tone_marking                tone-marked pinyin check                 Viết pinyin có thanh điệu cho 马.             mā              mǎ       3.0                        Use minimal tone pairs and require tone marks in written rehearsal.
-    word_order result complements in service dialogues        Nói bằng tiếng Trung: I found the ticket.      我学习汉语在学校。          我找到票了。       3.0                 Practice subject + time/place + verb phrase frames before open production.
-    word_order                   time-place word order Nói bằng tiếng Trung: I study Chinese at school.      我学习在学校汉语。       我在学校学习汉语。       3.0                 Practice subject + time/place + verb phrase frames before open production.</code></pre></div></article>
-<article class="nb-cell nb-markdown" data-cell-type="markdown"><h3>6. Figures cho paper</h3>
-<p>Week 08 xuất hai hình:</p>
-<ul><li>bar chart: lỗi nào nhiều nhất;</li><li>heatmap: target structure nào gắn với lỗi nào.</li></ul>
-<p>Caption phải nói rõ dữ liệu là synthetic, small, và descriptive.</p></article>
-<article class="nb-cell nb-code" data-cell-type="code"><div class="nb-input-label">In [7]</div><pre><code>figure_metadata = {&quot;Date&quot;: &quot;2026-06-03&quot;}
-colors = [&quot;#2563eb&quot;, &quot;#1f7a4d&quot;, &quot;#b45309&quot;, &quot;#b8325f&quot;, &quot;#6d5bd0&quot;]
+representative_examples.to_csv(TABLE_DIR / &quot;week08_representative_examples.csv&quot;, index=False)
+representative_examples</code></pre></article>
+<article class="nb-cell nb-markdown" data-cell-type="markdown" data-i18n-html="nb.figures"><h3>7. Figures cho paper</h3>
+<p>Figure 1 cho frequency. Figure 2 cho target structure by error category. Caption phải nêu N và limitation.</p></article>
+<article class="nb-cell nb-code" data-cell-type="code"><div class="nb-input-label">In [8]</div><pre><code>sns.set_theme(style=&quot;whitegrid&quot;)
 
-fig, ax = plt.subplots(figsize=(9.6, 5.4))
-plot_freq = error_frequency.sort_values(&quot;n&quot;, ascending=True)
-ax.barh(plot_freq[&quot;error_category&quot;], plot_freq[&quot;n&quot;], color=colors[:len(plot_freq)], alpha=0.92)
-for i, row in plot_freq.reset_index(drop=True).iterrows():
-    ax.text(row[&quot;n&quot;] + 0.25, i, f&quot;{int(row[&#x27;n&#x27;])} ({row[&#x27;percent_of_errors&#x27;]:.1f}%)&quot;, va=&quot;center&quot;, fontsize=12, color=&quot;#172033&quot;)
-ax.set_xlabel(&quot;Number of coded error rows&quot;, fontsize=12)
-ax.set_title(&quot;Top learner-error categories in usable responses&quot;, fontsize=15, weight=&quot;bold&quot;)
-ax.grid(axis=&quot;x&quot;, color=&quot;#dbe4f0&quot;, linewidth=0.8)
-ax.set_axisbelow(True)
-for spine in [&quot;top&quot;, &quot;right&quot;, &quot;left&quot;]:
-    ax.spines[spine].set_visible(False)
+fig, ax = plt.subplots(figsize=(8.8, 5.2))
+sns.barplot(data=error_frequency, y=&quot;error_category&quot;, x=&quot;n&quot;, color=&quot;#2563eb&quot;, ax=ax)
+ax.set_title(&quot;Week 08 coded learner-error categories&quot;)
+ax.set_xlabel(&quot;Coded error rows (n)&quot;)
+ax.set_ylabel(&quot;Error category&quot;)
+for i, row in error_frequency.reset_index().iterrows():
+    ax.text(row[&quot;n&quot;] + 0.15, i, f&quot;{row[&#x27;n&#x27;]} ({row[&#x27;percent_coded_errors&#x27;]}%)&quot;, va=&quot;center&quot;, fontsize=10)
+ax.set_xlim(0, max(error_frequency[&quot;n&quot;]) + 4)
 fig.tight_layout()
-bar_png = FIGURE_DIR / &quot;week08_error_category_frequency.png&quot;
-bar_svg = FIGURE_DIR / &quot;week08_error_category_frequency.svg&quot;
-fig.savefig(bar_png, dpi=220, metadata=figure_metadata, bbox_inches=&quot;tight&quot;)
-fig.savefig(bar_svg, format=&quot;svg&quot;, metadata=figure_metadata, bbox_inches=&quot;tight&quot;)
-strip_svg_whitespace(bar_svg)
+fig.savefig(FIGURE_DIR / &quot;week08_error_category_frequency.png&quot;, dpi=180)
+fig.savefig(FIGURE_DIR / &quot;week08_error_category_frequency.svg&quot;)
 plt.close(fig)
 
-heat = pd.crosstab(error_rows[&quot;target_structure&quot;], error_rows[&quot;error_category&quot;])
-fig, ax = plt.subplots(figsize=(10.2, 5.8))
-im = ax.imshow(heat.values, cmap=&quot;Blues&quot;)
-ax.set_xticks(np.arange(len(heat.columns)), labels=heat.columns, rotation=18, ha=&quot;right&quot;)
-ax.set_yticks(np.arange(len(heat.index)), labels=heat.index)
-for i in range(heat.shape[0]):
-    for j in range(heat.shape[1]):
-        value = int(heat.values[i, j])
-        ax.text(j, i, str(value), ha=&quot;center&quot;, va=&quot;center&quot;, color=&quot;#172033&quot;, fontweight=&quot;bold&quot;)
-ax.set_title(&quot;Error categories by target structure&quot;, fontsize=15, weight=&quot;bold&quot;)
-fig.colorbar(im, ax=ax, fraction=0.035, pad=0.03, label=&quot;count&quot;)
+fig, ax = plt.subplots(figsize=(9.4, 5.6))
+sns.heatmap(error_by_target, annot=True, fmt=&quot;d&quot;, cmap=&quot;Blues&quot;, linewidths=.5, cbar_kws={&quot;label&quot;:&quot;coded error rows&quot;}, ax=ax)
+ax.set_title(&quot;Week 08 target structure by error category&quot;)
+ax.set_xlabel(&quot;Error category&quot;)
+ax.set_ylabel(&quot;Target structure&quot;)
+plt.xticks(rotation=35, ha=&quot;right&quot;)
+plt.yticks(rotation=0)
 fig.tight_layout()
-heat_png = FIGURE_DIR / &quot;week08_error_by_target_heatmap.png&quot;
-heat_svg = FIGURE_DIR / &quot;week08_error_by_target_heatmap.svg&quot;
-fig.savefig(heat_png, dpi=220, metadata=figure_metadata, bbox_inches=&quot;tight&quot;)
-fig.savefig(heat_svg, format=&quot;svg&quot;, metadata=figure_metadata, bbox_inches=&quot;tight&quot;)
-strip_svg_whitespace(heat_svg)
+fig.savefig(FIGURE_DIR / &quot;week08_error_by_target_heatmap.png&quot;, dpi=180)
+fig.savefig(FIGURE_DIR / &quot;week08_error_by_target_heatmap.svg&quot;)
 plt.close(fig)
 
-print(&quot;Saved:&quot;, bar_png.relative_to(WEEK_DIR))
-print(&quot;Saved:&quot;, heat_png.relative_to(WEEK_DIR))</code></pre><div class="nb-output"><div class="nb-output-label">Output</div><pre><code>Saved: outputs/figures/week08_error_category_frequency.png
-Saved: outputs/figures/week08_error_by_target_heatmap.png</code></pre></div></article>
-<article class="nb-cell nb-markdown" data-cell-type="markdown"><h3>7. Output kiểm tra nhanh</h3>
-<p><img src="outputs/figures/week08_error_category_frequency.png" alt="Figure 1: Error category frequency" class="nb-image"></p>
-<p><img src="outputs/figures/week08_error_by_target_heatmap.png" alt="Figure 2: Error by target structure heatmap" class="nb-image"></p>
-<ul><li><a href="outputs/tables/week08_error_frequency.csv">Error frequency CSV</a></li><li><a href="outputs/tables/week08_error_by_target_structure.csv">Error by target structure CSV</a></li><li><a href="outputs/tables/week08_teaching_priority_table.csv">Teaching priority CSV</a></li><li><a href="outputs/tables/week08_representative_examples.csv">Representative examples CSV</a></li></ul></article>
-<article class="nb-cell nb-markdown" data-cell-type="markdown"><h3>8. Results paragraph frame</h3>
-<p>Một đoạn Results tốt trả lời bốn câu:</p>
-<ol><li>Có bao nhiêu usable response rows và coded error rows?</li><li>Error category nào nhiều nhất?</li><li>Crosstab cho thấy lỗi đó gắn với target nào?</li><li>Teaching implication và limitation là gì?</li></ol>
-<p>Không viết “Vietnamese learners always make this error.” Hãy viết “in this small synthetic dataset...”.</p></article>
-<article class="nb-cell nb-code" data-cell-type="code"><div class="nb-input-label">In [8]</div><pre><code>top_error = error_frequency.iloc[0]
+print(&quot;Saved figures:&quot;)
+print(FIGURE_DIR / &quot;week08_error_category_frequency.png&quot;)
+print(FIGURE_DIR / &quot;week08_error_by_target_heatmap.png&quot;)</code></pre><div class="nb-output"><div class="nb-output-label">Output</div><pre><code>Saved figures:
+/Users/mitu/Desktop/work/projects/tcsol-python-research-syllabus/weeks/week-08-learner-error-analysis/outputs/figures/week08_error_category_frequency.png
+/Users/mitu/Desktop/work/projects/tcsol-python-research-syllabus/weeks/week-08-learner-error-analysis/outputs/figures/week08_error_by_target_heatmap.png</code></pre></div></article>
+<article class="nb-cell nb-markdown" data-cell-type="markdown" data-i18n-html="nb.outputs"><h3>8. Output kiểm tra nhanh</h3>
+<p>Các file dưới đây là những gì người học cần mở trước khi viết Results.</p></article>
+<article class="nb-cell nb-code" data-cell-type="code"><div class="nb-input-label">In [9]</div><pre><code>for path in sorted(TABLE_DIR.glob(&quot;week08_*.csv&quot;)):
+    print(path.relative_to(WEEK_DIR))
+for path in sorted(FIGURE_DIR.glob(&quot;week08_*.png&quot;)):
+    print(path.relative_to(WEEK_DIR))</code></pre><div class="nb-output"><div class="nb-output-label">Output</div><pre><code>outputs/tables/week08_error_by_target_structure.csv
+outputs/tables/week08_error_frequency.csv
+outputs/tables/week08_representative_examples.csv
+outputs/tables/week08_teaching_priority_table.csv
+outputs/figures/week08_error_by_target_heatmap.png
+outputs/figures/week08_error_category_frequency.png</code></pre></div></article>
+<article class="nb-cell nb-markdown" data-cell-type="markdown" data-i18n-html="nb.results"><h3>9. Results paragraph frame</h3>
+<p>Đoạn dưới đây là draft mẫu. Hãy dùng số liệu của bạn, thêm một caption, và không viết broad claim về tất cả người học Việt Nam.</p></article>
+<article class="nb-cell nb-code" data-cell-type="code"><div class="nb-input-label">In [10]</div><pre><code>top_error = error_frequency.iloc[0]
 second_error = error_frequency.iloc[1]
 top_priority = priority_table.iloc[0]
-results_draft = f&quot;&quot;&quot;
-In the usable Week 08 learner-response records (N = {len(usable)}), {len(error_rows)} rows contained a coded learner error. The most frequent category was {top_error[&#x27;error_category&#x27;]} (n = {int(top_error[&#x27;n&#x27;])}, {top_error[&#x27;percent_of_errors&#x27;]}% of coded errors), followed by {second_error[&#x27;error_category&#x27;]} (n = {int(second_error[&#x27;n&#x27;])}). The crosstab suggests that {top_error[&#x27;error_category&#x27;]} was visible across multiple target structures, not only in one item type. This pattern should be read as teaching evidence rather than as a diagnosis of individual learners. Based on frequency and mean severity, the highest teaching-priority category was {top_priority[&#x27;error_category&#x27;]}, so the next short lesson should include sentence-frame practice, guided correction, and representative learner examples. Because the dataset is synthetic and small, the result should guide follow-up teaching design rather than support general claims about broader Vietnamese learners of Chinese.
-&quot;&quot;&quot;.strip()
-print(results_draft)
-print(&quot;\nWord count:&quot;, len(results_draft.split()))</code></pre><div class="nb-output"><div class="nb-output-label">Output</div><pre><code>In the usable Week 08 learner-response records (N = 76), 66 rows contained a coded learner error. The most frequent category was word_order (n = 17, 25.8% of coded errors), followed by measure_word (n = 13). The crosstab suggests that word_order was visible across multiple target structures, not only in one item type. This pattern should be read as teaching evidence rather than as a diagnosis of individual learners. Based on frequency and mean severity, the highest teaching-priority category was word_order, so the next short lesson should include sentence-frame practice, guided correction, and representative learner examples. Because the dataset is synthetic and small, the result should guide follow-up teaching design rather than support general claims about broader Vietnamese learners of Chinese.
 
-Word count: 121</code></pre></div></article>
-<article class="nb-cell nb-markdown" data-cell-type="markdown"><h3>9. Exercise</h3>
-<ol><li>Run the notebook from top to bottom.</li><li>Open <code>week08_error_frequency.csv</code> and identify the top error category.</li><li>Open <code>week08_error_by_target_structure.csv</code> and explain one high cell.</li><li>Open <code>week08_representative_examples.csv</code> and choose two examples for your Results paragraph.</li><li>Write one figure caption for the frequency chart.</li><li>Write a 120-160 word Results paragraph.</li><li>Stretch: create <code>error_rows_stretch = error_rows.copy()</code>, recode one example, and explain why the new code is clearer. Do not edit the raw CSV because the notebook checks SHA-256.</li></ol></article>
+paragraph = (
+    f&quot;In the on-prompt usable learner-response records (N = {len(analysis_rows)}), &quot;
+    f&quot;{len(error_rows)} rows contained a coded learner error. &quot;
+    f&quot;The most frequent category was {top_error[&#x27;error_category&#x27;]} &quot;
+    f&quot;(n = {top_error[&#x27;n&#x27;]}, {top_error[&#x27;percent_coded_errors&#x27;]}% of coded errors), &quot;
+    f&quot;followed by {second_error[&#x27;error_category&#x27;]} (n = {second_error[&#x27;n&#x27;]}). &quot;
+    f&quot;The crosstab shows that each top category is tied to its practiced target after off-prompt responses are excluded. &quot;
+    f&quot;The teaching-priority table ranks {top_priority[&#x27;error_category&#x27;]} highest because it combines frequency and severity. &quot;
+    f&quot;Because the dataset is synthetic and small, the pattern should guide follow-up teaching design rather than support broad claims about Vietnamese learners of Chinese.&quot;
+)
+print(paragraph)
+print(&quot;Word count:&quot;, len(paragraph.split()))</code></pre><div class="nb-output"><div class="nb-output-label">Output</div><pre><code>In the on-prompt usable learner-response records (N = 68), 57 rows contained a coded learner error. The most frequent category was tone_marking (n = 13, 22.8% of coded errors), followed by result_complement (n = 11). The crosstab shows that each top category is tied to its practiced target after off-prompt responses are excluded. The teaching-priority table ranks tone_marking highest because it combines frequency and severity. Because the dataset is synthetic and small, the pattern should guide follow-up teaching design rather than support broad claims about Vietnamese learners of Chinese.
+Word count: 89</code></pre></div></article>
+<article class="nb-cell nb-markdown" data-cell-type="markdown" data-i18n-html="nb.exercise"><h3>10. Exercise</h3>
+<ol><li>Run the notebook from top to bottom.</li><li>Open <code>outputs/tables/week08_error_frequency.csv</code> and identify the top error category.</li><li>Open <code>outputs/tables/week08_error_by_target_structure.csv</code> and explain one high cell.</li><li>Open <code>outputs/tables/week08_representative_examples.csv</code> and choose two examples for your Results paragraph.</li><li>Write two figure captions, one for each figure.</li><li>Write a 120-160 word Results paragraph.</li><li>Add one source note: which reading helps you connect errors to teaching targets?</li><li>Stretch: create <code>error_rows_stretch = error_rows.copy()</code>, recode <code>R004</code> from <code>word_order</code> to <code>word_order_target_frame</code>, and explain why the new code is clearer. Do not edit the raw CSV because the notebook checks SHA-256.</li></ol></article>
       </section>
     </div>
   </main>
@@ -333,10 +284,22 @@ Word count: 121</code></pre></div></article>
       defaultLang: "vi",
       translations: {
         "vi": {
+                "nb.title": "<h2>Tuần 08: Learner Error Analysis</h2>\n<p>Mục tiêu: biến câu trả lời của người học thành bằng chứng có thể đọc được trong paper. Tuần này học cách đếm lỗi, loại off-prompt rows, làm bảng chéo, chọn ví dụ đại diện và viết Results paragraph.</p>",
+                "nb.setup": "<h3>Trước khi chạy code</h3>\n<p>Cell setup bên dưới chuẩn bị thư viện, kiểm tra file data và tạo folder output. Bạn chỉ cần <strong>Run</strong> cell này trước; chưa cần hiểu từng dòng.</p>\n<ul><li>Cell này làm gì? Import thư viện, tìm folder Week 08, kiểm tra SHA-256 của CSV.</li><li>Kết quả mong đợi: in ra <code>Week folder</code>, <code>Data file</code>, và <code>SHA-256</code>.</li><li>Nếu lỗi: kiểm tra đã mở notebook từ project root hoặc folder Week 08; nếu thiếu package, chạy <code>python -m pip install -r requirements.txt</code>.</li></ul>",
+                "nb.loop": "<h3>1. Research loop của tuần này</h3>\n<p>Ta dùng một vòng rất ngắn:</p>\n<p>``<code>text learner response -&gt; on-prompt filter -&gt; error code -&gt; frequency table -&gt; representative examples -&gt; Results paragraph </code>``</p>\n<p>Điểm mới sau review: không phân tích dòng trả lời nhầm prompt trong crosstab chính. Một dòng phải vừa <code>usable_error == True</code> vừa <code>on_prompt == True</code>.</p>",
+                "nb.codebook": "<h3>2. Codebook tối thiểu</h3>\n<p>Không phải mọi dòng đều là lỗi. Ta giữ ba loại nhãn ngoài phân tích lỗi:</p>\n<ul><li><code>no_error</code>: câu trả lời target-like, không count là lỗi;</li><li><code>unusable_response</code>: blank/off-task, không phân tích;</li><li><code>off_prompt_response</code>: câu trả lời có thể đọc được nhưng không trả lời đúng prompt, không đưa vào crosstab target structure.</li></ul>",
+                "nb.frequency": "<h3>3. Frequency table: lỗi nào nhiều nhất?</h3>\n<p><code>value_counts()</code> trả lời câu hỏi: nhãn lỗi nào xuất hiện nhiều nhất trong các coded error rows?</p>",
+                "nb.crosstab": "<h3>4. Crosstab: lỗi nào gắn với target nào?</h3>\n<p><code>pd.crosstab()</code> cho biết mỗi target structure có bao nhiêu dòng thuộc từng error category. Vì đã loại <code>off_prompt_response</code>, bảng này chỉ đọc các lỗi trong đúng prompt.</p>",
+                "nb.priority": "<h3>5. Teaching priority không chỉ là nhiều hay ít</h3>\n<p>Ta dùng heuristic đơn giản: <code>priority_score = n * mean_severity</code>. Đây là gợi ý dạy lại, không phải bằng chứng nguyên nhân.</p>",
+                "nb.examples": "<h3>6. Representative examples</h3>\n<p>Ví dụ đại diện nên rõ prompt, learner answer, expected answer và teaching note. Không chọn <code>off_prompt_response</code> làm ví dụ chính.</p>",
+                "nb.figures": "<h3>7. Figures cho paper</h3>\n<p>Figure 1 cho frequency. Figure 2 cho target structure by error category. Caption phải nêu N và limitation.</p>",
+                "nb.outputs": "<h3>8. Output kiểm tra nhanh</h3>\n<p>Các file dưới đây là những gì người học cần mở trước khi viết Results.</p>",
+                "nb.results": "<h3>9. Results paragraph frame</h3>\n<p>Đoạn dưới đây là draft mẫu. Hãy dùng số liệu của bạn, thêm một caption, và không viết broad claim về tất cả người học Việt Nam.</p>",
+                "nb.exercise": "<h3>10. Exercise</h3>\n<ol><li>Run the notebook from top to bottom.</li><li>Open <code>outputs/tables/week08_error_frequency.csv</code> and identify the top error category.</li><li>Open <code>outputs/tables/week08_error_by_target_structure.csv</code> and explain one high cell.</li><li>Open <code>outputs/tables/week08_representative_examples.csv</code> and choose two examples for your Results paragraph.</li><li>Write two figure captions, one for each figure.</li><li>Write a 120-160 word Results paragraph.</li><li>Add one source note: which reading helps you connect errors to teaching targets?</li><li>Stretch: create <code>error_rows_stretch = error_rows.copy()</code>, recode <code>R004</code> from <code>word_order</code> to <code>word_order_target_frame</code>, and explain why the new code is clearer. Do not edit the raw CSV because the notebook checks SHA-256.</li></ol>",
                 "brand": "Python Research Hub",
-                "meta.title": "Tuần 08: Phân tích lỗi người học | Notebook đã render",
+                "meta.title": "Tuần 08: Learner Error Analysis | Notebook đã render",
                 "nav.aria": "Điều hướng notebook",
-                "nav.week": "Tuần 08",
+                "nav.week": "Tuần 01",
                 "nav.slides": "Slides",
                 "nav.demo": "Demo",
                 "nav.source": "Tải source .ipynb",
@@ -347,11 +310,11 @@ Word count: 121</code></pre></div></article>
                 "side.source": "Tải source .ipynb",
                 "side.csv": "Tải tệp CSV dữ liệu",
                 "hero.tag": "Notebook đã render",
-                "hero.title": "Tuần 08: Phân tích lỗi người học",
+                "hero.title": "Tuần 08: Learner Error Analysis",
                 "hero.body": "Đây là bản HTML đã chạy sẵn để đọc trên GitHub Pages. Muốn thực hành, mở notebook trong Colab hoặc tải file .ipynb.",
                 "action.colab": "Chạy trong Colab",
                 "action.source": "Tải .ipynb",
-                "action.week": "Quay lại Tuần 08",
+                "action.week": "Quay lại Tuần 01",
                 "note.title": "Cách dùng trang này",
                 "note.read.title": "Đọc",
                 "note.read.body": "Bản HTML giữ code và output cạnh nhau, phù hợp để ôn lại sau buổi học.",
@@ -362,10 +325,22 @@ Word count: 121</code></pre></div></article>
                 "notebook.cells.aria": "Các cell notebook đã render"
         },
         "en": {
+                "nb.title": "<h2>Week 08: Learner Error Analysis</h2>\n<p>Goal: turn learner responses into evidence that can be read in a paper. This week you learn to count errors, exclude off-prompt rows, build a crosstab, choose representative examples, and write a Results paragraph.</p>",
+                "nb.setup": "<h3>Before Running Code</h3>\n<p>The setup cell below prepares libraries, checks the data file, and creates output folders. You only need to <strong>Run</strong> it first; you do not need to understand every line yet.</p>\n<ul><li>What does this cell do? Imports libraries, finds the Week 08 folder, and checks the CSV SHA-256.</li><li>Expected output: it prints <code>Week folder</code>, <code>Data file</code>, and <code>SHA-256</code>.</li><li>If it errors: check that the notebook is opened from the project root or Week 08 folder; if packages are missing, run <code>python -m pip install -r requirements.txt</code>.</li></ul>",
+                "nb.loop": "<h3>1. This Week&#x27;s Research Loop</h3>\n<p>We use a short loop:</p>\n<p>``<code>text learner response -&gt; on-prompt filter -&gt; error code -&gt; frequency table -&gt; representative examples -&gt; Results paragraph </code>``</p>\n<p>New after review: off-prompt answers are not analyzed in the main crosstab. A row must be both <code>usable_error == True</code> and <code>on_prompt == True</code>.</p>",
+                "nb.codebook": "<h3>2. Minimal Codebook</h3>\n<p>Not every row is an error. We keep three non-error-analysis labels:</p>\n<ul><li><code>no_error</code>: target-like answer, not counted as an error;</li><li><code>unusable_response</code>: blank/off-task, not analyzed;</li><li><code>off_prompt_response</code>: readable answer but not answering the prompt, not used in the target-structure crosstab.</li></ul>",
+                "nb.frequency": "<h3>3. Frequency Table: Which Error Is Most Frequent?</h3>\n<p><code>value_counts()</code> answers: which error label appears most often in the coded error rows?</p>",
+                "nb.crosstab": "<h3>4. Crosstab: Which Error Connects To Which Target?</h3>\n<p><code>pd.crosstab()</code> shows how many rows from each target structure fall into each error category. Because <code>off_prompt_response</code> rows are excluded, this table only reads in-prompt errors.</p>",
+                "nb.priority": "<h3>5. Teaching Priority Is Not Only Frequency</h3>\n<p>We use a simple heuristic: <code>priority_score = n * mean_severity</code>. This suggests what to reteach; it is not causal evidence.</p>",
+                "nb.examples": "<h3>6. Representative Examples</h3>\n<p>A representative example should clearly show the prompt, learner answer, expected answer, and teaching note. Do not choose <code>off_prompt_response</code> as a main example.</p>",
+                "nb.figures": "<h3>7. Figures For The Paper</h3>\n<p>Figure 1 shows frequency. Figure 2 shows target structure by error category. Captions must state N and a limitation.</p>",
+                "nb.outputs": "<h3>8. Quick Output Check</h3>\n<p>The files below are what the learner should open before writing Results.</p>",
+                "nb.results": "<h3>9. Results Paragraph Frame</h3>\n<p>The paragraph below is a sample draft. Use your own numbers, add a caption, and avoid broad claims about all Vietnamese learners.</p>",
+                "nb.exercise": "<h3>10. Exercise</h3>\n<ol><li>Run the notebook from top to bottom.</li><li>Open <code>outputs/tables/week08_error_frequency.csv</code> and identify the top error category.</li><li>Open <code>outputs/tables/week08_error_by_target_structure.csv</code> and explain one high cell.</li><li>Open <code>outputs/tables/week08_representative_examples.csv</code> and choose two examples for your Results paragraph.</li><li>Write two figure captions, one for each figure.</li><li>Write a 120-160 word Results paragraph.</li><li>Add one source note: which reading helps connect errors to teaching targets?</li><li>Stretch: create <code>error_rows_stretch = error_rows.copy()</code>, recode <code>R004</code> from <code>word_order</code> to <code>word_order_target_frame</code>, and explain why the new code is clearer. Do not edit the raw CSV because the notebook checks SHA-256.</li></ol>",
                 "brand": "Python Research Hub",
-                "meta.title": "Week 08: Learner Error Analysis | Rendered Notebook",
+                "meta.title": "Tuần 08: Learner Error Analysis | Rendered Notebook",
                 "nav.aria": "Notebook navigation",
-                "nav.week": "Week 08",
+                "nav.week": "Week 01",
                 "nav.slides": "Slides",
                 "nav.demo": "Demo",
                 "nav.source": "Download source .ipynb",
@@ -376,11 +351,11 @@ Word count: 121</code></pre></div></article>
                 "side.source": "Download source .ipynb",
                 "side.csv": "Download data CSV",
                 "hero.tag": "Rendered notebook",
-                "hero.title": "Week 08: Learner Error Analysis",
+                "hero.title": "Tuần 08: Learner Error Analysis",
                 "hero.body": "This is the pre-run HTML version for GitHub Pages. To practice, open the notebook in Colab or download the .ipynb file.",
                 "action.colab": "Run in Colab",
                 "action.source": "Download .ipynb",
-                "action.week": "Back to Week 08",
+                "action.week": "Back to Week 01",
                 "note.title": "How to use this page",
                 "note.read.title": "Read",
                 "note.read.body": "The HTML version keeps code and output together, useful for review after class.",

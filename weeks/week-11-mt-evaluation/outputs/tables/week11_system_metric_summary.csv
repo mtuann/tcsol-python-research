@@ -1,0 +1,4 @@
+mt_system,segments,bleu,chrf_pp,ter,mean_adequacy,mean_fluency,major_or_minor_errors
+MT_B_fluent,12,63.47,77.94,23.04,4.39,4.19,10
+MT_A_literal,12,34.72,55.82,47.06,2.55,2.25,12
+MT_C_omission,12,32.96,53.29,49.02,3.08,3.28,12

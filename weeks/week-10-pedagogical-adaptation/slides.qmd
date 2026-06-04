@@ -15,9 +15,9 @@ Source note: learner-facing slides are authored directly in `slides.html` so the
 8. `groupby()`.
 9. Short lesson sequence.
 10. Result complement example activity.
-11. Lesson phase minutes.
-12. Activity priority figure.
-13. Phase minutes figure.
-14. Writing frame.
-15. Assignment.
+11. Top activity candidates.
+12. Lesson phase minutes.
+13. Activity priority figure.
+14. Phase minutes figure.
+15. Writing frame.
 16. Week 11 bridge.

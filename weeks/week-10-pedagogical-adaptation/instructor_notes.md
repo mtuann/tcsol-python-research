@@ -14,8 +14,8 @@
 
 - Raw activity rows: 25.
 - Model short lesson rows: 7.
-- Model short lesson minutes: 47.
+- Model short lesson minutes: 45.
 - Highest activity by adaptation score: `A001` / `Notice action vs result`.
 - Main phenomenon selected for the model lesson: `result_complement`.
 
-Keep the answer key out of the learner's first writing attempt.
+Learner-facing pages may show the worked model answer as an example. For assessment, ask the learner to rewrite the paragraph in their own words and add one source note.

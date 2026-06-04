@@ -1,0 +1,23 @@
+---
+title: "Week 11: MT Evaluation"
+format: html
+---
+
+Source note: learner-facing slides are authored directly in `slides.html` so the deck can use the shared interactive slide controller, bilingual toggle, quick overview, and GitHub Pages-safe navigation.
+
+1. MT evaluation.
+2. Research question.
+3. Unit of analysis.
+4. Metric vs human judgment.
+5. Dataset schema.
+6. BLEU.
+7. chrF++.
+8. TER.
+9. Group by MT system.
+10. Metric summary table.
+11. Simplified human labels.
+12. Figure 1: chrF++.
+13. Figure 2: error labels.
+14. Writing frame.
+15. Reporting source note.
+16. Week 12 bridge.

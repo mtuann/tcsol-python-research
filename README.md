@@ -127,6 +127,7 @@ For future slide work, use:
 - [`Tuần 08: Phân tích lỗi người học`](weeks/week-08-learner-error-analysis/)
 - [`Tuần 09: Dữ liệu đối chiếu Hán-Việt`](weeks/week-09-chinese-vietnamese-contrastive-data/)
 - [`Tuần 10: Pedagogical adaptation`](weeks/week-10-pedagogical-adaptation/)
+- [`Tuần 11: Đánh giá dịch máy`](weeks/week-11-mt-evaluation/)
 
 ## Suggested Repository Structure
 
@@ -493,7 +494,7 @@ These topics are useful later, but they are not the shortest path to a good Appl
 ## Next Content Tasks
 
 - Review and refine `weeks/week-08-learner-error-analysis/` after learner testing.
-- Continue detailed content for Week 11 machine translation evaluation.
+- Review Week 11 MT evaluation after learner testing and continue detailed content for Week 12 MTPE workflow.
 - Create blank CSV templates in `resources/templates/`.
 - Add a one-page learner setup guide in Vietnamese.
 - Add a Zotero + Word workflow guide.

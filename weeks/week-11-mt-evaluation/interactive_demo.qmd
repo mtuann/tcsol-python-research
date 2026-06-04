@@ -1,0 +1,6 @@
+---
+title: "Week 11: MT Evaluation Demo"
+format: html
+---
+
+Source note: the deployable demo is authored in `interactive_demo.html` for GitHub Pages. It lets learners choose a synthetic MT system and compare metric scores, human scores, and simplified error counts.

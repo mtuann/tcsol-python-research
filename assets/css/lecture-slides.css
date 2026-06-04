@@ -806,6 +806,23 @@ blockquote {
 }
 
 @media (max-width: 640px) {
+  .research-table .row,
+  .research-table .row.four,
+  .research-table .row.five,
+  .research-table .row.three,
+  .research-table .row.two {
+    grid-template-columns: 1fr;
+  }
+
+  .research-table .row.header {
+    display: none;
+  }
+
+  .research-table .row > span {
+    min-height: 0;
+    padding: 0.55rem 0.65rem;
+  }
+
   .deck {
     padding-bottom: 190px;
   }

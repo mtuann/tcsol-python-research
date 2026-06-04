@@ -373,6 +373,8 @@ pre code {
 .nb-output pre {
   background: #ffffff;
   margin: 0;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
 }
 
 .nb-error {

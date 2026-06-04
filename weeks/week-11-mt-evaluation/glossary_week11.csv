@@ -1,0 +1,8 @@
+term,vi,en,note_vi,note_en
+source segment,câu nguồn,source segment,câu tiếng Trung đầu vào,original Chinese input sentence
+MT output,bản dịch máy,MT output,câu tiếng Việt do system tạo,Vietnamese sentence produced by a system
+reference,bản dịch tham chiếu,reference,bản dịch người dùng làm mốc,human-written comparison translation
+BLEU,BLEU,BLEU,metric overlap theo word/ngram,word/n-gram overlap metric
+chrF++,chrF++,chrF++,metric overlap theo ký tự và từ,character and word n-gram metric
+TER,TER,TER,edit rate; thấp hơn là tốt hơn,edit rate; lower is better
+simplified error label,nhãn lỗi đơn giản,simplified error label,nhãn human review lấy cảm hứng MQM,MQM-inspired human review label

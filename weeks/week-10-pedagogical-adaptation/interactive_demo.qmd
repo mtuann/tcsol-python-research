@@ -3,4 +3,4 @@ title: "Week 10: Lesson Plan Builder Demo"
 format: html
 ---
 
-Source note: the deployable demo is authored in `interactive_demo.html` for GitHub Pages. It lets learners choose a phenomenon and inspect a fixed-data lesson sequence, activity scores, and a paper-facing adaptation sentence.
+Source note: the deployable demo is authored in `interactive_demo.html` for GitHub Pages. It lets learners choose an activity and inspect a fixed-data lesson sequence, activity scores, phase minutes, and a paper-facing adaptation sentence.

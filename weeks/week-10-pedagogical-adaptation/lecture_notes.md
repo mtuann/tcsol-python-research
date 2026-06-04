@@ -21,7 +21,7 @@ A contrastive analysis is useful only when it becomes a teachable sequence: noti
 |---|---|---|
 | candidate activity | one possible teaching move | unit of analysis |
 | lesson phase | review, notice, compare, practice, feedback, assessment | organize lesson flow |
-| adaptation score | simple ranking heuristic | choose what to teach first |
+| adaptation score | simple ranking heuristic | choose what to inspect first |
 | phase minutes | time spent in each lesson phase | justify lesson design |
 | pedagogical implication | what a teacher should do and why | Discussion section writing |
 
@@ -31,9 +31,18 @@ A contrastive analysis is useful only when it becomes a teachable sequence: noti
 activities = pd.read_csv(DATA_PATH)
 activities["adaptation_score"] = activities["week09_priority_score"] + activities["learner_difficulty"] * 2 + activities["communicative_value"] - activities["preparation_load"]
 priority = activities.sort_values("adaptation_score", ascending=False)
+plan = activities[activities["include_in_short_lesson"]].copy()
 phase_minutes = plan.groupby("lesson_phase")["minutes"].sum()
 ```
 
+Tiny worked example:
+
+```text
+A001 = 28 + 3*2 + 2 - 1 = 35
+```
+
+In this synthetic score, `learner_difficulty` means instructional need: the teacher may need to design support. It does not mean that difficult items are automatically better to teach.
+
 ## Important Caution
 
-A high adaptation score is not proof that an activity works. It is a transparent way to choose what to try first in a short lesson. Real effectiveness needs classroom evidence, learner work, or pre/post data.
+A high adaptation score is not proof that an activity works. It is a transparent way to choose what to inspect first when planning a short lesson. Real effectiveness needs classroom evidence, learner work, or pre/post data.

@@ -130,6 +130,7 @@ For future slide work, use:
 - [`Tuần 11: Đánh giá dịch máy`](weeks/week-11-mt-evaluation/)
 - [`Tuần 12: Quy trình MTPE`](weeks/week-12-mtpe-workflow/)
 - [`Tuần 13: Dữ liệu chính sách giáo dục`](weeks/week-13-education-policy-data/)
+- [`Tuần 14: Đóng gói mini paper`](weeks/week-14-paper-package-overleaf/)
 
 ## Suggested Repository Structure
 
@@ -496,10 +497,10 @@ These topics are useful later, but they are not the shortest path to a good Appl
 ## Next Content Tasks
 
 - Review and refine `weeks/week-08-learner-error-analysis/` after learner testing.
-- Review Week 13 education policy data after learner testing and continue detailed content for Week 14 paper packaging.
+- Review Week 13 education policy data and Week 14 paper packaging after learner testing.
 - Create blank CSV templates in `resources/templates/`.
 - Add a one-page learner setup guide in Vietnamese.
 - Add a Zotero + Word workflow guide.
-- Add a Week 14 Word/Zotero/Quarto/Overleaf paper package template.
+- Add a reusable Word/Zotero/Quarto/Overleaf paper package template in `resources/templates/`.
 - Add a simple MTPE annotation rubric.
 - Add a short policy document coding rubric.

@@ -27,9 +27,24 @@ Evaluation needs implementation or outcome data, not just policy text.
 Dates help readers see order. A policy plan, statistical bulletin, international metadata source, and comparative report should not be collapsed into one undated pile.
 
 ```python
-policy["issue_date_parsed"] = pd.to_datetime(policy["issue_date"])
+policy["issue_date_parsed"] = pd.to_datetime(policy["issue_date"], errors="coerce")
 policy.sort_values("issue_date_parsed")
 ```
+
+Tiny worked example:
+
+| source type | issue_date | date_basis | how to read it |
+|---|---|---|---|
+| policy plan | 2025-01-19 | publication_date | the policy source was published/announced on this date |
+| data portal | 2026-06-04 | access_date_placeholder | the page is dynamic, so this is when the learner checked it |
+
+Common mistake: sorting date strings without parsing them, then treating every date as a publication date.
+
+Debugging signs:
+
+- `NaT` means Python could not parse at least one date.
+- A timeline that places all dynamic portals on the access date is not wrong, but the caption must say so.
+- A sentence like "policy implementation increased in 2026" is too strong if the row is only an access-date placeholder.
 
 ## Concept 4: Coding Scheme
 
@@ -38,6 +53,7 @@ A good beginner coding scheme has broad `policy_area`, narrower `theme_code`, `e
 ## Paper Paragraph Logic
 
 1. State the sample size and unit.
-2. Report the most common policy areas.
-3. Mention source/evidence types.
-4. Add limitation: small synthetic dataset, paraphrased excerpts, source coverage not policy impact.
+2. List the metadata and coding fields.
+3. Explain date basis, especially access-date placeholders.
+4. Mention source/evidence types.
+5. Add limitation: small synthetic dataset, paraphrased excerpts, source coverage not policy impact.

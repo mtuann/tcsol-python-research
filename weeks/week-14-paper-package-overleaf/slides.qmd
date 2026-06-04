@@ -1,0 +1,29 @@
+---
+title: "Week 14: Paper package"
+format:
+  revealjs:
+    theme: simple
+    slide-number: true
+---
+
+# Week 14: Paper package
+
+Paper package audit + Word/Zotero by default + optional Quarto/Overleaf.
+
+## Research question
+
+Which pieces of evidence are ready for a mini paper, and which writing route fits the target submission?
+
+## Core workflow
+
+1. Audit package inventory.
+2. Identify missing actions.
+3. Choose tool route.
+4. Write package plan.
+5. Prepare reproducibility note.
+
+## Tool routes
+
+- Word + Zotero: default.
+- Quarto: optional reproducible report.
+- Overleaf: optional LaTeX/template route.

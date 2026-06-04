@@ -1,0 +1,9 @@
+source_id,source_title,source_type,where_used,required_metadata,zotero_status,bibtex_key,citation_risk,next_action
+R01,Zotero. Using the Zotero Word Plugin.,official technical doc,Week 14 tool workflow,"organization, title, update date, URL",add_to_zotero,zotero-word-plugin,low,Use as default citation-workflow source.
+R02,Zotero. Creating Bibliographies.,official technical doc,bibliography/export note,"organization, title, update date, URL",add_to_zotero,zotero-bibliographies,low,Use for export and quick bibliography guidance.
+R03,Project TIER. Protocol 4.0.,method/reproducibility protocol,package README and reproducibility checklist,"organization, title, version, URL",add_to_zotero,project-tier-protocol,low,Use as reproducible research package model.
+R04,Quarto. Citations.,official technical doc,optional Quarto route,"organization, title, URL",optional_bib,quarto-citations,low,Use only if learner wants reproducible report route.
+R05,Quarto. Manuscripts.,official technical doc,optional Quarto manuscript route,"organization, title, URL",optional_bib,quarto-manuscripts,medium,Optional; avoid requiring it for beginners.
+R06,Overleaf. Learn LaTeX in 30 minutes.,official technical doc,optional Overleaf route,"organization, title, URL",optional_bib,overleaf-learn-latex,medium,"Use as orientation, not required homework."
+R07,Overleaf Docs. Working with .bib files.,official technical doc,optional .bib workflow,"organization, title, URL",optional_bib,overleaf-bib-files,medium,Free route is Zotero export .bib then upload.
+R08,GitHub Docs. Configuring a publishing source for GitHub Pages.,official technical doc,course publishing note,"organization, title, URL",add_to_zotero,github-pages-source,low,Use for website deployment documentation.

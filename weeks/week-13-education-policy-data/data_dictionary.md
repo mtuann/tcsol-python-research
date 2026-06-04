@@ -7,6 +7,7 @@
 | `title` | text | source title | citation metadata |
 | `issuing_body` | text | organization or institution | source credibility/context |
 | `issue_date` | date string | source publication or access-relevant date | timeline |
+| `date_basis` | text | whether `issue_date` is a publication date or an access-date placeholder | timeline caution |
 | `source_type` | text | policy plan, bulletin, portal, model, report | evidence context |
 | `policy_level` | text | national, global, international | comparison scope |
 | `policy_area` | text | coded topic area | frequency table |

@@ -308,15 +308,24 @@ def notebook_week_label(nb: dict[str, Any], lang: str, fallback: str) -> str:
     )
 
 
+def inferred_week_label(notebook_path: Path, lang: str) -> str:
+    match = re.search(r"week-(\d{1,2})", notebook_path.parent.name)
+    if not match:
+        return "Tuần 01" if lang == "vi" else "Week 01"
+    week_number = match.group(1).zfill(2)
+    return f"Tuần {week_number}" if lang == "vi" else f"Week {week_number}"
+
+
 def build_html(nb: dict[str, Any], notebook_path: Path, repo_root: Path) -> str:
     rel_path = notebook_path.relative_to(repo_root).as_posix()
     title = notebook_title(nb)
     en_title = nb.get("metadata", {}).get("i18n", {}).get("title", {}).get("en", title)
-    week_label_vi = notebook_week_label(nb, "vi", "Tuần 01")
-    week_label_en = notebook_week_label(nb, "en", "Week 01")
-    data_csv = nb.get("metadata", {}).get(
-        "data_csv", "data/raw/week01_research_tracks.csv"
-    )
+    week_label_vi = notebook_week_label(nb, "vi", inferred_week_label(notebook_path, "vi"))
+    week_label_en = notebook_week_label(nb, "en", inferred_week_label(notebook_path, "en"))
+    data_csv = nb.get("metadata", {}).get("data_csv")
+    if not data_csv:
+        raw_csvs = sorted((notebook_path.parent / "data" / "raw").glob("*.csv"))
+        data_csv = raw_csvs[0].relative_to(notebook_path.parent).as_posix() if raw_csvs else ""
     colab_url = (
         f"https://colab.research.google.com/github/{REPO_OWNER}/{REPO_NAME}/blob/main/{rel_path}"
     )
@@ -455,7 +464,7 @@ def build_html(nb: dict[str, Any], notebook_path: Path, repo_root: Path) -> str:
           <p data-i18n="source.files.body">Các file dưới đây dành cho thực hành, nộp bài, hoặc chỉnh notebook. Người học nên đọc trang HTML trước.</p>
           <div class="doc-links">
             <a class="doc-chip" href="{html.escape(source_name)}" download data-i18n="source.files.notebook">Tải source .ipynb</a>
-            <a class="doc-chip" href="{html.escape(str(data_csv))}" download data-i18n="source.files.csv">Tải tệp CSV dữ liệu</a>
+            {f'<a class="doc-chip" href="{html.escape(str(data_csv))}" download data-i18n="source.files.csv">Tải tệp CSV dữ liệu</a>' if data_csv else ''}
           </div>
         </details>
       </section>

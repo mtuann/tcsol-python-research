@@ -1,8 +1,10 @@
-term,plain_meaning,week13_use
-policy metadata,information that identifies a policy source,title issuing body date URL access date
-coding scheme,a controlled set of labels,keeps policy rows comparable
-timeline,ordered source dates,shows when sources appeared
-evidence type,kind of source support,prevents overclaiming
-policy area,broad topic category,main summary variable
-source note,short reproducibility note,cites official sources and access date
-paraphrase,restated source idea,avoids long copied quotations
+term_en,term_vi,plain_vi,plain_en,week13_use,notes
+policy metadata,siêu dữ liệu nguồn chính sách,"thông tin giúp nhận diện và tìm lại nguồn: title, issuing body, date, URL, access date","information used to identify and retrieve a source: title, issuing body, date, URL, access date",source note,"write metadata before interpretation"
+coding scheme,hệ thống mã hóa,"bộ nhãn có kiểm soát để các dòng coding so sánh được với nhau","a controlled set of labels that keeps coded rows comparable",Methods paragraph,"include policy_area, theme_code, evidence_type"
+timeline,dòng thời gian,"bảng hoặc hình sắp nguồn theo thời gian","a table or figure that orders sources by date",figure/caption,"state whether dates are publication dates or placeholders"
+evidence type,loại bằng chứng,"nguồn đang hỗ trợ claim bằng policy text, statistics, metadata, method model, hay report","the kind of support a source provides: policy text, statistics, metadata, method model, or report",limitation,"do not mix evidence types as the same proof"
+policy area,lĩnh vực chính sách,"nhãn chủ đề rộng như teacher development, digitalization, equity access","a broad topic label such as teacher development, digitalization, or equity access",frequency table,"counts describe the source set, not policy importance"
+source note,ghi chú nguồn,"ghi nguồn chính, ngày truy cập, và giới hạn của classroom dataset","a short note naming core sources, access date, and dataset limits",reproducibility,"connects Week 13 to Week 14 paper package"
+paraphrase,diễn giải,"viết lại ý nguồn bằng lời của mình, không sao chép nguyên văn dài","restating a source idea in your own words, without long copied text",coding evidence,"consult original sources for real quotation"
+date basis,cơ sở ngày tháng,"cho biết ngày là publication date hay access-date placeholder","shows whether a date is a publication date or an access-date placeholder",timeline caution,"prevents wrong chronology claims"
+access date,ngày truy cập,"ngày người học kiểm tra nguồn online","the date the learner checked an online source",source note,"needed for dynamic portals and pages"

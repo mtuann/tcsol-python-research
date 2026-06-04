@@ -409,6 +409,10 @@ blockquote {
     position: static;
   }
 
+  .doc-main {
+    order: -1;
+  }
+
   .doc-grid,
   .doc-grid.two,
   .doc-grid.three {

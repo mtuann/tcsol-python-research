@@ -9,7 +9,7 @@
 
 ## Required Research/Method Reading
 
-- Citation: UNESCO Global Education Monitoring Report, PEER profiles.
+- Citation: UNESCO Global Education Monitoring Report. PEER profiles. Accessed 2026-06-04.
 - Link: https://www.unesco.org/gem-report/en/peer
 - Research question: how national education legislation, policies, and programmes can be organized by theme for policy dialogue.
 - Method: desk review of policy documents, complemented by country review where available.
@@ -30,10 +30,20 @@
 ## Optional / Instructor Source Menu
 
 - UNESCO DataHub SDG 4 dataset: https://data.unesco.org/explore/dataset/uis001/export/?flg=en-us
+  - Accessed: 2026-06-04
+  - Use: dynamic data portal example; cite with access date.
 - World Bank Global Education Policy Dashboard: https://www.worldbank.org/en/topic/education/brief/global-education-policy-dashboard
+  - Accessed: 2026-06-04
+  - Use: policy indicator/coding-instrument example.
 - OECD Education Policy Outlook 2025: https://www.oecd.org/en/publications/education-policy-outlook-2025_c3f402ba-en.html
+  - Accessed: 2026-06-04
+  - Use: comparative policy-report example.
 - pandas categorical data: https://pandas.pydata.org/pandas-docs/stable/user_guide/categorical.html
+  - Accessed: 2026-06-04
+  - Use: optional codebook/categorical-data extension.
 - pandas `crosstab`: https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.crosstab.html
+  - Accessed: 2026-06-04
+  - Use: optional Stretch crosstab.
 
 ## Source Update Log
 

@@ -38,7 +38,7 @@
     overview.className = "slide-overview";
     overview.setAttribute("aria-hidden", "true");
     overview.innerHTML = `
-      <div class="overview-panel" role="dialog" aria-modal="true" aria-label="Slide overview" data-i18n-aria-label="nav.toc.title">
+      <div class="overview-panel" role="dialog" aria-modal="true" aria-label="Slide overview" data-i18n-aria-label="nav.toc.title" tabindex="-1">
         <div class="overview-head">
           <div>
             <span class="tag" data-i18n="nav.toc">Overview</span>
@@ -57,6 +57,23 @@
     const prev = nav.querySelector('[data-dir="-1"]');
     const next = nav.querySelector('[data-dir="1"]');
     const overviewGrid = overview.querySelector(".overview-grid");
+    const overviewPanel = overview.querySelector(".overview-panel");
+    const focusableSelector = [
+      "a[href]",
+      "button:not([disabled])",
+      "input:not([disabled])",
+      "select:not([disabled])",
+      "textarea:not([disabled])",
+      "[tabindex]:not([tabindex='-1'])"
+    ].join(",");
+
+    function setBackgroundInert(open) {
+      Array.from(document.body.children).forEach((child) => {
+        if (child === overview) return;
+        if (open) child.setAttribute("inert", "");
+        else child.removeAttribute("inert");
+      });
+    }
 
     sections.forEach((section, idx) => {
       const info = titleInfo(section);
@@ -78,9 +95,11 @@
       if (open) lastFocusBeforeOverview = document.activeElement;
       overview.classList.toggle("is-open", open);
       overview.setAttribute("aria-hidden", String(!open));
+      setBackgroundInert(open);
       if (open) {
         const activeButton = overviewGrid.querySelector(".toc-item.active");
         if (activeButton) activeButton.focus();
+        else overviewPanel.focus();
       } else if (lastFocusBeforeOverview && typeof lastFocusBeforeOverview.focus === "function") {
         lastFocusBeforeOverview.focus();
       }
@@ -136,6 +155,20 @@
 
     window.addEventListener("keydown", (event) => {
       if (event.key === "Escape") setOverview(false);
+      if (overview.classList.contains("is-open") && event.key === "Tab") {
+        const focusable = Array.from(overviewPanel.querySelectorAll(focusableSelector));
+        if (!focusable.length) return;
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+        if (event.shiftKey && document.activeElement === first) {
+          event.preventDefault();
+          last.focus();
+        } else if (!event.shiftKey && document.activeElement === last) {
+          event.preventDefault();
+          first.focus();
+        }
+        return;
+      }
       if (event.target && ["INPUT", "TEXTAREA", "BUTTON", "A", "SELECT"].includes(event.target.tagName)) return;
       if (overview.classList.contains("is-open")) return;
       if (event.key === "ArrowRight" || event.key === " ") show(current + 1);

@@ -20,6 +20,10 @@ Answer:
 
 > The earliest source date is `___`; the latest source date is `___`.
 
+Then check `date_basis`:
+
+> The rows marked `access_date_placeholder` are `___`. I should not treat those dates as publication chronology because `___`.
+
 ## C. Coding Counts
 
 Use `week13_policy_area_summary.csv`.
@@ -31,7 +35,7 @@ Write 2 sentences:
 
 ## D. Evidence-Type Caution
 
-Use `week13_source_type_summary.csv` and `week13_theme_by_source_crosstab.csv`.
+Use `week13_source_type_summary.csv`.
 
 Mini guide:
 
@@ -43,6 +47,8 @@ Mini guide:
 
 Write 2-3 sentences explaining why these evidence types should not be mixed as if they were the same kind of proof.
 
-## E. Stretch: Revise One Code
+## E. Stretch: Cross-Tab And Revise One Code
+
+Use `week13_theme_by_source_crosstab.csv`.
 
 Pick one row and propose a better `theme_code`. Explain why the new code is clearer, and whether the change affects the policy-area summary.

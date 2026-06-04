@@ -30,6 +30,8 @@ weeks/**/data/processed/*
 !weeks/week-11-mt-evaluation/data/raw/week11_mt_evaluation_segments.csv
 !weeks/week-12-mtpe-workflow/data/raw/week12_mtpe_segments.csv
 !weeks/week-13-education-policy-data/data/raw/week13_policy_coding.csv
+!weeks/week-14-paper-package-overleaf/data/raw/week14_paper_package_inventory.csv
+!weeks/week-14-paper-package-overleaf/data/raw/week14_reference_checklist.csv
 submissions/
 weeks/**/submissions/
 
@@ -77,6 +79,12 @@ weeks/**/outputs/interactive/*
 !weeks/week-13-education-policy-data/outputs/tables/week13_policy_coding_sample.csv
 !weeks/week-13-education-policy-data/outputs/tables/week13_timeline.csv
 !weeks/week-13-education-policy-data/outputs/tables/week13_submission_text.md
+!weeks/week-14-paper-package-overleaf/outputs/tables/week14_package_audit.csv
+!weeks/week-14-paper-package-overleaf/outputs/tables/week14_missing_actions.csv
+!weeks/week-14-paper-package-overleaf/outputs/tables/week14_readiness_by_area.csv
+!weeks/week-14-paper-package-overleaf/outputs/tables/week14_reference_status.csv
+!weeks/week-14-paper-package-overleaf/outputs/tables/week14_tool_decision_table.csv
+!weeks/week-14-paper-package-overleaf/outputs/tables/week14_submission_plan.md
 !weeks/week-11-mt-evaluation/outputs/tables/week11_metric_settings.csv
 !weeks/week-11-mt-evaluation/outputs/tables/week11_severity_summary.csv
 !weeks/week-11-mt-evaluation/outputs/tables/week11_human_review_summary.csv
@@ -114,6 +122,8 @@ weeks/**/outputs/interactive/*
 !weeks/week-13-education-policy-data/outputs/figures/week13_policy_timeline.svg
 !weeks/week-13-education-policy-data/outputs/figures/week13_policy_area_counts.png
 !weeks/week-13-education-policy-data/outputs/figures/week13_policy_area_counts.svg
+!weeks/week-14-paper-package-overleaf/outputs/figures/week14_package_readiness.png
+!weeks/week-14-paper-package-overleaf/outputs/figures/week14_package_readiness.svg
 
 # Office temporary files
 ~$*

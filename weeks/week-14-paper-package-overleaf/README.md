@@ -8,9 +8,9 @@ Week 14 consolidates the course into a small paper package. The learner does not
 - Small research question: Which pieces of evidence are ready for a mini paper, and which writing tool route fits the target submission?
 - Why this matters: a paper fails more often from missing source notes, unclear files, or weak section structure than from missing advanced code.
 - Unit of analysis: one paper-package artifact or checklist item.
-- Dataset: a starter package inventory and reference checklist for the course outputs.
+- Dataset: a 17-row starter package inventory and a 9-row reference checklist for the course outputs.
 - Core learner output: package audit table, missing-action table, tool-decision table, readiness figure, source/reproducibility note, and one 180-220 word mini paper package plan.
-- Stretch output: optional Quarto or Overleaf skeleton with `.bib` export notes.
+- Stretch output: optional Quarto or Overleaf skeleton with `.bib` export notes when the route truly needs them.
 
 ## Python Skill
 
@@ -22,7 +22,7 @@ Week 14 consolidates the course into a small paper package. The learner does not
 
 - Paper section supported: whole-paper package, reference list, appendix, reproducibility note.
 - Writing output: one 180-220 word mini paper package plan plus a source/reproducibility note.
-- Tool support: Word + Zotero by default; Quarto or Overleaf only if the learner needs a reproducible report, LaTeX template, or `.bib` workflow.
+- Tool support: Word + Zotero by default; Quarto or Overleaf only if the learner needs a reproducible report, LaTeX template, collaborator requirement, or `.bib` workflow.
 - Sentence frame: "My mini paper will use `___` as the main question, `___` as the dataset, `___` as the key table/figure, and `___` as the writing route. The package is not complete until `___` is fixed."
 - Common writing risk: spending time formatting in Overleaf before the research question, figure, references, and source note are ready.
 
@@ -43,9 +43,10 @@ By the end of this week, the learner can:
 - [ ] `week14_missing_actions.csv` is exported.
 - [ ] `week14_tool_decision_table.csv` is exported.
 - [ ] `week14_reference_status.csv` is exported.
+- [ ] `week14_reference_checklist_review.csv` is exported.
 - [ ] `week14_package_readiness.png` is exported.
-- [ ] `week14_submission_plan.md` contains a 180-220 word mini paper package plan.
-- [ ] The learner chooses one default route: Word + Zotero, Quarto, or Overleaf.
+- [ ] `week14_submission_plan.md` contains a learner-specific 180-220 word mini paper package plan.
+- [ ] The learner chooses one route, with Word + Zotero as the default unless Quarto/Overleaf has a concrete submission reason.
 - [ ] The learner writes one reproducibility note: where data, notebook, outputs, and references live.
 
 ## Files
@@ -66,8 +67,8 @@ By the end of this week, the learner can:
 
 - File: `data/raw/week14_paper_package_inventory.csv`
 - Type: synthetic course-package inventory derived from public course artifacts.
-- SHA-256: `32d8e000dc6be913f58fc9bebd642df7fc93f2a447f737677d6963d08658af1e`
+- SHA-256: `bfcbb6e657bd8bd1b961dde13ec1c632b8f0ed135cf71e4716b511d9b1b1d97e`
 - File: `data/raw/week14_reference_checklist.csv`
 - Type: synthetic citation/source checklist based on official documentation and method sources.
-- SHA-256: `8c221a606662d94bcadb1321f8f21f157f461c844cabe51a9d000d4227fa6ad4`
+- SHA-256: `d964e61a560cb1fe585e5e0c77491891c62f3b2a097f3e6f9d1e5fa98d90c6b1`
 - Copyright note: the data describes course artifacts and source metadata; it does not contain private learner data.

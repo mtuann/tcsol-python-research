@@ -79,7 +79,7 @@ Detailed policy: [`resources/WRITING_AND_PAPER_TOOLING_ROADMAP.md`](resources/WR
 
 ## Course Design Standard
 
-All weekly lessons must follow the contract in [`resources/WEEKLY_LESSON_DESIGN_STANDARD.md`](resources/WEEKLY_LESSON_DESIGN_STANDARD.md). That file defines the required weekly artifacts: slides, lecture notes, live-coding notebook, dataset/data dictionary, exercises, assignment, readings, figure/table output, caption, interpretation paragraph, rubric, and reproducibility checklist.
+All weekly lessons must follow the contract in [`resources/WEEKLY_LESSON_DESIGN_STANDARD.md`](resources/WEEKLY_LESSON_DESIGN_STANDARD.md). That file defines the required weekly artifacts: slides, lecture notes, live-coding notebook, dataset/data dictionary, exercises, assignment, readings, figure/table output, caption, interpretation paragraph, rubric, and reproducibility checklist. Week 14 is the capstone exception: its package plan, readiness caption, and reproducibility note replace the ordinary weekly interpretation paragraph.
 
 Each week must also follow the writing-support policy in [`resources/WRITING_AND_PAPER_TOOLING_ROADMAP.md`](resources/WRITING_AND_PAPER_TOOLING_ROADMAP.md): paper connection, writing output, tool support, sentence frame, and common writing risk.
 
@@ -181,8 +181,8 @@ Important: do not publish identifiable student data. If this repository becomes 
 | 10 | Pedagogical adaptation | grouping, ranking, visualization | Convert contrastive findings into teaching priorities | short lesson adaptation |
 | 11 | MT evaluation | source/MT/reference tables, BLEU/chrF/TER | Compare MT systems on Chinese-Vietnamese examples | MT evaluation table |
 | 12 | MTPE workflow | edit distance, time logs, revision labels | Measure post-editing effort and classify revision types | MTPE effort memo |
-| 13 | Education policy data | policy metadata, timeline, coding scheme | Analyze policy documents and education statistics | policy coding table |
-| 14 | Paper package and Overleaf option | clean notebook, README, Zotero, Word, optional Quarto/Overleaf | Combine question, data, method, results, limitations | mini paper + notebook + optional Overleaf project |
+| 13 | Education policy data | policy metadata, timeline, coding scheme | Analyze policy documents and education statistics | policy coding Data/Methods paragraph + timeline/source tables |
+| 14 | Paper package and Overleaf option | clean notebook, README, Zotero, Word, optional Quarto/Overleaf | Combine question, data, method, results, limitations | mini paper package plan + notebook + reproducibility note |
 
 ## Writing and Paper Tooling Progression
 
@@ -192,7 +192,7 @@ Important: do not publish identifiable student data. If this repository becomes 
 | Evidence | 3-5 | descriptive table, figure caption, figure note | Word + Zotero setup begins |
 | Results | 6-8 | Results paragraph, limitation, teaching implication | Word + Zotero |
 | Track writing | 9-13 | track-specific analysis paragraph | Word + Zotero; Quarto optional |
-| Paper package | 14 | mini paper, appendix, references, reproducibility note | Word + Zotero by default; Overleaf/Quarto optional |
+| Paper package | 14 | package plan, appendix/source map, references, reproducibility note | Word + Zotero by default; Overleaf/Quarto optional |
 
 ## Project Tracks
 
@@ -402,7 +402,7 @@ Repository setup required on GitHub:
 | Research data design | 15% | data dictionary, coding scheme |
 | Visualization and statistics | 20% | figures, tables, interpretation |
 | Final notebook | 20% | reproducible notebook, clean outputs |
-| Mini paper | 20% | Introduction, Data, Methods, Results, Limitations |
+| Mini paper package | 20% | package plan, runnable notebook, reproducibility note, draft-ready section map |
 
 ## Reproducibility Checklist
 
@@ -468,14 +468,25 @@ These topics are useful later, but they are not the shortest path to a good Appl
 
 ### Writing, Citation, and Publishing
 
+Core for the learner:
+
 - [Zotero Word plugin documentation](https://www.zotero.org/support/word_processor_plugin_usage/)
 - [Zotero word processor integration](https://www.zotero.org/support/word_processor_integration)
+- [Zotero: creating bibliographies](https://www.zotero.org/support/creating_bibliographies)
+- [Project TIER Protocol 4.0](https://www.projecttier.org/tier-protocol/protocol-4-0/) as a simplified reproducibility-package model.
+
+Optional when the target paper requires it:
+
 - [Quarto authoring in VS Code](https://quarto.org/docs/get-started/authoring/vscode.html)
 - [Quarto citations](https://quarto.org/docs/authoring/citations.html)
+- [Quarto manuscripts](https://quarto.org/docs/manuscripts/) for instructor/deep-stretch use.
 - [Overleaf Learn LaTeX in 30 minutes](https://www.overleaf.com/learn/latex/Learn_LaTeX_in_30_minutes)
 - [Overleaf bibliography management in LaTeX](https://www.overleaf.com/learn/latex/Bibliography_management_in_LaTeX)
 - [Overleaf: working with `.bib` files](https://docs.overleaf.com/citing-and-references/working-with-.bib-files)
-- [Overleaf and Zotero](https://www.overleaf.com/learn/how-to/How_to_link_your_Overleaf_account_to_Mendeley_and_Zotero)
+- [Overleaf Zotero integration](https://docs.overleaf.com/integrations-and-add-ons/reference-manager-integrations/zotero), noting that direct sync is a premium feature and the free path is Zotero `.bib` export/upload.
+
+Course-admin publishing only:
+
 - [GitHub Pages quickstart](https://docs.github.com/pages/quickstart)
 - [GitHub Pages publishing source](https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site)
 - [Git documentation](https://git.github.io/htmldocs/git.html)

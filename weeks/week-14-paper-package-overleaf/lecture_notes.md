@@ -31,12 +31,14 @@ Quarto can combine Markdown, code, figures, tables, and citations. It is useful 
 from pathlib import Path
 import pandas as pd
 
-inventory = pd.read_csv("week14_paper_package_inventory.csv")
+inventory = pd.read_csv("data/raw/week14_paper_package_inventory.csv")
 inventory["file_exists"] = inventory["source_path"].apply(lambda p: Path(p).exists())
 missing = inventory[(inventory["required_core"] == "yes") & (~inventory["file_exists"])]
 ```
 
 This does not judge paper quality. It only tells the learner which files are missing or need attention.
+
+In Colab, the full course repository may not be present. The notebook therefore checks local files first and then tries GitHub raw URLs for course artifacts; learner-created `paper/...` files remain missing until the learner makes them.
 
 ## Common Mistakes
 

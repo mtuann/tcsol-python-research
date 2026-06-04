@@ -33,6 +33,8 @@ Every week must include:
 10. One technical reading and one research/method reading.
 11. One reproducibility checklist.
 
+Week 14 is the capstone package exception: it must still include a figure/table and caption, but its readiness caption, package plan, reference workflow, and reproducibility note may replace the ordinary weekly interpretation paragraph.
+
 Do not add a hard dataset and a hard Python concept in the same week. If the Python skill is new, the dataset must be simple. If the dataset is messy or realistic, the Python skill must already be familiar.
 
 ## Canonical Week Pattern
@@ -187,6 +189,12 @@ Minimum submission from the learner:
 notebook + cleaned data or derived table + figure/table + caption + interpretation paragraph + paper-facing writing + source list
 ```
 
+Week 14 minimum submission:
+
+```text
+notebook + package audit table + reference checklist review + readiness figure + caption + package plan + reproducibility note
+```
+
 ## Weekly README Template
 
 Each week's `README.md` must contain:
@@ -268,7 +276,7 @@ Default progression:
 | Evidence | 3-5 | descriptive table, figure caption, figure note | Word + Zotero setup begins |
 | Results | 6-8 | Results paragraph, limitation, teaching implication | Word + Zotero |
 | Track writing | 9-13 | track-specific analysis paragraph | Word + Zotero; Quarto optional |
-| Paper package | 14 | mini paper, appendix, references, reproducibility note | Word + Zotero by default; Overleaf/Quarto optional |
+| Paper package | 14 | package plan, appendix/source map, references, reproducibility note | Word + Zotero by default; Overleaf/Quarto optional |
 
 Required weekly writing block:
 

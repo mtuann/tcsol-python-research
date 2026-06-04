@@ -20,7 +20,7 @@ Write 2 sentences:
 
 ## C. Source Checklist
 
-Use `week14_reference_status.csv`.
+Use `week14_reference_checklist_review.csv`.
 
 Pick two sources and check:
 
@@ -29,6 +29,8 @@ Pick two sources and check:
 3. Does it have URL?
 4. Does it need access date?
 5. Is it already in Zotero?
+6. Is it learner-core, optional, instructor-only, or course-admin only?
+7. If the source is Overleaf/Quarto/GitHub Pages, is it truly needed for the learner's paper route?
 
 ## D. Mini Paper Skeleton
 

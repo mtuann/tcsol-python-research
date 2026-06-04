@@ -322,10 +322,21 @@ def build_html(nb: dict[str, Any], notebook_path: Path, repo_root: Path) -> str:
     en_title = nb.get("metadata", {}).get("i18n", {}).get("title", {}).get("en", title)
     week_label_vi = notebook_week_label(nb, "vi", inferred_week_label(notebook_path, "vi"))
     week_label_en = notebook_week_label(nb, "en", inferred_week_label(notebook_path, "en"))
-    data_csv = nb.get("metadata", {}).get("data_csv")
-    if not data_csv:
+    data_csv_value = nb.get("metadata", {}).get("data_csv")
+    if isinstance(data_csv_value, list):
+        data_csvs = [str(item) for item in data_csv_value]
+    elif data_csv_value:
+        data_csvs = [str(data_csv_value)]
+    else:
         raw_csvs = sorted((notebook_path.parent / "data" / "raw").glob("*.csv"))
-        data_csv = raw_csvs[0].relative_to(notebook_path.parent).as_posix() if raw_csvs else ""
+        data_csvs = [item.relative_to(notebook_path.parent).as_posix() for item in raw_csvs]
+    data_csv_links = "\n".join(
+        (
+            f'            <a class="doc-chip" href="{html.escape(csv_path)}" download>'
+            f'Data CSV: {html.escape(Path(csv_path).name)}</a>'
+        )
+        for csv_path in data_csvs
+    )
     colab_url = (
         f"https://colab.research.google.com/github/{REPO_OWNER}/{REPO_NAME}/blob/main/{rel_path}"
     )
@@ -373,7 +384,6 @@ def build_html(nb: dict[str, Any], notebook_path: Path, repo_root: Path) -> str:
             "source.files.title": "Source files",
             "source.files.body": "Các file dưới đây dành cho thực hành, nộp bài, hoặc chỉnh notebook. Người học nên đọc trang HTML trước.",
             "source.files.notebook": "Tải source .ipynb",
-            "source.files.csv": "Tải tệp CSV dữ liệu",
             "notebook.cells.aria": "Các cell notebook đã render",
         },
         "en": {
@@ -404,7 +414,6 @@ def build_html(nb: dict[str, Any], notebook_path: Path, repo_root: Path) -> str:
             "source.files.title": "Source files",
             "source.files.body": "The files below are for practice, submission, or notebook editing. Learners should read the HTML page first.",
             "source.files.notebook": "Download source .ipynb",
-            "source.files.csv": "Download data CSV",
             "notebook.cells.aria": "Rendered notebook cells",
         },
     }
@@ -464,7 +473,7 @@ def build_html(nb: dict[str, Any], notebook_path: Path, repo_root: Path) -> str:
           <p data-i18n="source.files.body">Các file dưới đây dành cho thực hành, nộp bài, hoặc chỉnh notebook. Người học nên đọc trang HTML trước.</p>
           <div class="doc-links">
             <a class="doc-chip" href="{html.escape(source_name)}" download data-i18n="source.files.notebook">Tải source .ipynb</a>
-            {f'<a class="doc-chip" href="{html.escape(str(data_csv))}" download data-i18n="source.files.csv">Tải tệp CSV dữ liệu</a>' if data_csv else ''}
+{data_csv_links}
           </div>
         </details>
       </section>

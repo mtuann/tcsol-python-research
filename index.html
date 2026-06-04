@@ -359,6 +359,15 @@
     .resource-card li {
       margin: 0.2rem 0;
     }
+    .resource-card.available,
+    .resource-card.latest {
+      border-color: #b8cdfd;
+      box-shadow: 0 10px 28px rgba(37, 99, 235, 0.08);
+    }
+    .resource-card.latest {
+      border-color: #96d7b5;
+      box-shadow: 0 10px 28px rgba(31, 122, 77, 0.1);
+    }
     .resource-grid {
       display: grid;
       gap: 1rem;
@@ -397,9 +406,14 @@
       gap: 0.85rem;
       grid-template-columns: 5.2rem 1.2fr 1.25fr 1fr;
     }
-    .week-row.current {
+    .week-row.available,
+    .week-row.latest {
       border-color: #b8cdfd;
       box-shadow: 0 10px 28px rgba(37, 99, 235, 0.08);
+    }
+    .week-row.latest {
+      border-color: #96d7b5;
+      box-shadow: 0 10px 28px rgba(31, 122, 77, 0.1);
     }
     .week-code {
       color: var(--blue);
@@ -640,7 +654,7 @@
           <span class="eyebrow" data-i18n="week1.tag">Tuần đã có</span>
           <h2 data-i18n="week1.title">Mở nhanh Week 01-14</h2>
         </div>
-        <p data-i18n="week1.body">Cả 14 tuần đã có trang HTML song ngữ, slides, demo tương tác, notebook đã render, bài tập và dữ liệu mẫu để học viên đi từ notebook đến mini paper package.</p>
+        <p data-i18n="week1.body">Cả 14 tuần đã có trang HTML song ngữ, slides, demo tương tác, notebook đã render, bài tập và dữ liệu mẫu để học viên đi từ notebook đến research outputs và mini paper package cuối khóa.</p>
       </div>
       <div class="resource-grid">
         <article class="resource-card">
@@ -785,7 +799,7 @@
             <a class="pill-link" href="weeks/week-12-mtpe-workflow/outputs/figures/week12_time_by_system.png" data-i18n="link.figure">Figure</a><a class="pill-link" href="weeks/week-12-mtpe-workflow/#assignment" data-i18n="link.assignment">Bài nộp</a><a class="pill-link" href="weeks/week-12-mtpe-workflow/#readings" data-i18n="link.readings">Bài đọc</a><a class="pill-link" href="weeks/week-12-mtpe-workflow/#rubric" data-i18n="link.rubric">Rubric</a>
           </div>
         </article>
-        <article class="resource-card current">
+        <article class="resource-card available">
           <span class="swatch amber"></span>
           <h3 data-i18n="week13.card.title">Week 13: Dữ liệu chính sách giáo dục</h3>
           <p data-i18n="week13.card.body">Mã hóa nguồn chính sách, kiểm tra metadata/date_basis, tạo timeline và Data/Methods paragraph cho policy analysis.</p>
@@ -797,7 +811,7 @@
             <a class="pill-link" href="weeks/week-13-education-policy-data/outputs/figures/week13_policy_timeline.png" data-i18n="link.figure">Figure</a><a class="pill-link" href="weeks/week-13-education-policy-data/#assignment" data-i18n="link.assignment">Bài nộp</a><a class="pill-link" href="weeks/week-13-education-policy-data/#readings" data-i18n="link.readings">Bài đọc</a><a class="pill-link" href="weeks/week-13-education-policy-data/#rubric" data-i18n="link.rubric">Rubric</a>
           </div>
         </article>
-        <article class="resource-card current">
+        <article class="resource-card latest">
           <span class="swatch rose"></span>
           <h3 data-i18n="week14.card.title">Week 14: Đóng gói mini paper</h3>
           <p data-i18n="week14.card.body">Audit paper package, chọn Word + Zotero mặc định, và dùng Quarto/Overleaf khi thật sự cần.</p>
@@ -869,20 +883,20 @@
         <p data-i18n="syllabus.body">Tuần 1-4 xây nền dữ liệu và notebook; tuần 5-8 học phân tích, hình, thống kê nhẹ; tuần 9-13 đi vào track nghiên cứu; tuần 14 đóng gói paper bằng Word/Zotero, Quarto hoặc Overleaf nếu cần.</p>
       </div>
       <div class="syllabus-list" aria-label="Syllabus 14 tuần" data-i18n-aria-label="syllabus.aria">
-        <div class="week-row current"><span class="week-code">Week 01</span><a class="week-title" href="weeks/week-01-python-research-workflow/" data-i18n="w01.title">Python như một quy trình nghiên cứu</a><span class="week-skill" data-i18n="w01.skill">Jupyter, cells, variables, Markdown</span><span class="week-output" data-i18n="w01.output">1-page research idea</span></div>
-        <div class="week-row current"><span class="week-code">Week 02</span><a class="week-title" href="weeks/week-02-research-data-tables/" data-i18n="w02.title">Dữ liệu nghiên cứu dưới dạng bảng</a><span class="week-skill" data-i18n="w02.skill">lists, dictionaries, CSV/Excel</span><span class="week-output" data-i18n="w02.output">dataset template + data description</span></div>
-        <div class="week-row current"><span class="week-code">Week 03</span><a class="week-title" href="weeks/week-03-pandas-descriptive-tables/" data-i18n="w03.title">pandas cơ bản</a><span class="week-skill" data-i18n="w03.skill">DataFrame, select, filter, groupby</span><span class="week-output" data-i18n="w03.output">descriptive table</span></div>
-        <div class="week-row current"><span class="week-code">Week 04</span><a class="week-title" href="weeks/week-04-data-cleaning-log/" data-i18n="w04.title">Làm sạch dữ liệu</a><span class="week-skill" data-i18n="w04.skill">missing values, type conversion, labels</span><span class="week-output" data-i18n="w04.output">cleaned dataset + cleaning log</span></div>
-        <div class="week-row current"><span class="week-code">Week 05</span><a class="week-title" href="weeks/week-05-visualization-for-paper/" data-i18n="w05.title">Visualization cho paper</a><span class="week-skill" data-i18n="w05.skill">matplotlib, seaborn</span><span class="week-output" data-i18n="w05.output">figure package + caption</span></div>
-        <div class="week-row current"><span class="week-code">Week 06</span><a class="week-title" href="weeks/week-06-intro-statistics-for-results/" data-i18n="w06.title">Thống kê cho Results</a><span class="week-skill" data-i18n="w06.skill">mean, SD, SE, CI, t-test stretch</span><span class="week-output" data-i18n="w06.output">Results paragraph + CI figure</span></div>
-        <div class="week-row current"><span class="week-code">Week 07</span><a class="week-title" href="weeks/week-07-tcsol-short-course-research/" data-i18n="w07.title">Nghiên cứu TCSOL ngắn hạn</a><span class="week-skill" data-i18n="w07.skill">rubric, classroom variables</span><span class="week-output" data-i18n="w07.output">mini teaching-study design</span></div>
-        <div class="week-row current"><span class="week-code">Week 08</span><a class="week-title" href="weeks/week-08-learner-error-analysis/" data-i18n="w08.title">Phân tích lỗi người học</a><span class="week-skill" data-i18n="w08.skill">frequency tables, cross-tabulation</span><span class="week-output" data-i18n="w08.output">learner error report</span></div>
-        <div class="week-row current"><span class="week-code">Week 09</span><a class="week-title" href="weeks/week-09-chinese-vietnamese-contrastive-data/" data-i18n="w09.title">Dữ liệu đối chiếu Hán-Việt</a><span class="week-skill" data-i18n="w09.skill">string matching, regex, coding categories</span><span class="week-output" data-i18n="w09.output">contrastive analysis table</span></div>
-        <div class="week-row current"><span class="week-code">Week 10</span><a class="week-title" href="weeks/week-10-pedagogical-adaptation/" data-i18n="w10.title">Chuyển kết quả đối chiếu thành sư phạm</a><span class="week-skill" data-i18n="w10.skill">grouping, ranking, visualization</span><span class="week-output" data-i18n="w10.output">lesson adaptation memo</span></div>
-        <div class="week-row current"><span class="week-code">Week 11</span><a class="week-title" href="weeks/week-11-mt-evaluation/" data-i18n="w11.title">Đánh giá dịch máy</a><span class="week-skill" data-i18n="w11.skill">source/MT/reference tables, BLEU, chrF, TER</span><span class="week-output" data-i18n="w11.output">MT evaluation table</span></div>
-        <div class="week-row current"><span class="week-code">Week 12</span><a class="week-title" href="weeks/week-12-mtpe-workflow/" data-i18n="w12.title">Quy trình MTPE</a><span class="week-skill" data-i18n="w12.skill">edit distance, time logs, revision labels</span><span class="week-output" data-i18n="w12.output">MTPE effort memo</span></div>
-        <div class="week-row current"><span class="week-code">Week 13</span><a class="week-title" href="weeks/week-13-education-policy-data/" data-i18n="w13.title">Dữ liệu chính sách giáo dục</a><span class="week-skill" data-i18n="w13.skill">metadata, timeline, coding scheme</span><span class="week-output" data-i18n="w13.output">policy coding Methods paragraph</span></div>
-        <div class="week-row current"><span class="week-code">Week 14</span><a class="week-title" href="weeks/week-14-paper-package-overleaf/" data-i18n="w14.title">Đóng gói mini paper</a><span class="week-skill" data-i18n="w14.skill">package audit, Zotero, optional Quarto/Overleaf</span><span class="week-output" data-i18n="w14.output">mini paper package</span></div>
+        <div class="week-row available"><span class="week-code">Week 01</span><a class="week-title" href="weeks/week-01-python-research-workflow/" data-i18n="w01.title">Python như một quy trình nghiên cứu</a><span class="week-skill" data-i18n="w01.skill">Jupyter, cells, variables, Markdown</span><span class="week-output" data-i18n="w01.output">1-page research idea</span></div>
+        <div class="week-row available"><span class="week-code">Week 02</span><a class="week-title" href="weeks/week-02-research-data-tables/" data-i18n="w02.title">Dữ liệu nghiên cứu dưới dạng bảng</a><span class="week-skill" data-i18n="w02.skill">lists, dictionaries, CSV/Excel</span><span class="week-output" data-i18n="w02.output">dataset template + data description</span></div>
+        <div class="week-row available"><span class="week-code">Week 03</span><a class="week-title" href="weeks/week-03-pandas-descriptive-tables/" data-i18n="w03.title">pandas cơ bản</a><span class="week-skill" data-i18n="w03.skill">DataFrame, select, filter, groupby</span><span class="week-output" data-i18n="w03.output">descriptive table</span></div>
+        <div class="week-row available"><span class="week-code">Week 04</span><a class="week-title" href="weeks/week-04-data-cleaning-log/" data-i18n="w04.title">Làm sạch dữ liệu</a><span class="week-skill" data-i18n="w04.skill">missing values, type conversion, labels</span><span class="week-output" data-i18n="w04.output">cleaned dataset + cleaning log</span></div>
+        <div class="week-row available"><span class="week-code">Week 05</span><a class="week-title" href="weeks/week-05-visualization-for-paper/" data-i18n="w05.title">Visualization cho paper</a><span class="week-skill" data-i18n="w05.skill">matplotlib, seaborn</span><span class="week-output" data-i18n="w05.output">figure package + caption</span></div>
+        <div class="week-row available"><span class="week-code">Week 06</span><a class="week-title" href="weeks/week-06-intro-statistics-for-results/" data-i18n="w06.title">Thống kê cho Results</a><span class="week-skill" data-i18n="w06.skill">mean, SD, SE, CI, t-test stretch</span><span class="week-output" data-i18n="w06.output">Results paragraph + CI figure</span></div>
+        <div class="week-row available"><span class="week-code">Week 07</span><a class="week-title" href="weeks/week-07-tcsol-short-course-research/" data-i18n="w07.title">Nghiên cứu TCSOL ngắn hạn</a><span class="week-skill" data-i18n="w07.skill">rubric, classroom variables</span><span class="week-output" data-i18n="w07.output">mini teaching-study design</span></div>
+        <div class="week-row available"><span class="week-code">Week 08</span><a class="week-title" href="weeks/week-08-learner-error-analysis/" data-i18n="w08.title">Phân tích lỗi người học</a><span class="week-skill" data-i18n="w08.skill">frequency tables, cross-tabulation</span><span class="week-output" data-i18n="w08.output">learner error report</span></div>
+        <div class="week-row available"><span class="week-code">Week 09</span><a class="week-title" href="weeks/week-09-chinese-vietnamese-contrastive-data/" data-i18n="w09.title">Dữ liệu đối chiếu Hán-Việt</a><span class="week-skill" data-i18n="w09.skill">string matching, regex, coding categories</span><span class="week-output" data-i18n="w09.output">contrastive analysis table</span></div>
+        <div class="week-row available"><span class="week-code">Week 10</span><a class="week-title" href="weeks/week-10-pedagogical-adaptation/" data-i18n="w10.title">Chuyển kết quả đối chiếu thành sư phạm</a><span class="week-skill" data-i18n="w10.skill">grouping, ranking, visualization</span><span class="week-output" data-i18n="w10.output">lesson adaptation memo</span></div>
+        <div class="week-row available"><span class="week-code">Week 11</span><a class="week-title" href="weeks/week-11-mt-evaluation/" data-i18n="w11.title">Đánh giá dịch máy</a><span class="week-skill" data-i18n="w11.skill">source/MT/reference tables, BLEU, chrF, TER</span><span class="week-output" data-i18n="w11.output">MT evaluation table</span></div>
+        <div class="week-row available"><span class="week-code">Week 12</span><a class="week-title" href="weeks/week-12-mtpe-workflow/" data-i18n="w12.title">Quy trình MTPE</a><span class="week-skill" data-i18n="w12.skill">edit distance, time logs, revision labels</span><span class="week-output" data-i18n="w12.output">MTPE effort memo</span></div>
+        <div class="week-row available"><span class="week-code">Week 13</span><a class="week-title" href="weeks/week-13-education-policy-data/" data-i18n="w13.title">Dữ liệu chính sách giáo dục</a><span class="week-skill" data-i18n="w13.skill">metadata, timeline, coding scheme</span><span class="week-output" data-i18n="w13.output">policy coding Data/Methods paragraph</span></div>
+        <div class="week-row latest"><span class="week-code">Week 14</span><a class="week-title" href="weeks/week-14-paper-package-overleaf/" data-i18n="w14.title">Đóng gói mini paper</a><span class="week-skill" data-i18n="w14.skill">package audit, Zotero, optional Quarto/Overleaf</span><span class="week-output" data-i18n="w14.output">mini paper package plan</span></div>
       </div>
     </section>
 
@@ -976,7 +990,7 @@
         "writing.roadmap": "Mở writing and paper tooling roadmap",
         "week1.tag": "Tuần đã có",
         "week1.title": "Mở nhanh Week 01-14",
-        "week1.body": "Cả 14 tuần đã có trang HTML song ngữ, slides, demo tương tác, notebook đã render, bài tập và dữ liệu mẫu để học viên đi từ notebook đến mini paper package.",
+        "week1.body": "Cả 14 tuần đã có trang HTML song ngữ, slides, demo tương tác, notebook đã render, bài tập và dữ liệu mẫu để học viên đi từ notebook đến research outputs và mini paper package cuối khóa.",
         "week1.learn.title": "Week 01: Research workflow",
         "week1.learn.body": "Làm quen với notebook, variables, Markdown, CSV nhỏ và cách nối một câu hỏi nghiên cứu với output đầu tiên.",
         "week1.practice.title": "Week 02: Research data tables",
@@ -1078,10 +1092,10 @@
         "w12.output": "MTPE effort memo",
         "w13.title": "Dữ liệu chính sách giáo dục",
         "w13.skill": "metadata, timeline, coding scheme",
-        "w13.output": "policy coding Methods paragraph",
+        "w13.output": "policy coding Data/Methods paragraph",
         "w14.title": "Đóng gói mini paper",
         "w14.skill": "package audit, Zotero, optional Quarto/Overleaf",
-        "w14.output": "mini paper package",
+        "w14.output": "mini paper package plan",
         "resources.tag": "Thiết kế tuần",
         "resources.title": "Mỗi tuần đều có cùng một cấu trúc để người học không bị lạc",
         "resources.body": "Thiết kế lặp lại giúp người mới tập trung vào khái niệm mới, không phải đoán tuần này cần mở file nào, viết đoạn gì, hay nộp gì.",
@@ -1165,8 +1179,8 @@
         "writing.overleaf.body": "Overleaf is a LaTeX packaging option once a draft, tables/figures, and references exist; it is not required in the early weeks.",
         "writing.roadmap": "Open the writing and paper tooling roadmap",
         "week1.tag": "Available weeks",
-        "week1.title": "Quick access to Weeks 01-13",
-        "week1.body": "All fourteen weeks now have bilingual HTML pages, slides, interactive demos, rendered notebooks, exercises, and sample data so the learner can move from notebooks to Methods/Results paragraphs with tables and figures.",
+        "week1.title": "Quick access to Weeks 01-14",
+        "week1.body": "All fourteen weeks now have bilingual HTML pages, slides, interactive demos, rendered notebooks, exercises, and sample data so the learner can move from notebooks to research outputs and a final mini paper package.",
         "week1.learn.title": "Week 01: Research workflow",
         "week1.learn.body": "Meet notebooks, variables, Markdown, a small CSV, and the first connection between a research question and an output.",
         "week1.practice.title": "Week 02: Research data tables",
@@ -1268,10 +1282,10 @@
         "w12.output": "MTPE effort memo",
         "w13.title": "Education policy data",
         "w13.skill": "metadata, timeline, coding scheme",
-        "w13.output": "policy coding Methods paragraph",
+        "w13.output": "policy coding Data/Methods paragraph",
         "w14.title": "Mini paper package",
         "w14.skill": "package audit, Zotero, optional Quarto/Overleaf",
-        "w14.output": "mini paper package",
+        "w14.output": "mini paper package plan",
         "resources.tag": "Weekly design",
         "resources.title": "Every week uses the same structure so the learner does not get lost",
         "resources.body": "The repeated design lets a beginner focus on the new concept instead of guessing which file to open, what to write, or what to submit.",

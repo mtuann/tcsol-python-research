@@ -22,7 +22,7 @@ Overleaf and LaTeX are useful, but they should not be introduced before the lear
 | Evidence | 3-5 | descriptive table, figure caption, figure note | notebook + exported output | Word + Zotero |
 | Results | 6-8 | Results paragraph, limitation, teaching implication | Word + Zotero | Markdown |
 | Track writing | 9-13 | track-specific analysis paragraph | Word + Zotero | Quarto |
-| Paper package | 14 | mini paper, appendix, references, reproducibility note | Word + Zotero | Overleaf or Quarto |
+| Paper package | 14 | package plan, appendix/source map, references, reproducibility note | Word + Zotero | Overleaf or Quarto |
 
 ## Weekly Writing Contract
 
@@ -76,23 +76,23 @@ Introduce Overleaf in Week 14 only after the learner can answer:
 - What is the paper title and research question?
 - Which table or figure is ready to include?
 - Which references are in Zotero or a `.bib` file?
-- Which sections are drafted: Introduction, Data, Methods, Results, Limitations?
+- Which sections are mapped or drafted: Introduction, Data, Methods, Results, Limitations?
 - Does the target journal, conference, or university require LaTeX?
 
 If the answer to the last question is "no", Word + Zotero remains the default. Overleaf should be presented as an optional packaging route for collaboration, LaTeX templates, and `.bib`-based references.
 
 ## Week 14 Paper Package
 
-Week 14 should not introduce a heavy new Python skill. It should consolidate:
+Week 14 should not introduce a heavy new Python skill or require a full paper draft from a beginner. It should consolidate:
 
 - cleaned dataset or derived table;
 - final notebook that runs top to bottom;
 - exported table/figure;
-- caption and interpretation;
-- source list or Zotero bibliography;
-- mini paper draft with Introduction, Data, Methods, Results, Limitations;
+- caption, package plan, and section map;
+- source list or Zotero bibliography workflow;
+- mini paper draft as stretch/future work after the package plan is approved;
 - appendix or reproducibility note;
-- optional Overleaf project with `main.tex`, `references.bib`, and figure/table files.
+- optional Overleaf project with `main.tex`, `.bib` export, and figure/table files only when a LaTeX route is required.
 
 ## Tool Decision Guide
 
@@ -103,7 +103,7 @@ Week 14 should not introduce a heavy new Python skill. It should consolidate:
 | Keep code, output, and prose together | Jupyter notebook |
 | Produce reproducible report from code and text | Quarto |
 | Use a LaTeX template or collaborate on LaTeX | Overleaf |
-| Publish a static course page | GitHub Pages |
+| Publish a static course page | GitHub Pages for course admin, not learner paper citation |
 
 ## Starter Source Links
 
@@ -114,4 +114,4 @@ Week 14 should not introduce a heavy new Python skill. It should consolidate:
 - Overleaf Learn LaTeX: https://www.overleaf.com/learn/latex/Learn_LaTeX_in_30_minutes
 - Overleaf bibliography management: https://www.overleaf.com/learn/latex/Bibliography_management_in_LaTeX
 - Overleaf `.bib` files: https://docs.overleaf.com/citing-and-references/working-with-.bib-files
-- Overleaf and Zotero: https://www.overleaf.com/learn/how-to/How_to_link_your_Overleaf_account_to_Mendeley_and_Zotero
+- Overleaf Zotero integration: https://docs.overleaf.com/integrations-and-add-ons/reference-manager-integrations/zotero (direct sync is premium; free route is Zotero `.bib` export/upload)

@@ -20,9 +20,18 @@
 - "Reproducibility" should be practical: where files are and how to rerun, not a philosophy lecture.
 - "Word + Zotero" should be presented as academically valid, not a lower-status choice.
 
+## QA Report
+
+| Surface | Status | Notes |
+|---|---|---|
+| `index.html` | Pass after revision | Vietnamese default frames Week 14 as consolidation; English aggregate translation keys were removed. |
+| `slides.html` | Pass after revision | Learner-facing labels, figure alt text, and sentence frames have bilingual support. |
+| `interactive_demo.html` | Pass after revision | Tool-route scale has visible explanation and screen-reader support. |
+| `live_coding.html` | Pass after revision | Vietnamese notebook headings are no longer English-only; Colab fallback is explained. |
+
 ## Final Check
 
-- [ ] Vietnamese default makes clear that Week 14 is consolidation.
-- [ ] English mode does not leave Vietnamese-only tool instructions.
-- [ ] The learner is not pushed into LaTeX if Word + Zotero fits the target.
-- [ ] `.bib`, Quarto, and Overleaf are framed as optional routes.
+- [x] Vietnamese default makes clear that Week 14 is consolidation.
+- [x] English mode does not leave Vietnamese-only tool instructions in learner-facing controls.
+- [x] The learner is not pushed into LaTeX if Word + Zotero fits the target.
+- [x] `.bib`, Quarto, and Overleaf are framed as optional routes.

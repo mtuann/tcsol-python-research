@@ -1,4 +1,6 @@
-zotero_status,citation_risk,source_count
-add_to_zotero,low,4
-optional_bib,low,1
-optional_bib,medium,3
+learner_scope,zotero_status,citation_risk,source_count
+core_beginner,add_to_zotero,low,2
+core_skim,add_to_zotero,low,1
+instructor_deep_stretch,optional_instructor,medium,1
+optional_learner,optional_bib,low,1
+optional_learner,optional_bib,medium,3

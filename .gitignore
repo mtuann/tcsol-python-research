@@ -83,6 +83,7 @@ weeks/**/outputs/interactive/*
 !weeks/week-14-paper-package-overleaf/outputs/tables/week14_missing_actions.csv
 !weeks/week-14-paper-package-overleaf/outputs/tables/week14_readiness_by_area.csv
 !weeks/week-14-paper-package-overleaf/outputs/tables/week14_reference_status.csv
+!weeks/week-14-paper-package-overleaf/outputs/tables/week14_reference_checklist_review.csv
 !weeks/week-14-paper-package-overleaf/outputs/tables/week14_tool_decision_table.csv
 !weeks/week-14-paper-package-overleaf/outputs/tables/week14_submission_plan.md
 !weeks/week-11-mt-evaluation/outputs/tables/week11_metric_settings.csv

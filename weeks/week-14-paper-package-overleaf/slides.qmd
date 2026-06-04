@@ -6,24 +6,25 @@ format:
     slide-number: true
 ---
 
-# Week 14: Paper package
+# Week 14: Paper Package
 
-Paper package audit + Word/Zotero by default + optional Quarto/Overleaf.
+Audit the final paper package, choose Word + Zotero by default, and use Quarto/Overleaf only when the submission target requires them.
 
-## Research question
+## Research Question
 
-Which pieces of evidence are ready for a mini paper, and which writing route fits the target submission?
+Which course artifacts are ready for a mini paper package, which ones need revision, and which writing route fits the target submission?
 
-## Core workflow
+## Core Workflow
 
-1. Audit package inventory.
+1. Check the package inventory.
 2. Identify missing actions.
-3. Choose tool route.
-4. Write package plan.
-5. Prepare reproducibility note.
+3. Review the reference checklist.
+4. Choose a tool route.
+5. Write a learner-specific package plan.
+6. Prepare a reproducibility note.
 
-## Tool routes
+## Tool Routes
 
-- Word + Zotero: default.
-- Quarto: optional reproducible report.
-- Overleaf: optional LaTeX/template route.
+- Word + Zotero: default beginner writing/citation route.
+- Quarto: optional reproducible report route.
+- Overleaf: optional LaTeX/template route; direct Zotero sync is premium, so the free route is Zotero `.bib` export/upload.

@@ -49,6 +49,6 @@ The dataset is organized at the level of [unit of observation]. Each row contain
 ## Submission
 
 - Nộp `live_coding.ipynb`.
-- Nếu giảng viên yêu cầu, nộp thêm `outputs/tables/week02_selected_table_plan.csv`.
+- Nộp `outputs/tables/week02_selected_table_plan.csv`.
 
 Không đưa tên thật, email, mã sinh viên thật, hoặc dữ liệu lớp học có thể định danh vào notebook public.

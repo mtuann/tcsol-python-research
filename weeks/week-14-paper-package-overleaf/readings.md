@@ -12,7 +12,7 @@
 - Citation: Project TIER. Protocol 4.0. Accessed 2026-06-04.
 - Link: https://www.projecttier.org/tier-protocol/protocol-4-0/
 - Why it matters this week: it gives a practical model for project folders, data, scripts, documentation, and reproducible research packages.
-- Sections to read: overview of project organization and documentation expectations.
+- Sections to read: flexibility/adaptability and reproducibility standards. Use the simplified six-item course checklist; do not require the full protocol from a beginner.
 
 ## Required Writing Tool Decision Reading
 
@@ -27,7 +27,7 @@
   - Use: optional citation workflow for reproducible reports.
 - Quarto Manuscripts: https://quarto.org/docs/manuscripts/
   - Accessed: 2026-06-04
-  - Use: optional manuscript project model.
+  - Use: instructor/deep-stretch reference only. Avoid requiring it for the beginner core.
 - Quarto MS Word output: https://quarto.org/docs/output-formats/ms-word.html
   - Accessed: 2026-06-04
   - Use: optional export route when Word output is needed.
@@ -42,7 +42,7 @@
   - Use: optional `.bib` route.
 - Overleaf docs: Zotero integration: https://docs.overleaf.com/integrations-and-add-ons/reference-manager-integrations/zotero
   - Accessed: 2026-06-04
-  - Use: note that direct Zotero integration may depend on account features; free path is Zotero export `.bib` then upload.
+  - Use: direct Overleaf-Zotero sync is a premium feature; the free path is Zotero export `.bib` then upload.
 
 ## Optional Publishing Source
 
@@ -58,3 +58,14 @@
 - Sources checked: Zotero documentation, Project TIER, Quarto official docs, Overleaf docs, GitHub Pages docs.
 - Sources selected: Zotero + Project TIER as required core; Quarto/Overleaf/GitHub Pages as optional tool route references.
 - Why selected: official documentation and reproducibility guidance match the final-week goal of paper packaging without adding unnecessary programming complexity.
+
+## Simplified Course Checklist From TIER
+
+Use this beginner-scale version:
+
+1. Keep a clear folder map.
+2. Keep raw/source data separate from outputs.
+3. Record source URLs and access dates.
+4. Keep the notebook or script that generated the table/figure.
+5. Export the table/figure used in the paper.
+6. Write a rerun note explaining where files live and how to reproduce the output.

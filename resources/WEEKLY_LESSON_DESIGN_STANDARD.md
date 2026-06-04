@@ -55,7 +55,7 @@ Required learner-facing week surfaces:
 
 - folder `index.html`: overview, research frame, writing support, notes, exercises, assignment, readings, rubric, and source links;
 - `slides.html`: bilingual stage-first deck using `assets/css/lecture-slides.css` and `assets/js/lecture-slides.js`, language switcher, slide overview/table of contents, page-number jump, keyboard navigation, visible course exit links, and final-slide next-step CTAs;
-- `live_coding.html`: rendered notebook with code/output, Colab action, source notebook download, and link back to the week overview;
+- `live_coding.html`: rendered notebook with code/output, Colab action, link back to the week overview, and source notebook download only in a clearly labeled secondary/source area;
 - `interactive_demo.html`: included when interaction improves learning; if not included, record the reason in the week's `README.md`;
 - homepage cards/links: point to public HTML pages first, not raw source files.
 

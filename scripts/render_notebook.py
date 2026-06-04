@@ -270,12 +270,21 @@ def metadata_i18n(nb: dict[str, Any], key: str, lang: str, fallback: str) -> str
     return value if isinstance(value, str) else fallback
 
 
+def notebook_week_label(nb: dict[str, Any], lang: str, fallback: str) -> str:
+    return metadata_i18n(
+        nb,
+        "week",
+        lang,
+        metadata_i18n(nb, "week_label", lang, fallback),
+    )
+
+
 def build_html(nb: dict[str, Any], notebook_path: Path, repo_root: Path) -> str:
     rel_path = notebook_path.relative_to(repo_root).as_posix()
     title = notebook_title(nb)
     en_title = nb.get("metadata", {}).get("i18n", {}).get("title", {}).get("en", title)
-    week_label_vi = metadata_i18n(nb, "week", "vi", "Tuần 01")
-    week_label_en = metadata_i18n(nb, "week", "en", "Week 01")
+    week_label_vi = notebook_week_label(nb, "vi", "Tuần 01")
+    week_label_en = notebook_week_label(nb, "en", "Week 01")
     data_csv = nb.get("metadata", {}).get(
         "data_csv", "data/raw/week01_research_tracks.csv"
     )
@@ -293,7 +302,6 @@ def build_html(nb: dict[str, Any], notebook_path: Path, repo_root: Path) -> str:
             "nav.week": week_label_vi,
             "nav.slides": "Slides",
             "nav.demo": "Demo",
-            "nav.source": "Tải source .ipynb",
             "nav.language": "Ngôn ngữ / Language",
             "side.title": "Notebook",
             "side.week": "Tổng quan tuần",
@@ -304,7 +312,6 @@ def build_html(nb: dict[str, Any], notebook_path: Path, repo_root: Path) -> str:
             "hero.title": title,
             "hero.body": "Đây là bản HTML đã chạy sẵn để đọc trên GitHub Pages. Muốn thực hành, mở notebook trong Colab hoặc tải file .ipynb.",
             "action.colab": "Chạy trong Colab",
-            "action.source": "Tải .ipynb",
             "action.week": f"Quay lại {week_label_vi}",
             "note.title": "Cách dùng trang này",
             "note.read.title": "Đọc",
@@ -323,7 +330,6 @@ def build_html(nb: dict[str, Any], notebook_path: Path, repo_root: Path) -> str:
             "nav.week": week_label_en,
             "nav.slides": "Slides",
             "nav.demo": "Demo",
-            "nav.source": "Download source .ipynb",
             "nav.language": "Language",
             "side.title": "Notebook",
             "side.week": "Week overview",
@@ -334,7 +340,6 @@ def build_html(nb: dict[str, Any], notebook_path: Path, repo_root: Path) -> str:
             "hero.title": en_title,
             "hero.body": "This is the pre-run HTML version for GitHub Pages. To practice, open the notebook in Colab or download the .ipynb file.",
             "action.colab": "Run in Colab",
-            "action.source": "Download .ipynb",
             "action.week": f"Back to {week_label_en}",
             "note.title": "How to use this page",
             "note.read.title": "Read",
@@ -364,7 +369,6 @@ def build_html(nb: dict[str, Any], notebook_path: Path, repo_root: Path) -> str:
       <a href="./" data-i18n="nav.week">{html.escape(week_label_vi)}</a>
       <a href="slides.html" data-i18n="nav.slides">Slides</a>
       <a href="interactive_demo.html" data-i18n="nav.demo">Demo</a>
-      <a href="{html.escape(source_name)}" download data-i18n="nav.source">Source .ipynb</a>
       <div class="language-switcher" role="group" aria-label="Ngôn ngữ / Language" data-i18n-aria-label="nav.language">
         <button type="button" data-lang-option="vi" aria-pressed="true">Tiếng Việt</button>
         <button type="button" data-lang-option="en" aria-pressed="false">English</button>
@@ -388,7 +392,6 @@ def build_html(nb: dict[str, Any], notebook_path: Path, repo_root: Path) -> str:
         <p class="doc-lead" data-i18n="hero.body">Đây là bản HTML đã chạy sẵn để đọc trên GitHub Pages. Muốn thực hành, mở notebook trong Colab hoặc tải file .ipynb.</p>
         <div class="doc-actions">
           <a class="doc-button" href="{html.escape(colab_url)}" data-i18n="action.colab">Chạy trong Colab</a>
-          <a class="doc-button secondary" href="{html.escape(source_name)}" download data-i18n="action.source">Tải .ipynb</a>
           <a class="doc-button secondary" href="./" data-i18n="action.week">Quay lại {html.escape(week_label_vi)}</a>
         </div>
       </section>

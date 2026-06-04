@@ -28,6 +28,7 @@ weeks/**/data/processed/*
 !weeks/week-09-chinese-vietnamese-contrastive-data/data/raw/week09_contrastive_examples.csv
 !weeks/week-10-pedagogical-adaptation/data/raw/week10_pedagogical_adaptation_activities.csv
 !weeks/week-11-mt-evaluation/data/raw/week11_mt_evaluation_segments.csv
+!weeks/week-12-mtpe-workflow/data/raw/week12_mtpe_segments.csv
 submissions/
 weeks/**/submissions/
 
@@ -61,9 +62,16 @@ weeks/**/outputs/interactive/*
 !weeks/week-10-pedagogical-adaptation/outputs/tables/week10_phase_minutes.csv
 !weeks/week-10-pedagogical-adaptation/outputs/tables/week10_activity_priority_table.csv
 !weeks/week-11-mt-evaluation/outputs/tables/week11_domain_summary.csv
-!weeks/week-11-mt-evaluation/outputs/tables/week11_error_label_summary.csv
 !weeks/week-11-mt-evaluation/outputs/tables/week11_segment_review_sample.csv
 !weeks/week-11-mt-evaluation/outputs/tables/week11_system_metric_summary.csv
+!weeks/week-12-mtpe-workflow/outputs/tables/week12_metric_settings.csv
+!weeks/week-12-mtpe-workflow/outputs/tables/week12_domain_effort_summary.csv
+!weeks/week-12-mtpe-workflow/outputs/tables/week12_segment_edit_sample.csv
+!weeks/week-12-mtpe-workflow/outputs/tables/week12_revision_type_summary.csv
+!weeks/week-12-mtpe-workflow/outputs/tables/week12_mtpe_effort_summary.csv
+!weeks/week-11-mt-evaluation/outputs/tables/week11_metric_settings.csv
+!weeks/week-11-mt-evaluation/outputs/tables/week11_severity_summary.csv
+!weeks/week-11-mt-evaluation/outputs/tables/week11_human_review_summary.csv
 !weeks/week-05-visualization-for-paper/outputs/figures/week05_mean_gain_by_activity.png
 !weeks/week-05-visualization-for-paper/outputs/figures/week05_mean_gain_by_activity.svg
 !weeks/week-05-visualization-for-paper/outputs/figures/week05_gain_distribution_by_activity.png
@@ -90,6 +98,10 @@ weeks/**/outputs/interactive/*
 !weeks/week-11-mt-evaluation/outputs/figures/week11_chrf_by_system.svg
 !weeks/week-11-mt-evaluation/outputs/figures/week11_error_count_by_system.png
 !weeks/week-11-mt-evaluation/outputs/figures/week11_error_count_by_system.svg
+!weeks/week-12-mtpe-workflow/outputs/figures/week12_edit_distance_by_system.svg
+!weeks/week-12-mtpe-workflow/outputs/figures/week12_edit_distance_by_system.png
+!weeks/week-12-mtpe-workflow/outputs/figures/week12_time_by_system.svg
+!weeks/week-12-mtpe-workflow/outputs/figures/week12_time_by_system.png
 
 # Office temporary files
 ~$*

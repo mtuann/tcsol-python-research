@@ -1,15 +1,10 @@
 # Week 11 Bilingual Content Blocks
 
-## Core Vietnamese
-
-- Tuần 11 đánh giá bản dịch máy bằng metric và human review đơn giản.
-- `source`, `MT output`, và `reference` là ba cột không được nhầm.
-- BLEU/chrF++ càng cao thường càng gần reference; TER càng thấp thường càng ít cần chỉnh sửa.
-- Metric không thay thế đánh giá song ngữ của con người.
-
-## Core English
-
-- Week 11 evaluates MT outputs with metrics and simple human review.
-- `source`, `MT output`, and `reference` must not be confused.
-- Higher BLEU/chrF++ usually means closer to the reference; lower TER usually means fewer edits.
-- Metrics do not replace bilingual human judgment.
+| Key | Vietnamese | English |
+|---|---|---|
+| week.title | Đánh giá dịch máy | Machine translation evaluation |
+| research.question | Synthetic MT profile nào có evidence mạnh hơn cho câu chính sách giáo dục Hán-Việt? | Which synthetic MT profile has stronger evidence for Chinese-Vietnamese education-policy sentences? |
+| metric.caution | Metric đo overlap với một reference; không thay thế bilingual human review. | Metrics measure overlap with one reference; they do not replace bilingual human review. |
+| ter.caution | TER là edit rate để match reference, không phải thời gian MTPE thật. | TER is edit rate to match a reference, not real MTPE time. |
+| human.labels | `error_type`, `severity`, và `review_decision` phải đọc tách nhau. | `error_type`, `severity`, and `review_decision` should be read separately. |
+| writing.output | Results paragraph có metric result, human review, limitation. | The Results paragraph includes metric result, human review, and limitation. |

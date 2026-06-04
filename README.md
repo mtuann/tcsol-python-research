@@ -93,7 +93,7 @@ Public learner-facing navigation should target HTML pages or folder `index.html`
 
 Notebook files follow the same rule. Direct `.ipynb` links on GitHub Pages may render as raw notebook JSON, so public navigation should point to a rendered notebook HTML page such as `live_coding.html`. Keep the `.ipynb` as downloadable/runnable source, and add a Colab link when the notebook should be executed without local setup.
 
-Week 01 is the canonical implementation pattern for future weeks. New weeks should copy its learner-facing structure: folder `index.html`, `slides.html` with exit navigation, `interactive_demo.html` when useful, rendered `live_coding.html`, Colab/source notebook links, bilingual labels, and clearly separated source Markdown/notebook files.
+Week 01 is the canonical implementation pattern for future weeks. New weeks should copy its learner-facing structure: folder `index.html`, `slides.html` with exit navigation, `interactive_demo.html` when useful, rendered `live_coding.html`, Colab links, bilingual labels, and clearly separated source Markdown/notebook files. Raw `.md` and `.ipynb` links should stay in clearly labeled source/download areas, not primary learner navigation.
 
 ## Bilingual Website Policy
 
@@ -128,6 +128,7 @@ For future slide work, use:
 - [`Tuần 09: Dữ liệu đối chiếu Hán-Việt`](weeks/week-09-chinese-vietnamese-contrastive-data/)
 - [`Tuần 10: Pedagogical adaptation`](weeks/week-10-pedagogical-adaptation/)
 - [`Tuần 11: Đánh giá dịch máy`](weeks/week-11-mt-evaluation/)
+- [`Tuần 12: Quy trình MTPE`](weeks/week-12-mtpe-workflow/)
 
 ## Suggested Repository Structure
 
@@ -177,7 +178,7 @@ Important: do not publish identifiable student data. If this repository becomes 
 | 9 | Chinese-Vietnamese contrastive data | string matching, regex, coding categories | Build bilingual examples and classify phenomena | contrastive analysis table |
 | 10 | Pedagogical adaptation | grouping, ranking, visualization | Convert contrastive findings into teaching priorities | short lesson adaptation |
 | 11 | MT evaluation | source/MT/reference tables, BLEU/chrF/TER | Compare MT systems on Chinese-Vietnamese examples | MT evaluation table |
-| 12 | MTPE workflow | edit distance, time logs, error annotation | Measure post-editing effort and classify errors | MTPE analysis memo |
+| 12 | MTPE workflow | edit distance, time logs, revision labels | Measure post-editing effort and classify revision types | MTPE effort memo |
 | 13 | Education policy data | policy metadata, timeline, coding scheme | Analyze policy documents and education statistics | policy coding table |
 | 14 | Paper package and Overleaf option | clean notebook, README, Zotero, Word, optional Quarto/Overleaf | Combine question, data, method, results, limitations | mini paper + notebook + optional Overleaf project |
 
@@ -376,7 +377,7 @@ Optional advanced MT evaluation:
 pip install unbabel-comet
 ```
 
-Only add COMET after the learner understands reference-based metrics and human error annotation. COMET is useful, but it can shift the course too far toward NLP if introduced too early.
+Only add COMET after the learner understands reference-based metrics and human review annotation. COMET is useful, but it can shift the course too far toward NLP if introduced too early.
 
 ## GitHub Pages Deployment
 
@@ -494,7 +495,7 @@ These topics are useful later, but they are not the shortest path to a good Appl
 ## Next Content Tasks
 
 - Review and refine `weeks/week-08-learner-error-analysis/` after learner testing.
-- Review Week 11 MT evaluation after learner testing and continue detailed content for Week 12 MTPE workflow.
+- Review Week 12 MTPE workflow after learner testing and continue detailed content for Week 13 education policy data.
 - Create blank CSV templates in `resources/templates/`.
 - Add a one-page learner setup guide in Vietnamese.
 - Add a Zotero + Word workflow guide.

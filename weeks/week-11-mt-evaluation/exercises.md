@@ -1,41 +1,59 @@
 # Week 11 Exercises
 
-## A. Copy And Modify
+## A. Source / MT / Reference Check
 
-Change the sorting line from:
+Look at segment `S001`.
+
+1. Copy the Chinese source.
+2. Copy the three Vietnamese MT outputs.
+3. Copy the Vietnamese reference.
+4. In one sentence, explain why the same source appears three times.
+
+## B. Metric Direction
+
+Fill in the blanks:
+
+> BLEU and chrF++ are usually read as higher is better. TER is usually read as lower is better because it measures edits needed to match a reference.
+
+Then answer:
 
 ```python
 metric_summary.sort_values("chrf_pp", ascending=False)
+metric_summary.sort_values("ter")
 ```
 
-to sort by `ter` ascending. Answer:
+> Sorting by chrF++ chooses `___`, while sorting by TER chooses `___`.
 
-> Sorting by chrF++ chooses `___`, but sorting by TER chooses `___`.
+## C. Human Review Labels
 
-## B. Guided Problem
-
-Use `groupby()` to count simplified error labels:
+Use:
 
 ```python
-data.groupby(["mt_system", "simplified_error_label"]).size()
+human_review
+severity_summary
 ```
 
-Answer: Which system has the most omission labels?
+Write 2 sentences:
 
-## C. Research-Style Task
+1. Which MT profile needs revision most often?
+2. Which labels are not errors?
 
-Choose one segment where automatic metric and human label seem to tell different stories. Write 80-100 words explaining:
+## D. Segment-Level Stretch
 
-- the source sentence;
-- the MT output;
-- the reference;
-- the metric or label;
-- why a human reviewer is still needed.
+Use `week11_segment_review_sample.csv`.
 
-## D. Caption Practice
+Pick one segment and compare:
 
-> Figure 1 compares chrF++ across three synthetic MT systems for 12 segments. Higher chrF++ means greater overlap with the reference, but the figure does not prove overall translation quality.
+- `segment_chrf_pp`
+- `segment_ter`
+- `error_type`
+- `severity`
+- `review_decision`
 
-## E. Source Note Practice
+Write 3-4 sentences explaining why automatic metrics are helpful but incomplete.
 
-> Source checked: `___` (accessed `___`). It helps define `___`, but it does not prove that the best metric score is the best translation.
+## E. Caption Practice
+
+Use this frame:
+
+> Figure 1 compares `___` across `___` synthetic MT profiles for `___` source segments. Higher `___` means `___`, but the figure does not prove `___`.

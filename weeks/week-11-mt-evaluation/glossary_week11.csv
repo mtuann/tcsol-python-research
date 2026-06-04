@@ -1,8 +1,11 @@
-term,vi,en,note_vi,note_en
-source segment,câu nguồn,source segment,câu tiếng Trung đầu vào,original Chinese input sentence
-MT output,bản dịch máy,MT output,câu tiếng Việt do system tạo,Vietnamese sentence produced by a system
-reference,bản dịch tham chiếu,reference,bản dịch người dùng làm mốc,human-written comparison translation
-BLEU,BLEU,BLEU,metric overlap theo word/ngram,word/n-gram overlap metric
-chrF++,chrF++,chrF++,metric overlap theo ký tự và từ,character and word n-gram metric
-TER,TER,TER,edit rate; thấp hơn là tốt hơn,edit rate; lower is better
-simplified error label,nhãn lỗi đơn giản,simplified error label,nhãn human review lấy cảm hứng MQM,MQM-inspired human review label
+term,vi,en,note
+BLEU,BLEU,BLEU,Automatic MT metric based on n-gram overlap.
+chrF++,chrF++,chrF++,Character plus word n-gram F-score for MT evaluation.
+TER,TER,TER,Translation edit rate; lower usually means fewer edits to match a reference.
+source segment,câu nguồn,source segment,Chinese sentence to translate.
+MT output,bản dịch máy,MT output,Vietnamese output produced by a synthetic MT profile.
+reference,bản dịch tham chiếu,reference translation,Vietnamese translation used for metrics.
+error_type,loại vấn đề,error type,Simplified human review category.
+severity,mức độ nghiêm trọng,severity,none minor or major.
+review_decision,quyết định review,review decision,Accept revise or minor edit decision.
+metric signature,chữ ký metric,metric signature,Settings string for reproducible metric reporting.

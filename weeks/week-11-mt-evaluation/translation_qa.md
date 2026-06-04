@@ -1,8 +1,10 @@
 # Week 11 Translation QA
 
-- [ ] Vietnamese is default on learner-facing HTML pages.
-- [ ] English toggle works on overview, slides, demo, and rendered notebook.
+- [ ] Vietnamese is default on overview, slides, demo, and notebook HTML.
+- [ ] English toggle updates page title, nav, slide controls, demo labels, and generated sentence.
 - [ ] Code terms remain in English: `BLEU`, `chrF++`, `TER`, `sacrebleu`, `mt_system`.
-- [ ] MT/MQM labels are described as simplified or MQM-inspired.
-- [ ] Public navigation points to HTML pages before raw `.md` or `.ipynb` files.
-- [ ] Metric wording avoids claiming automatic scores prove translation quality.
+- [ ] Human labels are explained as simplified/MQM-inspired, not full MQM training.
+- [ ] `no_error` and `acceptable_variant` are not described as errors.
+- [ ] TER is described as reference-matching edit rate, not actual MTPE time.
+- [ ] Public links point to rendered HTML first; raw `.md` and `.ipynb` files are source/download only.
+- [ ] Figures and captions state synthetic data and N.

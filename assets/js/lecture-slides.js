@@ -135,8 +135,8 @@
     });
 
     window.addEventListener("keydown", (event) => {
-      if (event.target && ["INPUT", "TEXTAREA", "BUTTON", "A", "SELECT"].includes(event.target.tagName)) return;
       if (event.key === "Escape") setOverview(false);
+      if (event.target && ["INPUT", "TEXTAREA", "BUTTON", "A", "SELECT"].includes(event.target.tagName)) return;
       if (overview.classList.contains("is-open")) return;
       if (event.key === "ArrowRight" || event.key === " ") show(current + 1);
       if (event.key === "ArrowLeft") show(current - 1);

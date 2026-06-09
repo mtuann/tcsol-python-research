@@ -1,0 +1,9 @@
+country,country_original,year,school_level,school_level_original,completion_rate,student_teacher_ratio,policy_note
+Vietnam,Viet Nam,2021,lower_secondary,lower_secondary,88.4,19.5,new short-course support
+Vietnam,Vietnam,2022,lower_secondary,lower secondary,90.1,18.7,curriculum update
+China,China,2021,lower_secondary,lower_secondary,96.2,16.2,national digital platform
+China,PR China,2022,lower_secondary,lower_secondary,96.8,15.9,teacher training expansion
+Thailand,Thailand,2021,lower_secondary,lower_secondary,84.0,20.4,baseline year
+Thailand,Thai Land,2022,lower_secondary,lower_secondary,,19.8,missing completion value
+Vietnam,Viet Nam,,upper_secondary,upper_secondary,75.5,22.1,missing year
+China,China,2022,upper_secondary,upper_secondary,,17.0,indicator not available

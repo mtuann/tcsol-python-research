@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Module 03 Slides - Cleaning Research Data</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="../../assets/slides.css">
+</head>
+<body data-lang="vi">
+  <header class="top-nav">
+    <div class="nav-group">
+      <a class="button primary" href="../../">Home</a>
+      <a class="button" href="./">Module 03</a>
+      <button class="button" type="button" id="toc-open">TOC</button>
+    </div>
+    <div class="language-switcher" role="group" aria-label="Language">
+      <button class="lang-button" type="button" data-lang="vi" aria-pressed="true">VI</button>
+      <button class="lang-button" type="button" data-lang="en" aria-pressed="false">EN</button>
+    </div>
+  </header>
+
+  <main id="deck">
+    <section class="slide active title-slide" data-title="Opening">
+      <div class="content">
+        <span class="kicker">Module 03</span>
+        <h1 class="vi">Làm sạch dữ liệu nghiên cứu</h1>
+        <h1 class="en">Cleaning research data</h1>
+        <p class="lead vi">Data chưa sạch có thể làm figure nói sai một cách rất tự tin.</p>
+        <p class="lead en">Unclean data can make a figure say the wrong thing with great confidence.</p>
+      </div>
+    </section>
+
+    <section class="slide" data-title="Learning Map">
+      <div class="content">
+        <span class="kicker vi">Bản đồ buổi học</span>
+        <span class="kicker en">Learning map</span>
+        <h2 class="vi">Từ bảng bẩn đến Methods note</h2>
+        <h2 class="en">From messy table to Methods note</h2>
+        <div class="grid four">
+          <article class="card"><h3>Inspect</h3><p class="vi">Thấy lỗi trước khi plot.</p><p class="en">See problems before plotting.</p></article>
+          <article class="card"><h3>Decide</h3><p class="vi">Viết rule, không đoán.</p><p class="en">Write a rule, do not guess.</p></article>
+          <article class="card"><h3>Clean</h3><p class="vi">Chuẩn hóa, convert, flag.</p><p class="en">Normalize, convert, flag.</p></article>
+          <article class="card"><h3>Write</h3><p class="vi">Log, caption, Methods.</p><p class="en">Log, caption, Methods.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" data-title="Why It Matters">
+      <div class="content">
+        <span class="kicker">Paper problem</span>
+        <h2 class="vi">Cleaning là quyết định về bằng chứng</h2>
+        <h2 class="en">Cleaning is a decision about evidence</h2>
+        <div class="grid three">
+          <article class="card"><h3 class="vi">Bỏ row?</h3><h3 class="en">Drop row?</h3><p class="vi">Có làm lệch sample không?</p><p class="en">Does it change the sample?</p></article>
+          <article class="card"><h3 class="vi">Fill missing?</h3><h3 class="en">Fill missing?</h3><p class="vi">Có tạo dữ liệu giả không?</p><p class="en">Does it invent data?</p></article>
+          <article class="card"><h3 class="vi">Đổi label?</h3><h3 class="en">Rename label?</h3><p class="vi">Có gom đúng nhóm không?</p><p class="en">Does it combine the right group?</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" data-title="Messy Preview">
+      <div class="content narrow">
+        <span class="kicker">Raw data</span>
+        <h2 class="vi">Một bảng nhỏ, nhiều rủi ro</h2>
+        <h2 class="en">One small table, many risks</h2>
+        <table class="mini-table">
+          <thead><tr><th>learner</th><th>activity_group</th><th>date</th><th>pre</th><th>post</th><th>minutes</th></tr></thead>
+          <tbody>
+            <tr><td>L003</td><td>Task_based</td><td>03-01-2026</td><td>55</td><td>70</td><td>34</td></tr>
+            <tr><td>L009</td><td>MTPE practice</td><td>2026-03-04</td><td>60</td><td>105</td><td>35</td></tr>
+            <tr><td>L014</td><td>Form-focused</td><td>2026-03-06</td><td>57</td><td>sixty-five</td><td>26</td></tr>
+          </tbody>
+        </table>
+        <p class="vi">Nếu plot ngay, label bị tách nhóm và score sai kiểu vẫn ảnh hưởng đến claim.</p>
+        <p class="en">If we plot immediately, labels split groups and wrong score types distort the claim.</p>
+      </div>
+    </section>
+
+    <section class="slide" data-title="Four Problems">
+      <div class="content">
+        <span class="kicker">Concepts</span>
+        <h2 class="vi">Bốn nhóm lỗi cần kiểm tra trước figure</h2>
+        <h2 class="en">Four problem types to check before figures</h2>
+        <div class="grid four">
+          <article class="card"><h3>Missing</h3><p>blank, NA, n/a, --</p></article>
+          <article class="card"><h3>Duplicate</h3><p>same observation key</p></article>
+          <article class="card"><h3>Label</h3><p>case, space, hyphen</p></article>
+          <article class="card"><h3>Type/range</h3><p>text score, 105, -3</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" data-title="Duplicate Key">
+      <div class="content">
+        <span class="kicker">Duplicate</span>
+        <h2 class="vi">Duplicate phụ thuộc vào unit of observation</h2>
+        <h2 class="en">Duplicates depend on the unit of observation</h2>
+        <div class="panel">
+          <p><strong>Rule:</strong> learner activity records are duplicated when <code>learner_id + survey_date</code> repeat.</p>
+          <p class="vi">Không phải lúc nào duplicate cũng là hai dòng giống hệt mọi cột. Trong research, key mới là trọng tâm.</p>
+          <p class="en">Duplicates are not always exact row copies. In research, the observation key is the center.</p>
+        </div>
+        <pre class="code-block">raw.duplicated(subset=["learner_id", "survey_date"], keep="first").sum()</pre>
+      </div>
+    </section>
+
+    <section class="slide" data-title="Label Normalization">
+      <div class="content">
+        <span class="kicker">Labels</span>
+        <h2 class="vi">Một nhóm có thể bị tách thành nhiều bars</h2>
+        <h2 class="en">One group can be split into several bars</h2>
+        <div class="solo-figure">
+          <img src="outputs/figures/module03_label_normalization.png" alt="Label normalization variants">
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" data-title="Type Conversion">
+      <div class="content">
+        <span class="kicker">pandas</span>
+        <h2 class="vi">`errors="coerce"` là bước audit, không phải phép màu</h2>
+        <h2 class="en">`errors="coerce"` is an audit step, not magic</h2>
+        <pre class="code-block">clean["post_vocab_score_raw"] = clean["post_vocab_score"]
+clean["post_vocab_score"] = pd.to_numeric(
+    clean["post_vocab_score"].replace("", pd.NA),
+    errors="coerce"
+)</pre>
+        <p class="vi">Giá trị không parse được trở thành missing. Sau đó ta phải đếm và ghi log.</p>
+        <p class="en">Unparseable values become missing. Then we must count and log them.</p>
+      </div>
+    </section>
+
+    <section class="slide" data-title="Valid Ranges">
+      <div class="content">
+        <span class="kicker">Ranges</span>
+        <h2 class="vi">Giá trị bất khả thi không nên bị xem là outlier bình thường</h2>
+        <h2 class="en">Impossible values should not be treated as ordinary outliers</h2>
+        <div class="grid three">
+          <article class="card"><h3>Score 105</h3><p class="vi">Ngoài miền 0-100.</p><p class="en">Outside 0-100.</p></article>
+          <article class="card"><h3>Minutes -3</h3><p class="vi">Thời lượng âm.</p><p class="en">Negative duration.</p></article>
+          <article class="card"><h3>Likert 6</h3><p class="vi">Ngoài miền 1-5.</p><p class="en">Outside 1-5.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" data-title="Cleaning Log">
+      <div class="content">
+        <span class="kicker">Cleaning log</span>
+        <h2 class="vi">Mỗi quyết định cần một dòng log</h2>
+        <h2 class="en">Every decision needs a log row</h2>
+        <table class="mini-table">
+          <thead><tr><th>issue</th><th>decision</th><th>paper note</th></tr></thead>
+          <tbody>
+            <tr><td>duplicate key</td><td>remove later learner-date row</td><td>state duplicate key</td></tr>
+            <tr><td>label variants</td><td>normalize to canonical labels</td><td>report label map</td></tr>
+            <tr><td>invalid score</td><td>set to NA, preserve raw</td><td>report valid range</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="slide figure-slide" data-title="Quality Figure">
+      <div class="content">
+        <span class="kicker vi">Figure minh bạch</span>
+        <span class="kicker en">Transparency figure</span>
+        <h2 class="vi">Before/after quality view cho người đọc thấy workflow</h2>
+        <h2 class="en">A before/after quality view shows the workflow</h2>
+        <div class="solo-figure">
+          <img src="outputs/figures/module03_quality_before_after.png" alt="Before and after quality checks">
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" data-title="Do Not Overclaim">
+      <div class="content">
+        <span class="kicker">Interpretation</span>
+        <h2 class="vi">Cleaning không biến toy data thành causal evidence</h2>
+        <h2 class="en">Cleaning does not turn toy data into causal evidence</h2>
+        <div class="panel">
+          <p class="vi">Ta có thể nói: "Dữ liệu đủ sạch để minh họa workflow và vẽ figure mô tả."</p>
+          <p class="en">We can say: "The data are clean enough to demonstrate the workflow and draw a descriptive figure."</p>
+          <p class="vi">Ta không nên nói: "Hoạt động này chắc chắn gây tăng điểm."</p>
+          <p class="en">We should not say: "This activity certainly caused score gains."</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" data-title="Transfer">
+      <div class="content">
+        <span class="kicker">Transfer</span>
+        <h2 class="vi">Cùng logic, nhiều hướng nghiên cứu</h2>
+        <h2 class="en">Same logic, many research tracks</h2>
+        <table class="mini-table">
+          <thead><tr><th>Track</th><th>Dirty issue</th><th>Risk</th></tr></thead>
+          <tbody>
+            <tr><td>Education policy</td><td>Viet Nam / Vietnam / PR China</td><td>duplicate country bars</td></tr>
+            <tr><td>Translation studies</td><td>score imported as text</td><td>mean score fails or excludes rows</td></tr>
+            <tr><td>Contrastive linguistics</td><td>duplicate segment IDs</td><td>one pattern is overweighted</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="slide" data-title="Writing">
+      <div class="content">
+        <span class="kicker">Writing</span>
+        <h2 class="vi">Methods note lấy từ cleaning log</h2>
+        <h2 class="en">The Methods note comes from the cleaning log</h2>
+        <div class="panel">
+          <p>The learner-survey data were screened for duplicate learner-date records, missing outcome cells, non-canonical activity labels, invalid numeric ranges, and date parsing failures. Invalid numeric values were set to missing and raw audit columns were preserved; gain scores were calculated only for complete pre/post pairs.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" data-title="Assignment">
+      <div class="content">
+        <span class="kicker vi">Bài tập</span>
+        <span class="kicker en">Assignment</span>
+        <h2 class="vi">Nộp clean data, log, figure và Methods note</h2>
+        <h2 class="en">Submit clean data, log, figure, and Methods note</h2>
+        <div class="grid four">
+          <article class="card"><h3>Inspect</h3><p>quality checks</p></article>
+          <article class="card"><h3>Clean</h3><p>auditable rules</p></article>
+          <article class="card"><h3>Visualize</h3><p>before/after figure</p></article>
+          <article class="card"><h3>Write</h3><p>120-180 words</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" data-title="Close">
+      <div class="content">
+        <span class="kicker vi">Kết thúc</span>
+        <span class="kicker en">Close</span>
+        <h2 class="vi">Data sạch là nền để transform đúng</h2>
+        <h2 class="en">Clean data is the foundation for correct transformation</h2>
+        <p class="lead vi">Tuần sau dùng filter, groupby, pivot và merge để tạo analysis-ready table. Nhưng chỉ làm vậy sau khi cleaning đã có log.</p>
+        <p class="lead en">Next module uses filter, groupby, pivot, and merge to create analysis-ready tables. But that only makes sense after cleaning has a log.</p>
+      </div>
+    </section>
+  </main>
+
+  <div class="bottom-controls" aria-label="Slide controls">
+    <button class="button" type="button" id="prev">Previous</button>
+    <span class="counter"><span id="current">1</span> / <span id="total">16</span></span>
+    <label for="jump">Slide</label>
+    <input class="jump" id="jump" type="number" min="1" max="16" value="1">
+    <button class="button primary" type="button" id="go">Go</button>
+    <button class="button primary" type="button" id="next">Next</button>
+  </div>
+
+  <aside class="toc-panel" id="toc-panel" aria-label="Table of contents">
+    <div class="toc-head">
+      <h2>Table of contents</h2>
+      <button class="button primary" type="button" id="toc-close">Close</button>
+    </div>
+    <div class="toc-list" id="toc-list"></div>
+  </aside>
+
+  <script src="../../assets/slides.js"></script>
+</body>
+</html>

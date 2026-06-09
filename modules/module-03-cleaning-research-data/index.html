@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Module 03 - Cleaning Research Data</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="../../assets/course.css">
+</head>
+<body data-lang="vi">
+  <header class="site-header">
+    <a class="brand" href="../../">
+      <span class="brand-mark" aria-hidden="true"></span>
+      <span>Python Research Viz</span>
+    </a>
+    <div class="nav-wrap">
+      <nav aria-label="Module navigation">
+        <a href="../../">Home</a>
+        <a href="slides.html">Slides</a>
+        <a href="interactive_demo.html">Demo</a>
+        <a href="live_coding.html">Notebook</a>
+        <a href="materials.html#assignment">Assignment</a>
+      </nav>
+      <div class="language-switcher" role="group" aria-label="Language">
+        <button class="lang-button" type="button" data-lang="vi" aria-pressed="true">VI</button>
+        <button class="lang-button" type="button" data-lang="en" aria-pressed="false">EN</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div>
+        <span class="eyebrow">Module 03</span>
+        <h1>
+          <span class="vi">Làm sạch dữ liệu nghiên cứu</span>
+          <span class="en">Cleaning research data</span>
+        </h1>
+        <p class="lead vi">Học cách biến một bảng lộn xộn thành dữ liệu có thể tin để vẽ figure: kiểm tra missing values, duplicate key, label variants, type conversion và valid ranges.</p>
+        <p class="lead en">Learn how to turn a messy table into trustworthy figure-ready evidence: missing values, duplicate keys, label variants, type conversion, and valid ranges.</p>
+        <div class="actions">
+          <a class="button primary" href="slides.html"><span class="vi">Mở slides</span><span class="en">Open slides</span></a>
+          <a class="button" href="live_coding.html"><span class="vi">Xem notebook</span><span class="en">View notebook</span></a>
+          <a class="button" href="interactive_demo.html"><span class="vi">Mở cleaning demo</span><span class="en">Open cleaning demo</span></a>
+        </div>
+      </div>
+
+      <figure class="hero-figure">
+        <img src="outputs/figures/module03_quality_before_after.png" alt="Before and after data quality checks">
+        <figcaption class="figure-caption vi">Figure không chỉ là kết quả phân tích; nó còn có thể dùng để minh bạch hóa dữ liệu đã được làm sạch ra sao.</figcaption>
+        <figcaption class="figure-caption en">A figure is not only an analysis result; it can also make the cleaning workflow transparent.</figcaption>
+      </figure>
+    </section>
+
+    <section id="build">
+      <div class="section-head">
+        <div>
+          <span class="eyebrow vi">Bạn sẽ tạo gì?</span>
+          <span class="eyebrow en">What you build</span>
+          <h2 class="vi">Một cleaning package có thể đưa vào Methods</h2>
+          <h2 class="en">A cleaning package that can support Methods writing</h2>
+        </div>
+        <p class="vi">Module này không dạy "xóa lỗi cho nhanh". Nó dạy cách ghi lại quyết định để người đọc hiểu figure được tạo từ dữ liệu nào.</p>
+        <p class="en">This module does not teach quick deletion. It teaches decision logging so readers can understand what evidence the figure comes from.</p>
+      </div>
+      <div class="grid four">
+        <article class="card">
+          <span class="card-top">1</span>
+          <h3>Inspect</h3>
+          <p class="vi">Tìm missing cells, duplicate key, label variants và type failures.</p>
+          <p class="en">Find missing cells, duplicate keys, label variants, and type failures.</p>
+        </article>
+        <article class="card">
+          <span class="card-top">2</span>
+          <h3>Clean</h3>
+          <p class="vi">Chuẩn hóa label, convert type, set invalid values thành NA.</p>
+          <p class="en">Normalize labels, convert types, and set invalid values to NA.</p>
+        </article>
+        <article class="card">
+          <span class="card-top">3</span>
+          <h3>Log</h3>
+          <p class="vi">Ghi issue, decision, affected rows, analysis risk và paper note.</p>
+          <p class="en">Record issue, decision, affected rows, analysis risk, and paper note.</p>
+        </article>
+        <article class="card">
+          <span class="card-top">4</span>
+          <h3>Write</h3>
+          <p class="vi">Viết Methods note và caption không overclaim.</p>
+          <p class="en">Write a Methods note and caption that do not overclaim.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="data">
+      <div class="section-head">
+        <div>
+          <span class="eyebrow">Datasets</span>
+          <h2 class="vi">Ba lớp dữ liệu để luyện cleaning thật sự</h2>
+          <h2 class="en">Three data layers for real cleaning practice</h2>
+        </div>
+        <p class="vi">Learner survey là lab chính. Education indicators giúp chuyển sang dữ liệu chính sách. Transfer bank giúp học viên tự nói về hướng research của mình.</p>
+        <p class="en">The learner survey is the main lab. Education indicators transfer the skill to policy data. The transfer bank helps learners connect the logic to their own research direction.</p>
+      </div>
+      <div class="grid three">
+        <article class="data-card">
+          <strong>Lab A: Messy learner survey</strong>
+          <p class="vi">Một bảng nhỏ có đủ lỗi: missing, duplicate key, label variants, type failures và invalid ranges.</p>
+          <p class="en">A small table with missingness, duplicate key, label variants, type failures, and invalid ranges.</p>
+          <a href="data/raw/module03_messy_learner_survey.csv">CSV</a>
+        </article>
+        <article class="data-card">
+          <strong>Lab B: Education indicators</strong>
+          <p class="vi">Country labels, percent strings, missing years và school-level labels không thống nhất.</p>
+          <p class="en">Country labels, percent strings, missing years, and inconsistent school-level labels.</p>
+          <a href="data/raw/module03_messy_education_indicators.csv">CSV</a>
+        </article>
+        <article class="data-card">
+          <strong>Lab C: Transfer bank</strong>
+          <p class="vi">Các kịch bản cho education policy, TCSOL, contrastive linguistics và translation studies.</p>
+          <p class="en">Scenarios for education policy, TCSOL, contrastive linguistics, and translation studies.</p>
+          <a href="data/raw/module03_transfer_cleaning_bank.csv">CSV</a>
+        </article>
+      </div>
+    </section>
+
+    <section id="workflow">
+      <div class="section-head">
+        <div>
+          <span class="eyebrow">Workflow</span>
+          <h2 class="vi">Cleaning tốt luôn để lại dấu vết</h2>
+          <h2 class="en">Good cleaning always leaves an audit trail</h2>
+        </div>
+        <p class="vi">Không ghi log thì rất khó giải thích vì sao một row bị bỏ, vì sao một label đổi tên, hoặc vì sao gain score chỉ tính trên complete pairs.</p>
+        <p class="en">Without a log, it is difficult to explain why a row was removed, why a label changed, or why gain scores use only complete pairs.</p>
+      </div>
+      <table class="mini-table">
+        <thead>
+          <tr><th>Step</th><th>Python action</th><th>Paper meaning</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Inspect</td><td><code>isna()</code>, <code>duplicated(subset=...)</code>, <code>value_counts()</code></td><td>Find risks before plotting.</td></tr>
+          <tr><td>Decide</td><td>Write the rule in a log row</td><td>Make the cleaning decision defensible.</td></tr>
+          <tr><td>Clean</td><td><code>str.strip()</code>, <code>to_numeric()</code>, <code>to_datetime()</code></td><td>Convert the table into analysis-ready evidence.</td></tr>
+          <tr><td>Export</td><td><code>to_csv()</code>, <code>savefig()</code></td><td>Produce a clean dataset, log, figure and caption.</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="output">
+      <div class="output-preview">
+        <img src="outputs/figures/module03_cleaning_workflow.png" alt="Cleaning workflow diagram">
+        <div>
+          <span class="eyebrow vi">Final output</span>
+          <span class="eyebrow en">Final output</span>
+          <h2 class="vi">Từ data bẩn đến figure có thể tin</h2>
+          <h2 class="en">From messy data to trustworthy figures</h2>
+          <p class="vi">Output cuối không chỉ là một bảng sạch. Nó là một package gồm clean data, cleaning log, figure before/after và Methods note.</p>
+          <p class="en">The final output is not just a clean table. It is a package: clean data, cleaning log, before/after figure, and Methods note.</p>
+          <div class="link-row">
+            <a class="button" href="outputs/figures/module03_quality_before_after.png">PNG</a>
+            <a class="button" href="outputs/figures/module03_quality_before_after.svg">SVG</a>
+            <a class="button" href="outputs/figures/module03_quality_before_after.pdf">PDF</a>
+            <a class="button" href="outputs/tables/module03_cleaning_log.csv">Cleaning log</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="callout">
+      <h2 class="vi">Câu hỏi kiểm tra trước khi sang Module 04</h2>
+      <h2 class="en">Check before moving to Module 04</h2>
+      <p class="vi">Nếu học viên giải thích được duplicate key, label map, type conversion audit và complete-pair rule, họ đã sẵn sàng transform data bằng filter, groupby, pivot và merge.</p>
+      <p class="en">If learners can explain the duplicate key, label map, type-conversion audit, and complete-pair rule, they are ready to transform data with filter, groupby, pivot, and merge.</p>
+      <div class="actions">
+        <a class="button primary" href="../../#modules"><span class="vi">Quay lại module explorer</span><span class="en">Back to module explorer</span></a>
+        <a class="button" href="materials.html#rubric">Rubric</a>
+        <a class="button" href="materials.html#readings">Readings</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <span class="vi">Module 03 đặt nền cho mọi transformation và figure sau này: dữ liệu chưa sạch thì chart chưa đáng tin.</span>
+    <span class="en">Module 03 prepares every later transformation and figure: if the data is not clean, the chart is not yet trustworthy.</span>
+  </footer>
+
+  <script src="../../assets/module.js"></script>
+</body>
+</html>

@@ -1,0 +1,9 @@
+issue_type,variable_or_rule,detected_before,cleaning_decision,affected_rows,analysis_risk,paper_note
+duplicate,duplicate learner-date key,1,Remove later row after checking learner_id and survey_date repeat the same observation unit.,1,Duplicate records overweight one learner in means.,State duplicate key and row count removed.
+label,activity_group variants,10,"Normalize case, spaces, hyphens, and underscores into canonical labels.",6,Same teaching condition can appear as several groups.,Report canonical label map.
+missing,pre/post vocabulary score,2,"Keep learner row, keep missing cell as NA, exclude incomplete pairs from gain analysis.",2,Dropping whole rows can hide attrition; filling scores can invent evidence.,Report missing outcome cells and complete-pair count.
+type,non-numeric score cell,1,"Convert scores with errors=""coerce"" and audit failed conversions.",1,Text in numeric columns can break or distort summary statistics.,"Report conversion failures as data cleaning, not analysis results."
+range,post score outside 0-100,1,Set impossible score to NA and flag the row.,1,Out-of-range values inflate group means and figure slopes.,Explain the valid score range.
+range,minutes_on_task below zero,1,Set impossible minutes to NA and preserve raw value in audit column.,1,Impossible exposure time weakens interpretation of activity effect.,Mention range rule for duration variable.
+range,satisfaction outside 1-5,1,Set impossible Likert value to NA.,1,Invalid ordinal values create misleading satisfaction summaries.,Mention allowed values in codebook.
+type,survey_date parse failure,1,Parse mixed dates; invalid strings become missing dates.,1,Timeline or ordering figures may be wrong if invalid dates are forced.,Report date parsing rule.

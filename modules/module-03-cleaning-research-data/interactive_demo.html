@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Module 03 Interactive Demo</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="../../assets/course.css">
+</head>
+<body data-lang="vi">
+  <header>
+    <nav aria-label="Demo navigation">
+      <a class="button primary" href="./">Module 03</a>
+      <a class="button" href="slides.html">Slides</a>
+      <a class="button" href="live_coding.html">Notebook</a>
+      <a class="button" href="materials.html">Materials</a>
+    </nav>
+    <div class="language-switcher" role="group" aria-label="Language">
+      <button class="lang-button" type="button" data-lang="vi" aria-pressed="true">VI</button>
+      <button class="lang-button" type="button" data-lang="en" aria-pressed="false">EN</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero compact">
+      <div>
+        <span class="kicker">Interactive demo</span>
+        <h1 class="vi">Trình duyệt cleaning log</h1>
+        <h1 class="en">Cleaning log explorer</h1>
+        <p class="lead vi">Lọc cleaning log theo issue type để thấy mỗi lỗi ảnh hưởng đến figure và Methods note ra sao.</p>
+        <p class="lead en">Filter the cleaning log by issue type to see how each problem affects figures and Methods writing.</p>
+      </div>
+      <div class="controls">
+        <label class="vi" for="issue-filter">Lọc issue</label>
+        <label class="en" for="issue-filter">Filter issue</label>
+        <select id="issue-filter" class="button">
+          <option value="all">All issues</option>
+        </select>
+      </div>
+    </section>
+
+    <section>
+      <div class="viz-layout">
+        <div class="chart">
+          <span class="kicker vi">Dòng bị ảnh hưởng</span>
+          <span class="kicker en">Affected rows</span>
+          <h2 class="vi">Log biến cleaning thành bằng chứng minh bạch</h2>
+          <h2 class="en">A log turns cleaning into transparent evidence</h2>
+          <div id="bars"></div>
+        </div>
+        <div>
+          <span class="kicker vi">Thẻ quyết định</span>
+          <span class="kicker en">Decision cards</span>
+          <div class="source-list" id="decision-list"></div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <span class="kicker vi">Quick check</span>
+      <span class="kicker en">Quick check</span>
+      <h2 class="vi">Một quyết định cleaning tốt phải trả lời được ba câu</h2>
+      <h2 class="en">A good cleaning decision answers three questions</h2>
+      <div class="grid three">
+        <article class="card"><h3>What?</h3><p class="vi">Lỗi nằm ở biến hoặc rule nào?</p><p class="en">Which variable or rule has the issue?</p></article>
+        <article class="card"><h3>Why?</h3><p class="vi">Nếu bỏ qua, figure sẽ sai thế nào?</p><p class="en">If ignored, how will the figure be wrong?</p></article>
+        <article class="card"><h3>How reported?</h3><p class="vi">Paper note sẽ viết gì?</p><p class="en">What will the paper note say?</p></article>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <span class="vi">Gợi ý: cleaning log là cầu nối giữa notebook và Methods section.</span>
+    <span class="en">Tip: the cleaning log connects the notebook to the Methods section.</span>
+  </footer>
+
+  <script src="../../assets/module.js"></script>
+  <script>
+    function parseCsv(text) {
+      const rows = [];
+      let row = [];
+      let cell = "";
+      let quoted = false;
+      for (let i = 0; i < text.length; i += 1) {
+        const char = text[i];
+        const next = text[i + 1];
+        if (char === '"' && quoted && next === '"') {
+          cell += '"';
+          i += 1;
+        } else if (char === '"') {
+          quoted = !quoted;
+        } else if (char === "," && !quoted) {
+          row.push(cell);
+          cell = "";
+        } else if ((char === "\n" || char === "\r") && !quoted) {
+          if (char === "\r" && next === "\n") i += 1;
+          row.push(cell);
+          if (row.some((value) => value.length > 0)) rows.push(row);
+          row = [];
+          cell = "";
+        } else {
+          cell += char;
+        }
+      }
+      if (cell.length || row.length) {
+        row.push(cell);
+        rows.push(row);
+      }
+      const headers = rows.shift();
+      return rows.map((values) => Object.fromEntries(headers.map((header, index) => [header, values[index] || ""])));
+    }
+
+    const issueFilter = document.getElementById("issue-filter");
+    const bars = document.getElementById("bars");
+    const list = document.getElementById("decision-list");
+    let logRows = [];
+
+    function color(type) {
+      return {
+        duplicate: "#172033",
+        label: "#245ee8",
+        missing: "#bd3f68",
+        type: "#b67218",
+        range: "#16815f"
+      }[type] || "#245ee8";
+    }
+
+    function render() {
+      const selected = issueFilter.value;
+      const filtered = selected === "all" ? logRows : logRows.filter((row) => row.issue_type === selected);
+      const max = Math.max(...logRows.map((row) => Number(row.affected_rows) || 0), 1);
+      bars.innerHTML = logRows.map((row) => {
+        const value = Number(row.affected_rows) || 0;
+        return `
+          <div class="bar-row">
+            <div class="bar-label">${row.issue_type}</div>
+            <div class="bar-track"><div class="bar-fill" style="width:${(value / max) * 100}%; background:${color(row.issue_type)}"></div></div>
+            <div class="bar-value">${value}</div>
+          </div>
+        `;
+      }).join("");
+
+      list.innerHTML = filtered.map((row) => `
+        <article class="source-card schema-card ${row.issue_type === "range" ? "numeric" : row.issue_type}">
+          <h3>${row.variable_or_rule}</h3>
+          <div class="meta">
+            <span class="chip">${row.issue_type}</span>
+            <span class="chip">${row.detected_before} detected</span>
+            <span class="chip">${row.affected_rows} affected</span>
+          </div>
+          <p><strong>Decision:</strong> ${row.cleaning_decision}</p>
+          <p><strong>Risk:</strong> ${row.analysis_risk}</p>
+          <p><strong>Paper note:</strong> ${row.paper_note}</p>
+        </article>
+      `).join("");
+    }
+
+    fetch("outputs/tables/module03_cleaning_log.csv")
+      .then((response) => response.text())
+      .then((text) => {
+        logRows = parseCsv(text);
+        [...new Set(logRows.map((row) => row.issue_type))].sort().forEach((type) => {
+          const option = document.createElement("option");
+          option.value = type;
+          option.textContent = type;
+          issueFilter.appendChild(option);
+        });
+        render();
+      });
+
+    issueFilter.addEventListener("change", render);
+  </script>
+</body>
+</html>

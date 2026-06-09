@@ -63,6 +63,7 @@ Current completed modules:
 
 - [`modules/module-01-research-data-workflow/`](modules/module-01-research-data-workflow/) provides the canonical V2 pattern: learner page, slides, interactive demo, runnable notebook, rendered notebook, datasets, outputs, assignment, rubric, readings, and data dictionary.
 - [`modules/module-02-tidy-data-codebook/`](modules/module-02-tidy-data-codebook/) extends the foundation with wide-to-long reshaping, variable types, codebook design, tidy output tables, and a first tidy-data figure.
+- [`modules/module-03-cleaning-research-data/`](modules/module-03-cleaning-research-data/) adds missingness, duplicate-key checks, label normalization, type conversion, valid-range rules, cleaning logs, and a before/after data-quality figure.
 
 ## Tool Stack
 

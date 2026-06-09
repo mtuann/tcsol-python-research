@@ -1,0 +1,18 @@
+learner_id,research_track,activity_group,cefr_start,survey_date,pre_vocab_score,post_vocab_score,minutes_on_task,satisfaction_1_5,notes,activity_group_raw,pre_vocab_score_raw,post_vocab_score_raw,minutes_on_task_raw,satisfaction_1_5_raw,survey_date_raw,complete_vocab_pair,gain_vocab_score
+L001,TCSOL,task-based,A2,2026-03-01,42.0,63.0,32.0,4.0,completed,Task-Based,42,63,32,4,2026-03-01,True,21.0
+L002,TCSOL,task-based,A2,2026-03-01,45.0,66.0,31.0,4.0,space variant in label,task based,45,66,31,4,2026/03/01,True,21.0
+L003,TCSOL,task-based,B1,2026-03-01,55.0,70.0,34.0,5.0,underscore variant in label,Task_based,55,70,34,5,03-01-2026,True,15.0
+L004,Contrastive Linguistics,form-focused,B1,2026-03-02,58.0,64.0,28.0,3.0,completed,form-focused,58,64,28,3,2026-03-02,True,6.0
+L005,Translation Studies,form-focused,B1,2026-03-02,51.0,60.0,27.0,3.0,capitalization variant,Form Focused,51,60,27,3,2026-03-02,True,9.0
+L006,Education Policy,task-based,A2,2026-03-03,39.0,57.0,30.0,4.0,completed,task-based,39,57,30,4,2026-03-03,True,18.0
+L007,TCSOL,task-based,A1,2026-03-03,,54.0,29.0,4.0,missing pre-test,task-based,,54,29,4,2026-03-03,False,
+L008,TCSOL,task-based,A2,2026-03-04,48.0,,33.0,5.0,missing post-test,task-based,48,,33,5,2026-03-04,False,
+L009,Translation Studies,mtpe-practice,B1,2026-03-04,60.0,,35.0,5.0,post score outside 0-100,MTPE practice,60,105,35,5,2026-03-04,False,
+L010,Contrastive Linguistics,contrastive-mini-lesson,A2,2026-03-05,46.0,61.0,,4.0,negative minutes typo,contrastive mini-lesson,46,61,-3,4,2026-03-05,True,15.0
+L011,Education Policy,task-based,A2,,44.0,58.0,30.0,4.0,invalid date,task based,44,58,30,4,not-a-date,True,14.0
+L012,TCSOL,task-based,A2,2026-03-05,50.0,67.0,32.0,4.0,completed,Task-Based,50,67,32,4,2026-03-05,True,17.0
+L013,Translation Studies,mtpe-practice,B1,2026-03-06,52.0,62.0,36.0,,missing satisfaction,MTPE Practice,52,62,36,,2026-03-06,True,10.0
+L014,Contrastive Linguistics,form-focused,B1,2026-03-06,57.0,,26.0,3.0,text entered in numeric score,Form-focused,57,sixty-five,26,3,2026-03-06,False,
+L015,Education Policy,task-based,A2,2026-03-07,43.0,59.0,31.0,4.0,completed,task-based,43,59,31,4,2026-03-07,True,16.0
+L016,TCSOL,task-based,A2,2026-03-07,41.0,58.0,30.0,4.0,label variant repeated,task based,41,58,30,4,2026-03-07,True,17.0
+L017,TCSOL,task-based,A2,2026-03-08,49.0,69.0,32.0,,satisfaction outside 1-5,Task-Based,49,69,32,6,2026-03-08,True,20.0

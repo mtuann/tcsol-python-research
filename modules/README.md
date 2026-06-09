@@ -10,7 +10,7 @@ The old V1 lessons are preserved in branch `v1-tcsol-beginner` and published at 
 |---|---|---|
 | 01 | [Research data workflow](module-01-research-data-workflow/) | available |
 | 02 | [Tidy data and codebook](module-02-tidy-data-codebook/) | available |
-| 03 | Cleaning research data | planned |
+| 03 | [Cleaning research data](module-03-cleaning-research-data/) | available |
 | 04 | Transforming data for analysis | planned |
 | 05 | Figure anatomy | planned |
 | 06 | Visual encoding and perception | planned |

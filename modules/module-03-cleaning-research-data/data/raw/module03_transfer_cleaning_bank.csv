@@ -1,0 +1,6 @@
+track,dirty_problem,cleaning_decision,risk_if_ignored,output_note
+education_policy,Country names appear as Viet Nam/Vietnam/PR China,Create a country normalization map before comparing countries,Same country can be plotted as two separate bars,Report the map and keep original label for audit.
+tcsol,Activity group appears as task based/task-based/Task_based,Normalize category labels before group comparison,Group means are split across spelling variants,Mention label harmonization in data preparation.
+contrastive_linguistics,Segment IDs repeat after merging coder files,"Check duplicates by stable unit key, not only exact rows",A repeated segment can overweight one linguistic pattern,Define the unit of observation and duplicate rule.
+translation_studies,BLEU/TER scores imported as text or percent strings,"Convert numeric columns with errors=""coerce"" and audit failures",Mean scores may silently fail or exclude records,Report conversion rule and missingness after conversion.
+academic_writing,Survey date has mixed formats and invalid strings,Parse dates with explicit decision for invalid dates,Timeline figures can put events in wrong order,Keep invalid dates as missing and explain exclusion.

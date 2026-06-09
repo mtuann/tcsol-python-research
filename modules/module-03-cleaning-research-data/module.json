@@ -1,0 +1,46 @@
+{
+  "number": "03",
+  "slug": "module-03-cleaning-research-data",
+  "status": "available",
+  "title": {
+    "vi": "Làm sạch dữ liệu nghiên cứu",
+    "en": "Cleaning research data"
+  },
+  "difficulty": {
+    "vi": "Beginner",
+    "en": "Beginner"
+  },
+  "guiding_question": {
+    "vi": "Data bẩn sẽ làm figure nói sai như thế nào?",
+    "en": "How can messy data make a figure say the wrong thing?"
+  },
+  "research_task": {
+    "vi": "Tạo cleaning log, clean dataset, before/after quality figure và Methods note.",
+    "en": "Create a cleaning log, clean dataset, before/after quality figure, and Methods note."
+  },
+  "data_practice": {
+    "vi": "Missing values, duplicate keys, label normalization, type conversion, valid ranges.",
+    "en": "Missing values, duplicate keys, label normalization, type conversion, valid ranges."
+  },
+  "visualization_focus": {
+    "vi": "Before/after data-quality figure và label normalization view.",
+    "en": "Before/after data-quality figure and label-normalization view."
+  },
+  "paper_output": {
+    "vi": "Cleaning log + Methods data-preparation paragraph + caption có limitation.",
+    "en": "Cleaning log + Methods data-preparation paragraph + caption with limitation."
+  },
+  "chart_types": ["before-after bar chart", "label normalization bar", "data-quality table"],
+  "tools": ["Jupyter", "pandas", "matplotlib", "Markdown"],
+  "datasets": [
+    "data/raw/module03_messy_learner_survey.csv",
+    "data/raw/module03_messy_education_indicators.csv",
+    "data/raw/module03_transfer_cleaning_bank.csv"
+  ],
+  "outputs": [
+    "outputs/tables/module03_cleaning_log.csv",
+    "outputs/tables/module03_quality_summary.csv",
+    "outputs/tables/module03_cleaned_learner_survey.csv",
+    "outputs/figures/module03_quality_before_after.png"
+  ]
+}

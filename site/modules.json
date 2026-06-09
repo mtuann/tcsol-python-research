@@ -140,7 +140,7 @@
       "number": "03",
       "slug": "module-03-cleaning-research-data",
       "stage": "data-foundation",
-      "status": "planned",
+      "status": "available",
       "difficulty": {
         "vi": "Beginner",
         "en": "Beginner"
@@ -154,23 +154,23 @@
         "en": "How can messy data make a figure say the wrong thing?"
       },
       "research_task": {
-        "vi": "Tạo cleaning log và giải thích quyết định xử lý missing values, duplicate, label, type.",
-        "en": "Create a cleaning log and explain decisions for missing values, duplicates, labels, and types."
+        "vi": "Tạo cleaning log, clean dataset, before/after quality figure và Methods note.",
+        "en": "Create a cleaning log, clean dataset, before/after quality figure, and Methods note."
       },
       "data_practice": {
-        "vi": "Missingness, duplicates, label normalization, type conversion.",
-        "en": "Missingness, duplicates, label normalization, type conversion."
+        "vi": "Missing values, duplicate keys, label normalization, type conversion, valid ranges.",
+        "en": "Missing values, duplicate keys, label normalization, type conversion, valid ranges."
       },
       "visualization_focus": {
-        "vi": "Before/after data quality view để thấy cleaning thay đổi evidence ra sao.",
-        "en": "Before/after data quality view showing how cleaning changes evidence."
+        "vi": "Before/after data-quality figure và label normalization view.",
+        "en": "Before/after data-quality figure and label-normalization view."
       },
       "paper_output": {
-        "vi": "Cleaning log + before/after table.",
-        "en": "Cleaning log + before/after table."
+        "vi": "Cleaning log + Methods data-preparation paragraph + caption có limitation.",
+        "en": "Cleaning log + Methods data-preparation paragraph + caption with limitation."
       },
-      "chart_types": ["missingness bar", "before-after table"],
-      "tools": ["pandas"],
+      "chart_types": ["before-after bar chart", "label normalization bar", "data-quality table"],
+      "tools": ["Jupyter", "pandas", "matplotlib", "Markdown"],
       "path": "modules/module-03-cleaning-research-data/"
     },
     {

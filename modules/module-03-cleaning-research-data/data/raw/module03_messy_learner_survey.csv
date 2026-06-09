@@ -1,0 +1,19 @@
+learner_id,research_track,activity_group,cefr_start,survey_date,pre_vocab_score,post_vocab_score,minutes_on_task,satisfaction_1_5,notes
+L001,TCSOL,Task-Based,A2,2026-03-01,42,63,32,4,completed
+L002,TCSOL,task based,A2,2026/03/01,45,66,31,4,space variant in label
+L003,TCSOL,Task_based,B1,03-01-2026,55,70,34,5,underscore variant in label
+L004,Contrastive Linguistics,form-focused,B1,2026-03-02,58,64,28,3,completed
+L005,Translation Studies,Form Focused,B1,2026-03-02,51,60,27,3,capitalization variant
+L006,Education Policy,task-based,A2,2026-03-03,39,57,30,4,completed
+L007,TCSOL,task-based,A1,2026-03-03,,54,29,4,missing pre-test
+L008,TCSOL,task-based,A2,2026-03-04,48,,33,5,missing post-test
+L009,Translation Studies,MTPE practice,B1,2026-03-04,60,105,35,5,post score outside 0-100
+L010,Contrastive Linguistics,contrastive mini-lesson,A2,2026-03-05,46,61,-3,4,negative minutes typo
+L011,Education Policy,task based,A2,not-a-date,44,58,30,4,invalid date
+L012,TCSOL,Task-Based,A2,2026-03-05,50,67,32,4,completed
+L012,TCSOL,Task-Based,A2,2026-03-05,50,67,32,4,exact duplicate row
+L013,Translation Studies,MTPE Practice,B1,2026-03-06,52,62,36,,missing satisfaction
+L014,Contrastive Linguistics,Form-focused,B1,2026-03-06,57,sixty-five,26,3,text entered in numeric score
+L015,Education Policy,task-based,A2,2026-03-07,43,59,31,4,completed
+L016,TCSOL,task based,A2,2026-03-07,41,58,30,4,label variant repeated
+L017,TCSOL,Task-Based,A2,2026-03-08,49,69,32,6,satisfaction outside 1-5

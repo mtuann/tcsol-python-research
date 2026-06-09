@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Module 03 Materials</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="../../assets/course.css">
+</head>
+<body data-lang="vi">
+  <header>
+    <nav aria-label="Materials navigation">
+      <a class="button primary" href="./">Module 03</a>
+      <a class="button" href="slides.html">Slides</a>
+      <a class="button" href="live_coding.html">Notebook</a>
+      <a class="button" href="#assignment">Assignment</a>
+      <a class="button" href="#rubric">Rubric</a>
+      <a class="button" href="#readings">Readings</a>
+    </nav>
+    <div class="language-switcher" role="group" aria-label="Language">
+      <button class="lang-button" type="button" data-lang="vi" aria-pressed="true">VI</button>
+      <button class="lang-button" type="button" data-lang="en" aria-pressed="false">EN</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero compact">
+      <div>
+        <span class="kicker">Module 03 materials</span>
+        <h1 class="vi">Bài tập, rubric và nguồn đọc</h1>
+        <h1 class="en">Assignment, rubric, and readings</h1>
+        <p class="lead vi">Trang này render học liệu để học viên đọc trên GitHub Pages, không phải mở raw Markdown.</p>
+        <p class="lead en">This page renders the materials for GitHub Pages so learners do not need raw Markdown.</p>
+      </div>
+      <div class="actions">
+        <a class="button" href="assignment.md">assignment.md</a>
+        <a class="button" href="rubric.md">rubric.md</a>
+        <a class="button" href="readings.md">readings.md</a>
+      </div>
+    </section>
+
+    <section id="assignment">
+      <span class="kicker vi">Bài tập</span>
+      <span class="kicker en">Assignment</span>
+      <h2 class="vi">Nộp cleaning package có thể dùng để viết Methods</h2>
+      <h2 class="en">Submit a cleaning package that can support Methods writing</h2>
+      <div class="grid four">
+        <article class="card"><h3>Part A</h3><p class="vi">Inspect data và xác định observation key.</p><p class="en">Inspect the data and identify the observation key.</p></article>
+        <article class="card"><h3>Part B</h3><p class="vi">Clean missing, duplicate, labels, type và ranges.</p><p class="en">Clean missingness, duplicates, labels, types, and ranges.</p></article>
+        <article class="card"><h3>Part C</h3><p class="vi">Tạo before/after quality figure.</p><p class="en">Create a before/after quality figure.</p></article>
+        <article class="card"><h3>Part D</h3><p class="vi">Viết 120-180 từ Methods note.</p><p class="en">Write a 120-180 word Methods note.</p></article>
+      </div>
+    </section>
+
+    <section id="rubric">
+      <span class="kicker">Rubric</span>
+      <h2 class="vi">Chấm theo quyết định cleaning và khả năng giải thích</h2>
+      <h2 class="en">Grade cleaning decisions and explanatory clarity</h2>
+      <table>
+        <thead><tr><th>Category</th><th>Points</th><th>Strong submission</th></tr></thead>
+        <tbody>
+          <tr><td>Problem inspection</td><td>15</td><td>Identifies missing values, duplicate key, label variants, type failures, and invalid ranges.</td></tr>
+          <tr><td>Cleaning decisions</td><td>25</td><td>Cleans one rule at a time, preserves audit columns, and avoids unjustified filling.</td></tr>
+          <tr><td>Cleaning log</td><td>20</td><td>States issue type, detected count, decision, affected rows, risk, and paper note.</td></tr>
+          <tr><td>Figure quality</td><td>15</td><td>Before/after quality figure is readable, labeled, exported, and linked to the cleaning log.</td></tr>
+          <tr><td>Methods writing</td><td>20</td><td>Explains observation key, row exclusions, conversion rules, and limitation.</td></tr>
+          <tr><td>Reproducibility</td><td>5</td><td>Notebook runs from raw data to outputs without manual edits.</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="readings">
+      <span class="kicker vi">Nguồn đọc</span>
+      <span class="kicker en">Readings</span>
+      <h2 class="vi">Đọc pandas theo đúng vấn đề cleaning</h2>
+      <h2 class="en">Read pandas by cleaning problem</h2>
+      <div class="grid two">
+        <article class="card"><h3>Missing data</h3><p>How pandas represents missing values and why missingness affects data types.</p><a href="https://pandas.pydata.org/docs/user_guide/missing_data.html">Open source</a></article>
+        <article class="card"><h3>Duplicate keys</h3><p>Use `duplicated(subset=...)` when duplicates depend on an observation key.</p><a href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.duplicated.html">Open source</a></article>
+        <article class="card"><h3>Type conversion</h3><p>`to_numeric(..., errors=&quot;coerce&quot;)` reveals failed numeric parsing and requires an audit.</p><a href="https://pandas.pydata.org/docs/reference/api/pandas.to_numeric.html">Open source</a></article>
+        <article class="card"><h3>Date parsing</h3><p>`to_datetime(..., errors=&quot;coerce&quot;)` keeps invalid dates visible as missing dates.</p><a href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.to_datetime.html">Open source</a></article>
+      </div>
+    </section>
+
+    <section id="critique">
+      <span class="kicker vi">Critique</span>
+      <span class="kicker en">Critique</span>
+      <h2 class="vi">Chart yếu thường bắt đầu từ data chưa sạch</h2>
+      <h2 class="en">Weak charts often begin with unclean data</h2>
+      <table>
+        <thead><tr><th>Problem</th><th>Misleading result</th><th>Fix</th></tr></thead>
+        <tbody>
+          <tr><td>Label variants</td><td>One group becomes several bars.</td><td>Normalize labels with a map.</td></tr>
+          <tr><td>Duplicate key</td><td>One learner receives extra weight.</td><td>Define and check the observation key.</td></tr>
+          <tr><td>Invalid score</td><td>Mean score is inflated.</td><td>Set impossible values to NA and log the rule.</td></tr>
+          <tr><td>Silent missingness</td><td>Sample size changes invisibly.</td><td>Report complete-pair count.</td></tr>
+        </tbody>
+      </table>
+    </section>
+  </main>
+
+  <footer>
+    <span class="vi">Gợi ý dạy: luôn hỏi "lỗi này làm claim trong figure sai như thế nào?"</span>
+    <span class="en">Teaching suggestion: always ask "how would this issue distort the figure claim?"</span>
+  </footer>
+
+  <script src="../../assets/module.js"></script>
+</body>
+</html>

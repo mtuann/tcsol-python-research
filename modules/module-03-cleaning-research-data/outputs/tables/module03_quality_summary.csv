@@ -1,0 +1,9 @@
+quality_check,issue_count_before,unresolved_after_cleaning,decision
+Duplicate learner-date records,1,0,Removed duplicate by observation-unit key.
+Non-canonical activity labels,6,0,Mapped variants to canonical labels.
+Raw missing outcome cells,2,0,Kept as NA and documented for complete-pair analysis.
+Non-numeric score cells,1,0,Coerced to NA and logged.
+Out-of-range score values,1,0,Set impossible score to NA and flagged.
+Invalid duration values,1,0,Set negative minutes to NA.
+Invalid Likert values,1,0,Set value outside 1-5 to NA.
+Invalid date strings,1,0,Parsed as missing date with raw value preserved.

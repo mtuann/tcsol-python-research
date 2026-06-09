@@ -1,0 +1,8 @@
+variable,raw_variants,canonical_value,why_it_matters
+activity_group,Task-Based / task based / Task_based / task-based,task-based,Compare activity groups without spelling split.
+activity_group,form-focused / Form Focused / Form-focused,form-focused,Keep form-focused lessons together.
+activity_group,MTPE practice / MTPE Practice,mtpe-practice,Treat MTPE as one activity label.
+country,Viet Nam / Vietnam,Vietnam,Avoid duplicate country bars.
+country,China / PR China,China,Avoid duplicate country bars.
+country,Thailand / Thai Land,Thailand,Avoid duplicate country bars.
+school_level,lower secondary / lower_secondary,lower_secondary,Make school-level filters consistent.

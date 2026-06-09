@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Module 03 Rendered Notebook</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="../../assets/course.css">
+</head>
+<body data-lang="vi">
+  <header>
+    <nav aria-label="Notebook navigation">
+      <a class="button primary" href="./">Module 03</a>
+      <a class="button" href="slides.html">Slides</a>
+      <a class="button" href="interactive_demo.html">Demo</a>
+      <a class="button" href="live_coding.ipynb">Download .ipynb</a>
+    </nav>
+    <div class="language-switcher" role="group" aria-label="Language">
+      <button class="lang-button" type="button" data-lang="vi" aria-pressed="true">VI</button>
+      <button class="lang-button" type="button" data-lang="en" aria-pressed="false">EN</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero compact">
+      <div>
+        <span class="kicker">Rendered notebook</span>
+        <h1>Module 03 live coding</h1>
+        <p class="lead vi">Bản web-readable của notebook. Khi dạy trực tiếp, hãy chạy file `.ipynb`; trang này giúp học viên đọc logic từ inspect đến Methods note.</p>
+        <p class="lead en">The web-readable version of the notebook. In class, run the `.ipynb`; this page helps learners read the logic from inspection to Methods note.</p>
+      </div>
+      <div><a class="button primary" href="live_coding.ipynb">Open notebook</a></div>
+    </section>
+
+    <section>
+      <span class="kicker vi">Mục tiêu</span>
+      <span class="kicker en">Goal</span>
+      <h2 class="vi">Clean data bằng rule có thể giải thích trong paper</h2>
+      <h2 class="en">Clean data with rules that can be explained in a paper</h2>
+      <p class="vi">Notebook đọc bảng learner survey lộn xộn, inspect lỗi, clean theo từng rule, export clean dataset, cleaning log và before/after quality figure.</p>
+      <p class="en">The notebook reads a messy learner survey, inspects problems, cleans one rule at a time, and exports a clean dataset, cleaning log, and before/after quality figure.</p>
+    </section>
+
+    <section>
+      <h2>1. Load tools and paths</h2>
+      <div class="cell">
+        <div class="cell-head"><span>Code</span><span>Python</span></div>
+        <pre>from pathlib import Path
+
+import matplotlib.pyplot as plt
+import pandas as pd
+
+BASE = Path.cwd()
+RAW = BASE / "data" / "raw"
+OUT_TABLES = BASE / "outputs" / "tables"
+OUT_FIGURES = BASE / "outputs" / "figures"</pre>
+        <div class="output vi">Ý nghĩa: raw data và output package được tách rõ, để không ghi đè dữ liệu gốc.</div>
+        <div class="output en">Meaning: raw data and output package are separated so raw data is not overwritten.</div>
+      </div>
+    </section>
+
+    <section>
+      <h2>2. Read and inspect the messy table</h2>
+      <div class="cell">
+        <div class="cell-head"><span>Code</span><span>pandas</span></div>
+        <pre>raw = pd.read_csv(RAW / "module03_messy_learner_survey.csv", keep_default_na=False)
+print(raw.shape)
+raw.head()
+
+print("Duplicate learner-date keys:",
+      raw.duplicated(subset=["learner_id", "survey_date"], keep="first").sum())
+print(raw["activity_group"].value_counts())</pre>
+        <div class="output">(18, 10)</div>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>learner_id</th><th>activity_group</th><th>survey_date</th><th>pre</th><th>post</th><th>notes</th></tr></thead>
+          <tbody>
+            <tr><td>L003</td><td>Task_based</td><td>03-01-2026</td><td>55</td><td>70</td><td>underscore variant</td></tr>
+            <tr><td>L009</td><td>MTPE practice</td><td>2026-03-04</td><td>60</td><td>105</td><td>score outside 0-100</td></tr>
+            <tr><td>L014</td><td>Form-focused</td><td>2026-03-06</td><td>57</td><td>sixty-five</td><td>text score</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section>
+      <h2>3. Define label normalization</h2>
+      <div class="cell">
+        <div class="cell-head"><span>Code</span><span>string cleaning</span></div>
+        <pre>def normalize_text(series):
+    return (series.astype(str)
+        .str.strip()
+        .str.lower()
+        .str.replace(r"[_-]+", " ", regex=True)
+        .str.replace(r"\s+", " ", regex=True))
+
+activity_map = {
+    "task based": "task-based",
+    "form focused": "form-focused",
+    "mtpe practice": "mtpe-practice",
+    "contrastive mini lesson": "contrastive-mini-lesson",
+}</pre>
+        <div class="output vi">Ý nghĩa: label map làm rõ những biến thể nào được gom lại, thay vì sửa text tùy hứng.</div>
+        <div class="output en">Meaning: the label map states which variants are combined, instead of editing text ad hoc.</div>
+      </div>
+    </section>
+
+    <section>
+      <h2>4. Clean one rule at a time</h2>
+      <div class="cell">
+        <div class="cell-head"><span>Code</span><span>audit columns</span></div>
+        <pre>duplicate_mask = raw.duplicated(subset=["learner_id", "survey_date"], keep="first")
+clean = raw.loc[~duplicate_mask].copy()
+
+clean["activity_group_raw"] = clean["activity_group"]
+clean["activity_group"] = normalize_text(clean["activity_group"]).map(activity_map)
+
+for col in ["pre_vocab_score", "post_vocab_score", "minutes_on_task", "satisfaction_1_5"]:
+    clean[f"{col}_raw"] = clean[col]
+    clean[col] = pd.to_numeric(clean[col].replace("", pd.NA), errors="coerce")
+
+clean["survey_date_raw"] = clean["survey_date"]
+clean["survey_date"] = pd.to_datetime(
+    clean["survey_date"].replace("", pd.NA),
+    errors="coerce",
+    format="mixed"
+)</pre>
+        <div class="output vi">Audit columns giúp người dạy và người đọc biết giá trị gốc trước khi convert.</div>
+        <div class="output en">Audit columns show the original value before conversion.</div>
+      </div>
+    </section>
+
+    <section>
+      <h2>5. Apply valid-range rules</h2>
+      <div class="cell">
+        <div class="cell-head"><span>Code</span><span>range checks</span></div>
+        <pre>invalid_post = clean["post_vocab_score"].notna() & ~clean["post_vocab_score"].between(0, 100)
+invalid_minutes = clean["minutes_on_task"].notna() & (clean["minutes_on_task"] < 0)
+invalid_sat = clean["satisfaction_1_5"].notna() & ~clean["satisfaction_1_5"].between(1, 5)
+
+clean.loc[invalid_post, "post_vocab_score"] = pd.NA
+clean.loc[invalid_minutes, "minutes_on_task"] = pd.NA
+clean.loc[invalid_sat, "satisfaction_1_5"] = pd.NA
+
+clean["complete_vocab_pair"] = clean[["pre_vocab_score", "post_vocab_score"]].notna().all(axis=1)
+clean["gain_vocab_score"] = clean["post_vocab_score"] - clean["pre_vocab_score"]</pre>
+        <div class="output vi">Không fill điểm sai. Ta giữ row, nhưng giá trị bất khả thi trở thành missing có log.</div>
+        <div class="output en">Do not fill impossible scores. Keep the row, but make the impossible value logged missingness.</div>
+      </div>
+    </section>
+
+    <section>
+      <h2>6. Read the cleaning log</h2>
+      <div class="cell">
+        <div class="cell-head"><span>Code</span><span>output</span></div>
+        <pre>cleaning_log = pd.read_csv(OUT_TABLES / "module03_cleaning_log.csv")
+cleaning_log[["issue_type", "variable_or_rule", "affected_rows", "paper_note"]]</pre>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>issue</th><th>rule</th><th>affected</th><th>paper note</th></tr></thead>
+          <tbody>
+            <tr><td>duplicate</td><td>duplicate learner-date key</td><td>1</td><td>State duplicate key and row count removed.</td></tr>
+            <tr><td>label</td><td>activity_group variants</td><td>6</td><td>Report canonical label map.</td></tr>
+            <tr><td>range</td><td>post score outside 0-100</td><td>1</td><td>Explain the valid score range.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section>
+      <h2>7. Plot the before/after quality figure</h2>
+      <figure class="figure-frame">
+        <img src="outputs/figures/module03_quality_before_after.png" alt="Before after data quality figure">
+        <figcaption class="vi">Figure này không claim hiệu quả giảng dạy. Nó cho thấy workflow cleaning đã xử lý hoặc document những vấn đề nào.</figcaption>
+        <figcaption class="en">This figure does not claim teaching effectiveness. It shows which problems the cleaning workflow fixed or documented.</figcaption>
+      </figure>
+    </section>
+
+    <section>
+      <h2>8. Caption and Methods draft</h2>
+      <div class="cell">
+        <div class="cell-head"><span>Writing output</span><span>Markdown</span></div>
+        <pre>The learner-survey data were screened for duplicate learner-date records, missing outcome cells, non-canonical activity labels, invalid numeric ranges, and date parsing failures. Invalid numeric values were set to missing and raw audit columns were preserved; gain scores were calculated only for learners with complete pre/post vocabulary scores.</pre>
+      </div>
+      <p class="vi">Writing tốt không nói "đã clean" chung chung. Nó nói clean cái gì, rule nào, và ảnh hưởng đến analysis sample ra sao.</p>
+      <p class="en">Good writing does not vaguely say "the data were cleaned." It says what was cleaned, under which rule, and how it affects the analysis sample.</p>
+    </section>
+  </main>
+
+  <footer>
+    <span class="vi">Sau khi đọc trang này, hãy chạy notebook thật để tự tái tạo clean data, log và figure.</span>
+    <span class="en">After reading this page, run the actual notebook to recreate the clean data, log, and figure.</span>
+  </footer>
+
+  <script src="../../assets/module.js"></script>
+</body>
+</html>

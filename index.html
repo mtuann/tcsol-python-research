@@ -336,6 +336,8 @@
       min-height: 275px;
       padding: 18px;
       box-shadow: none;
+      display: flex;
+      flex-direction: column;
     }
 
     .module-card h3 {
@@ -378,6 +380,36 @@
 
     .module-detail b {
       color: var(--ink);
+    }
+
+    .module-action-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: auto;
+      padding-top: 14px;
+    }
+
+    .module-action {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 38px;
+      padding: 0 13px;
+      border: 1px solid var(--blue);
+      border-radius: 999px;
+      background: var(--blue);
+      color: #fff;
+      text-decoration: none;
+      font-weight: 900;
+    }
+
+    .module-action.disabled {
+      border-color: var(--line);
+      background: var(--faint);
+      color: var(--muted);
     }
 
     .gallery-card {
@@ -605,6 +637,10 @@
         "card.data": "Data",
         "card.figure": "Figure",
         "card.output": "Output",
+        "card.open": "Mở module",
+        "card.soon": "Đang build",
+        "card.status.available": "Available",
+        "card.status.planned": "Planned",
         "footer.text": "V2 đang được build từ clean root. V1 vẫn ở"
       },
       en: {
@@ -656,6 +692,10 @@
         "card.data": "Data",
         "card.figure": "Figure",
         "card.output": "Output",
+        "card.open": "Open module",
+        "card.soon": "In progress",
+        "card.status.available": "Available",
+        "card.status.planned": "Planned",
         "footer.text": "V2 is being built from a clean root. V1 remains at"
       }
     };
@@ -734,12 +774,18 @@
           <p class="module-question">${localizeText(module.guiding_question)}</p>
           <div class="module-meta">
             <span class="chip">${localizeText(module.difficulty)}</span>
+            <span class="chip">${module.status === "available" ? t("card.status.available") : t("card.status.planned")}</span>
             <span class="chip">${module.tools.join(" + ")}</span>
           </div>
           <p class="module-detail"><b>${t("card.research")}:</b> ${localizeText(module.research_task)}</p>
           <p class="module-detail"><b>${t("card.data")}:</b> ${localizeText(module.data_practice)}</p>
           <p class="module-detail"><b>${t("card.figure")}:</b> ${localizeText(module.visualization_focus)}</p>
           <p class="module-detail"><b>${t("card.output")}:</b> ${localizeText(module.paper_output)}</p>
+          <div class="module-action-row">
+            ${module.status === "available"
+              ? `<a class="module-action" href="${module.path}">${t("card.open")}</a>`
+              : `<span class="module-action disabled">${t("card.soon")}</span>`}
+          </div>
         </article>
       `).join("");
     }

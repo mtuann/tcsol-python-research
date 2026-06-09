@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Figure Gallery</title>
+  <link rel="icon" href="data:,">
+  <style>
+    :root { --ink:#172033; --muted:#5c687c; --line:#d8e1ef; --bg:#f6f8fc; --blue:#245ee8; --shadow:0 18px 60px rgba(23,32,51,.08); }
+    * { box-sizing:border-box; }
+    body { margin:0; font-family:Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; color:var(--ink); background:linear-gradient(rgba(36,94,232,.07) 1px, transparent 1px), linear-gradient(90deg, rgba(36,94,232,.07) 1px, transparent 1px), var(--bg); background-size:42px 42px; }
+    body[data-lang="vi"] .en, body[data-lang="en"] .vi { display:none; }
+    header, main, footer { width:min(1080px, calc(100% - 40px)); margin:0 auto; }
+    header { display:flex; justify-content:space-between; align-items:center; gap:12px; padding:16px 0; }
+    nav, .language-switcher { display:flex; flex-wrap:wrap; gap:8px; align-items:center; }
+    a, button { min-height:40px; display:inline-flex; align-items:center; justify-content:center; padding:0 14px; border:1px solid var(--line); border-radius:999px; background:rgba(255,255,255,.92); color:var(--ink); text-decoration:none; font:inherit; font-weight:900; cursor:pointer; }
+    .primary, button[aria-pressed="true"] { color:#fff; border-color:var(--blue); background:var(--blue); }
+    .language-switcher { padding:4px; border:1px solid var(--line); border-radius:999px; background:rgba(255,255,255,.88); }
+    .language-switcher button { min-height:32px; border-color:transparent; background:transparent; }
+    .language-switcher button[aria-pressed="true"] { background:var(--blue); color:#fff; }
+    section { margin:22px 0; padding:clamp(20px,3vw,32px); border:1px solid var(--line); border-radius:8px; background:rgba(255,255,255,.95); box-shadow:var(--shadow); }
+    .kicker { display:inline-flex; margin-bottom:14px; padding:8px 13px; border:1px solid var(--line); border-radius:999px; color:var(--blue); background:#fff; font-size:.78rem; font-weight:950; text-transform:uppercase; }
+    h1 { margin:0; font-size:clamp(2.7rem,6vw,5.6rem); line-height:.96; letter-spacing:0; }
+    h2 { margin:0 0 12px; font-size:clamp(1.8rem,3vw,2.7rem); line-height:1.1; letter-spacing:0; }
+    p { color:var(--muted); line-height:1.66; }
+    .grid { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:14px; }
+    .card { padding:18px; border:1px solid var(--line); border-radius:8px; background:#fff; }
+    .card h3 { margin:0 0 8px; }
+    footer { padding:8px 0 42px; color:var(--muted); }
+    @media (max-width:920px) { header, .grid { grid-template-columns:1fr; } header { align-items:flex-start; flex-direction:column; } }
+  </style>
+</head>
+<body data-lang="vi">
+  <header>
+    <nav><a class="primary" href="../">Home</a><a href="README.md">Gallery notes</a></nav>
+    <div class="language-switcher"><button type="button" data-lang="vi" aria-pressed="true">VI</button><button type="button" data-lang="en" aria-pressed="false">EN</button></div>
+  </header>
+  <main>
+    <section>
+      <span class="kicker">Figure gallery</span>
+      <h1 class="vi">Thư viện figure theo claim nghiên cứu</h1>
+      <h1 class="en">Figure library organized by research claim</h1>
+      <p class="vi">Gallery sẽ lưu final figure, dataset, notebook, caption, chart rationale và lỗi thiết kế mà bản figure đã tránh.</p>
+      <p class="en">The gallery will store final figures, datasets, notebooks, captions, chart rationale, and the design mistake each figure avoids.</p>
+    </section>
+    <section>
+      <h2 class="vi">Figure families</h2>
+      <h2 class="en">Figure families</h2>
+      <div class="grid">
+        <article class="card"><h3>Comparison</h3><a href="comparison/README.md">Open</a></article>
+        <article class="card"><h3>Distribution</h3><a href="distribution/README.md">Open</a></article>
+        <article class="card"><h3>Relationship</h3><a href="relationship/README.md">Open</a></article>
+        <article class="card"><h3>Time change</h3><a href="time_change/README.md">Open</a></article>
+        <article class="card"><h3>Uncertainty</h3><a href="uncertainty/README.md">Open</a></article>
+        <article class="card"><h3>Coded text</h3><a href="coded_text/README.md">Open</a></article>
+        <article class="card"><h3>Multi-panel</h3><a href="multi_panel/README.md">Open</a></article>
+        <article class="card"><h3>Interactive to static</h3><a href="interactive_to_static/README.md">Open</a></article>
+      </div>
+    </section>
+  </main>
+  <footer>V2 figure gallery.</footer>
+  <script>
+    document.querySelectorAll(".language-switcher button").forEach((button) => {
+      button.addEventListener("click", () => {
+        document.body.dataset.lang = button.dataset.lang;
+        document.documentElement.lang = button.dataset.lang;
+        document.querySelectorAll(".language-switcher button").forEach((item) => item.setAttribute("aria-pressed", String(item === button)));
+      });
+    });
+  </script>
+</body>
+</html>

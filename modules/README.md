@@ -8,7 +8,7 @@ The old V1 lessons are preserved in branch `v1-tcsol-beginner` and published at 
 
 | Module | Theme | Status |
 |---|---|---|
-| 01 | Research data workflow | planned |
+| 01 | [Research data workflow](module-01-research-data-workflow/) | available |
 | 02 | Tidy data and codebook | planned |
 | 03 | Cleaning research data | planned |
 | 04 | Transforming data for analysis | planned |

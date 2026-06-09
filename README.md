@@ -1,6 +1,6 @@
 # Python Data Visualization for Academic Research Papers
 
-Source check: 2026-06-08
+Source check: 2026-06-09
 
 V2 clean-slate course repository for a practical graduate-level course on using Python to move from messy research data to publication-ready figures, captions, Results paragraphs, and reproducible paper packages.
 
@@ -58,6 +58,10 @@ Key planning documents:
 - [`resources/V2_REDESIGN_BLUEPRINT.md`](resources/V2_REDESIGN_BLUEPRINT.md)
 - [`resources/V2_MODULE_DESIGN_STANDARD.md`](resources/V2_MODULE_DESIGN_STANDARD.md)
 - [`site/modules.json`](site/modules.json)
+
+Current completed module:
+
+- [`modules/module-01-research-data-workflow/`](modules/module-01-research-data-workflow/) provides the canonical V2 pattern: learner page, slides, interactive demo, runnable notebook, rendered notebook, datasets, outputs, assignment, rubric, readings, and data dictionary.
 
 ## Tool Stack
 

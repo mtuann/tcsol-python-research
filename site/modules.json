@@ -1,6 +1,6 @@
 {
   "schema_version": "0.1.0",
-  "updated": "2026-06-08",
+  "updated": "2026-06-09",
   "course": {
     "title": {
       "vi": "Python Data Visualization cho Academic Research Papers",
@@ -66,7 +66,7 @@
       "number": "01",
       "slug": "module-01-research-data-workflow",
       "stage": "data-foundation",
-      "status": "planned",
+      "status": "available",
       "difficulty": {
         "vi": "Beginner",
         "en": "Beginner"
@@ -80,23 +80,23 @@
         "en": "Where does the paper's data live, can it be trusted, and how will it become evidence?"
       },
       "research_task": {
-        "vi": "Tạo data inventory cho một paper idea và phân biệt raw data, cleaned data, output, caption.",
-        "en": "Create a data inventory for a paper idea and separate raw data, cleaned data, outputs, and captions."
+        "vi": "Tạo data inventory, source readiness table, planning figure và caption cho một paper idea.",
+        "en": "Create a data inventory, source-readiness table, planning figure, and caption for a paper idea."
       },
       "data_practice": {
         "vi": "CSV, folder structure, source note, data inventory.",
         "en": "CSV, folder structure, source note, data inventory."
       },
       "visualization_focus": {
-        "vi": "Nhìn một bảng nhỏ và quyết định nó có thể tạo loại figure nào.",
-        "en": "Inspect a small table and decide what kind of figure it can support."
+        "vi": "Tạo horizontal bar chart đầu tiên để minh họa readiness của các data source.",
+        "en": "Create a first horizontal bar chart showing source readiness."
       },
       "paper_output": {
-        "vi": "Research question + data inventory.",
-        "en": "Research question + data inventory."
+        "vi": "Research question + data inventory + caption có limitation.",
+        "en": "Research question + data inventory + caption with limitation."
       },
-      "chart_types": ["dataset preview", "workflow map"],
-      "tools": ["Jupyter", "pandas", "Markdown"],
+      "chart_types": ["dataset preview", "workflow map", "horizontal bar chart"],
+      "tools": ["Jupyter", "pandas", "matplotlib", "Markdown"],
       "path": "modules/module-01-research-data-workflow/"
     },
     {

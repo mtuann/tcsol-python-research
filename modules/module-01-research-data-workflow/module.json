@@ -1,0 +1,54 @@
+{
+  "number": "01",
+  "slug": "module-01-research-data-workflow",
+  "status": "available",
+  "title": {
+    "vi": "Research data workflow",
+    "en": "Research data workflow"
+  },
+  "subtitle": {
+    "vi": "Từ paper idea đến data inventory, figure đầu tiên, caption và source note.",
+    "en": "From paper idea to data inventory, first figure, caption, and source note."
+  },
+  "guiding_question": {
+    "vi": "Data của paper nằm ở đâu, có đáng tin không, và sẽ biến thành bằng chứng như thế nào?",
+    "en": "Where does the paper's data live, can it be trusted, and how will it become evidence?"
+  },
+  "level": {
+    "vi": "Beginner, không cần biết lập trình trước",
+    "en": "Beginner, no prior programming required"
+  },
+  "learning_goals": [
+    {
+      "vi": "Phân biệt paper question, data source, raw data, cleaned data, output và caption.",
+      "en": "Distinguish paper question, data source, raw data, cleaned data, output, and caption."
+    },
+    {
+      "vi": "Đọc một CSV nhỏ bằng pandas và kiểm tra số dòng, cột, đơn vị quan sát.",
+      "en": "Read a small CSV with pandas and check rows, columns, and unit of observation."
+    },
+    {
+      "vi": "Tạo data inventory cho một paper idea trước khi vẽ figure.",
+      "en": "Create a data inventory for a paper idea before drawing a figure."
+    },
+    {
+      "vi": "Xuất một bảng summary, một figure paper-ready đầu tiên, và một caption có limitation.",
+      "en": "Export a summary table, a first paper-ready figure, and a caption with a limitation."
+    }
+  ],
+  "datasets": [
+    "data/raw/module01_toy_project_inventory.csv",
+    "data/raw/module01_public_source_inventory.csv",
+    "data/raw/module01_transfer_question_bank.csv"
+  ],
+  "outputs": [
+    "outputs/tables/module01_data_inventory.csv",
+    "outputs/tables/module01_source_readiness_summary.csv",
+    "outputs/tables/module01_paper_question_map.csv",
+    "outputs/figures/module01_source_readiness.png",
+    "outputs/figures/module01_source_readiness.svg",
+    "outputs/figures/module01_source_readiness.pdf"
+  ],
+  "tools": ["Jupyter", "pandas", "matplotlib", "Markdown"],
+  "source_check": "2026-06-09"
+}

@@ -2,6 +2,8 @@
 
 Every V2 module must teach one visualization or data-processing capability through repeated academic practice.
 
+Canonical implemented example: [`../modules/module-01-research-data-workflow/`](../modules/module-01-research-data-workflow/).
+
 ## Required Learning Arc
 
 1. **Research task**: What paper claim could this module support?
@@ -21,6 +23,17 @@ Each module needs three layers of practice:
 - **Lab A: Toy data** for syntax and concept clarity.
 - **Lab B: Academic data** for realistic structure and interpretation.
 - **Lab C: Track transfer** for education policy, applied linguistics, TCSOL, contrastive linguistics, or translation studies.
+
+## Required Web Experience
+
+Each completed module should provide HTML-first learning paths so GitHub Pages users do not land on raw Markdown unless they choose to.
+
+- `index.html`: learner overview with VI/EN switch, module links, dataset links, output preview, and paper-facing goal.
+- `slides.html`: visual lecture deck with Home, Module, TOC, Previous/Next, slide-number jump, and keyboard navigation.
+- `live_coding.html`: readable rendered notebook page that explains the code/output flow.
+- `interactive_demo.html`: include only when interaction helps exploration or teaching; otherwise omit.
+- `materials.html`: render assignment, rubric, and readings on the web; link to Markdown as editable source, not as the primary learner path.
+- Markdown files remain the durable source notes, assignment, rubric, readings, and data dictionary.
 
 ## Required Files
 

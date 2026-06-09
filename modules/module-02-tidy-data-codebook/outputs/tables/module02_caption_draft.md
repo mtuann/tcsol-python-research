@@ -1,0 +1,1 @@
+Figure 1. Mean learner scores after reshaping wide pre/post columns into a tidy learner-skill-time table. Each row in the analysis table represents one learner, one skill, and one time point. The figure is appropriate only after the codebook defines skill, time, and score; it should be read as a teaching example rather than causal evidence because the dataset is synthetic.

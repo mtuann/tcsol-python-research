@@ -9,7 +9,7 @@ The old V1 lessons are preserved in branch `v1-tcsol-beginner` and published at 
 | Module | Theme | Status |
 |---|---|---|
 | 01 | [Research data workflow](module-01-research-data-workflow/) | available |
-| 02 | Tidy data and codebook | planned |
+| 02 | [Tidy data and codebook](module-02-tidy-data-codebook/) | available |
 | 03 | Cleaning research data | planned |
 | 04 | Transforming data for analysis | planned |
 | 05 | Figure anatomy | planned |
@@ -34,6 +34,7 @@ Each completed module should include:
 - `lecture_notes.md`
 - `live_coding.ipynb`
 - `live_coding.html`
+- `materials.html`
 - `data/raw/`
 - `data_dictionary.md`
 - `outputs/figures/`
@@ -48,3 +49,10 @@ See [`../resources/V2_REDESIGN_BLUEPRINT.md`](../resources/V2_REDESIGN_BLUEPRINT
 ## Template
 
 Start new modules by copying [`_template/`](_template/) and then filling in the module-specific dataset, notebook, figures, assignment, and readings.
+
+The template uses shared assets:
+
+- [`../assets/course.css`](../assets/course.css)
+- [`../assets/slides.css`](../assets/slides.css)
+- [`../assets/module.js`](../assets/module.js)
+- [`../assets/slides.js`](../assets/slides.js)

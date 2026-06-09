@@ -1,0 +1,17 @@
+learner_id,research_track,activity_group,course_start_date,native_language,cefr_start,pre_vocab_score,post_vocab_score,pre_speaking_score,post_speaking_score,confidence_pre,confidence_post,minutes_on_task
+L001,TCSOL,task-based,2026-03-04,Vietnamese,A1,42,63,38,58,2,4,18
+L002,TCSOL,task-based,2026-03-04,Vietnamese,A1,45,66,41,61,2,4,20
+L003,TCSOL,task-based,2026-03-04,Vietnamese,A2,55,70,50,68,3,4,16
+L004,TCSOL,task-based,2026-03-04,Thai,A1,39,57,36,54,2,3,22
+L005,TCSOL,form-focused,2026-03-04,Vietnamese,A1,44,55,39,50,2,3,21
+L006,TCSOL,form-focused,2026-03-04,Vietnamese,A2,52,62,49,57,3,3,19
+L007,TCSOL,form-focused,2026-03-04,Indonesian,A1,41,53,35,47,2,3,25
+L008,TCSOL,form-focused,2026-03-04,Vietnamese,A1,47,58,42,52,3,3,17
+L009,translation,mtpe-guided,2026-03-11,Vietnamese,B1,68,78,62,71,3,4,14
+L010,translation,mtpe-guided,2026-03-11,Vietnamese,B1,64,76,60,70,3,4,15
+L011,translation,mtpe-guided,2026-03-11,Chinese,B2,74,83,69,77,4,5,11
+L012,translation,mtpe-guided,2026-03-11,Vietnamese,B1,61,72,58,67,3,4,18
+L013,translation,dictionary-only,2026-03-11,Vietnamese,B1,63,69,59,63,3,3,17
+L014,translation,dictionary-only,2026-03-11,Chinese,B2,72,76,67,70,4,4,13
+L015,translation,dictionary-only,2026-03-11,Vietnamese,B1,60,66,56,61,3,3,20
+L016,translation,dictionary-only,2026-03-11,Thai,B1,58,64,54,59,2,3,21

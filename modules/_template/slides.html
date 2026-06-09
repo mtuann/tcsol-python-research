@@ -5,36 +5,56 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>MODULE_XX Slides</title>
   <link rel="icon" href="data:,">
-  <style>
-    body { margin: 0; font-family: Inter, system-ui, sans-serif; background: #f6f8fc; color: #172033; }
-    .slide { min-height: 100vh; display: grid; place-items: center; padding: 48px; border-bottom: 1px solid #d8e1ef; }
-    .content { width: min(1000px, 100%); }
-    h1 { font-size: clamp(3rem, 8vw, 7rem); line-height: .95; letter-spacing: 0; margin: 0; }
-    p { font-size: 1.25rem; line-height: 1.6; color: #5c687c; max-width: 760px; }
-    .chip { display: inline-flex; padding: 8px 13px; border: 1px solid #d8e1ef; border-radius: 999px; background: #fff; font-weight: 900; color: #245ee8; }
-  </style>
+  <link rel="stylesheet" href="../../assets/slides.css">
 </head>
-<body>
-  <section class="slide">
-    <div class="content">
-      <span class="chip">MODULE_XX</span>
-      <h1>MODULE_TITLE</h1>
-      <p>Start with the paper problem, then show the dataset, data operation, figure decision, and writing output.</p>
+<body data-lang="vi">
+  <header class="top-nav">
+    <div class="nav-group">
+      <a class="button primary" href="../../">Home</a>
+      <a class="button" href="./">MODULE_XX</a>
+      <button class="button" type="button" id="toc-open">TOC</button>
     </div>
-  </section>
-  <section class="slide">
-    <div class="content">
-      <span class="chip">Dataset</span>
-      <h1>What does one row mean?</h1>
-      <p>Replace this with a visual dataset preview and the unit of observation.</p>
+    <div class="language-switcher" role="group" aria-label="Language">
+      <button class="lang-button" type="button" data-lang="vi" aria-pressed="true">VI</button>
+      <button class="lang-button" type="button" data-lang="en" aria-pressed="false">EN</button>
     </div>
-  </section>
-  <section class="slide">
-    <div class="content">
-      <span class="chip">Figure</span>
-      <h1>Which chart supports the claim?</h1>
-      <p>Replace this with two candidate figures and a concise design decision.</p>
+  </header>
+
+  <main id="deck">
+    <section class="slide active title-slide" data-title="Opening">
+      <div class="content">
+        <span class="kicker">MODULE_XX</span>
+        <h1>MODULE_TITLE</h1>
+        <p class="lead vi">VI opening claim.</p>
+        <p class="lead en">EN opening claim.</p>
+      </div>
+    </section>
+    <section class="slide" data-title="Paper Problem">
+      <div class="content">
+        <span class="kicker">Paper problem</span>
+        <h2 class="vi">VI paper problem.</h2>
+        <h2 class="en">EN paper problem.</h2>
+      </div>
+    </section>
+  </main>
+
+  <div class="bottom-controls" aria-label="Slide controls">
+    <button class="button" type="button" id="prev">Previous</button>
+    <span class="counter"><span id="current">1</span> / <span id="total">2</span></span>
+    <label for="jump">Slide</label>
+    <input class="jump" id="jump" type="number" min="1" max="2" value="1">
+    <button class="button primary" type="button" id="go">Go</button>
+    <button class="button primary" type="button" id="next">Next</button>
+  </div>
+
+  <aside class="toc-panel" id="toc-panel" aria-label="Table of contents">
+    <div class="toc-head">
+      <h2>Table of contents</h2>
+      <button class="button primary" type="button" id="toc-close">Close</button>
     </div>
-  </section>
+    <div class="toc-list" id="toc-list"></div>
+  </aside>
+
+  <script src="../../assets/slides.js"></script>
 </body>
 </html>

@@ -1,0 +1,12 @@
+variable_type,role,n_variables
+categorical,background variable,1
+categorical,grouping variable,1
+categorical,measure name,1
+categorical,treatment/exposure,1
+date,context variable,1
+identifier,id,1
+numeric,outcome,1
+numeric,process variable,1
+ordinal,baseline proficiency,1
+ordinal,measurement time,1
+ordinal,self-report outcome,2

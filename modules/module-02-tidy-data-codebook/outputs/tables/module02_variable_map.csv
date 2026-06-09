@@ -1,0 +1,13 @@
+variable_name,variable_type,role,required_for_paper,paper_note
+learner_id,identifier,id,True,Do not use real names in public outputs.
+research_track,categorical,grouping variable,True,Application track for transfer practice.
+activity_group,categorical,treatment/exposure,True,Group label for comparison charts.
+course_start_date,date,context variable,False,"Date variable should be parsed, not treated as plain text."
+native_language,categorical,background variable,False,Use only broad language category; no identifying details.
+cefr_start,ordinal,baseline proficiency,True,"Ordinal category, not a regular numeric score."
+skill,categorical,measure name,True,Created after reshaping scores into long format.
+time,ordinal,measurement time,True,Created after reshaping pre/post score columns.
+score,numeric,outcome,True,Comparable only within the same skill unless documented.
+confidence_pre,ordinal,self-report outcome,False,Likert-style confidence before activity.
+confidence_post,ordinal,self-report outcome,False,Likert-style confidence after activity.
+minutes_on_task,numeric,process variable,False,"Use as context, not as causal evidence without design notes."

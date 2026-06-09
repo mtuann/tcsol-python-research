@@ -1,0 +1,255 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Module 02 Slides - Tidy Data and Codebook</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="../../assets/slides.css">
+</head>
+<body data-lang="vi">
+  <header class="top-nav">
+    <div class="nav-group">
+      <a class="button primary" href="../../">Home</a>
+      <a class="button" href="./">Module 02</a>
+      <button class="button" type="button" id="toc-open">TOC</button>
+    </div>
+    <div class="language-switcher" role="group" aria-label="Language">
+      <button class="lang-button" type="button" data-lang="vi" aria-pressed="true">VI</button>
+      <button class="lang-button" type="button" data-lang="en" aria-pressed="false">EN</button>
+    </div>
+  </header>
+
+  <main id="deck">
+    <section class="slide active title-slide" data-title="Opening">
+      <div class="content">
+        <span class="kicker">Module 02</span>
+        <h1 class="vi">Tidy data và codebook</h1>
+        <h1 class="en">Tidy data and codebook</h1>
+        <p class="lead vi">Một figure tốt bắt đầu từ một bảng có row meaning rõ và một codebook đủ để người đọc tin.</p>
+        <p class="lead en">A good figure begins with clear row meaning and a codebook strong enough for readers to trust.</p>
+      </div>
+    </section>
+
+    <section class="slide" data-title="Learning Map">
+      <div class="content">
+        <span class="kicker vi">Bản đồ buổi học</span>
+        <span class="kicker en">Learning map</span>
+        <h2 class="vi">Từ bảng wide đến figure-ready table</h2>
+        <h2 class="en">From wide table to figure-ready table</h2>
+        <div class="grid four">
+          <article class="card"><h3>Inspect</h3><p class="vi">Một dòng nghĩa là gì?</p><p class="en">What does one row mean?</p></article>
+          <article class="card"><h3>Document</h3><p class="vi">Mỗi biến có type và role nào?</p><p class="en">What type and role does each variable have?</p></article>
+          <article class="card"><h3>Reshape</h3><p class="vi">Wide columns trở thành tidy rows.</p><p class="en">Wide columns become tidy rows.</p></article>
+          <article class="card"><h3>Write</h3><p class="vi">Caption nêu unit sau khi reshape.</p><p class="en">Caption names the unit after reshaping.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" data-title="Why Codebook">
+      <div class="content">
+        <span class="kicker">Paper problem</span>
+        <h2 class="vi">Nếu codebook yếu, chart sẽ nói mơ hồ</h2>
+        <h2 class="en">If the codebook is weak, the chart speaks vaguely</h2>
+        <div class="grid three">
+          <article class="card"><h3 class="vi">Score là gì?</h3><h3 class="en">What is the score?</h3><p>0-100? rubric? self-report?</p></article>
+          <article class="card"><h3 class="vi">Time là gì?</h3><h3 class="en">What is time?</h3><p>pre/post, date, semester, policy year?</p></article>
+          <article class="card"><h3 class="vi">Group là gì?</h3><h3 class="en">What is group?</h3><p>activity, class, country, learner type?</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" data-title="Wide Table">
+      <div class="content narrow">
+        <span class="kicker">Wide table</span>
+        <h2 class="vi">Wide table đặt nhiều measure vào nhiều cột</h2>
+        <h2 class="en">A wide table stores repeated measures in multiple columns</h2>
+        <table class="mini-table">
+          <thead><tr><th>learner_id</th><th>pre_vocab</th><th>post_vocab</th><th>pre_speaking</th><th>post_speaking</th></tr></thead>
+          <tbody>
+            <tr><td>L001</td><td>42</td><td>63</td><td>38</td><td>58</td></tr>
+            <tr><td>L002</td><td>45</td><td>66</td><td>41</td><td>61</td></tr>
+          </tbody>
+        </table>
+        <p class="vi">Một dòng là một learner. Nhưng skill và time đang bị giấu trong tên cột.</p>
+        <p class="en">One row is one learner. But skill and time are hidden inside column names.</p>
+      </div>
+    </section>
+
+    <section class="slide" data-title="Tidy Long">
+      <div class="content narrow">
+        <span class="kicker">Tidy long</span>
+        <h2 class="vi">Tidy table đưa measure thành biến rõ</h2>
+        <h2 class="en">A tidy table turns measures into explicit variables</h2>
+        <table class="mini-table">
+          <thead><tr><th>learner_id</th><th>skill</th><th>time</th><th>score</th></tr></thead>
+          <tbody>
+            <tr><td>L001</td><td>vocabulary</td><td>pre</td><td>42</td></tr>
+            <tr><td>L001</td><td>vocabulary</td><td>post</td><td>63</td></tr>
+            <tr><td>L001</td><td>speaking</td><td>pre</td><td>38</td></tr>
+            <tr><td>L001</td><td>speaking</td><td>post</td><td>58</td></tr>
+          </tbody>
+        </table>
+        <p class="vi">Một dòng bây giờ là một learner, một skill, một time point.</p>
+        <p class="en">One row is now one learner, one skill, and one time point.</p>
+      </div>
+    </section>
+
+    <section class="slide" data-title="Variable Types">
+      <div class="content">
+        <span class="kicker">Variable types</span>
+        <h2 class="vi">Chart type phụ thuộc vào variable type</h2>
+        <h2 class="en">Chart type depends on variable type</h2>
+        <div class="grid four">
+          <article class="card"><h3>Identifier</h3><p>learner_id, segment_id</p></article>
+          <article class="card"><h3>Categorical</h3><p>activity_group, country</p></article>
+          <article class="card"><h3>Ordinal</h3><p>CEFR, pre/post, Likert</p></article>
+          <article class="card"><h3>Numeric</h3><p>score, minutes, rate</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide figure-slide" data-title="Variable Map">
+      <div class="content">
+        <span class="kicker">Codebook</span>
+        <h2 class="vi">Codebook làm variable types hiện ra trước khi plot</h2>
+        <h2 class="en">The codebook makes variable types visible before plotting</h2>
+        <div class="solo-figure">
+          <img src="outputs/figures/module02_variable_type_map.png" alt="Variable type map">
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" data-title="Codebook Minimum">
+      <div class="content">
+        <span class="kicker">Codebook minimum</span>
+        <h2 class="vi">Mỗi biến cần đủ thông tin để viết Methods</h2>
+        <h2 class="en">Each variable needs enough information for Methods</h2>
+        <table class="mini-table">
+          <thead><tr><th>variable</th><th>type</th><th>role</th><th>paper note</th></tr></thead>
+          <tbody>
+            <tr><td>cefr_start</td><td>ordinal</td><td>baseline proficiency</td><td>Do not average CEFR labels.</td></tr>
+            <tr><td>time</td><td>ordinal</td><td>measurement time</td><td>Created from pre/post columns.</td></tr>
+            <tr><td>score</td><td>numeric</td><td>outcome</td><td>Comparable within skill.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="slide" data-title="Melt">
+      <div class="content">
+        <span class="kicker">pandas</span>
+        <h2 class="vi">`melt()` chuyển tên cột thành giá trị</h2>
+        <h2 class="en">`melt()` turns column names into values</h2>
+        <pre class="code-block">vocab = wide.melt(
+    id_vars=["learner_id", "activity_group"],
+    value_vars=["pre_vocab_score", "post_vocab_score"],
+    var_name="measure_time",
+    value_name="score"
+)</pre>
+        <p class="vi">Sau đó ta tách `measure_time` thành `time` và `skill`.</p>
+        <p class="en">Then we split `measure_time` into `time` and `skill`.</p>
+      </div>
+    </section>
+
+    <section class="slide" data-title="Row Meaning Changes">
+      <div class="content">
+        <span class="kicker vi">Điểm hay bị quên</span>
+        <span class="kicker en">Often forgotten</span>
+        <h2 class="vi">Reshape thay đổi số dòng và ý nghĩa mỗi dòng</h2>
+        <h2 class="en">Reshaping changes both row count and row meaning</h2>
+        <div class="grid two">
+          <article class="card"><h3>Before</h3><p class="vi">16 dòng: mỗi dòng là một learner.</p><p class="en">16 rows: each row is one learner.</p></article>
+          <article class="card"><h3>After</h3><p class="vi">64 dòng: mỗi dòng là learner-skill-time.</p><p class="en">64 rows: each row is learner-skill-time.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide figure-slide" data-title="First Figure">
+      <div class="content">
+        <span class="kicker vi">Figure đầu tiên</span>
+        <span class="kicker en">First figure</span>
+        <h2 class="vi">Khi dữ liệu tidy, plot trở nên trực tiếp</h2>
+        <h2 class="en">When data is tidy, plotting becomes direct</h2>
+        <div class="solo-figure">
+          <img src="outputs/figures/module02_tidy_prepost_example.png" alt="Tidy pre/post score figure">
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" data-title="Education Policy Transfer">
+      <div class="content">
+        <span class="kicker">Transfer</span>
+        <h2 class="vi">Education indicators cũng cần tidy structure</h2>
+        <h2 class="en">Education indicators also need tidy structure</h2>
+        <table class="mini-table">
+          <thead><tr><th>wide columns</th><th>tidy variables</th><th>figure</th></tr></thead>
+          <tbody>
+            <tr><td>gross_enrollment_rate, completion_rate, student_teacher_ratio</td><td>indicator_name, indicator_value</td><td>country-year comparison</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="slide" data-title="Writing">
+      <div class="content">
+        <span class="kicker">Writing</span>
+        <h2 class="vi">Caption phải nói unit sau khi reshape</h2>
+        <h2 class="en">The caption must name the unit after reshaping</h2>
+        <div class="panel">
+          <p>Each row in the analysis table represents one learner, one skill, and one time point.</p>
+          <p class="vi">Câu này giúp người đọc hiểu ngay figure đang summarize cái gì.</p>
+          <p class="en">This sentence tells the reader exactly what the figure is summarizing.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" data-title="Common Mistakes">
+      <div class="content">
+        <span class="kicker">Critique</span>
+        <h2 class="vi">Lỗi thường gặp không nằm ở code, mà nằm ở schema</h2>
+        <h2 class="en">Common errors are often schema errors, not code errors</h2>
+        <div class="grid three">
+          <article class="card"><h3 class="vi">Trung bình hóa ordinal</h3><h3 class="en">Averaging ordinal labels</h3><p>CEFR, Likert, pre/post need care.</p></article>
+          <article class="card"><h3 class="vi">Thiếu unit</h3><h3 class="en">Missing unit</h3><p>Raw row and tidy row are confused.</p></article>
+          <article class="card"><h3 class="vi">Thiếu allowed values</h3><h3 class="en">No allowed values</h3><p>Reader cannot interpret categories.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" data-title="Assignment">
+      <div class="content">
+        <span class="kicker vi">Bài tập</span>
+        <span class="kicker en">Assignment</span>
+        <h2 class="vi">Nộp tidy table, codebook, figure và Methods note</h2>
+        <h2 class="en">Submit a tidy table, codebook, figure, and Methods note</h2>
+        <div class="grid four">
+          <article class="card"><h3>Inspect</h3><p>Raw row meaning</p></article>
+          <article class="card"><h3>Codebook</h3><p>8+ variables</p></article>
+          <article class="card"><h3>Reshape</h3><p>Tidy long table</p></article>
+          <article class="card"><h3>Write</h3><p>Caption + Methods note</p></article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div class="bottom-controls" aria-label="Slide controls">
+    <button class="button" type="button" id="prev">Previous</button>
+    <span class="counter"><span id="current">1</span> / <span id="total">15</span></span>
+    <label for="jump">Slide</label>
+    <input class="jump" id="jump" type="number" min="1" max="15" value="1">
+    <button class="button primary" type="button" id="go">Go</button>
+    <button class="button primary" type="button" id="next">Next</button>
+  </div>
+
+  <aside class="toc-panel" id="toc-panel" aria-label="Table of contents">
+    <div class="toc-head">
+      <h2>Table of contents</h2>
+      <button class="button primary" type="button" id="toc-close">Close</button>
+    </div>
+    <div class="toc-list" id="toc-list"></div>
+  </aside>
+
+  <script src="../../assets/slides.js"></script>
+</body>
+</html>

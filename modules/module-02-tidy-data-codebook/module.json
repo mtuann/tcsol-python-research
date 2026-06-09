@@ -1,0 +1,54 @@
+{
+  "number": "02",
+  "slug": "module-02-tidy-data-codebook",
+  "status": "available",
+  "title": {
+    "vi": "Tidy data và codebook",
+    "en": "Tidy data and codebook"
+  },
+  "subtitle": {
+    "vi": "Biến bảng wide thành bảng tidy, rồi viết codebook để figure có nghĩa trong paper.",
+    "en": "Turn wide tables into tidy tables, then write a codebook so figures mean something in a paper."
+  },
+  "guiding_question": {
+    "vi": "Một dòng trong dataset nghĩa là gì, và mỗi cột sẽ được giải thích trong paper ra sao?",
+    "en": "What does one row mean, and how will each column be explained in the paper?"
+  },
+  "level": {
+    "vi": "Beginner, sau Module 01",
+    "en": "Beginner, after Module 01"
+  },
+  "learning_goals": [
+    {
+      "vi": "Phân biệt wide table và tidy long table.",
+      "en": "Distinguish a wide table from a tidy long table."
+    },
+    {
+      "vi": "Nhận diện identifier, categorical, ordinal, numeric, date và text variables.",
+      "en": "Identify identifier, categorical, ordinal, numeric, date, and text variables."
+    },
+    {
+      "vi": "Dùng `pandas.melt()` để tạo analysis-ready table cho figure.",
+      "en": "Use `pandas.melt()` to create an analysis-ready table for a figure."
+    },
+    {
+      "vi": "Viết codebook đủ để caption và Methods paragraph không mơ hồ.",
+      "en": "Write a codebook clear enough for captions and Methods paragraphs."
+    }
+  ],
+  "datasets": [
+    "data/raw/module02_toy_learner_survey_wide.csv",
+    "data/raw/module02_education_indicator_wide.csv",
+    "data/raw/module02_transfer_variable_bank.csv"
+  ],
+  "outputs": [
+    "outputs/tables/module02_tidy_learner_scores_long.csv",
+    "outputs/tables/module02_tidy_education_indicators_long.csv",
+    "outputs/tables/module02_codebook.csv",
+    "outputs/tables/module02_schema_summary.csv",
+    "outputs/figures/module02_tidy_prepost_example.png",
+    "outputs/figures/module02_variable_type_map.png"
+  ],
+  "tools": ["Jupyter", "pandas", "matplotlib", "Markdown"],
+  "source_check": "2026-06-09"
+}

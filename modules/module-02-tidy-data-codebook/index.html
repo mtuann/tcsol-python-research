@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Module 02 - Tidy Data and Codebook</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="../../assets/course.css">
+</head>
+<body data-lang="vi">
+  <header class="site-header">
+    <a class="brand" href="../../">
+      <span class="brand-mark" aria-hidden="true"></span>
+      <span>Python Research Viz</span>
+    </a>
+    <div class="nav-wrap">
+      <nav aria-label="Module navigation">
+        <a href="../../">Home</a>
+        <a href="slides.html">Slides</a>
+        <a href="interactive_demo.html">Demo</a>
+        <a href="live_coding.html">Notebook</a>
+        <a href="materials.html#assignment">Assignment</a>
+      </nav>
+      <div class="language-switcher" role="group" aria-label="Language">
+        <button class="lang-button" type="button" data-lang="vi" aria-pressed="true">VI</button>
+        <button class="lang-button" type="button" data-lang="en" aria-pressed="false">EN</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div>
+        <span class="eyebrow">Module 02</span>
+        <h1>
+          <span class="vi">Tidy data và codebook</span>
+          <span class="en">Tidy data and codebook</span>
+        </h1>
+        <p class="lead vi">Học cách biến bảng wide thành bảng tidy, rồi viết codebook để figure không còn là một hình vẽ mơ hồ. Đây là nền quan trọng nhất trước cleaning, transform và chart families.</p>
+        <p class="lead en">Learn how to turn wide tables into tidy tables, then write a codebook so a figure is no longer an ambiguous drawing. This is the key foundation before cleaning, transformation, and chart families.</p>
+        <div class="actions">
+          <a class="button primary" href="slides.html"><span class="vi">Mở slides</span><span class="en">Open slides</span></a>
+          <a class="button" href="live_coding.html"><span class="vi">Xem notebook</span><span class="en">View notebook</span></a>
+          <a class="button" href="interactive_demo.html"><span class="vi">Mở schema demo</span><span class="en">Open schema demo</span></a>
+        </div>
+      </div>
+
+      <figure class="hero-figure">
+        <img src="outputs/figures/module02_tidy_codebook_workflow.png" alt="Tidy data and codebook workflow map">
+        <figcaption class="figure-caption vi">Codebook nối cấu trúc bảng với diễn giải trong paper: wide table, codebook, tidy long table, figure.</figcaption>
+        <figcaption class="figure-caption en">A codebook connects table structure to paper interpretation: wide table, codebook, tidy long table, figure.</figcaption>
+      </figure>
+    </section>
+
+    <section id="build">
+      <div class="section-head">
+        <div>
+          <span class="eyebrow vi">Bạn sẽ tạo gì?</span>
+          <span class="eyebrow en">What you build</span>
+          <h2 class="vi">Một bảng tidy có thể vẽ và một codebook có thể viết vào Methods</h2>
+          <h2 class="en">A figure-ready tidy table and a Methods-ready codebook</h2>
+        </div>
+        <p class="vi">Module này không bắt đầu bằng chart. Nó bắt đầu bằng schema: identifier, variable type, allowed values, unit of observation và vai trò của từng biến trong lập luận.</p>
+        <p class="en">This module does not begin with a chart. It begins with schema: identifiers, variable types, allowed values, unit of observation, and each variable's role in the argument.</p>
+      </div>
+      <div class="grid four">
+        <article class="card">
+          <span class="card-top">1</span>
+          <h3>Wide table</h3>
+          <p class="vi">Đọc bảng có nhiều cột pre/post và xác định row meaning ban đầu.</p>
+          <p class="en">Read a table with multiple pre/post columns and identify the original row meaning.</p>
+        </article>
+        <article class="card">
+          <span class="card-top">2</span>
+          <h3>Codebook</h3>
+          <p class="vi">Ghi variable type, role, allowed values và paper note cho từng cột.</p>
+          <p class="en">Record variable type, role, allowed values, and paper note for each column.</p>
+        </article>
+        <article class="card">
+          <span class="card-top">3</span>
+          <h3>Tidy table</h3>
+          <p class="vi">Dùng `melt()` để tạo bảng learner-skill-time.</p>
+          <p class="en">Use `melt()` to create a learner-skill-time table.</p>
+        </article>
+        <article class="card">
+          <span class="card-top">4</span>
+          <h3>Figure + writing</h3>
+          <p class="vi">Vẽ pre/post figure, export và viết caption nêu unit sau khi reshape.</p>
+          <p class="en">Draw a pre/post figure, export it, and write a caption naming the reshaped unit.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="data">
+      <div class="section-head">
+        <div>
+          <span class="eyebrow">Datasets</span>
+          <h2 class="vi">Ba lớp dữ liệu để học schema, không chỉ học cú pháp</h2>
+          <h2 class="en">Three data layers for learning schema, not only syntax</h2>
+        </div>
+        <p class="vi">Bảng learner survey giúp thấy wide-to-long. Bảng education indicator giúp chuyển nhiều chỉ số thành `indicator_name` và `indicator_value`. Transfer bank giúp áp dụng sang hướng research của học viên.</p>
+        <p class="en">The learner survey shows wide-to-long reshaping. The education indicator table turns several measures into `indicator_name` and `indicator_value`. The transfer bank applies the same thinking to learner research directions.</p>
+      </div>
+      <div class="grid three">
+        <article class="data-card">
+          <strong>Lab A: Learner survey wide</strong>
+          <p class="vi">Một dòng là một learner, nhưng nhiều measure đang nằm thành cột wide.</p>
+          <p class="en">One row is one learner, but repeated measures are stored as wide columns.</p>
+          <a href="data/raw/module02_toy_learner_survey_wide.csv">CSV</a>
+        </article>
+        <article class="data-card">
+          <strong>Lab B: Education indicators</strong>
+          <p class="vi">Một dòng là country-year-school-level trước khi melt indicator columns.</p>
+          <p class="en">One row is country-year-school-level before melting indicator columns.</p>
+          <a href="data/raw/module02_education_indicator_wide.csv">CSV</a>
+        </article>
+        <article class="data-card">
+          <strong>Lab C: Variable bank</strong>
+          <p class="vi">Các kịch bản chuyển giao cho education policy, TCSOL, translation và contrastive linguistics.</p>
+          <p class="en">Transfer scenarios for education policy, TCSOL, translation, and contrastive linguistics.</p>
+          <a href="data/raw/module02_transfer_variable_bank.csv">CSV</a>
+        </article>
+      </div>
+    </section>
+
+    <section id="workflow">
+      <div class="section-head">
+        <div>
+          <span class="eyebrow">Workflow</span>
+          <h2 class="vi">`melt()` không phải mẹo; nó thay đổi unit of observation</h2>
+          <h2 class="en">`melt()` is not a trick; it changes the unit of observation</h2>
+        </div>
+        <p class="vi">Trước reshape, một dòng là một learner. Sau reshape, một dòng là một learner, một skill, một time point. Caption phải nói rõ điều này.</p>
+        <p class="en">Before reshaping, one row is one learner. After reshaping, one row is one learner, one skill, and one time point. The caption must say this clearly.</p>
+      </div>
+      <table class="mini-table">
+        <thead>
+          <tr><th>Step</th><th>Python action</th><th>Paper meaning</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>1</td><td><code>pd.read_csv()</code></td><td>Read the raw table and preserve the source path.</td></tr>
+          <tr><td>2</td><td><code>codebook[["variable_name", "variable_type"]]</code></td><td>State what each column is before plotting.</td></tr>
+          <tr><td>3</td><td><code>pd.melt(...)</code></td><td>Change repeated wide columns into tidy rows.</td></tr>
+          <tr><td>4</td><td><code>groupby(["skill", "time"])</code></td><td>Summarize by variables that the codebook defines.</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="output">
+      <div class="output-preview">
+        <img src="outputs/figures/module02_tidy_prepost_example.png" alt="Tidy pre/post learner score figure">
+        <div>
+          <span class="eyebrow vi">Final output</span>
+          <span class="eyebrow en">Final output</span>
+          <h2 class="vi">Figure này chỉ hợp lệ khi schema đã rõ</h2>
+          <h2 class="en">This figure is valid only after the schema is clear</h2>
+          <p class="vi">Figure pre/post nhìn đơn giản, nhưng phía sau nó là codebook giải thích `skill`, `time`, `score`, và row meaning sau khi reshape.</p>
+          <p class="en">The pre/post figure looks simple, but behind it is a codebook explaining `skill`, `time`, `score`, and row meaning after reshaping.</p>
+          <div class="link-row">
+            <a class="button" href="outputs/figures/module02_tidy_prepost_example.png">PNG</a>
+            <a class="button" href="outputs/figures/module02_tidy_prepost_example.svg">SVG</a>
+            <a class="button" href="outputs/figures/module02_tidy_prepost_example.pdf">PDF</a>
+            <a class="button" href="outputs/tables/module02_codebook.csv">Codebook</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="callout">
+      <h2 class="vi">Câu hỏi kiểm tra trước khi sang Module 03</h2>
+      <h2 class="en">Check before moving to Module 03</h2>
+      <p class="vi">Nếu học viên phân biệt được raw row meaning và tidy row meaning, họ đã sẵn sàng học cleaning: missing values, duplicate, label normalization và type conversion.</p>
+      <p class="en">If the learner can distinguish raw row meaning from tidy row meaning, they are ready for cleaning: missing values, duplicates, label normalization, and type conversion.</p>
+      <div class="actions">
+        <a class="button primary" href="../../#modules"><span class="vi">Quay lại module explorer</span><span class="en">Back to module explorer</span></a>
+        <a class="button" href="materials.html#rubric">Rubric</a>
+        <a class="button" href="materials.html#readings">Readings</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <span class="vi">Module 02 là nền cho cleaning, transform và tất cả chart families sau này.</span>
+    <span class="en">Module 02 is the foundation for cleaning, transformation, and all later chart families.</span>
+  </footer>
+
+  <script src="../../assets/module.js"></script>
+</body>
+</html>

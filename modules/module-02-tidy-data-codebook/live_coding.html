@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Module 02 Rendered Notebook</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="../../assets/course.css">
+</head>
+<body data-lang="vi">
+  <header>
+    <nav aria-label="Notebook navigation">
+      <a class="button primary" href="./">Module 02</a>
+      <a class="button" href="slides.html">Slides</a>
+      <a class="button" href="interactive_demo.html">Demo</a>
+      <a class="button" href="live_coding.ipynb">Download .ipynb</a>
+    </nav>
+    <div class="language-switcher" role="group" aria-label="Language">
+      <button class="lang-button" type="button" data-lang="vi" aria-pressed="true">VI</button>
+      <button class="lang-button" type="button" data-lang="en" aria-pressed="false">EN</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero compact">
+      <div>
+        <span class="kicker">Rendered notebook</span>
+        <h1>Module 02 live coding</h1>
+        <p class="lead vi">Bản web-readable của notebook. Khi dạy trực tiếp, hãy chạy file `.ipynb`; trang này giúp học viên đọc logic từ bảng wide đến bảng tidy và figure.</p>
+        <p class="lead en">The web-readable version of the notebook. In class, run the `.ipynb`; this page helps learners read the logic from wide table to tidy table and figure.</p>
+      </div>
+      <div><a class="button primary" href="live_coding.ipynb">Open notebook</a></div>
+    </section>
+
+    <section>
+      <span class="kicker vi">Mục tiêu</span>
+      <span class="kicker en">Goal</span>
+      <h2 class="vi">Reshape dữ liệu và viết codebook đủ dùng trong paper</h2>
+      <h2 class="en">Reshape data and write a paper-ready codebook</h2>
+      <p class="vi">Notebook đọc bảng learner survey dạng wide, xây codebook, dùng `melt()` để tạo tidy long table, rồi xuất bảng và figure. Học viên chỉ cần hiểu vài lệnh, nhưng phải hiểu rõ row meaning thay đổi ra sao.</p>
+      <p class="en">The notebook reads a wide learner-survey table, builds a codebook, uses `melt()` to create a tidy long table, then exports tables and a figure. Learners need only a few commands, but they must understand how row meaning changes.</p>
+    </section>
+
+    <section>
+      <h2>1. Load tools and paths</h2>
+      <div class="cell">
+        <div class="cell-head"><span>Code</span><span>Python</span></div>
+        <pre>from pathlib import Path
+
+import matplotlib.pyplot as plt
+import pandas as pd
+
+BASE = Path.cwd()
+RAW = BASE / "data" / "raw"
+OUT_TABLES = BASE / "outputs" / "tables"
+OUT_FIGURES = BASE / "outputs" / "figures"</pre>
+        <div class="output vi">Ý nghĩa: tách rõ input raw data và output paper package.</div>
+        <div class="output en">Meaning: keep raw inputs and paper-package outputs separate.</div>
+      </div>
+    </section>
+
+    <section>
+      <h2>2. Read the wide learner table</h2>
+      <div class="cell">
+        <div class="cell-head"><span>Code</span><span>pandas</span></div>
+        <pre>wide = pd.read_csv(RAW / "module02_toy_learner_survey_wide.csv")
+print(wide.shape)
+wide.head()</pre>
+        <div class="output">(16, 13)</div>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>learner_id</th><th>activity_group</th><th>pre_vocab_score</th><th>post_vocab_score</th><th>pre_speaking_score</th><th>post_speaking_score</th></tr></thead>
+          <tbody>
+            <tr><td>L001</td><td>task-based</td><td>42</td><td>63</td><td>38</td><td>58</td></tr>
+            <tr><td>L002</td><td>task-based</td><td>45</td><td>66</td><td>41</td><td>61</td></tr>
+            <tr><td>L003</td><td>task-based</td><td>55</td><td>70</td><td>50</td><td>68</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section>
+      <h2>3. Inspect the codebook</h2>
+      <div class="cell">
+        <div class="cell-head"><span>Code</span><span>schema</span></div>
+        <pre>codebook = pd.read_csv(OUT_TABLES / "module02_codebook.csv")
+codebook[["variable_name", "variable_type", "role", "unit_of_observation"]]</pre>
+      </div>
+      <div class="grid three">
+        <article class="card schema-card numeric"><strong>Numeric</strong><p>score, minutes_on_task</p></article>
+        <article class="card schema-card ordinal"><strong>Ordinal</strong><p>cefr_start, time, confidence</p></article>
+        <article class="card schema-card categorical"><strong>Categorical</strong><p>activity_group, research_track</p></article>
+      </div>
+    </section>
+
+    <section>
+      <h2>4. Reshape wide scores into tidy long format</h2>
+      <div class="cell">
+        <div class="cell-head"><span>Code</span><span>melt</span></div>
+        <pre>vocab = wide[[
+    "learner_id", "research_track", "activity_group", "cefr_start",
+    "pre_vocab_score", "post_vocab_score"
+]].melt(
+    id_vars=["learner_id", "research_track", "activity_group", "cefr_start"],
+    value_vars=["pre_vocab_score", "post_vocab_score"],
+    var_name="measure_time",
+    value_name="score"
+)
+
+vocab["skill"] = "vocabulary"
+vocab["time"] = vocab["measure_time"].str.extract(r"^(pre|post)")</pre>
+        <div class="output vi">Điểm mấu chốt: `pre_vocab_score` không còn là tên cột cuối cùng; `pre` trở thành giá trị của biến `time`, và `vocabulary` trở thành giá trị của biến `skill`.</div>
+        <div class="output en">Key point: `pre_vocab_score` is no longer the final column name; `pre` becomes a value of `time`, and `vocabulary` becomes a value of `skill`.</div>
+      </div>
+    </section>
+
+    <section>
+      <h2>5. Export the tidy table</h2>
+      <div class="cell">
+        <div class="cell-head"><span>Code</span><span>output</span></div>
+        <pre>tidy_scores.sort_values(["learner_id", "skill", "time"]).to_csv(
+    OUT_TABLES / "module02_tidy_learner_scores_long.csv",
+    index=False
+)
+
+summary = tidy_scores.groupby(["skill", "time"], observed=True, as_index=False)["score"].mean()
+summary</pre>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>skill</th><th>time</th><th>mean score</th></tr></thead>
+          <tbody>
+            <tr><td>speaking</td><td>pre</td><td>52.0</td></tr>
+            <tr><td>speaking</td><td>post</td><td>62.1</td></tr>
+            <tr><td>vocabulary</td><td>pre</td><td>55.3</td></tr>
+            <tr><td>vocabulary</td><td>post</td><td>66.8</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section>
+      <h2>6. Draw a first figure from tidy data</h2>
+      <figure class="figure-frame">
+        <img src="outputs/figures/module02_tidy_prepost_example.png" alt="Tidy pre/post learner score figure">
+        <figcaption class="vi">Vì bảng tidy có `skill`, `time`, `score`, figure code không cần xử lý tên cột phức tạp nữa.</figcaption>
+        <figcaption class="en">Because the tidy table has `skill`, `time`, and `score`, the figure code no longer needs complex column-name handling.</figcaption>
+      </figure>
+    </section>
+
+    <section>
+      <h2>7. Caption draft</h2>
+      <div class="cell">
+        <div class="cell-head"><span>Caption output</span><span>Markdown</span></div>
+        <pre>Figure 1. Mean learner scores after reshaping wide pre/post columns into a tidy learner-skill-time table. Each row in the analysis table represents one learner, one skill, and one time point. The figure is appropriate only after the codebook defines skill, time, and score; it should be read as a teaching example rather than causal evidence because the dataset is synthetic.</pre>
+      </div>
+      <p class="vi">Caption tốt không chỉ nói "điểm tăng"; nó nói bảng sau reshape có unit gì và vì sao không nên overclaim.</p>
+      <p class="en">A good caption does not only say "scores increased"; it states the unit after reshaping and why the reader should not overclaim.</p>
+    </section>
+  </main>
+
+  <footer>
+    <span class="vi">Sau khi đọc trang này, hãy chạy notebook thật để tự tạo lại tidy table và figure.</span>
+    <span class="en">After reading this page, run the actual notebook to recreate the tidy table and figure.</span>
+  </footer>
+
+  <script src="../../assets/module.js"></script>
+</body>
+</html>

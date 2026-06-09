@@ -1,0 +1,13 @@
+country,year,school_level,gross_enrollment_rate,completion_rate,student_teacher_ratio,source_note
+Vietnam,2020,lower secondary,86.1,78.4,27.5,World Bank / UIS teaching extract
+Vietnam,2021,lower secondary,87.5,79.0,28.1,World Bank / UIS teaching extract
+Vietnam,2022,lower secondary,88.4,80.2,27.9,World Bank / UIS teaching extract
+China,2020,lower secondary,97.2,92.5,18.2,World Bank / UIS teaching extract
+China,2021,lower secondary,97.8,93.1,17.9,World Bank / UIS teaching extract
+China,2022,lower secondary,98.0,93.8,17.7,World Bank / UIS teaching extract
+Thailand,2020,lower secondary,89.3,82.4,22.4,World Bank / UIS teaching extract
+Thailand,2021,lower secondary,90.1,83.0,22.1,World Bank / UIS teaching extract
+Thailand,2022,lower secondary,91.0,84.3,21.9,World Bank / UIS teaching extract
+Indonesia,2020,lower secondary,83.5,75.8,25.9,World Bank / UIS teaching extract
+Indonesia,2021,lower secondary,84.6,76.2,25.5,World Bank / UIS teaching extract
+Indonesia,2022,lower secondary,85.1,77.4,25.1,World Bank / UIS teaching extract

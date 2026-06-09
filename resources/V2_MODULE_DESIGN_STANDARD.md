@@ -4,6 +4,13 @@ Every V2 module must teach one visualization or data-processing capability throu
 
 Canonical implemented example: [`../modules/module-01-research-data-workflow/`](../modules/module-01-research-data-workflow/).
 
+Shared module engine:
+
+- `../assets/course.css` for module overview, notebook, demo, and materials pages.
+- `../assets/slides.css` for slide decks.
+- `../assets/module.js` for bilingual VI/EN switching.
+- `../assets/slides.js` for slide navigation, TOC, keyboard controls, and slide-number jump.
+
 ## Required Learning Arc
 
 1. **Research task**: What paper claim could this module support?

@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Module 02 Materials</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="../../assets/course.css">
+</head>
+<body data-lang="vi">
+  <header>
+    <nav aria-label="Materials navigation">
+      <a class="button primary" href="./">Module 02</a>
+      <a class="button" href="slides.html">Slides</a>
+      <a class="button" href="live_coding.html">Notebook</a>
+      <a class="button" href="#assignment">Assignment</a>
+      <a class="button" href="#rubric">Rubric</a>
+      <a class="button" href="#readings">Readings</a>
+    </nav>
+    <div class="language-switcher" role="group" aria-label="Language">
+      <button class="lang-button" type="button" data-lang="vi" aria-pressed="true">VI</button>
+      <button class="lang-button" type="button" data-lang="en" aria-pressed="false">EN</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero compact">
+      <div>
+        <span class="kicker">Module 02 materials</span>
+        <h1 class="vi">Bài tập, rubric và nguồn đọc</h1>
+        <h1 class="en">Assignment, rubric, and readings</h1>
+        <p class="lead vi">Trang này render assignment/rubric/readings để học viên không phải đọc raw Markdown trên GitHub Pages.</p>
+        <p class="lead en">This page renders the assignment, rubric, and readings so learners do not need to read raw Markdown on GitHub Pages.</p>
+      </div>
+      <div class="actions">
+        <a class="button" href="assignment.md">assignment.md</a>
+        <a class="button" href="rubric.md">rubric.md</a>
+        <a class="button" href="readings.md">readings.md</a>
+      </div>
+    </section>
+
+    <section id="assignment">
+      <span class="kicker vi">Bài tập</span>
+      <span class="kicker en">Assignment</span>
+      <h2 class="vi">Nộp tidy dataset, codebook, figure và Methods note</h2>
+      <h2 class="en">Submit a tidy dataset, codebook, figure, and Methods note</h2>
+      <div class="grid four">
+        <article class="card"><h3>Part A</h3><p class="vi">Inspect wide table và viết raw row meaning.</p><p class="en">Inspect the wide table and write the raw row meaning.</p></article>
+        <article class="card"><h3>Part B</h3><p class="vi">Tạo codebook ít nhất 8 biến.</p><p class="en">Create a codebook for at least 8 variables.</p></article>
+        <article class="card"><h3>Part C</h3><p class="vi">Reshape thành tidy long table.</p><p class="en">Reshape into a tidy long table.</p></article>
+        <article class="card"><h3>Part D</h3><p class="vi">Xuất figure PNG/SVG và viết caption.</p><p class="en">Export PNG/SVG figure and write a caption.</p></article>
+      </div>
+    </section>
+
+    <section id="rubric">
+      <span class="kicker">Rubric</span>
+      <h2 class="vi">Chấm theo schema và khả năng tái lập</h2>
+      <h2 class="en">Grade schema clarity and reproducibility</h2>
+      <table>
+        <thead><tr><th>Category</th><th>Points</th><th>Strong submission</th></tr></thead>
+        <tbody>
+          <tr><td>Unit of observation</td><td>20</td><td>Clearly distinguishes raw row meaning from tidy row meaning.</td></tr>
+          <tr><td>Codebook quality</td><td>25</td><td>Every key variable has type, role, allowed values, unit, and paper note.</td></tr>
+          <tr><td>Tidy transformation</td><td>20</td><td>Reshaped table is correct, readable, and figure-ready.</td></tr>
+          <tr><td>Figure quality</td><td>15</td><td>Figure uses tidy variables correctly and exports as PNG/SVG.</td></tr>
+          <tr><td>Caption and Methods note</td><td>15</td><td>Writing explains source, unit, variables, pattern, and limitation.</td></tr>
+          <tr><td>Reproducibility</td><td>5</td><td>Notebook runs and outputs can be regenerated.</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="readings">
+      <span class="kicker vi">Nguồn đọc</span>
+      <span class="kicker en">Readings</span>
+      <h2 class="vi">Đọc về tidy data, pandas reshape và data dictionary</h2>
+      <h2 class="en">Read about tidy data, pandas reshaping, and data dictionaries</h2>
+      <div class="grid two">
+        <article class="card"><h3>Tidy Data</h3><p>Conceptual anchor: variables as columns, observations as rows, values as cells.</p><a href="https://www.jstatsoft.org/article/view/v059i10">Open source</a></article>
+        <article class="card"><h3>pandas reshaping</h3><p>Official pandas guide for `melt`, `pivot`, and reshaping workflows.</p><a href="https://pandas.pydata.org/docs/user_guide/reshaping.html">Open source</a></article>
+        <article class="card"><h3>pandas read_csv</h3><p>CSV import options for paths, missing values, dates, and columns.</p><a href="https://pandas.pydata.org/docs/reference/api/pandas.read_csv.html">Open source</a></article>
+        <article class="card"><h3>Data dictionary</h3><p>Practical reference for documenting variables and dataset structure.</p><a href="https://datamanagement.hms.harvard.edu/collect-analyze/documentation-metadata/data-dictionary">Open source</a></article>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <span class="vi">Gợi ý dạy: luôn hỏi "raw row là gì?" rồi mới hỏi "tidy row là gì?".</span>
+    <span class="en">Teaching suggestion: always ask "what is the raw row?" before asking "what is the tidy row?"</span>
+  </footer>
+
+  <script src="../../assets/module.js"></script>
+</body>
+</html>

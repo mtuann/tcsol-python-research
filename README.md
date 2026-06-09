@@ -59,9 +59,10 @@ Key planning documents:
 - [`resources/V2_MODULE_DESIGN_STANDARD.md`](resources/V2_MODULE_DESIGN_STANDARD.md)
 - [`site/modules.json`](site/modules.json)
 
-Current completed module:
+Current completed modules:
 
 - [`modules/module-01-research-data-workflow/`](modules/module-01-research-data-workflow/) provides the canonical V2 pattern: learner page, slides, interactive demo, runnable notebook, rendered notebook, datasets, outputs, assignment, rubric, readings, and data dictionary.
+- [`modules/module-02-tidy-data-codebook/`](modules/module-02-tidy-data-codebook/) extends the foundation with wide-to-long reshaping, variable types, codebook design, tidy output tables, and a first tidy-data figure.
 
 ## Tool Stack
 

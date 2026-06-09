@@ -1,0 +1,13 @@
+variable_name,variable_type,role,unit_of_observation,allowed_values,paper_note
+learner_id,identifier,id,one learner,L001-L016,Do not use real names in public outputs.
+research_track,categorical,grouping variable,learner,TCSOL; translation,Application track for transfer practice.
+activity_group,categorical,treatment/exposure,learner,task-based; form-focused; mtpe-guided; dictionary-only,Group label for comparison charts.
+course_start_date,date,context variable,learner,YYYY-MM-DD,"Date variable should be parsed, not treated as plain text."
+native_language,categorical,background variable,learner,Vietnamese; Thai; Indonesian; Chinese,Use only broad language category; no identifying details.
+cefr_start,ordinal,baseline proficiency,learner,A1 < A2 < B1 < B2,"Ordinal category, not a regular numeric score."
+skill,categorical,measure name,learner-skill-time,vocabulary; speaking,Created after reshaping scores into long format.
+time,ordinal,measurement time,learner-skill-time,pre < post,Created after reshaping pre/post score columns.
+score,numeric,outcome,learner-skill-time,0-100,Comparable only within the same skill unless documented.
+confidence_pre,ordinal,self-report outcome,learner,1-5,Likert-style confidence before activity.
+confidence_post,ordinal,self-report outcome,learner,1-5,Likert-style confidence after activity.
+minutes_on_task,numeric,process variable,learner,minutes,"Use as context, not as causal evidence without design notes."

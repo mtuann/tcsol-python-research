@@ -103,7 +103,7 @@
       "number": "02",
       "slug": "module-02-tidy-data-codebook",
       "stage": "data-foundation",
-      "status": "planned",
+      "status": "available",
       "difficulty": {
         "vi": "Beginner",
         "en": "Beginner"
@@ -117,23 +117,23 @@
         "en": "What does one row mean, and how will each column be explained in the paper?"
       },
       "research_task": {
-        "vi": "Thiết kế unit of observation, biến, kiểu dữ liệu và codebook cho một nghiên cứu nhỏ.",
-        "en": "Design the unit of observation, variables, data types, and codebook for a small study."
+        "vi": "Biến bảng wide thành tidy long table, tạo codebook và figure pre/post đầu tiên.",
+        "en": "Turn a wide table into a tidy long table, create a codebook, and build a first pre/post figure."
       },
       "data_practice": {
-        "vi": "DataFrame, row/column/value, variable type, schema.",
-        "en": "DataFrame, row/column/value, variable type, schema."
+        "vi": "Wide vs long, `melt`, variable type, schema, codebook.",
+        "en": "Wide vs long, `melt`, variable type, schema, codebook."
       },
       "visualization_focus": {
-        "vi": "Tách biến categorical, numeric, date, text để biết chart nào có thể dùng.",
-        "en": "Separate categorical, numeric, date, and text variables to identify possible charts."
+        "vi": "Tạo variable type map và pre/post figure từ tidy learner-skill-time table.",
+        "en": "Create a variable type map and pre/post figure from a tidy learner-skill-time table."
       },
       "paper_output": {
-        "vi": "Codebook + dataset schema.",
-        "en": "Codebook + dataset schema."
+        "vi": "Codebook + tidy dataset + caption nêu unit sau khi reshape.",
+        "en": "Codebook + tidy dataset + caption naming the reshaped unit."
       },
-      "chart_types": ["schema table", "variable map"],
-      "tools": ["pandas", "openpyxl"],
+      "chart_types": ["schema table", "variable map", "pre/post line chart"],
+      "tools": ["Jupyter", "pandas", "matplotlib", "Markdown"],
       "path": "modules/module-02-tidy-data-codebook/"
     },
     {

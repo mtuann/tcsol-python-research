@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Module 02 Interactive Demo</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="../../assets/course.css">
+</head>
+<body data-lang="vi">
+  <header>
+    <nav aria-label="Demo navigation">
+      <a class="button primary" href="./">Module 02</a>
+      <a class="button" href="slides.html">Slides</a>
+      <a class="button" href="live_coding.html">Notebook</a>
+    </nav>
+    <div class="language-switcher" role="group" aria-label="Language">
+      <button class="lang-button" type="button" data-lang="vi" aria-pressed="true">VI</button>
+      <button class="lang-button" type="button" data-lang="en" aria-pressed="false">EN</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero compact">
+      <div>
+        <span class="kicker">Interactive demo</span>
+        <h1 class="vi">Schema explorer</h1>
+        <h1 class="en">Schema explorer</h1>
+        <p class="lead vi">Lọc codebook theo variable type để thấy mỗi biến có role và paper note khác nhau. Đây là bước chuẩn bị trước khi chọn chart.</p>
+        <p class="lead en">Filter the codebook by variable type to see how each variable has a different role and paper note. This is the preparation step before choosing charts.</p>
+      </div>
+      <div class="controls">
+        <label class="vi" for="type-filter">Lọc type</label>
+        <label class="en" for="type-filter">Filter type</label>
+        <select id="type-filter" class="button">
+          <option value="all">All types</option>
+        </select>
+      </div>
+    </section>
+
+    <section>
+      <div class="viz-layout">
+        <div class="chart">
+          <span class="kicker vi">Variable types</span>
+          <span class="kicker en">Variable types</span>
+          <h2 class="vi">Codebook biến schema thành thứ nhìn được</h2>
+          <h2 class="en">A codebook turns schema into something visible</h2>
+          <div id="bars"></div>
+        </div>
+        <div>
+          <span class="kicker vi">Variable cards</span>
+          <span class="kicker en">Variable cards</span>
+          <div class="source-list" id="variable-list"></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <span class="vi">Gợi ý: nếu không thể viết paper note cho một biến, bạn chưa hiểu biến đó đủ để plot.</span>
+    <span class="en">Tip: if you cannot write a paper note for a variable, you do not understand it well enough to plot it.</span>
+  </footer>
+
+  <script src="../../assets/module.js"></script>
+  <script>
+    function parseCsv(text) {
+      const rows = [];
+      let row = [];
+      let cell = "";
+      let quoted = false;
+      for (let i = 0; i < text.length; i += 1) {
+        const char = text[i];
+        const next = text[i + 1];
+        if (char === '"' && quoted && next === '"') {
+          cell += '"';
+          i += 1;
+        } else if (char === '"') {
+          quoted = !quoted;
+        } else if (char === "," && !quoted) {
+          row.push(cell);
+          cell = "";
+        } else if ((char === "\n" || char === "\r") && !quoted) {
+          if (char === "\r" && next === "\n") i += 1;
+          row.push(cell);
+          if (row.some((value) => value.length > 0)) rows.push(row);
+          row = [];
+          cell = "";
+        } else {
+          cell += char;
+        }
+      }
+      if (cell.length || row.length) {
+        row.push(cell);
+        rows.push(row);
+      }
+      const headers = rows.shift();
+      return rows.map((values) => Object.fromEntries(headers.map((header, index) => [header, values[index] || ""])));
+    }
+
+    const typeFilter = document.getElementById("type-filter");
+    const bars = document.getElementById("bars");
+    const list = document.getElementById("variable-list");
+    let codebook = [];
+
+    function color(type) {
+      return {
+        identifier: "#172033",
+        categorical: "#bd3f68",
+        ordinal: "#b67218",
+        numeric: "#16815f",
+        date: "#245ee8"
+      }[type] || "#245ee8";
+    }
+
+    function render() {
+      const selected = typeFilter.value;
+      const filtered = selected === "all" ? codebook : codebook.filter((row) => row.variable_type === selected);
+      const counts = codebook.reduce((acc, row) => {
+        acc[row.variable_type] = (acc[row.variable_type] || 0) + 1;
+        return acc;
+      }, {});
+      const max = Math.max(...Object.values(counts), 1);
+      bars.innerHTML = Object.entries(counts).map(([type, count]) => `
+        <div class="bar-row">
+          <div class="bar-label">${type}</div>
+          <div class="bar-track"><div class="bar-fill" style="width:${(count / max) * 100}%; background:${color(type)}"></div></div>
+          <div class="bar-value">${count}</div>
+        </div>
+      `).join("");
+
+      list.innerHTML = filtered.map((row) => `
+        <article class="source-card schema-card ${row.variable_type}">
+          <h3>${row.variable_name}</h3>
+          <div class="meta">
+            <span class="chip">${row.variable_type}</span>
+            <span class="chip">${row.role}</span>
+            <span class="chip">${row.unit_of_observation}</span>
+          </div>
+          <p><strong>Allowed values:</strong> ${row.allowed_values}</p>
+          <p><strong>Paper note:</strong> ${row.paper_note}</p>
+        </article>
+      `).join("");
+    }
+
+    fetch("outputs/tables/module02_codebook.csv")
+      .then((response) => response.text())
+      .then((text) => {
+        codebook = parseCsv(text);
+        [...new Set(codebook.map((row) => row.variable_type))].sort().forEach((type) => {
+          const option = document.createElement("option");
+          option.value = type;
+          option.textContent = type;
+          typeFilter.appendChild(option);
+        });
+        render();
+      });
+
+    typeFilter.addEventListener("change", render);
+  </script>
+</body>
+</html>

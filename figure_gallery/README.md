@@ -12,8 +12,8 @@ Each completed V2 module should contribute at least one polished figure here.
 - `time_change/`
 - `uncertainty/`
 - `coded_text/`
-- `maps_optional/`
 - `multi_panel/`
+- `interactive_to_static/`
 
 ## Required Figure Record
 

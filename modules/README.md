@@ -44,3 +44,7 @@ Each completed module should include:
 - `readings.md`
 
 See [`../resources/V2_REDESIGN_BLUEPRINT.md`](../resources/V2_REDESIGN_BLUEPRINT.md).
+
+## Template
+
+Start new modules by copying [`_template/`](_template/) and then filling in the module-specific dataset, notebook, figures, assignment, and readings.

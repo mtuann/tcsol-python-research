@@ -14,6 +14,7 @@ V2 should practice with more data than V1. Each module should use:
 - `education_policy/`: UNESCO UIS, World Bank education indicators, OECD/PISA-style tables.
 - `social_science/`: survey, Likert, demographic, pre/post, or intervention data.
 - `language_translation/`: learner errors, bilingual examples, MT quality ratings, MTPE logs.
+- `synthetic_teaching/`: small controlled datasets made only for teaching one concept.
 
 ## Data Rules
 

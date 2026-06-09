@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MODULE_XX - MODULE_TITLE</title>
+  <link rel="icon" href="data:,">
+  <style>
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: #172033;
+      background: #f6f8fc;
+    }
+    main {
+      width: min(1060px, calc(100% - 40px));
+      margin: 0 auto;
+      padding: 32px 0 56px;
+    }
+    a { color: inherit; }
+    .back { font-weight: 850; }
+    .hero, section {
+      margin: 22px 0;
+      padding: 24px;
+      border: 1px solid #d8e1ef;
+      border-radius: 8px;
+      background: #fff;
+    }
+    h1 {
+      margin: 12px 0;
+      font-size: clamp(2.4rem, 6vw, 5.2rem);
+      line-height: 0.98;
+      letter-spacing: 0;
+    }
+    h2 { margin-top: 0; }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+    .card {
+      padding: 16px;
+      border: 1px solid #d8e1ef;
+      border-radius: 8px;
+      background: #f9fbff;
+    }
+    @media (max-width: 760px) {
+      .grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <a class="back" href="../../">Back to V2 home</a>
+
+    <section class="hero">
+      <p>MODULE_XX</p>
+      <h1>MODULE_TITLE</h1>
+      <p>Replace this template with the module's guiding research question and final paper-facing output.</p>
+    </section>
+
+    <section>
+      <h2>1. Big Question</h2>
+      <p>State the paper-writing problem this module solves.</p>
+    </section>
+
+    <section>
+      <h2>2. What You Will Build</h2>
+      <div class="grid">
+        <article class="card"><strong>Dataset</strong><p>Describe the toy, academic, and transfer datasets.</p></article>
+        <article class="card"><strong>Figure</strong><p>Name the final figure and why it fits the research claim.</p></article>
+        <article class="card"><strong>Caption</strong><p>State the caption pattern learners will practice.</p></article>
+        <article class="card"><strong>Notebook</strong><p>Link to rendered notebook HTML and downloadable `.ipynb`.</p></article>
+      </div>
+    </section>
+
+    <section>
+      <h2>3. Learning Path</h2>
+      <ol>
+        <li>Inspect the data.</li>
+        <li>Clean or transform the table.</li>
+        <li>Build two candidate figures.</li>
+        <li>Choose and export the final figure.</li>
+        <li>Write the caption and Results note.</li>
+      </ol>
+    </section>
+  </main>
+</body>
+</html>

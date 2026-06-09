@@ -42,6 +42,9 @@ These courses inform the redesign, without copying their materials:
 tcsol-python-research-syllabus/
 ├── index.html                         # V2 homepage
 ├── README.md                          # V2 course overview
+├── site/
+│   ├── README.md
+│   └── modules.json                   # canonical module metadata for website rendering
 ├── modules/                           # V2 lesson modules
 │   ├── module-01-research-data-workflow/
 │   ├── module-02-tidy-data-codebook/

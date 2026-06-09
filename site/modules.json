@@ -1,0 +1,739 @@
+{
+  "schema_version": "0.1.0",
+  "updated": "2026-06-08",
+  "course": {
+    "title": {
+      "vi": "Python Data Visualization cho Academic Research Papers",
+      "en": "Python Data Visualization for Academic Research Papers"
+    },
+    "tagline": {
+      "vi": "Từ dữ liệu lộn xộn đến figure, caption và Results paragraph có thể đưa vào paper.",
+      "en": "From messy data to paper-ready figures, captions, and Results paragraphs."
+    }
+  },
+  "stages": [
+    {
+      "id": "data-foundation",
+      "modules": ["01", "02", "03", "04"],
+      "label": {
+        "vi": "Nền dữ liệu",
+        "en": "Data foundation"
+      },
+      "goal": {
+        "vi": "Biến dữ liệu thô thành bảng phân tích đáng tin trước khi vẽ.",
+        "en": "Turn raw data into trustworthy analysis tables before plotting."
+      }
+    },
+    {
+      "id": "figure-grammar",
+      "modules": ["05", "06"],
+      "label": {
+        "vi": "Ngữ pháp hình",
+        "en": "Figure grammar"
+      },
+      "goal": {
+        "vi": "Hiểu cấu trúc một figure paper-ready và vì sao một chart có thể gây hiểu nhầm.",
+        "en": "Understand paper-ready figure anatomy and why charts can mislead."
+      }
+    },
+    {
+      "id": "chart-families",
+      "modules": ["07", "08", "09", "10", "11", "12"],
+      "label": {
+        "vi": "Các họ biểu đồ nghiên cứu",
+        "en": "Research chart families"
+      },
+      "goal": {
+        "vi": "Chọn chart theo claim: so sánh, phân phối, quan hệ, thời gian, uncertainty, dữ liệu coding.",
+        "en": "Choose charts by claim: comparison, distribution, relationship, change, uncertainty, coded data."
+      }
+    },
+    {
+      "id": "paper-package",
+      "modules": ["13", "14", "15", "16"],
+      "label": {
+        "vi": "Đóng gói cho paper",
+        "en": "Paper package"
+      },
+      "goal": {
+        "vi": "Polish figure, chuyển exploration thành static output, viết Results section và reproducibility note.",
+        "en": "Polish figures, turn exploration into static output, and write Results plus reproducibility notes."
+      }
+    }
+  ],
+  "modules": [
+    {
+      "number": "01",
+      "slug": "module-01-research-data-workflow",
+      "stage": "data-foundation",
+      "status": "planned",
+      "difficulty": {
+        "vi": "Beginner",
+        "en": "Beginner"
+      },
+      "title": {
+        "vi": "Research data workflow",
+        "en": "Research data workflow"
+      },
+      "guiding_question": {
+        "vi": "Data của paper này nằm ở đâu, có đáng tin không, và sẽ biến thành bằng chứng như thế nào?",
+        "en": "Where does the paper's data live, can it be trusted, and how will it become evidence?"
+      },
+      "research_task": {
+        "vi": "Tạo data inventory cho một paper idea và phân biệt raw data, cleaned data, output, caption.",
+        "en": "Create a data inventory for a paper idea and separate raw data, cleaned data, outputs, and captions."
+      },
+      "data_practice": {
+        "vi": "CSV, folder structure, source note, data inventory.",
+        "en": "CSV, folder structure, source note, data inventory."
+      },
+      "visualization_focus": {
+        "vi": "Nhìn một bảng nhỏ và quyết định nó có thể tạo loại figure nào.",
+        "en": "Inspect a small table and decide what kind of figure it can support."
+      },
+      "paper_output": {
+        "vi": "Research question + data inventory.",
+        "en": "Research question + data inventory."
+      },
+      "chart_types": ["dataset preview", "workflow map"],
+      "tools": ["Jupyter", "pandas", "Markdown"],
+      "path": "modules/module-01-research-data-workflow/"
+    },
+    {
+      "number": "02",
+      "slug": "module-02-tidy-data-codebook",
+      "stage": "data-foundation",
+      "status": "planned",
+      "difficulty": {
+        "vi": "Beginner",
+        "en": "Beginner"
+      },
+      "title": {
+        "vi": "Tidy data và codebook",
+        "en": "Tidy data and codebook"
+      },
+      "guiding_question": {
+        "vi": "Một dòng trong dataset nghĩa là gì, và mỗi cột sẽ được giải thích trong paper ra sao?",
+        "en": "What does one row mean, and how will each column be explained in the paper?"
+      },
+      "research_task": {
+        "vi": "Thiết kế unit of observation, biến, kiểu dữ liệu và codebook cho một nghiên cứu nhỏ.",
+        "en": "Design the unit of observation, variables, data types, and codebook for a small study."
+      },
+      "data_practice": {
+        "vi": "DataFrame, row/column/value, variable type, schema.",
+        "en": "DataFrame, row/column/value, variable type, schema."
+      },
+      "visualization_focus": {
+        "vi": "Tách biến categorical, numeric, date, text để biết chart nào có thể dùng.",
+        "en": "Separate categorical, numeric, date, and text variables to identify possible charts."
+      },
+      "paper_output": {
+        "vi": "Codebook + dataset schema.",
+        "en": "Codebook + dataset schema."
+      },
+      "chart_types": ["schema table", "variable map"],
+      "tools": ["pandas", "openpyxl"],
+      "path": "modules/module-02-tidy-data-codebook/"
+    },
+    {
+      "number": "03",
+      "slug": "module-03-cleaning-research-data",
+      "stage": "data-foundation",
+      "status": "planned",
+      "difficulty": {
+        "vi": "Beginner",
+        "en": "Beginner"
+      },
+      "title": {
+        "vi": "Làm sạch dữ liệu nghiên cứu",
+        "en": "Cleaning research data"
+      },
+      "guiding_question": {
+        "vi": "Data bẩn sẽ làm figure nói sai như thế nào?",
+        "en": "How can messy data make a figure say the wrong thing?"
+      },
+      "research_task": {
+        "vi": "Tạo cleaning log và giải thích quyết định xử lý missing values, duplicate, label, type.",
+        "en": "Create a cleaning log and explain decisions for missing values, duplicates, labels, and types."
+      },
+      "data_practice": {
+        "vi": "Missingness, duplicates, label normalization, type conversion.",
+        "en": "Missingness, duplicates, label normalization, type conversion."
+      },
+      "visualization_focus": {
+        "vi": "Before/after data quality view để thấy cleaning thay đổi evidence ra sao.",
+        "en": "Before/after data quality view showing how cleaning changes evidence."
+      },
+      "paper_output": {
+        "vi": "Cleaning log + before/after table.",
+        "en": "Cleaning log + before/after table."
+      },
+      "chart_types": ["missingness bar", "before-after table"],
+      "tools": ["pandas"],
+      "path": "modules/module-03-cleaning-research-data/"
+    },
+    {
+      "number": "04",
+      "slug": "module-04-transforming-data-for-analysis",
+      "stage": "data-foundation",
+      "status": "planned",
+      "difficulty": {
+        "vi": "Beginner",
+        "en": "Beginner"
+      },
+      "title": {
+        "vi": "Transform data cho phân tích",
+        "en": "Transforming data for analysis"
+      },
+      "guiding_question": {
+        "vi": "Làm sao biến raw data thành table đúng để plot đúng?",
+        "en": "How do we turn raw data into the right table for the right plot?"
+      },
+      "research_task": {
+        "vi": "Tạo analysis-ready table bằng filter, groupby, pivot/melt và merge.",
+        "en": "Create an analysis-ready table using filter, groupby, pivot/melt, and merge."
+      },
+      "data_practice": {
+        "vi": "Filter, groupby, pivot, melt, merge.",
+        "en": "Filter, groupby, pivot, melt, merge."
+      },
+      "visualization_focus": {
+        "vi": "So sánh raw table và plot table để thấy chart cần cấu trúc nào.",
+        "en": "Compare raw tables and plot tables to see what structure charts require."
+      },
+      "paper_output": {
+        "vi": "Analysis-ready dataset.",
+        "en": "Analysis-ready dataset."
+      },
+      "chart_types": ["analysis table", "aggregation preview"],
+      "tools": ["pandas"],
+      "path": "modules/module-04-transforming-data-for-analysis/"
+    },
+    {
+      "number": "05",
+      "slug": "module-05-figure-anatomy",
+      "stage": "figure-grammar",
+      "status": "planned",
+      "difficulty": {
+        "vi": "Beginner",
+        "en": "Beginner"
+      },
+      "title": {
+        "vi": "Figure anatomy",
+        "en": "Figure anatomy"
+      },
+      "guiding_question": {
+        "vi": "Một figure paper-ready gồm những phần nào?",
+        "en": "What parts make a figure paper-ready?"
+      },
+      "research_task": {
+        "vi": "Tạo figure đầu tiên với title, axis label, scale, legend, caption, export.",
+        "en": "Create the first figure with title, axis labels, scale, legend, caption, and export."
+      },
+      "data_practice": {
+        "vi": "Small clean dataset and summary table.",
+        "en": "Small clean dataset and summary table."
+      },
+      "visualization_focus": {
+        "vi": "Matplotlib figure/axes, label, size, DPI, PNG/SVG/PDF.",
+        "en": "Matplotlib figure/axes, labels, size, DPI, PNG/SVG/PDF."
+      },
+      "paper_output": {
+        "vi": "First publication-style figure.",
+        "en": "First publication-style figure."
+      },
+      "chart_types": ["bar", "dot plot"],
+      "tools": ["matplotlib", "seaborn"],
+      "path": "modules/module-05-figure-anatomy/"
+    },
+    {
+      "number": "06",
+      "slug": "module-06-visual-encoding-perception",
+      "stage": "figure-grammar",
+      "status": "planned",
+      "difficulty": {
+        "vi": "Beginner-intermediate",
+        "en": "Beginner-intermediate"
+      },
+      "title": {
+        "vi": "Visual encoding và perception",
+        "en": "Visual encoding and perception"
+      },
+      "guiding_question": {
+        "vi": "Vì sao biểu đồ này gây hiểu nhầm?",
+        "en": "Why does this chart mislead?"
+      },
+      "research_task": {
+        "vi": "Critique một chart yếu và redesign bằng encoding phù hợp hơn.",
+        "en": "Critique a weak chart and redesign it with better encodings."
+      },
+      "data_practice": {
+        "vi": "Chart redesign dataset.",
+        "en": "Chart redesign dataset."
+      },
+      "visualization_focus": {
+        "vi": "Marks, channels, order, scale, color, hierarchy.",
+        "en": "Marks, channels, order, scale, color, hierarchy."
+      },
+      "paper_output": {
+        "vi": "Redesigned weak chart + rationale.",
+        "en": "Redesigned weak chart + rationale."
+      },
+      "chart_types": ["before-after redesign", "encoding map"],
+      "tools": ["seaborn", "altair"],
+      "path": "modules/module-06-visual-encoding-perception/"
+    },
+    {
+      "number": "07",
+      "slug": "module-07-comparisons",
+      "stage": "chart-families",
+      "status": "planned",
+      "difficulty": {
+        "vi": "Intermediate",
+        "en": "Intermediate"
+      },
+      "title": {
+        "vi": "Comparisons",
+        "en": "Comparisons"
+      },
+      "guiding_question": {
+        "vi": "So sánh nhóm bằng chart nào là thuyết phục nhất?",
+        "en": "Which chart best supports a group comparison?"
+      },
+      "research_task": {
+        "vi": "So sánh nhóm, điều kiện hoặc quốc gia mà không overclaim.",
+        "en": "Compare groups, conditions, or countries without overclaiming."
+      },
+      "data_practice": {
+        "vi": "Group comparison data, sorted summaries.",
+        "en": "Group comparison data, sorted summaries."
+      },
+      "visualization_focus": {
+        "vi": "Bar, dot plot, slope chart, small multiples.",
+        "en": "Bar, dot plot, slope chart, small multiples."
+      },
+      "paper_output": {
+        "vi": "Comparison figure + caption.",
+        "en": "Comparison figure + caption."
+      },
+      "chart_types": ["dot plot", "slope chart", "small multiple"],
+      "tools": ["matplotlib", "seaborn"],
+      "path": "modules/module-07-comparisons/"
+    },
+    {
+      "number": "08",
+      "slug": "module-08-distributions",
+      "stage": "chart-families",
+      "status": "planned",
+      "difficulty": {
+        "vi": "Intermediate",
+        "en": "Intermediate"
+      },
+      "title": {
+        "vi": "Distributions",
+        "en": "Distributions"
+      },
+      "guiding_question": {
+        "vi": "Phân phối dữ liệu nói gì mà mean không nói được?",
+        "en": "What does a distribution show that a mean cannot?"
+      },
+      "research_task": {
+        "vi": "Mô tả spread, skew, outlier và nhóm khác nhau trong data.",
+        "en": "Describe spread, skew, outliers, and group differences in data."
+      },
+      "data_practice": {
+        "vi": "Scores, survey variables, demographic variables.",
+        "en": "Scores, survey variables, demographic variables."
+      },
+      "visualization_focus": {
+        "vi": "Histogram, KDE, ECDF, boxplot, violin.",
+        "en": "Histogram, KDE, ECDF, boxplot, violin."
+      },
+      "paper_output": {
+        "vi": "Distribution figure + interpretation.",
+        "en": "Distribution figure + interpretation."
+      },
+      "chart_types": ["histogram", "ECDF", "boxplot", "violin"],
+      "tools": ["seaborn", "matplotlib"],
+      "path": "modules/module-08-distributions/"
+    },
+    {
+      "number": "09",
+      "slug": "module-09-relationships",
+      "stage": "chart-families",
+      "status": "planned",
+      "difficulty": {
+        "vi": "Intermediate",
+        "en": "Intermediate"
+      },
+      "title": {
+        "vi": "Relationships",
+        "en": "Relationships"
+      },
+      "guiding_question": {
+        "vi": "Hai biến có quan hệ thật không, hay chỉ nhìn có vẻ vậy?",
+        "en": "Do two variables really relate, or do they only appear to?"
+      },
+      "research_task": {
+        "vi": "Vẽ và diễn giải relationship mà không biến correlation thành causation.",
+        "en": "Visualize and interpret relationships without turning correlation into causation."
+      },
+      "data_practice": {
+        "vi": "Paired or multivariable data.",
+        "en": "Paired or multivariable data."
+      },
+      "visualization_focus": {
+        "vi": "Scatter, trend line, faceting, overplotting, residual view.",
+        "en": "Scatter, trend line, faceting, overplotting, residual view."
+      },
+      "paper_output": {
+        "vi": "Relationship figure + limitation.",
+        "en": "Relationship figure + limitation."
+      },
+      "chart_types": ["scatter", "regression line", "facet grid"],
+      "tools": ["seaborn", "statsmodels"],
+      "path": "modules/module-09-relationships/"
+    },
+    {
+      "number": "10",
+      "slug": "module-10-time-and-change",
+      "stage": "chart-families",
+      "status": "planned",
+      "difficulty": {
+        "vi": "Intermediate",
+        "en": "Intermediate"
+      },
+      "title": {
+        "vi": "Time and change",
+        "en": "Time and change"
+      },
+      "guiding_question": {
+        "vi": "Thay đổi theo thời gian nên kể bằng hình như thế nào?",
+        "en": "How should change over time be told visually?"
+      },
+      "research_task": {
+        "vi": "Trình bày trend, intervention, policy event hoặc pre/post change.",
+        "en": "Present trends, interventions, policy events, or pre/post changes."
+      },
+      "data_practice": {
+        "vi": "Country-year data, policy timeline, pre/post data.",
+        "en": "Country-year data, policy timeline, pre/post data."
+      },
+      "visualization_focus": {
+        "vi": "Line, event timeline, pre/post panel, annotation.",
+        "en": "Line, event timeline, pre/post panel, annotation."
+      },
+      "paper_output": {
+        "vi": "Longitudinal or change figure.",
+        "en": "Longitudinal or change figure."
+      },
+      "chart_types": ["line chart", "timeline", "pre-post panel"],
+      "tools": ["matplotlib", "altair"],
+      "path": "modules/module-10-time-and-change/"
+    },
+    {
+      "number": "11",
+      "slug": "module-11-uncertainty",
+      "stage": "chart-families",
+      "status": "planned",
+      "difficulty": {
+        "vi": "Intermediate",
+        "en": "Intermediate"
+      },
+      "title": {
+        "vi": "Uncertainty",
+        "en": "Uncertainty"
+      },
+      "guiding_question": {
+        "vi": "Làm sao show uncertainty mà không làm người đọc rối?",
+        "en": "How can uncertainty be shown without confusing readers?"
+      },
+      "research_task": {
+        "vi": "Hiển thị CI, SE hoặc bootstrap interval và viết claim thận trọng.",
+        "en": "Show CI, SE, or bootstrap intervals and write cautious claims."
+      },
+      "data_practice": {
+        "vi": "Sample means, confidence intervals, bootstrap, regression output.",
+        "en": "Sample means, confidence intervals, bootstrap, regression output."
+      },
+      "visualization_focus": {
+        "vi": "Error bars, interval plot, uncertainty bands.",
+        "en": "Error bars, interval plot, uncertainty bands."
+      },
+      "paper_output": {
+        "vi": "Uncertainty-aware Results paragraph.",
+        "en": "Uncertainty-aware Results paragraph."
+      },
+      "chart_types": ["interval plot", "error bars", "confidence band"],
+      "tools": ["scipy", "statsmodels", "matplotlib"],
+      "path": "modules/module-11-uncertainty/"
+    },
+    {
+      "number": "12",
+      "slug": "module-12-categorical-coded-text-data",
+      "stage": "chart-families",
+      "status": "planned",
+      "difficulty": {
+        "vi": "Intermediate",
+        "en": "Intermediate"
+      },
+      "title": {
+        "vi": "Categorical và coded text data",
+        "en": "Categorical and coded text data"
+      },
+      "guiding_question": {
+        "vi": "Dữ liệu coding, text label và category nên visualize ra sao?",
+        "en": "How should coded, text-label, and categorical data be visualized?"
+      },
+      "research_task": {
+        "vi": "Tóm tắt coding categories, error labels, themes hoặc annotation results.",
+        "en": "Summarize coding categories, error labels, themes, or annotation results."
+      },
+      "data_practice": {
+        "vi": "Coding categories, crosstabs, error labels.",
+        "en": "Coding categories, crosstabs, error labels."
+      },
+      "visualization_focus": {
+        "vi": "Heatmap, stacked bar, dot summary, representative examples.",
+        "en": "Heatmap, stacked bar, dot summary, representative examples."
+      },
+      "paper_output": {
+        "vi": "Coded-data figure/table.",
+        "en": "Coded-data figure/table."
+      },
+      "chart_types": ["heatmap", "stacked bar", "dot summary"],
+      "tools": ["pandas", "seaborn"],
+      "path": "modules/module-12-categorical-coded-text-data/"
+    },
+    {
+      "number": "13",
+      "slug": "module-13-color-annotation-accessibility",
+      "stage": "paper-package",
+      "status": "planned",
+      "difficulty": {
+        "vi": "Intermediate",
+        "en": "Intermediate"
+      },
+      "title": {
+        "vi": "Color, annotation và accessibility",
+        "en": "Color, annotation, and accessibility"
+      },
+      "guiding_question": {
+        "vi": "Làm sao polish figure để đưa vào paper mà vẫn đọc được và công bằng?",
+        "en": "How can a figure be polished for a paper while remaining readable and accessible?"
+      },
+      "research_task": {
+        "vi": "Cải thiện figure bằng palette, label trực tiếp, annotation và alt text.",
+        "en": "Improve a figure with palettes, direct labels, annotation, and alt text."
+      },
+      "data_practice": {
+        "vi": "Figure polish dataset.",
+        "en": "Figure polish dataset."
+      },
+      "visualization_focus": {
+        "vi": "Palette, typography, direct label, annotation, alt text.",
+        "en": "Palette, typography, direct labels, annotation, alt text."
+      },
+      "paper_output": {
+        "vi": "Polished journal-style figure.",
+        "en": "Polished journal-style figure."
+      },
+      "chart_types": ["annotated figure", "before-after polish"],
+      "tools": ["matplotlib", "seaborn"],
+      "path": "modules/module-13-color-annotation-accessibility/"
+    },
+    {
+      "number": "14",
+      "slug": "module-14-interactive-exploration-static-paper-output",
+      "stage": "paper-package",
+      "status": "planned",
+      "difficulty": {
+        "vi": "Intermediate-advanced",
+        "en": "Intermediate-advanced"
+      },
+      "title": {
+        "vi": "Interactive exploration, static paper output",
+        "en": "Interactive exploration, static paper output"
+      },
+      "guiding_question": {
+        "vi": "Interactive giúp khám phá, nhưng static figure cho paper ra sao?",
+        "en": "Interactivity helps exploration, but what becomes the static paper figure?"
+      },
+      "research_task": {
+        "vi": "Dùng interactive chart để explore, rồi xuất một static figure có claim rõ.",
+        "en": "Use an interactive chart to explore, then export a static figure with a clear claim."
+      },
+      "data_practice": {
+        "vi": "Larger public data extract.",
+        "en": "Larger public data extract."
+      },
+      "visualization_focus": {
+        "vi": "Altair/Plotly exploration, filter, tooltip, static export.",
+        "en": "Altair/Plotly exploration, filters, tooltips, static export."
+      },
+      "paper_output": {
+        "vi": "Interactive view + paper figure.",
+        "en": "Interactive view + paper figure."
+      },
+      "chart_types": ["interactive scatter", "interactive line", "static selected view"],
+      "tools": ["altair", "plotly", "matplotlib"],
+      "path": "modules/module-14-interactive-exploration-static-paper-output/"
+    },
+    {
+      "number": "15",
+      "slug": "module-15-multi-figure-results-section",
+      "stage": "paper-package",
+      "status": "planned",
+      "difficulty": {
+        "vi": "Advanced",
+        "en": "Advanced"
+      },
+      "title": {
+        "vi": "Multi-figure Results section",
+        "en": "Multi-figure Results section"
+      },
+      "guiding_question": {
+        "vi": "Hai đến ba figures nên kể thành Results section như thế nào?",
+        "en": "How should two or three figures become a Results section?"
+      },
+      "research_task": {
+        "vi": "Sắp xếp sequence figure, table và paragraph để kể một argument.",
+        "en": "Sequence figures, tables, and paragraphs to tell one argument."
+      },
+      "data_practice": {
+        "vi": "Linked datasets or multiple views of one dataset.",
+        "en": "Linked datasets or multiple views of one dataset."
+      },
+      "visualization_focus": {
+        "vi": "Panels, numbering, caption sequence, figure references.",
+        "en": "Panels, numbering, caption sequence, figure references."
+      },
+      "paper_output": {
+        "vi": "2-3 figure Results package.",
+        "en": "2-3 figure Results package."
+      },
+      "chart_types": ["multi-panel", "figure sequence", "summary table"],
+      "tools": ["matplotlib", "pandas"],
+      "path": "modules/module-15-multi-figure-results-section/"
+    },
+    {
+      "number": "16",
+      "slug": "module-16-reproducible-paper-package",
+      "stage": "paper-package",
+      "status": "planned",
+      "difficulty": {
+        "vi": "Advanced",
+        "en": "Advanced"
+      },
+      "title": {
+        "vi": "Reproducible paper package",
+        "en": "Reproducible paper package"
+      },
+      "guiding_question": {
+        "vi": "Làm sao đóng gói data, notebook, figures và captions để reproducible?",
+        "en": "How do we package data, notebooks, figures, and captions reproducibly?"
+      },
+      "research_task": {
+        "vi": "Audit final package: data, code, figure, caption, Results, source note.",
+        "en": "Audit the final package: data, code, figure, caption, Results, source note."
+      },
+      "data_practice": {
+        "vi": "Final cleaned data and outputs.",
+        "en": "Final cleaned data and outputs."
+      },
+      "visualization_focus": {
+        "vi": "Export audit, source map, figure checklist.",
+        "en": "Export audit, source map, figure checklist."
+      },
+      "paper_output": {
+        "vi": "Final figure package + reproducibility note.",
+        "en": "Final figure package + reproducibility note."
+      },
+      "chart_types": ["package audit", "source map"],
+      "tools": ["pandas", "Jupyter", "Zotero"],
+      "path": "modules/module-16-reproducible-paper-package/"
+    }
+  ],
+  "gallery_categories": [
+    {
+      "id": "comparison",
+      "label": {
+        "vi": "So sánh",
+        "en": "Comparison"
+      }
+    },
+    {
+      "id": "distribution",
+      "label": {
+        "vi": "Phân phối",
+        "en": "Distribution"
+      }
+    },
+    {
+      "id": "relationship",
+      "label": {
+        "vi": "Quan hệ",
+        "en": "Relationship"
+      }
+    },
+    {
+      "id": "time-change",
+      "label": {
+        "vi": "Thời gian và thay đổi",
+        "en": "Time and change"
+      }
+    },
+    {
+      "id": "uncertainty",
+      "label": {
+        "vi": "Uncertainty",
+        "en": "Uncertainty"
+      }
+    },
+    {
+      "id": "coded-text",
+      "label": {
+        "vi": "Dữ liệu coding/text",
+        "en": "Coded text"
+      }
+    }
+  ],
+  "data_categories": [
+    {
+      "id": "general-academic",
+      "label": {
+        "vi": "General academic data",
+        "en": "General academic data"
+      }
+    },
+    {
+      "id": "education-policy",
+      "label": {
+        "vi": "Education policy",
+        "en": "Education policy"
+      }
+    },
+    {
+      "id": "social-science",
+      "label": {
+        "vi": "Social science",
+        "en": "Social science"
+      }
+    },
+    {
+      "id": "language-translation",
+      "label": {
+        "vi": "Language and translation",
+        "en": "Language and translation"
+      }
+    },
+    {
+      "id": "synthetic-teaching",
+      "label": {
+        "vi": "Synthetic teaching data",
+        "en": "Synthetic teaching data"
+      }
+    }
+  ]
+}

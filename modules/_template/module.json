@@ -1,0 +1,37 @@
+{
+  "number": "XX",
+  "slug": "module-xx-topic",
+  "stage": "data-foundation",
+  "status": "draft",
+  "difficulty": {
+    "vi": "Beginner",
+    "en": "Beginner"
+  },
+  "title": {
+    "vi": "MODULE TITLE VI",
+    "en": "MODULE TITLE EN"
+  },
+  "guiding_question": {
+    "vi": "MODULE QUESTION VI",
+    "en": "MODULE QUESTION EN"
+  },
+  "research_task": {
+    "vi": "RESEARCH TASK VI",
+    "en": "RESEARCH TASK EN"
+  },
+  "data_practice": {
+    "vi": "DATA PRACTICE VI",
+    "en": "DATA PRACTICE EN"
+  },
+  "visualization_focus": {
+    "vi": "VISUALIZATION FOCUS VI",
+    "en": "VISUALIZATION FOCUS EN"
+  },
+  "paper_output": {
+    "vi": "PAPER OUTPUT VI",
+    "en": "PAPER OUTPUT EN"
+  },
+  "chart_types": [],
+  "tools": [],
+  "path": "modules/module-xx-topic/"
+}

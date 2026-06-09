@@ -45,6 +45,7 @@ By the end of V2, the learner should be able to:
 ├── README.md
 ├── index.html
 ├── requirements.txt
+├── site/
 ├── modules/
 ├── data_bank/
 ├── figure_gallery/
@@ -56,6 +57,7 @@ Key planning documents:
 
 - [`resources/V2_REDESIGN_BLUEPRINT.md`](resources/V2_REDESIGN_BLUEPRINT.md)
 - [`resources/V2_MODULE_DESIGN_STANDARD.md`](resources/V2_MODULE_DESIGN_STANDARD.md)
+- [`site/modules.json`](site/modules.json)
 
 ## Tool Stack
 

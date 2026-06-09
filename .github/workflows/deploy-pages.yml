@@ -37,7 +37,7 @@ jobs:
         run: |
           mkdir -p _site _site/v1
           cd main
-          for item in index.html README.md modules data_bank figure_gallery paper_package resources requirements.txt; do
+          for item in index.html README.md site modules data_bank figure_gallery paper_package resources requirements.txt; do
             if [ -e "$item" ]; then
               cp -R "$item" ../_site/
             fi

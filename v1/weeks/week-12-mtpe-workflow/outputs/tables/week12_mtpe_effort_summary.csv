@@ -1,0 +1,4 @@
+mt_system,segments,mean_pe_time_seconds,median_pe_time_seconds,mean_char_edit_distance,mean_normalized_edit_distance,revision_needed_rows
+MT_B,10,36.4,35.0,9.4,0.11,5
+MT_A,10,99.4,101.5,33.9,0.41,10
+MT_C,10,111.4,117.5,32.9,0.4,10

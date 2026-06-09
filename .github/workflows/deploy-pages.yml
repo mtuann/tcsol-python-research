@@ -28,7 +28,11 @@ jobs:
       - name: Prepare static site
         run: |
           mkdir -p _site
-          cp -R index.html README.md assets weeks resources _site/
+          for item in index.html README.md assets weeks resources v1 modules data_bank figure_gallery paper_package; do
+            if [ -e "$item" ]; then
+              cp -R "$item" _site/
+            fi
+          done
           touch _site/.nojekyll
 
       - name: Upload Pages artifact

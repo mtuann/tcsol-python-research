@@ -4,6 +4,15 @@
 
 Last source check: 2026-06-04
 
+## Version Note
+
+This repository is moving from V1 to V2.
+
+- **V1 archive**: the original beginner TCSOL-oriented website is frozen in [`v1/`](v1/) and preserved through Git branch `v1-tcsol-beginner` plus tag `v1.0-tcsol-beginner`.
+- **V2 direction**: the root site on `main` will be rebuilt as **Python Data Visualization for Academic Research Papers**, with heavier data processing, richer figure practice, and paper-ready visualization outputs.
+
+Design blueprint: [`resources/V2_REDESIGN_BLUEPRINT.md`](resources/V2_REDESIGN_BLUEPRINT.md).
+
 ## Project Purpose
 
 This project designs a Python learning path for a student who is preparing for graduate study in education policy and whose research interests include:

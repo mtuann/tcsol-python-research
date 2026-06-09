@@ -1,0 +1,288 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title data-i18n="meta.title">Tuần 01: Python như một quy trình nghiên cứu | Notebook đã render</title>
+  <link rel="stylesheet" href="../../assets/css/bilingual.css">
+  <link rel="stylesheet" href="../../assets/css/course-doc.css">
+</head>
+<body>
+  <header class="doc-topbar">
+    <a class="doc-brand" href="../../" data-i18n="brand">Python Research Hub</a>
+    <nav class="doc-nav" aria-label="Điều hướng notebook" data-i18n-aria-label="nav.aria">
+      <a href="./" data-i18n="nav.week">Week 01</a>
+      <a href="slides.html" data-i18n="nav.slides">Slides</a>
+      <a href="interactive_demo.html" data-i18n="nav.demo">Demo</a>
+      <a href="live_coding.ipynb" download data-i18n="nav.source">Source .ipynb</a>
+      <div class="language-switcher" role="group" aria-label="Ngôn ngữ / Language" data-i18n-aria-label="nav.language">
+        <button type="button" data-lang-option="vi" aria-pressed="true">Tiếng Việt</button>
+        <button type="button" data-lang-option="en" aria-pressed="false">English</button>
+      </div>
+    </nav>
+  </header>
+
+  <main class="doc-shell notebook-shell">
+    <aside class="doc-sidebar">
+      <strong data-i18n="side.title">Notebook</strong>
+      <a href="./" data-i18n="side.week">Tổng quan tuần</a>
+      <a href="https://colab.research.google.com/github/mtuann/tcsol-python-research/blob/main/weeks/week-01-python-research-workflow/live_coding.ipynb" data-i18n="side.colab">Chạy bằng Colab</a>
+      <a href="live_coding.ipynb" download data-i18n="side.source">Tải source .ipynb</a>
+      <a href="data/raw/week01_research_tracks.csv" download data-i18n="side.csv">Tải tệp CSV dữ liệu</a>
+    </aside>
+
+    <div class="doc-main">
+      <section class="doc-hero">
+        <span class="doc-eyebrow" data-i18n="hero.tag">Rendered notebook</span>
+        <h1 data-i18n="hero.title">Tuần 01: Python như một quy trình nghiên cứu</h1>
+        <p class="doc-lead" data-i18n="hero.body">Đây là bản HTML đã chạy sẵn để đọc trên GitHub Pages. Muốn thực hành, mở notebook trong Colab hoặc tải file .ipynb.</p>
+        <div class="doc-actions">
+          <a class="doc-button" href="https://colab.research.google.com/github/mtuann/tcsol-python-research/blob/main/weeks/week-01-python-research-workflow/live_coding.ipynb" data-i18n="action.colab">Chạy trong Colab</a>
+          <a class="doc-button secondary" href="live_coding.ipynb" download data-i18n="action.source">Tải .ipynb</a>
+          <a class="doc-button secondary" href="./" data-i18n="action.week">Quay lại Week 01</a>
+        </div>
+      </section>
+
+      <section class="doc-card notebook-note">
+        <h2 data-i18n="note.title">Cách dùng trang này</h2>
+        <div class="doc-grid three">
+          <article class="mini-card"><span class="swatch blue"></span><h3 data-i18n="note.read.title">Đọc</h3><p data-i18n="note.read.body">Bản HTML giữ code và output cạnh nhau, phù hợp để ôn lại sau buổi học.</p></article>
+          <article class="mini-card"><span class="swatch green"></span><h3 data-i18n="note.run.title">Chạy</h3><p data-i18n="note.run.body">Nút Colab mở notebook có thể chạy từng cell và tự tải CSV nếu không có file local.</p></article>
+          <article class="mini-card"><span class="swatch amber"></span><h3 data-i18n="note.source.title">Source</h3><p data-i18n="note.source.body">File .ipynb vẫn được giữ để tải, nộp bài hoặc chỉnh trong JupyterLab/VS Code.</p></article>
+        </div>
+      </section>
+
+      <section class="notebook-document" aria-label="Các cell notebook đã render" data-i18n-aria-label="notebook.cells.aria">
+        <article class="nb-cell nb-markdown" data-cell-type="markdown" data-i18n-html="notebook.cell01"><h2>Tuần 01: Python như một quy trình nghiên cứu</h2>
+<p>Đây là notebook nghiên cứu đầu tiên của bạn. Mục tiêu hôm nay không phải là thành thạo lập trình. Mục tiêu là chạy notebook, sửa vài giá trị an toàn, xem một dataset rất nhỏ, và kết nối output của Python với câu hỏi nghiên cứu.</p></article>
+<article class="nb-cell nb-markdown" data-cell-type="markdown" data-i18n-html="notebook.cell02"><h3>Mục tiêu học tập</h3>
+<p>Cuối notebook này, bạn có thể:</p>
+<ol><li>chạy các ô code từ đầu đến cuối;</li><li>sửa các biến text đơn giản;</li><li>đọc output từ một tệp CSV nhỏ;</li><li>chọn một hướng nghiên cứu;</li><li>viết caption, memo, và một câu paper-facing.</li></ol></article>
+<article class="nb-cell nb-markdown" data-cell-type="markdown" data-i18n-html="notebook.cell03"><h3>Cách bắt đầu</h3>
+<ol><li>Mở bản HTML này để đọc trước.</li><li>Mở Colab từ nút trên trang nếu muốn chạy notebook.</li><li>Trong Colab, chọn <strong>File -&gt; Save a copy in Drive</strong>.</li><li>Chạy từng cell từ trên xuống.</li><li>Chỉ sửa các cell có ghi <strong>Bạn sửa</strong>.</li><li>Tải hoặc nộp file <code>.ipynb</code> đã hoàn thành.</li></ol></article>
+<article class="nb-cell nb-markdown" data-cell-type="markdown" data-i18n-html="notebook.cell04"><h3>1. Điểm bắt đầu nghiên cứu của tôi</h3>
+<p><strong>Bạn sửa:</strong> chỉ sửa phần giá trị nằm trong dấu ngoặc kép. Giữ nguyên dấu ngoặc kép.</p></article>
+<article class="nb-cell nb-code" data-cell-type="code"><div class="nb-input-label">In [1]</div><pre><code>my_name = &quot;Your name&quot;
+my_research_area = &quot;TCSOL&quot;
+my_topic = &quot;short-term Chinese teaching&quot;
+my_question = &quot;How can a short course help Vietnamese beginners learn Chinese measure words?&quot;
+
+print(&quot;Researcher:&quot;, my_name)
+print(&quot;Area:&quot;, my_research_area)
+print(&quot;Topic:&quot;, my_topic)
+print(&quot;Question:&quot;, my_question)</code></pre><div class="nb-output"><div class="nb-output-label">Output</div><pre><code>Researcher: Your name
+Area: TCSOL
+Topic: short-term Chinese teaching
+Question: How can a short course help Vietnamese beginners learn Chinese measure words?</code></pre></div></article>
+<article class="nb-cell nb-markdown" data-cell-type="markdown" data-i18n-html="notebook.cell06"><h3>2. Đọc một tệp CSV nhỏ</h3>
+<p>Tệp CSV là một bảng được lưu dưới dạng text. Tuần này, mỗi dòng là một hướng project có thể phát triển.</p>
+<p><strong>Code mẫu - chỉ cần chạy:</strong> cell tiếp theo tìm file CSV. Nếu mở bằng Colab và chưa có file local, Python sẽ tự tải bản public từ GitHub.</p></article>
+<article class="nb-cell nb-code" data-cell-type="code"><div class="nb-input-label">In [2]</div><pre><code>from pathlib import Path
+from urllib.request import urlretrieve
+import csv
+
+possible_paths = [
+    Path(&quot;data/raw/week01_research_tracks.csv&quot;),
+    Path(&quot;weeks/week-01-python-research-workflow/data/raw/week01_research_tracks.csv&quot;),
+]
+
+data_path = next((path for path in possible_paths if path.exists()), None)
+
+if data_path is None:
+    week_dir = Path(&quot;.&quot;)
+    data_dir = week_dir / &quot;data/raw&quot;
+    data_dir.mkdir(parents=True, exist_ok=True)
+    data_path = data_dir / &quot;week01_research_tracks.csv&quot;
+    source_url = &quot;https://raw.githubusercontent.com/mtuann/tcsol-python-research/main/weeks/week-01-python-research-workflow/data/raw/week01_research_tracks.csv&quot;
+    try:
+        urlretrieve(source_url, data_path)
+    except Exception as error:
+        raise RuntimeError(
+            &quot;Python could not download the Week 01 CSV. &quot;
+            &quot;Please upload week01_research_tracks.csv to data/raw/ and run this cell again.&quot;
+        ) from error
+else:
+    week_dir = data_path.parents[2]
+
+print(&quot;Data file exists:&quot;, data_path.exists())
+print(&quot;Data file path:&quot;, data_path)</code></pre><div class="nb-output"><div class="nb-output-label">Output</div><pre><code>Data file exists: True
+Data file path: weeks/week-01-python-research-workflow/data/raw/week01_research_tracks.csv</code></pre></div></article>
+<article class="nb-cell nb-code" data-cell-type="code"><div class="nb-input-label">In [3]</div><pre><code>with data_path.open(encoding=&quot;utf-8&quot;) as file:
+    rows = list(csv.DictReader(file))
+
+print(&quot;Number of rows:&quot;, len(rows))
+print(&quot;Column names:&quot;, list(rows[0].keys()))</code></pre><div class="nb-output"><div class="nb-output-label">Output</div><pre><code>Number of rows: 4
+Column names: [&#x27;track_id&#x27;, &#x27;track&#x27;, &#x27;broad_interest&#x27;, &#x27;small_research_question&#x27;, &#x27;unit_of_observation&#x27;, &#x27;starter_dataset&#x27;, &#x27;likely_output&#x27;, &#x27;beginner_python_task&#x27;]</code></pre></div></article>
+<article class="nb-cell nb-markdown" data-cell-type="markdown" data-i18n-html="notebook.cell09"><h3>3. Xem các dòng dữ liệu</h3>
+<p><strong>Code mẫu - chỉ cần chạy:</strong> đừng lo nếu bạn chưa hiểu mọi ký hiệu. Hãy đọc output được in ra và hỏi: một dòng dữ liệu đại diện cho điều gì?</p></article>
+<article class="nb-cell nb-code" data-cell-type="code"><div class="nb-input-label">In [4]</div><pre><code>for row in rows:
+    print(row[&quot;track_id&quot;], &quot;-&quot;, row[&quot;track&quot;])
+    print(&quot;  Question:&quot;, row[&quot;small_research_question&quot;])
+    print(&quot;  One row in future data:&quot;, row[&quot;unit_of_observation&quot;])
+    print()</code></pre><div class="nb-output"><div class="nb-output-label">Output</div><pre><code>TCSOL_SHORT - Short-term Chinese teaching
+  Question: How do learner scores change before and after a two-week measure-word activity?
+  One row in future data: learner pre/post score record
+
+CONTRASTIVE - Chinese-Vietnamese contrastive analysis
+  Question: Which Chinese ba-construction features need explicit Chinese-Vietnamese comparison in teaching notes?
+  One row in future data: Chinese-Vietnamese grammar example with teaching note
+
+MTPE - Machine translation and MTPE
+  Question: Which simplified MT error label appears most often in Chinese-Vietnamese education-policy sentences?
+  One row in future data: translation segment with human post-editing
+
+POLICY - Education policy
+  Question: Which themes appear in manually coded excerpts about teacher development and digitalization?
+  One row in future data: manually coded policy excerpt</code></pre></div></article>
+<article class="nb-cell nb-markdown" data-cell-type="markdown" data-i18n-html="notebook.cell11"><h3>4. Chọn một hướng nghiên cứu</h3>
+<p><strong>Bạn sửa:</strong> chọn một trong các ID sau, rồi chỉ sửa giá trị của <code>selected_track_id</code>.</p>
+<ul><li><code>TCSOL_SHORT</code></li><li><code>CONTRASTIVE</code></li><li><code>MTPE</code></li><li><code>POLICY</code></li></ul></article>
+<article class="nb-cell nb-code" data-cell-type="code"><div class="nb-input-label">In [5]</div><pre><code>selected_track_id = &quot;TCSOL_SHORT&quot;
+
+valid_track_ids = [row[&quot;track_id&quot;] for row in rows]
+if selected_track_id not in valid_track_ids:
+    raise ValueError(&quot;Please choose one of these track IDs: &quot; + &quot;, &quot;.join(valid_track_ids))
+
+selected = next(row for row in rows if row[&quot;track_id&quot;] == selected_track_id)
+
+print(&quot;Selected track:&quot;, selected[&quot;track&quot;])
+print(&quot;Small research question:&quot;, selected[&quot;small_research_question&quot;])
+print(&quot;Data unit:&quot;, selected[&quot;unit_of_observation&quot;])
+print(&quot;Likely paper output:&quot;, selected[&quot;likely_output&quot;])</code></pre><div class="nb-output"><div class="nb-output-label">Output</div><pre><code>Selected track: Short-term Chinese teaching
+Small research question: How do learner scores change before and after a two-week measure-word activity?
+Data unit: learner pre/post score record
+Likely paper output: pre/post score table or learner progress figure</code></pre></div></article>
+<article class="nb-cell nb-markdown" data-cell-type="markdown" data-i18n-html="notebook.cell13"><h3>5. Tạo một bảng tóm tắt nhỏ</h3>
+<p><strong>Code mẫu - chỉ cần chạy:</strong> bảng này rất đơn giản, nhưng đã có thói quen viết paper: nối câu hỏi, dữ liệu, và output.</p></article>
+<article class="nb-cell nb-code" data-cell-type="code"><div class="nb-input-label">In [6]</div><pre><code>summary = {
+    &quot;selected_track&quot;: selected[&quot;track&quot;],
+    &quot;small_research_question&quot;: selected[&quot;small_research_question&quot;],
+    &quot;unit_of_observation&quot;: selected[&quot;unit_of_observation&quot;],
+    &quot;likely_output&quot;: selected[&quot;likely_output&quot;],
+}
+
+for key, value in summary.items():
+    print(key + &quot;:&quot;, value)</code></pre><div class="nb-output"><div class="nb-output-label">Output</div><pre><code>selected_track: Short-term Chinese teaching
+small_research_question: How do learner scores change before and after a two-week measure-word activity?
+unit_of_observation: learner pre/post score record
+likely_output: pre/post score table or learner progress figure</code></pre></div></article>
+<article class="nb-cell nb-code" data-cell-type="code"><div class="nb-input-label">In [7]</div><pre><code>output_dir = week_dir / &quot;outputs/tables&quot;
+output_dir.mkdir(parents=True, exist_ok=True)
+output_path = output_dir / &quot;week01_selected_track_summary.csv&quot;
+
+with output_path.open(&quot;w&quot;, encoding=&quot;utf-8&quot;, newline=&quot;&quot;) as file:
+    writer = csv.DictWriter(file, fieldnames=list(summary.keys()), lineterminator=&quot;\n&quot;)
+    writer.writeheader()
+    writer.writerow(summary)
+
+print(&quot;Saved summary table to:&quot;, output_path)</code></pre><div class="nb-output"><div class="nb-output-label">Output</div><pre><code>Saved summary table to: weeks/week-01-python-research-workflow/outputs/tables/week01_selected_track_summary.csv</code></pre></div></article>
+<article class="nb-cell nb-markdown" data-cell-type="markdown" data-i18n-html="notebook.cell16"><h3>Ghi chú nguồn và quyền riêng tư</h3>
+<ul><li>Source: instructor-created Week 01 teaching dataset.</li><li>Access date: 2026-06-03.</li><li>Full track table: N = 4 tracks.</li><li>Selected-track summary: N = 1 selected track.</li><li>Privacy: không đưa họ tên pháp lý đầy đủ hoặc dữ liệu riêng tư của người học vào notebook có thể public.</li></ul></article>
+<article class="nb-cell nb-markdown" data-cell-type="markdown" data-i18n-html="notebook.cell17"><h3>6. Caption</h3>
+<p>Viết một caption cho bảng tóm tắt của bạn.</p>
+<p>Ví dụ cho bảng đầy đủ:</p>
+<blockquote>Bảng 1. Bốn hướng nghiên cứu cho thấy cách chuyển sở thích rộng thành câu hỏi sẵn sàng cho dữ liệu. Mỗi dòng đại diện cho một hướng project có thể phát triển. Dữ liệu do giảng viên tạo cho Tuần 01, truy cập ngày 2026-06-03. N = 4 hướng.</blockquote>
+<p>Ví dụ cho bảng hướng đã chọn:</p>
+<blockquote>Bảng 2. Hướng project đã chọn kết nối câu hỏi nhỏ với đơn vị quan sát và output paper dự kiến. Dữ liệu do giảng viên tạo cho Tuần 01, truy cập ngày 2026-06-03. N = 1 hướng.</blockquote></article>
+<article class="nb-cell nb-markdown" data-cell-type="markdown" data-i18n-html="notebook.cell18"><h3>7. Final memo template</h3>
+<p>Dùng <strong>một template này</strong> cho bài nộp Week 01. Viết 100-150 từ trong phần memo.</p>
+<p>Sentence frame:</p>
+<blockquote>This project asks [small question] because [research reason]. The first dataset would contain [unit of observation], so Python can help by [table/figure/output].</blockquote>
+<p>Điền phần dưới đây:</p>
+<ul><li>Chosen track:</li><li>Small research question:</li><li>Data I would need:</li><li>Possible table or figure:</li><li>Paper-facing sentence:</li><li>Limitation:</li></ul>
+<p><strong>Memo của bạn:</strong></p>
+<p>...</p></article>
+      </section>
+    </div>
+  </main>
+
+  <script src="../../assets/js/bilingual.js"></script>
+  <script>
+    window.Bilingual.init({
+      defaultLang: "vi",
+      translations: {
+        "vi": {
+                "notebook.cell01": "<h2>Tuần 01: Python như một quy trình nghiên cứu</h2>\n<p>Đây là notebook nghiên cứu đầu tiên của bạn. Mục tiêu hôm nay không phải là thành thạo lập trình. Mục tiêu là chạy notebook, sửa vài giá trị an toàn, xem một dataset rất nhỏ, và kết nối output của Python với câu hỏi nghiên cứu.</p>",
+                "notebook.cell02": "<h3>Mục tiêu học tập</h3>\n<p>Cuối notebook này, bạn có thể:</p>\n<ol><li>chạy các ô code từ đầu đến cuối;</li><li>sửa các biến text đơn giản;</li><li>đọc output từ một tệp CSV nhỏ;</li><li>chọn một hướng nghiên cứu;</li><li>viết caption, memo, và một câu paper-facing.</li></ol>",
+                "notebook.cell03": "<h3>Cách bắt đầu</h3>\n<ol><li>Mở bản HTML này để đọc trước.</li><li>Mở Colab từ nút trên trang nếu muốn chạy notebook.</li><li>Trong Colab, chọn <strong>File -&gt; Save a copy in Drive</strong>.</li><li>Chạy từng cell từ trên xuống.</li><li>Chỉ sửa các cell có ghi <strong>Bạn sửa</strong>.</li><li>Tải hoặc nộp file <code>.ipynb</code> đã hoàn thành.</li></ol>",
+                "notebook.cell04": "<h3>1. Điểm bắt đầu nghiên cứu của tôi</h3>\n<p><strong>Bạn sửa:</strong> chỉ sửa phần giá trị nằm trong dấu ngoặc kép. Giữ nguyên dấu ngoặc kép.</p>",
+                "notebook.cell06": "<h3>2. Đọc một tệp CSV nhỏ</h3>\n<p>Tệp CSV là một bảng được lưu dưới dạng text. Tuần này, mỗi dòng là một hướng project có thể phát triển.</p>\n<p><strong>Code mẫu - chỉ cần chạy:</strong> cell tiếp theo tìm file CSV. Nếu mở bằng Colab và chưa có file local, Python sẽ tự tải bản public từ GitHub.</p>",
+                "notebook.cell09": "<h3>3. Xem các dòng dữ liệu</h3>\n<p><strong>Code mẫu - chỉ cần chạy:</strong> đừng lo nếu bạn chưa hiểu mọi ký hiệu. Hãy đọc output được in ra và hỏi: một dòng dữ liệu đại diện cho điều gì?</p>",
+                "notebook.cell11": "<h3>4. Chọn một hướng nghiên cứu</h3>\n<p><strong>Bạn sửa:</strong> chọn một trong các ID sau, rồi chỉ sửa giá trị của <code>selected_track_id</code>.</p>\n<ul><li><code>TCSOL_SHORT</code></li><li><code>CONTRASTIVE</code></li><li><code>MTPE</code></li><li><code>POLICY</code></li></ul>",
+                "notebook.cell13": "<h3>5. Tạo một bảng tóm tắt nhỏ</h3>\n<p><strong>Code mẫu - chỉ cần chạy:</strong> bảng này rất đơn giản, nhưng đã có thói quen viết paper: nối câu hỏi, dữ liệu, và output.</p>",
+                "notebook.cell16": "<h3>Ghi chú nguồn và quyền riêng tư</h3>\n<ul><li>Source: instructor-created Week 01 teaching dataset.</li><li>Access date: 2026-06-03.</li><li>Full track table: N = 4 tracks.</li><li>Selected-track summary: N = 1 selected track.</li><li>Privacy: không đưa họ tên pháp lý đầy đủ hoặc dữ liệu riêng tư của người học vào notebook có thể public.</li></ul>",
+                "notebook.cell17": "<h3>6. Caption</h3>\n<p>Viết một caption cho bảng tóm tắt của bạn.</p>\n<p>Ví dụ cho bảng đầy đủ:</p>\n<blockquote>Bảng 1. Bốn hướng nghiên cứu cho thấy cách chuyển sở thích rộng thành câu hỏi sẵn sàng cho dữ liệu. Mỗi dòng đại diện cho một hướng project có thể phát triển. Dữ liệu do giảng viên tạo cho Tuần 01, truy cập ngày 2026-06-03. N = 4 hướng.</blockquote>\n<p>Ví dụ cho bảng hướng đã chọn:</p>\n<blockquote>Bảng 2. Hướng project đã chọn kết nối câu hỏi nhỏ với đơn vị quan sát và output paper dự kiến. Dữ liệu do giảng viên tạo cho Tuần 01, truy cập ngày 2026-06-03. N = 1 hướng.</blockquote>",
+                "notebook.cell18": "<h3>7. Final memo template</h3>\n<p>Dùng <strong>một template này</strong> cho bài nộp Week 01. Viết 100-150 từ trong phần memo.</p>\n<p>Sentence frame:</p>\n<blockquote>This project asks [small question] because [research reason]. The first dataset would contain [unit of observation], so Python can help by [table/figure/output].</blockquote>\n<p>Điền phần dưới đây:</p>\n<ul><li>Chosen track:</li><li>Small research question:</li><li>Data I would need:</li><li>Possible table or figure:</li><li>Paper-facing sentence:</li><li>Limitation:</li></ul>\n<p><strong>Memo của bạn:</strong></p>\n<p>...</p>",
+                "brand": "Python Research Hub",
+                "meta.title": "Tuần 01: Python như một quy trình nghiên cứu | Notebook đã render",
+                "nav.aria": "Điều hướng notebook",
+                "nav.week": "Tuần 01",
+                "nav.slides": "Slides",
+                "nav.demo": "Demo",
+                "nav.source": "Tải source .ipynb",
+                "nav.language": "Ngôn ngữ / Language",
+                "side.title": "Notebook",
+                "side.week": "Tổng quan tuần",
+                "side.colab": "Chạy bằng Colab",
+                "side.source": "Tải source .ipynb",
+                "side.csv": "Tải tệp CSV dữ liệu",
+                "hero.tag": "Notebook đã render",
+                "hero.title": "Tuần 01: Python như một quy trình nghiên cứu",
+                "hero.body": "Đây là bản HTML đã chạy sẵn để đọc trên GitHub Pages. Muốn thực hành, mở notebook trong Colab hoặc tải file .ipynb.",
+                "action.colab": "Chạy trong Colab",
+                "action.source": "Tải .ipynb",
+                "action.week": "Quay lại Tuần 01",
+                "note.title": "Cách dùng trang này",
+                "note.read.title": "Đọc",
+                "note.read.body": "Bản HTML giữ code và output cạnh nhau, phù hợp để ôn lại sau buổi học.",
+                "note.run.title": "Chạy",
+                "note.run.body": "Nút Colab mở notebook có thể chạy từng cell và tự tải CSV nếu không có file local.",
+                "note.source.title": "Source",
+                "note.source.body": "File .ipynb vẫn được giữ để tải, nộp bài hoặc chỉnh trong JupyterLab/VS Code.",
+                "notebook.cells.aria": "Các cell notebook đã render"
+        },
+        "en": {
+                "notebook.cell01": "<h2>Week 01: Python as a research workflow</h2>\n<p>This is your first research notebook. Today&#x27;s goal is not to master programming. The goal is to run a notebook, safely edit a few values, inspect a tiny dataset, and connect Python output to a research question.</p>",
+                "notebook.cell02": "<h3>Learning objectives</h3>\n<p>By the end of this notebook, you can:</p>\n<ol><li>run code cells from top to bottom;</li><li>edit simple text variables;</li><li>read output from a tiny CSV file;</li><li>choose one research track;</li><li>write a caption, memo, and one paper-facing sentence.</li></ol>",
+                "notebook.cell03": "<h3>How to start</h3>\n<ol><li>Open this HTML version first to read.</li><li>Use the Colab button on the page if you want to run the notebook.</li><li>In Colab, choose <strong>File -&gt; Save a copy in Drive</strong>.</li><li>Run each cell from top to bottom.</li><li>Edit only cells marked <strong>You edit</strong>.</li><li>Download or submit the completed <code>.ipynb</code> file.</li></ol>",
+                "notebook.cell04": "<h3>1. My research starting point</h3>\n<p><strong>You edit:</strong> edit only the value inside quotation marks. Keep the quotation marks.</p>",
+                "notebook.cell06": "<h3>2. Read a small CSV file</h3>\n<p>A CSV file is a table saved as text. This week, each row is one possible future project track.</p>\n<p><strong>Run-only instructor code:</strong> the next cell finds the CSV file. If you open the notebook in Colab and the file is not local, Python downloads the public GitHub copy automatically.</p>",
+                "notebook.cell09": "<h3>3. Inspect the data rows</h3>\n<p><strong>Run-only instructor code:</strong> do not worry if you do not understand every symbol yet. Read the printed output and ask: what does one data row represent?</p>",
+                "notebook.cell11": "<h3>4. Choose one research track</h3>\n<p><strong>You edit:</strong> choose one of the following IDs, then edit only the value of <code>selected_track_id</code>.</p>\n<ul><li><code>TCSOL_SHORT</code></li><li><code>CONTRASTIVE</code></li><li><code>MTPE</code></li><li><code>POLICY</code></li></ul>",
+                "notebook.cell13": "<h3>5. Create a small summary table</h3>\n<p><strong>Run-only instructor code:</strong> this table is simple, but it already practices paper writing habits: connecting question, data, and output.</p>",
+                "notebook.cell16": "<h3>Source and privacy note</h3>\n<ul><li>Source: instructor-created Week 01 teaching dataset.</li><li>Access date: 2026-06-03.</li><li>Full track table: N = 4 tracks.</li><li>Selected-track summary: N = 1 selected track.</li><li>Privacy: do not put a full legal name or private learner data into a notebook that may become public.</li></ul>",
+                "notebook.cell17": "<h3>6. Caption</h3>\n<p>Write a caption for your summary table.</p>\n<p>Example for the full table:</p>\n<blockquote>Table 1. Four research tracks show how a broad interest can become a data-ready question. Each row represents one possible future project track. The teaching dataset was created by the instructor for Week 01 and accessed on 2026-06-03. N = 4 tracks.</blockquote>\n<p>Example for the selected-track table:</p>\n<blockquote>Table 2. The selected project track connects a small question to a unit of observation and likely paper output. The teaching dataset was created by the instructor for Week 01 and accessed on 2026-06-03. N = 1 track.</blockquote>",
+                "notebook.cell18": "<h3>7. Final memo template</h3>\n<p>Use <strong>this one template</strong> for the Week 01 submission. Write 100-150 words in the memo section.</p>\n<p>Sentence frame:</p>\n<blockquote>This project asks [small question] because [research reason]. The first dataset would contain [unit of observation], so Python can help by [table/figure/output].</blockquote>\n<p>Fill in the section below:</p>\n<ul><li>Chosen track:</li><li>Small research question:</li><li>Data I would need:</li><li>Possible table or figure:</li><li>Paper-facing sentence:</li><li>Limitation:</li></ul>\n<p><strong>My memo:</strong></p>\n<p>...</p>",
+                "brand": "Python Research Hub",
+                "meta.title": "Week 01: Python as a research workflow | Rendered Notebook",
+                "nav.aria": "Notebook navigation",
+                "nav.week": "Week 01",
+                "nav.slides": "Slides",
+                "nav.demo": "Demo",
+                "nav.source": "Download source .ipynb",
+                "nav.language": "Language",
+                "side.title": "Notebook",
+                "side.week": "Week overview",
+                "side.colab": "Run in Colab",
+                "side.source": "Download source .ipynb",
+                "side.csv": "Download data CSV",
+                "hero.tag": "Rendered notebook",
+                "hero.title": "Week 01: Python as a research workflow",
+                "hero.body": "This is the pre-run HTML version for GitHub Pages. To practice, open the notebook in Colab or download the .ipynb file.",
+                "action.colab": "Run in Colab",
+                "action.source": "Download .ipynb",
+                "action.week": "Back to Week 01",
+                "note.title": "How to use this page",
+                "note.read.title": "Read",
+                "note.read.body": "The HTML version keeps code and output together, useful for review after class.",
+                "note.run.title": "Run",
+                "note.run.body": "The Colab button opens a runnable notebook and downloads the CSV automatically when local files are unavailable.",
+                "note.source.title": "Source",
+                "note.source.body": "The .ipynb file remains available for download, submission, or editing in JupyterLab/VS Code.",
+                "notebook.cells.aria": "Rendered notebook cells"
+        }
+}
+    });
+  </script>
+</body>
+</html>

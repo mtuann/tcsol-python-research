@@ -1,0 +1,11 @@
+term,vi,en,note
+BLEU,BLEU,BLEU,Automatic MT metric based on n-gram overlap.
+chrF++,chrF++,chrF++,Character plus word n-gram F-score for MT evaluation.
+TER,TER,TER,Translation edit rate; lower usually means fewer edits to match a reference.
+source segment,câu nguồn,source segment,Chinese sentence to translate.
+MT output,bản dịch máy,MT output,Vietnamese output produced by a synthetic MT profile.
+reference,bản dịch tham chiếu,reference translation,Vietnamese translation used for metrics.
+error_type,loại vấn đề,error type,Simplified human review category.
+severity,mức độ nghiêm trọng,severity,none minor or major.
+review_decision,quyết định review,review decision,Accept revise or minor edit decision.
+metric signature,chữ ký metric,metric signature,Settings string for reproducible metric reporting.

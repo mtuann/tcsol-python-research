@@ -1,0 +1,5 @@
+artifact_id,paper_area,artifact_name,status,file_exists,learner_action,notes
+D02,Data,Data description and unit definition,revise,True,Write a 4-5 sentence data description for the chosen paper,"Use Week 02 as a template, not as final data."
+T03,Evidence,Descriptive table model,revise,True,Pick the most relevant descriptive table for the selected track,A table without caption is not paper-ready.
+REF14,References,Zotero collection / bibliography workflow note,missing,False,Create a Zotero collection and write the reference workflow note,Export .bib only if using Quarto or Overleaf.
+REPRO14,Reproducibility,Package README / reproducibility note,missing,False,Write a short package README with file map and rerun note,This protects future-you.

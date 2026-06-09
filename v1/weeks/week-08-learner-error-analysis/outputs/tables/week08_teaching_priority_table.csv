@@ -1,0 +1,6 @@
+error_category,n,mean_severity,target_count,priority_score,teaching_move
+tone_marking,13,1.85,1,24.0,Use minimal tone pairs and require tone marks in written rehearsal.
+measure_word,11,2.18,1,24.0,"Teach object-specific classifier chunks such as 一杯茶, 两本书, 三张票."
+result_complement,11,1.91,1,21.0,Contrast 找票 and 找到票了; ask whether the action reached a result.
+word_order,11,1.91,1,21.0,Practice subject + time/place + verb phrase frames before open production.
+aspect_marker,11,1.82,1,20.0,Use short action-result routines and compare verb-final 了 with sentence-final 了.

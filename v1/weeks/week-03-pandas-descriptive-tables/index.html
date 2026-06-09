@@ -1,0 +1,398 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title data-i18n="meta.title">Tuần 03: pandas cơ bản và bảng mô tả</title>
+  <link rel="stylesheet" href="../../assets/css/bilingual.css">
+  <link rel="stylesheet" href="../../assets/css/course-doc.css">
+</head>
+<body>
+  <header class="doc-topbar">
+    <a class="doc-brand" href="../../" data-i18n="brand">Python Research Hub</a>
+    <nav class="doc-nav" aria-label="Điều hướng tài liệu" data-i18n-aria-label="nav.aria">
+      <a href="#overview" data-i18n="nav.overview">Tổng quan</a>
+      <a href="#notes" data-i18n="nav.notes">Ghi chú</a>
+      <a href="#practice" data-i18n="nav.practice">Thực hành</a>
+      <a href="#assignment" data-i18n="nav.assignment">Bài nộp</a>
+      <a href="#readings" data-i18n="nav.readings">Bài đọc</a>
+      <a href="#rubric" data-i18n="nav.rubric">Tiêu chí</a>
+      <div class="language-switcher" role="group" aria-label="Ngôn ngữ / Language" data-i18n-aria-label="nav.language">
+        <button type="button" data-lang-option="vi" aria-pressed="true">Tiếng Việt</button>
+        <button type="button" data-lang-option="en" aria-pressed="false">English</button>
+      </div>
+    </nav>
+  </header>
+
+  <main class="doc-shell">
+    <aside class="doc-sidebar">
+      <strong data-i18n="side.title">Tuần 03</strong>
+      <a href="slides.html" data-i18n="side.slides">Slides</a>
+      <a href="interactive_demo.html" data-i18n="side.demo">Demo tương tác</a>
+      <a href="live_coding.html" data-i18n="side.notebook">Notebook HTML</a>
+      <a href="https://colab.research.google.com/github/mtuann/tcsol-python-research/blob/main/weeks/week-03-pandas-descriptive-tables/live_coding.ipynb" data-i18n="side.colab">Chạy trong Colab</a>
+      <a href="live_coding.ipynb" download data-i18n="side.notebookSource">Tải source .ipynb</a>
+      <a href="data/raw/week03_tcsol_scores.csv" download data-i18n="side.csv">Tải CSV</a>
+      <a href="outputs/tables/week03_group_summary.csv" download data-i18n="side.output">Tải bảng output</a>
+    </aside>
+
+    <div class="doc-main">
+      <section class="doc-hero" id="overview">
+        <span class="doc-eyebrow" data-i18n="hero.tag">Tuần 03</span>
+        <h1 data-i18n="hero.title">pandas cơ bản và bảng mô tả</h1>
+        <p class="doc-lead" data-i18n="hero.body">Tuần này biến CSV của Week 02 thành bảng mô tả bằng pandas: đọc dữ liệu, chọn cột, lọc dòng, tính gain score, groupby và viết caption.</p>
+        <div class="doc-actions">
+          <a class="doc-button" href="slides.html" data-i18n="action.slides">Mở slides</a>
+          <a class="doc-button secondary" href="interactive_demo.html" data-i18n="action.demo">Mở demo</a>
+          <a class="doc-button secondary" href="live_coding.html" data-i18n="action.notebook">Xem notebook HTML</a>
+          <a class="doc-button secondary" href="https://colab.research.google.com/github/mtuann/tcsol-python-research/blob/main/weeks/week-03-pandas-descriptive-tables/live_coding.ipynb" data-i18n="action.colab">Chạy trong Colab</a>
+        </div>
+      </section>
+
+      <section class="doc-card">
+        <h2 data-i18n="frame.title">Khung nghiên cứu</h2>
+        <div class="doc-grid">
+          <article class="mini-card">
+            <span class="swatch blue"></span>
+            <h3 data-i18n="frame.question.title">Câu hỏi nhỏ</h3>
+            <p data-i18n="frame.question.body">Nhóm hoạt động nào có mức tăng điểm mô tả cao nhất?</p>
+          </article>
+          <article class="mini-card">
+            <span class="swatch green"></span>
+            <h3 data-i18n="frame.data.title">Dữ liệu</h3>
+            <p data-i18n="frame.data.body">32 bản ghi điểm trước/sau của người học trong bốn hoạt động ngắn.</p>
+          </article>
+          <article class="mini-card">
+            <span class="swatch amber"></span>
+            <h3 data-i18n="frame.output.title">Output</h3>
+            <p data-i18n="frame.output.body">Một descriptive table có N, mean pre, mean post và mean gain.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="doc-card">
+        <h2 data-i18n="writing.title">Hỗ trợ viết paper</h2>
+        <div class="doc-grid two">
+          <article class="mini-card">
+            <span class="swatch purple"></span>
+            <h3 data-i18n="writing.output.title">Output viết tuần này</h3>
+            <p data-i18n="writing.output.body">Caption bảng mô tả và đoạn diễn giải 120-160 từ cho phần Results.</p>
+          </article>
+          <article class="mini-card">
+            <span class="swatch rose"></span>
+            <h3 data-i18n="writing.tools.title">Công cụ hỗ trợ</h3>
+            <p data-i18n="writing.tools.body">Viết caption trong notebook trước, sau đó có thể paste sang Word. Zotero setup bắt đầu nhẹ bằng source note; Overleaf chưa cần.</p>
+          </article>
+        </div>
+        <h3 data-i18n="writing.frame.title">Mẫu câu caption</h3>
+        <blockquote data-i18n="writing.frame.body">Table 1. Nhóm [group] có mean gain mô tả cao nhất ([number] điểm), nhưng đây chỉ là mô tả vì [limitation].</blockquote>
+      </section>
+
+      <section class="doc-card" id="notes">
+        <h2 data-i18n="notes.title">Ghi chú bài học</h2>
+        <p data-i18n="notes.intro">pandas là công cụ làm việc với bảng. Tuần này chỉ học đủ bốn thao tác để tạo bảng mô tả cho paper.</p>
+        <table>
+          <thead>
+            <tr><th data-i18n="notes.term">Khái niệm</th><th data-i18n="notes.meaning">Nghĩa thực hành</th><th data-i18n="notes.paper">Liên hệ paper</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><code>DataFrame</code></td><td data-i18n="df.meaning">bảng dữ liệu trong bộ nhớ</td><td data-i18n="df.paper">nơi tạo bảng mô tả</td></tr>
+            <tr><td><code>select</code></td><td data-i18n="select.meaning">chọn cột cần dùng</td><td data-i18n="select.paper">giữ biến liên quan tới câu hỏi</td></tr>
+            <tr><td><code>filter</code></td><td data-i18n="filter.meaning">giữ dòng thỏa điều kiện</td><td data-i18n="filter.paper">giải thích N và tiêu chí đưa vào bảng</td></tr>
+            <tr><td><code>groupby</code></td><td data-i18n="groupby.meaning">nhóm dòng rồi tính thống kê</td><td data-i18n="groupby.paper">tạo table theo nhóm/label/theme</td></tr>
+          </tbody>
+        </table>
+        <pre><code>summary = (
+    complete
+    .groupby("activity_focus")
+    .agg(n_learners=("learner_id", "count"),
+         mean_gain=("gain_score", "mean"))
+    .reset_index()
+)</code></pre>
+      </section>
+
+      <section class="doc-card">
+        <h2 data-i18n="workflow.title">Quy trình code tuần này</h2>
+        <div class="doc-grid">
+          <article class="mini-card"><span class="swatch blue"></span><h3 data-i18n="workflow.load.title">1. Đọc dữ liệu</h3><p data-i18n-html="workflow.load.body">Đọc CSV bằng <code>pd.read_csv</code> và kiểm tra <code>shape</code>, <code>columns</code>, <code>head()</code>.</p></article>
+          <article class="mini-card"><span class="swatch green"></span><h3 data-i18n="workflow.prepare.title">2. Chuẩn bị bảng</h3><p data-i18n-html="workflow.prepare.body">Chọn cột, lọc <code>completed == "yes"</code>, tạo <code>gain_score</code>.</p></article>
+          <article class="mini-card"><span class="swatch amber"></span><h3 data-i18n="workflow.summarize.title">3. Tóm tắt</h3><p data-i18n-html="workflow.summarize.body">Dùng <code>groupby</code> để tính N và mean gain theo <code>activity_focus</code>.</p></article>
+        </div>
+      </section>
+
+      <section class="doc-card" id="practice">
+        <h2 data-i18n="practice.title">Thực hành</h2>
+        <div class="doc-grid">
+          <article class="mini-card"><span class="swatch blue"></span><h3 data-i18n="practice.a.title">A. Sao chép rồi sửa</h3><p data-i18n-html="practice.a.body">Đổi <code>group_variable</code> từ <code>activity_focus</code> sang <code>class_group</code>.</p></article>
+          <article class="mini-card"><span class="swatch green"></span><h3 data-i18n="practice.b.title">B. Bài tập có hướng dẫn</h3><p data-i18n="practice.b.body">Đi theo checklist: đọc dữ liệu, lọc dòng, tạo gain score, groupby, export.</p></article>
+          <article class="mini-card"><span class="swatch amber"></span><h3 data-i18n="practice.c.title">C. Bài tập kiểu nghiên cứu</h3><p data-i18n="practice.c.body">Viết 120-160 từ diễn giải bảng và nêu một hạn chế.</p></article>
+        </div>
+      </section>
+
+      <section class="doc-card" id="assignment">
+        <h2 data-i18n="assignment.title">Bài nộp</h2>
+        <p data-i18n="assignment.body">Nộp notebook chạy được, bảng CSV đã export, caption ngắn, đoạn diễn giải 120-160 từ, source note và một hạn chế.</p>
+        <ol>
+          <li data-i18n="assignment.t1">Load dataset bằng pandas.</li>
+          <li data-i18n="assignment.t2">Lọc completed records.</li>
+          <li data-i18n="assignment.t3">Tạo gain score.</li>
+          <li data-i18n="assignment.t4">Tạo bảng summary theo activity focus.</li>
+          <li data-i18n="assignment.t5">Export bảng CSV output.</li>
+          <li data-i18n="assignment.t6">Viết caption 2-4 câu và interpretation 120-160 từ.</li>
+        </ol>
+      </section>
+
+      <section class="doc-card" id="readings">
+        <h2 data-i18n="readings.title">Bài đọc</h2>
+        <div class="doc-grid two">
+          <article class="mini-card"><span class="swatch blue"></span><h3>pandas Getting Started</h3><p data-i18n="readings.pandas.body">Đọc phần DataFrame/table-oriented data để hiểu pandas xem dữ liệu dạng bảng như thế nào.</p><a class="doc-chip" href="https://pandas.pydata.org/pandas-docs/stable/getting_started/intro_tutorials/01_table_oriented.html" data-i18n="readings.open">Mở nguồn</a></article>
+          <article class="mini-card"><span class="swatch green"></span><h3>pandas GroupBy</h3><p data-i18n="readings.groupby.body">Dùng như tài liệu tra cứu cho ý tưởng split-apply-combine.</p><a class="doc-chip" href="https://pandas.pydata.org/pandas-docs/stable/user_guide/groupby.html" data-i18n="readings.open2">Mở nguồn</a></article>
+          <article class="mini-card"><span class="swatch amber"></span><h3>Tidy Data</h3><p data-i18n="readings.tidy.body">Tuần này chỉ cần nhớ: row là một observation, column là một variable.</p><a class="doc-chip" href="https://vita.had.co.nz/papers/tidy-data.html" data-i18n="readings.open3">Mở nguồn</a></article>
+          <article class="mini-card"><span class="swatch rose"></span><h3>Zotero Word Plugin</h3><p data-i18n="readings.zotero.body">Đọc lướt để biết caption/source note sau này đi vào Word/Zotero như thế nào.</p><a class="doc-chip" href="https://www.zotero.org/support/word_processor_plugin_usage/" data-i18n="readings.open4">Mở nguồn</a></article>
+        </div>
+      </section>
+
+      <section class="doc-card" id="rubric">
+        <h2 data-i18n="rubric.title">Tiêu chí</h2>
+        <table>
+          <thead><tr><th data-i18n="rubric.criteria">Tiêu chí</th><th data-i18n="rubric.points">Điểm</th><th data-i18n="rubric.good">Bài làm tốt</th></tr></thead>
+          <tbody>
+            <tr><td data-i18n="rubric.code">Code đúng</td><td>25</td><td data-i18n="rubric.code.body">Notebook chạy, load/filter/gain/groupby/export đúng.</td></tr>
+            <tr><td data-i18n="rubric.clarity">Code rõ</td><td>15</td><td data-i18n="rubric.clarity.body">Tên biến dễ đọc, cell có thứ tự, không rối.</td></tr>
+            <tr><td data-i18n="rubric.data">Xử lý dữ liệu</td><td>15</td><td data-i18n="rubric.data.body">Raw CSV giữ nguyên, N và filter được giải thích.</td></tr>
+            <tr><td data-i18n="rubric.table">Bảng</td><td>15</td><td data-i18n="rubric.table.body">Có N, mean pre/post/gain, rounding nhất quán.</td></tr>
+            <tr><td data-i18n="rubric.writing">Writing</td><td>20</td><td data-i18n="rubric.writing.body">Caption và paragraph có pattern, N, limitation, không overclaim.</td></tr>
+            <tr><td data-i18n="rubric.repro">Tái lập</td><td>10</td><td data-i18n="rubric.repro.body">Đường dẫn ổn định, source note có ngày, không sửa output thủ công.</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section class="doc-card">
+        <h2 data-i18n="source.title">Nguồn biên soạn cho giảng viên</h2>
+        <p data-i18n="source.body">Các file Markdown dưới đây là source để sửa bài giảng. Người học nên dùng trang HTML, slides, demo và notebook HTML.</p>
+        <div class="doc-links">
+          <a class="doc-chip" href="README.md">README.md</a>
+          <a class="doc-chip" href="lecture_notes.md">lecture_notes.md</a>
+          <a class="doc-chip" href="exercises.md">exercises.md</a>
+          <a class="doc-chip" href="assignment.md">assignment.md</a>
+          <a class="doc-chip" href="readings.md">readings.md</a>
+          <a class="doc-chip" href="rubric.md">rubric.md</a>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <script src="../../assets/js/bilingual.js"></script>
+  <script>
+    const WEEK03_I18N = {
+      vi: {
+        "meta.title": "Tuần 03: pandas cơ bản và bảng mô tả",
+        "brand": "Python Research Hub",
+        "nav.aria": "Điều hướng tài liệu",
+        "nav.language": "Ngôn ngữ / Language",
+        "nav.overview": "Tổng quan",
+        "nav.notes": "Ghi chú",
+        "nav.practice": "Thực hành",
+        "nav.assignment": "Bài nộp",
+        "nav.readings": "Bài đọc",
+        "nav.rubric": "Tiêu chí",
+        "side.title": "Tuần 03",
+        "side.slides": "Slides",
+        "side.demo": "Demo tương tác",
+        "side.notebook": "Notebook HTML",
+        "side.colab": "Chạy trong Colab",
+        "side.notebookSource": "Tải source .ipynb",
+        "side.csv": "Tải CSV",
+        "side.output": "Tải bảng output",
+        "hero.tag": "Tuần 03",
+        "hero.title": "pandas cơ bản và bảng mô tả",
+        "hero.body": "Tuần này biến CSV của Week 02 thành bảng mô tả bằng pandas: đọc dữ liệu, chọn cột, lọc dòng, tính gain score, groupby và viết caption.",
+        "action.slides": "Mở slides",
+        "action.demo": "Mở demo",
+        "action.notebook": "Xem notebook HTML",
+        "action.colab": "Chạy trong Colab",
+        "frame.title": "Khung nghiên cứu",
+        "frame.question.title": "Câu hỏi nhỏ",
+        "frame.question.body": "Nhóm hoạt động nào có mức tăng điểm mô tả cao nhất?",
+        "frame.data.title": "Dữ liệu",
+        "frame.data.body": "32 bản ghi điểm trước/sau của người học trong bốn hoạt động ngắn.",
+        "frame.output.title": "Output",
+        "frame.output.body": "Một descriptive table có N, mean pre, mean post và mean gain.",
+        "writing.title": "Hỗ trợ viết paper",
+        "writing.output.title": "Output viết tuần này",
+        "writing.output.body": "Caption bảng mô tả và đoạn diễn giải 120-160 từ cho phần Results.",
+        "writing.tools.title": "Công cụ hỗ trợ",
+        "writing.tools.body": "Viết caption trong notebook trước, sau đó có thể paste sang Word. Zotero setup bắt đầu nhẹ bằng source note; Overleaf chưa cần.",
+        "writing.frame.title": "Mẫu câu caption",
+        "writing.frame.body": "Table 1. Nhóm [group] có mean gain mô tả cao nhất ([number] điểm), nhưng đây chỉ là mô tả vì [limitation].",
+        "notes.title": "Ghi chú bài học",
+        "notes.intro": "pandas là công cụ làm việc với bảng. Tuần này chỉ học đủ bốn thao tác để tạo bảng mô tả cho paper.",
+        "notes.term": "Khái niệm",
+        "notes.meaning": "Nghĩa thực hành",
+        "notes.paper": "Liên hệ paper",
+        "df.meaning": "bảng dữ liệu trong bộ nhớ",
+        "df.paper": "nơi tạo bảng mô tả",
+        "select.meaning": "chọn cột cần dùng",
+        "select.paper": "giữ biến liên quan tới câu hỏi",
+        "filter.meaning": "giữ dòng thỏa điều kiện",
+        "filter.paper": "giải thích N và tiêu chí đưa vào bảng",
+        "groupby.meaning": "nhóm dòng rồi tính thống kê",
+        "groupby.paper": "tạo table theo nhóm/label/theme",
+        "workflow.title": "Quy trình code tuần này",
+        "workflow.load.title": "1. Đọc dữ liệu",
+        "workflow.load.body": "Đọc CSV bằng <code>pd.read_csv</code> và kiểm tra <code>shape</code>, <code>columns</code>, <code>head()</code>.",
+        "workflow.prepare.title": "2. Chuẩn bị bảng",
+        "workflow.prepare.body": "Chọn cột, lọc <code>completed == \"yes\"</code>, tạo <code>gain_score</code>.",
+        "workflow.summarize.title": "3. Tóm tắt",
+        "workflow.summarize.body": "Dùng <code>groupby</code> để tính N và mean gain theo <code>activity_focus</code>.",
+        "practice.title": "Thực hành",
+        "practice.a.title": "A. Sao chép rồi sửa",
+        "practice.a.body": "Đổi <code>group_variable</code> từ <code>activity_focus</code> sang <code>class_group</code>.",
+        "practice.b.title": "B. Bài tập có hướng dẫn",
+        "practice.b.body": "Đi theo checklist: đọc dữ liệu, lọc dòng, tạo gain score, groupby, export.",
+        "practice.c.title": "C. Bài tập kiểu nghiên cứu",
+        "practice.c.body": "Viết 120-160 từ diễn giải bảng và nêu một hạn chế.",
+        "assignment.title": "Bài nộp",
+        "assignment.body": "Nộp notebook chạy được, bảng CSV đã export, caption ngắn, đoạn diễn giải 120-160 từ, source note và một hạn chế.",
+        "assignment.t1": "Load dataset bằng pandas.",
+        "assignment.t2": "Lọc completed records.",
+        "assignment.t3": "Tạo gain score.",
+        "assignment.t4": "Tạo bảng summary theo activity focus.",
+        "assignment.t5": "Export bảng CSV output.",
+        "assignment.t6": "Viết caption 2-4 câu và interpretation 120-160 từ.",
+        "readings.title": "Bài đọc",
+        "readings.pandas.body": "Đọc phần DataFrame/table-oriented data để hiểu pandas xem dữ liệu dạng bảng như thế nào.",
+        "readings.groupby.body": "Dùng như tài liệu tra cứu cho ý tưởng split-apply-combine.",
+        "readings.tidy.body": "Tuần này chỉ cần nhớ: row là một observation, column là một variable.",
+        "readings.zotero.body": "Đọc lướt để biết caption/source note sau này đi vào Word/Zotero như thế nào.",
+        "readings.open": "Mở nguồn",
+        "readings.open2": "Mở nguồn",
+        "readings.open3": "Mở nguồn",
+        "readings.open4": "Mở nguồn",
+        "rubric.title": "Tiêu chí",
+        "rubric.criteria": "Tiêu chí",
+        "rubric.points": "Điểm",
+        "rubric.good": "Bài làm tốt",
+        "rubric.code": "Code đúng",
+        "rubric.code.body": "Notebook chạy, load/filter/gain/groupby/export đúng.",
+        "rubric.clarity": "Code rõ",
+        "rubric.clarity.body": "Tên biến dễ đọc, cell có thứ tự, không rối.",
+        "rubric.data": "Xử lý dữ liệu",
+        "rubric.data.body": "Raw CSV giữ nguyên, N và filter được giải thích.",
+        "rubric.table": "Bảng",
+        "rubric.table.body": "Có N, mean pre/post/gain, rounding nhất quán.",
+        "rubric.writing": "Writing",
+        "rubric.writing.body": "Caption và paragraph có pattern, N, limitation, không overclaim.",
+        "rubric.repro": "Tái lập",
+        "rubric.repro.body": "Đường dẫn ổn định, source note có ngày, không sửa output thủ công.",
+        "source.title": "Nguồn biên soạn cho giảng viên",
+        "source.body": "Các file Markdown dưới đây là source để sửa bài giảng. Người học nên dùng trang HTML, slides, demo và notebook HTML."
+      },
+      en: {
+        "meta.title": "Week 03: pandas basics and descriptive tables",
+        "brand": "Python Research Hub",
+        "nav.aria": "Document navigation",
+        "nav.language": "Language",
+        "nav.overview": "Overview",
+        "nav.notes": "Notes",
+        "nav.practice": "Practice",
+        "nav.assignment": "Assignment",
+        "nav.readings": "Readings",
+        "nav.rubric": "Rubric",
+        "side.title": "Week 03",
+        "side.slides": "Slides",
+        "side.demo": "Interactive demo",
+        "side.notebook": "Notebook HTML",
+        "side.colab": "Run in Colab",
+        "side.notebookSource": "Source .ipynb",
+        "side.csv": "Download CSV",
+        "side.output": "Download output table",
+        "hero.tag": "Week 03",
+        "hero.title": "pandas basics and descriptive tables",
+        "hero.body": "This week turns the Week 02 CSV idea into a descriptive table with pandas: read data, select columns, filter rows, calculate gain score, groupby, and write a caption.",
+        "action.slides": "Open slides",
+        "action.demo": "Open demo",
+        "action.notebook": "View notebook HTML",
+        "action.colab": "Run in Colab",
+        "frame.title": "Research frame",
+        "frame.question.title": "Small question",
+        "frame.question.body": "Which activity group has the largest descriptive score gain?",
+        "frame.data.title": "Data",
+        "frame.data.body": "32 learner pre/post score records from four short activities.",
+        "frame.output.title": "Output",
+        "frame.output.body": "A descriptive table with N, mean pre, mean post, and mean gain.",
+        "writing.title": "Writing support",
+        "writing.output.title": "This week's writing output",
+        "writing.output.body": "A descriptive table caption and a 120-160 word Results interpretation.",
+        "writing.tools.title": "Tool support",
+        "writing.tools.body": "Draft the caption in the notebook first, then paste it into Word. Zotero setup begins lightly with a source note; Overleaf is not needed.",
+        "writing.frame.title": "Caption frame",
+        "writing.frame.body": "Table 1 shows that [group] had the highest average gain ([number] points), but this result is descriptive because [limitation].",
+        "notes.title": "Lecture notes",
+        "notes.intro": "pandas is a table-working tool. This week uses only enough pandas to create a paper-facing descriptive table.",
+        "notes.term": "Concept",
+        "notes.meaning": "Practical meaning",
+        "notes.paper": "Paper connection",
+        "df.meaning": "a data table in memory",
+        "df.paper": "where the descriptive table is produced",
+        "select.meaning": "choose needed columns",
+        "select.paper": "keep variables linked to the question",
+        "filter.meaning": "keep rows matching a condition",
+        "filter.paper": "explain N and inclusion criteria",
+        "groupby.meaning": "group rows and calculate statistics",
+        "groupby.paper": "create a table by group/label/theme",
+        "workflow.title": "This week's code workflow",
+        "workflow.load.title": "1. Load",
+        "workflow.load.body": "Read the CSV with <code>pd.read_csv</code> and check <code>shape</code>, <code>columns</code>, and <code>head()</code>.",
+        "workflow.prepare.title": "2. Prepare",
+        "workflow.prepare.body": "Select columns, filter <code>completed == \"yes\"</code>, and create <code>gain_score</code>.",
+        "workflow.summarize.title": "3. Summarize",
+        "workflow.summarize.body": "Use <code>groupby</code> to calculate N and average gain by <code>activity_focus</code>.",
+        "practice.title": "Practice",
+        "practice.a.title": "A. Copy and Modify",
+        "practice.a.body": "Change <code>group_variable</code> from <code>activity_focus</code> to <code>class_group</code>.",
+        "practice.b.title": "B. Guided Problem",
+        "practice.b.body": "Rewrite the checklist yourself: load, filter, gain score, groupby, export.",
+        "practice.c.title": "C. Research-Style Task",
+        "practice.c.body": "Write 120-160 words interpreting the table and naming one limitation.",
+        "assignment.title": "Assignment",
+        "assignment.body": "Submit a runnable notebook, exported CSV table, caption, interpretation paragraph, source note, and one limitation.",
+        "assignment.t1": "Load the dataset with pandas.",
+        "assignment.t2": "Filter completed records.",
+        "assignment.t3": "Create gain score.",
+        "assignment.t4": "Create a summary table by activity focus.",
+        "assignment.t5": "Export CSV output.",
+        "assignment.t6": "Write a 2-4 sentence caption and a 120-160 word interpretation.",
+        "readings.title": "Readings",
+        "readings.pandas.body": "Read the DataFrame/table-oriented data section to understand how pandas sees tabular data.",
+        "readings.groupby.body": "Use this as a lookup source for the split-apply-combine idea.",
+        "readings.tidy.body": "This week only needs one idea: rows are observations, columns are variables.",
+        "readings.zotero.body": "Skim this to see how captions/source notes later move into Word/Zotero.",
+        "readings.open": "Open source",
+        "readings.open2": "Open source",
+        "readings.open3": "Open source",
+        "readings.open4": "Open source",
+        "rubric.title": "Rubric",
+        "rubric.criteria": "Criterion",
+        "rubric.points": "Points",
+        "rubric.good": "Strong work",
+        "rubric.code": "Code correctness",
+        "rubric.code.body": "Notebook runs; load/filter/gain/groupby/export are correct.",
+        "rubric.clarity": "Code clarity",
+        "rubric.clarity.body": "Variable names are readable, cells are ordered, and the notebook is not cluttered.",
+        "rubric.data": "Data handling",
+        "rubric.data.body": "Raw CSV is preserved; N and filtering are explained.",
+        "rubric.table": "Table",
+        "rubric.table.body": "Includes N, mean pre/post/gain, and consistent rounding.",
+        "rubric.writing": "Writing",
+        "rubric.writing.body": "Caption and paragraph include pattern, N, limitation, and no overclaim.",
+        "rubric.repro": "Reproducibility",
+        "rubric.repro.body": "Stable paths, source note with date, and no manual output editing.",
+        "source.title": "Instructor authoring sources",
+        "source.body": "The Markdown files below are source files for editing the lesson. Learners should use the HTML page, slides, demo, and notebook HTML."
+      }
+    };
+    window.Bilingual.init({ translations: WEEK03_I18N, defaultLang: "vi" });
+  </script>
+</body>
+</html>

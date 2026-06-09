@@ -1,0 +1,26 @@
+activity_id,phenomenon,activity_title,lesson_phase,minutes,adaptation_score,activity_goal
+A001,result_complement,Notice action vs result,notice,6,35.0,identify action-result difference
+A002,result_complement,Contrast mini-board,compare,8,35.0,compare Chinese result complement with Vietnamese result wording
+A004,result_complement,Lost-ticket role play,communicative_practice,10,35.0,use result complements in a tiny communicative task
+A005,result_complement,Exit ticket,assessment,4,35.0,check whether learner separates action and result
+A003,result_complement,Frame completion drill,controlled_practice,10,34.0,produce controlled result-complement frames
+A021,result_complement,Teacher feedback bank,feedback,3,33.0,give corrective feedback without long lecture
+A025,result_complement,Mini review opener,review,4,32.0,activate prior contrast before practice
+A022,aspect_marker,Before-after picture prompt,communicative_practice,10,32.0,use aspect marker with visible context
+A006,aspect_marker,了 context sort,notice,8,31.0,notice that 了 is not simply past tense
+A007,aspect_marker,Timeline plus context,compare,8,31.0,connect aspect marker to context
+A008,aspect_marker,Sentence choice check,assessment,5,30.0,check context-based aspect choice
+A019,sino_vietnamese_lexical,False-friend warning,compare,7,30.0,avoid false-friend overconfidence
+A020,sino_vietnamese_lexical,Policy-text register note,communicative_practice,9,29.0,connect lexical contrast to register
+A015,tone_pinyin_mapping,Minimal pair listening,notice,6,28.0,notice tone changes meaning
+A012,time_place_order,Sentence strip reorder,notice,7,28.0,notice Chinese pre-verbal place phrase
+A018,sino_vietnamese_lexical,Cognate confidence card,notice,5,27.0,use cognates as confidence support
+A016,tone_pinyin_mapping,Tone mark dictation,controlled_practice,7,27.0,practice tone mark attention
+A017,tone_pinyin_mapping,Meaning check pair,assessment,4,27.0,check tone-meaning link
+A013,time_place_order,Vietnamese-to-Chinese frame,controlled_practice,9,27.0,practice location before verb
+A014,time_place_order,Classroom map task,communicative_practice,10,26.0,use place phrase in meaningful context
+A010,measure_classifier,个 contrast warning,compare,6,26.0,explain why 个 appears in Chinese
+A024,time_place_order,Peer correction strip,feedback,5,25.0,notice and correct order
+A011,measure_classifier,Shopping list practice,controlled_practice,8,25.0,practice classifier chunks
+A009,measure_classifier,Classifier object tray,notice,7,24.0,notice classifier-object relation
+A023,measure_classifier,Object classifier exit ticket,assessment,3,23.0,quick classifier check

@@ -1,0 +1,6 @@
+---
+title: "Week 11: MT evaluation"
+format: revealjs
+---
+
+Static HTML fallback is maintained in `slides.html` for GitHub Pages. Update the fallback when changing slide content.

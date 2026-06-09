@@ -1,0 +1,14 @@
+---
+title: "Week 07 Interactive Demo"
+format: html
+---
+
+Source note: learner-facing demo is authored directly in `interactive_demo.html` to support bilingual UI, no-JS fallback, dynamic visualization, and GitHub Pages-safe interaction without a build step.
+
+The demo lets learners:
+
+- choose an activity focus;
+- adjust five rubric scores;
+- inspect a dynamic rubric bar chart;
+- read a generated Methods sentence;
+- keep claims descriptive rather than causal.

@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title data-i18n="meta.title">Writing and Paper Tooling Roadmap</title>
+  <link rel="stylesheet" href="../assets/css/bilingual.css">
+  <link rel="stylesheet" href="../assets/css/course-doc.css">
+</head>
+<body>
+  <header class="doc-topbar">
+    <a class="doc-brand" href="../" data-i18n="brand">Python Research Hub</a>
+    <nav class="doc-nav" aria-label="Điều hướng tài liệu" data-i18n-aria-label="nav.aria">
+      <a href="#policy" data-i18n="nav.policy">Policy</a>
+      <a href="#progression" data-i18n="nav.progression">Progression</a>
+      <a href="#overleaf" data-i18n="nav.overleaf">Overleaf</a>
+      <a href="#sources" data-i18n="nav.sources">Sources</a>
+      <div class="language-switcher" role="group" aria-label="Ngôn ngữ / Language" data-i18n-aria-label="nav.language">
+        <button type="button" data-lang-option="vi" aria-pressed="true">Tiếng Việt</button>
+        <button type="button" data-lang-option="en" aria-pressed="false">English</button>
+      </div>
+    </nav>
+  </header>
+
+  <main class="doc-shell">
+    <aside class="doc-sidebar">
+      <strong data-i18n="side.title">Writing roadmap</strong>
+      <a href="../" data-i18n="side.home">Homepage</a>
+      <a href="../weeks/week-01-python-research-workflow/" data-i18n="side.week1">Week 01 HTML</a>
+      <a href="WRITING_AND_PAPER_TOOLING_ROADMAP.md" data-i18n="side.source">Nguồn biên soạn</a>
+    </aside>
+
+    <div class="doc-main">
+      <section class="doc-hero">
+        <span class="doc-eyebrow" data-i18n="hero.tag">Course-wide roadmap</span>
+        <h1 data-i18n="hero.title">Writing mỗi tuần, Overleaf ở cuối khóa</h1>
+        <p class="doc-lead" data-i18n="hero.body">Khóa học dạy Python để tạo bằng chứng nghiên cứu, nhưng writing mới là nơi bằng chứng trở thành paper. Vì vậy mỗi tuần đều có writing output nhỏ.</p>
+      </section>
+
+      <section class="doc-card" id="policy">
+        <h2 data-i18n="policy.title">Core policy</h2>
+        <div class="doc-grid">
+          <article class="mini-card">
+            <span class="swatch blue"></span>
+            <h3 data-i18n="policy.weekly.title">Writing xuất hiện mỗi tuần</h3>
+            <p data-i18n="policy.weekly.body">Mỗi tuần có một caption, memo, Methods note, Results paragraph, limitation hoặc source note.</p>
+          </article>
+          <article class="mini-card">
+            <span class="swatch green"></span>
+            <h3 data-i18n="policy.word.title">Word + Zotero là mặc định</h3>
+            <p data-i18n="policy.word.body">Đây là workflow quen thuộc và đủ tốt cho giai đoạn đầu trong applied linguistics, translation studies và education policy.</p>
+          </article>
+          <article class="mini-card">
+            <span class="swatch rose"></span>
+            <h3 data-i18n="policy.overleaf.title">Overleaf không đưa quá sớm</h3>
+            <p data-i18n="policy.overleaf.body">Overleaf/LaTeX là công cụ đóng gói, không phải nhiệm vụ đầu tiên của người mới học Python.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="doc-card" id="progression">
+        <h2 data-i18n="progression.title">Tool progression</h2>
+        <table>
+          <thead>
+            <tr><th data-i18n="table.stage">Stage</th><th data-i18n="table.weeks">Weeks</th><th data-i18n="table.focus">Writing focus</th><th data-i18n="table.tool">Tool support</th></tr>
+          </thead>
+          <tbody>
+            <tr><td data-i18n="stage.foundation">Foundation</td><td>1-2</td><td data-i18n="focus.foundation">research question, data unit, source note</td><td data-i18n="tool.foundation">notebook Markdown; Word optional</td></tr>
+            <tr><td data-i18n="stage.evidence">Evidence</td><td>3-5</td><td data-i18n="focus.evidence">descriptive table, figure caption, figure note</td><td data-i18n="tool.evidence">Word + Zotero setup begins</td></tr>
+            <tr><td data-i18n="stage.results">Results</td><td>6-8</td><td data-i18n="focus.results">Results paragraph, limitation, teaching implication</td><td data-i18n="tool.results">Word + Zotero</td></tr>
+            <tr><td data-i18n="stage.track">Track writing</td><td>9-13</td><td data-i18n="focus.track">track-specific analysis paragraph</td><td data-i18n="tool.track">Word + Zotero; Quarto optional</td></tr>
+            <tr><td data-i18n="stage.package">Paper package</td><td>14</td><td data-i18n="focus.package">package plan, appendix/source map, references, reproducibility note</td><td data-i18n="tool.package">Word + Zotero by default; Overleaf/Quarto optional</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section class="doc-card">
+        <h2 data-i18n="contract.title">Weekly writing contract</h2>
+        <p data-i18n="contract.body">Mỗi weekly README cần có block này để người học biết kỹ năng Python đang phục vụ phần nào của paper.</p>
+        <pre><code>## Writing Support
+
+- Paper section supported:
+- Writing output:
+- Tool support:
+- Sentence frame:
+- Common writing risk:</code></pre>
+      </section>
+
+      <section class="doc-card" id="overleaf">
+        <h2 data-i18n="overleaf.title">Overleaf entry point</h2>
+        <p data-i18n="overleaf.body">Chỉ giới thiệu Overleaf ở Week 14, khi người học đã có đủ material để format: title, research question, table/figure, captions, references và section map/draft sections.</p>
+        <div class="doc-grid two">
+          <article class="mini-card">
+            <span class="swatch amber"></span>
+            <h3 data-i18n="overleaf.ask.title">Trước khi dùng Overleaf, hỏi</h3>
+            <ul>
+              <li data-i18n="overleaf.ask1">Target journal hoặc university có cần LaTeX không?</li>
+              <li data-i18n="overleaf.ask2">References đã có trong Zotero chưa, và `.bib` chỉ có cần nếu chọn Quarto/Overleaf?</li>
+              <li data-i18n="overleaf.ask3">Bảng/hình đã sẵn sàng đưa vào paper chưa?</li>
+            </ul>
+          </article>
+          <article class="mini-card">
+            <span class="swatch purple"></span>
+            <h3 data-i18n="overleaf.package.title">Week 14 package</h3>
+            <ul>
+              <li data-i18n="overleaf.pack1">final notebook chạy được</li>
+              <li data-i18n="overleaf.pack2">package plan + section map</li>
+              <li data-i18n="overleaf.pack3">optional `main.tex`, Zotero-exported `.bib`, figure/table files</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section class="doc-card" id="sources">
+        <h2 data-i18n="sources.title">Starter source links</h2>
+        <div class="doc-links">
+          <a class="doc-chip" href="https://www.zotero.org/support/word_processor_plugin_usage">Zotero Word plugin</a>
+          <a class="doc-chip" href="https://quarto.org/docs/authoring/citations.html">Quarto citations</a>
+          <a class="doc-chip" href="https://www.overleaf.com/learn/latex/Learn_LaTeX_in_30_minutes">Overleaf Learn LaTeX</a>
+          <a class="doc-chip" href="https://www.overleaf.com/learn/latex/Bibliography_management_in_LaTeX">Overleaf bibliography</a>
+          <a class="doc-chip" href="https://docs.overleaf.com/citing-and-references/working-with-.bib-files">Overleaf .bib files</a>
+          <a class="doc-chip" href="https://www.overleaf.com/learn/how-to/How_to_link_your_Overleaf_account_to_Mendeley_and_Zotero">Overleaf + Zotero</a>
+        </div>
+        <p class="source-note" data-i18n="sources.note">Source audit date: 2026-06-03. Markdown source remains available for editing; this HTML page is the learner-facing version.</p>
+      </section>
+    </div>
+  </main>
+
+  <script src="../assets/js/bilingual.js"></script>
+  <script>
+    const WRITING_I18N = {
+      vi: {
+        "meta.title": "Writing and Paper Tooling Roadmap",
+        "brand": "Python Research Hub",
+        "nav.aria": "Điều hướng tài liệu",
+        "nav.language": "Ngôn ngữ / Language",
+        "nav.policy": "Policy",
+        "nav.progression": "Progression",
+        "nav.overleaf": "Overleaf",
+        "nav.sources": "Sources",
+        "side.title": "Writing roadmap",
+        "side.home": "Homepage",
+        "side.week1": "Week 01 HTML",
+        "side.source": "Nguồn biên soạn",
+        "hero.tag": "Course-wide roadmap",
+        "hero.title": "Writing mỗi tuần, Overleaf ở cuối khóa",
+        "hero.body": "Khóa học dạy Python để tạo bằng chứng nghiên cứu, nhưng writing mới là nơi bằng chứng trở thành paper. Vì vậy mỗi tuần đều có writing output nhỏ.",
+        "policy.title": "Core policy",
+        "policy.weekly.title": "Writing xuất hiện mỗi tuần",
+        "policy.weekly.body": "Mỗi tuần có một caption, memo, Methods note, Results paragraph, limitation hoặc source note.",
+        "policy.word.title": "Word + Zotero là mặc định",
+        "policy.word.body": "Đây là workflow quen thuộc và đủ tốt cho giai đoạn đầu trong applied linguistics, translation studies và education policy.",
+        "policy.overleaf.title": "Overleaf không đưa quá sớm",
+        "policy.overleaf.body": "Overleaf/LaTeX là công cụ đóng gói, không phải nhiệm vụ đầu tiên của người mới học Python.",
+        "progression.title": "Tool progression",
+        "table.stage": "Stage",
+        "table.weeks": "Weeks",
+        "table.focus": "Writing focus",
+        "table.tool": "Tool support",
+        "stage.foundation": "Foundation",
+        "focus.foundation": "research question, data unit, source note",
+        "tool.foundation": "notebook Markdown; Word optional",
+        "stage.evidence": "Evidence",
+        "focus.evidence": "descriptive table, figure caption, figure note",
+        "tool.evidence": "Word + Zotero setup begins",
+        "stage.results": "Results",
+        "focus.results": "Results paragraph, limitation, teaching implication",
+        "tool.results": "Word + Zotero",
+        "stage.track": "Track writing",
+        "focus.track": "track-specific analysis paragraph",
+        "tool.track": "Word + Zotero; Quarto optional",
+        "stage.package": "Paper package",
+        "focus.package": "package plan, appendix/source map, references, reproducibility note",
+        "tool.package": "Word + Zotero by default; Overleaf/Quarto optional",
+        "contract.title": "Weekly writing contract",
+        "contract.body": "Mỗi weekly README cần có block này để người học biết kỹ năng Python đang phục vụ phần nào của paper.",
+        "overleaf.title": "Overleaf entry point",
+        "overleaf.body": "Chỉ giới thiệu Overleaf ở Week 14, khi người học đã có đủ material để format: title, research question, table/figure, captions, references và section map/draft sections.",
+        "overleaf.ask.title": "Trước khi dùng Overleaf, hỏi",
+        "overleaf.ask1": "Target journal hoặc university có cần LaTeX không?",
+        "overleaf.ask2": "References đã có trong Zotero chưa, và `.bib` chỉ có cần nếu chọn Quarto/Overleaf?",
+        "overleaf.ask3": "Bảng/hình đã sẵn sàng đưa vào paper chưa?",
+        "overleaf.package.title": "Week 14 package",
+        "overleaf.pack1": "final notebook chạy được",
+        "overleaf.pack2": "package plan + section map",
+        "overleaf.pack3": "optional `main.tex`, Zotero-exported `.bib`, figure/table files",
+        "sources.title": "Starter source links",
+        "sources.note": "Source audit date: 2026-06-03. Markdown source remains available for editing; this HTML page is the learner-facing version."
+      },
+      en: {
+        "meta.title": "Writing and Paper Tooling Roadmap",
+        "brand": "Python Research Hub",
+        "nav.aria": "Document navigation",
+        "nav.language": "Language",
+        "nav.policy": "Policy",
+        "nav.progression": "Progression",
+        "nav.overleaf": "Overleaf",
+        "nav.sources": "Sources",
+        "side.title": "Writing roadmap",
+        "side.home": "Homepage",
+        "side.week1": "Week 01 HTML",
+        "side.source": "Authoring source",
+        "hero.tag": "Course-wide roadmap",
+        "hero.title": "Writing every week, Overleaf at the end",
+        "hero.body": "The course teaches Python to create research evidence, but writing is where evidence becomes a paper. Every week therefore has a small writing output.",
+        "policy.title": "Core policy",
+        "policy.weekly.title": "Writing appears every week",
+        "policy.weekly.body": "Each week includes a caption, memo, Methods note, Results paragraph, limitation, or source note.",
+        "policy.word.title": "Word + Zotero is the default",
+        "policy.word.body": "This workflow is familiar and sufficient early on in applied linguistics, translation studies, and education policy.",
+        "policy.overleaf.title": "Overleaf is not introduced too early",
+        "policy.overleaf.body": "Overleaf/LaTeX is a packaging tool, not the first task for a beginner learning Python.",
+        "progression.title": "Tool progression",
+        "table.stage": "Stage",
+        "table.weeks": "Weeks",
+        "table.focus": "Writing focus",
+        "table.tool": "Tool support",
+        "stage.foundation": "Foundation",
+        "focus.foundation": "research question, data unit, source note",
+        "tool.foundation": "notebook Markdown; Word optional",
+        "stage.evidence": "Evidence",
+        "focus.evidence": "descriptive table, figure caption, figure note",
+        "tool.evidence": "Word + Zotero setup begins",
+        "stage.results": "Results",
+        "focus.results": "Results paragraph, limitation, teaching implication",
+        "tool.results": "Word + Zotero",
+        "stage.track": "Track writing",
+        "focus.track": "track-specific analysis paragraph",
+        "tool.track": "Word + Zotero; Quarto optional",
+        "stage.package": "Paper package",
+        "focus.package": "package plan, appendix/source map, references, reproducibility note",
+        "tool.package": "Word + Zotero by default; Overleaf/Quarto optional",
+        "contract.title": "Weekly writing contract",
+        "contract.body": "Each weekly README needs this block so the learner knows which part of the paper the Python skill supports.",
+        "overleaf.title": "Overleaf entry point",
+        "overleaf.body": "Introduce Overleaf only in Week 14, when the learner has enough material to format: title, research question, table/figure, captions, references, and a section map or draft sections.",
+        "overleaf.ask.title": "Before using Overleaf, ask",
+        "overleaf.ask1": "Does the target journal or university require LaTeX?",
+        "overleaf.ask2": "Are references already in Zotero, and is `.bib` needed only for Quarto/Overleaf?",
+        "overleaf.ask3": "Are tables/figures ready to move into the paper?",
+        "overleaf.package.title": "Week 14 package",
+        "overleaf.pack1": "final runnable notebook",
+        "overleaf.pack2": "package plan + section map",
+        "overleaf.pack3": "optional `main.tex`, Zotero-exported `.bib`, figure/table files",
+        "sources.title": "Starter source links",
+        "sources.note": "Source audit date: 2026-06-03. Markdown source remains available for editing; this HTML page is the learner-facing version."
+      }
+    };
+    window.Bilingual.init({ translations: WRITING_I18N, defaultLang: "vi" });
+  </script>
+</body>
+</html>

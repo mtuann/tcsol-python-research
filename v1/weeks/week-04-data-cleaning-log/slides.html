@@ -1,0 +1,532 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title data-i18n="meta.title">Tuần 04: Làm sạch dữ liệu và cleaning log</title>
+  <link rel="stylesheet" href="../../assets/css/bilingual.css">
+  <link rel="stylesheet" href="../../assets/css/lecture-slides.css?v=20260603c">
+</head>
+<body class="lecture-slide-page">
+  <div class="site-tools slide-tools">
+    <nav class="slide-exit-links" aria-label="Điều hướng khóa học" data-i18n-aria-label="nav.course.aria">
+      <a class="slide-link primary" href="../../" data-i18n="nav.home">Trang chủ</a>
+      <a class="slide-link" href="./" data-i18n="nav.week">Tuần 04</a>
+      <button class="slide-link" type="button" data-toc-open data-i18n="nav.toc" data-i18n-aria-label="nav.toc.aria" aria-label="Mục lục slide">Mục lục</button>
+    </nav>
+    <div class="language-switcher" role="group" aria-label="Ngôn ngữ / Language" data-i18n-aria-label="nav.language">
+      <button type="button" data-lang-option="vi" aria-pressed="true">Tiếng Việt</button>
+      <button type="button" data-lang-option="en" aria-pressed="false">English</button>
+    </div>
+  </div>
+
+  <main class="deck">
+    <div class="slides">
+      <section class="active">
+        <div class="hero-layout">
+          <div class="slide-head">
+            <span class="tag" data-i18n="s1.tag">Tuần 04</span>
+            <h1 data-i18n="s1.title">Làm sạch dữ liệu và cleaning log</h1>
+            <p class="lead" data-i18n="s1.body">Từ CSV messy đến cleaned dataset, trước khi viết Methods note cho paper.</p>
+          </div>
+          <div class="stage">
+            <div class="research-table compact messy-table" aria-label="Bảng raw messy minh họa" data-i18n-aria-label="hero.table.aria">
+              <div class="row five header"><span>id</span><span>class</span><span>activity</span><span>post</span><span>done</span></div>
+              <div class="row five"><span>S04</span><span> class a </span><span>Measure Words</span><span>74</span><span>YES</span></div>
+              <div class="row five focus-row"><span>S12</span><span>Class-B</span><span>result_comp</span><span><strong class="value-spotlight">eighty</strong></span><span>Y</span></div>
+              <div class="row five"><span>S27</span><span>C</span><span>word_order</span><span>missing</span><span>n</span></div>
+            </div>
+            <div class="chip-row">
+              <span class="chip" data-i18n="s1.meta.rows">N = 36 bản ghi synthetic</span>
+              <span class="chip optional" data-i18n="s1.meta.source">Nguồn: dataset dạy học Week 04</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="slide-head">
+          <span class="tag" data-i18n="s2.tag">Từ Week 03</span>
+          <h2 class="wide-title" data-i18n="s2.title">Bảng mô tả chỉ tốt khi dữ liệu đầu vào đáng tin</h2>
+          <p class="lead" data-i18n="s2.body">Tuần trước ta groupby và viết caption. Tuần này ta hỏi: bảng đó có được tạo từ dữ liệu sạch và có thể tái lập không?</p>
+        </div>
+        <div class="stage">
+          <div class="flow four">
+            <div class="flow-step"><strong>Raw CSV</strong><span data-i18n="flow.raw">giữ nguyên như thu thập</span></div>
+            <div class="flow-step"><strong data-i18n="flow.clean">Clean</strong><span data-i18n="flow.clean.body">chuẩn hóa bằng code</span></div>
+            <div class="flow-step"><strong data-i18n="flow.log">Log</strong><span data-i18n="flow.log.body">ghi quyết định</span></div>
+            <div class="flow-step"><strong data-i18n="flow.paper">Methods</strong><span data-i18n="flow.paper.body">viết được vào paper</span></div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="slide-head">
+          <span class="tag" data-i18n="s3.tag">Câu hỏi</span>
+          <h2 class="wide-title" data-i18n="s3.title">Sau khi clean, bản ghi nào còn dùng được?</h2>
+          <p class="lead" data-i18n="s3.body">Ta không cố cứu mọi dòng. Ta làm rõ dòng nào đủ bằng chứng pre/post và dòng nào phải coi là missing.</p>
+        </div>
+        <div class="stage">
+          <div class="concept-grid">
+            <div class="concept-card row"><strong data-i18n="q.raw.title">Raw N</strong><span data-i18n="q.raw.body">36 learner records</span></div>
+            <div class="concept-card column"><strong data-i18n="q.problem.title">Vấn đề</strong><span data-i18n="q.problem.body">nhãn và score không nhất quán</span></div>
+            <div class="concept-card value"><strong data-i18n="q.rule.title">Quy tắc</strong><span data-i18n="q.rule.body">clean bằng mapping rõ ràng</span></div>
+            <div class="concept-card schema"><strong data-i18n="q.output.title">Output</strong><span data-i18n="q.output.body">25 usable completed pre/post records</span></div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="slide-head">
+          <span class="tag" data-i18n="s4.tag">Raw vs cleaned</span>
+          <h2 class="wide-title" data-i18n="s4.title">Không sửa tay file raw</h2>
+          <p class="lead" data-i18n="s4.body">Raw data là bằng chứng gốc. Cleaned data là bảng dẫn xuất bằng code, có thể chạy lại.</p>
+        </div>
+        <div class="stage">
+          <div class="two-col">
+            <div class="concept-card value"><strong>data/raw</strong><span data-i18n="raw.card">file gốc, không overwrite, không chỉnh tay</span></div>
+            <div class="concept-card column"><strong>data/processed</strong><span data-i18n="clean.card">file sạch sinh từ notebook</span></div>
+          </div>
+          <div class="paper-card"><blockquote data-i18n="raw.note">Nếu không thể giải thích cleaned CSV được tạo ra thế nào, Methods section chưa đủ minh bạch.</blockquote></div>
+        </div>
+      </section>
+
+      <section>
+        <div class="slide-head">
+          <span class="tag" data-i18n="s5.tag">Diagnose</span>
+          <h2 class="wide-title" data-i18n="s5.title">Trước khi clean, hãy đo vấn đề</h2>
+        </div>
+        <div class="stage">
+          <div class="code-card"><pre><code>raw = pd.read_csv(csv_path, na_values=["", "NA", "missing", "not recorded"])
+raw.isna().sum()
+raw.dtypes
+raw["activity_focus"].value_counts(dropna=False)</code></pre></div>
+          <div class="chip-row">
+            <span class="chip" data-i18n="diag.missing">missing count</span>
+            <span class="chip" data-i18n="diag.type">data type</span>
+            <span class="chip optional" data-i18n="diag.labels">label variants</span>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="slide-head">
+          <span class="tag" data-i18n="s6.tag">Missing</span>
+          <h2 class="wide-title" data-i18n="s6.title">Missing không phải là 0</h2>
+          <p class="lead" data-i18n-html="s6.body">Một điểm số chưa biết khác hoàn toàn với điểm số bằng 0. <span class="inline-token">isna()</span> giúp ta không tự tạo dữ liệu giả.</p>
+        </div>
+        <div class="stage">
+          <div class="concept-grid three">
+            <div class="concept-card row"><strong>72</strong><span data-i18n="missing.known">giá trị quan sát được</span></div>
+            <div class="concept-card value"><strong>0</strong><span data-i18n="missing.zero">giá trị thật bằng không</span></div>
+            <div class="concept-card schema"><strong>&lt;NA&gt;</strong><span data-i18n="missing.na">không biết hoặc không ghi nhận</span></div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="slide-head">
+          <span class="tag" data-i18n="s7.tag">Labels</span>
+          <h2 class="wide-title" data-i18n="s7.title">Chuẩn hóa nhãn bằng mapping</h2>
+          <p class="lead" data-i18n="s7.body">Mapping biến nhiều cách viết thành một label chuẩn, không thay đổi kết quả học tập.</p>
+        </div>
+        <div class="stage">
+          <div class="code-card"><pre><code>activity_map = {
+  "measure words": "measure_words",
+  "measure_words": "measure_words",
+  "result-complement": "result_complements",
+  "result complements": "result_complements"
+}
+clean["activity_focus"] = normalized.map(activity_map)</code></pre></div>
+        </div>
+      </section>
+
+      <section>
+        <div class="slide-head">
+          <span class="tag" data-i18n="s8.tag">Numeric</span>
+          <h2 class="wide-title" data-i18n="s8.title">Chuyển cột số một cách an toàn</h2>
+          <p class="lead" data-i18n-html="s8.body"><span class="inline-token">errors="coerce"</span> chuyển text không hợp lệ thành missing để người học thấy vấn đề, thay vì crash hoặc tự đoán.</p>
+        </div>
+        <div class="stage">
+          <div class="code-card"><pre><code>numeric_cols = ["pre_score", "post_score", "attendance_hours", "self_confidence"]
+for col in numeric_cols:
+    clean[col] = pd.to_numeric(clean[col], errors="coerce")</code></pre></div>
+          <div class="paper-card"><blockquote data-i18n-html="numeric.note">Ví dụ <span class="frame-slot">eighty</span> thành <span class="frame-slot purpose">missing</span>, không thành 80 nếu không có quy tắc rõ.</blockquote></div>
+        </div>
+      </section>
+
+      <section>
+        <div class="slide-head">
+          <span class="tag" data-i18n="s9.tag">Completed</span>
+          <h2 class="wide-title" data-i18n="s9.title">Chuẩn hóa inclusion rule</h2>
+          <p class="lead" data-i18n="s9.body">Y, YES, y có thể cùng nghĩa với yes. Nhưng blank vẫn là missing, không tự biến thành no.</p>
+        </div>
+        <div class="stage">
+          <div class="research-table compact">
+            <div class="row three header"><span data-i18n="inc.raw">Raw label</span><span data-i18n="inc.cleaned">Cleaned label</span><span data-i18n="inc.reason">Reason</span></div>
+            <div class="row three"><span>Y / YES / y</span><span>yes</span><span data-i18n="inc.yes">cùng trạng thái hoàn thành</span></div>
+            <div class="row three"><span>n / no</span><span>no</span><span data-i18n="inc.no">không đưa vào pre/post completed summary</span></div>
+            <div class="row three"><span>blank</span><span>&lt;NA&gt;</span><span data-i18n="inc.blank">không đoán thay dữ liệu</span></div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="slide-head">
+          <span class="tag" data-i18n="s10.tag">Derived column</span>
+          <h2 class="wide-title" data-i18n="s10.title">Tạo gain_score sau khi cột số đã sạch</h2>
+          <p class="lead" data-i18n="s10.body">Gain chỉ có nghĩa khi cả pre_score và post_score đều là số quan sát được.</p>
+        </div>
+        <div class="stage">
+          <div class="code-card"><pre><code>clean["gain_score"] = clean["post_score"] - clean["pre_score"]
+clean["usable_pre_post"] = (
+    clean["completed"].eq("yes")
+    & clean["pre_score"].notna()
+    & clean["post_score"].notna()
+)</code></pre></div>
+        </div>
+      </section>
+
+      <section>
+        <div class="slide-head">
+          <span class="tag" data-i18n="s11.tag">Cleaning log</span>
+          <h2 class="wide-title" data-i18n="s11.title">Cleaning log là Methods note dạng bảng</h2>
+        </div>
+        <div class="stage">
+          <div class="research-table compact">
+            <div class="row five header"><span>step</span><span>column</span><span>problem</span><span>decision</span><span>reason</span></div>
+            <div class="row five"><span>2</span><span>activity</span><span data-i18n="log.problem1">case, hyphen, underscore</span><span data-i18n="log.decision1">map to 4 labels</span><span data-i18n="log.reason1">summary table needs stable groups</span></div>
+            <div class="row five"><span>5</span><span>scores</span><span data-i18n="log.problem2">text in numeric fields</span><span data-i18n="log.decision2">coerce invalid to missing</span><span data-i18n="log.reason2">do not invent scores</span></div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="slide-head">
+          <span class="tag" data-i18n="s12.tag">Trước/sau</span>
+          <h2 class="wide-title" data-i18n="s12.title">Một bảng nhỏ cho thấy cleaning có tác dụng gì</h2>
+        </div>
+        <div class="stage">
+          <div class="research-table compact" aria-label="Before after cleaning summary" data-i18n-aria-label="summary.table.aria">
+            <div class="row four header"><span data-i18n="summary.h.check">Kiểm tra</span><span data-i18n="summary.h.before">Trước</span><span data-i18n="summary.h.after">Sau</span><span data-i18n="summary.h.note">Ghi chú</span></div>
+            <div class="row four"><span data-i18n="summary.row.activity">nhãn hoạt động</span><span>18</span><span><strong class="value-spotlight">4</strong></span><span data-i18n="summary.activity">chuẩn hóa nhãn hoạt động</span></div>
+            <div class="row four"><span data-i18n="summary.row.class">nhãn lớp</span><span>12</span><span>4</span><span data-i18n="summary.class">chuẩn hóa section lớp</span></div>
+            <div class="row four"><span data-i18n="summary.row.usable">dòng dùng được</span><span>19</span><span>25</span><span data-i18n="summary.usable">map biến thể completed</span></div>
+          </div>
+          <div class="paper-card"><blockquote data-i18n-html="summary.caption">Caption: Bảng kiểm tra trước/sau cleaning cho dataset TCSOL synthetic Week 04 (N = 36 bản ghi raw). Cleaning giảm số biến thể nhãn và tăng số dòng completed pre/post dùng được từ 19 lên 25.</blockquote></div>
+        </div>
+      </section>
+
+      <section>
+        <div class="slide-head">
+          <span class="tag" data-i18n="s13.tag">Writing</span>
+          <h2 class="wide-title" data-i18n="s13.title">Methods note: nói quyết định, N và limitation</h2>
+        </div>
+        <div class="stage">
+          <div class="paper-card sentence-frame-card">
+            <blockquote class="sentence-frame" data-i18n-html="methods.frame">Before analysis, the raw CSV was preserved and a cleaned copy was created in pandas. Labels were <span class="frame-slot">standardized</span>, invalid numeric entries were treated as <span class="frame-slot purpose">missing</span>, and <span class="frame-slot columns">25 records</span> had usable completed pre/post scores.</blockquote>
+          </div>
+          <div class="concept-grid three">
+            <div class="concept-card row"><strong data-i18n="methods.artifact.title">Artifact</strong><span>week04_cleaning_log.csv</span></div>
+            <div class="concept-card value"><strong data-i18n="methods.n.title">N báo cáo</strong><span>25 usable rows</span></div>
+            <div class="concept-card schema"><strong data-i18n="methods.limit.title">Limitation</strong><span data-i18n="methods.limit.body">cleaning không phục hồi điểm bị thiếu</span></div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="slide-head">
+          <span class="tag" data-i18n="s14.tag">Thực hành</span>
+          <h2 class="wide-title" data-i18n="s14.title">Checklist bài nộp</h2>
+          <p class="lead" data-i18n="s14.body">Mục tiêu không phải nhiều code. Mục tiêu là một workflow chạy lại được và giải thích được.</p>
+        </div>
+        <div class="stage">
+          <div class="checklist">
+            <div class="check-item"><b>1</b><span data-i18n="check.1">notebook chạy từ đầu đến cuối</span></div>
+            <div class="check-item"><b>2</b><span data-i18n="check.2">raw CSV không sửa tay; cleaned CSV sinh bằng code</span></div>
+            <div class="check-item"><b>3</b><span data-i18n="check.3">cleaning log có problem, decision, reason, evidence</span></div>
+            <div class="check-item"><b>4</b><span data-i18n="check.4">caption, interpretation, Methods note có limitation và source note</span></div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="slide-head">
+          <span class="tag" data-i18n="s15.tag">Đi tiếp</span>
+          <h2 class="wide-title" data-i18n="s15.title">Mở demo, chạy notebook, rồi export output</h2>
+          <p class="lead" data-i18n="s15.body">Week 05 sẽ dùng cleaned data để tạo figure cho paper. Hôm nay ta đảm bảo figure đó không dựa trên nhãn bẩn.</p>
+        </div>
+        <div class="stage">
+          <div class="slide-cta-row" aria-label="Đi tiếp sau slides" data-i18n-aria-label="cta.aria">
+            <a class="slide-cta primary" href="interactive_demo.html" data-i18n="cta.demo">Mở demo</a>
+            <a class="slide-cta" href="live_coding.html" data-i18n="cta.notebook">Xem notebook</a>
+            <a class="slide-cta" href="./" data-i18n="cta.week">Về Tuần 04</a>
+            <a class="slide-cta" href="../../" data-i18n="cta.home">Về trang chủ</a>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <script src="../../assets/js/bilingual.js"></script>
+  <script src="../../assets/js/lecture-slides.js"></script>
+  <script>
+    const SLIDE_I18N = {
+      vi: {
+        "meta.title": "Tuần 04: Làm sạch dữ liệu và cleaning log",
+        "nav.course.aria": "Điều hướng khóa học",
+        "nav.home": "Trang chủ",
+        "nav.week": "Tuần 04",
+        "nav.toc": "Mục lục",
+        "nav.toc.aria": "Mục lục slide",
+        "nav.language": "Ngôn ngữ / Language",
+        "nav.slides.aria": "Điều hướng slide",
+        "nav.previous": "Trước",
+        "nav.next": "Tiếp",
+        "nav.jump.aria": "Đi đến slide",
+        "nav.jump.label": "Slide",
+        "nav.jump.input": "Số slide",
+        "nav.jump.go": "Đi",
+        "nav.toc.title": "Mục lục slide",
+        "nav.toc.hint": "Chọn phần muốn xem nhanh.",
+        "nav.toc.close": "Đóng",
+        "s1.tag": "Tuần 04",
+        "s1.title": "Làm sạch dữ liệu và cleaning log",
+        "s1.body": "Từ CSV messy đến cleaned dataset, trước khi viết Methods note cho paper.",
+        "hero.table.aria": "Bảng raw messy minh họa",
+        "s1.meta.rows": "N = 36 bản ghi synthetic",
+        "s1.meta.source": "Nguồn: dataset dạy học Week 04",
+        "s2.tag": "Từ Week 03",
+        "s2.title": "Bảng mô tả chỉ tốt khi dữ liệu đầu vào đáng tin",
+        "s2.body": "Tuần trước ta groupby và viết caption. Tuần này ta hỏi: bảng đó có được tạo từ dữ liệu sạch và có thể tái lập không?",
+        "flow.raw": "giữ nguyên như thu thập",
+        "flow.clean": "Clean",
+        "flow.clean.body": "chuẩn hóa bằng code",
+        "flow.log": "Log",
+        "flow.log.body": "ghi quyết định",
+        "flow.paper": "Methods",
+        "flow.paper.body": "viết được vào paper",
+        "s3.tag": "Câu hỏi",
+        "s3.title": "Sau khi clean, bản ghi nào còn dùng được?",
+        "s3.body": "Ta không cố cứu mọi dòng. Ta làm rõ dòng nào đủ bằng chứng pre/post và dòng nào phải coi là missing.",
+        "q.raw.title": "Raw N",
+        "q.raw.body": "36 bản ghi learner",
+        "q.problem.title": "Vấn đề",
+        "q.problem.body": "nhãn và score không nhất quán",
+        "q.rule.title": "Quy tắc",
+        "q.rule.body": "clean bằng mapping rõ ràng",
+        "q.output.title": "Output",
+        "q.output.body": "25 bản ghi completed pre/post dùng được",
+        "s4.tag": "Raw vs cleaned",
+        "s4.title": "Không sửa tay file raw",
+        "s4.body": "Raw data là bằng chứng gốc. Cleaned data là bảng dẫn xuất bằng code, có thể chạy lại.",
+        "raw.card": "file gốc, không overwrite, không chỉnh tay",
+        "clean.card": "file sạch sinh từ notebook",
+        "raw.note": "Nếu không thể giải thích cleaned CSV được tạo ra thế nào, Methods section chưa đủ minh bạch.",
+        "s5.tag": "Diagnose",
+        "s5.title": "Trước khi clean, hãy đo vấn đề",
+        "diag.missing": "đếm missing",
+        "diag.type": "kiểu dữ liệu",
+        "diag.labels": "nhãn đang có",
+        "s6.tag": "Missing",
+        "s6.title": "Missing không phải là 0",
+        "s6.body": "Một điểm số chưa biết khác hoàn toàn với điểm số bằng 0. <span class=\"inline-token\">isna()</span> giúp ta không tự tạo dữ liệu giả.",
+        "missing.known": "giá trị quan sát được",
+        "missing.zero": "giá trị thật bằng không",
+        "missing.na": "không biết hoặc không ghi nhận",
+        "s7.tag": "Labels",
+        "s7.title": "Chuẩn hóa nhãn bằng mapping",
+        "s7.body": "Mapping biến nhiều cách viết thành một label chuẩn, không thay đổi kết quả học tập.",
+        "s8.tag": "Numeric",
+        "s8.title": "Chuyển cột số một cách an toàn",
+        "s8.body": "<span class=\"inline-token\">errors=&quot;coerce&quot;</span> chuyển text không hợp lệ thành missing để người học thấy vấn đề, thay vì crash hoặc tự đoán.",
+        "numeric.note": "Ví dụ <span class=\"frame-slot\">eighty</span> thành <span class=\"frame-slot purpose\">missing</span>, không thành 80 nếu không có quy tắc rõ.",
+        "s9.tag": "Completed",
+        "s9.title": "Chuẩn hóa inclusion rule",
+        "s9.body": "Y, YES, y có thể cùng nghĩa với yes. Nhưng blank vẫn là missing, không tự biến thành no.",
+        "inc.raw": "Nhãn raw",
+        "inc.cleaned": "Nhãn cleaned",
+        "inc.reason": "Lý do",
+        "inc.yes": "cùng trạng thái hoàn thành",
+        "inc.no": "không đưa vào pre/post completed summary",
+        "inc.blank": "không đoán thay dữ liệu",
+        "s10.tag": "Derived column",
+        "s10.title": "Tạo gain_score sau khi cột số đã sạch",
+        "s10.body": "Gain chỉ có nghĩa khi cả pre_score và post_score đều là số quan sát được.",
+        "s11.tag": "Cleaning log",
+        "s11.title": "Cleaning log là Methods note dạng bảng",
+        "log.problem1": "case, hyphen, underscore",
+        "log.decision1": "map về 4 nhãn",
+        "log.reason1": "bảng summary cần nhóm ổn định",
+        "log.problem2": "text trong cột số",
+        "log.decision2": "coerce invalid thành missing",
+        "log.reason2": "không tự tạo điểm số",
+        "s12.tag": "Trước/sau",
+        "s12.title": "Một bảng nhỏ cho thấy cleaning có tác dụng gì",
+        "summary.table.aria": "Bảng before after cleaning",
+        "summary.h.check": "Kiểm tra",
+        "summary.h.before": "Trước",
+        "summary.h.after": "Sau",
+        "summary.h.note": "Ghi chú",
+        "summary.row.activity": "nhãn hoạt động",
+        "summary.row.class": "nhãn lớp",
+        "summary.row.usable": "dòng dùng được",
+        "summary.activity": "chuẩn hóa nhãn hoạt động",
+        "summary.class": "chuẩn hóa section lớp",
+        "summary.usable": "map biến thể completed",
+        "summary.caption": "Caption: Bảng kiểm tra trước/sau cleaning cho dataset TCSOL synthetic Week 04 (N = 36 bản ghi raw). Cleaning giảm số biến thể nhãn và tăng số dòng completed pre/post dùng được từ 19 lên 25.",
+        "s13.tag": "Writing",
+        "s13.title": "Methods note: nói quyết định, N và limitation",
+        "methods.frame": "Nháp tiếng Anh cho paper: Before analysis, the raw CSV was preserved and a cleaned copy was created in pandas. Labels were <span class=\"frame-slot\">standardized</span>, invalid numeric entries were treated as <span class=\"frame-slot purpose\">missing</span>, and <span class=\"frame-slot columns\">25 records</span> had usable completed pre/post scores.",
+        "methods.artifact.title": "Artifact",
+        "methods.n.title": "N báo cáo",
+        "methods.limit.title": "Limitation",
+        "methods.limit.body": "cleaning không phục hồi điểm bị thiếu",
+        "s14.tag": "Thực hành",
+        "s14.title": "Checklist bài nộp",
+        "s14.body": "Mục tiêu không phải nhiều code. Mục tiêu là một workflow chạy lại được và giải thích được.",
+        "check.1": "notebook chạy từ đầu đến cuối",
+        "check.2": "raw CSV không sửa tay; cleaned CSV sinh bằng code",
+        "check.3": "cleaning log có problem, decision, reason, evidence",
+        "check.4": "caption, interpretation, Methods note có limitation và source note",
+        "s15.tag": "Đi tiếp",
+        "s15.title": "Mở demo, chạy notebook, rồi export output",
+        "s15.body": "Week 05 sẽ dùng cleaned data để tạo figure cho paper. Hôm nay ta đảm bảo figure đó không dựa trên nhãn bẩn.",
+        "cta.aria": "Đi tiếp sau slides",
+        "cta.demo": "Mở demo",
+        "cta.notebook": "Xem notebook",
+        "cta.week": "Về Tuần 04",
+        "cta.home": "Về trang chủ"
+      },
+      en: {
+        "meta.title": "Week 04: Data cleaning and cleaning logs",
+        "nav.course.aria": "Course navigation",
+        "nav.home": "Home",
+        "nav.week": "Week 04",
+        "nav.toc": "Overview",
+        "nav.toc.aria": "Slide overview",
+        "nav.language": "Language",
+        "nav.slides.aria": "Slide navigation",
+        "nav.previous": "Previous",
+        "nav.next": "Next",
+        "nav.jump.aria": "Go to slide",
+        "nav.jump.label": "Slide",
+        "nav.jump.input": "Slide number",
+        "nav.jump.go": "Go",
+        "nav.toc.title": "Slide overview",
+        "nav.toc.hint": "Choose a section to jump directly to the slide you need.",
+        "nav.toc.close": "Close",
+        "s1.tag": "Week 04",
+        "s1.title": "Data cleaning and cleaning logs",
+        "s1.body": "From messy CSV to cleaned dataset, before writing a Methods note.",
+        "hero.table.aria": "Illustrative messy raw table",
+        "s1.meta.rows": "N = 36 synthetic records",
+        "s1.meta.source": "Source: Week 04 teaching dataset",
+        "s2.tag": "From Week 03",
+        "s2.title": "A descriptive table is only as good as its input data",
+        "s2.body": "Last week we used groupby and wrote captions. This week we ask whether that table came from clean, reproducible data.",
+        "flow.raw": "preserved as collected",
+        "flow.clean": "Clean",
+        "flow.clean.body": "standardized by code",
+        "flow.log": "Log",
+        "flow.log.body": "document decisions",
+        "flow.paper": "Methods",
+        "flow.paper.body": "ready for the paper",
+        "s3.tag": "Question",
+        "s3.title": "After cleaning, which records are usable?",
+        "s3.body": "We do not try to rescue every row. We clarify which rows have pre/post evidence and which values remain missing.",
+        "q.raw.title": "Raw N",
+        "q.raw.body": "36 learner records",
+        "q.problem.title": "Problem",
+        "q.problem.body": "inconsistent labels and scores",
+        "q.rule.title": "Rule",
+        "q.rule.body": "clean with explicit mappings",
+        "q.output.title": "Output",
+        "q.output.body": "25 usable completed pre/post records",
+        "s4.tag": "Raw vs cleaned",
+        "s4.title": "Do not manually edit the raw file",
+        "s4.body": "Raw data is the original evidence. Cleaned data is a code-derived table that can be rerun.",
+        "raw.card": "original file, no overwrite, no hand edits",
+        "clean.card": "clean file generated from the notebook",
+        "raw.note": "If the cleaned CSV cannot be explained, the Methods section is not transparent enough.",
+        "s5.tag": "Diagnose",
+        "s5.title": "Measure the issues before cleaning",
+        "diag.missing": "missing count",
+        "diag.type": "data type",
+        "diag.labels": "label variants",
+        "s6.tag": "Missing",
+        "s6.title": "Missing is not zero",
+        "s6.body": "An unknown score is different from a score of 0. <span class=\"inline-token\">isna()</span> keeps us from inventing data.",
+        "missing.known": "observed value",
+        "missing.zero": "true zero value",
+        "missing.na": "unknown or not recorded",
+        "s7.tag": "Labels",
+        "s7.title": "Normalize labels with a mapping",
+        "s7.body": "A mapping turns many spellings into one standard label without changing learning outcomes.",
+        "s8.tag": "Numeric",
+        "s8.title": "Convert numeric columns safely",
+        "s8.body": "<span class=\"inline-token\">errors=&quot;coerce&quot;</span> turns invalid text into missing values so learners see the issue instead of guessing.",
+        "numeric.note": "For example, <span class=\"frame-slot\">eighty</span> becomes <span class=\"frame-slot purpose\">missing</span>, not 80 without a clear rule.",
+        "s9.tag": "Completed",
+        "s9.title": "Standardize the inclusion rule",
+        "s9.body": "Y, YES, and y may all mean yes. A blank remains missing; it is not automatically no.",
+        "inc.raw": "Raw label",
+        "inc.cleaned": "Cleaned label",
+        "inc.reason": "Reason",
+        "inc.yes": "same completed status",
+        "inc.no": "not included in the completed pre/post summary",
+        "inc.blank": "do not guess for the data",
+        "s10.tag": "Derived column",
+        "s10.title": "Create gain_score after numeric columns are clean",
+        "s10.body": "Gain only has meaning when both pre_score and post_score are observed numbers.",
+        "s11.tag": "Cleaning log",
+        "s11.title": "A cleaning log is a Methods note as a table",
+        "log.problem1": "case, hyphen, underscore",
+        "log.decision1": "map to 4 labels",
+        "log.reason1": "summary table needs stable groups",
+        "log.problem2": "text in numeric fields",
+        "log.decision2": "coerce invalid to missing",
+        "log.reason2": "do not invent scores",
+        "s12.tag": "Before/after",
+        "s12.title": "A small table shows what cleaning changed",
+        "summary.table.aria": "Before after cleaning table",
+        "summary.h.check": "Check",
+        "summary.h.before": "Before",
+        "summary.h.after": "After",
+        "summary.h.note": "Note",
+        "summary.row.activity": "activity labels",
+        "summary.row.class": "class labels",
+        "summary.row.usable": "usable rows",
+        "summary.activity": "standardized activity labels",
+        "summary.class": "standardized class sections",
+        "summary.usable": "mapped completed variants",
+        "summary.caption": "Caption: Before/after cleaning checks for the synthetic Week 04 TCSOL dataset (N = 36 raw records). Cleaning reduces label variants and increases usable completed pre/post rows from 19 to 25.",
+        "s13.tag": "Writing",
+        "s13.title": "Methods note: state decisions, N, and limitation",
+        "methods.frame": "Before analysis, the raw CSV was preserved and a cleaned copy was created in pandas. Labels were <span class=\"frame-slot\">standardized</span>, invalid numeric entries were treated as <span class=\"frame-slot purpose\">missing</span>, and <span class=\"frame-slot columns\">25 records</span> had usable completed pre/post scores.",
+        "methods.artifact.title": "Artifact",
+        "methods.n.title": "Reported N",
+        "methods.limit.title": "Limitation",
+        "methods.limit.body": "cleaning does not recover missing scores",
+        "s14.tag": "Practice",
+        "s14.title": "Assignment checklist",
+        "s14.body": "The goal is not lots of code. The goal is a workflow that can be rerun and explained.",
+        "check.1": "notebook runs from top to bottom",
+        "check.2": "raw CSV unchanged; cleaned CSV generated by code",
+        "check.3": "cleaning log has problem, decision, reason, evidence",
+        "check.4": "caption, interpretation, Methods note has limitation and source note",
+        "s15.tag": "Next",
+        "s15.title": "Open the demo, run the notebook, then export outputs",
+        "s15.body": "Week 05 will use cleaned data to create a paper figure. Today we make sure the figure is not built on messy labels.",
+        "cta.aria": "Next steps after slides",
+        "cta.demo": "Open demo",
+        "cta.notebook": "View notebook",
+        "cta.week": "Back to Week 04",
+        "cta.home": "Home"
+      }
+    };
+    window.Bilingual.init({ translations: SLIDE_I18N, defaultLang: "vi" });
+    window.LectureSlides.init();
+  </script>
+</body>
+</html>

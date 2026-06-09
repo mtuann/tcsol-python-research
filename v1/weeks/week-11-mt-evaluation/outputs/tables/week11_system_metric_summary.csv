@@ -1,0 +1,4 @@
+mt_system,segments,bleu,chrf_pp,ter,mean_adequacy,mean_fluency,revision_needed_rows
+MT_B,12,68.02,80.73,20.09,4.59,4.43,6
+MT_C,12,38.12,57.48,43.93,3.21,3.54,12
+MT_A,12,33.59,55.77,47.2,2.96,2.73,12

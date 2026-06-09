@@ -1,0 +1,368 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title data-i18n="meta.title">Tuần 07: Nghiên cứu TCSOL ngắn hạn</title>
+  <link rel="stylesheet" href="../../assets/css/bilingual.css">
+  <link rel="stylesheet" href="../../assets/css/course-doc.css">
+</head>
+<body>
+  <header class="doc-topbar">
+    <a class="doc-brand" href="../../" data-i18n="brand">Python Research Hub</a>
+    <nav class="doc-nav" aria-label="Điều hướng tài liệu" data-i18n-aria-label="nav.aria">
+      <a href="#overview" data-i18n="nav.overview">Tổng quan</a>
+      <a href="#notes" data-i18n="nav.notes">Ghi chú</a>
+      <a href="#practice" data-i18n="nav.practice">Thực hành</a>
+      <a href="#assignment" data-i18n="nav.assignment">Bài nộp</a>
+      <a href="#readings" data-i18n="nav.readings">Bài đọc</a>
+      <a href="#rubric" data-i18n="nav.rubric">Tiêu chí</a>
+      <div class="language-switcher" role="group" aria-label="Ngôn ngữ / Language" data-i18n-aria-label="nav.language">
+        <button type="button" data-lang-option="vi" aria-pressed="true">Tiếng Việt</button>
+        <button type="button" data-lang-option="en" aria-pressed="false">English</button>
+      </div>
+    </nav>
+  </header>
+
+  <main class="doc-shell">
+    <aside class="doc-sidebar">
+      <strong data-i18n="side.title">Tuần 07</strong>
+      <a href="slides.html" data-i18n="side.slides">Slides</a>
+      <a href="interactive_demo.html" data-i18n="side.demo">Demo tương tác</a>
+      <a href="live_coding.html" data-i18n="side.notebook">Notebook HTML</a>
+      <a href="https://colab.research.google.com/github/mtuann/tcsol-python-research/blob/main/weeks/week-07-tcsol-short-course-research/live_coding.ipynb" data-i18n="side.colab">Chạy trong Colab</a>
+      <a href="live_coding.ipynb" download data-i18n="side.notebookSource">Tải source .ipynb</a>
+      <a href="data/raw/week07_short_course_learner_tasks.csv" download data-i18n="side.data">Tải data CSV</a>
+      <a href="outputs/tables/week07_activity_summary.csv" data-i18n="side.table">Xem bảng activity</a>
+      <a href="outputs/figures/week07_total_gain_by_activity.png" data-i18n="side.figure">Xem figure</a>
+    </aside>
+
+    <div class="doc-main">
+      <section class="doc-hero" id="overview">
+        <span class="doc-eyebrow" data-i18n="hero.tag">Tuần 07</span>
+        <h1 data-i18n="hero.title">Nghiên cứu TCSOL ngắn hạn</h1>
+        <p class="doc-lead" data-i18n="hero.body">Tuần này biến một hoạt động Hán ngữ ngắn hạn thành mini teaching-study: target structure, learner task, rubric, classroom variables và Methods draft.</p>
+        <div class="doc-actions">
+          <a class="doc-button" href="slides.html" data-i18n="action.slides">Mở slides</a>
+          <a class="doc-button secondary" href="interactive_demo.html" data-i18n="action.demo">Mở demo</a>
+          <a class="doc-button secondary" href="live_coding.html" data-i18n="action.notebook">Xem notebook HTML</a>
+          <a class="doc-button secondary" href="outputs/figures/week07_total_gain_by_activity.png" data-i18n="action.figure">Xem figure</a>
+        </div>
+      </section>
+
+      <section class="doc-card">
+        <h2 data-i18n="frame.title">Khung nghiên cứu</h2>
+        <div class="doc-grid">
+          <article class="mini-card"><span class="swatch blue"></span><h3 data-i18n="frame.question.title">Câu hỏi nhỏ</h3><p data-i18n="frame.question.body">Activity focus nào có descriptive rubric gain cao hơn cho result complements?</p></article>
+          <article class="mini-card"><span class="swatch green"></span><h3 data-i18n="frame.data.title">Dữ liệu</h3><p data-i18n="frame.data.body">30 synthetic learner task records; 28 usable records có một target structure chung, rubric pre/post và teacher note.</p></article>
+          <article class="mini-card"><span class="swatch amber"></span><h3 data-i18n="frame.output.title">Output</h3><p data-i18n="frame.output.body">Variable map, rubric summary, activity summary, hai figures và Methods draft.</p></article>
+        </div>
+      </section>
+
+      <section class="doc-card" id="notes">
+        <h2 data-i18n="notes.title">Ghi chú bài học</h2>
+        <p data-i18n="notes.intro">Tuần 07 học cách thiết kế evidence trước khi viết Results. Rubric là cầu nối giữa hoạt động dạy học và dữ liệu.</p>
+        <table>
+          <thead><tr><th data-i18n="notes.concept">Khái niệm</th><th data-i18n="notes.meaning">Nghĩa dễ hiểu</th><th data-i18n="notes.use">Dùng khi viết</th></tr></thead>
+          <tbody>
+            <tr><td><code>target_structure</code></td><td data-i18n="target.meaning">cấu trúc Hán ngữ đang dạy</td><td data-i18n="target.use">định nghĩa teaching focus</td></tr>
+            <tr><td><code>learner task</code></td><td data-i18n="task.meaning">việc learner phải làm</td><td data-i18n="task.use">tạo evidence quan sát được</td></tr>
+            <tr><td><code>rubric</code></td><td data-i18n="rubric.meaning">thang chấm nhất quán</td><td data-i18n="rubric.use">biến evidence thành dữ liệu</td></tr>
+            <tr><td><code>activity_focus</code></td><td data-i18n="activity.meaning">kiểu hoạt động dạy học</td><td data-i18n="activity.use">biến nhóm để mô tả</td></tr>
+            <tr><td><code>main_difficulty</code></td><td data-i18n="difficulty.meaning">mã khó khăn học tập</td><td data-i18n="difficulty.use">thêm insight định tính</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section class="doc-card">
+        <h2 data-i18n="workflow.title">Workflow tuần này</h2>
+        <div class="doc-grid">
+          <article class="mini-card"><span class="swatch blue"></span><h3 data-i18n="workflow.design.title">1. Design</h3><p data-i18n="workflow.design.body">Chọn target structure, learner task và rubric.</p></article>
+          <article class="mini-card"><span class="swatch green"></span><h3 data-i18n="workflow.map.title">2. Map</h3><p data-i18n="workflow.map.body">Xác định unit, grouping variable, rubric variables và difficulty code.</p></article>
+          <article class="mini-card"><span class="swatch amber"></span><h3 data-i18n="workflow.write.title">3. Write</h3><p data-i18n="workflow.write.body">Chuyển design thành Methods draft có limitation.</p></article>
+        </div>
+      </section>
+
+      <section class="doc-card">
+        <h2 data-i18n="result.title">Output mẫu</h2>
+        <div class="doc-grid two">
+          <article class="mini-card"><span class="swatch green"></span><h3 data-i18n="result.activity.title">Activity summary</h3><p data-i18n="result.activity.body">Feedback cycle có total rubric gain mô tả cao nhất trong dữ liệu synthetic usable.</p></article>
+          <article class="mini-card"><span class="swatch purple"></span><h3 data-i18n="result.method.title">Methods focus</h3><p data-i18n="result.method.body">Đoạn viết định nghĩa unit, task, rubric, exclusion rule và limitation.</p></article>
+        </div>
+        <blockquote data-i18n="result.frame">Đơn vị phân tích là một learner task record; activity focus là biến nhóm, không phải bằng chứng nhân quả.</blockquote>
+      </section>
+
+      <section class="doc-card" id="practice">
+        <h2 data-i18n="practice.title">Thực hành</h2>
+        <div class="doc-grid">
+          <article class="mini-card"><span class="swatch blue"></span><h3 data-i18n="practice.a.title">A. Core Minimum</h3><p data-i18n="practice.a.body">Chọn target structure, đọc rubric, xác định unit và viết Methods draft.</p></article>
+          <article class="mini-card"><span class="swatch green"></span><h3 data-i18n="practice.b.title">B. Guided Core</h3><p data-i18n="practice.b.body">Chạy notebook để xuất variable map, summary tables và figures.</p></article>
+          <article class="mini-card"><span class="swatch amber"></span><h3 data-i18n="practice.c.title">C. Stretch</h3><p data-i18n="practice.c.body">Thêm một difficulty code và nối nó với source note.</p></article>
+        </div>
+      </section>
+
+      <section class="doc-card" id="assignment">
+        <h2 data-i18n="assignment.title">Bài nộp</h2>
+        <p data-i18n="assignment.body">Nộp notebook, 3 bảng CSV, 2 figures, captions, Methods draft và source note.</p>
+        <ol>
+          <li data-i18n-html="assignment.t1">Filter <code>usable_task == True</code>.</li>
+          <li data-i18n="assignment.t2">Tạo variable map và rubric summary.</li>
+          <li data-i18n="assignment.t3">Tạo activity figure và criterion figure.</li>
+          <li data-i18n="assignment.t4">Viết Methods draft không overclaim.</li>
+        </ol>
+      </section>
+
+      <section class="doc-card" id="readings">
+        <h2 data-i18n="readings.title">Bài đọc</h2>
+        <div class="doc-grid two">
+          <article class="mini-card"><span class="swatch blue"></span><h3>NCSSFL-ACTFL Can-Do</h3><p data-i18n="readings.cando.body">Nguồn chính để nghĩ learning target và rubric evidence.</p><a class="doc-chip" href="https://www.actfl.org/educator-resources/ncssfl-actfl-can-do-statements" data-i18n="readings.open">Mở nguồn</a></article>
+          <article class="mini-card"><span class="swatch green"></span><h3>ACTFL Guidelines 2024</h3><p data-i18n="readings.actfl.body">Nguồn cho functional proficiency across domains.</p><a class="doc-chip" href="https://www.actfl.org/news/revised-actfl-proficiency-guidelines-released" data-i18n="readings.open2">Mở nguồn</a></article>
+          <article class="mini-card"><span class="swatch amber"></span><h3>CEFR Companion Volume</h3><p data-i18n="readings.cefr.body">Nguồn cho action-oriented tasks và descriptors.</p><a class="doc-chip" href="https://www.coe.int/en/web/common-european-framework-reference-languages/cefr-companion-volume-and-its-language-versions" data-i18n="readings.open3">Mở nguồn</a></article>
+          <article class="mini-card"><span class="swatch rose"></span><h3>Chinese Standards</h3><p data-i18n="readings.chinese.body">Nguồn cho proficiency framework riêng của dạy Hán ngữ quốc tế.</p><a class="doc-chip" href="https://www.chinese.cn/zhuanti/202207/en/" data-i18n="readings.open4">Mở nguồn</a></article>
+        </div>
+      </section>
+
+      <section class="doc-card" id="rubric">
+        <h2 data-i18n="rubric.title">Tiêu chí</h2>
+        <table>
+          <thead><tr><th data-i18n="rubric.criteria">Tiêu chí</th><th data-i18n="rubric.points">Điểm</th><th data-i18n="rubric.good">Bài làm tốt</th></tr></thead>
+          <tbody>
+            <tr><td data-i18n="rubric.design">Research design</td><td>20</td><td data-i18n="rubric.design.body">Target structure, task và activity focus nối với nhau rõ.</td></tr>
+            <tr><td data-i18n="rubric.map">Variable map</td><td>15</td><td data-i18n="rubric.map.body">Unit, grouping variable, rubric variables và qualitative code đúng.</td></tr>
+            <tr><td data-i18n="rubric.code">Notebook output</td><td>20</td><td data-i18n="rubric.code.body">Notebook chạy và xuất đủ bảng/hình.</td></tr>
+            <tr><td data-i18n="rubric.reasoning">Rubric reasoning</td><td>15</td><td data-i18n="rubric.reasoning.body">Criteria quan sát được, task-specific và không là nhãn mơ hồ.</td></tr>
+            <tr><td data-i18n="rubric.write">Methods writing</td><td>20</td><td data-i18n="rubric.write.body">Draft có context, unit, variables, rubric, exclusion rule và limitation.</td></tr>
+            <tr><td data-i18n="rubric.source">Source note</td><td>10</td><td data-i18n="rubric.source.body">Nguồn được dùng cụ thể và đã adapt vào task.</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section class="doc-card">
+        <h2 data-i18n="source.title">Nguồn biên soạn cho giảng viên</h2>
+        <p data-i18n="source.body">Markdown là source để sửa bài. Người học nên dùng trang HTML, slides, demo và notebook HTML.</p>
+        <div class="doc-links">
+          <a class="doc-chip" href="README.md" download>README.md</a>
+          <a class="doc-chip" href="lecture_notes.md" download>lecture_notes.md</a>
+          <a class="doc-chip" href="exercises.md" download>exercises.md</a>
+          <a class="doc-chip" href="assignment.md" download>assignment.md</a>
+          <a class="doc-chip" href="readings.md" download>readings.md</a>
+          <a class="doc-chip" href="rubric.md" download>rubric.md</a>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <script src="../../assets/js/bilingual.js"></script>
+  <script>
+    const WEEK07_I18N = {
+      vi: {
+        "meta.title": "Tuần 07: Nghiên cứu TCSOL ngắn hạn",
+        "brand": "Python Research Hub",
+        "nav.aria": "Điều hướng tài liệu",
+        "nav.language": "Ngôn ngữ / Language",
+        "nav.overview": "Tổng quan",
+        "nav.notes": "Ghi chú",
+        "nav.practice": "Thực hành",
+        "nav.assignment": "Bài nộp",
+        "nav.readings": "Bài đọc",
+        "nav.rubric": "Tiêu chí",
+        "side.title": "Tuần 07",
+        "side.slides": "Slides",
+        "side.demo": "Demo tương tác",
+        "side.notebook": "Notebook HTML",
+        "side.colab": "Chạy trong Colab",
+        "side.notebookSource": "Tải source .ipynb",
+        "side.data": "Tải data CSV",
+        "side.table": "Xem bảng activity",
+        "side.figure": "Xem figure",
+        "hero.tag": "Tuần 07",
+        "hero.title": "Nghiên cứu TCSOL ngắn hạn",
+        "hero.body": "Tuần này biến một hoạt động Hán ngữ ngắn hạn thành mini teaching-study: target structure, learner task, rubric, classroom variables và Methods draft.",
+        "action.slides": "Mở slides",
+        "action.demo": "Mở demo",
+        "action.notebook": "Xem notebook HTML",
+        "action.figure": "Xem figure",
+        "frame.title": "Khung nghiên cứu",
+        "frame.question.title": "Câu hỏi nhỏ",
+        "frame.question.body": "Activity focus nào có descriptive rubric gain cao hơn cho result complements?",
+        "frame.data.title": "Dữ liệu",
+        "frame.data.body": "30 synthetic learner task records; 28 usable records có một target structure chung, rubric pre/post và teacher note.",
+        "frame.output.title": "Output",
+        "frame.output.body": "Variable map, rubric summary, activity summary, hai figures và Methods draft.",
+        "notes.title": "Ghi chú bài học",
+        "notes.intro": "Tuần 07 học cách thiết kế evidence trước khi viết Results. Rubric là cầu nối giữa hoạt động dạy học và dữ liệu.",
+        "notes.concept": "Khái niệm",
+        "notes.meaning": "Nghĩa dễ hiểu",
+        "notes.use": "Dùng khi viết",
+        "target.meaning": "cấu trúc Hán ngữ đang dạy",
+        "target.use": "định nghĩa teaching focus",
+        "task.meaning": "việc learner phải làm",
+        "task.use": "tạo evidence quan sát được",
+        "rubric.meaning": "thang chấm nhất quán",
+        "rubric.use": "biến evidence thành dữ liệu",
+        "activity.meaning": "kiểu hoạt động dạy học",
+        "activity.use": "biến nhóm để mô tả",
+        "difficulty.meaning": "mã khó khăn học tập",
+        "difficulty.use": "thêm insight định tính",
+        "workflow.title": "Workflow tuần này",
+        "workflow.design.title": "1. Design",
+        "workflow.design.body": "Chọn target structure, learner task và rubric.",
+        "workflow.map.title": "2. Map",
+        "workflow.map.body": "Xác định unit, grouping variable, rubric variables và difficulty code.",
+        "workflow.write.title": "3. Write",
+        "workflow.write.body": "Chuyển design thành Methods draft có limitation.",
+        "result.title": "Output mẫu",
+        "result.activity.title": "Activity summary",
+        "result.activity.body": "Feedback cycle có total rubric gain mô tả cao nhất trong dữ liệu synthetic usable.",
+        "result.method.title": "Methods focus",
+        "result.method.body": "Đoạn viết định nghĩa unit, task, rubric, exclusion rule và limitation.",
+        "result.frame": "Đơn vị phân tích là một learner task record; activity focus là biến nhóm, không phải bằng chứng nhân quả.",
+        "practice.title": "Thực hành",
+        "practice.a.title": "A. Core Minimum",
+        "practice.a.body": "Chọn target structure, đọc rubric, xác định unit và viết Methods draft.",
+        "practice.b.title": "B. Guided Core",
+        "practice.b.body": "Chạy notebook để xuất variable map, summary tables và figures.",
+        "practice.c.title": "C. Stretch",
+        "practice.c.body": "Thêm một difficulty code và nối nó với source note.",
+        "assignment.title": "Bài nộp",
+        "assignment.body": "Nộp notebook, 3 bảng CSV, 2 figures, captions, Methods draft và source note.",
+        "assignment.t1": "Filter <code>usable_task == True</code>.",
+        "assignment.t2": "Tạo variable map và rubric summary.",
+        "assignment.t3": "Tạo activity figure và criterion figure.",
+        "assignment.t4": "Viết Methods draft không overclaim.",
+        "readings.title": "Bài đọc",
+        "readings.cando.body": "Nguồn chính để nghĩ learning target và rubric evidence.",
+        "readings.actfl.body": "Nguồn cho functional proficiency across domains.",
+        "readings.cefr.body": "Nguồn cho action-oriented tasks và descriptors.",
+        "readings.chinese.body": "Nguồn cho proficiency framework riêng của dạy Hán ngữ quốc tế.",
+        "readings.open": "Mở nguồn",
+        "readings.open2": "Mở nguồn",
+        "readings.open3": "Mở nguồn",
+        "readings.open4": "Mở nguồn",
+        "rubric.title": "Tiêu chí",
+        "rubric.criteria": "Tiêu chí",
+        "rubric.points": "Điểm",
+        "rubric.good": "Bài làm tốt",
+        "rubric.design": "Research design",
+        "rubric.design.body": "Target structure, task và activity focus nối với nhau rõ.",
+        "rubric.map": "Variable map",
+        "rubric.map.body": "Unit, grouping variable, rubric variables và qualitative code đúng.",
+        "rubric.code": "Notebook output",
+        "rubric.code.body": "Notebook chạy và xuất đủ bảng/hình.",
+        "rubric.reasoning": "Rubric reasoning",
+        "rubric.reasoning.body": "Criteria quan sát được, task-specific và không là nhãn mơ hồ.",
+        "rubric.write": "Methods writing",
+        "rubric.write.body": "Draft có context, unit, variables, rubric, exclusion rule và limitation.",
+        "rubric.source": "Source note",
+        "rubric.source.body": "Nguồn được dùng cụ thể và đã adapt vào task.",
+        "source.title": "Nguồn biên soạn cho giảng viên",
+        "source.body": "Markdown là source để sửa bài. Người học nên dùng trang HTML, slides, demo và notebook HTML."
+      },
+      en: {
+        "meta.title": "Week 07: TCSOL Short-Course Research",
+        "brand": "Python Research Hub",
+        "nav.aria": "Document navigation",
+        "nav.language": "Language",
+        "nav.overview": "Overview",
+        "nav.notes": "Notes",
+        "nav.practice": "Practice",
+        "nav.assignment": "Assignment",
+        "nav.readings": "Readings",
+        "nav.rubric": "Rubric",
+        "side.title": "Week 07",
+        "side.slides": "Slides",
+        "side.demo": "Interactive demo",
+        "side.notebook": "Notebook HTML",
+        "side.colab": "Run in Colab",
+        "side.notebookSource": "Download source .ipynb",
+        "side.data": "Download data CSV",
+        "side.table": "View activity table",
+        "side.figure": "View figure",
+        "hero.tag": "Week 07",
+        "hero.title": "TCSOL Short-Course Research",
+        "hero.body": "This week turns a short-term Chinese activity into a mini teaching study: target structure, learner task, rubric, classroom variables, and Methods draft.",
+        "action.slides": "Open slides",
+        "action.demo": "Open demo",
+        "action.notebook": "View notebook HTML",
+        "action.figure": "View figure",
+        "frame.title": "Research frame",
+        "frame.question.title": "Small question",
+        "frame.question.body": "Which activity focus shows higher descriptive rubric gain for result complements?",
+        "frame.data.title": "Data",
+        "frame.data.body": "30 synthetic learner task records; 28 usable records share one target structure and have pre/post rubric scores plus teacher notes.",
+        "frame.output.title": "Output",
+        "frame.output.body": "Variable map, rubric summary, activity summary, two figures, and a Methods draft.",
+        "notes.title": "Lesson notes",
+        "notes.intro": "Week 07 teaches how to design evidence before writing Results. The rubric connects teaching activity and data.",
+        "notes.concept": "Concept",
+        "notes.meaning": "Plain meaning",
+        "notes.use": "Writing use",
+        "target.meaning": "Chinese structure being taught",
+        "target.use": "defines the teaching focus",
+        "task.meaning": "what the learner does",
+        "task.use": "creates observable evidence",
+        "rubric.meaning": "consistent scoring guide",
+        "rubric.use": "turns evidence into data",
+        "activity.meaning": "teaching activity type",
+        "activity.use": "grouping variable for description",
+        "difficulty.meaning": "learning difficulty code",
+        "difficulty.use": "adds qualitative insight",
+        "workflow.title": "This week's workflow",
+        "workflow.design.title": "1. Design",
+        "workflow.design.body": "Choose target structure, learner task, and rubric.",
+        "workflow.map.title": "2. Map",
+        "workflow.map.body": "Identify unit, grouping variable, rubric variables, and difficulty code.",
+        "workflow.write.title": "3. Write",
+        "workflow.write.body": "Turn the design into a Methods draft with a limitation.",
+        "result.title": "Sample output",
+        "result.activity.title": "Activity summary",
+        "result.activity.body": "Feedback cycle has the highest descriptive total rubric gain in the usable synthetic data.",
+        "result.method.title": "Methods focus",
+        "result.method.body": "The paragraph defines unit, task, rubric, exclusion rule, and limitation.",
+        "result.frame": "The unit of analysis is one learner task record; activity focus is a grouping variable, not causal evidence.",
+        "practice.title": "Practice",
+        "practice.a.title": "A. Core Minimum",
+        "practice.a.body": "Choose a target structure, read the rubric, identify the unit, and write a Methods draft.",
+        "practice.b.title": "B. Guided Core",
+        "practice.b.body": "Run the notebook to export the variable map, summary tables, and figures.",
+        "practice.c.title": "C. Stretch",
+        "practice.c.body": "Add one difficulty code and connect it to a source note.",
+        "assignment.title": "Assignment",
+        "assignment.body": "Submit notebook, 3 CSV tables, 2 figures, captions, Methods draft, and source note.",
+        "assignment.t1": "Filter <code>usable_task == True</code>.",
+        "assignment.t2": "Create the variable map and rubric summary.",
+        "assignment.t3": "Create the activity figure and criterion figure.",
+        "assignment.t4": "Write a Methods draft without overclaiming.",
+        "readings.title": "Readings",
+        "readings.cando.body": "Main source for thinking about learning targets and rubric evidence.",
+        "readings.actfl.body": "Source for functional proficiency across domains.",
+        "readings.cefr.body": "Source for action-oriented tasks and descriptors.",
+        "readings.chinese.body": "Source for a Chinese-specific international proficiency framework.",
+        "readings.open": "Open source",
+        "readings.open2": "Open source",
+        "readings.open3": "Open source",
+        "readings.open4": "Open source",
+        "rubric.title": "Rubric",
+        "rubric.criteria": "Criterion",
+        "rubric.points": "Points",
+        "rubric.good": "Strong work",
+        "rubric.design": "Research design",
+        "rubric.design.body": "Target structure, task, and activity focus are clearly connected.",
+        "rubric.map": "Variable map",
+        "rubric.map.body": "Unit, grouping variable, rubric variables, and qualitative code are correct.",
+        "rubric.code": "Notebook output",
+        "rubric.code.body": "Notebook runs and exports all tables/figures.",
+        "rubric.reasoning": "Rubric reasoning",
+        "rubric.reasoning.body": "Criteria are observable, task-specific, and not vague labels.",
+        "rubric.write": "Methods writing",
+        "rubric.write.body": "Draft includes context, unit, variables, rubric, exclusion rule, and limitation.",
+        "rubric.source": "Source note",
+        "rubric.source.body": "Source use is specific and adapted to the task.",
+        "source.title": "Instructor authoring sources",
+        "source.body": "Markdown files are the editing source. Learners should use the HTML page, slides, demo, and notebook HTML."
+      }
+    };
+    window.Bilingual.init({ translations: WEEK07_I18N, defaultLang: "vi" });
+  </script>
+</body>
+</html>

@@ -1,0 +1,626 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title data-i18n="meta.title">Tuần 04: Làm sạch dữ liệu và cleaning log | Notebook đã render</title>
+  <link rel="stylesheet" href="../../assets/css/bilingual.css">
+  <link rel="stylesheet" href="../../assets/css/course-doc.css">
+</head>
+<body>
+  <header class="doc-topbar">
+    <a class="doc-brand" href="../../" data-i18n="brand">Python Research Hub</a>
+    <nav class="doc-nav" aria-label="Điều hướng notebook" data-i18n-aria-label="nav.aria">
+      <a href="./" data-i18n="nav.week">Tuần 04</a>
+      <a href="slides.html" data-i18n="nav.slides">Slides</a>
+      <a href="interactive_demo.html" data-i18n="nav.demo">Demo</a>
+      <a href="live_coding.ipynb" download data-i18n="nav.source">Source .ipynb</a>
+      <div class="language-switcher" role="group" aria-label="Ngôn ngữ / Language" data-i18n-aria-label="nav.language">
+        <button type="button" data-lang-option="vi" aria-pressed="true">Tiếng Việt</button>
+        <button type="button" data-lang-option="en" aria-pressed="false">English</button>
+      </div>
+    </nav>
+  </header>
+
+  <main class="doc-shell notebook-shell">
+    <aside class="doc-sidebar">
+      <strong data-i18n="side.title">Notebook</strong>
+      <a href="./" data-i18n="side.week">Tổng quan tuần</a>
+      <a href="https://colab.research.google.com/github/mtuann/tcsol-python-research/blob/main/weeks/week-04-data-cleaning-log/live_coding.ipynb" data-i18n="side.colab">Chạy bằng Colab</a>
+      <a href="live_coding.ipynb" download data-i18n="side.source">Tải source .ipynb</a>
+      <a href="data/raw/week04_messy_tcsol_scores.csv" download data-i18n="side.csv">Tải tệp CSV dữ liệu</a>
+    </aside>
+
+    <div class="doc-main">
+      <section class="doc-hero">
+        <span class="doc-eyebrow" data-i18n="hero.tag">Rendered notebook</span>
+        <h1 data-i18n="hero.title">Tuần 04: Làm sạch dữ liệu và cleaning log</h1>
+        <p class="doc-lead" data-i18n="hero.body">Đây là bản HTML đã chạy sẵn để đọc trên GitHub Pages. Muốn thực hành, mở notebook trong Colab hoặc tải file .ipynb.</p>
+        <div class="doc-actions">
+          <a class="doc-button" href="https://colab.research.google.com/github/mtuann/tcsol-python-research/blob/main/weeks/week-04-data-cleaning-log/live_coding.ipynb" data-i18n="action.colab">Chạy trong Colab</a>
+          <a class="doc-button secondary" href="live_coding.ipynb" download data-i18n="action.source">Tải .ipynb</a>
+          <a class="doc-button secondary" href="./" data-i18n="action.week">Quay lại Tuần 04</a>
+        </div>
+      </section>
+
+      <section class="doc-card notebook-note">
+        <h2 data-i18n="note.title">Cách dùng trang này</h2>
+        <div class="doc-grid three">
+          <article class="mini-card"><span class="swatch blue"></span><h3 data-i18n="note.read.title">Đọc</h3><p data-i18n="note.read.body">Bản HTML giữ code và output cạnh nhau, phù hợp để ôn lại sau buổi học.</p></article>
+          <article class="mini-card"><span class="swatch green"></span><h3 data-i18n="note.run.title">Chạy</h3><p data-i18n="note.run.body">Nút Colab mở notebook có thể chạy từng cell và tự tải CSV nếu không có file local.</p></article>
+          <article class="mini-card"><span class="swatch amber"></span><h3 data-i18n="note.source.title">Source</h3><p data-i18n="note.source.body">File .ipynb vẫn được giữ để tải, nộp bài hoặc chỉnh trong JupyterLab/VS Code.</p></article>
+        </div>
+      </section>
+
+      <section class="notebook-document" aria-label="Các cell notebook đã render" data-i18n-aria-label="notebook.cells.aria">
+        <article class="nb-cell nb-markdown" data-cell-type="markdown" data-i18n-html="notebook.cell01"><h2>Tuần 04: Làm sạch dữ liệu và cleaning log</h2>
+<p>Mục tiêu hôm nay không phải là sửa dữ liệu cho đẹp. Mục tiêu là tạo <strong>một cleaned dataset có thể tái lập</strong>: giữ raw CSV, chẩn đoán lỗi, chuẩn hóa nhãn, chuyển kiểu số, ghi cleaning log, xuất dữ liệu sạch, rồi viết note cho phần Methods/Data preparation.</p></article>
+<article class="nb-cell nb-markdown" data-cell-type="markdown" data-i18n-html="notebook.cell02"><h3>1. Cài đặt ý tưởng</h3>
+<p>Raw data là dữ liệu gốc. Cleaned data là bảng dẫn xuất bằng code. Tuần này không sửa file raw bằng tay.</p></article>
+<article class="nb-cell nb-code" data-cell-type="code"><div class="nb-input-label">In [1]</div><pre><code>from pathlib import Path
+from urllib.request import urlretrieve
+import hashlib
+
+import pandas as pd
+
+THIS_WEEK = &quot;week-04-data-cleaning-log&quot;
+EXPECTED_SHA256 = &quot;98c55be211cf92de8fae30343c7a1bb28d1eccf24bba5fcc6af44d777f7e0614&quot;
+
+
+def find_week_dir():
+    candidates = [
+        Path.cwd(),
+        Path.cwd() / &quot;weeks&quot; / THIS_WEEK,
+        Path.cwd().parent,
+        Path.cwd().parent / &quot;weeks&quot; / THIS_WEEK,
+    ]
+    for candidate in candidates:
+        if candidate.name == THIS_WEEK and (candidate / &quot;data/raw&quot;).exists():
+            return candidate
+        if (candidate / &quot;data/raw/week04_messy_tcsol_scores.csv&quot;).exists():
+            return candidate
+    week_dir = Path.cwd() / &quot;weeks&quot; / THIS_WEEK
+    week_dir.mkdir(parents=True, exist_ok=True)
+    return week_dir
+
+
+def course_path(path):
+    path = Path(path)
+    if THIS_WEEK in path.parts:
+        start = path.parts.index(THIS_WEEK)
+        return Path(&quot;weeks&quot;) / Path(*path.parts[start:])
+    return path.name
+
+
+WEEK_DIR = find_week_dir()
+DATA_PATH = WEEK_DIR / &quot;data/raw/week04_messy_tcsol_scores.csv&quot;
+PROCESSED_DIR = WEEK_DIR / &quot;data/processed&quot;
+TABLE_DIR = WEEK_DIR / &quot;outputs/tables&quot;
+PROCESSED_DIR.mkdir(parents=True, exist_ok=True)
+TABLE_DIR.mkdir(parents=True, exist_ok=True)
+
+if not DATA_PATH.exists():
+    DATA_PATH.parent.mkdir(parents=True, exist_ok=True)
+    source_url = &quot;https://raw.githubusercontent.com/mtuann/tcsol-python-research/main/weeks/week-04-data-cleaning-log/data/raw/week04_messy_tcsol_scores.csv&quot;
+    urlretrieve(source_url, DATA_PATH)
+
+actual_hash = hashlib.sha256(DATA_PATH.read_bytes()).hexdigest()
+if actual_hash != EXPECTED_SHA256:
+    raise ValueError(&quot;Downloaded CSV does not match the expected Week 04 teaching dataset.&quot;)
+
+print(&quot;pandas version:&quot;, pd.__version__)
+print(&quot;Week folder:&quot;, course_path(WEEK_DIR))
+print(&quot;Data file:&quot;, course_path(DATA_PATH))</code></pre><div class="nb-output"><div class="nb-output-label">Output</div><pre><code>pandas version: 2.2.3
+Week folder: weeks/week-04-data-cleaning-log
+Data file: weeks/week-04-data-cleaning-log/data/raw/week04_messy_tcsol_scores.csv</code></pre></div></article>
+<article class="nb-cell nb-markdown" data-cell-type="markdown" data-i18n-html="notebook.cell04"><h3>2. Đọc raw CSV</h3>
+<p>Trước tiên đọc một bản <strong>text nguyên trạng</strong> để nhìn thấy các mã missing như <code>NA</code>, <code>missing</code>, <code>not recorded</code>. Sau đó đọc lại với <code>na_values</code> để pandas chuyển chúng thành missing thật.</p></article>
+<article class="nb-cell nb-code" data-cell-type="code"><div class="nb-input-label">In [2]</div><pre><code>raw_text = pd.read_csv(DATA_PATH, keep_default_na=False)
+missing_codes = [&quot;NA&quot;, &quot;missing&quot;, &quot;not recorded&quot;, &quot;&quot;]
+raw = pd.read_csv(DATA_PATH, na_values=missing_codes, keep_default_na=True)
+
+print(&quot;Shape:&quot;, raw.shape)
+print(&quot;Columns:&quot;, list(raw.columns))
+print(raw.head(8).to_string(index=False))
+
+print(&quot;\nRaw missing-code examples before pandas converts them:&quot;)
+missing_code_report = raw_text.isin(missing_codes).sum()
+print(missing_code_report[missing_code_report &gt; 0].to_string())</code></pre><div class="nb-output"><div class="nb-output-label">Output</div><pre><code>Shape: (36, 8)
+Columns: [&#x27;learner_id&#x27;, &#x27;class_group&#x27;, &#x27;activity_focus&#x27;, &#x27;pre_score&#x27;, &#x27;post_score&#x27;, &#x27;attendance_hours&#x27;, &#x27;completed&#x27;, &#x27;self_confidence&#x27;]
+learner_id class_group     activity_focus pre_score  post_score  attendance_hours completed  self_confidence
+      S001           A      Measure Words        62        75.0               4.5       yes                4
+      S002          a       measure words        58        70.0               4.0         Y                3
+      S003     Class A      measure_words       NaN        72.0               4.5       yes                4
+      S004           A      Measure words        60         NaN               4.0       yes                3
+      S005           B result complements        55        68.0               3.5         y                2
+      S006           b Result Complements        59        73.0               4.0       YES                3
+      S007          B  result_complements        61        74.0               4.0       yes                3
+      S008     Class B result-complements       NaN        71.0               3.5       yes                2
+
+Raw missing-code examples before pandas converts them:
+pre_score           4
+post_score          3
+attendance_hours    1
+completed           1</code></pre></div></article>
+<article class="nb-cell nb-markdown" data-cell-type="markdown" data-i18n-html="notebook.cell06"><h3>3. Diagnose trước khi clean</h3>
+<p>Trước khi sửa gì, hãy xem missing values, kiểu dữ liệu, và nhãn đang lộn xộn thế nào.</p></article>
+<article class="nb-cell nb-code" data-cell-type="code"><div class="nb-input-label">In [3]</div><pre><code>print(&quot;Missing values by column:&quot;)
+print(raw.isna().sum().to_string())
+
+print(&quot;\nData types before cleaning:&quot;)
+print(raw.dtypes.to_string())
+
+print(&quot;\nRaw activity labels:&quot;)
+print(raw[&quot;activity_focus&quot;].value_counts(dropna=False).to_string())</code></pre><div class="nb-output"><div class="nb-output-label">Output</div><pre><code>Missing values by column:
+learner_id          0
+class_group         0
+activity_focus      0
+pre_score           4
+post_score          3
+attendance_hours    1
+completed           1
+self_confidence     0
+
+Data types before cleaning:
+learner_id           object
+class_group          object
+activity_focus       object
+pre_score            object
+post_score          float64
+attendance_hours    float64
+completed            object
+self_confidence       int64
+
+Raw activity labels:
+activity_focus
+Measure Words         4
+Result Complements    3
+Word Order            3
+measure words         2
+Vocabulary Review     2
+vocabulary_review     2
+Vocab Review          2
+word-order            2
+word_order            2
+word order            2
+result-complements    2
+result_complements    2
+result complements    2
+measure_words         2
+vocabulary review     1
+Measure words         1
+vocab_review          1
+vocab review          1</code></pre></div></article>
+<article class="nb-cell nb-markdown" data-cell-type="markdown" data-i18n-html="notebook.cell08"><h3>4. Bắt đầu cleaning log</h3>
+<p>Cleaning log là bảng ghi quyết định: cột nào có vấn đề, mình quyết định gì, và vì sao.</p></article>
+<article class="nb-cell nb-code" data-cell-type="code"><div class="nb-input-label">In [4]</div><pre><code>cleaning_steps = []
+
+def log_step(step, column, problem, decision, reason, evidence):
+    cleaning_steps.append({
+        &quot;step&quot;: step,
+        &quot;column&quot;: column,
+        &quot;problem&quot;: problem,
+        &quot;decision&quot;: decision,
+        &quot;reason&quot;: reason,
+        &quot;evidence&quot;: evidence,
+    })
+
+clean = raw.copy()
+log_step(
+    1,
+    &quot;all&quot;,
+    &quot;raw data may be overwritten&quot;,
+    &quot;created a cleaned copy&quot;,
+    &quot;preserve the original CSV&quot;,
+    f&quot;raw rows preserved: {len(raw)}&quot;
+)</code></pre></article>
+<article class="nb-cell nb-markdown" data-cell-type="markdown" data-i18n-html="notebook.cell10"><h3>5. Chuẩn hóa <code>class_group</code></h3>
+<p>Các label như <code>a</code>, <code>Class A</code>, và <code>A</code> phải trở về một chuẩn chung để groupby không đếm thành nhiều nhóm giả.</p></article>
+<article class="nb-cell nb-code" data-cell-type="code"><div class="nb-input-label">In [5]</div><pre><code>clean[&quot;class_group_raw&quot;] = clean[&quot;class_group&quot;]
+class_map = {
+    &quot;a&quot;: &quot;A&quot;, &quot;class a&quot;: &quot;A&quot;,
+    &quot;b&quot;: &quot;B&quot;, &quot;class b&quot;: &quot;B&quot;,
+    &quot;c&quot;: &quot;C&quot;, &quot;class c&quot;: &quot;C&quot;,
+    &quot;d&quot;: &quot;D&quot;, &quot;class d&quot;: &quot;D&quot;,
+}
+clean[&quot;class_group&quot;] = (
+    clean[&quot;class_group&quot;]
+    .astype(&quot;string&quot;)
+    .str.strip()
+    .str.lower()
+    .map(class_map)
+)
+log_step(
+    2,
+    &quot;class_group&quot;,
+    &quot;case, spaces, and Class A/Class B variants&quot;,
+    &quot;mapped to A-D&quot;,
+    &quot;standard labels make group summaries readable&quot;,
+    f&quot;{raw[&#x27;class_group&#x27;].astype(&#x27;string&#x27;).str.strip().nunique(dropna=True)} raw variants -&gt; {clean[&#x27;class_group&#x27;].nunique(dropna=True)} standard labels&quot;
+)
+
+print(clean[[&quot;class_group_raw&quot;, &quot;class_group&quot;]].drop_duplicates().sort_values(&quot;class_group_raw&quot;).to_string(index=False))</code></pre><div class="nb-output"><div class="nb-output-label">Output</div><pre><code>class_group_raw class_group
+              a           A
+             a            A
+              A           A
+              B           B
+             B            B
+              C           C
+        Class A           A
+        Class B           B
+        Class C           C
+        Class D           D
+              D           D
+              b           B
+              c           C
+              d           D</code></pre></div></article>
+<article class="nb-cell nb-markdown" data-cell-type="markdown" data-i18n-html="notebook.cell12"><h3>6. Chuẩn hóa <code>activity_focus</code></h3>
+<p>Đây là cột dùng cho bảng mô tả. Nếu không clean, <code>Measure Words</code>, <code>measure words</code>, và <code>measure_words</code> sẽ bị đếm riêng.</p></article>
+<article class="nb-cell nb-code" data-cell-type="code"><div class="nb-input-label">In [6]</div><pre><code>clean[&quot;activity_focus_raw&quot;] = clean[&quot;activity_focus&quot;]
+activity_map = {
+    &quot;measure words&quot;: &quot;measure_words&quot;,
+    &quot;result complements&quot;: &quot;result_complements&quot;,
+    &quot;word order&quot;: &quot;word_order&quot;,
+    &quot;vocab review&quot;: &quot;vocabulary_review&quot;,
+    &quot;vocabulary review&quot;: &quot;vocabulary_review&quot;,
+}
+activity_key = (
+    clean[&quot;activity_focus&quot;]
+    .astype(&quot;string&quot;)
+    .str.strip()
+    .str.lower()
+    .str.replace(&quot;-&quot;, &quot; &quot;, regex=False)
+    .str.replace(&quot;_&quot;, &quot; &quot;, regex=False)
+)
+clean[&quot;activity_focus&quot;] = activity_key.map(activity_map)
+log_step(
+    3,
+    &quot;activity_focus&quot;,
+    &quot;spelling, case, hyphen, and underscore variants&quot;,
+    &quot;mapped to four standard labels&quot;,
+    &quot;paper tables need stable group labels&quot;,
+    f&quot;{raw[&#x27;activity_focus&#x27;].nunique(dropna=True)} raw variants -&gt; {clean[&#x27;activity_focus&#x27;].nunique(dropna=True)} standard labels&quot;
+)
+
+unmapped = clean[clean[&quot;activity_focus&quot;].isna()][&quot;activity_focus_raw&quot;].dropna().unique()
+print(&quot;Unmapped activity labels:&quot;, list(unmapped))
+print(clean[[&quot;activity_focus_raw&quot;, &quot;activity_focus&quot;]].drop_duplicates().sort_values(&quot;activity_focus_raw&quot;).to_string(index=False))</code></pre><div class="nb-output"><div class="nb-output-label">Output</div><pre><code>Unmapped activity labels: []
+activity_focus_raw     activity_focus
+     Measure Words      measure_words
+     Measure words      measure_words
+Result Complements result_complements
+      Vocab Review  vocabulary_review
+ Vocabulary Review  vocabulary_review
+        Word Order         word_order
+     measure words      measure_words
+     measure_words      measure_words
+result complements result_complements
+result-complements result_complements
+result_complements result_complements
+      vocab review  vocabulary_review
+      vocab_review  vocabulary_review
+ vocabulary review  vocabulary_review
+ vocabulary_review  vocabulary_review
+        word order         word_order
+        word-order         word_order
+        word_order         word_order</code></pre></div></article>
+<article class="nb-cell nb-markdown" data-cell-type="markdown" data-i18n-html="notebook.cell14"><h3>7. Chuẩn hóa <code>completed</code></h3>
+<p><code>yes</code>, <code>Y</code>, <code>YES</code> nên về <code>yes</code>; <code>n</code> nên về <code>no</code>; ô trống vẫn là missing.</p></article>
+<article class="nb-cell nb-code" data-cell-type="code"><div class="nb-input-label">In [7]</div><pre><code>clean[&quot;completed_raw&quot;] = clean[&quot;completed&quot;]
+completed_map = {&quot;yes&quot;: &quot;yes&quot;, &quot;y&quot;: &quot;yes&quot;, &quot;no&quot;: &quot;no&quot;, &quot;n&quot;: &quot;no&quot;}
+clean[&quot;completed&quot;] = (
+    clean[&quot;completed&quot;]
+    .astype(&quot;string&quot;)
+    .str.strip()
+    .str.lower()
+    .map(completed_map)
+)
+log_step(
+    4,
+    &quot;completed&quot;,
+    &quot;yes/no variants and blank status&quot;,
+    &quot;mapped to yes/no; blanks remain missing&quot;,
+    &quot;the inclusion rule must be explicit&quot;,
+    f&quot;{raw[&#x27;completed&#x27;].astype(&#x27;string&#x27;).str.strip().str.lower().nunique(dropna=True)} raw variants -&gt; {clean[&#x27;completed&#x27;].nunique(dropna=True)} labels&quot;
+)
+
+print(clean[[&quot;completed_raw&quot;, &quot;completed&quot;]].drop_duplicates().to_string(index=False))</code></pre><div class="nb-output"><div class="nb-output-label">Output</div><pre><code>completed_raw completed
+          yes       yes
+            Y       yes
+            y       yes
+          YES       yes
+           no        no
+            n        no
+          NaN       NaN</code></pre></div></article>
+<article class="nb-cell nb-markdown" data-cell-type="markdown" data-i18n-html="notebook.cell16"><h3>8. Chuyển cột số</h3>
+<p>Không thay missing bằng 0. <code>0</code> là một điểm thật; missing là chưa biết. Dùng <code>errors=&quot;coerce&quot;</code> để giá trị không hợp lệ thành missing.</p></article>
+<article class="nb-cell nb-code" data-cell-type="code"><div class="nb-input-label">In [8]</div><pre><code>numeric_columns = [&quot;pre_score&quot;, &quot;post_score&quot;, &quot;attendance_hours&quot;, &quot;self_confidence&quot;]
+missing_before = raw_text[numeric_columns].isin(missing_codes).sum()
+for column in numeric_columns:
+    clean[column] = pd.to_numeric(clean[column], errors=&quot;coerce&quot;)
+log_step(
+    5,
+    &quot;, &quot;.join(numeric_columns),
+    &quot;numbers stored as text or invalid strings&quot;,
+    &quot;converted with pd.to_numeric(errors=&#x27;coerce&#x27;)&quot;,
+    &quot;invalid measurements should be missing, not guessed&quot;,
+    &quot;missing/invalid after conversion: &quot; + clean[numeric_columns].isna().sum().to_dict().__repr__()
+)
+
+print(&quot;Missing-like text codes before conversion:&quot;)
+print(missing_before.to_string())
+print(&quot;\nMissing values after numeric conversion:&quot;)
+print(clean[numeric_columns].isna().sum().to_string())
+print(&quot;\nData types after conversion:&quot;)
+print(clean[numeric_columns].dtypes.to_string())</code></pre><div class="nb-output"><div class="nb-output-label">Output</div><pre><code>Missing-like text codes before conversion:
+pre_score           4
+post_score          3
+attendance_hours    1
+self_confidence     0
+
+Missing values after numeric conversion:
+pre_score           5
+post_score          3
+attendance_hours    1
+self_confidence     0
+
+Data types after conversion:
+pre_score           float64
+post_score          float64
+attendance_hours    float64
+self_confidence       int64</code></pre></div></article>
+<article class="nb-cell nb-markdown" data-cell-type="markdown" data-i18n-html="notebook.cell18"><h3>9. Tạo <code>gain_score</code> và bảng usable rows</h3>
+<p><code>gain_score</code> chỉ có nghĩa khi cả pre và post đều có số. Ta tạo flag để biết dòng nào dùng được cho summary pre/post.</p></article>
+<article class="nb-cell nb-code" data-cell-type="code"><div class="nb-input-label">In [9]</div><pre><code>clean[&quot;gain_score&quot;] = clean[&quot;post_score&quot;] - clean[&quot;pre_score&quot;]
+pre_observed = clean[&quot;pre_score&quot;].notna()
+post_observed = clean[&quot;post_score&quot;].notna()
+completed_yes = clean[&quot;completed&quot;] == &quot;yes&quot;
+clean[&quot;usable_pre_post&quot;] = pre_observed &amp; post_observed &amp; completed_yes
+log_step(
+    6,
+    &quot;gain_score&quot;,
+    &quot;derived measure needs complete pre/post scores&quot;,
+    &quot;created only where pre and post are numeric&quot;,
+    &quot;do not calculate gains from unknown scores&quot;,
+    f&quot;usable_pre_post=True: {int(clean[&#x27;usable_pre_post&#x27;].sum())} rows&quot;
+)
+
+print(clean[&quot;usable_pre_post&quot;].value_counts().to_string())
+print(clean[[&quot;learner_id&quot;, &quot;activity_focus&quot;, &quot;pre_score&quot;, &quot;post_score&quot;, &quot;gain_score&quot;, &quot;usable_pre_post&quot;]].head(10).to_string(index=False))</code></pre><div class="nb-output"><div class="nb-output-label">Output</div><pre><code>usable_pre_post
+True     25
+False    11
+learner_id     activity_focus  pre_score  post_score  gain_score  usable_pre_post
+      S001      measure_words       62.0        75.0        13.0             True
+      S002      measure_words       58.0        70.0        12.0             True
+      S003      measure_words        NaN        72.0         NaN            False
+      S004      measure_words       60.0         NaN         NaN            False
+      S005 result_complements       55.0        68.0        13.0             True
+      S006 result_complements       59.0        73.0        14.0             True
+      S007 result_complements       61.0        74.0        13.0             True
+      S008 result_complements        NaN        71.0         NaN            False
+      S009         word_order       64.0        73.0         9.0             True
+      S010         word_order       63.0        72.0         9.0             True</code></pre></div></article>
+<article class="nb-cell nb-markdown" data-cell-type="markdown" data-i18n-html="notebook.cell20"><h3>10. Bảng trước/sau và bảng usable theo hoạt động</h3>
+<p>Bảng trước/sau cho thấy cleaning đã giảm số nhãn rời rạc. Bảng usable theo hoạt động khép lại câu hỏi nghiên cứu: nhóm hoạt động nào còn đủ bản ghi pre/post để mô tả.</p></article>
+<article class="nb-cell nb-code" data-cell-type="code"><div class="nb-input-label">In [10]</div><pre><code>raw_pre_numeric = pd.to_numeric(raw[&quot;pre_score&quot;], errors=&quot;coerce&quot;)
+raw_post_numeric = pd.to_numeric(raw[&quot;post_score&quot;], errors=&quot;coerce&quot;)
+raw_literal_completed = raw[&quot;completed&quot;].astype(&quot;string&quot;).str.strip().str.lower() == &quot;yes&quot;
+raw_usable_pre_post = raw_literal_completed &amp; raw_pre_numeric.notna() &amp; raw_post_numeric.notna()
+
+cleaning_summary = pd.DataFrame([
+    {
+        &quot;check&quot;: &quot;activity_focus labels&quot;,
+        &quot;before&quot;: raw[&quot;activity_focus&quot;].nunique(dropna=True),
+        &quot;after&quot;: clean[&quot;activity_focus&quot;].nunique(dropna=True),
+        &quot;note&quot;: &quot;standardized activity labels&quot;
+    },
+    {
+        &quot;check&quot;: &quot;class_group labels&quot;,
+        &quot;before&quot;: raw[&quot;class_group&quot;].astype(&quot;string&quot;).str.strip().nunique(dropna=True),
+        &quot;after&quot;: clean[&quot;class_group&quot;].nunique(dropna=True),
+        &quot;note&quot;: &quot;standardized class sections&quot;
+    },
+    {
+        &quot;check&quot;: &quot;completed labels&quot;,
+        &quot;before&quot;: raw[&quot;completed&quot;].astype(&quot;string&quot;).str.strip().str.lower().nunique(dropna=True),
+        &quot;after&quot;: clean[&quot;completed&quot;].nunique(dropna=True),
+        &quot;note&quot;: &quot;mapped yes/no variants&quot;
+    },
+    {
+        &quot;check&quot;: &quot;usable pre/post rows&quot;,
+        &quot;before&quot;: int(raw_usable_pre_post.sum()),
+        &quot;after&quot;: int(clean[&quot;usable_pre_post&quot;].sum()),
+        &quot;note&quot;: &quot;normalizing completed labels recovers usable rows&quot;
+    }
+])
+
+activity_usable = (
+    clean.groupby(&quot;activity_focus&quot;, dropna=False)
+    .agg(
+        raw_records=(&quot;learner_id&quot;, &quot;count&quot;),
+        usable_pre_post=(&quot;usable_pre_post&quot;, &quot;sum&quot;),
+        mean_gain_usable=(&quot;gain_score&quot;, lambda s: s[clean.loc[s.index, &quot;usable_pre_post&quot;]].mean())
+    )
+    .reset_index()
+    .sort_values(&quot;usable_pre_post&quot;, ascending=False)
+)
+activity_usable[&quot;mean_gain_usable&quot;] = activity_usable[&quot;mean_gain_usable&quot;].round(2)
+
+print(&quot;Before/after cleaning summary:&quot;)
+print(cleaning_summary.to_string(index=False))
+print(&quot;\nUsable rows by activity_focus:&quot;)
+print(activity_usable.to_string(index=False))</code></pre><div class="nb-output"><div class="nb-output-label">Output</div><pre><code>Before/after cleaning summary:
+                check  before  after                                              note
+activity_focus labels      18      4                      standardized activity labels
+   class_group labels      12      4                       standardized class sections
+     completed labels       4      2                            mapped yes/no variants
+ usable pre/post rows      19     25 normalizing completed labels recovers usable rows
+
+Usable rows by activity_focus:
+    activity_focus  raw_records  usable_pre_post  mean_gain_usable
+ vocabulary_review            9                8              9.75
+result_complements            9                6             13.00
+        word_order            9                6              8.83
+     measure_words            9                5             12.60</code></pre></div></article>
+<article class="nb-cell nb-markdown" data-cell-type="markdown" data-i18n-html="notebook.cell22"><h3>11. Export artifacts</h3>
+<p>Xuất bốn artifact: cleaned CSV, cleaning log, bảng before/after, và bảng usable theo hoạt động. Đây là phần nộp bài chính của Week 04.</p></article>
+<article class="nb-cell nb-code" data-cell-type="code"><div class="nb-input-label">In [11]</div><pre><code>cleaning_log = pd.DataFrame(cleaning_steps)
+
+cleaned_path = PROCESSED_DIR / &quot;week04_cleaned_tcsol_scores.csv&quot;
+log_path = TABLE_DIR / &quot;week04_cleaning_log.csv&quot;
+summary_path = TABLE_DIR / &quot;week04_cleaning_summary.csv&quot;
+usable_path = TABLE_DIR / &quot;week04_usable_by_activity.csv&quot;
+
+clean.to_csv(cleaned_path, index=False)
+cleaning_log.to_csv(log_path, index=False)
+cleaning_summary.to_csv(summary_path, index=False)
+activity_usable.to_csv(usable_path, index=False)
+
+print(&quot;Saved cleaned data to:&quot;, course_path(cleaned_path))
+print(&quot;Saved cleaning log to:&quot;, course_path(log_path))
+print(&quot;Saved cleaning summary to:&quot;, course_path(summary_path))
+print(&quot;Saved usable-by-activity table to:&quot;, course_path(usable_path))</code></pre><div class="nb-output"><div class="nb-output-label">Output</div><pre><code>Saved cleaned data to: weeks/week-04-data-cleaning-log/data/processed/week04_cleaned_tcsol_scores.csv
+Saved cleaning log to: weeks/week-04-data-cleaning-log/outputs/tables/week04_cleaning_log.csv
+Saved cleaning summary to: weeks/week-04-data-cleaning-log/outputs/tables/week04_cleaning_summary.csv
+Saved usable-by-activity table to: weeks/week-04-data-cleaning-log/outputs/tables/week04_usable_by_activity.csv</code></pre></div></article>
+<article class="nb-cell nb-markdown" data-cell-type="markdown" data-i18n-html="notebook.cell24"><h3>12. Cleaning decision note, caption và interpretation</h3>
+<p>Viết note ngắn, rõ quyết định và limitation. Caption/interpretation phải nhắc bảng nào là bằng chứng, N là bao nhiêu, và không nói dữ liệu đã “hoàn hảo”.</p></article>
+<article class="nb-cell nb-code" data-cell-type="code"><div class="nb-input-label">In [12]</div><pre><code>usable_n = int(clean[&quot;usable_pre_post&quot;].sum())
+cleaning_note = (
+    &quot;Before analysis, the raw CSV was preserved and a cleaned copy was created in pandas. &quot;
+    &quot;Class-group, activity-focus, and completion labels were standardized with predefined mappings recorded in week04_cleaning_log.csv. &quot;
+    &quot;Score and attendance columns were converted to numeric values with pd.to_numeric(errors=&#x27;coerce&#x27;), &quot;
+    &quot;so invalid entries were treated as missing rather than replaced with zero. &quot;
+    f&quot;After cleaning, {usable_n} records had completed status and numeric pre/post scores, as summarized in week04_usable_by_activity.csv. &quot;
+    &quot;The main limitation is that cleaning improves consistency but does not recover unknown scores or make the activity groups causal evidence.&quot;
+)
+caption = (
+    &quot;Table 1. Before/after cleaning checks for the synthetic Week 04 TCSOL dataset &quot;
+    &quot;(N = 36 raw records). The table reports label variants and usable pre/post rows after applying the notebook cleaning rules.&quot;
+)
+interpretation = (
+    &quot;The cleaning workflow reduced activity-focus labels from 18 raw variants to 4 standard labels and class-group labels from 12 variants to 4 sections. &quot;
+    &quot;After completed-status variants were mapped, usable completed pre/post records increased from 19 to 25. &quot;
+    &quot;This supports a descriptive summary by activity focus, but it does not recover missing scores or justify causal claims.&quot;
+)
+source_note = (
+    &quot;Dataset source: Synthetic Week 04 teaching dataset created for this course; not real student data. &quot;
+    &quot;Raw file: data/raw/week04_messy_tcsol_scores.csv. Access date: 2026-06-03.&quot;
+)
+
+print(&quot;Cleaning decision note:\n&quot;, cleaning_note, sep=&quot;&quot;)
+print(&quot;\nCaption:\n&quot;, caption, sep=&quot;&quot;)
+print(&quot;\nInterpretation:\n&quot;, interpretation, sep=&quot;&quot;)
+print(&quot;\nSource note:\n&quot;, source_note, sep=&quot;&quot;)</code></pre><div class="nb-output"><div class="nb-output-label">Output</div><pre><code>Cleaning decision note:
+Before analysis, the raw CSV was preserved and a cleaned copy was created in pandas. Class-group, activity-focus, and completion labels were standardized with predefined mappings recorded in week04_cleaning_log.csv. Score and attendance columns were converted to numeric values with pd.to_numeric(errors=&#x27;coerce&#x27;), so invalid entries were treated as missing rather than replaced with zero. After cleaning, 25 records had completed status and numeric pre/post scores, as summarized in week04_usable_by_activity.csv. The main limitation is that cleaning improves consistency but does not recover unknown scores or make the activity groups causal evidence.
+
+Caption:
+Table 1. Before/after cleaning checks for the synthetic Week 04 TCSOL dataset (N = 36 raw records). The table reports label variants and usable pre/post rows after applying the notebook cleaning rules.
+
+Interpretation:
+The cleaning workflow reduced activity-focus labels from 18 raw variants to 4 standard labels and class-group labels from 12 variants to 4 sections. After completed-status variants were mapped, usable completed pre/post records increased from 19 to 25. This supports a descriptive summary by activity focus, but it does not recover missing scores or justify causal claims.
+
+Source note:
+Dataset source: Synthetic Week 04 teaching dataset created for this course; not real student data. Raw file: data/raw/week04_messy_tcsol_scores.csv. Access date: 2026-06-03.</code></pre></div></article>
+<article class="nb-cell nb-markdown" data-cell-type="markdown" data-i18n-html="notebook.cell26"><h3>13. Bài tập nhỏ trong notebook</h3>
+<p>Tạm thời xóa rule <code>&quot;vocab review&quot;: &quot;vocabulary_review&quot;</code>, rồi chạy lại từ section 6. Ghi lại label nào bị unmapped. Sau đó thêm rule lại và kiểm tra <code>Unmapped activity labels: []</code>.</p></article>
+      </section>
+    </div>
+  </main>
+
+  <script src="../../assets/js/bilingual.js"></script>
+  <script>
+    window.Bilingual.init({
+      defaultLang: "vi",
+      translations: {
+        "vi": {
+                "notebook.cell01": "<h2>Tuần 04: Làm sạch dữ liệu và cleaning log</h2>\n<p>Mục tiêu hôm nay không phải là sửa dữ liệu cho đẹp. Mục tiêu là tạo <strong>một cleaned dataset có thể tái lập</strong>: giữ raw CSV, chẩn đoán lỗi, chuẩn hóa nhãn, chuyển kiểu số, ghi cleaning log, xuất dữ liệu sạch, rồi viết note cho phần Methods/Data preparation.</p>",
+                "notebook.cell02": "<h3>1. Cài đặt ý tưởng</h3>\n<p>Raw data là dữ liệu gốc. Cleaned data là bảng dẫn xuất bằng code. Tuần này không sửa file raw bằng tay.</p>",
+                "notebook.cell04": "<h3>2. Đọc raw CSV</h3>\n<p>Trước tiên đọc một bản <strong>text nguyên trạng</strong> để nhìn thấy các mã missing như <code>NA</code>, <code>missing</code>, <code>not recorded</code>. Sau đó đọc lại với <code>na_values</code> để pandas chuyển chúng thành missing thật.</p>",
+                "notebook.cell06": "<h3>3. Diagnose trước khi clean</h3>\n<p>Trước khi sửa gì, hãy xem missing values, kiểu dữ liệu, và nhãn đang lộn xộn thế nào.</p>",
+                "notebook.cell08": "<h3>4. Bắt đầu cleaning log</h3>\n<p>Cleaning log là bảng ghi quyết định: cột nào có vấn đề, mình quyết định gì, và vì sao.</p>",
+                "notebook.cell10": "<h3>5. Chuẩn hóa <code>class_group</code></h3>\n<p>Các label như <code>a</code>, <code>Class A</code>, và <code>A</code> phải trở về một chuẩn chung để groupby không đếm thành nhiều nhóm giả.</p>",
+                "notebook.cell12": "<h3>6. Chuẩn hóa <code>activity_focus</code></h3>\n<p>Đây là cột dùng cho bảng mô tả. Nếu không clean, <code>Measure Words</code>, <code>measure words</code>, và <code>measure_words</code> sẽ bị đếm riêng.</p>",
+                "notebook.cell14": "<h3>7. Chuẩn hóa <code>completed</code></h3>\n<p><code>yes</code>, <code>Y</code>, <code>YES</code> nên về <code>yes</code>; <code>n</code> nên về <code>no</code>; ô trống vẫn là missing.</p>",
+                "notebook.cell16": "<h3>8. Chuyển cột số</h3>\n<p>Không thay missing bằng 0. <code>0</code> là một điểm thật; missing là chưa biết. Dùng <code>errors=&quot;coerce&quot;</code> để giá trị không hợp lệ thành missing.</p>",
+                "notebook.cell18": "<h3>9. Tạo <code>gain_score</code> và bảng usable rows</h3>\n<p><code>gain_score</code> chỉ có nghĩa khi cả pre và post đều có số. Ta tạo flag để biết dòng nào dùng được cho summary pre/post.</p>",
+                "notebook.cell20": "<h3>10. Bảng trước/sau và bảng usable theo hoạt động</h3>\n<p>Bảng trước/sau cho thấy cleaning đã giảm số nhãn rời rạc. Bảng usable theo hoạt động khép lại câu hỏi nghiên cứu: nhóm hoạt động nào còn đủ bản ghi pre/post để mô tả.</p>",
+                "notebook.cell22": "<h3>11. Export artifacts</h3>\n<p>Xuất bốn artifact: cleaned CSV, cleaning log, bảng before/after, và bảng usable theo hoạt động. Đây là phần nộp bài chính của Week 04.</p>",
+                "notebook.cell24": "<h3>12. Cleaning decision note, caption và interpretation</h3>\n<p>Viết note ngắn, rõ quyết định và limitation. Caption/interpretation phải nhắc bảng nào là bằng chứng, N là bao nhiêu, và không nói dữ liệu đã “hoàn hảo”.</p>",
+                "notebook.cell26": "<h3>13. Bài tập nhỏ trong notebook</h3>\n<p>Tạm thời xóa rule <code>&quot;vocab review&quot;: &quot;vocabulary_review&quot;</code>, rồi chạy lại từ section 6. Ghi lại label nào bị unmapped. Sau đó thêm rule lại và kiểm tra <code>Unmapped activity labels: []</code>.</p>",
+                "brand": "Python Research Hub",
+                "meta.title": "Tuần 04: Làm sạch dữ liệu và cleaning log | Notebook đã render",
+                "nav.aria": "Điều hướng notebook",
+                "nav.week": "Tuần 04",
+                "nav.slides": "Slides",
+                "nav.demo": "Demo",
+                "nav.source": "Tải source .ipynb",
+                "nav.language": "Ngôn ngữ / Language",
+                "side.title": "Notebook",
+                "side.week": "Tổng quan tuần",
+                "side.colab": "Chạy bằng Colab",
+                "side.source": "Tải source .ipynb",
+                "side.csv": "Tải tệp CSV dữ liệu",
+                "hero.tag": "Notebook đã render",
+                "hero.title": "Tuần 04: Làm sạch dữ liệu và cleaning log",
+                "hero.body": "Đây là bản HTML đã chạy sẵn để đọc trên GitHub Pages. Muốn thực hành, mở notebook trong Colab hoặc tải file .ipynb.",
+                "action.colab": "Chạy trong Colab",
+                "action.source": "Tải .ipynb",
+                "action.week": "Quay lại Tuần 04",
+                "note.title": "Cách dùng trang này",
+                "note.read.title": "Đọc",
+                "note.read.body": "Bản HTML giữ code và output cạnh nhau, phù hợp để ôn lại sau buổi học.",
+                "note.run.title": "Chạy",
+                "note.run.body": "Nút Colab mở notebook có thể chạy từng cell và tự tải CSV nếu không có file local.",
+                "note.source.title": "Source",
+                "note.source.body": "File .ipynb vẫn được giữ để tải, nộp bài hoặc chỉnh trong JupyterLab/VS Code.",
+                "notebook.cells.aria": "Các cell notebook đã render"
+        },
+        "en": {
+                "notebook.cell01": "<h2>Week 04: Data cleaning and cleaning logs</h2>\n<p>Today is not about making data look pretty. The goal is to create <strong>one reproducible cleaned dataset</strong>: preserve the raw CSV, diagnose issues, normalize labels, convert numeric types, record a cleaning log, export cleaned data, and write a Methods/Data preparation note.</p>",
+                "notebook.cell02": "<h3>1. Setup idea</h3>\n<p>Raw data is the original collected table. Cleaned data is a derived table produced by code. This week we do not manually edit the raw file.</p>",
+                "notebook.cell04": "<h3>2. Read the raw CSV</h3>\n<p>First read a <strong>literal text copy</strong> to see missing-value codes such as <code>NA</code>, <code>missing</code>, and <code>not recorded</code>. Then read again with <code>na_values</code> so pandas converts them into real missing values.</p>",
+                "notebook.cell06": "<h3>3. Diagnose before cleaning</h3>\n<p>Before changing anything, inspect missing values, data types, and messy labels.</p>",
+                "notebook.cell08": "<h3>4. Start the cleaning log</h3>\n<p>A cleaning log records decisions: which column had a problem, what decision was made, and why.</p>",
+                "notebook.cell10": "<h3>5. Normalize <code>class_group</code></h3>\n<p>Labels such as <code>a</code>, <code>Class A</code>, and <code>A</code> must become one standard label so groupby does not count fake groups.</p>",
+                "notebook.cell12": "<h3>6. Normalize <code>activity_focus</code></h3>\n<p>This is the column used for the descriptive table. Without cleaning, <code>Measure Words</code>, <code>measure words</code>, and <code>measure_words</code> would be counted separately.</p>",
+                "notebook.cell14": "<h3>7. Normalize <code>completed</code></h3>\n<p><code>yes</code>, <code>Y</code>, and <code>YES</code> should become <code>yes</code>; <code>n</code> should become <code>no</code>; blank cells remain missing.</p>",
+                "notebook.cell16": "<h3>8. Convert numeric columns</h3>\n<p>Do not replace missing with 0. <code>0</code> is a real score; missing means unknown. Use <code>errors=&quot;coerce&quot;</code> so invalid values become missing.</p>",
+                "notebook.cell18": "<h3>9. Create <code>gain_score</code> and usable rows</h3>\n<p><code>gain_score</code> only makes sense when both pre and post are numeric. We create a flag showing which rows are usable for a pre/post summary.</p>",
+                "notebook.cell20": "<h3>10. Before/after table and usable rows by activity</h3>\n<p>The before/after table shows that cleaning reduced label variants. The usable-by-activity table closes the research question: which activity focus still has enough pre/post records for description.</p>",
+                "notebook.cell22": "<h3>11. Export artifacts</h3>\n<p>Export four artifacts: cleaned CSV, cleaning log, before/after table, and usable-by-activity table. These are the main Week 04 submission files.</p>",
+                "notebook.cell24": "<h3>12. Cleaning decision note, caption, and interpretation</h3>\n<p>Write a short note that states decisions and limitations clearly. The caption/interpretation should name the evidence table, report N, and avoid saying the data became “perfect.”</p>",
+                "notebook.cell26": "<h3>13. Small notebook exercise</h3>\n<p>Temporarily remove the rule <code>&quot;vocab review&quot;: &quot;vocabulary_review&quot;</code>, then rerun from section 6. Record which labels become unmapped. Then add the rule back and check that <code>Unmapped activity labels: []</code> returns.</p>",
+                "brand": "Python Research Hub",
+                "meta.title": "Week 04: Data cleaning and cleaning logs | Rendered Notebook",
+                "nav.aria": "Notebook navigation",
+                "nav.week": "Week 04",
+                "nav.slides": "Slides",
+                "nav.demo": "Demo",
+                "nav.source": "Download source .ipynb",
+                "nav.language": "Language",
+                "side.title": "Notebook",
+                "side.week": "Week overview",
+                "side.colab": "Run in Colab",
+                "side.source": "Download source .ipynb",
+                "side.csv": "Download data CSV",
+                "hero.tag": "Rendered notebook",
+                "hero.title": "Week 04: Data cleaning and cleaning logs",
+                "hero.body": "This is the pre-run HTML version for GitHub Pages. To practice, open the notebook in Colab or download the .ipynb file.",
+                "action.colab": "Run in Colab",
+                "action.source": "Download .ipynb",
+                "action.week": "Back to Week 04",
+                "note.title": "How to use this page",
+                "note.read.title": "Read",
+                "note.read.body": "The HTML version keeps code and output together, useful for review after class.",
+                "note.run.title": "Run",
+                "note.run.body": "The Colab button opens a runnable notebook and downloads the CSV automatically when local files are unavailable.",
+                "note.source.title": "Source",
+                "note.source.body": "The .ipynb file remains available for download, submission, or editing in JupyterLab/VS Code.",
+                "notebook.cells.aria": "Rendered notebook cells"
+        }
+}
+    });
+  </script>
+</body>
+</html>

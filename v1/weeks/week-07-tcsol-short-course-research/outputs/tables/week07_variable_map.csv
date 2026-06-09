@@ -1,0 +1,18 @@
+variable,role,measurement
+learner_id,identifier,ID for the synthetic learner task record; not the unit by itself
+class_group,context variable,synthetic class label
+activity_focus,grouping variable,"input practice, role play, or feedback cycle"
+activity_label,display label,human-readable activity label for tables and figures
+target_structure,teaching focus,result complements in service dialogues
+attendance_hours,context variable,synthetic attendance hours
+task_completion_*,rubric criterion,1-5 score before/after activity
+accuracy_*,rubric criterion,1-5 score before/after activity
+fluency_*,rubric criterion,1-5 score before/after activity
+interaction_strategy_*,rubric criterion,1-5 score before/after activity
+confidence_*,rubric criterion,1-5 observed confidence or self-rating before/after activity
+*_gain,derived outcome,post score minus pre score for each rubric criterion
+total_gain,derived outcome,mean post score minus mean pre score across five criteria
+main_difficulty,qualitative code,teacher-coded learning difficulty
+teacher_feedback,qualitative note,short teacher observation
+completed_task,cleaning flag,whether the learner completed the task
+usable_task,analysis filter,use only True rows for Week 07 summaries

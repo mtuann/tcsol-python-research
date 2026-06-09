@@ -1,0 +1,6 @@
+---
+title: "Week 09: Contrastive Risk Demo"
+format: html
+---
+
+Source note: the deployable demo is authored in `interactive_demo.html` for GitHub Pages. It lets learners choose a contrastive phenomenon, inspect one representative example pair, and try hypothetical count/risk values. The sliders are a what-if explanation layer; they do not edit the Week 09 dataset.

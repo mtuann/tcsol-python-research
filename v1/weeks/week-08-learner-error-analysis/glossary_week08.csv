@@ -1,0 +1,11 @@
+term,vi,en,note
+learner response,câu trả lời của người học,learner response,one answer to one item
+unit of analysis,đơn vị phân tích,unit of analysis,one response row this week
+error category,nhãn loại lỗi,error category,human coding label
+value_counts,đếm tần suất,value_counts,pandas method for category counts
+crosstab,bảng chéo,crosstab,two-way frequency table
+severity,mức độ nghiêm trọng,severity,simple 1-3 teaching heuristic
+representative example,ví dụ đại diện,representative example,learner answer plus expected answer
+teaching priority,ưu tiên dạy lại,teaching priority,what to address next
+transfer hypothesis,giả thuyết chuyển di,transfer hypothesis,possible explanation not proof
+Results paragraph,đoạn Results,Results paragraph,short paper-facing result

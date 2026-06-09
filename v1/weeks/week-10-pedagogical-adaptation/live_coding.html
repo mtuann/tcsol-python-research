@@ -1,0 +1,346 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title data-i18n="meta.title">Tuần 10: Pedagogical Adaptation | Notebook đã render</title>
+  <link rel="stylesheet" href="../../assets/css/bilingual.css">
+  <link rel="stylesheet" href="../../assets/css/course-doc.css">
+</head>
+<body>
+  <header class="doc-topbar">
+    <a class="doc-brand" href="../../" data-i18n="brand">Python Research Hub</a>
+    <nav class="doc-nav" aria-label="Điều hướng notebook" data-i18n-aria-label="nav.aria">
+      <a href="./" data-i18n="nav.week">Tuần 10</a>
+      <a href="slides.html" data-i18n="nav.slides">Slides</a>
+      <a href="interactive_demo.html" data-i18n="nav.demo">Demo</a>
+      <a href="live_coding.ipynb" download data-i18n="nav.source">Source .ipynb</a>
+      <div class="language-switcher" role="group" aria-label="Ngôn ngữ / Language" data-i18n-aria-label="nav.language">
+        <button type="button" data-lang-option="vi" aria-pressed="true">Tiếng Việt</button>
+        <button type="button" data-lang-option="en" aria-pressed="false">English</button>
+      </div>
+    </nav>
+  </header>
+
+  <main class="doc-shell notebook-shell">
+    <aside class="doc-sidebar">
+      <strong data-i18n="side.title">Notebook</strong>
+      <a href="./" data-i18n="side.week">Tổng quan tuần</a>
+      <a href="https://colab.research.google.com/github/mtuann/tcsol-python-research/blob/main/weeks/week-10-pedagogical-adaptation/live_coding.ipynb" data-i18n="side.colab">Chạy bằng Colab</a>
+      <a href="live_coding.ipynb" download data-i18n="side.source">Tải source .ipynb</a>
+      <a href="data/raw/week10_pedagogical_adaptation_activities.csv" download data-i18n="side.csv">Tải tệp CSV dữ liệu</a>
+    </aside>
+
+    <div class="doc-main">
+      <section class="doc-hero">
+        <span class="doc-eyebrow" data-i18n="hero.tag">Rendered notebook</span>
+        <h1 data-i18n="hero.title">Tuần 10: Pedagogical Adaptation</h1>
+        <p class="doc-lead" data-i18n="hero.body">Đây là bản HTML đã chạy sẵn để đọc trên GitHub Pages. Muốn thực hành, mở notebook trong Colab hoặc tải file .ipynb.</p>
+        <div class="doc-actions">
+          <a class="doc-button" href="https://colab.research.google.com/github/mtuann/tcsol-python-research/blob/main/weeks/week-10-pedagogical-adaptation/live_coding.ipynb" data-i18n="action.colab">Chạy trong Colab</a>
+          <a class="doc-button secondary" href="live_coding.ipynb" download data-i18n="action.source">Tải .ipynb</a>
+          <a class="doc-button secondary" href="./" data-i18n="action.week">Quay lại Tuần 10</a>
+        </div>
+      </section>
+
+      <section class="doc-card notebook-note">
+        <h2 data-i18n="note.title">Cách dùng trang này</h2>
+        <div class="doc-grid three">
+          <article class="mini-card"><span class="swatch blue"></span><h3 data-i18n="note.read.title">Đọc</h3><p data-i18n="note.read.body">Bản HTML giữ code và output cạnh nhau, phù hợp để ôn lại sau buổi học.</p></article>
+          <article class="mini-card"><span class="swatch green"></span><h3 data-i18n="note.run.title">Chạy</h3><p data-i18n="note.run.body">Nút Colab mở notebook có thể chạy từng cell và tự tải CSV nếu không có file local.</p></article>
+          <article class="mini-card"><span class="swatch amber"></span><h3 data-i18n="note.source.title">Source</h3><p data-i18n="note.source.body">File .ipynb vẫn được giữ để tải, nộp bài hoặc chỉnh trong JupyterLab/VS Code.</p></article>
+        </div>
+      </section>
+
+      <section class="notebook-document" aria-label="Các cell notebook đã render" data-i18n-aria-label="notebook.cells.aria">
+        <article class="nb-cell nb-markdown" data-cell-type="markdown" data-i18n-html="nb.title"><h2>Tuần 10: Pedagogical adaptation</h2>
+<p>Mục tiêu: biến bảng đối chiếu Week 09 thành một lesson adaptation có activity sequence, pacing và limitation.</p></article>
+<article class="nb-cell nb-markdown" data-cell-type="markdown" data-i18n-html="nb.setup"><h3>Trước khi chạy code</h3>
+<p>Cell setup là <strong>run-only</strong>: import thư viện, kiểm tra data và tạo output folders.</p></article>
+<article class="nb-cell nb-code" data-cell-type="code"><div class="nb-input-label">In [1]</div><pre><code>from pathlib import Path
+from urllib.request import urlretrieve
+import hashlib
+
+import pandas as pd
+import matplotlib
+matplotlib.use(&quot;Agg&quot;)
+import matplotlib.pyplot as plt
+
+CANDIDATES = [Path(&quot;weeks/week-10-pedagogical-adaptation&quot;), Path(&quot;.&quot;)]
+WEEK_DIR = next(
+    candidate for candidate in CANDIDATES
+    if (candidate / &quot;data&quot; / &quot;raw&quot; / &quot;week10_pedagogical_adaptation_activities.csv&quot;).exists()
+    or candidate.name == &quot;week-10-pedagogical-adaptation&quot;
+)
+DATA_PATH = WEEK_DIR / &quot;data&quot; / &quot;raw&quot; / &quot;week10_pedagogical_adaptation_activities.csv&quot;
+TABLE_DIR = WEEK_DIR / &quot;outputs&quot; / &quot;tables&quot;
+FIG_DIR = WEEK_DIR / &quot;outputs&quot; / &quot;figures&quot;
+TABLE_DIR.mkdir(parents=True, exist_ok=True)
+FIG_DIR.mkdir(parents=True, exist_ok=True)
+
+EXPECTED_SHA = &quot;03ecb6c201417f55a0c33b0a78ac9641461d3d591589de3f0f9dbd37e6ff1e97&quot;
+REMOTE_DATA = &quot;https://raw.githubusercontent.com/mtuann/tcsol-python-research/main/weeks/week-10-pedagogical-adaptation/data/raw/week10_pedagogical_adaptation_activities.csv&quot;
+if not DATA_PATH.exists():
+    DATA_PATH.parent.mkdir(parents=True, exist_ok=True)
+    urlretrieve(REMOTE_DATA, DATA_PATH)
+actual_sha = hashlib.sha256(DATA_PATH.read_bytes()).hexdigest()
+print(&quot;Data file:&quot;, DATA_PATH)
+print(&quot;SHA-256:&quot;, actual_sha)
+if actual_sha != EXPECTED_SHA:
+    print(&quot;Note: SHA differs from the course snapshot. Continue only if you intentionally changed the data.&quot;)</code></pre><div class="nb-output"><div class="nb-output-label">Output</div><pre><code>Data file: weeks/week-10-pedagogical-adaptation/data/raw/week10_pedagogical_adaptation_activities.csv
+SHA-256: 03ecb6c201417f55a0c33b0a78ac9641461d3d591589de3f0f9dbd37e6ff1e97</code></pre></div></article>
+<article class="nb-cell nb-markdown" data-cell-type="markdown" data-i18n-html="nb.load"><h3>1. Load activity data</h3>
+<p>Một row là một candidate teaching activity. Đây không phải dữ liệu learner thật.</p></article>
+<article class="nb-cell nb-code" data-cell-type="code"><div class="nb-input-label">In [2]</div><pre><code>activities = pd.read_csv(DATA_PATH)
+activities[&quot;include_in_short_lesson&quot;] = activities[&quot;include_in_short_lesson&quot;].astype(str).str.lower().eq(&quot;true&quot;)
+print(&quot;Candidate activities:&quot;, len(activities))
+print(activities[[&quot;activity_id&quot;, &quot;phenomenon&quot;, &quot;activity_title&quot;, &quot;lesson_phase&quot;, &quot;minutes&quot;]].head(8).to_string(index=False))</code></pre><div class="nb-output"><div class="nb-output-label">Output</div><pre><code>Candidate activities: 25
+activity_id        phenomenon          activity_title           lesson_phase  minutes
+       A001 result_complement Notice action vs result                 notice        6
+       A002 result_complement     Contrast mini-board                compare        8
+       A003 result_complement  Frame completion drill    controlled_practice       10
+       A004 result_complement   Lost-ticket role play communicative_practice       10
+       A005 result_complement             Exit ticket             assessment        4
+       A006     aspect_marker          了 context sort                 notice        8
+       A007     aspect_marker   Timeline plus context                compare        8
+       A008     aspect_marker   Sentence choice check             assessment        5</code></pre></div></article>
+<article class="nb-cell nb-markdown" data-cell-type="markdown" data-i18n-html="nb.score"><h3>2. Adaptation score</h3>
+<p>Score là heuristic lập kế hoạch: ưu tiên Week 09 + instructional need + communicative value - preparation load. Trong dataset này, <code>learner_difficulty</code> được đọc là nhu cầu hỗ trợ của giáo viên, không phải bằng chứng rằng item khó thì luôn nên dạy trước.</p>
+<p>Worked example: <code>A001 = 28 + 3*2 + 2 - 1 = 35</code>.</p></article>
+<article class="nb-cell nb-code" data-cell-type="code"><div class="nb-input-label">In [3]</div><pre><code>activities[&quot;adaptation_score&quot;] = (
+    activities[&quot;week09_priority_score&quot;]
+    + activities[&quot;learner_difficulty&quot;] * 2
+    + activities[&quot;communicative_value&quot;]
+    - activities[&quot;preparation_load&quot;]
+).round(1)
+print(activities[[&quot;activity_id&quot;, &quot;activity_title&quot;, &quot;adaptation_score&quot;]].head().to_string(index=False))</code></pre><div class="nb-output"><div class="nb-output-label">Output</div><pre><code>activity_id          activity_title  adaptation_score
+       A001 Notice action vs result              35.0
+       A002     Contrast mini-board              35.0
+       A003  Frame completion drill              34.0
+       A004   Lost-ticket role play              35.0
+       A005             Exit ticket              35.0</code></pre></div></article>
+<article class="nb-cell nb-markdown" data-cell-type="markdown" data-i18n-html="nb.sort"><h3>3. Rank activities với <code>sort_values()</code></h3>
+<p><code>sort_values()</code> đưa activity có score cao lên trước để ta đọc table dễ hơn.</p></article>
+<article class="nb-cell nb-code" data-cell-type="code"><div class="nb-input-label">In [4]</div><pre><code>priority = activities.sort_values([&quot;adaptation_score&quot;, &quot;week09_priority_score&quot;], ascending=False).copy()
+priority_table = priority[[&quot;activity_id&quot;, &quot;phenomenon&quot;, &quot;activity_title&quot;, &quot;lesson_phase&quot;, &quot;minutes&quot;, &quot;adaptation_score&quot;, &quot;activity_goal&quot;]]
+priority_table.to_csv(TABLE_DIR / &quot;week10_activity_priority_table.csv&quot;, index=False)
+print(priority_table.head(10).to_string(index=False))</code></pre><div class="nb-output"><div class="nb-output-label">Output</div><pre><code>activity_id        phenomenon              activity_title           lesson_phase  minutes  adaptation_score                                                    activity_goal
+       A001 result_complement     Notice action vs result                 notice        6              35.0                                identify action-result difference
+       A002 result_complement         Contrast mini-board                compare        8              35.0 compare Chinese result complement with Vietnamese result wording
+       A004 result_complement       Lost-ticket role play communicative_practice       10              35.0              use result complements in a tiny communicative task
+       A005 result_complement                 Exit ticket             assessment        4              35.0                check whether learner separates action and result
+       A003 result_complement      Frame completion drill    controlled_practice       10              34.0                      produce controlled result-complement frames
+       A021 result_complement       Teacher feedback bank               feedback        3              33.0                    give corrective feedback without long lecture
+       A025 result_complement          Mini review opener                 review        4              32.0                          activate prior contrast before practice
+       A022     aspect_marker Before-after picture prompt communicative_practice       10              32.0                           use aspect marker with visible context
+       A006     aspect_marker              了 context sort                 notice        8              31.0                           notice that 了 is not simply past tense
+       A007     aspect_marker       Timeline plus context                compare        8              31.0                                 connect aspect marker to context</code></pre></div></article>
+<article class="nb-cell nb-markdown" data-cell-type="markdown" data-i18n-html="nb.groupby"><h3>4. Group minutes với <code>groupby()</code></h3>
+<p><code>groupby()</code> giúp trả lời: lesson plan dành bao nhiêu phút cho từng phase?</p></article>
+<article class="nb-cell nb-code" data-cell-type="code"><div class="nb-input-label">In [5]</div><pre><code>phase_order = {
+    &quot;review&quot;: 1,
+    &quot;notice&quot;: 2,
+    &quot;compare&quot;: 3,
+    &quot;controlled_practice&quot;: 4,
+    &quot;communicative_practice&quot;: 5,
+    &quot;feedback&quot;: 6,
+    &quot;assessment&quot;: 7,
+}
+
+# Step 1: keep only the model lesson rows.
+plan = activities[activities[&quot;include_in_short_lesson&quot;]].copy()
+
+# Step 2: make a summary table: one row per lesson phase.
+phase_minutes = plan.groupby(&quot;lesson_phase&quot;, as_index=False)[&quot;minutes&quot;].sum()
+
+# Step 3: sort phases in lesson order, not alphabetically.
+phase_minutes[&quot;phase_order&quot;] = phase_minutes[&quot;lesson_phase&quot;].map(phase_order)
+phase_minutes = phase_minutes.sort_values(&quot;phase_order&quot;).drop(columns=&quot;phase_order&quot;)
+
+plan[&quot;phase_order&quot;] = plan[&quot;lesson_phase&quot;].map(phase_order)
+plan = plan.sort_values([&quot;phase_order&quot;, &quot;activity_id&quot;])
+
+phase_minutes.to_csv(TABLE_DIR / &quot;week10_phase_minutes.csv&quot;, index=False)
+print(phase_minutes.to_string(index=False))
+print(&quot;Total lesson minutes:&quot;, int(plan[&quot;minutes&quot;].sum()))</code></pre><div class="nb-output"><div class="nb-output-label">Output</div><pre><code>          lesson_phase  minutes
+                review        4
+                notice        6
+               compare        8
+   controlled_practice       10
+communicative_practice       10
+              feedback        3
+            assessment        4
+Total lesson minutes: 45</code></pre></div></article>
+<article class="nb-cell nb-markdown" data-cell-type="markdown" data-i18n-html="nb.plan"><h3>5. Short lesson plan table</h3>
+<p>Bảng lesson plan giữ phase, minutes, teacher move, learner output và assessment evidence.</p></article>
+<article class="nb-cell nb-code" data-cell-type="code"><div class="nb-input-label">In [6]</div><pre><code>lesson_plan = plan[[&quot;activity_id&quot;, &quot;lesson_phase&quot;, &quot;minutes&quot;, &quot;activity_title&quot;, &quot;target_form&quot;, &quot;vietnamese_bridge&quot;, &quot;teacher_move&quot;, &quot;learner_output&quot;, &quot;assessment_evidence&quot;, &quot;caution_note&quot;]]
+lesson_plan.to_csv(TABLE_DIR / &quot;week10_short_lesson_plan.csv&quot;, index=False)
+print(lesson_plan.to_string(index=False))</code></pre><div class="nb-output"><div class="nb-output-label">Output</div><pre><code>activity_id           lesson_phase  minutes          activity_title        target_form                                 vietnamese_bridge                                          teacher_move             learner_output                         assessment_evidence                                                                                             caution_note
+       A025                 review        4      Mini review opener             找 / 找到                                    tìm / tìm thấy                              show old and new example       one oral distinction                 learner names action/result                                                                                  Review should be short.
+       A001                 notice        6 Notice action vs result             找 / 找到                                    tìm / tìm thấy model two examples; ask learners to mark result words        marked example card      learner highlights correct focus token Do not explain every complement type at once; 到 here signals successful attainment, not simply location.
+       A002                compare        8     Contrast mini-board       找到 / 找完 / 找错                    tìm thấy / tìm xong / tìm nhầm     write Chinese pattern beside Vietnamese rendering one completed contrast row                 oral explanation of one row                                                  Keep Vietnamese rendering as support, not final answer.
+       A003    controlled_practice       10  Frame completion drill      我找到了票 / 我没找到票                   tìm thấy vé / không tìm thấy vé            give half-completed sentences and feedback    six completed sentences                accuracy in completed frames                                                      Controlled practice should be brief and meaningful.
+       A004 communicative_practice       10   Lost-ticket role play 找到票 / 买到票 / 你找到了吗？ tìm thấy vé / mua được vé / bạn đã tìm thấy chưa?         assign roles and require two target sentences              mini dialogue                    target forms in dialogue                                                    Do not grade fluency more than target form this week.
+       A021               feedback        3   Teacher feedback bank             你找到了吗？                             Bạn đã tìm thấy chưa?                                       prepare prompts              feedback bank              feedback addresses target form                                                                   Feedback should be specific and brief.
+       A005             assessment        4             Exit ticket             找到 / 找                                    tìm thấy / tìm             collect one sentence plus one explanation        one sentence + note teacher reads for action/result distinction                                                              Exit ticket is formative, not a test score.</code></pre></div></article>
+<article class="nb-cell nb-markdown" data-cell-type="markdown" data-i18n-html="nb.summary"><h3>6. Summary table</h3>
+<p>Summary table gom thông tin chính để viết paragraph.</p></article>
+<article class="nb-cell nb-code" data-cell-type="code"><div class="nb-input-label">In [7]</div><pre><code>summary = pd.DataFrame([
+    {&quot;item&quot;: &quot;candidate_activities&quot;, &quot;value&quot;: len(activities)},
+    {&quot;item&quot;: &quot;selected_activities&quot;, &quot;value&quot;: len(plan)},
+    {&quot;item&quot;: &quot;lesson_minutes&quot;, &quot;value&quot;: int(plan[&quot;minutes&quot;].sum())},
+    {&quot;item&quot;: &quot;top_activity&quot;, &quot;value&quot;: priority.iloc[0][&quot;activity_title&quot;]},
+    {&quot;item&quot;: &quot;main_phenomenon&quot;, &quot;value&quot;: &quot;result_complement&quot;},
+])
+summary.to_csv(TABLE_DIR / &quot;week10_adaptation_summary.csv&quot;, index=False)
+print(summary.to_string(index=False))</code></pre><div class="nb-output"><div class="nb-output-label">Output</div><pre><code>                item                   value
+candidate_activities                      25
+ selected_activities                       7
+      lesson_minutes                      45
+        top_activity Notice action vs result
+     main_phenomenon       result_complement</code></pre></div></article>
+<article class="nb-cell nb-markdown" data-cell-type="markdown" data-i18n-html="nb.figures"><h3>7. Figures cho paper</h3>
+<p>Figure 1 ranking activities. Figure 2 đọc pacing theo phase.</p></article>
+<article class="nb-cell nb-code" data-cell-type="code"><div class="nb-input-label">In [8]</div><pre><code>plt.rcParams.update({&quot;font.size&quot;: 10, &quot;axes.titlesize&quot;: 13, &quot;axes.labelsize&quot;: 10})
+plot_priority = priority_table.head(10).sort_values(&quot;adaptation_score&quot;)
+fig, ax = plt.subplots(figsize=(8.4, 5.2))
+ax.barh(plot_priority[&quot;activity_title&quot;], plot_priority[&quot;adaptation_score&quot;], color=&quot;#2f63ea&quot;)
+ax.set_title(&quot;Week 10 candidate activities ranked by adaptation score&quot;)
+ax.set_xlabel(&quot;Adaptation score&quot;)
+ax.set_ylabel(&quot;Activity&quot;)
+for i, value in enumerate(plot_priority[&quot;adaptation_score&quot;]):
+    ax.text(value + 0.2, i, f&quot;{value:.1f}&quot;, va=&quot;center&quot;, fontweight=&quot;bold&quot;)
+fig.tight_layout()
+fig.savefig(FIG_DIR / &quot;week10_activity_priority.png&quot;, dpi=200)
+fig.savefig(FIG_DIR / &quot;week10_activity_priority.svg&quot;)
+plt.close(fig)
+
+fig, ax = plt.subplots(figsize=(8.2, 4.6))
+colors = [&quot;#334155&quot;, &quot;#2563eb&quot;, &quot;#6d5bd0&quot;, &quot;#1f7a4d&quot;, &quot;#b45309&quot;, &quot;#b8325f&quot;, &quot;#64748b&quot;]
+ax.bar(phase_minutes[&quot;lesson_phase&quot;], phase_minutes[&quot;minutes&quot;], color=colors[:len(phase_minutes)])
+ax.set_title(&quot;Week 10 selected short lesson: minutes by phase&quot;)
+ax.set_xlabel(&quot;Lesson phase&quot;)
+ax.set_ylabel(&quot;Minutes&quot;)
+ax.tick_params(axis=&quot;x&quot;, rotation=20)
+for i, value in enumerate(phase_minutes[&quot;minutes&quot;]):
+    ax.text(i, value + 0.3, str(value), ha=&quot;center&quot;, fontweight=&quot;bold&quot;)
+fig.tight_layout()
+fig.savefig(FIG_DIR / &quot;week10_lesson_phase_minutes.png&quot;, dpi=200)
+fig.savefig(FIG_DIR / &quot;week10_lesson_phase_minutes.svg&quot;)
+plt.close(fig)
+print(&quot;Figures exported:&quot;)
+print(FIG_DIR / &quot;week10_activity_priority.png&quot;)
+print(FIG_DIR / &quot;week10_lesson_phase_minutes.png&quot;)</code></pre><div class="nb-output"><div class="nb-output-label">Output</div><pre><code>Figures exported:
+weeks/week-10-pedagogical-adaptation/outputs/figures/week10_activity_priority.png
+weeks/week-10-pedagogical-adaptation/outputs/figures/week10_lesson_phase_minutes.png</code></pre></div></article>
+<article class="nb-cell nb-markdown" data-cell-type="markdown" data-i18n-html="nb.writing"><h3>8. Pedagogical adaptation paragraph</h3>
+<p>Dùng table + figure để viết. Điền số liệu sau khi bạn đọc output.</p>
+<p>Caption frame:</p>
+<blockquote>Figure 1 ranks candidate teaching activities by <code>adaptation_score</code> for 25 synthetic activity rows. The unit is one candidate activity. The score is a planning heuristic for teacher review, not evidence that the activity is effective.</blockquote>
+<p>Source note frame:</p>
+<blockquote>Source checked: <code>___</code> (accessed <code>___</code>). It supports <code>___</code>, but it does not prove this synthetic activity sequence works with real learners.</blockquote>
+<p>Paragraph frame:</p>
+<blockquote>Based on the activity-priority table, I would adapt the short lesson by focusing on <code>___</code>. The lesson begins with <code>___</code>, then moves to <code>___</code>, and ends with <code>___</code>. This recommendation is useful because <code>___</code>. However, it remains a design recommendation because the dataset is synthetic and should be tested with real learner responses.</blockquote></article>
+<article class="nb-cell nb-code" data-cell-type="code"><div class="nb-input-label">In [9]</div><pre><code>first = lesson_plan.iloc[0]
+last = lesson_plan.iloc[-1]
+paragraph = (
+    f&quot;Based on the activity-priority table, I would adapt a short TCSOL lesson by focusing on result complements. &quot;
+    f&quot;The selected plan uses {int(plan[&#x27;minutes&#x27;].sum())} minutes across {len(plan)} activities. &quot;
+    f&quot;It begins with {first[&#x27;activity_title&#x27;]}, moves through comparison and controlled practice, &quot;
+    f&quot;and ends with {last[&#x27;activity_title&#x27;]}. This sequence is useful because learners first notice the &quot;
+    &quot;action-result contrast before using it in a tiny communicative task. However, the score is only a &quot;
+    &quot;planning heuristic from a synthetic dataset, so the adaptation should be tested with real learner responses.&quot;
+)
+print(paragraph)</code></pre><div class="nb-output"><div class="nb-output-label">Output</div><pre><code>Based on the activity-priority table, I would adapt a short TCSOL lesson by focusing on result complements. The selected plan uses 45 minutes across 7 activities. It begins with Mini review opener, moves through comparison and controlled practice, and ends with Exit ticket. This sequence is useful because learners first notice the action-result contrast before using it in a tiny communicative task. However, the score is only a planning heuristic from a synthetic dataset, so the adaptation should be tested with real learner responses.</code></pre></div></article>
+      </section>
+    </div>
+  </main>
+
+  <script src="../../assets/js/bilingual.js"></script>
+  <script>
+    window.Bilingual.init({
+      defaultLang: "vi",
+      translations: {
+        "vi": {
+                "nb.title": "<h2>Tuần 10: Pedagogical adaptation</h2>\n<p>Mục tiêu: biến bảng đối chiếu Week 09 thành một lesson adaptation có activity sequence, pacing và limitation.</p>",
+                "nb.setup": "<h3>Trước khi chạy code</h3>\n<p>Cell setup là <strong>run-only</strong>: import thư viện, kiểm tra data và tạo output folders.</p>",
+                "nb.load": "<h3>1. Load activity data</h3>\n<p>Một row là một candidate teaching activity. Đây không phải dữ liệu learner thật.</p>",
+                "nb.score": "<h3>2. Adaptation score</h3>\n<p>Score là heuristic lập kế hoạch: ưu tiên Week 09 + instructional need + communicative value - preparation load. Trong dataset này, <code>learner_difficulty</code> được đọc là nhu cầu hỗ trợ của giáo viên, không phải bằng chứng rằng item khó thì luôn nên dạy trước.</p>\n<p>Worked example: <code>A001 = 28 + 3*2 + 2 - 1 = 35</code>.</p>",
+                "nb.sort": "<h3>3. Rank activities với <code>sort_values()</code></h3>\n<p><code>sort_values()</code> đưa activity có score cao lên trước để ta đọc table dễ hơn.</p>",
+                "nb.groupby": "<h3>4. Group minutes với <code>groupby()</code></h3>\n<p><code>groupby()</code> giúp trả lời: lesson plan dành bao nhiêu phút cho từng phase?</p>",
+                "nb.plan": "<h3>5. Short lesson plan table</h3>\n<p>Bảng lesson plan giữ phase, minutes, teacher move, learner output và assessment evidence.</p>",
+                "nb.summary": "<h3>6. Summary table</h3>\n<p>Summary table gom thông tin chính để viết paragraph.</p>",
+                "nb.figures": "<h3>7. Figures cho paper</h3>\n<p>Figure 1 ranking activities. Figure 2 đọc pacing theo phase.</p>",
+                "nb.writing": "<h3>8. Pedagogical adaptation paragraph</h3>\n<p>Dùng table + figure để viết. Điền số liệu sau khi bạn đọc output.</p>\n<p>Caption frame:</p>\n<blockquote>Figure 1 ranks candidate teaching activities by <code>adaptation_score</code> for 25 synthetic activity rows. The unit is one candidate activity. The score is a planning heuristic for teacher review, not evidence that the activity is effective.</blockquote>\n<p>Source note frame:</p>\n<blockquote>Source checked: <code>___</code> (accessed <code>___</code>). It supports <code>___</code>, but it does not prove this synthetic activity sequence works with real learners.</blockquote>\n<p>Paragraph frame:</p>\n<blockquote>Based on the activity-priority table, I would adapt the short lesson by focusing on <code>___</code>. The lesson begins with <code>___</code>, then moves to <code>___</code>, and ends with <code>___</code>. This recommendation is useful because <code>___</code>. However, it remains a design recommendation because the dataset is synthetic and should be tested with real learner responses.</blockquote>",
+                "brand": "Python Research Hub",
+                "meta.title": "Tuần 10: Pedagogical Adaptation | Notebook đã render",
+                "nav.aria": "Điều hướng notebook",
+                "nav.week": "Tuần 10",
+                "nav.slides": "Slides",
+                "nav.demo": "Demo",
+                "nav.source": "Tải source .ipynb",
+                "nav.language": "Ngôn ngữ / Language",
+                "side.title": "Notebook",
+                "side.week": "Tổng quan tuần",
+                "side.colab": "Chạy bằng Colab",
+                "side.source": "Tải source .ipynb",
+                "side.csv": "Tải tệp CSV dữ liệu",
+                "hero.tag": "Notebook đã render",
+                "hero.title": "Tuần 10: Pedagogical Adaptation",
+                "hero.body": "Đây là bản HTML đã chạy sẵn để đọc trên GitHub Pages. Muốn thực hành, mở notebook trong Colab hoặc tải file .ipynb.",
+                "action.colab": "Chạy trong Colab",
+                "action.source": "Tải .ipynb",
+                "action.week": "Quay lại Tuần 10",
+                "note.title": "Cách dùng trang này",
+                "note.read.title": "Đọc",
+                "note.read.body": "Bản HTML giữ code và output cạnh nhau, phù hợp để ôn lại sau buổi học.",
+                "note.run.title": "Chạy",
+                "note.run.body": "Nút Colab mở notebook có thể chạy từng cell và tự tải CSV nếu không có file local.",
+                "note.source.title": "Source",
+                "note.source.body": "File .ipynb vẫn được giữ để tải, nộp bài hoặc chỉnh trong JupyterLab/VS Code.",
+                "notebook.cells.aria": "Các cell notebook đã render"
+        },
+        "en": {
+                "nb.title": "<h2>Week 10: Pedagogical adaptation</h2>\n<p>Goal: turn the Week 09 contrastive table into a lesson adaptation with an activity sequence, pacing, and limitation.</p>",
+                "nb.setup": "<h3>Before running code</h3>\n<p>The setup cell is <strong>run-only</strong>: it imports libraries, checks data, and creates output folders.</p>",
+                "nb.load": "<h3>1. Load activity data</h3>\n<p>One row is one candidate teaching activity. This is not real learner data.</p>",
+                "nb.score": "<h3>2. Adaptation score</h3>\n<p>The score is a planning heuristic: Week 09 priority + instructional need + communicative value - preparation load. In this dataset, <code>learner_difficulty</code> is read as teacher support need, not proof that difficult items are always better to teach.</p>\n<p>Worked example: <code>A001 = 28 + 3*2 + 2 - 1 = 35</code>.</p>",
+                "nb.sort": "<h3>3. Rank activities with <code>sort_values()</code></h3>\n<p><code>sort_values()</code> places high-score activities first so the table is easier to read.</p>",
+                "nb.groupby": "<h3>4. Group minutes with <code>groupby()</code></h3>\n<p><code>groupby()</code> answers: how many minutes does the lesson plan spend in each phase?</p>",
+                "nb.plan": "<h3>5. Short lesson plan table</h3>\n<p>The lesson plan table keeps phase, minutes, teacher move, learner output, and assessment evidence.</p>",
+                "nb.summary": "<h3>6. Summary table</h3>\n<p>The summary table collects the key information for the paragraph.</p>",
+                "nb.figures": "<h3>7. Figures for a paper</h3>\n<p>Figure 1 ranks activities. Figure 2 reads pacing by phase.</p>",
+                "nb.writing": "<h3>8. Pedagogical adaptation paragraph</h3>\n<p>Use the table and figure to write. Fill the numbers after reading the output.</p>\n<p>Caption frame:</p>\n<blockquote>Figure 1 ranks candidate teaching activities by <code>adaptation_score</code> for 25 synthetic activity rows. The unit is one candidate activity. The score is a planning heuristic for teacher review, not evidence that the activity is effective.</blockquote>\n<p>Source note frame:</p>\n<blockquote>Source checked: <code>___</code> (accessed <code>___</code>). It supports <code>___</code>, but it does not prove this synthetic activity sequence works with real learners.</blockquote>\n<p>Paragraph frame:</p>\n<blockquote>Based on the activity-priority table, I would adapt the short lesson by focusing on <code>___</code>. The lesson begins with <code>___</code>, then moves to <code>___</code>, and ends with <code>___</code>. This recommendation is useful because <code>___</code>. However, it remains a design recommendation because the dataset is synthetic and should be tested with real learner responses.</blockquote>",
+                "brand": "Python Research Hub",
+                "meta.title": "Week 10: Pedagogical Adaptation | Rendered Notebook",
+                "nav.aria": "Notebook navigation",
+                "nav.week": "Week 10",
+                "nav.slides": "Slides",
+                "nav.demo": "Demo",
+                "nav.source": "Download source .ipynb",
+                "nav.language": "Language",
+                "side.title": "Notebook",
+                "side.week": "Week overview",
+                "side.colab": "Run in Colab",
+                "side.source": "Download source .ipynb",
+                "side.csv": "Download data CSV",
+                "hero.tag": "Rendered notebook",
+                "hero.title": "Week 10: Pedagogical Adaptation",
+                "hero.body": "This is the pre-run HTML version for GitHub Pages. To practice, open the notebook in Colab or download the .ipynb file.",
+                "action.colab": "Run in Colab",
+                "action.source": "Download .ipynb",
+                "action.week": "Back to Week 10",
+                "note.title": "How to use this page",
+                "note.read.title": "Read",
+                "note.read.body": "The HTML version keeps code and output together, useful for review after class.",
+                "note.run.title": "Run",
+                "note.run.body": "The Colab button opens a runnable notebook and downloads the CSV automatically when local files are unavailable.",
+                "note.source.title": "Source",
+                "note.source.body": "The .ipynb file remains available for download, submission, or editing in JupyterLab/VS Code.",
+                "notebook.cells.aria": "Rendered notebook cells"
+        }
+}
+    });
+  </script>
+</body>
+</html>

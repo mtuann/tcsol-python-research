@@ -1,0 +1,10 @@
+policy_area,metadata,method_model,milestone,policy_text,report,statistical_indicator
+comparative_policy,0,0,0,0,1,0
+digitalization,0,0,0,1,0,0
+education_statistics,0,0,0,0,0,1
+equity_access,0,0,0,0,0,1
+indicator_metadata,2,0,0,0,0,0
+internationalization,0,0,0,1,0,0
+policy_coding_method,0,2,0,0,0,0
+system_governance,0,0,1,0,0,0
+teacher_development,0,0,0,1,0,1

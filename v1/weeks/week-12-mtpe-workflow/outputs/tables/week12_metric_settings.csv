@@ -1,0 +1,7 @@
+item,value
+rapidfuzz_version,3.13.0
+distance_function,rapidfuzz.distance.Levenshtein.distance
+normalization,"char_edit_distance / max(len(vi_mt_output), len(vi_postedit))"
+time_measure,synthetic post-editing time in seconds for classroom practice
+dataset_type,synthetic classroom dataset; not real post-editor logs
+dataset_sha256,f4a22aed428056220b9617dd4259dbe7efa27a6f9308b525a4bd0032b19e3363

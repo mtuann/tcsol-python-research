@@ -1,0 +1,6 @@
+column_name,plain_language_meaning,example_value,required,private_data_risk,notes
+learner_id,anonymous learner code,S001,yes,medium,use anonymous ID only
+pre_score,score before activity,58,yes,low,numeric score
+post_score,score after activity,72,yes,low,numeric score
+focus,teaching focus,measure_words,yes,low,short label
+source_note,where the row came from,teacher-created sample,no,low,use for reproducibility

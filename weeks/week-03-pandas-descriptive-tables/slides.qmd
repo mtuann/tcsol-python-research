@@ -1,6 +1,0 @@
----
-title: "Week 03: pandas descriptive tables"
-format: html
----
-
-Source note: the learner-facing deck is maintained directly in `slides.html` so it can use the shared interactive slide runtime and bilingual translations.

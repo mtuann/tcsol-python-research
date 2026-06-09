@@ -1,8 +1,0 @@
----
-title: "Week 14 interactive demo"
-format: html
----
-
-# Tool Route Selector
-
-A small static HTML demo lets the learner compare Word + Zotero, Quarto, and Overleaf without installing anything.

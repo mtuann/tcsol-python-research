@@ -2,7 +2,7 @@
 
 V2 modules are the new teaching units for **Python Data Visualization for Academic Research Papers**.
 
-The old V1 lessons remain in `weeks/` and the frozen public archive lives in `v1/`. New development should happen here.
+The old V1 lessons are preserved in branch `v1-tcsol-beginner` and published at `/v1/` during deployment. New development should happen here.
 
 ## Planned Modules
 

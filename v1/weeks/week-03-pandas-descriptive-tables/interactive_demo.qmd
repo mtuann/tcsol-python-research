@@ -1,6 +1,0 @@
----
-title: "Week 03 Interactive Demo"
-format: html
----
-
-Source note: the learner-facing interactive demo is maintained directly in `interactive_demo.html` to keep the bilingual JavaScript state simple.

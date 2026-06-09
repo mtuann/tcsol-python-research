@@ -1,7 +1,0 @@
-mt_system,severity,segment_count
-MT_A,major,6
-MT_A,minor,6
-MT_B,minor,6
-MT_B,none,6
-MT_C,major,7
-MT_C,minor,5

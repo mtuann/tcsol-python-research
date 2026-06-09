@@ -1,6 +1,0 @@
----
-title: "Week 12 MTPE workflow demo"
-format: html
----
-
-Static HTML fallback is maintained in `interactive_demo.html` for GitHub Pages.

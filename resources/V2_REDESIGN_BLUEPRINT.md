@@ -8,10 +8,10 @@ V1 is frozen as the beginner TCSOL-oriented course.
 
 - Git branch: `v1-tcsol-beginner`
 - Git tag: `v1.0-tcsol-beginner`
-- Static website archive: `/v1/`
+- Static website archive: `/v1/`, generated during GitHub Pages deployment from the V1 branch.
 - Frozen commit: `713cd5dad388d319086c2afe4fcd3760d7472d23`
 
-The root website on `main` will become V2. Do not edit `/v1/` for normal course development. Only touch `/v1/` for emergency deployment fixes.
+The root website on `main` is V2. Do not keep a local `/v1/` folder on `main`. The deploy workflow checks out `v1-tcsol-beginner` separately and publishes it under `/v1/`.
 
 ## V2 Course Identity
 
@@ -42,7 +42,6 @@ These courses inform the redesign, without copying their materials:
 tcsol-python-research-syllabus/
 ├── index.html                         # V2 homepage
 ├── README.md                          # V2 course overview
-├── v1/                                # frozen V1 static website
 ├── modules/                           # V2 lesson modules
 │   ├── module-01-research-data-workflow/
 │   ├── module-02-tidy-data-codebook/
@@ -70,10 +69,10 @@ tcsol-python-research-syllabus/
 │   ├── V2_REDESIGN_BLUEPRINT.md
 │   ├── V2_MODULE_DESIGN_STANDARD.md
 │   └── ...
-└── assets/
+└── requirements.txt
 ```
 
-The current `weeks/` folder can remain during migration. New V2 work should use `modules/` so the conceptual shift is visible.
+Do not revive the old `weeks/` folder on `main`. New V2 work should use `modules/` so the conceptual shift is visible.
 
 ## V2 Module Design Standard
 
@@ -169,12 +168,12 @@ Do not make dashboard-building the core. The main deliverable is a paper-quality
 
 ## Migration Steps
 
-1. Freeze V1 through branch, tag, and `/v1/` static archive.
+1. Freeze V1 through branch, tag, and deploy-time `/v1/` static archive.
 2. Replace root homepage with V2 course identity and navigation.
 3. Add `data_bank/`, `figure_gallery/`, and `paper_package/`.
 4. Create Module 01 using the V2 module design standard.
 5. Build modules sequentially, keeping every module data-heavy and paper-facing.
-6. Keep old `weeks/` available during migration, but remove it from primary navigation once V2 has enough modules.
+6. Keep V1 accessible through `/v1/`, but keep V2 development on `main` clean.
 
 ## V2 Quality Bar
 

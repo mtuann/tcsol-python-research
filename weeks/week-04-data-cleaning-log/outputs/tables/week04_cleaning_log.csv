@@ -1,7 +1,0 @@
-step,column,problem,decision,reason,evidence
-1,all,raw data may be overwritten,created a cleaned copy,preserve the original CSV,raw rows preserved: 36
-2,class_group,"case, spaces, and Class A/Class B variants",mapped to A-D,standard labels make group summaries readable,12 raw variants -> 4 standard labels
-3,activity_focus,"spelling, case, hyphen, and underscore variants",mapped to four standard labels,paper tables need stable group labels,18 raw variants -> 4 standard labels
-4,completed,yes/no variants and blank status,mapped to yes/no; blanks remain missing,the inclusion rule must be explicit,4 raw variants -> 2 labels
-5,"pre_score, post_score, attendance_hours, self_confidence",numbers stored as text or invalid strings,converted with pd.to_numeric(errors='coerce'),"invalid measurements should be missing, not guessed","missing/invalid after conversion: {'pre_score': 5, 'post_score': 3, 'attendance_hours': 1, 'self_confidence': 0}"
-6,gain_score,derived measure needs complete pre/post scores,created only where pre and post are numeric,do not calculate gains from unknown scores,usable_pre_post=True: 25 rows

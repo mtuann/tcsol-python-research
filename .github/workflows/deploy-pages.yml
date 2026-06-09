@@ -19,18 +19,33 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: Checkout V2 main
         uses: actions/checkout@v4
+        with:
+          path: main
+
+      - name: Checkout frozen V1 archive
+        uses: actions/checkout@v4
+        with:
+          ref: v1-tcsol-beginner
+          path: v1-archive
 
       - name: Configure Pages
         uses: actions/configure-pages@v5
 
       - name: Prepare static site
         run: |
-          mkdir -p _site
-          for item in index.html README.md assets weeks resources v1 modules data_bank figure_gallery paper_package; do
+          mkdir -p _site _site/v1
+          cd main
+          for item in index.html README.md modules data_bank figure_gallery paper_package resources requirements.txt; do
             if [ -e "$item" ]; then
-              cp -R "$item" _site/
+              cp -R "$item" ../_site/
+            fi
+          done
+          cd ..
+          for item in index.html README.md assets weeks resources; do
+            if [ -e "v1-archive/$item" ]; then
+              cp -R "v1-archive/$item" _site/v1/
             fi
           done
           touch _site/.nojekyll

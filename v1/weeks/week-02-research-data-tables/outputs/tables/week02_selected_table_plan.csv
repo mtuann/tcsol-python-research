@@ -1,2 +1,0 @@
-selected_track,one_row_means,required_columns,optional_columns,paper_output,privacy_risk
-Education policy,manually coded policy excerpt,doc_id; title; issuing_body; date; excerpt; theme_code,policy_level; url; access_date; coding_note,theme count table or source matrix,"low: public documents, but keep URL and access date"

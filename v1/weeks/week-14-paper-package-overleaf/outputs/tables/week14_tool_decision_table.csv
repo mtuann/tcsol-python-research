@@ -1,4 +1,0 @@
-route,best_when,required_files,risk,beginner_choice
-Word + Zotero,"beginner draft, familiar writing, standard applied-linguistics or education-policy paper","Word draft, Zotero collection, exported figures/tables",manual file organization can become messy,default
-Quarto,"the learner wants prose, code, citations, figures, and tables in one reproducible report","qmd file, notebook/code, figures/tables, references.bib only if this route is chosen",adds Markdown/YAML/citation syntax,optional
-Overleaf,"a LaTeX template, collaborator, journal, or university requires LaTeX","main.tex, uploaded figures/tables, .bib export or premium Zotero sync",adds LaTeX; direct Zotero sync is premium; formatting can distract from unfinished argument,optional

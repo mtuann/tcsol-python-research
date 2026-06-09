@@ -1,5 +1,0 @@
-track_id,unit_example,key_fields,what_one_row_means
-TCSOL_SHORT,"learner_id=S001; pre_score=58; post_score=72; focus=measure_words","learner_id,pre_score,post_score,focus,activity,score_note","one learner's pre/post score record"
-CONTRASTIVE,"zh=我把书放在桌子上; vi=Tôi đặt sách lên bàn; feature=把-construction; teaching_note=Vietnamese comparison should explain why 把 marks a disposal-like structure","zh_sentence,vi_equivalent,feature,contrast_point,teaching_note","one Chinese-Vietnamese grammar example with teaching note"
-MTPE,"zh_source=教育数字化推动资源共享; vi_mt=Giáo dục số thúc đẩy tài nguyên chia sẻ; vi_postedit=Giáo dục số thúc đẩy việc chia sẻ tài nguyên; local_error_label=word_order; mqm_dimension=fluency; severity=minor","zh_source,vi_mt,vi_postedit,local_error_label,mqm_dimension,severity,pe_time_seconds","one translation segment with human post-editing and a simplified MQM-inspired label"
-POLICY,"doc_id=P001; title=教育强国建设规划纲要（2024—2035年）; issuing_body=中共中央 国务院; theme_code=digitalization; excerpt=教育数字化; access_date=2026-06-03","doc_id,title,issuing_body,date,policy_level,excerpt,theme_code,coding_note,url,access_date","one manually coded policy excerpt"

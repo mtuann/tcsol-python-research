@@ -1,7 +1,0 @@
-term,vi,en,note_vi,note_en
-candidate activity,hoạt động ứng viên,candidate activity,một activity có thể đưa vào lesson plan,one possible teaching activity
-lesson phase,giai đoạn bài học,lesson phase,review/notice/compare/practice/feedback/assessment,review/notice/compare/practice/feedback/assessment
-adaptation score,điểm điều chỉnh sư phạm,adaptation score,heuristic để xếp ưu tiên activity,heuristic for ranking activities
-groupby(),gom nhóm,groupby(),gom rows theo category để tính summary,group rows by category to calculate a summary
-sort_values(),sắp xếp bảng,sort_values(),đưa rows cao/thấp lên trước,put high/low rows first
-pedagogical implication,hàm ý sư phạm,pedagogical implication,câu viết teacher nên làm gì và vì sao,writing move explaining what a teacher should do and why

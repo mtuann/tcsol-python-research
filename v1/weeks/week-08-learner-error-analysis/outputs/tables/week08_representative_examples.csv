@@ -1,6 +1,0 @@
-error_category,response_id,target_structure,prompt_vi,learner_answer,expected_answer,error_feature,correction_note
-aspect_marker,R068,aspect marker le in daily routines,Nói bằng tiếng Trung: I ate dinner.,我饭吃了。,我吃饭了。,missing or misplaced 了,Use short action-result routines and compare verb-final 了 with sentence-final 了.
-measure_word,R002,shopping measure words,Nói bằng tiếng Trung: two cups of tea.,两茶。,两杯茶。,classifier omitted before object noun,"Teach object-specific classifier chunks such as 一杯茶, 两本书, 三张票."
-result_complement,R006,result complements in service dialogues,Nói bằng tiếng Trung: I found the ticket.,我找到了票。,我找到票了。,missing or wrong result complement,Contrast 找票 and 找到票了; ask learners to say whether the action reached a result.
-tone_marking,R035,tone-marked pinyin check,Viết pinyin có thanh điệu cho 马.,mà,mǎ,missing or wrong tone mark,Use minimal tone pairs and require tone marks in written rehearsal.
-word_order,R039,time-place word order,Nói bằng tiếng Trung: I study Chinese at school.,我学习在学校汉语。,我在学校学习汉语。,place phrase inserted between verb and object,Practice subject + time/place + verb phrase frames before open production.

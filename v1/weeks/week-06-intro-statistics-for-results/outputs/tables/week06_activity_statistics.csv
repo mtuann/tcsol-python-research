@@ -1,5 +1,0 @@
-activity_focus,activity_label,n,pre_mean,post_mean,mean_gain,sd_gain,se_gain,t_critical_95,ci95_low,ci95_high
-result_complements,Result complements,6,58.67,71.67,13.0,0.89,0.37,2.57,12.06,13.94
-measure_words,Measure words,5,59.6,72.2,12.6,0.55,0.24,2.78,11.92,13.28
-vocabulary_review,Vocabulary review,8,72.62,82.38,9.75,0.71,0.25,2.36,9.16,10.34
-word_order,Word order,6,64.33,73.17,8.83,0.41,0.17,2.57,8.4,9.26

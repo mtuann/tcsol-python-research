@@ -1,3 +1,0 @@
-# Week 13 interactive demo source
-
-Rendered as `interactive_demo.html`. Update the HTML directly for now.

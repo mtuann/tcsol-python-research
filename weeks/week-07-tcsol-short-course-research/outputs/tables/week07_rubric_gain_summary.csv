@@ -1,6 +1,0 @@
-criterion,criterion_label,pre_mean,post_mean,mean_gain
-task_completion,Task completion,2.36,3.79,1.43
-accuracy,Accuracy,2.86,4.21,1.36
-fluency,Fluency,1.96,3.46,1.5
-interaction_strategy,Interaction strategy,1.79,3.39,1.61
-confidence,Confidence,2.57,4.0,1.43

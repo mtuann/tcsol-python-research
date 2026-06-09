@@ -1,7 +1,0 @@
----
-title: "Week 06 Interactive Demo"
-format: html
----
-
-The source demo for Week 06 is maintained in `interactive_demo.html` because it uses custom bilingual JavaScript and SVG interactions.
-
